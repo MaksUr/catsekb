@@ -11,30 +11,17 @@ class Group(models.Model):
         verbose_name = 'Группа'
         verbose_name_plural = 'Группы'
 
-
-class Animal(models.Model):
-    name = models.CharField('Имя', max_length=32, unique=True)
-    created = models.DateTimeField('Дата публикации', auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField('Дата обновления', auto_now_add=False, auto_now=True)
-    date_of_birth = models.DateTimeField('Дата рождения', blank=True, null=True, default=None)
-    group = models.ForeignKey(Group, blank=True, null=True, default=None)
-    show = models.BooleanField('Показывать', default=True)
-
-    class Meta:
-        verbose_name = 'Питомец'
-        verbose_name_plural = 'Питомцы'
-
     def __str__(self):
         return self.name
 
 
 class FieldType(models.Model):
     name = models.CharField('Название', max_length=32, unique=True)
-    description = models.CharField('Описание', max_length=32, unique=True, blank=True, default=None)
+    description = models.CharField('Описание', max_length=32, blank=True, default=None)
 
     class Meta:
         verbose_name = 'Тип особенности'
-        verbose_name_plural = 'Типы особенности'
+        verbose_name_plural = 'Типы особенностей'
 
     def __str__(self):
         return self.name
@@ -54,10 +41,27 @@ class FieldValue(models.Model):
         return '{field_type}: {val}'.format(field_type = self.field_type, val=val)
 
 
+class Animal(models.Model):
+    name = models.CharField('Имя', max_length=32, unique=True)
+    # TODO: Create sex field
+    created = models.DateTimeField('Дата публикации', auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField('Дата обновления', auto_now_add=False, auto_now=True)
+    date_of_birth = models.DateTimeField('Дата рождения', blank=True, null=True, default=None)
+    group = models.ForeignKey(Group, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)
+    show = models.BooleanField('Показывать', default=True)
+    field_value = models.ManyToManyField(FieldValue, verbose_name=FieldValue._meta.verbose_name)
+
+    class Meta:
+        verbose_name = 'Питомец'
+        verbose_name_plural = 'Питомцы'
+
+    def __str__(self):
+        return self.name
+
+
 class AnimalDescription(models.Model):
-    animal = models.ForeignKey(Animal)
+    animal = models.OneToOneField(Animal, unique=True)
     description = models.TextField('Описание', blank=True, default=None)
-    fields = models.ManyToManyField(FieldValue)
 
     class Meta:
         verbose_name = 'Описание'
@@ -70,6 +74,6 @@ class AnimalDescription(models.Model):
 class Image(models.Model):
     image = models.ImageField('Изображение', upload_to='images/')
     image_url = models.URLField('URL изображения')
-    animal = models.ForeignKey(Animal)
-    width = models.IntegerField('Ширина', blank=True, default=None)
-    height = models.IntegerField('Высота', blank=True, default=None)
+    animal = models.OneToOneField(Animal)
+    width = models.IntegerField('Ширина', blank=True, default=None, null=True)
+    height = models.IntegerField('Высота', blank=True, default=None, null=True)
