@@ -1,6 +1,10 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 
 # Create your models here.
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+from django.utils.translation import ugettext_lazy as _
 
 
 class Group(models.Model):
@@ -54,9 +58,21 @@ class Animal(models.Model):
     class Meta:
         verbose_name = 'Питомец'
         verbose_name_plural = 'Питомцы'
+        # unique_together = (("name", "field_value.field_type"),)
 
     def __str__(self):
         return self.name
+
+
+# TODO: Implement
+@receiver(pre_save, sender=Animal)
+def check_animal_field_value(sender, instance, **kwargs):
+    condition = True
+    if condition:
+        raise ValidationError(
+            _('%(value)s is not valid'),
+            params={'value': 'value'},
+        )
 
 
 class AnimalDescription(models.Model):
