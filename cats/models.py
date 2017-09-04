@@ -34,6 +34,7 @@ class FieldType(models.Model):
 class FieldValue(models.Model):
     field_type = models.ForeignKey(FieldType)
     value_text = models.CharField('Значение (текст)', max_length=32, blank=True, null=True, default=None)
+    # TODO: d
     value_bool = models.BooleanField('Значение (да/нет)', blank=True, default=None)
 
     class Meta:
