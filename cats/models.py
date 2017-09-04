@@ -53,26 +53,14 @@ class Animal(models.Model):
     date_of_birth = models.DateTimeField('Дата рождения', blank=True, null=True, default=None)
     group = models.ForeignKey(Group, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)
     show = models.BooleanField('Показывать', default=True)
-    field_value = models.ManyToManyField(FieldValue, verbose_name=FieldValue._meta.verbose_name)
+    field_value = models.ManyToManyField(FieldValue, verbose_name=FieldValue._meta.verbose_name, blank=True, default=None)
 
     class Meta:
         verbose_name = 'Питомец'
         verbose_name_plural = 'Питомцы'
-        # unique_together = (("name", "field_value.field_type"),)
 
     def __str__(self):
         return self.name
-
-
-# TODO: Implement
-@receiver(pre_save, sender=Animal)
-def check_animal_field_value(sender, instance, **kwargs):
-    condition = True
-    if condition:
-        raise ValidationError(
-            _('%(value)s is not valid'),
-            params={'value': 'value'},
-        )
 
 
 class AnimalDescription(models.Model):

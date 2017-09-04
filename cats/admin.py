@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
+from cats.forms import AnimalForm
 from cats.models import Animal, AnimalDescription, Image, FieldValue, Group, FieldType
 
 
@@ -13,6 +14,7 @@ class ImageInline(admin.StackedInline):
 
 
 class AnimalAdmin(admin.ModelAdmin):
+    form = AnimalForm
     inlines = [AnimalDescriptionInline, ImageInline]
 admin.site.register(Animal, AnimalAdmin)
 
