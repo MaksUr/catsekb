@@ -63,6 +63,14 @@ class Animal(models.Model):
     def __str__(self):
         return self.name
 
+    def get_hashtag_name(self):
+        template = '#{name}_catsekb'
+        return template.format(name=self.__str__())
+
+    def get_instagram_link(self):
+        template = 'https://www.instagram.com/explore/tags/{name}_catsekb/'
+        return template.format(name=self.__str__())
+
 
 class AnimalDescription(models.Model):
     animal = models.OneToOneField(Animal, unique=True)
