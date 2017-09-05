@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from cats.forms import AnimalForm
-from cats.models import Animal, AnimalDescription, Image, FieldValue, Group, FieldType
+from cats.models import Animal, AnimalDescription, AnimalImage, FieldValue, Group, FieldType
 
 
 class AnimalDescriptionInline(admin.StackedInline):
@@ -10,7 +10,7 @@ class AnimalDescriptionInline(admin.StackedInline):
 
 
 class ImageInline(admin.StackedInline):
-    model = Image
+    model = AnimalImage
 
 
 class AnimalAdmin(admin.ModelAdmin):
@@ -21,6 +21,7 @@ admin.site.register(Animal, AnimalAdmin)
 
 class GroupAdmin(admin.ModelAdmin):
     model = Group
+    # TODO: add animal list
 admin.site.register(Group, GroupAdmin)
 
 
@@ -32,3 +33,5 @@ class FieldValueInline(admin.StackedInline):
 class FieldTypeAdmin(admin.ModelAdmin):
     inlines = [FieldValueInline]
 admin.site.register(FieldType, FieldTypeAdmin)
+
+admin.site.register(AnimalImage)

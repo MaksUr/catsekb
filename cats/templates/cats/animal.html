@@ -1,3 +1,58 @@
-<h1>{{ animal.name }}</h1>
-<a href="{{ animal.get_instagram_link }}">{{ animal.get_hashtag_name }}</a>
-{#<p>Хэштег: {{ animal.get_hashtag_name }}</p>#}
+{% load verbose_names %}
+
+{% if animal.name%}
+    <div style="background-color: blanchedalmond">
+        {# Имя #}
+        <h1>{{ animal.name }}</h1>
+
+        {# Ссылка #}
+        <a href="{{ animal.get_instagram_link }}">{{ animal.get_hashtag_name }}</a>
+
+        {# Кличка #}
+        <p>{% get_verbose_field_name animal 'name' %}: {{ animal.name}}</p>
+    </div>
+{% endif %}
+
+{# Группа #}
+{% if animal.group %}
+    <div style="background-color: antiquewhite">
+        <p>{% get_verbose_field_name animal 'group' %}: {{ animal.group}}</p>
+    </div>
+{% endif %}
+
+
+{# Особенности #}
+{% if animal.field_value %}
+    <div style="background-color: aquamarine">
+        {% for field in animal.field_value.all %}
+            <p>{{ field.field_type }}: {{ field.value_text }}</p>
+        {% endfor %}
+    </div>
+
+{% endif %}
+
+{# Описание #}
+{% if animal.get_description %}
+    <div style="background-color: aliceblue">
+        <h4>{% get_verbose_field_name animal.get_description 'description' %}</h4>
+        <p>{{ animal.get_description.description }}</p>
+    </div>
+{% endif %}
+
+{# Фото #}
+{% if animal.get_image %}
+    <img src="{{ animal.get_image.image.url }}" alt="{{ animal.get_image.alt }}">
+{% endif %}
+
+
+{# Время #}
+<div style="background-color: cornsilk">
+    {# TODO: Change time format #}
+    <p>{% get_verbose_field_name animal 'created' %}: {{ animal.created}}</p>
+    <p>{% get_verbose_field_name animal 'updated' %}: {{ animal.updated}}</p>
+</div>
+
+
+
+
+
