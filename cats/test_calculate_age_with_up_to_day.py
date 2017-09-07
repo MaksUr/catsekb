@@ -77,25 +77,25 @@ class TestCalcAgeUpToDay(TestCase):
         # m = 'month check - birthday: {b}, date: {d}'
         # self.assertDictEqual(d1, d2, msg=m.format(b=birthday, d=now))
 
-        # now = date(2017, 10, 30)
-        # birthday = date(2016, 10, 31)
-        # d1 = calc_age_uptoday(birthday, now)
-        # d2 = {YEARS: 0, MONTHS: 11, DAYS: 30}
-        # m = 'month check - birthday: {b}, date: {d}'
-        # self.assertDictEqual(d1, d2, msg=m.format(b=birthday, d=now))
-        #
-        # now = date(2017, 10, 31)
-        # birthday = date(2016, 10, 31)
-        # d1 = calc_age_uptoday(birthday, now)
-        # d2 = {YEARS: 1, MONTHS: 0, DAYS: 0}
-        # m = 'month check - birthday: {b}, date: {d}'
-        # self.assertDictEqual(d1, d2, msg=m.format(b=birthday, d=now))
-        #
-        # now = date(2017, 11, 1)
-        # birthday = date(2016, 10, 31)
-        # d1 = calc_age_uptoday(birthday, now)
-        # d2 = {YEARS: 1, MONTHS: 0, DAYS: 1}
-        # m = 'month check - birthday: {b}, date: {d}'
-        # self.assertDictEqual(d1, d2, msg=m.format(b=birthday, d=now))
+        now = date(2017, 10, 30)
+        birthday = date(2016, 10, 31)
+        d1 = calc_age_uptoday(birthday, now)
+        d2 = {YEARS: 0, MONTHS: 11, DAYS: 30}
+        m = 'month check - birthday: {b}, date: {d}'
+        self.assertDictEqual(d1, d2, msg=m.format(b=birthday, d=now))
+
+        now = date(2017, 10, 31)
+        birthday = date(2016, 10, 31)
+        d1 = calc_age_uptoday(birthday, now)
+        d2 = {YEARS: 1, MONTHS: 0, DAYS: 0}
+        m = 'month check - birthday: {b}, date: {d}'
+        self.assertDictEqual(d1, d2, msg=m.format(b=birthday, d=now))
+
+        now = date(2017, 11, 1)
+        birthday = date(2016, 10, 31)
+        d1 = calc_age_uptoday(birthday, now)
+        d2 = {YEARS: 1, MONTHS: 0, DAYS: 1}
+        m = 'month check - birthday: {b}, date: {d}'
+        self.assertDictEqual(d1, d2, msg=m.format(b=birthday, d=now))
 
 
