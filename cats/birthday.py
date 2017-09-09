@@ -22,40 +22,50 @@ def calc_age_uptoday(before_date, later_date):
     mode = YEARLY
     result[YEARS] = get_calendar_items_count(before, mode, later)
 
+
     mode = MONTHLY
-    if later_date.month < before_date.month:
-        # before = date(later_date.year, before_date.month, before_date.day) - relativedelta(years=1)
-        before = before_date + relativedelta(years=result[YEARS]+1)
-        result[MONTHS] = get_calendar_items_count(before, mode, later)
-    elif later_date.month > before_date.month:
-        before = date(later_date.year, before_date.month, before_date.day)
-        result[MONTHS] = get_calendar_items_count(before, mode, later)
+    if later_date >= before_date + relativedelta(years=result[YEARS]):
+        m = 'Др наступила! ДР:{}, ДАТА:{}'
+        print(m.format(before_date, later_date))
     else:
-        result[MONTHS] = None
+        m = 'Др не наступила! ДР:{}, ДАТА:{}'
+        print(m.format(before_date, later_date))
 
-    mode = DAILY
-    if later_date.day < before_date.day:
-        before = date(later_date.year, later_date.month, before_date.day) - relativedelta(months=1)
 
-        result[DAYS] = get_calendar_items_count(before, mode, later)
-        if result[MONTHS] is None:
-            mode = MONTHLY
-            before = date(later_date.year, before_date.month, before_date.day) - relativedelta(years=1)
-            result[MONTHS] = get_calendar_items_count(before, mode, later)
-    elif later_date.day > before_date.day:
-        before = date(later_date.year, later_date.month, before_date.day)
-        result[DAYS] = get_calendar_items_count(before, mode, later)
-        if result[MONTHS] is None:
-            mode = MONTHLY
-            before = date(later_date.year, later_date.month, before_date.day)
-            result[MONTHS] = get_calendar_items_count(before, mode, later)
-    else:
-        before = date(later_date.year, later_date.month, before_date.day)
-        result[DAYS] = get_calendar_items_count(before, mode, later)
-        if result[MONTHS] is None:
-            mode = MONTHLY
-            before = date(later_date.year, later_date.month, before_date.day)
-            result[MONTHS] = get_calendar_items_count(before, mode, later) + 1
+
+
+    #     # before = date(later_date.year, before_date.month, before_date.day) - relativedelta(years=1)
+    #     before = before_date + relativedelta(years=result[YEARS]+1)
+    #     result[MONTHS] = get_calendar_items_count(before, mode, later)
+    # elif later_date.month > before_date.month:
+    #     before = date(later_date.year, before_date.month, before_date.day)
+    #     result[MONTHS] = get_calendar_items_count(before, mode, later)
+    # else:
+    #     result[MONTHS] = None
+    #
+    # mode = DAILY
+    # if later_date.day < before_date.day:
+    #     before = date(later_date.year, later_date.month, before_date.day) - relativedelta(months=1)
+    #
+    #     result[DAYS] = get_calendar_items_count(before, mode, later)
+    #     if result[MONTHS] is None:
+    #         mode = MONTHLY
+    #         before = date(later_date.year, before_date.month, before_date.day) - relativedelta(years=1)
+    #         result[MONTHS] = get_calendar_items_count(before, mode, later)
+    # elif later_date.day > before_date.day:
+    #     before = date(later_date.year, later_date.month, before_date.day)
+    #     result[DAYS] = get_calendar_items_count(before, mode, later)
+    #     if result[MONTHS] is None:
+    #         mode = MONTHLY
+    #         before = date(later_date.year, later_date.month, before_date.day)
+    #         result[MONTHS] = get_calendar_items_count(before, mode, later)
+    # else:
+    #     before = date(later_date.year, later_date.month, before_date.day)
+    #     result[DAYS] = get_calendar_items_count(before, mode, later)
+    #     if result[MONTHS] is None:
+    #         mode = MONTHLY
+    #         before = date(later_date.year, later_date.month, before_date.day)
+    #         result[MONTHS] = get_calendar_items_count(before, mode, later) + 1
 
 
     return result
