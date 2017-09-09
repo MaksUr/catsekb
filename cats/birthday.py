@@ -24,10 +24,10 @@ def calc_age_uptoday(before_date, later_date):
 
 
     mode = MONTHLY
-    if later_date >= before_date + relativedelta(years=result[YEARS]):
+    if result[YEARS] == (later_date.year-before_date.year):
         m = 'Др наступила! ДР:{}, ДАТА:{}'
         print(m.format(before_date, later_date))
-    else:
+    else:  # result[YEARS] < (later_date.year-before_date.year)
         m = 'Др не наступила! ДР:{}, ДАТА:{}'
         print(m.format(before_date, later_date))
 
@@ -35,6 +35,7 @@ def calc_age_uptoday(before_date, later_date):
 
 
     #     # before = date(later_date.year, before_date.month, before_date.day) - relativedelta(years=1)
+    # if later_date >= before_date + relativedelta(years=result[YEARS]+1):
     #     before = before_date + relativedelta(years=result[YEARS]+1)
     #     result[MONTHS] = get_calendar_items_count(before, mode, later)
     # elif later_date.month > before_date.month:
