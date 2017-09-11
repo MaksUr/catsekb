@@ -2,6 +2,8 @@
 from dateutil.relativedelta import relativedelta
 from dateutil.rrule import rrule, MONTHLY, YEARLY, DAILY
 from datetime import date
+from calendar import monthrange
+
 
 
 YEARS = 'years'
@@ -34,6 +36,14 @@ def calc_age_uptoday(before_date, later_date):
         before = later_date  # Получение даты дня рождения в этом гоу
         before = get_date(before.year, before.month, before_date.day)   # Установить день месяца рождения
     result[DAYS] = get_calendar_items_count(before, mode, later)
+    if result[DAYS] < 0:
+        result[DAYS] = 1
+    else:
+        month_days_count = monthrange(later_date.year, later_date.month)[1]
+        if (before_date.day > later_date.day) and before_date.day > month_days_count:
+            pass
+        elif month_days_count <= result[DAYS]:
+            result[DAYS] = 0
 
     return result
 
