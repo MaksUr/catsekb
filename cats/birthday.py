@@ -41,7 +41,15 @@ def calc_age_uptoday(before_date, later_date):
     else:
         month_days_count = monthrange(later_date.year, later_date.month)[1]
         if (before_date.day > later_date.day) and before_date.day > month_days_count:
-            pass
+            if (
+                (before_date.month == later_date.month == 2) and
+                monthrange(before_date.year, before_date.month)[1] == 29
+            ):
+                result[DAYS] = 0
+            else:
+                if result[DAYS] > month_days_count:
+                    result[DAYS] = 0
+
         elif month_days_count <= result[DAYS]:
             result[DAYS] = 0
 
