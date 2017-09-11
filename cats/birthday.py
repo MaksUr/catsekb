@@ -23,53 +23,17 @@ def calc_age_uptoday(before_date, later_date):
     result[YEARS] = get_calendar_items_count(before, mode, later)
 
     mode = MONTHLY
-    if result[YEARS] == (later_date.year-before_date.year):
-        m = 'Др наступила! ДР:{}, ДАТА:{}'
-        print(m.format(before_date, later_date))
-        before = before_date + relativedelta(years=result[YEARS])
-        mode = MONTHLY
-        result[MONTHS] = get_calendar_items_count(before, mode, later)
-    else:  # result[YEARS] < (later_date.year-before_date.year)
-        m = 'Др не наступила! ДР:{}, ДАТА:{}'
-        print(m.format(before_date, later_date))
+    before = before_date + relativedelta(years=result[YEARS])
+    result[MONTHS] = get_calendar_items_count(before, mode, later)
 
-
-
-
-    #     # before = date(later_date.year, before_date.month, before_date.day) - relativedelta(years=1)
-    # if later_date >= before_date + relativedelta(years=result[YEARS]+1):
-    #     before = before_date + relativedelta(years=result[YEARS]+1)
-    #     result[MONTHS] = get_calendar_items_count(before, mode, later)
-    # elif later_date.month > before_date.month:
-    #     before = date(later_date.year, before_date.month, before_date.day)
-    #     result[MONTHS] = get_calendar_items_count(before, mode, later)
-    # else:
-    #     result[MONTHS] = None
-    #
-    # mode = DAILY
-    # if later_date.day < before_date.day:
-    #     before = date(later_date.year, later_date.month, before_date.day) - relativedelta(months=1)
-    #
-    #     result[DAYS] = get_calendar_items_count(before, mode, later)
-    #     if result[MONTHS] is None:
-    #         mode = MONTHLY
-    #         before = date(later_date.year, before_date.month, before_date.day) - relativedelta(years=1)
-    #         result[MONTHS] = get_calendar_items_count(before, mode, later)
-    # elif later_date.day > before_date.day:
-    #     before = date(later_date.year, later_date.month, before_date.day)
-    #     result[DAYS] = get_calendar_items_count(before, mode, later)
-    #     if result[MONTHS] is None:
-    #         mode = MONTHLY
-    #         before = date(later_date.year, later_date.month, before_date.day)
-    #         result[MONTHS] = get_calendar_items_count(before, mode, later)
-    # else:
-    #     before = date(later_date.year, later_date.month, before_date.day)
-    #     result[DAYS] = get_calendar_items_count(before, mode, later)
-    #     if result[MONTHS] is None:
-    #         mode = MONTHLY
-    #         before = date(later_date.year, later_date.month, before_date.day)
-    #         result[MONTHS] = get_calendar_items_count(before, mode, later) + 1
-
+    mode = DAILY  # Вычесление количества дней
+    if later_date.day < before_date.day:
+        before = later_date - relativedelta(months=1)  # Сдвиг на месяц назад сегодняшней даты
+        before = get_date(before.year, before.month, before_date.day)   # Установить день месяца рождения
+    else:
+        before = later_date  # Получение даты дня рождения в этом гоу
+        before = get_date(before.year, before.month, before_date.day)   # Установить день месяца рождения
+    result[DAYS] = get_calendar_items_count(before, mode, later)
 
     return result
 
@@ -107,14 +71,14 @@ def get_calendar_items_count(dtstart, mode, until):
     return res
 
 
-# def get_date(year, month, day):
-#     try:
-#         res = date(year, month, day)
-#     except ValueError as e:
-#         if 'day is out of range for month' == e.args[0]:
-#             return get_date(year, month, day-1)
-#     else:
-#         return res
+def get_date(year, month, day):
+    try:
+        res = date(year, month, day)
+    except ValueError as e:
+        if 'day is out of range for month' == e.args[0]:
+            return get_date(year, month, day-1)
+    else:
+        return res
 
 
 
