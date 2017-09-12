@@ -297,7 +297,7 @@ class TestCalcAgeUpToDay(TestCase):
     def test_clc_uptoday_from_29_2_1996_to_28_2_2016(self):
         start_date = date(1996, 2, 29)
         end_date = date(2016, 2, 28)
-        check = {YEARS: 19, MONTHS: 12, DAYS: 0}
+        check = {YEARS: 19, MONTHS: 11, DAYS: 30}
         m = 'month check - birthday: {b}, date: {d}'
         res = calc_age_uptoday(start_date, end_date)
         self.assertDictEqual(res, check, msg=m.format(b=start_date, d=end_date))
