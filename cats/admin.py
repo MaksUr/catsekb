@@ -19,9 +19,13 @@ class AnimalAdmin(admin.ModelAdmin):
 admin.site.register(Animal, AnimalAdmin)
 
 
+class AnimalsInline(admin.TabularInline):
+    extra = 0
+    model = Animal
+
+
 class GroupAdmin(admin.ModelAdmin):
-    model = Group
-    # TODO: add animal list
+    inlines = [AnimalsInline]
 admin.site.register(Group, GroupAdmin)
 
 

@@ -9,6 +9,7 @@ from cats.time import calc_age_uptoday
 class Group(Model):
     name = CharField('Имя', max_length=32, unique=True)
     description = TextField('Описание', blank=True, default=None)
+    show = BooleanField('Показывать', default=True)
 
     class Meta:
         verbose_name = 'Группа'
