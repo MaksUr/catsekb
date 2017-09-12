@@ -20,6 +20,23 @@
     </div>
 {% endif %}
 
+{# Возраст #}
+{% if animal.get_age %}
+    <div style="background-color: brown">
+        <p>{% get_verbose_field_name animal 'date_of_birth' %}:</p>
+        {% with animal.get_age as age %}
+            {% if age.years > 0 %}
+                <p>Лет: {{ age.years }}</p>
+            {% endif %}
+            {% if age.months > 0 %}
+                <p>Месяцев: {{ age.months }}</p>
+            {% endif %}
+            {% if age.days > 0 %}
+                <p>Дней: {{ age.days }}</p>
+            {% endif %}
+        {% endwith %}
+    </div>
+{% endif %}
 
 {# Особенности #}
 {% if animal.field_value %}
@@ -44,12 +61,11 @@
     <img src="{{ animal.get_image.image.url }}" alt="{{ animal.get_image.alt }}">
 {% endif %}
 
-
 {# Время #}
 <div style="background-color: cornsilk">
     {# TODO: Change time format #}
-    <p>{% get_verbose_field_name animal 'created' %}: {{ animal.created}}</p>
-    <p>{% get_verbose_field_name animal 'updated' %}: {{ animal.updated}}</p>
+    <p>{% get_verbose_field_name animal 'created' %}: {{ animal.created|date:'SHORT_DATE_FORMAT'}}</p>
+    <p>{% get_verbose_field_name animal 'updated' %}: {{ animal.updated|date:'SHORT_DATE_FORMAT'}}</p>
 </div>
 
 

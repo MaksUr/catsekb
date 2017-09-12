@@ -1,4 +1,3 @@
-# TODO: delete this file
 from datetime import date
 
 from dateutil.relativedelta import relativedelta

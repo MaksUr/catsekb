@@ -1,15 +1,14 @@
-from django.core.exceptions import ValidationError
-from django.db import models
+from datetime import date
+from django.db.models import Model, CharField, TextField, ForeignKey, DateTimeField, BooleanField, ManyToManyField, \
+    OneToOneField, ImageField, URLField, IntegerField, DateField
 
 # Create your models here.
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
-from django.utils.translation import ugettext_lazy as _
+from cats.time import calc_age_uptoday
 
 
-class Group(models.Model):
-    name = models.CharField('Имя', max_length=32, unique=True)
-    description = models.TextField('Описание', blank=True, default=None)
+class Group(Model):
+    name = CharField('Имя', max_length=32, unique=True)
+    description = TextField('Описание', blank=True, default=None)
 
     class Meta:
         verbose_name = 'Группа'
@@ -19,9 +18,9 @@ class Group(models.Model):
         return self.name
 
 
-class FieldType(models.Model):
-    name = models.CharField('Название', max_length=32, unique=True)
-    description = models.CharField('Описание', max_length=32, blank=True, default=None)
+class FieldType(Model):
+    name = CharField('Название', max_length=32, unique=True)
+    description = CharField('Описание', max_length=32, blank=True, default=None)
 
     class Meta:
         verbose_name = 'Тип особенности'
@@ -31,9 +30,9 @@ class FieldType(models.Model):
         return self.name
 
 
-class FieldValue(models.Model):
-    field_type = models.ForeignKey(FieldType)
-    value_text = models.CharField('Значение (текст)', max_length=32, blank=True, null=True, default=None)
+class FieldValue(Model):
+    field_type = ForeignKey(FieldType)
+    value_text = CharField('Значение (текст)', max_length=32, blank=True, null=True, default=None)
 
     class Meta:
         verbose_name = 'Значение особенности'
@@ -44,15 +43,15 @@ class FieldValue(models.Model):
         return '{field_type}: {val}'.format(field_type=self.field_type, val=val)
 
 
-class Animal(models.Model):
-    name = models.CharField('Имя', max_length=32, unique=True, blank=True, default=None)
+class Animal(Model):
+    name = CharField('Имя', max_length=32, unique=True, blank=True, default=None)
     # TODO: Create sex field
-    created = models.DateTimeField('Дата публикации', auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField('Дата обновления', auto_now_add=False, auto_now=True)
-    date_of_birth = models.DateTimeField('Дата рождения', blank=True, null=True, default=None)
-    group = models.ForeignKey(Group, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)
-    show = models.BooleanField('Показывать', default=True)
-    field_value = models.ManyToManyField(
+    created = DateTimeField('Дата публикации', auto_now_add=True, auto_now=False)
+    updated = DateTimeField('Дата обновления', auto_now_add=False, auto_now=True)
+    date_of_birth = DateField('Возраст', blank=True, null=True, default=None)
+    group = ForeignKey(Group, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)
+    show = BooleanField('Показывать', default=True)
+    field_value = ManyToManyField(
         FieldValue, verbose_name=FieldValue._meta.verbose_name, blank=True, default=None
     )
 
@@ -91,10 +90,16 @@ class Animal(models.Model):
         """
         return AnimalImage.objects.get(animal=self)
 
+    def get_age(self):
+        if self.date_of_birth:
+            return calc_age_uptoday(before_date=self.date_of_birth, later_date=date.today())
+        else:
+            return None
 
-class AnimalDescription(models.Model):
-    animal = models.OneToOneField(Animal, unique=True, blank=True, default=None)
-    description = models.TextField('Описание', blank=True, default=None)
+
+class AnimalDescription(Model):
+    animal = OneToOneField(Animal, unique=True, blank=True, default=None)
+    description = TextField('Описание', blank=True, default=None)
 
     class Meta:
         verbose_name = 'Описание'
@@ -104,13 +109,13 @@ class AnimalDescription(models.Model):
         return 'Описание: {}'.format(self.animal)
 
 
-class AnimalImage(models.Model):
-    animal = models.OneToOneField(Animal)
-    image = models.ImageField('Изображение', upload_to='images/')
-    image_url = models.URLField('URL изображения', blank=True, default=None)
-    alt = models.CharField('Подпись к фото', max_length=50)
-    width = models.IntegerField('Ширина', blank=True, default=None, null=True)
-    height = models.IntegerField('Высота', blank=True, default=None, null=True)
+class AnimalImage(Model):
+    animal = OneToOneField(Animal)
+    image = ImageField('Изображение', upload_to='images/')
+    image_url = URLField('URL изображения', blank=True, default=None)
+    alt = CharField('Подпись к фото', max_length=50)
+    width = IntegerField('Ширина', blank=True, default=None, null=True)
+    height = IntegerField('Высота', blank=True, default=None, null=True)
 
     class Meta:
         verbose_name = 'Фотография'

@@ -12,5 +12,4 @@ def index(request):
 
 def animal(request, animal_id):
     animal_by_id = Animal.objects.get(id=animal_id)
-    print(type(animal_by_id.date_of_birth))
     return render(request, 'cats/animal.html', {'animal': animal_by_id})
