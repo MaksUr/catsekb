@@ -10,6 +10,13 @@ class AnimalForm(forms.ModelForm):
         fields = '__all__'
 
     def clean(self):
+        name = self.cleaned_data.get('name', None)
+        if self.instance.name == name:
+            pass
+        elif Animal.objects.filter(name=name).exists():
+            message = '"{name}" уже сущесвтует'.format(name=name)
+            raise ValidationError({'name': [message]})
+
         words = self.cleaned_data.get('field_value')
         field_types = FieldType.objects.all()  # TODO: Ограничить FieldType до тех, на которые ссылаются field_value
         for field_type in field_types:
