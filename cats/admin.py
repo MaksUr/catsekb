@@ -1,8 +1,13 @@
 from django.contrib import admin
 
 # Register your models here.
-from cats.forms import AnimalForm
-from cats.models import Animal, AnimalDescription, AnimalImage, FieldValue, Group, FieldType
+from cats.forms import AnimalForm, AnimalAgeForm
+from cats.models import Animal, AnimalDescription, AnimalImage, FieldValue, Group, FieldType, AnimalAge
+
+
+class AnimalAgeInline(admin.TabularInline):
+    model = AnimalAge
+    form = AnimalAgeForm
 
 
 class AnimalDescriptionInline(admin.StackedInline):
@@ -14,8 +19,9 @@ class ImageInline(admin.StackedInline):
 
 
 class AnimalAdmin(admin.ModelAdmin):
+    readonly_fields = ('created', 'updated')
     form = AnimalForm
-    inlines = [AnimalDescriptionInline, ImageInline]
+    inlines = [AnimalAgeInline, AnimalDescriptionInline, ImageInline]
 admin.site.register(Animal, AnimalAdmin)
 
 

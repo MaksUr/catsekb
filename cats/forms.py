@@ -1,13 +1,18 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from cats.models import Animal, FieldType, FieldValue
+from cats.models import Animal, FieldType, FieldValue, AnimalAge
+
+
+def get_range(size):
+    res = [(i, str(i)) for i in range(0, size+1)]
+    return [(None, '')] + res
 
 
 class AnimalForm(forms.ModelForm):
     class Meta:
         model = Animal
-        fields = '__all__'
+        fields = ['name', 'group', 'show', 'field_value']
 
     def clean(self):
         name = self.cleaned_data.get('name', None)
@@ -27,3 +32,23 @@ class AnimalForm(forms.ModelForm):
             types.add(w.field_type)
         if len(errors):
             raise ValidationError({'field_value': list(errors)})
+
+
+class AnimalAgeForm(forms.ModelForm):
+    years = forms.ChoiceField(
+        widget=forms.Select,
+        choices=get_range(20),
+    )
+    months = forms.ChoiceField(
+        widget=forms.Select,
+        choices=get_range(12),
+    )
+    days = forms.ChoiceField(
+        widget=forms.Select,
+        choices=get_range(31),
+    )
+
+    class Meta:
+        model = AnimalAge
+        fields = ['years', 'months', 'days']
+

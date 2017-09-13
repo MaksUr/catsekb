@@ -98,6 +98,17 @@ class Animal(Model):
             return None
 
 
+class AnimalAge(Model):
+    animal = OneToOneField(Animal, unique=True, blank=True, default=None)
+    years = IntegerField('Лет', blank=True, default=None)
+    months = IntegerField('Месяцев', blank=True, default=None)
+    days = IntegerField('Дней', blank=True, default=None)
+
+    class Meta:
+        verbose_name = 'Возраст'
+        verbose_name_plural = 'Возраст'
+
+
 class AnimalDescription(Model):
     animal = OneToOneField(Animal, unique=True, blank=True, default=None)
     description = TextField('Описание', blank=True, default=None)
