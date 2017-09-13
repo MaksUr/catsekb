@@ -49,7 +49,6 @@ class Animal(Model):
     # TODO: Create sex field
     created = DateTimeField('Дата публикации', auto_now_add=True, auto_now=False)
     updated = DateTimeField('Дата обновления', auto_now_add=False, auto_now=True)
-    date_of_birth = DateField('Возраст', blank=True, null=True, default=None)
     group = ForeignKey(Group, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)
     show = BooleanField('Показывать', default=True)
     field_value = ManyToManyField(
