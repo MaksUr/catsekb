@@ -49,6 +49,7 @@ class Animal(Model):
     # TODO: Create sex field
     created = DateTimeField('Дата публикации', auto_now_add=True, auto_now=False)
     updated = DateTimeField('Дата обновления', auto_now_add=False, auto_now=True)
+    date_of_birth = DateField('День рождения', null=True, default=None)
     group = ForeignKey(Group, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)
     show = BooleanField('Показывать', default=True)
     field_value = ManyToManyField(
@@ -91,21 +92,11 @@ class Animal(Model):
         return AnimalImage.objects.get(animal=self)
 
     def get_age(self):
-        if self.date_of_birth:
-            return calc_age_uptoday(before_date=self.date_of_birth, later_date=date.today())
-        else:
-            return None
-
-
-class AnimalAge(Model):
-    animal = OneToOneField(Animal, unique=True, blank=True, default=None)
-    years = IntegerField('Лет', blank=True, default=None)
-    months = IntegerField('Месяцев', blank=True, default=None)
-    days = IntegerField('Дней', blank=True, default=None)
-
-    class Meta:
-        verbose_name = 'Возраст'
-        verbose_name_plural = 'Возраст'
+        # TODO: Implement
+        return calc_age_uptoday(before_date=date(2017, 1, 1), later_date=date.today())
+        # else:
+        #     print(None)
+        #     return None
 
 
 class AnimalDescription(Model):

@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from cats.models import Animal, FieldType, FieldValue, AnimalAge
+from cats.models import Animal, FieldType, FieldValue
 
 
 def get_range(size):
@@ -10,18 +10,39 @@ def get_range(size):
 
 
 class AnimalForm(forms.ModelForm):
+    years = forms.ChoiceField(
+        widget=forms.Select,
+        choices=get_range(20),
+        required=False,
+        label='Лет'
+    )
+    months = forms.ChoiceField(
+        widget=forms.Select,
+        choices=get_range(12),
+        required=False,
+        label='Месяцев'
+    )
+    days = forms.ChoiceField(
+        widget=forms.Select,
+        choices=get_range(31),
+        required=False,
+        label='Дней'
+    )
+
     class Meta:
         model = Animal
         fields = ['name', 'group', 'show', 'field_value']
 
     def clean(self):
-        name = self.cleaned_data.get('name', None)
-        if self.instance.name == name:
-            pass
-        elif Animal.objects.filter(name=name).exists():
-            message = '"{name}" уже сущесвтует'.format(name=name)
-            raise ValidationError({'name': [message]})
+        self.check_name()
+        self.check_field_value()
+        self.save_date_of_birth()
 
+    def save_date_of_birth(self):
+        # TODO: implement
+        pass
+
+    def check_field_value(self):
         words = self.cleaned_data.get('field_value')
         types = set()
         errors = set()
@@ -33,22 +54,10 @@ class AnimalForm(forms.ModelForm):
         if len(errors):
             raise ValidationError({'field_value': list(errors)})
 
-
-class AnimalAgeForm(forms.ModelForm):
-    years = forms.ChoiceField(
-        widget=forms.Select,
-        choices=get_range(20),
-    )
-    months = forms.ChoiceField(
-        widget=forms.Select,
-        choices=get_range(12),
-    )
-    days = forms.ChoiceField(
-        widget=forms.Select,
-        choices=get_range(31),
-    )
-
-    class Meta:
-        model = AnimalAge
-        fields = ['years', 'months', 'days']
-
+    def check_name(self):
+        name = self.cleaned_data.get('name', None)
+        if self.instance.name == name:
+            pass
+        elif Animal.objects.filter(name=name).exists():
+            message = '"{name}" уже сущесвтует'.format(name=name)
+            raise ValidationError({'name': [message]})
