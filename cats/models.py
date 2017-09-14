@@ -1,31 +1,44 @@
 from datetime import date
+
 from django.db.models import Model, CharField, TextField, ForeignKey, DateTimeField, BooleanField, ManyToManyField, \
     OneToOneField, ImageField, URLField, IntegerField, DateField
 
 # Create your models here.
+from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOSE_NAME, ANIMAL_IMAGE_KEY_HEIGHT, \
+    ANIMAL_IMAGE_KEY_WIDTH, ANIMAL_IMAGE_KEY_ALT, ANIMAL_IMAGE_KEY_IMAGE_URL, ANIMAL_IMAGE_KEY_IMAGE, \
+    ANIMAL_DESCRIPTION_STR_TEMPLATE, ANIMAL_DESCRIPTION_VERBOSE_NAME_PLURAL, ANIMAL_DESCRIPTION_VERBOSE_NAME, \
+    ANIMAL_DESCRIPTION_KEY_DESCRIPTION, HASHTAG_TEMPLATE_INSTAGRAM, HASHTAG_TEMPLATE, HASHTAG_SUFFIX, \
+    ANIMAL_VERBOSE_NAME_PLURAL, ANIMAL_VERBOSE_NAME, ANIMAL_KEY_UPDATED, ANIMAL_KEY_CREATED, ANIMAL_KEY_SHOW, \
+    ANIMAL_KEY_DATE_OF_BIRTH, ANIMAL_KEY_BIRTHDAY_PRECISION, ANIMAL_KEY_SEX, ANIMAL_KEY_NAME, \
+    ANIMAL_BIRTHDAY_PRECISION_DAY_CHOICE, ANIMAL_BIRTHDAY_PRECISION_MONTH_CHOICE, ANIMAL_BIRTHDAY_PRECISION_YEAR_CHOICE, \
+    ANIMAL_BIRTHDAY_PRECISION_DAY, ANIMAL_BIRTHDAY_PRECISION_MONTH, ANIMAL_BIRTHDAY_PRECISION_YEAR, ANIMAL_SEX_FEMALE, \
+    ANIMAL_SEX_MALE, ANIMAL_SEX_CHOICE_FEMALE, ANIMAL_SEX_CHOICE_MALE, FIELD_VALUE_STR_TEMPLATE, \
+    FIELD_VALUE_VERBOSE_NAME_PLURAL, FIELD_VALUE_VERBOSE_NAME, FIELD_VALUE_KEY_VALUE_TEXT, \
+    FIELD_TYPE_KEY_VERBOSE_NAME_PLURAL, FIELD_TYPE_KEY_VERBOSE_NAME, FIELD_TYPE_KEY_DESCRIPTION, FIELD_TYPE_KEY_NAME, \
+    GROUP_VERBOSE_NAME_PLURAL, GROUP_VERBOSE_NAME, GROUP_KEY_SHOW, GROUP_KEY_DESCRIPTION, GROUP_KEY_NAME
 from cats.time import calc_age_uptoday
 
 
 class Group(Model):
-    name = CharField('Имя', max_length=32, unique=True)
-    description = TextField('Описание', blank=True, default=None)
-    show = BooleanField('Показывать', default=True)
+    name = CharField(GROUP_KEY_NAME, max_length=32, unique=True)
+    description = TextField(GROUP_KEY_DESCRIPTION, blank=True, default=None)
+    show = BooleanField(GROUP_KEY_SHOW, default=True)
 
     class Meta:
-        verbose_name = 'Группа'
-        verbose_name_plural = 'Группы'
+        verbose_name = GROUP_VERBOSE_NAME
+        verbose_name_plural = GROUP_VERBOSE_NAME_PLURAL
 
     def __str__(self):
         return self.name
 
 
 class FieldType(Model):
-    name = CharField('Название', max_length=32, unique=True)
-    description = CharField('Описание', max_length=32, blank=True, default=None)
+    name = CharField(FIELD_TYPE_KEY_NAME, max_length=32, unique=True)
+    description = CharField(FIELD_TYPE_KEY_DESCRIPTION, max_length=32, blank=True, default=None)
 
     class Meta:
-        verbose_name = 'Тип особенности'
-        verbose_name_plural = 'Типы особенностей'
+        verbose_name = FIELD_TYPE_KEY_VERBOSE_NAME
+        verbose_name_plural = FIELD_TYPE_KEY_VERBOSE_NAME_PLURAL
 
     def __str__(self):
         return self.name
@@ -33,45 +46,47 @@ class FieldType(Model):
 
 class FieldValue(Model):
     field_type = ForeignKey(FieldType)
-    value_text = CharField('Значение (текст)', max_length=32, blank=True, null=True, default=None)
+    value_text = CharField(FIELD_VALUE_KEY_VALUE_TEXT, max_length=32, blank=True, null=True, default=None)
 
     class Meta:
-        verbose_name = 'Значение особенности'
-        verbose_name_plural = 'Значения особенностей'
+        verbose_name = FIELD_VALUE_VERBOSE_NAME
+        verbose_name_plural = FIELD_VALUE_VERBOSE_NAME_PLURAL
 
     def __str__(self):
         val = self.value_text
-        return '{field_type}: {val}'.format(field_type=self.field_type, val=val)
+        return FIELD_VALUE_STR_TEMPLATE.format(field_type=self.field_type, val=val)
 
 
 class Animal(Model):
     SEX = (
-        ("M", "Мужской"),
-        ("F", "Женский")
+        (ANIMAL_SEX_MALE, ANIMAL_SEX_CHOICE_MALE),
+        (ANIMAL_SEX_FEMALE, ANIMAL_SEX_CHOICE_FEMALE)
     )
-    BIRTHDAY_PRECISION_Y = "Y"
-    BIRTHDAY_PRECISION_M = "M"
-    BIRTHDAY_PRECISION_D = "D"
+    BIRTHDAY_PRECISION_Y = ANIMAL_BIRTHDAY_PRECISION_YEAR
+    BIRTHDAY_PRECISION_M = ANIMAL_BIRTHDAY_PRECISION_MONTH
+    BIRTHDAY_PRECISION_D = ANIMAL_BIRTHDAY_PRECISION_DAY
     BIRTHDAY_PRECISIONS = (
-        (BIRTHDAY_PRECISION_Y, "до года"),
-        (BIRTHDAY_PRECISION_M, "до месяца"),
-        (BIRTHDAY_PRECISION_D, "до дня"),
+        (BIRTHDAY_PRECISION_Y, ANIMAL_BIRTHDAY_PRECISION_YEAR_CHOICE),
+        (BIRTHDAY_PRECISION_M, ANIMAL_BIRTHDAY_PRECISION_MONTH_CHOICE),
+        (BIRTHDAY_PRECISION_D, ANIMAL_BIRTHDAY_PRECISION_DAY_CHOICE),
     )
-    name = CharField('Имя', max_length=32, unique=True, blank=True, default=None)
-    sex = CharField('Пол', max_length=1, choices=SEX)
-    birthday_precision = CharField('Точность даты рождения', max_length=1, choices=BIRTHDAY_PRECISIONS, null=True, default=None)
-    date_of_birth = DateField('День рождения', null=True, default=None, blank=True)
+    name = CharField(ANIMAL_KEY_NAME, max_length=32, unique=True, blank=True, default=None)
+    sex = CharField(ANIMAL_KEY_SEX, max_length=1, choices=SEX)
+    birthday_precision = CharField(
+        ANIMAL_KEY_BIRTHDAY_PRECISION, max_length=1, choices=BIRTHDAY_PRECISIONS, null=True, default=None
+    )
+    date_of_birth = DateField(ANIMAL_KEY_DATE_OF_BIRTH, null=True, default=None, blank=True)
     group = ForeignKey(Group, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)
-    show = BooleanField('Показывать', default=True)
+    show = BooleanField(ANIMAL_KEY_SHOW, default=True)
     field_value = ManyToManyField(
         FieldValue, verbose_name=FieldValue._meta.verbose_name, blank=True, default=None
     )
-    created = DateTimeField('Дата публикации', auto_now_add=True, auto_now=False)
-    updated = DateTimeField('Дата обновления', auto_now_add=False, auto_now=True)
+    created = DateTimeField(ANIMAL_KEY_CREATED, auto_now_add=True, auto_now=False)
+    updated = DateTimeField(ANIMAL_KEY_UPDATED, auto_now_add=False, auto_now=True)
 
     class Meta:
-        verbose_name = 'Питомец'
-        verbose_name_plural = 'Питомцы'
+        verbose_name = ANIMAL_VERBOSE_NAME
+        verbose_name_plural = ANIMAL_VERBOSE_NAME_PLURAL
 
     def __str__(self):
         if self.name:
@@ -81,13 +96,13 @@ class Animal(Model):
 
     def get_hashtag_name(self):
         if self.name:
-            template = '#{name}_catsekb'
-            return template.format(name=self.__str__())
+            template = HASHTAG_TEMPLATE
+            return template.format(name=self.__str__(), suffix=HASHTAG_SUFFIX)
 
     def get_instagram_link(self):
         if self.name:
-            template = 'https://www.instagram.com/explore/tags/{name}_catsekb/'
-            return template.format(name=self.__str__())
+            template = HASHTAG_TEMPLATE_INSTAGRAM
+            return template.format(name=self.__str__(), suffix=HASHTAG_SUFFIX)
 
     def get_description(self):
 
@@ -113,25 +128,26 @@ class Animal(Model):
 
 class AnimalDescription(Model):
     animal = OneToOneField(Animal, unique=True, blank=True, default=None)
-    description = TextField('Описание', blank=True, default=None)
+    description = TextField(ANIMAL_DESCRIPTION_KEY_DESCRIPTION, blank=True, default=None)
 
     class Meta:
-        verbose_name = 'Описание'
-        verbose_name_plural = 'Описания'
+        verbose_name = ANIMAL_DESCRIPTION_VERBOSE_NAME
+        verbose_name_plural = ANIMAL_DESCRIPTION_VERBOSE_NAME_PLURAL
 
     def __str__(self):
-        return 'Описание: {}'.format(self.animal)
+        return ANIMAL_DESCRIPTION_STR_TEMPLATE.format(animal=self.animal)
 
 
 class AnimalImage(Model):
     animal = OneToOneField(Animal)
-    image = ImageField('Изображение', upload_to='images/')
-    image_url = URLField('URL изображения', blank=True, default=None)
-    alt = CharField('Подпись к фото', max_length=50)
-    width = IntegerField('Ширина', blank=True, default=None, null=True)
-    height = IntegerField('Высота', blank=True, default=None, null=True)
+    image = ImageField(ANIMAL_IMAGE_KEY_IMAGE, upload_to='images/')
+    image_url = URLField(ANIMAL_IMAGE_KEY_IMAGE_URL, blank=True, default=None)
+    alt = CharField(ANIMAL_IMAGE_KEY_ALT, max_length=50)
+    width = IntegerField(ANIMAL_IMAGE_KEY_WIDTH, blank=True, default=None, null=True)
+    height = IntegerField(ANIMAL_IMAGE_KEY_HEIGHT, blank=True, default=None, null=True)
+    # TODO: create main field, unique for animal (checkbutton)
 
     class Meta:
-        verbose_name = 'Фотография'
-        verbose_name_plural = 'Фотографии'
+        verbose_name = ANIMAL_IMAGE_VERBOSE_NAME
+        verbose_name_plural = ANIMAL_IMAGE_VERBOSE_NAME_PLURAL
 
