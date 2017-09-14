@@ -14,7 +14,7 @@ class ImageInline(admin.StackedInline):
 
 
 class AnimalAdmin(admin.ModelAdmin):
-    readonly_fields = ('created', 'updated', 'date_of_birth')
+    readonly_fields = ('birthday_precision', 'created', 'updated')
     form = AnimalForm
     inlines = [AnimalDescriptionInline, ImageInline]
 admin.site.register(Animal, AnimalAdmin)

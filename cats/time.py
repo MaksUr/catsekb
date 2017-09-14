@@ -20,3 +20,15 @@ def calc_age_uptoday(before_date, later_date):
     result[MONTHS] = diff.months
     result[DAYS] = diff.days
     return result
+
+
+def get_date_from_age(years=0, months=0, days=0):
+
+    """
+
+    :type days: int
+    :type months: int
+    :type years: int
+    """
+    diff = relativedelta(years=years, months=months, days=days)
+    return date.today() - diff

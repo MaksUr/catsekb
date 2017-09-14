@@ -45,16 +45,29 @@ class FieldValue(Model):
 
 
 class Animal(Model):
+    SEX = (
+        ("M", "Мужской"),
+        ("F", "Женский")
+    )
+    BIRTHDAY_PRECISION_Y = "Y"
+    BIRTHDAY_PRECISION_M = "M"
+    BIRTHDAY_PRECISION_D = "D"
+    BIRTHDAY_PRECISIONS = (
+        (BIRTHDAY_PRECISION_Y, "до года"),
+        (BIRTHDAY_PRECISION_M, "до месяца"),
+        (BIRTHDAY_PRECISION_D, "до дня"),
+    )
     name = CharField('Имя', max_length=32, unique=True, blank=True, default=None)
-    # TODO: Create sex field
-    created = DateTimeField('Дата публикации', auto_now_add=True, auto_now=False)
-    updated = DateTimeField('Дата обновления', auto_now_add=False, auto_now=True)
-    date_of_birth = DateField('День рождения', null=True, default=None)
+    sex = CharField('Пол', max_length=1, choices=SEX)
+    birthday_precision = CharField('Точность даты рождения', max_length=1, choices=BIRTHDAY_PRECISIONS, null=True, default=None)
+    date_of_birth = DateField('День рождения', null=True, default=None, blank=True)
     group = ForeignKey(Group, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)
     show = BooleanField('Показывать', default=True)
     field_value = ManyToManyField(
         FieldValue, verbose_name=FieldValue._meta.verbose_name, blank=True, default=None
     )
+    created = DateTimeField('Дата публикации', auto_now_add=True, auto_now=False)
+    updated = DateTimeField('Дата обновления', auto_now_add=False, auto_now=True)
 
     class Meta:
         verbose_name = 'Питомец'
@@ -92,11 +105,10 @@ class Animal(Model):
         return AnimalImage.objects.get(animal=self)
 
     def get_age(self):
-        # TODO: Implement
-        return calc_age_uptoday(before_date=date(2017, 1, 1), later_date=date.today())
-        # else:
-        #     print(None)
-        #     return None
+        if self.date_of_birth:
+            return calc_age_uptoday(before_date=self.date_of_birth, later_date=date.today())
+        else:
+            return None
 
 
 class AnimalDescription(Model):
