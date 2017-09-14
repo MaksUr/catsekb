@@ -1,39 +1,18 @@
 from datetime import date
+
 from django import forms
 from django.core.exceptions import ValidationError
 
-from cats.models import Animal, FieldType, FieldValue
+from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECISION, ANIMAL_KEY_UPDATED_HELP_TEXT, \
+    ANIMAL_KEY_CREATED_HELP_TEXT, ANIMAL_KEY_SHOW_HELP_TEXT, ANIMAL_KEY_DATE_OF_BIRTH_HELP_TEXT, \
+    ANIMAL_KEY_BIRTHDAY_PRECISION_HELP_TEXT, ANIMAL_KEY_SEX_HELP_TEXT, ANIMAL_KEY_NAME_HELP_TEXT, \
+    ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST, ANIMAL_FORM_VALIDATION_ERROR_MULTIPLY_GROUPS, DJ_INSTANCE, \
+    DJ_INITIAL, ANIMAL_DAYS, ANIMAL_FORM_KEY_DAYS, ANIMAL_KEY_DAYS_HELP_TEXT, ANIMAL_MONTHS, ANIMAL_FORM_KEY_MONTHS, \
+    ANIMAL_KEY_MONTHS_HELP_TEXT, ANIMAL_YEARS, ANIMAL_FORM_KEY_YEARS, ANIMAL_KEY_YEARS_HELP_TEXT, ANIMAL_SEX, \
+    ANIMAL_FIELD_VALUE, ANIMAL_SHOW, ANIMAL_GROUP, ANIMAL_KEY_GROUP_HELP_TEXT, ANIMAL_NAME, ANIMAL_DATE_OF_BIRTH, \
+    ANIMAL_KEY_FIELD_VALUE_HELP_TEXT
+from cats.models import Animal
 from cats.time import get_date_from_age, calc_age_uptoday
-
-ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST = '"{name}" уже сущесвтует'
-
-ANIMAL_FORM_VALIDATION_ERROR_MULTIPLY_GROUPS = 'Группа "{type}" имеет более одного значения.'
-
-DJ_INITIAL = 'initial'
-
-ANIMAL_DAYS = 'days'
-
-ANIMAL_MONTHS = 'months'
-
-ANIMAL_YEARS = 'years'
-
-ANIMAL_SEX = 'sex'
-
-ANIMAL_FIELD_VALUE = 'field_value'
-
-ANIMAL_SHOW = 'show'
-
-ANIMAL_GROUP = 'group'
-
-ANIMAL_NAME = 'name'
-
-ANIMAL_DATE_OF_BIRTH = 'date_of_birth'
-
-DJ_INSTANCE = 'instance'
-
-ANIMAL_FORM_KEY_DAYS = 'Дней'
-ANIMAL_FORM_KEY_MONTHS = 'Месяцев'
-ANIMAL_FORM_KEY_YEARS = 'Лет'
 
 
 def get_range(size):
@@ -55,18 +34,21 @@ class AnimalForm(forms.ModelForm):
         choices=get_range(20),
         required=False,
         label=ANIMAL_FORM_KEY_YEARS,
+        help_text=ANIMAL_KEY_YEARS_HELP_TEXT,
     )
     months = forms.ChoiceField(
         widget=forms.Select,
         choices=get_range(12),
         required=False,
-        label=ANIMAL_FORM_KEY_MONTHS
+        label=ANIMAL_FORM_KEY_MONTHS,
+        help_text=ANIMAL_KEY_MONTHS_HELP_TEXT,
     )
     days = forms.ChoiceField(
         widget=forms.Select,
         choices=get_range(31),
         required=False,
-        label=ANIMAL_FORM_KEY_DAYS
+        label=ANIMAL_FORM_KEY_DAYS,
+        help_text=ANIMAL_KEY_DAYS_HELP_TEXT,
     )
 
     def __init__(self, *args, **kwargs):
@@ -85,6 +67,17 @@ class AnimalForm(forms.ModelForm):
             ANIMAL_YEARS, ANIMAL_MONTHS,
             ANIMAL_DAYS, ANIMAL_DATE_OF_BIRTH
         ]
+        help_texts = {
+            ANIMAL_UPDATED: ANIMAL_KEY_UPDATED_HELP_TEXT,
+            ANIMAL_CREATED: ANIMAL_KEY_CREATED_HELP_TEXT,
+            ANIMAL_SHOW: ANIMAL_KEY_SHOW_HELP_TEXT,
+            ANIMAL_DATE_OF_BIRTH: ANIMAL_KEY_DATE_OF_BIRTH_HELP_TEXT,
+            ANIMAL_BIRTHDAY_PRECISION: ANIMAL_KEY_BIRTHDAY_PRECISION_HELP_TEXT,
+            ANIMAL_SEX: ANIMAL_KEY_SEX_HELP_TEXT,
+            ANIMAL_NAME: ANIMAL_KEY_NAME_HELP_TEXT,
+            ANIMAL_GROUP: ANIMAL_KEY_GROUP_HELP_TEXT,
+            ANIMAL_FIELD_VALUE: ANIMAL_KEY_FIELD_VALUE_HELP_TEXT,
+        }
 
     def clean(self):
         if ANIMAL_NAME in self.changed_data:

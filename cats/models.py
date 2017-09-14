@@ -14,7 +14,7 @@ from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOS
     ANIMAL_BIRTHDAY_PRECISION_DAY, ANIMAL_BIRTHDAY_PRECISION_MONTH, ANIMAL_BIRTHDAY_PRECISION_YEAR, ANIMAL_SEX_FEMALE, \
     ANIMAL_SEX_MALE, ANIMAL_SEX_CHOICE_FEMALE, ANIMAL_SEX_CHOICE_MALE, FIELD_VALUE_STR_TEMPLATE, \
     FIELD_VALUE_VERBOSE_NAME_PLURAL, FIELD_VALUE_VERBOSE_NAME, FIELD_VALUE_KEY_VALUE_TEXT, \
-    FIELD_TYPE_KEY_VERBOSE_NAME_PLURAL, FIELD_TYPE_KEY_VERBOSE_NAME, FIELD_TYPE_KEY_DESCRIPTION, FIELD_TYPE_KEY_NAME, \
+    FIELD_TYPE_VERBOSE_NAME_PLURAL, FIELD_TYPE_VERBOSE_NAME, FIELD_TYPE_KEY_DESCRIPTION, FIELD_TYPE_KEY_NAME, \
     GROUP_VERBOSE_NAME_PLURAL, GROUP_VERBOSE_NAME, GROUP_KEY_SHOW, GROUP_KEY_DESCRIPTION, GROUP_KEY_NAME
 from cats.time import calc_age_uptoday
 
@@ -37,8 +37,8 @@ class FieldType(Model):
     description = CharField(FIELD_TYPE_KEY_DESCRIPTION, max_length=32, blank=True, default=None)
 
     class Meta:
-        verbose_name = FIELD_TYPE_KEY_VERBOSE_NAME
-        verbose_name_plural = FIELD_TYPE_KEY_VERBOSE_NAME_PLURAL
+        verbose_name = FIELD_TYPE_VERBOSE_NAME
+        verbose_name_plural = FIELD_TYPE_VERBOSE_NAME_PLURAL
 
     def __str__(self):
         return self.name
@@ -55,6 +55,10 @@ class FieldValue(Model):
     def __str__(self):
         val = self.value_text
         return FIELD_VALUE_STR_TEMPLATE.format(field_type=self.field_type, val=val)
+
+
+class ANIMAL_KEY_BIRTHDAY_PRECISION_HELP_TEXTe(object):
+    pass
 
 
 class Animal(Model):

@@ -7,10 +7,12 @@ from cats.models import Animal, AnimalDescription, AnimalImage, FieldValue, Grou
 
 class AnimalDescriptionInline(admin.StackedInline):
     model = AnimalDescription
+    # TODO: form = AnimalDescriptionForm
 
 
 class ImageInline(admin.StackedInline):
     model = AnimalImage
+    # TODO: form = AnimalImageForm
 
 
 class AnimalAdmin(admin.ModelAdmin):
