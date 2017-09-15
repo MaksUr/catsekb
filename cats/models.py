@@ -57,10 +57,6 @@ class FieldValue(Model):
         return FIELD_VALUE_STR_TEMPLATE.format(field_type=self.field_type, val=val)
 
 
-class ANIMAL_KEY_BIRTHDAY_PRECISION_HELP_TEXTe(object):
-    pass
-
-
 class Animal(Model):
     SEX = (
         (ANIMAL_SEX_MALE, ANIMAL_SEX_CHOICE_MALE),
