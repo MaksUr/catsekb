@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
+from cats.constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPDATED
 from cats.forms import AnimalForm
 from cats.models import Animal, AnimalDescription, AnimalImage, FieldValue, Group, FieldType
 
@@ -16,7 +17,20 @@ class ImageInline(admin.StackedInline):
 
 
 class AnimalAdmin(admin.ModelAdmin):
-    readonly_fields = ('birthday_precision', 'created', 'updated')
+    fieldsets = [
+        (
+            'Общая информация', {
+                'fields': ['name', 'group', 'field_value', 'sex'],
+            },
+        ),
+        (
+            'Настройки возраста', {
+                'fields': ['years', 'months', 'days', 'date_of_birth', 'birthday_precision'],
+                'classes': ['collapse']
+            },
+        ),
+    ]
+    readonly_fields = (ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPDATED)
     form = AnimalForm
     inlines = [AnimalDescriptionInline, ImageInline]
 admin.site.register(Animal, AnimalAdmin)
