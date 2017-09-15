@@ -53,16 +53,20 @@ class AnimalForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         instance = kwargs.get(DJ_INSTANCE)
-        if instance and getattr(instance, ANIMAL_DATE_OF_BIRTH, None):
+        if instance:
             upd = dict()
-            upd[DJ_INITIAL] = calc_age_uptoday(before_date=instance.date_of_birth, later_date=date.today())
-            kwargs.update(upd)
+            upd[DJ_INITIAL] = dict()
+            if getattr(instance, ANIMAL_DATE_OF_BIRTH, None):
+                upd[DJ_INITIAL].update(calc_age_uptoday(before_date=instance.date_of_birth, later_date=date.today()))
+                kwargs.update(upd)
+
         forms.ModelForm.__init__(self, *args, **kwargs)
 
     class Meta:
         model = Animal
         fields = [
-            ANIMAL_NAME, ANIMAL_GROUP, ANIMAL_SHOW,
+            ANIMAL_NAME,
+            ANIMAL_GROUP, ANIMAL_SHOW,
             ANIMAL_FIELD_VALUE, ANIMAL_SEX,
             ANIMAL_YEARS, ANIMAL_MONTHS,
             ANIMAL_DAYS, ANIMAL_DATE_OF_BIRTH
@@ -140,3 +144,9 @@ class AnimalForm(forms.ModelForm):
         elif Animal.objects.filter(name=name).exists():
             message = ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST.format(name=name)
             raise ValidationError({ANIMAL_NAME: [message]})
+
+
+# TODO: implement class AnimalDescriptionForm
+
+
+# TODO: implement class AnimalImageForm

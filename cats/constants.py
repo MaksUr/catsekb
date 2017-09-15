@@ -2,6 +2,7 @@
 # TEMPLATE - это шаблон. Переменные вставляются внуть скобок: '{название_поля} - {значение_поля}'
 #
 # verbose_name - название модели, plural - множ. число.
+# field_set - объединение полей (заголовок)
 #
 # ANIMAL - питомец
 # FIELD_TYPE - название свойства
@@ -16,6 +17,13 @@
 # Служебные переменные
 DJ_INSTANCE = 'instance'
 DJ_INITIAL = 'initial'
+DJ_CLASSES_COLLAPSE = 'collapse'
+DJ_CLASSES = 'classes'
+DJ_FIELDS = 'fields'
+# URLs
+URL_NAME_GROUP = 'group'
+URL_NAME_ANIMAL = 'animal'
+URL_NAME_INDEX = 'index'
 
 
 APPLICATION_VERBOSE_NAME = 'Котики'  # Название приложения
@@ -75,6 +83,7 @@ ANIMAL_DESCRIPTION_KEY_DESCRIPTION_HELP_TEXT = '_help_text ANIMAL_DESCRIPTION_KE
 # class Animal
 ANIMAL_VERBOSE_NAME_PLURAL = 'Питомцы'
 ANIMAL_VERBOSE_NAME = 'Питомец'
+ANIMAL_MAIN_FIELD_SET = 'Общая информация'
 
 HASHTAG_TEMPLATE_INSTAGRAM = 'https://www.instagram.com/explore/tags/{name}_{suffix}/'
 HASHTAG_TEMPLATE = '#{name}_{suffix}'
@@ -85,6 +94,7 @@ ANIMAL_NAME = 'name'
 ANIMAL_KEY_NAME = 'Имя'
 ANIMAL_KEY_NAME_HELP_TEXT = '_help_text ANIMAL_KEY_NAME'
 ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST = '"{name}" уже сущесвтует'
+ANIMAL_NAME_DEFAULT = 'Котик'  # Имя котика по дефолту, если имя не указано.
 
 # sex
 ANIMAL_SEX = 'sex'
@@ -141,6 +151,7 @@ ANIMAL_KEY_UPDATED = 'Дата обновления'
 ANIMAL_KEY_UPDATED_HELP_TEXT = '_help_text ANIMAL_KEY_UPDATED'
 
 # Возраст. Определяет date_of_birth в том случае, если date_of_birth не редактировался пользователем.
+ANIMAL_AGE_FIELD_SET = 'Настройки возраста'
 # days (AnimalForm) - возраст
 ANIMAL_DAYS = 'days'
 ANIMAL_FORM_KEY_DAYS = 'Дней'
@@ -208,10 +219,7 @@ GROUP_SHOW = 'show'
 GROUP_KEY_SHOW = 'Показывать группу'
 GROUP_KEY_SHOW_HELP_TEXT = '_help_text GROUP_KEY_SHOW'
 
-
-
-
-
-
-
+ANIMAL_ANIMAL_LINK = 'animal_link'
+ANIMAL_KEY_ANIMAL_LINK = 'Ссылка на сайт'
+ANIMAL_KEY_ANIMAL_LINK_HELP_TEXT = '_help_text ANIMAL_KEY_ANIMAL_LINK'
 

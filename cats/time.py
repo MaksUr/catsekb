@@ -2,9 +2,7 @@ from datetime import date
 
 from dateutil.relativedelta import relativedelta
 
-YEARS = 'years'
-MONTHS = 'months'
-DAYS = 'days'
+from cats.constants import ANIMAL_YEARS, ANIMAL_MONTHS, ANIMAL_DAYS
 
 
 def calc_age_uptoday(before_date, later_date):
@@ -16,9 +14,9 @@ def calc_age_uptoday(before_date, later_date):
 
     result = dict()
     diff = relativedelta(later_date, before_date)
-    result[YEARS] = diff.years
-    result[MONTHS] = diff.months
-    result[DAYS] = diff.days
+    result[ANIMAL_YEARS] = diff.years
+    result[ANIMAL_MONTHS] = diff.months
+    result[ANIMAL_DAYS] = diff.days
     return result
 
 
