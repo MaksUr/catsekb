@@ -8,28 +8,30 @@ from cats.models import Animal, AnimalDescription, AnimalImage, FieldValue, Grou
 
 class AnimalDescriptionInline(admin.StackedInline):
     model = AnimalDescription
+    classes = ['collapse']
     # TODO: form = AnimalDescriptionForm
 
 
 class ImageInline(admin.StackedInline):
     model = AnimalImage
+    classes = ['collapse']
     # TODO: form = AnimalImageForm
 
 
 class AnimalAdmin(admin.ModelAdmin):
-    fieldsets = [
+    fieldsets = (
         (
             'Общая информация', {
-                'fields': ['name', 'group', 'field_value', 'sex'],
+                'fields': ('name', 'group', 'field_value', 'sex'),
             },
         ),
         (
             'Настройки возраста', {
-                'fields': ['years', 'months', 'days', 'date_of_birth', 'birthday_precision'],
+                'fields': (('years', 'months', 'days'), 'date_of_birth', 'birthday_precision'),
                 'classes': ['collapse']
             },
         ),
-    ]
+    )
     readonly_fields = (ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPDATED)
     form = AnimalForm
     inlines = [AnimalDescriptionInline, ImageInline]

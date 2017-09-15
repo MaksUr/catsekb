@@ -28,32 +28,32 @@ ANIMAL_IMAGE_VERBOSE_NAME = 'Фотография'
 # animal (foreign key for class Animal)
 ANIMAL_IMAGE_ANIMAL = 'animal'
 ANIMAL_IMAGE_KEY_ANIMAL = '_Животное'  # TODO: edit value
-ANIMAL_IMAGE_KEY_ANIMAL_HELP_TEXT = '_Вспомогательный текст для ANIMAL_IMAGE_KEY_ANIMAL'
+ANIMAL_IMAGE_KEY_ANIMAL_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_ANIMAL'
 
 # image
 ANIMAL_IMAGE_IMAGE = 'image'
 ANIMAL_IMAGE_KEY_IMAGE = 'Изображение'
-ANIMAL_IMAGE_KEY_IMAGE_HELP_TEXT = '_Вспомогательный текст для ANIMAL_IMAGE_KEY_IMAGE'
+ANIMAL_IMAGE_KEY_IMAGE_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_IMAGE'
 
 # image_url
 ANIMAL_IMAGE_IMAGE_URL = 'image_url'
 ANIMAL_IMAGE_KEY_IMAGE_URL = 'URL изображения'
-ANIMAL_IMAGE_KEY_WIDTH_HELP_TEXT = '_Вспомогательный текст для ANIMAL_IMAGE_KEY_WIDTH'
+ANIMAL_IMAGE_KEY_WIDTH_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_WIDTH'
 
 # alt
 ANIMAL_IMAGE_ALT = 'alt'
 ANIMAL_IMAGE_KEY_ALT = 'Подпись к фото'
-ANIMAL_IMAGE_KEY_HEIGHT_HELP_TEXT = '_Вспомогательный текст для ANIMAL_IMAGE_KEY_HEIGHT'
+ANIMAL_IMAGE_KEY_HEIGHT_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_HEIGHT'
 
 # width
 ANIMAL_IMAGE_WIDTH = 'width'
 ANIMAL_IMAGE_KEY_WIDTH = 'Ширина'
-ANIMAL_IMAGE_KEY_IMAGE_URL_HELP_TEXT = '_Вспомогательный текст для ANIMAL_IMAGE_KEY_IMAGE_URL'
+ANIMAL_IMAGE_KEY_IMAGE_URL_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_IMAGE_URL'
 
 # height
 ANIMAL_IMAGE_HEIGHT = 'height'
 ANIMAL_IMAGE_KEY_HEIGHT = 'Высота'
-ANIMAL_IMAGE_KEY_ALT_HELP_TEXT = '_Вспомогательный текст для ANIMAL_IMAGE_KEY_ALT'
+ANIMAL_IMAGE_KEY_ALT_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_ALT'
 
 
 # class AnimalDescription
@@ -64,12 +64,12 @@ ANIMAL_DESCRIPTION_STR_TEMPLATE = 'Описание: {animal}'
 # animal (foreign key for class Animal)
 ANIMAL_DESCRIPTION_ANIMAL = 'description'
 ANIMAL_DESCRIPTION_KEY_ANIMAL = 'Описание'
-ANIMAL_DESCRIPTION_KEY_ANIMAL_HELP_TEXT = '_Вспомогательный текст для ANIMAL_DESCRIPTION_KEY_DESCRIPTION'
+ANIMAL_DESCRIPTION_KEY_ANIMAL_HELP_TEXT = '_help_text ANIMAL_DESCRIPTION_KEY_DESCRIPTION'
 
 # description
 ANIMAL_DESCRIPTION_DESCRIPTION = 'description'
 ANIMAL_DESCRIPTION_KEY_DESCRIPTION = 'Описание'
-ANIMAL_DESCRIPTION_KEY_DESCRIPTION_HELP_TEXT = '_Вспомогательный текст для ANIMAL_DESCRIPTION_KEY_DESCRIPTION'
+ANIMAL_DESCRIPTION_KEY_DESCRIPTION_HELP_TEXT = '_help_text ANIMAL_DESCRIPTION_KEY_DESCRIPTION'
 
 
 # class Animal
@@ -83,13 +83,13 @@ HASHTAG_SUFFIX = 'catsekb'
 # name
 ANIMAL_NAME = 'name'
 ANIMAL_KEY_NAME = 'Имя'
-ANIMAL_KEY_NAME_HELP_TEXT = '_Вспомогательный текст для ANIMAL_KEY_NAME'
+ANIMAL_KEY_NAME_HELP_TEXT = '_help_text ANIMAL_KEY_NAME'
 ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST = '"{name}" уже сущесвтует'
 
 # sex
 ANIMAL_SEX = 'sex'
 ANIMAL_KEY_SEX = 'Пол'
-ANIMAL_KEY_SEX_HELP_TEXT = '_Вспомогательный текст для ANIMAL_KEY_SEX'
+ANIMAL_KEY_SEX_HELP_TEXT = '_help_text ANIMAL_KEY_SEX'
 
 ANIMAL_SEX_FEMALE = "F"  # для хранения в БД
 ANIMAL_SEX_MALE = "M"  # для хранения в БД
@@ -101,7 +101,7 @@ ANIMAL_SEX_CHOICE_MALE = "Мужской"
 # При установки date_of_birth устанавливается точность DAY
 ANIMAL_BIRTHDAY_PRECISION = 'birthday_precision'
 ANIMAL_KEY_BIRTHDAY_PRECISION = 'Точность даты рождения'
-ANIMAL_KEY_BIRTHDAY_PRECISION_HELP_TEXT = '_Вспомогательный текст для ANIMAL_KEY_BIRTHDAY_PRECISION'
+ANIMAL_KEY_BIRTHDAY_PRECISION_HELP_TEXT = '_help_text ANIMAL_KEY_BIRTHDAY_PRECISION'
 
 ANIMAL_BIRTHDAY_PRECISION_DAY_CHOICE = "до дня"
 ANIMAL_BIRTHDAY_PRECISION_MONTH_CHOICE = "до месяца"
@@ -114,47 +114,47 @@ ANIMAL_BIRTHDAY_PRECISION_YEAR = "Y"  # для хранения в БД
 # При выборе этого поля, при сохранении возраст (days, months, years) устанавливается автоматом.
 ANIMAL_DATE_OF_BIRTH = 'date_of_birth'
 ANIMAL_KEY_DATE_OF_BIRTH = 'День рождения'
-ANIMAL_KEY_DATE_OF_BIRTH_HELP_TEXT = '_Вспомогательный текст для ANIMAL_KEY_DATE_OF_BIRTH'
+ANIMAL_KEY_DATE_OF_BIRTH_HELP_TEXT = '_help_text ANIMAL_KEY_DATE_OF_BIRTH'
 
 # group
 ANIMAL_GROUP = 'group'
-ANIMAL_KEY_GROUP_HELP_TEXT = '_Вспомогательный текст для ANIMAL_KEY_GROUP'
+ANIMAL_KEY_GROUP_HELP_TEXT = '_help_text ANIMAL_KEY_GROUP'
 ANIMAL_FORM_VALIDATION_ERROR_MULTIPLY_GROUPS = 'Группа "{type}" имеет более одного значения.'
 
 # show
 ANIMAL_SHOW = 'show'
 ANIMAL_KEY_SHOW = 'Показывать котика'
-ANIMAL_KEY_SHOW_HELP_TEXT = '_Вспомогательный текст для ANIMAL_KEY_SHOW'
+ANIMAL_KEY_SHOW_HELP_TEXT = '_help_text ANIMAL_KEY_SHOW'
 
 # field_value (foreign key)
 ANIMAL_FIELD_VALUE = 'field_value'
-ANIMAL_KEY_FIELD_VALUE_HELP_TEXT = '_Вспомогательный текст для ANIMAL_KEY_FIELD_VALUE'
+ANIMAL_KEY_FIELD_VALUE_HELP_TEXT = '_help_text ANIMAL_KEY_FIELD_VALUE'
 
 # created
 ANIMAL_CREATED = 'created'
 ANIMAL_KEY_CREATED = 'Дата публикации'
-ANIMAL_KEY_CREATED_HELP_TEXT = '_Вспомогательный текст для ANIMAL_KEY_CREATED'
+ANIMAL_KEY_CREATED_HELP_TEXT = '_help_text ANIMAL_KEY_CREATED'
 
 # updated
 ANIMAL_UPDATED = 'updated'
 ANIMAL_KEY_UPDATED = 'Дата обновления'
-ANIMAL_KEY_UPDATED_HELP_TEXT = '_Вспомогательный текст для ANIMAL_KEY_UPDATED'
+ANIMAL_KEY_UPDATED_HELP_TEXT = '_help_text ANIMAL_KEY_UPDATED'
 
 # Возраст. Определяет date_of_birth в том случае, если date_of_birth не редактировался пользователем.
 # days (AnimalForm) - возраст
 ANIMAL_DAYS = 'days'
 ANIMAL_FORM_KEY_DAYS = 'Дней'
-ANIMAL_KEY_DAYS_HELP_TEXT = '_Вспомогательный текст для ANIMAL_KEY_DAYS'
+ANIMAL_KEY_DAYS_HELP_TEXT = '_help_text ANIMAL_KEY_DAYS'
 
 # months (AnimalForm) - возраст
 ANIMAL_MONTHS = 'months'
 ANIMAL_FORM_KEY_MONTHS = 'Месяцев'
-ANIMAL_KEY_MONTHS_HELP_TEXT = '_Вспомогательный текст для ANIMAL_KEY_MONTHS'
+ANIMAL_KEY_MONTHS_HELP_TEXT = '_help_text ANIMAL_KEY_MONTHS'
 
 # years (AnimalForm) - возраст
 ANIMAL_YEARS = 'years'
 ANIMAL_FORM_KEY_YEARS = 'Лет'
-ANIMAL_KEY_YEARS_HELP_TEXT = '_Вспомогательный текст для ANIMAL_KEY_YEARS'
+ANIMAL_KEY_YEARS_HELP_TEXT = '_help_text ANIMAL_KEY_YEARS'
 
 
 # class FieldValue
@@ -166,12 +166,12 @@ FIELD_VALUE_STR_TEMPLATE = '{field_type}: {val}'
 # value_text
 FIELD_VALUE_VALUE_TEXT = 'value_text'
 FIELD_VALUE_KEY_VALUE_TEXT = 'Значение (текст)'
-FIELD_VALUE_KEY_VALUE_TEXT_HELP_TEXT = '_Вспомогательный текст для FIELD_VALUE_KEY_VALUE_TEXT'
+FIELD_VALUE_KEY_VALUE_TEXT_HELP_TEXT = '_help_text FIELD_VALUE_KEY_VALUE_TEXT'
 
 # field_type (foreign key for class FieldType)
 FIELD_VALUE_FIELD_TYPE = 'field_type'
 FIELD_VALUE_KEY_FIELD_TYPE = '_?'  # TODO: edit value
-FIELD_VALUE_KEY_FIELD_TYPE_HELP_TEXT = '_Вспомогательный текст для FIELD_VALUE_KEY_VALUE_TEXT'
+FIELD_VALUE_KEY_FIELD_TYPE_HELP_TEXT = '_help_text FIELD_VALUE_KEY_VALUE_TEXT'
 
 
 # class FieldType
@@ -181,12 +181,12 @@ FIELD_TYPE_VERBOSE_NAME_PLURAL = 'Типы особенностей'
 # name
 FIELD_TYPE_NAME = 'name'
 FIELD_TYPE_KEY_NAME = 'Название'
-FIELD_TYPE_KEY_NAME_HELP_TEXT = '_Вспомогательный текст для FIELD_TYPE_KEY_NAME'
+FIELD_TYPE_KEY_NAME_HELP_TEXT = '_help_text FIELD_TYPE_KEY_NAME'
 
 # description
 FIELD_TYPE_DESCRIPTION = 'description'
 FIELD_TYPE_KEY_DESCRIPTION = 'Описание'
-FIELD_TYPE_KEY_DESCRIPTION_HELP_TEXT = '_Вспомогательный текст для FIELD_TYPE_KEY_DESCRIPTION'
+FIELD_TYPE_KEY_DESCRIPTION_HELP_TEXT = '_help_text FIELD_TYPE_KEY_DESCRIPTION'
 
 
 # class Group
@@ -196,17 +196,17 @@ GROUP_VERBOSE_NAME_PLURAL = 'Группы'
 # name
 GROUP_NAME = 'name'
 GROUP_KEY_NAME = 'Имя'
-GROUP_KEY_NAME_HELP_TEXT = '_Вспомогательный текст для GROUP_KEY_NAME'
+GROUP_KEY_NAME_HELP_TEXT = '_help_text GROUP_KEY_NAME'
 
 # description
 GROUP_DESCRIPTION = 'description'
 GROUP_KEY_DESCRIPTION = 'Описание'
-GROUP_KEY_DESCRIPTION_HELP_TEXT = '_Вспомогательный текст для GROUP_KEY_DESCRIPTION'
+GROUP_KEY_DESCRIPTION_HELP_TEXT = '_help_text GROUP_KEY_DESCRIPTION'
 
 # show
 GROUP_SHOW = 'show'
 GROUP_KEY_SHOW = 'Показывать группу'
-GROUP_KEY_SHOW_HELP_TEXT = '_Вспомогательный текст для GROUP_KEY_SHOW'
+GROUP_KEY_SHOW_HELP_TEXT = '_help_text GROUP_KEY_SHOW'
 
 
 
