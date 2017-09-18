@@ -16,7 +16,7 @@ from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOS
     FIELD_VALUE_VERBOSE_NAME_PLURAL, FIELD_VALUE_VERBOSE_NAME, FIELD_VALUE_KEY_VALUE_TEXT, \
     FIELD_TYPE_VERBOSE_NAME_PLURAL, FIELD_TYPE_VERBOSE_NAME, FIELD_TYPE_KEY_DESCRIPTION, FIELD_TYPE_KEY_NAME, \
     GROUP_VERBOSE_NAME_PLURAL, GROUP_VERBOSE_NAME, GROUP_KEY_SHOW, GROUP_KEY_DESCRIPTION, GROUP_KEY_NAME, \
-    ANIMAL_NAME_DEFAULT
+    ANIMAL_NAME_DEFAULT, URL_NAME_ANIMAL
 from cats.time import calc_age_uptoday
 
 
@@ -125,6 +125,10 @@ class Animal(Model):
             return calc_age_uptoday(before_date=self.date_of_birth, later_date=date.today())
         else:
             return None
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse(URL_NAME_ANIMAL, kwargs={'animal_id': self.id})
 
 
 class AnimalDescription(Model):

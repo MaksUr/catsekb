@@ -27,20 +27,13 @@ class ImageInline(admin.StackedInline):
 
 class AnimalAdmin(admin.ModelAdmin):
 
-    def get_absolute_url(self, obj):
-        # TODO: create link to site related object
-        # l = reverse('animal', args=(obj.id,))
-        # l = 'animal_{n}'.format(n=obj.id)
-        # res = HttpRequest.build_absolute_uri()
-        return 'res'
-
     list_display = (ANIMAL_NAME, DJ_ID)
     fieldsets = (
         (
             ANIMAL_MAIN_FIELD_SET, {
                 DJ_FIELDS: (
                     ANIMAL_NAME, ANIMAL_GROUP, ANIMAL_FIELD_VALUE, ANIMAL_SEX,
-                    ANIMAL_CREATED, ANIMAL_UPDATED, 'get_absolute_url'
+                    ANIMAL_CREATED, ANIMAL_UPDATED,
                 ),
             },
         ),
@@ -55,7 +48,7 @@ class AnimalAdmin(admin.ModelAdmin):
             },
         ),
     )
-    readonly_fields = (ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPDATED, 'get_absolute_url')
+    readonly_fields = (ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPDATED,)
     form = AnimalForm
     inlines = [AnimalDescriptionInline, ImageInline]
 
