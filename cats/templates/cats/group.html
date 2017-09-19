@@ -1,2 +1,13 @@
-<p>Список {{ group.name }}</p>
-{% include "cats/animals.html"  with animals=group %}
+{#{{ name }}#}
+{#{{ id }}#}
+{#{{ group }}#}
+<p>Список: {{ name }}</p>
+{#TODO: Реализовать#}
+{#{% include "cats/animals.html"  with animals=group %}#}
+{###############################}
+{% for animal in group %}
+    <p>
+        <a href="{% url 'animal' animal_id=animal.id group_id=id %}">{{ animal.name }}</a>
+    </p>
+{% endfor %}
+{###############################}
