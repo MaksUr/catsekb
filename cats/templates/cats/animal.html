@@ -68,4 +68,10 @@
     <p>{% get_verbose_field_name animal 'updated' %}: {{ animal.updated|date:'SHORT_DATE_FORMAT'}}</p>
 </div>
 
-
+{# Следующий и предыдущий #}
+{% if next %}
+    {{ next }}
+{% endif %}
+{% if last %}
+    {{ last }}
+{% endif %}
