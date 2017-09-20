@@ -91,7 +91,7 @@ HASHTAG_SUFFIX = 'catsekb'
 
 # name
 ANIMAL_NAME = 'name'
-ANIMAL_KEY_NAME = 'Имя'
+ANIMAL_KEY_NAME = 'Имя.'
 ANIMAL_KEY_NAME_HELP_TEXT = '_help_text ANIMAL_KEY_NAME'
 ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST = '"{name}" уже сущесвтует'
 ANIMAL_NAME_DEFAULT = 'Котик'  # Имя котика по дефолту, если имя не указано.
