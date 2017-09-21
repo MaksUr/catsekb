@@ -92,14 +92,14 @@ HASHTAG_SUFFIX = 'catsekb'
 # name
 ANIMAL_NAME = 'name'
 ANIMAL_KEY_NAME = 'Имя.'
-ANIMAL_KEY_NAME_HELP_TEXT = '_help_text ANIMAL_KEY_NAME'
+ANIMAL_KEY_NAME_HELP_TEXT = 'Введите только имя. Хэштэг генерируется автоматически'
 ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST = '"{name}" уже сущесвтует'
 ANIMAL_NAME_DEFAULT = 'Котик'  # Имя котика по дефолту, если имя не указано.
 
 # sex
 ANIMAL_SEX = 'sex'
 ANIMAL_KEY_SEX = 'Пол'
-ANIMAL_KEY_SEX_HELP_TEXT = '_help_text ANIMAL_KEY_SEX'
+ANIMAL_KEY_SEX_HELP_TEXT = 'Выберите пол'
 
 ANIMAL_SEX_FEMALE = "F"  # для хранения в БД
 ANIMAL_SEX_MALE = "M"  # для хранения в БД
@@ -111,7 +111,7 @@ ANIMAL_SEX_CHOICE_MALE = "Мужской"
 # При установки date_of_birth устанавливается точность DAY
 ANIMAL_BIRTHDAY_PRECISION = 'birthday_precision'
 ANIMAL_KEY_BIRTHDAY_PRECISION = 'Точность даты рождения'
-ANIMAL_KEY_BIRTHDAY_PRECISION_HELP_TEXT = '_help_text ANIMAL_KEY_BIRTHDAY_PRECISION'
+ANIMAL_KEY_BIRTHDAY_PRECISION_HELP_TEXT = ''
 
 ANIMAL_BIRTHDAY_PRECISION_DAY_CHOICE = "до дня"
 ANIMAL_BIRTHDAY_PRECISION_MONTH_CHOICE = "до месяца"
@@ -123,12 +123,12 @@ ANIMAL_BIRTHDAY_PRECISION_YEAR = "Y"  # для хранения в БД
 # date_of_birth
 # При выборе этого поля, при сохранении возраст (days, months, years) устанавливается автоматом.
 ANIMAL_DATE_OF_BIRTH = 'date_of_birth'
-ANIMAL_KEY_DATE_OF_BIRTH = 'День рождения'
-ANIMAL_KEY_DATE_OF_BIRTH_HELP_TEXT = '_help_text ANIMAL_KEY_DATE_OF_BIRTH'
+ANIMAL_KEY_DATE_OF_BIRTH = 'Дата рождения'
+ANIMAL_KEY_DATE_OF_BIRTH_HELP_TEXT = 'Введите точную дату рождения, если известна'
 
 # group
 ANIMAL_GROUP = 'group'
-ANIMAL_KEY_GROUP_HELP_TEXT = '_help_text ANIMAL_KEY_GROUP'
+ANIMAL_KEY_GROUP_HELP_TEXT = ''
 ANIMAL_FORM_VALIDATION_ERROR_MULTIPLY_GROUPS = 'Группа "{type}" имеет более одного значения.'
 
 # show
@@ -143,29 +143,29 @@ ANIMAL_KEY_FIELD_VALUE_HELP_TEXT = '_help_text ANIMAL_KEY_FIELD_VALUE'
 # created
 ANIMAL_CREATED = 'created'
 ANIMAL_KEY_CREATED = 'Дата публикации'
-ANIMAL_KEY_CREATED_HELP_TEXT = '_help_text ANIMAL_KEY_CREATED'
+ANIMAL_KEY_CREATED_HELP_TEXT = ''
 
 # updated
 ANIMAL_UPDATED = 'updated'
 ANIMAL_KEY_UPDATED = 'Дата обновления'
-ANIMAL_KEY_UPDATED_HELP_TEXT = '_help_text ANIMAL_KEY_UPDATED'
+ANIMAL_KEY_UPDATED_HELP_TEXT = ''
 
 # Возраст. Определяет date_of_birth в том случае, если date_of_birth не редактировался пользователем.
-ANIMAL_AGE_FIELD_SET = 'Настройки возраста'
+ANIMAL_AGE_FIELD_SET = 'Возраст котика'
 # days (AnimalForm) - возраст
 ANIMAL_DAYS = 'days'
 ANIMAL_FORM_KEY_DAYS = 'Дней'
-ANIMAL_KEY_DAYS_HELP_TEXT = '_help_text ANIMAL_KEY_DAYS'
+ANIMAL_KEY_DAYS_HELP_TEXT = 'Указывается точность до дня'
 
 # months (AnimalForm) - возраст
 ANIMAL_MONTHS = 'months'
 ANIMAL_FORM_KEY_MONTHS = 'Месяцев'
-ANIMAL_KEY_MONTHS_HELP_TEXT = '_help_text ANIMAL_KEY_MONTHS'
+ANIMAL_KEY_MONTHS_HELP_TEXT = 'Указывается точность до месяца'
 
 # years (AnimalForm) - возраст
 ANIMAL_YEARS = 'years'
 ANIMAL_FORM_KEY_YEARS = 'Лет'
-ANIMAL_KEY_YEARS_HELP_TEXT = '_help_text ANIMAL_KEY_YEARS'
+ANIMAL_KEY_YEARS_HELP_TEXT = 'Указывается точность до года'
 
 
 # class FieldValue
@@ -222,4 +222,3 @@ GROUP_KEY_SHOW_HELP_TEXT = '_help_text GROUP_KEY_SHOW'
 ANIMAL_ANIMAL_LINK = 'animal_link'
 ANIMAL_KEY_ANIMAL_LINK = 'Ссылка на сайт'
 ANIMAL_KEY_ANIMAL_LINK_HELP_TEXT = '_help_text ANIMAL_KEY_ANIMAL_LINK'
-
