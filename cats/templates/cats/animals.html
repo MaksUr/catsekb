@@ -1,7 +1,0 @@
-{#animal#}
-{#group#}
-{% for animal in animals %}
-    <p>
-        <a href="{% url 'animal' animal_id=animal.id group_id=group %}">{{ animal.name }}</a>
-    </p>
-{% endfor %}

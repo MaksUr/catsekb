@@ -12,8 +12,7 @@
 </head>
 <body>
     <h1>Наши питомцы</h1>
-    <h2>Все питомцы</h2>
-        {% include "cats/animals.html"  with animals=animals group='all'%}
+    {% include "cats/group.html" with name="Все питомцы" id='all' group=animals %}
     <h2>Группы</h2>
         {% for group in groups %}
             <p>
