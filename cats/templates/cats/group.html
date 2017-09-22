@@ -4,6 +4,6 @@
 <h2>{{ name }}</h2>
 {% for animal in group %}
     <p>
-        <a href="{% url 'animal' animal_id=animal.id group_id=id %}">{{ animal.name }}</a>
+        <a href="{% url 'animal' animal_id=animal.0 group_id=id %}">{{ animal.1 }}</a>
     </p>
 {% endfor %}

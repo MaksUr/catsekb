@@ -1,3 +1,6 @@
+{# group #}
+{# animal #}
+{# page #}
 {% load verbose_names %}
 
 {% if animal.name%}
@@ -68,10 +71,30 @@
     <p>{% get_verbose_field_name animal 'updated' %}: {{ animal.updated|date:'SHORT_DATE_FORMAT'}}</p>
 </div>
 
-{# Следующий и предыдущий #}
-{% if next %}
-    {{ next }}
-{% endif %}
-{% if last %}
-    {{ last }}
+{# previous and next animal #}
+{% if page %}
+    {% load app_filters %}
+
+    {# previous #}
+    <p>
+        {% if page.has_previous %}
+            {% with prev_id=page.paginator.object_list|return_item_by_index:page.previous_page_number %}
+                <a href="{% url 'animal' animal_id=prev_id group_id=group %}">previous</a>
+            {% endwith %}
+        {% else %}
+            <span>previous</span>
+        {% endif %}
+    </p>
+
+    {# next #}
+    <p>
+        {% if page.has_next %}
+            {% with next_id=page.paginator.object_list|return_item_by_index:page.next_page_number %}
+                <a href="{% url 'animal' animal_id=next_id group_id=group %}">next</a>
+            {% endwith %}
+        {% else %}
+            <span>next</span>
+        {% endif %}
+    </p>
+
 {% endif %}
