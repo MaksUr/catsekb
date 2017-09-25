@@ -1,7 +1,8 @@
-{#{{ name }}#}
-{#{{ id }}#}
-{#{{ group }}#}
-<h2>{{ name }}</h2>
+{#name#}
+{#id#}
+{#group#}
+
+<h2><a href="{% url 'group' id %}">{{ name }}</a></h2>
 {% for animal in group %}
     <p>
         <a href="{% url 'animal' animal_id=animal.0 group_id=id %}">{{ animal.1 }}</a>

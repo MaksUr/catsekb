@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^group_(?P<group_id>[0-9a-z]+)/animal_(?P<animal_id>[0-9]+)/$', views.animal, name='animal'),
     url(r'^animal_(?P<animal_id>[0-9]+)/$', views.animal, name='animal'),  # TODO: Объединить animal
     url(r'^group_(?P<group_id>[0-9a-z]+)/$', views.group, name='group'),
+    url(r'^groups/$', views.groups, name='groups'),
 ]

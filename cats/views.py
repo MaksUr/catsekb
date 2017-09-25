@@ -85,3 +85,8 @@ def animal(request, animal_id, group_id=None):  # TODO: rename
 def group(request, group_id):  # TODO: rename
     name, group_id, animals = get_animals_from_group(group_id)
     return render(request, 'cats/group.html', {'group': animals, 'name': name, 'id': group_id})
+
+
+def groups(request):
+    groups = Group.objects.filter(show=True)
+    return render(request, 'cats/groups.html', {'groups': groups})
