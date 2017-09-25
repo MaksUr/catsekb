@@ -50,13 +50,13 @@ def get_animals_from_group(group_id):
     return group_name, group_id, list(animals_id)
 
 
-def index(request):  # TODO: rename
+def index_view(request):  # TODO: rename
     groups = Group.objects.filter(show=True)
     name, group_id, animals = get_animals_from_group(Animal.ALL_ANIMALS_KEY)
     return render(request, 'cats/index.html', {'group': animals, 'name': name, 'id': group_id, 'groups': groups})
 
 
-def animal(request, animal_id, group_id=None):  # TODO: rename
+def animal_view(request, animal_id, group_id=None):  # TODO: rename
     """
 
     :type request: HttpResponse
@@ -82,11 +82,11 @@ def animal(request, animal_id, group_id=None):  # TODO: rename
     return render(request, 'cats/animal.html', {'group': group_id, 'animal': animal, 'page': page})
 
 
-def group(request, group_id):  # TODO: rename
+def group_view(request, group_id):  # TODO: rename
     name, group_id, animals = get_animals_from_group(group_id)
     return render(request, 'cats/group.html', {'group': animals, 'name': name, 'id': group_id})
 
 
-def groups(request):
+def groups_view(request):
     groups = Group.objects.filter(show=True)
     return render(request, 'cats/groups.html', {'groups': groups})

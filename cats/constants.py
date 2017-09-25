@@ -22,6 +22,7 @@ DJ_CLASSES = 'classes'
 DJ_FIELDS = 'fields'
 # URLs
 URL_NAME_GROUP = 'group'
+URL_NAME_GROUPS = 'groups'
 URL_NAME_ANIMAL = 'animal'
 URL_NAME_INDEX = 'index'
 
