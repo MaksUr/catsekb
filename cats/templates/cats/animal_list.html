@@ -1,0 +1,11 @@
+{% for animal in object_list %}
+    <li>
+        {% if animal.name %}
+            <a href="{% url 'animal_detail' pk=animal.id %}">{{ animal.name }}</a>
+        {% else %}
+            <a href="{% url 'animal_detail' pk=animal.id %}">Id: {{ animal.id }}</a>
+        {% endif %}
+    </li>
+{% empty %}
+    Животных еще не создано
+{% endfor %}

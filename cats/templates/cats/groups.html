@@ -1,7 +1,0 @@
-{#groups#}
-<h2><a href="{% url 'groups' %}">Группы</a></h2>
-    {% for group in groups %}
-        <p>
-            <a href="{% url 'group' group.id %}">{{ group.name }}</a>
-        </p>
-    {% endfor %}

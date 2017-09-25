@@ -21,6 +21,7 @@ DJ_CLASSES_COLLAPSE = 'collapse'
 DJ_CLASSES = 'classes'
 DJ_FIELDS = 'fields'
 # URLs
+# TODO: rename
 URL_NAME_GROUP = 'group'
 URL_NAME_GROUPS = 'groups'
 URL_NAME_ANIMAL = 'animal'

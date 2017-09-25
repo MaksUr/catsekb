@@ -1,23 +1,9 @@
-{#group#}
-{#name#}
-{#id#}
-{#groups#}
+{#group_list#}
+{#group_detail#}
+{#animal_list#}
+{#animal_detail#}
 
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <style type="text/css">
-        body {
-
-        }
-    </style>
-</head>
-<body>
-    <h1>Наши питомцы</h1>
-    {% include "cats/group.html" with name=name id=id group=group %}
-    {% include "cats/groups.html" with groups=groups %}
-</body>
-</html>
+<p><a href="{% url 'group_list' %}">group_list</a></p>
+<p><a href="{% url 'group_detail' pk=1  %}">group_detail</a></p>
+<p><a href="{% url 'animal_list'  %}">animal_list</a></p>
+<p><a href="{% url 'animal_detail' pk=1 %}">animal_detail</a></p>

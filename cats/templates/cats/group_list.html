@@ -1,0 +1,7 @@
+{% for group in object_list %}
+    <li>
+        {{ group.name }}
+    </li>
+{% empty %}
+    Групп еще нет
+{% endfor %}
