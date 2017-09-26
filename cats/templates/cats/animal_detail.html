@@ -1,0 +1,97 @@
+{% load verbose_names %}
+
+{# Имя #}
+<div style="background-color: blanchedalmond">
+    {% if object.name %}
+        {# Кличка #}
+        <h1>{{ object.name }}</h1>
+        {# Ссылка #}
+        <a href="{{ object.get_instagram_link }}">{{ object.get_hashtag_name }}</a>
+        {# Кличка #}
+        <p>{% get_verbose_field_name object 'name' %}: {{ object.name}}</p>
+    {% else %}
+        <h1>Id: {{ object.id }}</h1>
+    {% endif %}
+</div>
+
+{# Группа #}
+{% if object.group %}
+    <div style="background-color: antiquewhite">
+        <p>{% get_verbose_field_name object 'group' %}: {{ object.group}}</p>
+    </div>
+{% endif %}
+
+{# Возраст #}
+{% if object.get_age %}
+    <div style="background-color: brown">
+        <p>{% get_verbose_field_name object 'date_of_birth' %}:</p>
+        {% with object.get_age as age %}
+            {% if age.years > 0 %}
+                <p>Лет: {{ age.years }}</p>
+            {% endif %}
+            {% if age.months > 0 %}
+                <p>Месяцев: {{ age.months }}</p>
+            {% endif %}
+            {% if age.days > 0 %}
+                <p>Дней: {{ age.days }}</p>
+            {% endif %}
+        {% endwith %}
+    </div>
+{% endif %}
+
+{# Особенности #}
+{% if object.field_value %}
+    <div style="background-color: aquamarine">
+        {% for field in object.field_value.all %}
+            <p>{{ field.field_type }}: {{ field.value_text }}</p>
+        {% endfor %}
+    </div>
+
+{% endif %}
+
+{# Описание #}
+{% if object.get_description %}
+    <div style="background-color: aliceblue">
+        <h4>{% get_verbose_field_name object.get_description 'description' %}</h4>
+        <p>{{ object.get_description.description }}</p>
+    </div>
+{% endif %}
+
+{# Фото #}
+{% if object.get_image %}
+    <img src="{{ object.get_image.image.url }}" alt="{{ object.get_image.alt }}">
+{% endif %}
+
+{# Время #}
+<div style="background-color: cornsilk">
+    {# TODO: Change time format #}
+    <p>{% get_verbose_field_name object 'created' %}: {{ object.created|date:'SHORT_DATE_FORMAT'}}</p>
+    <p>{% get_verbose_field_name object 'updated' %}: {{ object.updated|date:'SHORT_DATE_FORMAT'}}</p>
+</div>
+
+{# Pagibation #}
+{% if page %}
+    {% load app_filters %}
+
+    {# previous #}
+    <p>
+        {% if page.has_previous %}
+            {% with prev_id=page.paginator.object_list|return_item_by_index:page.previous_page_number %}
+                <a href="{% url 'animal' animal_id=prev_id group_id=group %}">previous</a>
+            {% endwith %}
+        {% else %}
+            <span>previous</span>
+        {% endif %}
+    </p>
+
+    {# next #}
+    <p>
+        {% if page.has_next %}
+            {% with next_id=page.paginator.object_list|return_item_by_index:page.next_page_number %}
+                <a href="{% url 'animal' animal_id=next_id group_id=group %}">next</a>
+            {% endwith %}
+        {% else %}
+            <span>next</span>
+        {% endif %}
+    </p>
+{% endif %}

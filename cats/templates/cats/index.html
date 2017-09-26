@@ -1,25 +1,9 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <style type="text/css">
-        body {
+{#group_list#}
+{#group_detail#}
+{#animal_list#}
+{#animal_detail#}
 
-        }
-    </style>
-</head>
-<body>
-    <h1>Наши питомцы</h1>
-    <h2>Все питомцы</h2>
-        {% include "cats/animals.html"  with animals=animals %}
-    <h2>Группы</h2>
-        {% for group in groups %}
-            <p>
-                <a href="{% url 'group' group.id %}">{{ group.name }}</a>
-            </p>
-        {% endfor %}
-    <h2>Фильтры</h2>
-</body>
-</html>
+<p><a href="{% url 'group_list' %}">group_list</a></p>
+{#<p><a href="{% url 'group_detail' pk=1  %}">group_detail</a></p>#}
+<p><a href="{% url 'group_detail' pk='all' %}">animal_list</a></p>
+{#<p><a href="{% url 'animal_detail' pk=1 %}">animal_detail</a></p>#}

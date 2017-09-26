@@ -21,7 +21,9 @@ DJ_CLASSES_COLLAPSE = 'collapse'
 DJ_CLASSES = 'classes'
 DJ_FIELDS = 'fields'
 # URLs
+# TODO: rename
 URL_NAME_GROUP = 'group'
+URL_NAME_GROUPS = 'groups'
 URL_NAME_ANIMAL = 'animal'
 URL_NAME_INDEX = 'index'
 
@@ -203,6 +205,9 @@ FIELD_TYPE_KEY_DESCRIPTION_HELP_TEXT = '_help_text FIELD_TYPE_KEY_DESCRIPTION'
 # class Group
 GROUP_VERBOSE_NAME = 'Группа'
 GROUP_VERBOSE_NAME_PLURAL = 'Группы'
+
+GROUP_ALL_ANIMALS_KEY_NAME = 'Все питомцы'
+GROUP_ALL_ANIMALS_NAME = 'all'
 
 # name
 GROUP_NAME = 'name'

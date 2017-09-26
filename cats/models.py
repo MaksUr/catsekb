@@ -16,7 +16,8 @@ from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOS
     FIELD_VALUE_VERBOSE_NAME_PLURAL, FIELD_VALUE_VERBOSE_NAME, FIELD_VALUE_KEY_VALUE_TEXT, \
     FIELD_TYPE_VERBOSE_NAME_PLURAL, FIELD_TYPE_VERBOSE_NAME, FIELD_TYPE_KEY_DESCRIPTION, FIELD_TYPE_KEY_NAME, \
     GROUP_VERBOSE_NAME_PLURAL, GROUP_VERBOSE_NAME, GROUP_KEY_SHOW, GROUP_KEY_DESCRIPTION, GROUP_KEY_NAME, \
-    ANIMAL_NAME_DEFAULT, URL_NAME_ANIMAL
+    ANIMAL_NAME_DEFAULT, URL_NAME_ANIMAL, GROUP_ALL_ANIMALS_KEY_NAME, GROUP_ALL_ANIMALS_NAME
+from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
 
 
@@ -59,6 +60,9 @@ class FieldValue(Model):
 
 
 class Animal(Model):
+    ALL_ANIMALS = GROUP_ALL_ANIMALS_KEY_NAME
+    ALL_ANIMALS_KEY = GROUP_ALL_ANIMALS_NAME
+
     SEX = (
         (ANIMAL_SEX_MALE, ANIMAL_SEX_CHOICE_MALE),
         (ANIMAL_SEX_FEMALE, ANIMAL_SEX_CHOICE_FEMALE)
@@ -71,6 +75,8 @@ class Animal(Model):
         (BIRTHDAY_PRECISION_M, ANIMAL_BIRTHDAY_PRECISION_MONTH_CHOICE),
         (BIRTHDAY_PRECISION_D, ANIMAL_BIRTHDAY_PRECISION_DAY_CHOICE),
     )
+
+    # fields
     name = CharField(ANIMAL_KEY_NAME, max_length=32, unique=True, blank=True, default=ANIMAL_NAME_DEFAULT)
     sex = CharField(ANIMAL_KEY_SEX, max_length=1, choices=SEX)
     birthday_precision = CharField(
@@ -84,6 +90,8 @@ class Animal(Model):
     )
     created = DateTimeField(ANIMAL_KEY_CREATED, auto_now_add=True, auto_now=False)
     updated = DateTimeField(ANIMAL_KEY_UPDATED, auto_now_add=False, auto_now=True)
+
+    objects = AnimalQuerySet.as_manager()
 
     class Meta:
         verbose_name = ANIMAL_VERBOSE_NAME
