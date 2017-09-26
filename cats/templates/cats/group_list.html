@@ -1,7 +1,7 @@
 {% for group in object_list %}
     <li>
-        {{ group.name }}
+        <a href="{% url 'group_detail' pk=group.id  %}">{{ group.name }}</a>
     </li>
 {% empty %}
-    Групп еще нет
+    <p>Групп еще нет</p>
 {% endfor %}
