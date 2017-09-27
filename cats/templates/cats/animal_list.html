@@ -1,10 +1,19 @@
-{% for animal in object_list %}
+{#animal_list#}
+{#group_id#}
+{% for animal in animal_list %}
     <li>
-        {% if animal.name %}
-            <a href="{% url 'animal_detail' pk=animal.id %}">{{ animal.name }}</a>
+        {% if group_id %}
+            <a href="{% url 'animal_detail' pk=animal.id group_pk=group_id %}">
         {% else %}
-            <a href="{% url 'animal_detail' pk=animal.id %}">Id: {{ animal.id }}</a>
+            <a href="{% url 'animal_detail' pk=animal.id %}">
         {% endif %}
+
+            {% if animal.name %}
+                {{ animal.name }}
+            {% else %}
+                Id: {{ animal.id }}
+            {% endif %}
+        </a>
     </li>
 {% empty %}
     <p>Животных не найдено</p>

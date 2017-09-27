@@ -1,9 +1,5 @@
-Груп детаил
-{{ object.name }}
-{#TODO: Include animal_list with get parameters#}
+{#object#}
+{#object_list#}
+<h2><a href="{% url 'group_detail' pk=object.id %}">{{ object.name }}</a></h2>
 
-{% for animal in animals %}
-    <li>
-        <a href="{% url 'animal_detail' pk=animal.id group_pk=object.id %}">Кот: {{ animal.name }}</a>
-    </li>
-{% endfor %}
+{% include "cats/animal_list.html" with animal_list=object_list group_id=object.id %}

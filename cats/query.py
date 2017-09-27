@@ -1,27 +1,34 @@
 from django.db.models import QuerySet
 
+NAME = 'name'
+
+NAME__ISTARTSWITH = 'name__istartswith'
+
+GROUP__NAME = 'group__name'
+
+GROUP = 'group'
+
+GROUP__PK = 'group__pk'
+
+ALL = 'all'
+
+GROUP_ID = 'group_id'
+
 
 class AnimalQuerySet(QuerySet):
 
-    def get_animals_by_group_id(self, group):
-        """
+    def filter_animals(self, **kwargs):
+        if kwargs.get(GROUP_ID) is not None:
+            if kwargs[GROUP_ID] != ALL:
+                kwargs[GROUP__PK] = kwargs[GROUP_ID]
+            del kwargs[GROUP_ID]
 
-        :type group: str
-        """
-        if group == 'all' or group is None:
-            return self.all()
-        res = self.filter(group__pk=group)
-        return res
+        if kwargs.get(GROUP) is not None:
+            if kwargs[GROUP] != ALL:
+                kwargs[GROUP__NAME] = kwargs[GROUP]
+            del kwargs[GROUP]
 
-    def get_animals_by_group_name(self, group=None):
-        """
-
-        :type group: str
-        """
-        if group == 'all' or group is None:
-            return self.all()
-        else:
-            res = self.filter(group__name=group)
-            return res
-
-
+        if kwargs.get(NAME) is not None:
+            kwargs[NAME__ISTARTSWITH] = kwargs[NAME]
+            del kwargs[NAME]
+        return self.filter(**kwargs)

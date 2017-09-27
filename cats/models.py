@@ -33,6 +33,11 @@ class Group(Model):
     def __str__(self):
         return self.name
 
+    @staticmethod
+    def get_group_with_all_animals():
+        res = Group(name=GROUP_ALL_ANIMALS_KEY_NAME, show=True, id='all')
+        return res
+
 
 class FieldType(Model):
     name = CharField(FIELD_TYPE_KEY_NAME, max_length=32, unique=True)
@@ -60,8 +65,6 @@ class FieldValue(Model):
 
 
 class Animal(Model):
-    ALL_ANIMALS = GROUP_ALL_ANIMALS_KEY_NAME
-    ALL_ANIMALS_KEY = GROUP_ALL_ANIMALS_NAME
 
     SEX = (
         (ANIMAL_SEX_MALE, ANIMAL_SEX_CHOICE_MALE),

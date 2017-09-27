@@ -7,28 +7,36 @@ from django.views.generic import ListView, DetailView
 from cats.models import Animal, Group
 
 
+def get_group(group_name):
+    if group_name == 'all':
+        return Group.get_group_with_all_animals()
+    else:
+        res = get_object_or_404(Group, id=group_name, show=True)
+        return res
+
+
+# TODO: доступен только админам или из фильтра с контролем параметров
 class AnimalListView(ListView):
     # template animal_list
     model = Animal
-    # TODO: parse get parameters and get animals
+
+    def __init__(self, **kwargs):
+        ListView.__init__(self, **kwargs)
+        self.context = dict()
 
     def get_queryset(self):
-        req = self.request.GET.dict()
-        query = dict()
-        if req.get('name'):
-            query['name__istartswith'] = req['name']
-        if req.get('sex'):
-            query['sex'] = req['sex']
-        # TODO: добавить свойства
+        query = self.request.GET.dict()
         query['show'] = True
-
-        if req.get('group_id'):
-            res = Animal.objects.filter(**query).get_animals_by_group_id(req['group_id'])
-        elif req.get('group'):
-            res = Animal.objects.filter(**query).get_animals_by_group_name(req['group'])
-        else:
-            res = Animal.objects.filter(**query)
+        res = Animal.objects.filter_animals(**query)
+        if self.kwargs.get('group_pk') is not None:
+            res = res.filter_animals(group_id=self.kwargs['group_pk'])
+            self.context['group_id'] = self.kwargs['group_pk']
         return res
+
+    def get_context_data(self, **kwargs):
+        context = ListView.get_context_data(self, **kwargs)
+        context.update(self.context)
+        return context
 
 
 class AnimalDetailView(DetailView):
@@ -39,19 +47,19 @@ class AnimalDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = DetailView.get_context_data(self, **kwargs)
         animal = kwargs['object']
-        group_name = self.get_group_name()
-        if group_name is not None:
+        group_id = self.get_group_id()
+        if group_id is not None:
             # TODO: check
-            animals = Animal.objects.get_animals_by_group_name(group_name)
-            context['page'] = self.get_animal_page(animals, animal)
+            animals = Animal.objects.filter_animals(group_id=group_id)
+            context['page'] = self.get_animal_page(animals, animal, group_id)
         return context
 
-    def get_group_name(self):
+    def get_group_id(self):
         res = self.kwargs.get('group_pk')
         return res
 
     @staticmethod
-    def get_animal_page(animals, animal):
+    def get_animal_page(animals, animal, group_id):
         if animal not in animals:
             # TODO: check
             raise Http404('Анимал отсутствует в данной группе')
@@ -65,6 +73,7 @@ class AnimalDetailView(DetailView):
                 return None
             paginator = Paginator(animals_id_list, 1)
             page = paginator.page(page_number)
+            page.group_id = group_id
             return page
 
 
@@ -76,48 +85,22 @@ class GroupListView(ListView):
 class GroupDetailView(ListView):
     # template group_detail
     model = Group
+    template_name = 'cats/group_detail.html'
 
-    def __init__(self, **kwargs):
-        ListView.__init__(self, **kwargs)
-    # TODO: implement
-    # def get_context_data(self, **kwargs):
-    #     context = ListView.get_context_data(self, **kwargs)
-    #     group_id = self.kwargs['pk']
-    #     animals = Animal.objects.get_animals_by_group_id(group_id).filter(show=True)
-    #     context['animals'] = animals
-    #     return context
+    def get_queryset(self):
+        return Animal.objects.filter_animals(group_id=self.kwargs['pk'])
 
-    # def get_q
+    def get_context_data(self, **kwargs):
+        context = ListView.get_context_data(self, **kwargs)
+        group_name = self.kwargs['pk']
+        group = get_group(group_name)
+        context['object'] = group
+        return context
 
 
 def index_view(request):
-    return render(request, 'cats/index.html', {})
-
-
-
-# #####################################################
-# def animal_view(request, animal_id, group_id=None):  # TODO: rename
-#     """
-#
-#     :type request: HttpResponse
-#     :type animal_id: str
-#     :type group_id: str
-#     """
-#     animal_id = check_and_get_int_id(animal_id)
-#     animal = get_animal_by_id(animal_id)
-#
-#     if group_id is None:
-#         page = None
-#     else:
-#         group_name, group_id, animals_id_list,  = get_animals_from_group(group_id)
-#         animals_id_list = [i[0] for i in animals_id_list]
-#         try:
-#             i = animals_id_list.index(animal_id) + 1
-#         except ValueError:
-#             # TODO: id in current group does not exist
-#             raise Exception("В данной группе нет животного с таким айди")
-#         paginator = Paginator(animals_id_list, 1)
-#         page = paginator.page(i)
-#
-#     return render(request, 'cats/animal.html', {'group': group_id, 'animal': animal, 'page': page})
-#
+    all_animals_group = get_group('all')
+    # TODO: edit
+    all_animals_list = Animal.objects.filter(show=True)
+    group_list = Group.objects.filter(show=True)
+    return render(request, 'cats/index.html', locals())
