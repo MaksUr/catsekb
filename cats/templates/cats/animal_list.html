@@ -2,12 +2,7 @@
 {#group_id#}
 {% for animal in animal_list %}
     <li>
-        {% if group_id %}
-            <a href="{% url 'animal_detail' pk=animal.id group_pk=group_id %}">
-        {% else %}
-            <a href="{% url 'animal_detail' pk=animal.id %}">
-        {% endif %}
-
+        <a href="{% url 'animal_detail' pk=animal.id %}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}">
             {% if animal.name %}
                 {{ animal.name }}
             {% else %}

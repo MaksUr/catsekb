@@ -20,26 +20,3 @@
     {% include "cats/group_list.html" with group_list=group_list %}
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-{#group_list#}
-{#group_detail#}
-{#animal_list#}
-{#animal_detail#}
-
-
-<p>================================================</p>
-<p><a href="{% url 'group_list' %}">group_list (example)</a></p>
-<p><a href="{% url 'group_detail' pk=1  %}">group_detail (example)</a></p>
-<p><a href="{% url 'group_detail' pk='all' %}">group_detail_all (example)</a></p>
-<p><a href="{% url 'animal_detail' pk=1 %}">animal_detail_without_group (example)</a></p>
-<p><a href="{% url 'animal_detail' pk=5 group_pk=1 %}">animal_detail_with_group (example)</a></p>
-<p><a href="{% url 'animal_detail' pk=1 group_pk="all" %}">animal_detail_with_all_group (example)</a></p>

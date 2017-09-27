@@ -20,23 +20,11 @@ class AnimalListView(ListView):
     # template animal_list
     model = Animal
 
-    def __init__(self, **kwargs):
-        ListView.__init__(self, **kwargs)
-        self.context = dict()
-
     def get_queryset(self):
         query = self.request.GET.dict()
         query['show'] = True
         res = Animal.objects.filter_animals(**query)
-        if self.kwargs.get('group_pk') is not None:
-            res = res.filter_animals(group_id=self.kwargs['group_pk'])
-            self.context['group_id'] = self.kwargs['group_pk']
         return res
-
-    def get_context_data(self, **kwargs):
-        context = ListView.get_context_data(self, **kwargs)
-        context.update(self.context)
-        return context
 
 
 class AnimalDetailView(DetailView):
@@ -50,12 +38,13 @@ class AnimalDetailView(DetailView):
         group_id = self.get_group_id()
         if group_id is not None:
             # TODO: check
-            animals = Animal.objects.filter_animals(group_id=group_id)
+            animals = Animal.objects.filter_animals(group_id=group_id).order_by('created')
             context['page'] = self.get_animal_page(animals, animal, group_id)
         return context
 
     def get_group_id(self):
-        res = self.kwargs.get('group_pk')
+        # TODO: Необходимо изменить таким образом, чтобы функция возвращала запрос query для filter_animals
+        res = self.request.GET.get('group_id')
         return res
 
     @staticmethod

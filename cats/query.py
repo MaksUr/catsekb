@@ -1,5 +1,7 @@
 from django.db.models import QuerySet
 
+from cats.constants import GROUP_ALL_ANIMALS_KEY_NAME
+
 NAME = 'name'
 
 NAME__ISTARTSWITH = 'name__istartswith'
@@ -24,7 +26,7 @@ class AnimalQuerySet(QuerySet):
             del kwargs[GROUP_ID]
 
         if kwargs.get(GROUP) is not None:
-            if kwargs[GROUP] != ALL:
+            if kwargs[GROUP] != GROUP_ALL_ANIMALS_KEY_NAME:
                 kwargs[GROUP__NAME] = kwargs[GROUP]
             del kwargs[GROUP]
 
