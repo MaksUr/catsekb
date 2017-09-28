@@ -1,6 +1,7 @@
 {#all_animals_group#}
 {#all_animals_list#}
 {#group_list#}
+{#filter_label#}
 
 {% load static %}
 <!DOCTYPE html>
@@ -16,7 +17,10 @@
 </head>
 <body>
     <h1>Наши питомцы</h1>
-    {% include "cats/group_detail.html" with object=all_animals_group object_list=all_animals_list %}
+    {% include "cats/group_detail.html" with object=all_animals_group object_list=all_animals_list filter_label='' %}
     {% include "cats/group_list.html" with group_list=group_list %}
+    <p><a href="{% url 'animal_filter' %}">{{ filter_label }}</a></p>
+
+
 </body>
 </html>

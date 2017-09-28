@@ -38,6 +38,9 @@ class Group(Model):
         res = Group(name=GROUP_ALL_ANIMALS_KEY_NAME, show=True, id='all')
         return res
 
+    def id_str(self):
+        return str(self.id)
+
 
 class FieldType(Model):
     name = CharField(FIELD_TYPE_KEY_NAME, max_length=32, unique=True)

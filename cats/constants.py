@@ -228,3 +228,5 @@ ANIMAL_ANIMAL_LINK = 'animal_link'
 ANIMAL_KEY_ANIMAL_LINK = 'Ссылка на сайт'
 ANIMAL_KEY_ANIMAL_LINK_HELP_TEXT = '_help_text ANIMAL_KEY_ANIMAL_LINK'
 
+# Labels
+FILTER_LABEL = 'Фильтр'

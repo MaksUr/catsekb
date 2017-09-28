@@ -81,7 +81,7 @@
         {% if page.has_previous %}
             {% with prev_id=page.paginator.object_list|return_item_by_index:page.previous_page_number %}
 {#                TODO: use urlencode#}
-                <a href="{% url 'animal_detail' pk=prev_id %}?group_id={{ page.group_id }}">previous</a>
+                <a href="{% url 'animal_detail' pk=prev_id %}?{{ request.GET.urlencode }}">previous</a>
             {% endwith %}
         {% else %}
             <span>previous</span>
@@ -93,7 +93,7 @@
         {% if page.has_next %}
             {% with next_id=page.paginator.object_list|return_item_by_index:page.next_page_number %}
 {#                TODO: use urlencode#}
-                <a href="{% url 'animal_detail' pk=next_id %}?group_id={{ page.group_id }}">next</a>
+                <a href="{% url 'animal_detail' pk=next_id %}?{{ request.GET.urlencode }}">next</a>
             {% endwith %}
         {% else %}
             <span>next</span>

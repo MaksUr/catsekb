@@ -1,9 +1,8 @@
-from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
-from django.http import HttpResponse, Http404
-from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 
+from cats.constants import FILTER_LABEL
 from cats.models import Animal, Group
 
 
@@ -26,6 +25,18 @@ class AnimalListView(ListView):
         res = Animal.objects.filter_animals(**query)
         return res
 
+    def get_context_data(self, **kwargs):
+        context = ListView.get_context_data(self, **kwargs)
+        context['filter_string'] = self.get_filter_string()
+        context['filter_label'] = FILTER_LABEL
+        return context
+
+    def get_filter_string(self):
+        if self.request.GET:
+            return '?'+self.request.GET.urlencode()
+        else:
+            return ''
+
 
 class AnimalDetailView(DetailView):
     # template animal_detail
@@ -35,34 +46,31 @@ class AnimalDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = DetailView.get_context_data(self, **kwargs)
         animal = kwargs['object']
-        group_id = self.get_group_id()
-        if group_id is not None:
-            # TODO: check
-            animals = Animal.objects.filter_animals(group_id=group_id).order_by('created')
-            context['page'] = self.get_animal_page(animals, animal, group_id)
+        animals_query = self.get_animals_query()
+        if animals_query:
+            animals_query['show'] = True
+            animals = Animal.objects.filter_animals(**animals_query).order_by('created')
+            context['page'] = self.get_animal_page(animals, animal)
         return context
 
-    def get_group_id(self):
-        # TODO: Необходимо изменить таким образом, чтобы функция возвращала запрос query для filter_animals
-        res = self.request.GET.get('group_id')
+    def get_animals_query(self):
+        res = self.request.GET.dict()
         return res
 
     @staticmethod
-    def get_animal_page(animals, animal, group_id):
+    def get_animal_page(animals, animal):
         if animal not in animals:
-            # TODO: check
-            raise Http404('Анимал отсутствует в данной группе')
             # TODO: redirect without group
+            return None
+            # raise Http404('Анимал отсутствует в данной группе')
         else:
             animals_id_list = [i.id for i in animals]
             try:
                 page_number = animals_id_list.index(animal.id) + 1
             except ValueError:
-                # TODO: check
                 return None
             paginator = Paginator(animals_id_list, 1)
             page = paginator.page(page_number)
-            page.group_id = group_id
             return page
 
 
@@ -89,7 +97,7 @@ class GroupDetailView(ListView):
 
 def index_view(request):
     all_animals_group = get_group('all')
-    # TODO: edit
     all_animals_list = Animal.objects.filter(show=True)
     group_list = Group.objects.filter(show=True)
+    filter_label = FILTER_LABEL
     return render(request, 'cats/index.html', locals())
