@@ -11,7 +11,7 @@ from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECI
     ANIMAL_KEY_MONTHS_HELP_TEXT, ANIMAL_YEARS, ANIMAL_FORM_KEY_YEARS, ANIMAL_KEY_YEARS_HELP_TEXT, ANIMAL_SEX, \
     ANIMAL_FIELD_VALUE, ANIMAL_SHOW, ANIMAL_GROUP, ANIMAL_KEY_GROUP_HELP_TEXT, ANIMAL_NAME, ANIMAL_DATE_OF_BIRTH, \
     ANIMAL_KEY_FIELD_VALUE_HELP_TEXT
-from cats.models import Animal
+from cats.models import Animal, Group
 from cats.time import get_date_from_age, calc_age_uptoday
 
 
@@ -26,6 +26,19 @@ def get_int_val(val):
         return 0
     else:
         return int(val)
+
+
+class FilterForm(forms.ModelForm):
+    # TODO: debug and edit
+    name = forms.CharField(max_length=30, required=False)
+    sex = forms.ChoiceField(widget=forms.Select, choices=(('M', 'мужской'), ('F', 'женский')))
+    group = forms.ChoiceField(
+        widget=forms.Select, choices=[(group.id, group.name) for group in Group.objects.filter(show=True)]
+    )
+
+    class Meta:
+        model = Animal
+        fields = ('name', 'sex', 'group')
 
 
 class AnimalForm(forms.ModelForm):

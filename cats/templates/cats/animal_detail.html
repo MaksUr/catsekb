@@ -99,5 +99,5 @@
 {% endif %}
 
 {% if request.GET %}
-    <a href="{% url 'animal_filter' %}?{{ request.GET.urlencode }}">К списку</a>
+    <a href="{% url 'animal_list' %}?{{ request.GET.urlencode }}">К списку</a>
 {% endif %}

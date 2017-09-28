@@ -1,8 +1,9 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, FormView
 
 from cats.constants import FILTER_LABEL
+from cats.forms import FilterForm
 from cats.models import Animal, Group
 
 
@@ -101,3 +102,18 @@ def index_view(request):
     group_list = Group.objects.filter(show=True)
     filter_label = FILTER_LABEL
     return render(request, 'cats/index.html', locals())
+
+
+class FilterView(FormView):
+    template_name = 'cats/animal_filter.html'
+    form_class = FilterForm
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        form.send_email()
+        return FormView.form_valid(self, form)
+
+    def get_context_data(self, **kwargs):
+        context = FormView.get_context_data(self, **kwargs)
+        return context

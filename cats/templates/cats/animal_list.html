@@ -2,7 +2,7 @@
 {#filter_string#}
 {#filter_label?#}
 {% if filter_label %}
-    <h2><a href="{% url 'animal_filter' %}">{{ filter_label }}</a></h2>
+    <h2><a href="{% url 'animal_list' %}">{{ filter_label }}</a></h2>
 {% endif %}
 
 {% for animal in animal_list %}
