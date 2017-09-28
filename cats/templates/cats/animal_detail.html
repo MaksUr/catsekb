@@ -67,12 +67,11 @@
 
 {# Время #}
 <div style="background-color: cornsilk">
-    {# TODO: Change time format #}
     <p>{% get_verbose_field_name object 'created' %}: {{ object.created|date:'SHORT_DATE_FORMAT'}}</p>
     <p>{% get_verbose_field_name object 'updated' %}: {{ object.updated|date:'SHORT_DATE_FORMAT'}}</p>
 </div>
 
-{# Pagibation #}
+{# Pagination #}
 {% if page %}
     {% load app_filters %}
 
@@ -80,7 +79,6 @@
     <p>
         {% if page.has_previous %}
             {% with prev_id=page.paginator.object_list|return_item_by_index:page.previous_page_number %}
-{#                TODO: use urlencode#}
                 <a href="{% url 'animal_detail' pk=prev_id %}?{{ request.GET.urlencode }}">previous</a>
             {% endwith %}
         {% else %}
@@ -92,11 +90,14 @@
     <p>
         {% if page.has_next %}
             {% with next_id=page.paginator.object_list|return_item_by_index:page.next_page_number %}
-{#                TODO: use urlencode#}
                 <a href="{% url 'animal_detail' pk=next_id %}?{{ request.GET.urlencode }}">next</a>
             {% endwith %}
         {% else %}
             <span>next</span>
         {% endif %}
     </p>
+{% endif %}
+
+{% if request.GET %}
+    <a href="{% url 'animal_filter' %}?{{ request.GET.urlencode }}">К списку</a>
 {% endif %}
