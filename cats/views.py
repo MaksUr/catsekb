@@ -109,10 +109,10 @@ class FilterView(FormView):
     form_class = FilterForm
 
     def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
-        form.send_email()
-        return FormView.form_valid(self, form)
+        if form.is_valid():
+            return FormView.form_valid(self, form)
+        else:
+            raise Exception('Форма не прошла валидацию')
 
     def get_context_data(self, **kwargs):
         context = FormView.get_context_data(self, **kwargs)

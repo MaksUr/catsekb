@@ -1,6 +1,7 @@
 <p>Фильтр. Форма</p>
 
-<form action="{% url 'animal_list' %}" method="get">
+{#<form action="{% url 'animal_list' %}" method="get">#}
+<form action="{% url 'animal_list' %}" method="post">{% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Send_message">
+    <input type="submit" value="Поиск">
 </form>

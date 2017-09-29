@@ -28,19 +28,6 @@ def get_int_val(val):
         return int(val)
 
 
-class FilterForm(forms.ModelForm):
-    # TODO: debug and edit
-    name = forms.CharField(max_length=30, required=False)
-    sex = forms.ChoiceField(widget=forms.Select, choices=(('M', 'мужской'), ('F', 'женский')))
-    group = forms.ChoiceField(
-        widget=forms.Select, choices=[(group.id, group.name) for group in Group.objects.filter(show=True)]
-    )
-
-    class Meta:
-        model = Animal
-        fields = ('name', 'sex', 'group')
-
-
 class AnimalForm(forms.ModelForm):
     years = forms.ChoiceField(
         widget=forms.Select,
@@ -158,6 +145,21 @@ class AnimalForm(forms.ModelForm):
             message = ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST.format(name=name)
             raise ValidationError({ANIMAL_NAME: [message]})
 
+
+class FilterForm(forms.ModelForm):
+    class Meta:
+        model = Animal
+        fields = [
+            ANIMAL_NAME,
+            ANIMAL_GROUP,
+            ANIMAL_FIELD_VALUE, ANIMAL_SEX,
+
+        ]
+
+    def clean(self):
+        if self.cleaned_data.get(ANIMAL_NAME) == '':
+            raise ValidationError({ANIMAL_NAME: ('')})
+        print('clean')
 
 # TODO: implement class AnimalDescriptionForm
 
