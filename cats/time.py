@@ -30,3 +30,19 @@ def get_date_from_age(years=0, months=0, days=0):
     """
     diff = relativedelta(years=years, months=months, days=days)
     return date.today() - diff
+
+
+def get_age_from_string(age_string):
+    """
+
+    :type age_string: str
+    """
+    # TODO: parsing string
+    result = dict()
+    result[ANIMAL_YEARS] = 1
+    result[ANIMAL_MONTHS] = 4
+    result[ANIMAL_DAYS] = 5
+    return result
+
+
+

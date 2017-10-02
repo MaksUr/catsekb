@@ -1,5 +1,6 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 from django.views.generic import ListView, DetailView, FormView
 
 from cats.constants import FILTER_LABEL
@@ -15,6 +16,27 @@ def get_group(group_name):
         return res
 
 
+def get_animals_from_query(query, show=True):
+    """
+
+    :type show: bool
+    :type query: dict
+    """
+    query['show'] = show
+    return Animal.objects.filter_animals(**query).order_by('created')
+
+
+def get_filter_string(query):
+    """
+
+    :type query: QueryDict
+    """
+    if query:
+        return '?'+query.urlencode()
+    else:
+        return ''
+
+
 # TODO: доступен только админам или из фильтра с контролем параметров
 class AnimalListView(ListView):
     # template animal_list
@@ -22,21 +44,14 @@ class AnimalListView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.dict()
-        query['show'] = True
-        res = Animal.objects.filter_animals(**query)
+        res = get_animals_from_query(query)
         return res
 
     def get_context_data(self, **kwargs):
         context = ListView.get_context_data(self, **kwargs)
-        context['filter_string'] = self.get_filter_string()
+        context['filter_string'] = get_filter_string(self.request.GET)
         context['filter_label'] = FILTER_LABEL
         return context
-
-    def get_filter_string(self):
-        if self.request.GET:
-            return '?'+self.request.GET.urlencode()
-        else:
-            return ''
 
 
 class AnimalDetailView(DetailView):
@@ -49,8 +64,7 @@ class AnimalDetailView(DetailView):
         animal = kwargs['object']
         animals_query = self.get_animals_query()
         if animals_query:
-            animals_query['show'] = True
-            animals = Animal.objects.filter_animals(**animals_query).order_by('created')
+            animals = get_animals_from_query(animals_query)
             context['page'] = self.get_animal_page(animals, animal)
         return context
 
@@ -86,7 +100,7 @@ class GroupDetailView(ListView):
     template_name = 'cats/group_detail.html'
 
     def get_queryset(self):
-        return Animal.objects.filter_animals(group_id=self.kwargs['pk'])
+        return Animal.objects.filter_animals(group_id=self.kwargs['pk'], show=True)  # TODO: group_show=True
 
     def get_context_data(self, **kwargs):
         context = ListView.get_context_data(self, **kwargs)
@@ -108,12 +122,19 @@ class FilterView(FormView):
     template_name = 'cats/animal_filter.html'
     form_class = FilterForm
 
-    def form_valid(self, form):
-        if form.is_valid():
-            return FormView.form_valid(self, form)
-        else:
-            raise Exception('Форма не прошла валидацию')
-
     def get_context_data(self, **kwargs):
         context = FormView.get_context_data(self, **kwargs)
+        if self.request.GET.dict():
+            query = self.request.GET
+            context['animal_list'] = get_animals_from_query(query.dict())
+            context['filter_string'] = get_filter_string(query)
         return context
+
+    def get_form_kwargs(self):
+        res = FormView.get_form_kwargs(self)
+        res['data'] = self.request.GET.dict()
+        return res
+
+
+
+

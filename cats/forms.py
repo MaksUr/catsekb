@@ -146,20 +146,27 @@ class AnimalForm(forms.ModelForm):
             raise ValidationError({ANIMAL_NAME: [message]})
 
 
-class FilterForm(forms.ModelForm):
-    class Meta:
-        model = Animal
-        fields = [
-            ANIMAL_NAME,
-            ANIMAL_GROUP,
-            ANIMAL_FIELD_VALUE, ANIMAL_SEX,
-
-        ]
-
-    def clean(self):
-        if self.cleaned_data.get(ANIMAL_NAME) == '':
-            raise ValidationError({ANIMAL_NAME: ('')})
-        print('clean')
+class FilterForm(forms.Form):
+    name = forms.CharField(
+        required=False,
+        label='Имя',
+    )
+    sex = forms.ChoiceField(widget=forms.RadioSelect, required=False, choices=(('M', 'муж'), ('F', 'жен')), label='Пол')
+    age_distance = forms.ChoiceField(
+        label='Возрастной промежуток',
+        widget=forms.RadioSelect,
+        required=False,
+        choices=(
+            ('_d5', 'до 5 дней'),
+            ('d5_m1', 'от 5 дней до меся'),
+            ('m1_m6', 'от месяца до полугода'),
+            ('m6_y1', 'от полугода до года'),
+            ('y1_y2', 'от года до двух'),
+            ('y2_y5', 'от двух до пяти лет'),
+            ('y2_', 'более пяти лет'),
+            ('y1m5d53_y2', 'от одного года 5 месяцев и 53 дней до 2 лет'),
+        )
+    )
 
 # TODO: implement class AnimalDescriptionForm
 
