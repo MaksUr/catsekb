@@ -16,7 +16,7 @@ from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOS
     FIELD_VALUE_VERBOSE_NAME_PLURAL, FIELD_VALUE_VERBOSE_NAME, FIELD_VALUE_KEY_VALUE_TEXT, \
     FIELD_TYPE_VERBOSE_NAME_PLURAL, FIELD_TYPE_VERBOSE_NAME, FIELD_TYPE_KEY_DESCRIPTION, FIELD_TYPE_KEY_NAME, \
     GROUP_VERBOSE_NAME_PLURAL, GROUP_VERBOSE_NAME, GROUP_KEY_SHOW, GROUP_KEY_DESCRIPTION, GROUP_KEY_NAME, \
-    ANIMAL_NAME_DEFAULT, URL_NAME_ANIMAL, GROUP_ALL_ANIMALS_KEY_NAME, GROUP_ALL_ANIMALS_NAME
+    ANIMAL_NAME_DEFAULT, GROUP_ALL_ANIMALS_KEY_NAME, GROUP_ALL_ANIMALS_NAME, URL_NAME_ANIMAL, DJ_PK
 from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
 
@@ -35,7 +35,7 @@ class Group(Model):
 
     @staticmethod
     def get_group_with_all_animals():
-        res = Group(name=GROUP_ALL_ANIMALS_KEY_NAME, show=True, id='all')
+        res = Group(name=GROUP_ALL_ANIMALS_KEY_NAME, show=True, id=GROUP_ALL_ANIMALS_NAME)
         return res
 
     def id_str(self):
@@ -142,7 +142,7 @@ class Animal(Model):
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse(URL_NAME_ANIMAL, kwargs={'animal_id': self.id})
+        return reverse(URL_NAME_ANIMAL, kwargs={DJ_PK: self.id})
 
 
 class AnimalDescription(Model):

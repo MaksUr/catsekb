@@ -20,12 +20,18 @@ DJ_INITIAL = 'initial'
 DJ_CLASSES_COLLAPSE = 'collapse'
 DJ_CLASSES = 'classes'
 DJ_FIELDS = 'fields'
+DJ_PK = 'pk'
+DJ_PAGE = 'page'
+DJ_OBJECT = 'object'
+
 # URLs
-# TODO: rename
-URL_NAME_GROUP = 'group'
-URL_NAME_GROUPS = 'groups'
-URL_NAME_ANIMAL = 'animal'
 URL_NAME_INDEX = 'index'
+URL_NAME_GROUPS = 'group_list'
+URL_NAME_GROUP = 'group_detail'
+URL_NAME_ANIMAL_FILTER = 'animal_filter'
+URL_NAME_ANIMALS = 'animal_list'
+URL_NAME_ANIMAL = 'animal_detail'
+
 
 
 APPLICATION_VERBOSE_NAME = 'Котики'  # Название приложения
@@ -227,6 +233,26 @@ GROUP_KEY_SHOW_HELP_TEXT = '_help_text GROUP_KEY_SHOW'
 ANIMAL_ANIMAL_LINK = 'animal_link'
 ANIMAL_KEY_ANIMAL_LINK = 'Ссылка на сайт'
 ANIMAL_KEY_ANIMAL_LINK_HELP_TEXT = '_help_text ANIMAL_KEY_ANIMAL_LINK'
+
+
+# class FilterForm
+
+# sex
+SEX_CHOICES = ((ANIMAL_SEX_MALE, ANIMAL_SEX_CHOICE_MALE), (ANIMAL_SEX_FEMALE, ANIMAL_SEX_CHOICE_FEMALE))
+
+# age_distance
+AGE_DISTANCE = 'age_distance'
+AGE_DISTANCE_KEY = 'Возрастной промежуток'
+AGE_DISTANCE_CHOICES = (
+    ('_d5', 'до 5 дней'),
+    ('d5_m1', 'от 5 дней до месяца'),
+    ('m1_m6', 'от месяца до полугода'),
+    ('m6_y1', 'от полугода до года'),
+    ('y1_y2', 'от года до двух'),
+    ('y2_y5', 'от двух до пяти лет'),
+    ('y5_', 'более пяти лет'),
+)
+
 
 # Labels
 FILTER_LABEL = 'Фильтр'

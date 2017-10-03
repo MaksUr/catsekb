@@ -10,7 +10,8 @@ from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECI
     DJ_INITIAL, ANIMAL_DAYS, ANIMAL_FORM_KEY_DAYS, ANIMAL_KEY_DAYS_HELP_TEXT, ANIMAL_MONTHS, ANIMAL_FORM_KEY_MONTHS, \
     ANIMAL_KEY_MONTHS_HELP_TEXT, ANIMAL_YEARS, ANIMAL_FORM_KEY_YEARS, ANIMAL_KEY_YEARS_HELP_TEXT, ANIMAL_SEX, \
     ANIMAL_FIELD_VALUE, ANIMAL_SHOW, ANIMAL_GROUP, ANIMAL_KEY_GROUP_HELP_TEXT, ANIMAL_NAME, ANIMAL_DATE_OF_BIRTH, \
-    ANIMAL_KEY_FIELD_VALUE_HELP_TEXT
+    ANIMAL_KEY_FIELD_VALUE_HELP_TEXT, ANIMAL_KEY_NAME, SEX_CHOICES, ANIMAL_KEY_SEX, AGE_DISTANCE_CHOICES, \
+    AGE_DISTANCE_KEY
 from cats.models import Animal, Group
 from cats.time import get_date_from_age, calc_age_uptoday
 
@@ -149,22 +150,14 @@ class AnimalForm(forms.ModelForm):
 class FilterForm(forms.Form):
     name = forms.CharField(
         required=False,
-        label='Имя',
+        label=ANIMAL_KEY_NAME,
     )
-    sex = forms.ChoiceField(widget=forms.RadioSelect, required=False, choices=(('M', 'муж'), ('F', 'жен')), label='Пол')
+    sex = forms.ChoiceField(widget=forms.RadioSelect, required=False, choices=SEX_CHOICES, label=ANIMAL_KEY_SEX)
     age_distance = forms.ChoiceField(
-        label='Возрастной промежуток',
+        label=AGE_DISTANCE_KEY,
         widget=forms.RadioSelect,
         required=False,
-        choices=(
-            ('_d5', 'до 5 дней'),
-            ('d5_m1', 'от 5 дней до меся'),
-            ('m1_m6', 'от месяца до полугода'),
-            ('m6_y1', 'от полугода до года'),
-            ('y1_y2', 'от года до двух'),
-            ('y2_y5', 'от двух до пяти лет'),
-            ('y5_', 'более пяти лет'),
-        )
+        choices=AGE_DISTANCE_CHOICES
     )
 
 # TODO: implement class AnimalDescriptionForm
