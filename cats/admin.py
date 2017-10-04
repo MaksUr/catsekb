@@ -1,16 +1,11 @@
 from django.contrib import admin
 
 # Register your models here.
-from django.http import HttpRequest
-from django.urls import reverse
-
 from cats.constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPDATED, ANIMAL_NAME, ANIMAL_GROUP, \
     ANIMAL_FIELD_VALUE, ANIMAL_SEX, ANIMAL_DATE_OF_BIRTH, ANIMAL_DAYS, ANIMAL_MONTHS, ANIMAL_YEARS, \
-    ANIMAL_AGE_FIELD_SET, DJ_CLASSES_COLLAPSE, DJ_CLASSES, DJ_FIELDS, ANIMAL_MAIN_FIELD_SET, ANIMAL_ANIMAL_LINK
+    ANIMAL_AGE_FIELD_SET, DJ_CLASSES_COLLAPSE, DJ_CLASSES, DJ_FIELDS, ANIMAL_MAIN_FIELD_SET, DJ_ID
 from cats.forms import AnimalForm
 from cats.models import Animal, AnimalDescription, AnimalImage, FieldValue, Group, FieldType
-
-DJ_ID = 'id'
 
 
 class AnimalDescriptionInline(admin.StackedInline):
@@ -59,6 +54,8 @@ admin.site.register(Animal, AnimalAdmin)
 class AnimalsInline(admin.TabularInline):
     extra = 0
     model = Animal
+    form = AnimalForm
+    fields = ('name', 'sex')
 
 
 class GroupAdmin(admin.ModelAdmin):

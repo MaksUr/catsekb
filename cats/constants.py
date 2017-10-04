@@ -21,6 +21,7 @@ DJ_CLASSES_COLLAPSE = 'collapse'
 DJ_CLASSES = 'classes'
 DJ_FIELDS = 'fields'
 DJ_PK = 'pk'
+DJ_ID = 'id'
 DJ_PAGE = 'page'
 DJ_OBJECT = 'object'
 
