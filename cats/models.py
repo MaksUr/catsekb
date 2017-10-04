@@ -6,8 +6,7 @@ from django.db.models import Model, CharField, TextField, ForeignKey, DateTimeFi
 # Create your models here.
 from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOSE_NAME, ANIMAL_IMAGE_KEY_HEIGHT, \
     ANIMAL_IMAGE_KEY_WIDTH, ANIMAL_IMAGE_KEY_ALT, ANIMAL_IMAGE_KEY_IMAGE_URL, ANIMAL_IMAGE_KEY_IMAGE, \
-    ANIMAL_DESCRIPTION_STR_TEMPLATE, ANIMAL_DESCRIPTION_VERBOSE_NAME_PLURAL, ANIMAL_DESCRIPTION_VERBOSE_NAME, \
-    ANIMAL_DESCRIPTION_KEY_DESCRIPTION, HASHTAG_TEMPLATE_INSTAGRAM, HASHTAG_TEMPLATE, HASHTAG_SUFFIX, \
+    HASHTAG_TEMPLATE_INSTAGRAM, HASHTAG_TEMPLATE, HASHTAG_SUFFIX, \
     ANIMAL_VERBOSE_NAME_PLURAL, ANIMAL_VERBOSE_NAME, ANIMAL_KEY_UPDATED, ANIMAL_KEY_CREATED, ANIMAL_KEY_SHOW, \
     ANIMAL_KEY_DATE_OF_BIRTH, ANIMAL_KEY_BIRTHDAY_PRECISION, ANIMAL_KEY_SEX, ANIMAL_KEY_NAME, \
     ANIMAL_BIRTHDAY_PRECISION_DAY_CHOICE, ANIMAL_BIRTHDAY_PRECISION_MONTH_CHOICE, ANIMAL_BIRTHDAY_PRECISION_YEAR_CHOICE, \
@@ -16,7 +15,7 @@ from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOS
     FIELD_VALUE_VERBOSE_NAME_PLURAL, FIELD_VALUE_VERBOSE_NAME, FIELD_VALUE_KEY_VALUE_TEXT, \
     FIELD_TYPE_VERBOSE_NAME_PLURAL, FIELD_TYPE_VERBOSE_NAME, FIELD_TYPE_KEY_DESCRIPTION, FIELD_TYPE_KEY_NAME, \
     GROUP_VERBOSE_NAME_PLURAL, GROUP_VERBOSE_NAME, GROUP_KEY_SHOW, GROUP_KEY_DESCRIPTION, GROUP_KEY_NAME, \
-    ANIMAL_NAME_DEFAULT, GROUP_ALL_ANIMALS_KEY_NAME, GROUP_ALL_ANIMALS_NAME, URL_NAME_ANIMAL, DJ_PK
+    GROUP_ALL_ANIMALS_KEY_NAME, GROUP_ALL_ANIMALS_NAME, URL_NAME_ANIMAL, DJ_PK, ANIMAL_KEY_DESCRIPTION
 from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
 
@@ -83,8 +82,9 @@ class Animal(Model):
     )
 
     # fields
-    name = CharField(ANIMAL_KEY_NAME, max_length=32, unique=True, blank=True, default=ANIMAL_NAME_DEFAULT)
-    sex = CharField(ANIMAL_KEY_SEX, max_length=1, choices=SEX)
+    name = CharField(ANIMAL_KEY_NAME, max_length=32, blank=True, default=None)
+    description = TextField(ANIMAL_KEY_DESCRIPTION, blank=True, default=None)
+    sex = CharField(ANIMAL_KEY_SEX, max_length=1, choices=SEX, blank=True, default=None)
     birthday_precision = CharField(
         ANIMAL_KEY_BIRTHDAY_PRECISION, max_length=1, choices=BIRTHDAY_PRECISIONS, null=True, default=None
     )
@@ -119,14 +119,6 @@ class Animal(Model):
             template = HASHTAG_TEMPLATE_INSTAGRAM
             return template.format(name=self.__str__(), suffix=HASHTAG_SUFFIX)
 
-    def get_description(self):
-
-        """
-
-        :rtype: AnimalDescription
-        """
-        return AnimalDescription.objects.get(animal=self)
-    
     def get_image(self):
         """
 
@@ -143,18 +135,6 @@ class Animal(Model):
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse(URL_NAME_ANIMAL, kwargs={DJ_PK: self.id})
-
-
-class AnimalDescription(Model):
-    animal = OneToOneField(Animal, unique=True, blank=True, default=None)
-    description = TextField(ANIMAL_DESCRIPTION_KEY_DESCRIPTION, blank=True, default=None)
-
-    class Meta:
-        verbose_name = ANIMAL_DESCRIPTION_VERBOSE_NAME
-        verbose_name_plural = ANIMAL_DESCRIPTION_VERBOSE_NAME_PLURAL
-
-    def __str__(self):
-        return ANIMAL_DESCRIPTION_STR_TEMPLATE.format(animal=self.animal)
 
 
 class AnimalImage(Model):

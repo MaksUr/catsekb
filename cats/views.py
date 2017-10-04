@@ -54,6 +54,7 @@ class AnimalListView(ListView):
 
 
 class AnimalDetailView(DetailView):
+    # TODO: if show=False check admin login
     # template animal_detail
     model = Animal
     animal_paginate_by = 1
