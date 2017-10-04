@@ -1,7 +1,11 @@
 <p>Фильтр. Форма</p>
 
-{#<form action="{% url 'animal_list' %}" method="get">#}
-<form action="{% url 'animal_list' %}" method="post">{% csrf_token %}
+<form method="get">
     {{ form.as_p }}
     <input type="submit" value="Поиск">
 </form>
+<a href="{% url 'animal_filter' %}">Сбросить фильтры</a>
+{% if animal_list %}
+    {% include "cats/animal_list.html" with animal_list=animal_list filter_string=filter_string %}
+{% endif %}
+

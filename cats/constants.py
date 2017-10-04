@@ -20,12 +20,19 @@ DJ_INITIAL = 'initial'
 DJ_CLASSES_COLLAPSE = 'collapse'
 DJ_CLASSES = 'classes'
 DJ_FIELDS = 'fields'
+DJ_PK = 'pk'
+DJ_ID = 'id'
+DJ_PAGE = 'page'
+DJ_OBJECT = 'object'
+
 # URLs
-# TODO: rename
-URL_NAME_GROUP = 'group'
-URL_NAME_GROUPS = 'groups'
-URL_NAME_ANIMAL = 'animal'
 URL_NAME_INDEX = 'index'
+URL_NAME_GROUPS = 'group_list'
+URL_NAME_GROUP = 'group_detail'
+URL_NAME_ANIMAL_FILTER = 'animal_filter'
+URL_NAME_ANIMALS = 'animal_list'
+URL_NAME_ANIMAL = 'animal_detail'
+
 
 
 APPLICATION_VERBOSE_NAME = 'Котики'  # Название приложения
@@ -66,22 +73,6 @@ ANIMAL_IMAGE_KEY_HEIGHT = 'Высота'
 ANIMAL_IMAGE_KEY_ALT_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_ALT'
 
 
-# class AnimalDescription
-ANIMAL_DESCRIPTION_VERBOSE_NAME = 'Описание'
-ANIMAL_DESCRIPTION_VERBOSE_NAME_PLURAL = 'Описания'
-ANIMAL_DESCRIPTION_STR_TEMPLATE = 'Описание: {animal}'
-
-# animal (foreign key for class Animal)
-ANIMAL_DESCRIPTION_ANIMAL = 'description'
-ANIMAL_DESCRIPTION_KEY_ANIMAL = 'Описание'
-ANIMAL_DESCRIPTION_KEY_ANIMAL_HELP_TEXT = '_help_text ANIMAL_DESCRIPTION_KEY_DESCRIPTION'
-
-# description
-ANIMAL_DESCRIPTION_DESCRIPTION = 'description'
-ANIMAL_DESCRIPTION_KEY_DESCRIPTION = 'Описание'
-ANIMAL_DESCRIPTION_KEY_DESCRIPTION_HELP_TEXT = '_help_text ANIMAL_DESCRIPTION_KEY_DESCRIPTION'
-
-
 # class Animal
 ANIMAL_VERBOSE_NAME_PLURAL = 'Питомцы'
 ANIMAL_VERBOSE_NAME = 'Питомец'
@@ -96,7 +87,11 @@ ANIMAL_NAME = 'name'
 ANIMAL_KEY_NAME = 'Имя'
 ANIMAL_KEY_NAME_HELP_TEXT = '_help_text ANIMAL_KEY_NAME'
 ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST = '"{name}" уже сущесвтует'
-ANIMAL_NAME_DEFAULT = 'Котик'  # Имя котика по дефолту, если имя не указано.
+
+# description
+ANIMAL_DESCRIPTION = 'description'
+ANIMAL_KEY_DESCRIPTION = 'Описание'
+ANIMAL_KEY_DESCRIPTION_HELP_TEXT = '_help_text ANIMAL_DESCRIPTION_KEY_DESCRIPTION'
 
 # sex
 ANIMAL_SEX = 'sex'
@@ -136,7 +131,7 @@ ANIMAL_FORM_VALIDATION_ERROR_MULTIPLY_GROUPS = 'Группа "{type}" имеет
 # show
 ANIMAL_SHOW = 'show'
 ANIMAL_KEY_SHOW = 'Показывать котика'
-ANIMAL_KEY_SHOW_HELP_TEXT = '_help_text ANIMAL_KEY_SHOW'
+ANIMAL_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удаления или чтобы скрыть.'
 
 # field_value (foreign key)
 ANIMAL_FIELD_VALUE = 'field_value'
@@ -172,13 +167,13 @@ ANIMAL_KEY_YEARS_HELP_TEXT = '_help_text ANIMAL_KEY_YEARS'
 
 # class FieldValue
 # Только одно значение FieldValue в одном Animal может принадлежать одному FieldType
-FIELD_VALUE_VERBOSE_NAME = 'Значение особенности'
+FIELD_VALUE_VERBOSE_NAME = 'Характерная особенность'
 FIELD_VALUE_VERBOSE_NAME_PLURAL = 'Значения особенностей'
-FIELD_VALUE_STR_TEMPLATE = '{field_type}: {val}'
+FIELD_VALUE_STR_TEMPLATE = '{field_type} - {val}'
 
 # value_text
 FIELD_VALUE_VALUE_TEXT = 'value_text'
-FIELD_VALUE_KEY_VALUE_TEXT = 'Значение (текст)'
+FIELD_VALUE_KEY_VALUE_TEXT = 'Особенность'
 FIELD_VALUE_KEY_VALUE_TEXT_HELP_TEXT = '_help_text FIELD_VALUE_KEY_VALUE_TEXT'
 
 # field_type (foreign key for class FieldType)
@@ -222,11 +217,31 @@ GROUP_KEY_DESCRIPTION_HELP_TEXT = '_help_text GROUP_KEY_DESCRIPTION'
 # show
 GROUP_SHOW = 'show'
 GROUP_KEY_SHOW = 'Показывать группу'
-GROUP_KEY_SHOW_HELP_TEXT = '_help_text GROUP_KEY_SHOW'
+GROUP_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удаления или чтобы скрыть.'
 
 ANIMAL_ANIMAL_LINK = 'animal_link'
 ANIMAL_KEY_ANIMAL_LINK = 'Ссылка на сайт'
 ANIMAL_KEY_ANIMAL_LINK_HELP_TEXT = '_help_text ANIMAL_KEY_ANIMAL_LINK'
+
+
+# class FilterForm
+
+# sex
+SEX_CHOICES = ((ANIMAL_SEX_MALE, ANIMAL_SEX_CHOICE_MALE), (ANIMAL_SEX_FEMALE, ANIMAL_SEX_CHOICE_FEMALE))
+
+# age_distance
+AGE_DISTANCE = 'age_distance'
+AGE_DISTANCE_KEY = 'Возрастной промежуток'
+AGE_DISTANCE_CHOICES = (
+    ('_d5', 'до 5 дней'),
+    ('d5_m1', 'от 5 дней до месяца'),
+    ('m1_m6', 'от месяца до полугода'),
+    ('m6_y1', 'от полугода до года'),
+    ('y1_y2', 'от года до двух'),
+    ('y2_y5', 'от двух до пяти лет'),
+    ('y5_', 'более пяти лет'),
+)
+
 
 # Labels
 FILTER_LABEL = 'Фильтр'

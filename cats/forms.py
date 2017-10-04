@@ -1,7 +1,7 @@
 from datetime import date
 
 from django import forms
-from django.core.exceptions import ValidationError
+from django.forms import ValidationError
 
 from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECISION, ANIMAL_KEY_UPDATED_HELP_TEXT, \
     ANIMAL_KEY_CREATED_HELP_TEXT, ANIMAL_KEY_SHOW_HELP_TEXT, ANIMAL_KEY_DATE_OF_BIRTH_HELP_TEXT, \
@@ -10,8 +10,9 @@ from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECI
     DJ_INITIAL, ANIMAL_DAYS, ANIMAL_FORM_KEY_DAYS, ANIMAL_KEY_DAYS_HELP_TEXT, ANIMAL_MONTHS, ANIMAL_FORM_KEY_MONTHS, \
     ANIMAL_KEY_MONTHS_HELP_TEXT, ANIMAL_YEARS, ANIMAL_FORM_KEY_YEARS, ANIMAL_KEY_YEARS_HELP_TEXT, ANIMAL_SEX, \
     ANIMAL_FIELD_VALUE, ANIMAL_SHOW, ANIMAL_GROUP, ANIMAL_KEY_GROUP_HELP_TEXT, ANIMAL_NAME, ANIMAL_DATE_OF_BIRTH, \
-    ANIMAL_KEY_FIELD_VALUE_HELP_TEXT
-from cats.models import Animal, Group
+    ANIMAL_KEY_FIELD_VALUE_HELP_TEXT, ANIMAL_KEY_NAME, SEX_CHOICES, ANIMAL_KEY_SEX, AGE_DISTANCE_CHOICES, \
+    AGE_DISTANCE_KEY, ANIMAL_DESCRIPTION, ANIMAL_KEY_DESCRIPTION_HELP_TEXT
+from cats.models import Animal
 from cats.time import get_date_from_age, calc_age_uptoday
 
 
@@ -69,7 +70,8 @@ class AnimalForm(forms.ModelForm):
             ANIMAL_GROUP, ANIMAL_SHOW,
             ANIMAL_FIELD_VALUE, ANIMAL_SEX,
             ANIMAL_YEARS, ANIMAL_MONTHS,
-            ANIMAL_DAYS, ANIMAL_DATE_OF_BIRTH
+            ANIMAL_DAYS, ANIMAL_DATE_OF_BIRTH,
+            ANIMAL_DESCRIPTION,
         ]
         help_texts = {
             ANIMAL_UPDATED: ANIMAL_KEY_UPDATED_HELP_TEXT,
@@ -81,15 +83,10 @@ class AnimalForm(forms.ModelForm):
             ANIMAL_NAME: ANIMAL_KEY_NAME_HELP_TEXT,
             ANIMAL_GROUP: ANIMAL_KEY_GROUP_HELP_TEXT,
             ANIMAL_FIELD_VALUE: ANIMAL_KEY_FIELD_VALUE_HELP_TEXT,
+            ANIMAL_DESCRIPTION: ANIMAL_KEY_DESCRIPTION_HELP_TEXT,
         }
 
     def clean(self):
-        if ANIMAL_NAME in self.changed_data:
-            self.check_name()
-
-        if ANIMAL_FIELD_VALUE in self.changed_data:
-            self.check_field_value()
-
         if ANIMAL_DATE_OF_BIRTH in self.changed_data:
             if not self.cleaned_data[ANIMAL_DATE_OF_BIRTH]:
                 self.instance.birthday_precision = None
@@ -125,7 +122,7 @@ class AnimalForm(forms.ModelForm):
         )
         self.cleaned_data[ANIMAL_DATE_OF_BIRTH] = date_of_birth
 
-    def check_field_value(self):
+    def clean_field_value(self):
         words = self.cleaned_data.get(ANIMAL_FIELD_VALUE)
         types = set()
         errors = set()
@@ -135,33 +132,31 @@ class AnimalForm(forms.ModelForm):
                 errors.add(message)
             types.add(w.field_type)
         if len(errors):
-            raise ValidationError({ANIMAL_FIELD_VALUE: list(errors)})
+            raise ValidationError(list(errors))
+        return words
 
-    def check_name(self):
+    def clean_name(self):
         name = self.cleaned_data.get(ANIMAL_NAME, None)
-        if self.instance.name == name:
+        if name == "" or self.instance.name == name:
             pass
         elif Animal.objects.filter(name=name).exists():
             message = ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST.format(name=name)
-            raise ValidationError({ANIMAL_NAME: [message]})
+            raise ValidationError(message)
+        return name
 
 
-class FilterForm(forms.ModelForm):
-    class Meta:
-        model = Animal
-        fields = [
-            ANIMAL_NAME,
-            ANIMAL_GROUP,
-            ANIMAL_FIELD_VALUE, ANIMAL_SEX,
-
-        ]
-
-    def clean(self):
-        if self.cleaned_data.get(ANIMAL_NAME) == '':
-            raise ValidationError({ANIMAL_NAME: ('')})
-        print('clean')
-
-# TODO: implement class AnimalDescriptionForm
+class FilterForm(forms.Form):
+    name = forms.CharField(
+        required=False,
+        label=ANIMAL_KEY_NAME,
+    )
+    sex = forms.ChoiceField(widget=forms.RadioSelect, required=False, choices=SEX_CHOICES, label=ANIMAL_KEY_SEX)
+    age_distance = forms.ChoiceField(
+        label=AGE_DISTANCE_KEY,
+        widget=forms.RadioSelect,
+        required=False,
+        choices=AGE_DISTANCE_CHOICES
+    )
 
 
 # TODO: implement class AnimalImageForm

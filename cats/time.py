@@ -1,8 +1,13 @@
 from datetime import date
 
+import re
 from dateutil.relativedelta import relativedelta
 
 from cats.constants import ANIMAL_YEARS, ANIMAL_MONTHS, ANIMAL_DAYS
+
+PATTERN_SEARCH_YEARS_AGE = re.compile(r'(?<=y)(?P<years>\d+)')
+PATTERN_SEARCH_MONTHS_AGE = re.compile(r'(?<=m)(?P<months>\d+)')
+PATTERN_SEARCH_DAYS_AGE = re.compile(r'(?<=d)(?P<days>\d+)')
 
 
 def calc_age_uptoday(before_date, later_date):
@@ -30,3 +35,29 @@ def get_date_from_age(years=0, months=0, days=0):
     """
     diff = relativedelta(years=years, months=months, days=days)
     return date.today() - diff
+
+
+def get_age_from_string(age_string):
+    """
+
+    :type age_string: str
+    """
+    def update_res(key, res, pattern, s):
+        s = re.search(pattern, s)
+        if s:
+            try:
+                v = int(s.group(key))
+            except ValueError:
+                pass
+            else:
+                res[key] = v
+    result = dict()
+    update_res(ANIMAL_YEARS, result, PATTERN_SEARCH_YEARS_AGE, age_string)
+    update_res(ANIMAL_MONTHS, result, PATTERN_SEARCH_MONTHS_AGE, age_string)
+    update_res(ANIMAL_DAYS, result, PATTERN_SEARCH_DAYS_AGE, age_string)
+    return result
+
+
+
+
+

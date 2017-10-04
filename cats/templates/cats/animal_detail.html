@@ -53,10 +53,10 @@
 {% endif %}
 
 {# Описание #}
-{% if object.get_description %}
+{% if object.description %}
     <div style="background-color: aliceblue">
-        <h4>{% get_verbose_field_name object.get_description 'description' %}</h4>
-        <p>{{ object.get_description.description }}</p>
+        <h4>{% get_verbose_field_name object 'description' %}</h4>
+        <p>{{ object.description }}</p>
     </div>
 {% endif %}
 
