@@ -82,11 +82,11 @@ class Animal(Model):
     )
 
     # fields
-    name = CharField(ANIMAL_KEY_NAME, max_length=32, blank=True, default=None)
-    description = TextField(ANIMAL_KEY_DESCRIPTION, blank=True, default=None)
-    sex = CharField(ANIMAL_KEY_SEX, max_length=1, choices=SEX, blank=True, default=None)
+    name = CharField(ANIMAL_KEY_NAME, max_length=32, blank=True, default='')
+    description = TextField(ANIMAL_KEY_DESCRIPTION, blank=True, default='')
+    sex = CharField(ANIMAL_KEY_SEX, max_length=1, choices=SEX, blank=True, default='')
     birthday_precision = CharField(
-        ANIMAL_KEY_BIRTHDAY_PRECISION, max_length=1, choices=BIRTHDAY_PRECISIONS, null=True, default=None
+        ANIMAL_KEY_BIRTHDAY_PRECISION, max_length=1, choices=BIRTHDAY_PRECISIONS, null=True, default=''
     )
     date_of_birth = DateField(ANIMAL_KEY_DATE_OF_BIRTH, null=True, default=None, blank=True)
     group = ForeignKey(Group, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)

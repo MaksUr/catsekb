@@ -167,13 +167,13 @@ ANIMAL_KEY_YEARS_HELP_TEXT = '_help_text ANIMAL_KEY_YEARS'
 
 # class FieldValue
 # Только одно значение FieldValue в одном Animal может принадлежать одному FieldType
-FIELD_VALUE_VERBOSE_NAME = 'Значение особенности'
+FIELD_VALUE_VERBOSE_NAME = 'Характерная особенность'
 FIELD_VALUE_VERBOSE_NAME_PLURAL = 'Значения особенностей'
-FIELD_VALUE_STR_TEMPLATE = '{field_type}: {val}'
+FIELD_VALUE_STR_TEMPLATE = '{field_type} - {val}'
 
 # value_text
 FIELD_VALUE_VALUE_TEXT = 'value_text'
-FIELD_VALUE_KEY_VALUE_TEXT = 'Значение (текст)'
+FIELD_VALUE_KEY_VALUE_TEXT = 'Особенность'
 FIELD_VALUE_KEY_VALUE_TEXT_HELP_TEXT = '_help_text FIELD_VALUE_KEY_VALUE_TEXT'
 
 # field_type (foreign key for class FieldType)

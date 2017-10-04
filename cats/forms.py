@@ -123,7 +123,6 @@ class AnimalForm(forms.ModelForm):
         self.cleaned_data[ANIMAL_DATE_OF_BIRTH] = date_of_birth
 
     def clean_field_value(self):
-        # TODO: check
         words = self.cleaned_data.get(ANIMAL_FIELD_VALUE)
         types = set()
         errors = set()

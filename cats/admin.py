@@ -47,12 +47,12 @@ class AnimalAdmin(admin.ModelAdmin):
 admin.site.register(Animal, AnimalAdmin)
 
 
-class AnimalsInline(admin.TabularInline):
-    # TODO: Implement
+class AnimalsInline(admin.StackedInline):
     extra = 0
     model = Animal
     form = AnimalForm
-    fields = (ANIMAL_NAME, ANIMAL_SEX)
+    fields = (ANIMAL_NAME, 'sex')
+    show_change_link = True
 
 
 class GroupAdmin(admin.ModelAdmin):
