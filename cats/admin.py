@@ -4,7 +4,7 @@ from django.contrib import admin
 from cats.constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPDATED, ANIMAL_NAME, ANIMAL_GROUP, \
     ANIMAL_FIELD_VALUE, ANIMAL_SEX, ANIMAL_DATE_OF_BIRTH, ANIMAL_DAYS, ANIMAL_MONTHS, ANIMAL_YEARS, \
     ANIMAL_AGE_FIELD_SET, DJ_CLASSES_COLLAPSE, DJ_CLASSES, DJ_FIELDS, ANIMAL_MAIN_FIELD_SET, DJ_ID, ANIMAL_SHOW, \
-    ANIMAL_DESCRIPTION
+    ANIMAL_DESCRIPTION, GROUP_NAME, GROUP_SHOW
 from cats.forms import AnimalForm
 from cats.models import Animal, AnimalImage, FieldValue, Group, FieldType
 
@@ -17,7 +17,7 @@ class ImageInline(admin.StackedInline):
 
 class AnimalAdmin(admin.ModelAdmin):
 
-    list_display = (DJ_ID, ANIMAL_NAME)
+    list_display = (DJ_ID, ANIMAL_NAME, ANIMAL_SHOW)
     fieldsets = (
         (
             ANIMAL_MAIN_FIELD_SET, {
@@ -51,11 +51,12 @@ class AnimalsInline(admin.StackedInline):
     extra = 0
     model = Animal
     form = AnimalForm
-    fields = (ANIMAL_NAME, 'sex')
+    fields = (ANIMAL_NAME, ANIMAL_SEX, ANIMAL_SHOW)
     show_change_link = True
 
 
 class GroupAdmin(admin.ModelAdmin):
+    list_display = (GROUP_NAME, GROUP_SHOW)
     inlines = [AnimalsInline]
 admin.site.register(Group, GroupAdmin)
 

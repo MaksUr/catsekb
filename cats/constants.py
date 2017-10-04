@@ -131,7 +131,7 @@ ANIMAL_FORM_VALIDATION_ERROR_MULTIPLY_GROUPS = 'Группа "{type}" имеет
 # show
 ANIMAL_SHOW = 'show'
 ANIMAL_KEY_SHOW = 'Показывать котика'
-ANIMAL_KEY_SHOW_HELP_TEXT = '_help_text ANIMAL_KEY_SHOW'
+ANIMAL_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удаления или чтобы скрыть.'
 
 # field_value (foreign key)
 ANIMAL_FIELD_VALUE = 'field_value'
@@ -217,7 +217,7 @@ GROUP_KEY_DESCRIPTION_HELP_TEXT = '_help_text GROUP_KEY_DESCRIPTION'
 # show
 GROUP_SHOW = 'show'
 GROUP_KEY_SHOW = 'Показывать группу'
-GROUP_KEY_SHOW_HELP_TEXT = '_help_text GROUP_KEY_SHOW'
+GROUP_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удаления или чтобы скрыть.'
 
 ANIMAL_ANIMAL_LINK = 'animal_link'
 ANIMAL_KEY_ANIMAL_LINK = 'Ссылка на сайт'
