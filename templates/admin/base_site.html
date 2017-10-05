@@ -1,0 +1,30 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block extrastyle %}
+    <style>
+        #header {
+            background: #b2b8c1;
+        }
+
+        .button, input[type=submit], input[type=button], .submit-row input, a.button {
+            background: #5f5f5f;
+        }
+
+        .module h2, .module caption, .inline-group h2 {
+            background: #c8abc1;
+        }
+
+        a:link, a:visited {
+            color: #612b9b;
+        }
+
+    </style>
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">CatsEkb - администрирование</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
