@@ -1,0 +1,59 @@
+a:link, a:visited {
+    color: #447e9b;
+}
+
+a:focus, a:hover {
+    color: #036;
+}
+
+table thead th.sorted .sortoptions a.sortremove:focus:after,
+table thead th.sorted .sortoptions a.sortremove:hover:after {
+    color: #447e9b;
+}
+
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+    background: #79aec8;
+}
+
+.button:active, input[type=submit]:active, input[type=button]:active,
+.button:focus, input[type=submit]:focus, input[type=button]:focus,
+.button:hover, input[type=submit]:hover, input[type=button]:hover {
+    background: #609ab6;
+}
+
+.button.default, input[type=submit].default, .submit-row input.default {
+    background: #417690;
+}
+
+.button.default:active, input[type=submit].default:active,
+.button.default:focus, input[type=submit].default:focus,
+.button.default:hover, input[type=submit].default:hover {
+    background: #205067;
+}
+
+.module h2, .module caption, .inline-group h2 {
+    background: #79aec8;
+}
+
+div.breadcrumbs {
+    background: #79aec8;
+}
+
+.object-tools a:focus, .object-tools a:hover {
+    background-color: #417690;
+}
+
+#header {
+    background: #417690;
+}
+
+#user-tools a:focus, #user-tools a:hover {
+    border-bottom-color: #79aec8;
+    color: #79aec8;
+}
+
+
+
+
+
+
