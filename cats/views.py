@@ -24,7 +24,11 @@ def get_animals_from_query(query, show=True):
     :type query: dict
     """
     query[ANIMAL_SHOW] = show
-    return Animal.objects.filter_animals(**query).order_by(ANIMAL_CREATED)
+    try:
+        res = Animal.objects.filter_animals(**query).order_by(ANIMAL_CREATED)
+    except FieldError:
+        raise Http404("Запрос неверный")
+    return res
 
 
 def get_filter_string(query):
@@ -45,10 +49,7 @@ class AnimalListView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.dict()
-        try:
-            res = get_animals_from_query(query)
-        except FieldError:
-            raise Http404("Запрос неверный")
+        res = get_animals_from_query(query)
         return res
 
     def get_context_data(self, **kwargs):
