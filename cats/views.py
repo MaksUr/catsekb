@@ -1,4 +1,6 @@
+from django.core.exceptions import FieldError
 from django.core.paginator import Paginator
+from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, FormView
 
@@ -22,7 +24,11 @@ def get_animals_from_query(query, show=True):
     :type query: dict
     """
     query[ANIMAL_SHOW] = show
-    return Animal.objects.filter_animals(**query).order_by(ANIMAL_CREATED)
+    try:
+        res = Animal.objects.filter_animals(**query).order_by(ANIMAL_CREATED)
+    except FieldError:
+        raise Http404("Запрос неверный")
+    return res
 
 
 def get_filter_string(query):
