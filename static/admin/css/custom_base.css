@@ -1,27 +1,33 @@
 a:link, a:visited {
+    /*color1*/
     color: #447e9b;
 }
 
 a:focus, a:hover {
+    /*color2*/
     color: #036;
 }
 
 table thead th.sorted .sortoptions a.sortremove:focus:after,
 table thead th.sorted .sortoptions a.sortremove:hover:after {
+    /*color1*/
     color: #447e9b;
 }
 
 .button, input[type=submit], input[type=button], .submit-row input, a.button {
+    /*color3*/
     background: #79aec8;
 }
 
 .button:active, input[type=submit]:active, input[type=button]:active,
 .button:focus, input[type=submit]:focus, input[type=button]:focus,
 .button:hover, input[type=submit]:hover, input[type=button]:hover {
+    /*color4*/
     background: #609ab6;
 }
 
 .button.default, input[type=submit].default, .submit-row input.default {
+    /*color5*/
     background: #417690;
 }
 
@@ -32,26 +38,45 @@ table thead th.sorted .sortoptions a.sortremove:hover:after {
 }
 
 .module h2, .module caption, .inline-group h2 {
+    /*color3*/
     background: #79aec8;
 }
 
 div.breadcrumbs {
+    /*color3*/
     background: #79aec8;
 }
 
 .object-tools a:focus, .object-tools a:hover {
+    /*color5*/
     background-color: #417690;
 }
 
 #header {
+    /*color5*/
     background: #417690;
 }
 
 #user-tools a:focus, #user-tools a:hover {
+    /*color3*/
     border-bottom-color: #79aec8;
+    /*color3*/
     color: #79aec8;
 }
 
+
+/*colors*/
+/*.c {*/
+    /*background-color: #526aa5;*/
+
+    /*background-color: #a3b1db;*/
+
+    /*background-color: #f1ece9;*/
+
+    /*background-color: #f0cdb7;*/
+
+    /*background-color: #705344;*/
+/*}*/
 
 
 
