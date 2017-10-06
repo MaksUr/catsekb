@@ -1,4 +1,6 @@
+from django.core.exceptions import FieldError
 from django.core.paginator import Paginator
+from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, FormView
 
@@ -43,7 +45,10 @@ class AnimalListView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.dict()
-        res = get_animals_from_query(query)
+        try:
+            res = get_animals_from_query(query)
+        except FieldError:
+            raise Http404("Запрос неверный")
         return res
 
     def get_context_data(self, **kwargs):
