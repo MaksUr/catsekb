@@ -1,11 +1,6 @@
 a:link, a:visited {
     /*color1*/
-    color: #447e9b;
-}
-
-a:focus, a:hover {
-    /*color2*/
-    color: #036;
+    color: #a07965;
 }
 
 table thead th.sorted .sortoptions a.sortremove:focus:after,
@@ -14,69 +9,104 @@ table thead th.sorted .sortoptions a.sortremove:hover:after {
     color: #447e9b;
 }
 
+a:focus, a:hover {
+    /*color2*/
+    color: #526aa5;
+}
+
+
+a.section:link, a.section:visited {
+    color: #462a23;
+}
+
+
+#branding h1 {
+    color: #ffffff;
+}
+#branding h1, #branding h1 a:link, #branding h1 a:visited {
+    color: #ffffff;
+}
+
+
+
 .button, input[type=submit], input[type=button], .submit-row input, a.button {
     /*color3*/
-    background: #79aec8;
+    background: #eba987;
+}
+
+
+#user-tools a:focus, #user-tools a:hover {
+    /*color3*/
+    border-bottom-color: #f0cdb7;
+    /*color3*/
+    color: #f0cdb7;
+}
+
+
+div.breadcrumbs {
+    /*color3*/
+    background: #f0cdb7;
+    color: #526aa5;
+
+}
+
+div.breadcrumbs a {
+    color: #462a23;
+}
+
+div.breadcrumbs a:focus, div.breadcrumbs a:hover {
+    color: #526aa5;
+}
+
+.module h2, .module caption, .inline-group h2 {
+    /*color3*/
+    background: #f0cdb7;
 }
 
 .button:active, input[type=submit]:active, input[type=button]:active,
 .button:focus, input[type=submit]:focus, input[type=button]:focus,
 .button:hover, input[type=submit]:hover, input[type=button]:hover {
     /*color4*/
-    background: #609ab6;
+    background: #705344;
 }
 
 .button.default, input[type=submit].default, .submit-row input.default {
     /*color5*/
-    background: #417690;
+    background: #705344;
 }
 
 .button.default:active, input[type=submit].default:active,
 .button.default:focus, input[type=submit].default:focus,
 .button.default:hover, input[type=submit].default:hover {
-    background: #205067;
+    background: #526aa5;
 }
 
-.module h2, .module caption, .inline-group h2 {
-    /*color3*/
-    background: #79aec8;
-}
 
-div.breadcrumbs {
-    /*color3*/
-    background: #79aec8;
-}
 
 .object-tools a:focus, .object-tools a:hover {
     /*color5*/
-    background-color: #417690;
+    background-color: #705344;
 }
 
 #header {
     /*color5*/
-    background: #417690;
-}
-
-#user-tools a:focus, #user-tools a:hover {
-    /*color3*/
-    border-bottom-color: #79aec8;
-    /*color3*/
-    color: #79aec8;
+    background: #705344;
+    color: #fff;
 }
 
 
 /*colors*/
-/*.c {*/
-    /*background-color: #526aa5;*/
+.c {
+    background-color: #526aa5;
 
-    /*background-color: #a3b1db;*/
+    background-color: #a3b1db;
 
-    /*background-color: #f1ece9;*/
+    background-color: #f1ece9;
 
-    /*background-color: #f0cdb7;*/
+    background-color: #f0cdb7;
 
-    /*background-color: #705344;*/
-/*}*/
+    background-color: #705344;
+}
 
 
 
