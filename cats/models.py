@@ -15,7 +15,9 @@ from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOS
     FIELD_VALUE_VERBOSE_NAME_PLURAL, FIELD_VALUE_VERBOSE_NAME, FIELD_VALUE_KEY_VALUE_TEXT, \
     FIELD_TYPE_VERBOSE_NAME_PLURAL, FIELD_TYPE_VERBOSE_NAME, FIELD_TYPE_KEY_DESCRIPTION, FIELD_TYPE_KEY_NAME, \
     GROUP_VERBOSE_NAME_PLURAL, GROUP_VERBOSE_NAME, GROUP_KEY_SHOW, GROUP_KEY_DESCRIPTION, GROUP_KEY_NAME, \
-    GROUP_ALL_ANIMALS_KEY_NAME, GROUP_ALL_ANIMALS_NAME, URL_NAME_ANIMAL, DJ_PK, ANIMAL_KEY_DESCRIPTION
+    GROUP_ALL_ANIMALS_KEY_NAME, GROUP_ALL_ANIMALS_NAME, URL_NAME_ANIMAL, DJ_PK, ANIMAL_KEY_DESCRIPTION, \
+    ANIMAL_KEY_LOCATION_STATUS, ANIMAL_SEX_CHOICES, ANIMAL_BIRTHDAY_PRECISION_CHOICES, ANIMAL_LOCATION_STATUS_CHOICES, \
+    ANIMAL_LOCATION_STATUS_SHELTER
 from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
 
@@ -67,32 +69,28 @@ class FieldValue(Model):
 
 
 class Animal(Model):
-
-    SEX = (
-        (ANIMAL_SEX_MALE, ANIMAL_SEX_CHOICE_MALE),
-        (ANIMAL_SEX_FEMALE, ANIMAL_SEX_CHOICE_FEMALE)
-    )
     BIRTHDAY_PRECISION_Y = ANIMAL_BIRTHDAY_PRECISION_YEAR
     BIRTHDAY_PRECISION_M = ANIMAL_BIRTHDAY_PRECISION_MONTH
     BIRTHDAY_PRECISION_D = ANIMAL_BIRTHDAY_PRECISION_DAY
-    BIRTHDAY_PRECISIONS = (
-        (BIRTHDAY_PRECISION_Y, ANIMAL_BIRTHDAY_PRECISION_YEAR_CHOICE),
-        (BIRTHDAY_PRECISION_M, ANIMAL_BIRTHDAY_PRECISION_MONTH_CHOICE),
-        (BIRTHDAY_PRECISION_D, ANIMAL_BIRTHDAY_PRECISION_DAY_CHOICE),
-    )
 
     # fields
     name = CharField(ANIMAL_KEY_NAME, max_length=32, blank=True, default='')
     description = TextField(ANIMAL_KEY_DESCRIPTION, blank=True, default='')
-    sex = CharField(ANIMAL_KEY_SEX, max_length=1, choices=SEX, blank=True, default='')
+    sex = CharField(ANIMAL_KEY_SEX, max_length=1, choices=ANIMAL_SEX_CHOICES, blank=True, default='')
     birthday_precision = CharField(
-        ANIMAL_KEY_BIRTHDAY_PRECISION, max_length=1, choices=BIRTHDAY_PRECISIONS, null=True, default=''
+        ANIMAL_KEY_BIRTHDAY_PRECISION, max_length=1, choices=ANIMAL_BIRTHDAY_PRECISION_CHOICES, null=True, default=''
     )
     date_of_birth = DateField(ANIMAL_KEY_DATE_OF_BIRTH, null=True, default=None, blank=True)
     group = ForeignKey(Group, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)
     show = BooleanField(ANIMAL_KEY_SHOW, default=True)
     field_value = ManyToManyField(
         FieldValue, verbose_name=FieldValue._meta.verbose_name, blank=True, default=None
+    )
+    location_status = CharField(
+        ANIMAL_KEY_LOCATION_STATUS,
+        max_length=1,
+        choices=ANIMAL_LOCATION_STATUS_CHOICES,
+        default=ANIMAL_LOCATION_STATUS_SHELTER
     )
     created = DateTimeField(ANIMAL_KEY_CREATED, auto_now_add=True, auto_now=False)
     updated = DateTimeField(ANIMAL_KEY_UPDATED, auto_now_add=False, auto_now=True)

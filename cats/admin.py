@@ -4,7 +4,7 @@ from django.contrib import admin
 from cats.constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPDATED, ANIMAL_NAME, ANIMAL_GROUP, \
     ANIMAL_FIELD_VALUE, ANIMAL_SEX, ANIMAL_DATE_OF_BIRTH, ANIMAL_DAYS, ANIMAL_MONTHS, ANIMAL_YEARS, \
     ANIMAL_AGE_FIELD_SET, DJ_CLASSES_COLLAPSE, DJ_CLASSES, DJ_FIELDS, ANIMAL_MAIN_FIELD_SET, DJ_ID, ANIMAL_SHOW, \
-    ANIMAL_DESCRIPTION, GROUP_NAME, GROUP_SHOW
+    ANIMAL_DESCRIPTION, GROUP_NAME, GROUP_SHOW, ANIMAL_LOCATION_STATUS
 from cats.forms import AnimalForm
 from cats.models import Animal, AnimalImage, FieldValue, Group, FieldType
 
@@ -17,12 +17,14 @@ class ImageInline(admin.StackedInline):
 
 class AnimalAdmin(admin.ModelAdmin):
 
-    list_display = (DJ_ID, ANIMAL_NAME, ANIMAL_SHOW)
+    list_display = (DJ_ID, ANIMAL_NAME, ANIMAL_SHOW, ANIMAL_LOCATION_STATUS)
     fieldsets = (
         (
             ANIMAL_MAIN_FIELD_SET, {
                 DJ_FIELDS: (
-                    ANIMAL_NAME, ANIMAL_SHOW, ANIMAL_DESCRIPTION, ANIMAL_GROUP, ANIMAL_FIELD_VALUE, ANIMAL_SEX,
+                    ANIMAL_NAME, ANIMAL_LOCATION_STATUS,
+                    ANIMAL_SHOW, ANIMAL_DESCRIPTION,
+                    ANIMAL_GROUP, ANIMAL_FIELD_VALUE, ANIMAL_SEX,
                     ANIMAL_CREATED, ANIMAL_UPDATED,
                 ),
             },
@@ -51,7 +53,7 @@ class AnimalsInline(admin.StackedInline):
     extra = 0
     model = Animal
     form = AnimalForm
-    fields = (ANIMAL_NAME, ANIMAL_SEX, ANIMAL_SHOW)
+    fields = (ANIMAL_NAME, ANIMAL_SEX, ANIMAL_SHOW, ANIMAL_LOCATION_STATUS)
     show_change_link = True
 
 

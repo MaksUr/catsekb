@@ -10,8 +10,9 @@ from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECI
     DJ_INITIAL, ANIMAL_DAYS, ANIMAL_FORM_KEY_DAYS, ANIMAL_KEY_DAYS_HELP_TEXT, ANIMAL_MONTHS, ANIMAL_FORM_KEY_MONTHS, \
     ANIMAL_KEY_MONTHS_HELP_TEXT, ANIMAL_YEARS, ANIMAL_FORM_KEY_YEARS, ANIMAL_KEY_YEARS_HELP_TEXT, ANIMAL_SEX, \
     ANIMAL_FIELD_VALUE, ANIMAL_SHOW, ANIMAL_GROUP, ANIMAL_KEY_GROUP_HELP_TEXT, ANIMAL_NAME, ANIMAL_DATE_OF_BIRTH, \
-    ANIMAL_KEY_FIELD_VALUE_HELP_TEXT, ANIMAL_KEY_NAME, SEX_CHOICES, ANIMAL_KEY_SEX, AGE_DISTANCE_CHOICES, \
-    AGE_DISTANCE_KEY, ANIMAL_DESCRIPTION, ANIMAL_KEY_DESCRIPTION_HELP_TEXT
+    ANIMAL_KEY_FIELD_VALUE_HELP_TEXT, ANIMAL_KEY_NAME, ANIMAL_KEY_SEX, AGE_DISTANCE_CHOICES, \
+    AGE_DISTANCE_KEY, ANIMAL_DESCRIPTION, ANIMAL_KEY_DESCRIPTION_HELP_TEXT, ANIMAL_KEY_LOCATION_STATUS_HELP_TEXT, \
+    ANIMAL_LOCATION_STATUS, ANIMAL_SEX_CHOICES, ANIMAL_LOCATION_STATUS_CHOICES, ANIMAL_KEY_LOCATION_STATUS
 from cats.models import Animal
 from cats.time import get_date_from_age, calc_age_uptoday
 
@@ -66,7 +67,7 @@ class AnimalForm(forms.ModelForm):
     class Meta:
         model = Animal
         fields = [
-            ANIMAL_NAME,
+            ANIMAL_NAME, ANIMAL_LOCATION_STATUS,
             ANIMAL_GROUP, ANIMAL_SHOW,
             ANIMAL_FIELD_VALUE, ANIMAL_SEX,
             ANIMAL_YEARS, ANIMAL_MONTHS,
@@ -84,6 +85,7 @@ class AnimalForm(forms.ModelForm):
             ANIMAL_GROUP: ANIMAL_KEY_GROUP_HELP_TEXT,
             ANIMAL_FIELD_VALUE: ANIMAL_KEY_FIELD_VALUE_HELP_TEXT,
             ANIMAL_DESCRIPTION: ANIMAL_KEY_DESCRIPTION_HELP_TEXT,
+            ANIMAL_LOCATION_STATUS: ANIMAL_KEY_LOCATION_STATUS_HELP_TEXT,
         }
 
     def clean(self):
@@ -150,12 +152,18 @@ class FilterForm(forms.Form):
         required=False,
         label=ANIMAL_KEY_NAME,
     )
-    sex = forms.ChoiceField(widget=forms.RadioSelect, required=False, choices=SEX_CHOICES, label=ANIMAL_KEY_SEX)
+    sex = forms.ChoiceField(widget=forms.RadioSelect, required=False, choices=ANIMAL_SEX_CHOICES, label=ANIMAL_KEY_SEX)
     age_distance = forms.ChoiceField(
         label=AGE_DISTANCE_KEY,
         widget=forms.RadioSelect,
         required=False,
         choices=AGE_DISTANCE_CHOICES
+    )
+    location_status = forms.ChoiceField(
+        widget=forms.RadioSelect,
+        required=False,
+        choices=ANIMAL_LOCATION_STATUS_CHOICES,
+        label=ANIMAL_KEY_LOCATION_STATUS
     )
 
 
