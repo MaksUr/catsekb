@@ -4,28 +4,49 @@ from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, FormView
 
-from cats.constants import FILTER_LABEL, GROUP_ALL_ANIMALS_NAME, ANIMAL_CREATED, ANIMAL_SHOW, DJ_PK, DJ_PAGE, DJ_OBJECT
+from cats.constants import FILTER_LABEL, GROUP_ALL_ANIMALS_NAME, ANIMAL_CREATED, ANIMAL_SHOW, DJ_PK, DJ_PAGE, DJ_OBJECT, \
+    GROUP_SHOW
 from cats.forms import FilterForm
 from cats.models import Animal, Group
 
 
-def get_group(group_name):
-    if group_name == GROUP_ALL_ANIMALS_NAME:
+def get_group(group_id, show_permission=False):
+    if group_id == GROUP_ALL_ANIMALS_NAME:
         return Group.get_group_with_all_animals()
     else:
-        res = get_object_or_404(Group, id=group_name, show=True)
+        query = dict()
+        query['id'] = group_id
+        if show_permission is False:
+            query['show'] = True
+        res = get_object_or_404(Group, **query)
         return res
 
 
-def get_animals_from_query(query, show=True):
+def get_animals_from_query(query, show_permission=False):
     """
 
-    :type show: bool
+    :type show_permission: bool
     :type query: dict
     """
-    query[ANIMAL_SHOW] = show
+    if show_permission is False:
+        query[ANIMAL_SHOW] = True
     try:
-        res = Animal.objects.filter_animals(**query).order_by(ANIMAL_CREATED)
+        res = Animal.objects.filter(**query).order_by(ANIMAL_CREATED)
+    except FieldError:
+        raise Http404("Запрос неверный")
+    return res
+
+
+def get_groups_from_query(query, show_permission=False):
+    """
+
+    :type show_permission: bool
+    :type query: dict
+    """
+    if show_permission is False:
+        query[GROUP_SHOW] = True
+    try:
+        res = Group.objects.filter(**query)
     except FieldError:
         raise Http404("Запрос неверный")
     return res
@@ -48,8 +69,9 @@ class AnimalListView(ListView):
     model = Animal
 
     def get_queryset(self):
+        show_permission = self.request.user.is_authenticated()
         query = self.request.GET.dict()
-        res = get_animals_from_query(query)
+        res = get_animals_from_query(query, show_permission=show_permission)
         return res
 
     def get_context_data(self, **kwargs):
@@ -68,9 +90,12 @@ class AnimalDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = DetailView.get_context_data(self, **kwargs)
         animal = kwargs[DJ_OBJECT]
+        show_permission = self.request.user.is_authenticated()
+        if show_permission is False and animal.show is False:
+            raise Http404("Нет прав для просмотра этой страницы")
         animals_query = self.get_animals_query()
         if animals_query:
-            animals = get_animals_from_query(animals_query)
+            animals = get_animals_from_query(animals_query, show_permission=show_permission)
             context[DJ_PAGE] = self.get_animal_page(animals, animal)
         return context
 
@@ -99,6 +124,11 @@ class GroupListView(ListView):
     # template group_list
     model = Group
 
+    def get_queryset(self):
+        show_permission = self.request.user.is_authenticated()
+        group_list = get_groups_from_query(dict(), show_permission=show_permission)
+        return group_list
+
 
 class GroupDetailView(ListView):
     # template group_detail
@@ -106,22 +136,25 @@ class GroupDetailView(ListView):
     template_name = 'cats/group_detail.html'
 
     def get_queryset(self):
-        return Animal.objects.filter_animals(group_id=self.kwargs[DJ_PK], show=True)  # TODO: group_show=True
+        show_permission = self.request.user.is_authenticated()
+        return Animal.objects.filter(group_id=self.kwargs[DJ_PK], show=show_permission)
 
     def get_context_data(self, **kwargs):
+        show_permission = self.request.user.is_authenticated()
         context = ListView.get_context_data(self, **kwargs)
-        group_name = self.kwargs[DJ_PK]
-        group = get_group(group_name)
+        group_id = self.kwargs[DJ_PK]
+        group = get_group(group_id=group_id, show_permission=show_permission)
         context[DJ_OBJECT] = group
         return context
 
 
 def index_view(request):
-    all_animals_group = get_group(GROUP_ALL_ANIMALS_NAME)
-    all_animals_list = Animal.objects.filter(show=True)
-    group_list = Group.objects.filter(show=True)
+    show_permission = request.user.is_authenticated()
+    all_animals_group = get_group(GROUP_ALL_ANIMALS_NAME, show_permission=show_permission)
+    all_animals_list = get_animals_from_query(dict(), show_permission=show_permission)
+    group_list = get_groups_from_query(dict(), show_permission=show_permission)
     filter_label = FILTER_LABEL
-    return render(request, 'cats/index.html', locals())
+    return render(request, 'cats/index.html', locals())  # TODO: delete locals
 
 
 class FilterView(FormView):
@@ -131,8 +164,9 @@ class FilterView(FormView):
     def get_context_data(self, **kwargs):
         context = FormView.get_context_data(self, **kwargs)
         if self.request.GET.dict():
+            show_permission = self.request.user.is_authenticated()
             query = self.request.GET
-            context['animal_list'] = get_animals_from_query(query.dict())
+            context['animal_list'] = get_animals_from_query(query.dict(), show_permission=show_permission)
             context['filter_string'] = get_filter_string(query)
         return context
 

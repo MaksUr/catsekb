@@ -17,7 +17,7 @@ GROUP_ID = 'group_id'
 
 class AnimalQuerySet(QuerySet):
 
-    def filter_animals(self, **kwargs):
+    def filter(self, *args, **kwargs):
         if kwargs.get(GROUP_ID) is not None:
             if kwargs[GROUP_ID] != GROUP_ALL_ANIMALS_NAME:
                 kwargs[GROUP__PK] = kwargs[GROUP_ID]
@@ -51,4 +51,6 @@ class AnimalQuerySet(QuerySet):
                         kwargs[DATE_OF_BIRTH__GTE] = end_date
             finally:
                 del kwargs[AGE_DISTANCE]
-        return self.filter(**kwargs)
+        res = QuerySet.filter(self, *args, **kwargs)
+        return res
+

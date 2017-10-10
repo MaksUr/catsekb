@@ -13,6 +13,7 @@
 # foreign_key: animal ссылается на модель Animal.
 # Это значит поле animal в AnimalImage относится к определенному Animal
 
+SHOW = 'show'
 
 # Служебные переменные
 DJ_INSTANCE = 'instance'
@@ -32,7 +33,6 @@ URL_NAME_GROUP = 'group_detail'
 URL_NAME_ANIMAL_FILTER = 'animal_filter'
 URL_NAME_ANIMALS = 'animal_list'
 URL_NAME_ANIMAL = 'animal_detail'
-
 
 
 APPLICATION_VERBOSE_NAME = 'Котики'  # Название приложения
@@ -152,7 +152,7 @@ ANIMAL_KEY_GROUP_HELP_TEXT = '_help_text ANIMAL_KEY_GROUP'
 ANIMAL_FORM_VALIDATION_ERROR_MULTIPLY_GROUPS = 'Группа "{type}" имеет более одного значения.'
 
 # show
-ANIMAL_SHOW = 'show'
+ANIMAL_SHOW = SHOW
 ANIMAL_KEY_SHOW = 'Показывать котика'
 ANIMAL_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удаления или чтобы скрыть.'
 
@@ -238,7 +238,7 @@ GROUP_KEY_DESCRIPTION = 'Описание'
 GROUP_KEY_DESCRIPTION_HELP_TEXT = '_help_text GROUP_KEY_DESCRIPTION'
 
 # show
-GROUP_SHOW = 'show'
+GROUP_SHOW = SHOW
 GROUP_KEY_SHOW = 'Показывать группу'
 GROUP_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удаления или чтобы скрыть.'
 
