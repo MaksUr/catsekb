@@ -7,3 +7,6 @@ __pycache__/
 # Django
 db.sqlite3
 images/
+
+# Other
+other/
