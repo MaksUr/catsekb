@@ -2,7 +2,8 @@ import re
 
 from os.path import join
 
-from cats.constants import ANIMAL_LOCATION_STATUS_DEAD, ANIMAL_LOCATION_STATUS_SHELTER, ANIMAL_LOCATION_STATUS_HOME
+from cats.constants import ANIMAL_LOCATION_STATUS_DEAD, ANIMAL_LOCATION_STATUS_SHELTER, ANIMAL_LOCATION_STATUS_HOME, \
+    ANIMAL_SEX_MALE, ANIMAL_SEX_FEMALE
 from cats.vk_api.helper_functions import save_json, open_json, replace_str_end_at_empty, print_log
 
 SIZES = 'sizes'
@@ -30,6 +31,9 @@ STATUS_HOME = ANIMAL_LOCATION_STATUS_HOME
 STATUS_DIE = ANIMAL_LOCATION_STATUS_SHELTER
 STATUS_SHELTER = ANIMAL_LOCATION_STATUS_DEAD
 
+PATTERN_SEX_M = re.compile(r"ПРИСТРОЕН(?!А)", flags=re.IGNORECASE)
+PATTERN_SEX_F = re.compile(r"ПРИСТРОЕНА", flags=re.IGNORECASE)
+
 MAPPING = {
     STATUS_HOME: {
         LABEL: 'ПРИСТРОЕН',
@@ -50,6 +54,15 @@ MAPPING = {
         PATTERN: None
     },
 }
+
+
+def get_sex(title):
+    if re.search(PATTERN_SEX_M, title) is not None:
+        return ANIMAL_SEX_MALE
+    elif re.search(PATTERN_SEX_F, title) is not None:
+        return ANIMAL_SEX_FEMALE
+    else:
+        return None
 
 
 def collect_albums_to_file(log_file=None):
@@ -139,6 +152,7 @@ def parse_album_item(alb, log_file=None):
     alb[LOCAL_PHOTOS] = [join(start_local_pth, p) for p in alb[LOCAL_PHOTOS]]
     alb['status'], alb['name'] = get_name_status(alb['title'], log_file=log_file)
     alb[VK_PHOTOS] = parse_album_item_vk_photos(alb[VK_PHOTOS], log_file=log_file)
+    alb['sex'] = get_sex(alb['title'])
     return alb
 
 

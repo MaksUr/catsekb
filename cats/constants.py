@@ -112,9 +112,9 @@ ANIMAL_LOCATION_STATUS = 'location_status'
 ANIMAL_KEY_LOCATION_STATUS = 'Статус'
 ANIMAL_KEY_LOCATION_STATUS_HELP_TEXT = '_help_text ANIMAL_KEY_LOCATION_STATUS'
 
-ANIMAL_LOCATION_STATUS_HOME = 'home'    # для хранения в БД
-ANIMAL_LOCATION_STATUS_SHELTER = 'shelter'    # для хранения в БД
-ANIMAL_LOCATION_STATUS_DEAD = 'dead'    # для хранения в БД
+ANIMAL_LOCATION_STATUS_HOME = 'H'    # для хранения в БД
+ANIMAL_LOCATION_STATUS_SHELTER = 'S'    # для хранения в БД
+ANIMAL_LOCATION_STATUS_DEAD = 'D'    # для хранения в БД
 ANIMAL_LOCATION_STATUS_CHOICE_HOME = 'Пристроен'
 ANIMAL_LOCATION_STATUS_CHOICE_SHELTER = 'В приюте'
 ANIMAL_LOCATION_STATUS_CHOICE_DEAD = 'На радуге'
