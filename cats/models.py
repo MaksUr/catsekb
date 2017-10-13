@@ -90,8 +90,10 @@ class Animal(Model):
         ANIMAL_KEY_LOCATION_STATUS,
         max_length=1,
         choices=ANIMAL_LOCATION_STATUS_CHOICES,
-        default=ANIMAL_LOCATION_STATUS_SHELTER
+        default='',
+        blank=True
     )
+    # TODO: add vk_album_url field
     created = DateTimeField(ANIMAL_KEY_CREATED, auto_now_add=True, auto_now=False)
     updated = DateTimeField(ANIMAL_KEY_UPDATED, auto_now_add=False, auto_now=True)
 
@@ -134,15 +136,23 @@ class Animal(Model):
         from django.urls import reverse
         return reverse(URL_NAME_ANIMAL, kwargs={DJ_PK: self.id})
 
+    def get_location_status(self):
+        # TODO: replace tuple to dict in constants
+        if self.location_status == 'S':
+            return 'В приюте'
+        elif self.location_status == 'H':
+            return 'Пристроен'
+        else:
+            return 'На радуге'
+
 
 class AnimalImage(Model):
-    animal = OneToOneField(Animal)
-    image = ImageField(ANIMAL_IMAGE_KEY_IMAGE, upload_to='images/')
+    animal = ForeignKey(Animal)
     image_url = URLField(ANIMAL_IMAGE_KEY_IMAGE_URL, blank=True, default=None)
     alt = CharField(ANIMAL_IMAGE_KEY_ALT, max_length=50)
     width = IntegerField(ANIMAL_IMAGE_KEY_WIDTH, blank=True, default=None, null=True)
     height = IntegerField(ANIMAL_IMAGE_KEY_HEIGHT, blank=True, default=None, null=True)
-    # TODO: create main field, unique for animal (checkbutton)
+    favourite = BooleanField("Избранное", default=False)
 
     class Meta:
         verbose_name = ANIMAL_IMAGE_VERBOSE_NAME

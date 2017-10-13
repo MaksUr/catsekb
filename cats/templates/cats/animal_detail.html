@@ -17,6 +17,13 @@
     {% endif %}
 </div>
 
+{# Статус #}
+{% if object.location_status %}
+    <div style="background-color: hotpink">
+        <p>{% get_verbose_field_name object 'location_status' %}: {{ object.get_location_status}}</p>
+    </div>
+{% endif %}
+
 {# Группа #}
 {% if object.group %}
     <div style="background-color: antiquewhite">

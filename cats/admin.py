@@ -17,7 +17,7 @@ class ImageInline(admin.StackedInline):
 
 class AnimalAdmin(admin.ModelAdmin):
 
-    list_display = (DJ_ID, ANIMAL_NAME, ANIMAL_SHOW, ANIMAL_LOCATION_STATUS)
+    list_display = (DJ_ID, ANIMAL_NAME, ANIMAL_LOCATION_STATUS, 'sex', ANIMAL_SHOW)  # TODO: from constants
     fieldsets = (
         (
             ANIMAL_MAIN_FIELD_SET, {

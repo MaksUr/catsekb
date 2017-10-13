@@ -42,7 +42,7 @@ def open_json(file_name, log_file=None):
         res = json.load(open(file_name, 'r', encoding="utf-8"))
     except FileNotFoundError:
         f = abspath(file_name)
-        message = 'Файл:\n\t{f}\n\t - не найден'.format(f=f)
+        message = 'Файл:\n\t{f}\n\t - не найден\n\t{n}'.format(f=f, n=file_name)
         print_log(message, log_file=log_file)
         raise ValueError(message)
     else:
