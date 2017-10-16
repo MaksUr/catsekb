@@ -71,6 +71,7 @@
 {% for image in object.animalimage_set.all %}
     <img src="{{ image.image_url }}" width=300 alt="{{ image.alt }}">
 {% empty %}
+    {# TODO: set image #}
     <img src="https://pbs.twimg.com/profile_images/848471660860538880/pevXVsIp.jpg">
 {% endfor %}
 
