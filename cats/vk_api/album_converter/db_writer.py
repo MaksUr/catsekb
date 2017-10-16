@@ -7,7 +7,7 @@ from cats.vk_api.helper_functions import open_json, print_log
 
 # http://127.0.0.1:8000/media/images/cats/albums/Багира/photos/246566509_456241041.jpg
 
-CONFIG = r'C:\rep\djangoProjects\cekb\cats\vk_api\album_analyzer\parse_album_list.json'
+CONFIG = r'cats\vk_api\album_analyzer\parse_album_list.json'
 ROOT_PTH = r'http://127.0.0.1:8000/'
 START_IMAGE_PTH = join('media', 'images', 'cats')
 
@@ -31,7 +31,6 @@ def save_image(animal, image_url, alt='alt', width=0, height=0, favourite=False,
 def save_images(animal, images, log_file=None):
     for image_pth in images:
         save_image(animal=animal, image_url=image_pth, log_file=log_file)
-        break
 
 
 def save_animal(animal_d, log_file=None):
