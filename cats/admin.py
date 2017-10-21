@@ -4,7 +4,8 @@ from django.contrib import admin
 from cats.constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPDATED, ANIMAL_NAME, ANIMAL_GROUP, \
     ANIMAL_FIELD_VALUE, ANIMAL_SEX, ANIMAL_DATE_OF_BIRTH, ANIMAL_DAYS, ANIMAL_MONTHS, ANIMAL_YEARS, \
     ANIMAL_AGE_FIELD_SET, DJ_CLASSES_COLLAPSE, DJ_CLASSES, DJ_FIELDS, ANIMAL_MAIN_FIELD_SET, DJ_ID, ANIMAL_SHOW, \
-    ANIMAL_DESCRIPTION, GROUP_NAME, GROUP_SHOW, ANIMAL_LOCATION_STATUS
+    ANIMAL_DESCRIPTION, GROUP_NAME, GROUP_SHOW, ANIMAL_LOCATION_STATUS, ANIMAL_TAG, ANIMAL_TAG_FIELD_SET, \
+    ANIMAL_TAG_DISPLAY, ANIMAL_KEY_TAG_DISPLAY
 from cats.forms import AnimalForm
 from cats.models import Animal, AnimalImage, FieldValue, Group, FieldType
 
@@ -20,8 +21,13 @@ class ImageInline(admin.StackedInline):
 
 
 class AnimalAdmin(admin.ModelAdmin):
+    def tag_display(self, obj):
+        res = '<a href="{url}">{label}</a>'.format(url=obj.get_instagram_link(), label=obj.get_hashtag_name())
+        return res
+    tag_display.allow_tags = True
+    tag_display.short_description = ANIMAL_KEY_TAG_DISPLAY
 
-    list_display = (DJ_ID, ANIMAL_NAME, ANIMAL_LOCATION_STATUS, 'sex', ANIMAL_SHOW)  # TODO: from constants
+    list_display = (DJ_ID, ANIMAL_NAME, ANIMAL_LOCATION_STATUS, ANIMAL_SEX, ANIMAL_SHOW)  # TODO: from constants
     fieldsets = (
         (
             ANIMAL_MAIN_FIELD_SET, {
@@ -29,9 +35,15 @@ class AnimalAdmin(admin.ModelAdmin):
                     ANIMAL_NAME, ANIMAL_LOCATION_STATUS,
                     ANIMAL_SHOW, ANIMAL_DESCRIPTION,
                     ANIMAL_GROUP, ANIMAL_FIELD_VALUE, ANIMAL_SEX,
-                    ANIMAL_CREATED, ANIMAL_UPDATED,
+                    ANIMAL_CREATED, ANIMAL_UPDATED, ANIMAL_TAG
                 ),
             },
+        ),
+        (
+            ANIMAL_TAG_FIELD_SET, {
+                DJ_FIELDS: (ANIMAL_TAG, ANIMAL_TAG_DISPLAY),
+                DJ_CLASSES: (DJ_CLASSES_COLLAPSE,),
+          },
         ),
         (
             ANIMAL_AGE_FIELD_SET, {
@@ -40,12 +52,12 @@ class AnimalAdmin(admin.ModelAdmin):
                     ANIMAL_DATE_OF_BIRTH,
                     ANIMAL_BIRTHDAY_PRECISION
                 ),
-                # DJ_CLASSES: (DJ_CLASSES_COLLAPSE,)
+                DJ_CLASSES: (DJ_CLASSES_COLLAPSE,)
             },
         ),
     )
 
-    readonly_fields = (ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPDATED,)
+    readonly_fields = (ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPDATED, ANIMAL_TAG_DISPLAY)
     form = AnimalForm
     inlines = [ImageInline]
 

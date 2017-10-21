@@ -78,6 +78,19 @@ ANIMAL_VERBOSE_NAME_PLURAL = 'Питомцы'
 ANIMAL_VERBOSE_NAME = 'Питомец'
 ANIMAL_MAIN_FIELD_SET = 'Общая информация'
 
+# tag
+ANIMAL_TAG_FIELD_SET = 'Настройка хэштега'
+
+ANIMAL_TAG = 'tag'
+ANIMAL_KEY_TAG = 'Редактирование хештега'
+ANIMAL_KEY_TAG_HELP_TEXT = 'При заполнении этого поля, будет использоваться данный пользовательский хэштег.'
+
+# tag display
+
+ANIMAL_TAG_DISPLAY = 'tag_display'
+ANIMAL_KEY_TAG_DISPLAY = 'Сгенерированный хэштег'
+ANIMAL_KEY_TAG_DISPLAY_HELP_TEXT = 'Убедитесь в корректности ссылки.'  # TODO: display in admin form
+
 HASHTAG_TEMPLATE_INSTAGRAM = 'https://www.instagram.com/explore/tags/{name}_{suffix}/'
 HASHTAG_TEMPLATE = '#{name}_{suffix}'
 HASHTAG_SUFFIX = 'catsekb'
