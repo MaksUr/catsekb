@@ -158,3 +158,13 @@ class AnimalImage(Model):
         verbose_name = ANIMAL_IMAGE_VERBOSE_NAME
         verbose_name_plural = ANIMAL_IMAGE_VERBOSE_NAME_PLURAL
 
+
+class Article(Model):  # TODO: create new application
+    name = CharField("Название статьи", max_length=100)
+    text = TextField("Текст статьи", blank=True, default='')
+
+    def __str__(self):
+        return self.name
+
+
+
