@@ -1,5 +1,6 @@
 from django.core.exceptions import FieldError
 from django.core.paginator import Paginator
+from django.db.models import QuerySet
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, FormView
@@ -151,11 +152,12 @@ class GroupDetailView(ListView):
 def index_view(request):
     show_permission = request.user.is_authenticated()
     all_animals_group = get_group(GROUP_ALL_ANIMALS_NAME, show_permission=show_permission)
-    all_animals_list = get_animals_from_query(dict(), show_permission=show_permission)
     group_list = get_groups_from_query(dict(), show_permission=show_permission)
-    helpful_info_list = ['Первая статься', 'Вторая статья',]  # TODO: add helpful info
-    filter_label = FILTER_LABEL
-    return render(request, 'cats/index.html', locals())  # TODO: delete locals
+    context = {
+        'group_list': [all_animals_group] + list(group_list),
+        'helpful_info_list': ['Первая статься', 'Вторая статья'],  # TODO: add helpful info
+    }
+    return render(request, 'cats/index.html', context)  # TODO: delete locals
 
 
 class FilterView(FormView):
