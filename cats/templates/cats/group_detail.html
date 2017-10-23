@@ -1,5 +1,132 @@
 {#object#}
 {#object_list#}
 
-<h2><a href="{% url 'group_detail' pk=object.id %}">{{ object.name }}</a></h2>
-{% include "cats/animal_list.html" with animal_list=object_list filter_string='?group_id='|add:object.id_str%}
+<p>Галерея котов</p>
+
+{#<div class="container">#}
+{#			<div class="row">#}
+{#				<div class="col-md-4 col-md-offset-4">#}
+{#					<div class="title mid">#}
+{#						<h2>#}
+{#							Ищут дома#}
+{#						</h2>#}
+{#						<p></p>#}
+{#					</div>#}
+{#				</div>#}
+{#			</div>#}
+{#			<div class="search_home mid">#}
+{#				<div class="row slim">#}
+{#					<div class="col-md-12 slim">#}
+{#						<div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">#}
+{#							<div class="cat">#}
+{#								<img src="img/cats_find1.jpg">#}
+{#								<a href="#">#}
+{#									<div class="name_cat">#}
+{#										<p>#}
+{#											#Тигр_catsekb#}
+{#										</p>#}
+{#									</div>#}
+{#								</a>#}
+{#							</div>#}
+{#						</div>#}
+{#						<div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">#}
+{#							<div class="cat">#}
+{#								<img src="img/cats_find2.jpg">#}
+{#								<a href="#">#}
+{#									<div class="name_cat">#}
+{#										<p>#}
+{#											#Лев_catsekb#}
+{#										</p>#}
+{#									</div>#}
+{#								</a>#}
+{#							</div>#}
+{#						</div>#}
+{#						<div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">#}
+{#							<div class="cat">#}
+{#								<img src="img/cats_find3.jpg">#}
+{#								<a href="#">#}
+{#									<div class="name_cat">#}
+{#										<p>#}
+{#											#Лев_catsekb#}
+{#										</p>#}
+{#									</div>#}
+{#								</a>#}
+{#							</div>#}
+{#						</div>#}
+{#						<div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">#}
+{#							<div class="cat">#}
+{#								<img src="img/cats_find4.jpg">#}
+{#								<a href="#">#}
+{#									<div class="name_cat">#}
+{#										<p>#}
+{#											#Лев_catsekb#}
+{#										</p>#}
+{#									</div>#}
+{#								</a>#}
+{#							</div>#}
+{#						</div>#}
+{#						<div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">#}
+{#							<div class="cat">#}
+{#								<img src="img/cats_find5.jpg">#}
+{#								<a href="#">#}
+{#									<div class="name_cat">#}
+{#										<p>#}
+{#											#Лев_catsekb#}
+{#										</p>#}
+{#									</div>#}
+{#								</a>#}
+{#							</div>#}
+{#						</div>#}
+{#						<div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">#}
+{#							<div class="cat">#}
+{#								<img src="img/cats_find6.jpg">#}
+{#								<a href="#">#}
+{#									<div class="name_cat">#}
+{#										<p>#}
+{#											#Лев_catsekb#}
+{#										</p>#}
+{#									</div>#}
+{#								</a>#}
+{#							</div>#}
+{#						</div>#}
+{#						<div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">#}
+{#							<div class="cat">#}
+{#								<img src="img/cats_find7.jpg">#}
+{#								<a href="#">#}
+{#									<div class="name_cat">#}
+{#										<p>#}
+{#											#Лев_catsekb#}
+{#										</p>#}
+{#									</div>#}
+{#								</a>#}
+{#							</div>#}
+{#						</div>#}
+{#						<div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">#}
+{#							<div class="cat">#}
+{#								<img src="img/cats_find8.jpg">#}
+{#								<a href="#">#}
+{#									<div class="name_cat">#}
+{#										<p>#}
+{#											#Лев_catsekb#}
+{#										</p>#}
+{#									</div>#}
+{#								</a>#}
+{##}
+{#							</div>#}
+{#						</div>#}
+{#						<div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">#}
+{#							<div class="cat">#}
+{#								<img src="img/cats_find9.jpg">#}
+{#								<a href="#">#}
+{#									<div class="name_cat">#}
+{#										<p>#}
+{#											#Майк_catsekb#}
+{#										</p>#}
+{#									</div>#}
+{#								</a>#}
+{#							</div>#}
+{#						</div>#}
+{#					</div>#}
+{#				</div>#}
+{#			</div>#}
+{#		</div>#}

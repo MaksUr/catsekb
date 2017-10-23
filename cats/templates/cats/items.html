@@ -1,0 +1,15 @@
+{# link #}
+{# link_caption #}
+{# items #}
+{# items_class #}
+<a href="{{ link }}">{{ link_caption }}</a>
+<ul class="{{ items_class }}">
+    {% for item in items %}
+        <li>
+            <a href="#">{{ item }}</a>
+        </li>
+    {% empty %}
+        <li>Здесь пока пусто...</li>
+    {% endfor %}
+</ul>
+

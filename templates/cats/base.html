@@ -1,0 +1,72 @@
+{# group_list #}
+{# helpful_info_list #}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% block meta %}<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">{% endblock meta %}
+    {% block base_title %}
+    <title>{% block title %}CatsEkb{% endblock title %}</title>
+    {% endblock base_title %}
+
+
+    {# Bootstrap CSS #}
+    {% block bootstrap_css %}
+        <link rel="stylesheet" type="text/css" href="{% static "catsekb/css/bootstrap/bootstrap.min.css" %}">
+    {% endblock bootstrap_css %}
+
+    {# Base CSS #}
+    {% block base_css %}
+        <link rel="stylesheet" type="text/css" href="{% static "catsekb/css/base.css" %}">
+    {% endblock base_css %}
+
+
+    {# Custom CSS #}
+    {% block css %}{% endblock css %}
+
+
+    {# Custom head JS #}
+    {% block head_js %}{% endblock head_js %}
+
+
+</head>
+<body {% block body_attr %}{% endblock body_attr %}>
+
+    {# Top navigation bar #}
+
+    {% block topbar %}
+        {% include 'cats/topbar.html' with groups=group_list helps=helpful_info_list %}
+    {% endblock topbar %}
+
+    {# Header #}
+    {% block header %}
+        {% include 'cats/header.html' with groups=group_list helps=helpful_info_list %}
+    {% endblock header %}
+
+    {# Main content goes here #}
+    {% block base_body %}{% endblock base_body %}
+
+    {# Footer #}
+    {% block footer %}
+        {% include 'cats/footer.html' %}
+    {% endblock footer %}
+
+
+    {# JQuery #}
+    {% block jquery_js %}
+        <script type="text/javascript" src="{% static "catsekb/js/jquery-3.2.1.js" %}"></script>
+    {% endblock jquery_js %}
+
+    {# Bootstrap #}
+    {% block bootstrap_js %}
+        <script type="text/javascript" src="{% static "catsekb/js/bootstrap.min.js" %}"></script>
+    {% endblock %}
+
+    {# Custom JS #}
+    {% block body_js %}
+        <script type="text/javascript" src="{% static "catsekb/js/script.js" %}"></script>
+    {% endblock body_js %}
+</body>
+</html>

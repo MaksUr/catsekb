@@ -1,0 +1,82 @@
+
+/* Устройства с шириной экрана от 768px до 1200px */
+@media (min-width: 768px) and (max-width: 1200px) {
+
+	.slider img {
+		width: 100%;
+	}
+
+	.full_container, .line_container {
+		background-position: 21%;
+	}
+	.line_container {
+		filter: none;
+		background-image: none;
+		background-color: rgba(227, 235, 236, 0.7);
+	}
+	.line_container h2 {
+		text-align: center;
+		padding-top: 28px;	
+	}
+
+
+	.social img:first-child {
+		padding-left: 0;
+	}
+}
+
+/* Устройства с шириной экрана до 767px */
+@media (max-width: 767px) {
+
+	.mobile_list {
+		visibility: visible;
+	}
+	.slider img {
+		width: 100%;
+	}
+	.main_menu {
+		margin-top: 20px;
+	}
+	.full_container, .line_container {
+		background-position: 20%;
+	}
+	.line_container {
+		filter: none;
+		background-image: none;
+		background-color: rgba(227, 235, 236, 0.7);
+	}
+	.line_container h2 {	
+		text-align: center;
+		padding-top: 5%;
+	}
+
+	.cat_a_mouse {
+   		transform: translateY(15%) rotate(59deg);
+	}
+
+	footer a {
+		 padding-bottom: 0px;
+	}
+
+
+	.about_company { 
+		margin-top: 40px;
+	}
+	.social {
+		margin-top: 40px;
+	}
+
+	.logo_foot {
+		margin-top: 40px;
+		display: inline-block;
+	}
+
+
+	/* Наши коты */
+}
+
+@media (min-width: 644px) and (max-width: 844px) {
+	.name_cat p {
+    	padding-top: 4.5%;
+	}
+}

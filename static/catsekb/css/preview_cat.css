@@ -1,0 +1,154 @@
+
+.prev_cat {
+
+}
+
+.next_cat {
+
+}
+
+
+.preview_photo a {
+	border: none;
+	padding: 0;
+}
+
+.preview_photo img {
+	cursor: -webkit-zoom-in;
+	cursor: zoom-in;
+	width: 100%; /* Для IE */
+}
+
+/* increase - увеличение */
+
+.increase_photo {
+	position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    /* visibility: hidden; */
+    left: 50%;
+    margin-left: -50%;
+    z-index: 90;
+    text-align: center;
+    transform: translateX(100%);
+    background-color: rgba(255, 255, 255, .7);
+    transition: transform .75s;
+}
+.increase_photo.vissible {
+	transform: translateX(0%);
+}
+
+.item_photo {
+	height: 70%;
+    width: 80%;
+    position: absolute;
+    top: 10vh;
+    left: 50%;
+    margin-left: -40%;
+    opacity: 0;
+    transition: all .6s;
+    overflow: hidden;
+}
+.increase_photo.vissible > .item_photo.active {
+    opacity: 1;
+}
+
+.item_photo img {
+	max-height: 100%;
+    max-width: 100%;
+}
+
+.close_increase {
+	position: absolute;
+    z-index: 92;
+    right: 50px;
+    top: 5vh;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+
+.close_increase:hover span {
+    color: #a3b1db;
+}
+
+.prev_photo, .next_photo {
+    position: absolute;
+    top: 35vh;
+	max-width: 30px;
+    cursor: pointer;
+}
+
+.prev_photo {
+    left: 50px;
+}
+
+.next_photo {
+    right: 50px;  
+}
+.prev_photo:hover, .next_photo:hover {
+    filter: invert(.5);
+}
+
+.count_photo {
+	position: absolute;
+    bottom: 20px;
+    right: 30px;
+    font-size: 12px;
+    z-index: 9;
+}
+
+.description_cat {
+	margin-top: 25px;
+}
+
+.description_cat li {
+	margin-bottom: 10px;
+}
+
+.description_cat li:last-child {
+	margin-top: 20px;
+}
+
+.description_cat p {
+	margin: 10px 0 25px 0;
+}
+.property_name {
+	color: #a3b1db;
+}
+
+.request_container {
+	overflow-y: hidden;
+}
+.request {
+	margin-top: 100px;
+	position: relative;
+}
+
+.request a {
+	color: white;
+	text-transform: uppercase;
+	width: 200px;
+	height: 50px;
+	background-color: #526aa5;
+	border: none;
+	padding-top: 16.5px;
+	border-radius: 3px;
+	position: relative;
+}
+
+.cat_a_letter {
+	position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -55px;
+    width: 100px;
+    z-index: -1;
+    transition: all .8s ease;
+}
+.request a:hover + .cat_a_letter {
+	transform: translateY(-64%);
+    position: absolute; 
+    transition: transform .8s ease;  
+}

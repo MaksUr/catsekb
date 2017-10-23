@@ -1,0 +1,35 @@
+{# group_list #}
+{# helpful_info_list #}
+{% load static %}
+<header>
+    <div class="header_layer">
+        <div class="container-fluid">
+            <div class="row">
+                    <div class="main_menu mid">
+                        <img src="{% static 'catsekb/img/logo.png' %}" class="logo">
+                        <h1>
+                            Возьми кота домой!
+                        </h1>
+                    </div>
+                <div class="hidden-xs col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-8">
+                    <nav class="font">
+                        <ul class="menu mid">
+                            <li>
+                                <a href="{% url 'index' %}">Главная</a>
+                            </li>
+                            <li>
+                                {% include "cats/group_list.html" with group_list=groups ul_class='menu_opening' %}
+                            </li>
+                            <li>
+                                {% include "cats/helpful_info.html" with info_list=helps ul_class='menu_opening' %}
+                            </li>
+                            <li>
+                                <a href="#">Контакты</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
