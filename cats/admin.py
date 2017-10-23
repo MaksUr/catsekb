@@ -10,8 +10,12 @@ from cats.models import Animal, AnimalImage, FieldValue, Group, FieldType, Artic
 
 
 class ImageInline(admin.StackedInline):
+    extra = 0
     model = AnimalImage
     classes = [DJ_CLASSES_COLLAPSE]
+    # list_display = (...) TODO: implement
+    fields = ('image_url', 'image_thumb', 'alt', 'width', 'height', 'favourite')
+    readonly_fields = ('alt', 'width', 'height', 'image_thumb')
     # TODO: form = AnimalImageForm
 
 

@@ -148,11 +148,19 @@ class Animal(Model):
 
 class AnimalImage(Model):
     animal = ForeignKey(Animal)
-    image_url = URLField(ANIMAL_IMAGE_KEY_IMAGE_URL, blank=True, default=None)
+    image_url = URLField(ANIMAL_IMAGE_KEY_IMAGE_URL, default=None)
     alt = CharField(ANIMAL_IMAGE_KEY_ALT, max_length=50)
     width = IntegerField(ANIMAL_IMAGE_KEY_WIDTH, blank=True, default=None, null=True)
     height = IntegerField(ANIMAL_IMAGE_KEY_HEIGHT, blank=True, default=None, null=True)
     favourite = BooleanField("Избранное", default=False)
+
+    def image_thumb(self):
+        # TODO: edit view
+        if self.image_url:
+            return '<img src="%s" height="200" />' % self.image_url
+        else:
+            return '<img src="%s" height="200" />' % r'https://a.d-cd.net/8338b22s-960.jpg'
+    image_thumb.allow_tags = True
 
     class Meta:
         verbose_name = ANIMAL_IMAGE_VERBOSE_NAME
