@@ -99,9 +99,9 @@ class AnimalListView(ListView):
     def get_context_data(self, **kwargs):
         show_permission = self.request.user.is_authenticated()
         context = ListView.get_context_data(self, **kwargs)
+        context.update(get_base_context(show_permission=show_permission))
         # TODO: Edit
         context['filter_string'] = get_filter_string(self.request.GET)
-        context.update(get_base_context(show_permission=show_permission))
         return context
 
 
@@ -111,6 +111,7 @@ class AnimalDetailView(DetailView):
     animal_paginate_by = 1
 
     def get_context_data(self, **kwargs):
+        # TODO: add base_context
         context = DetailView.get_context_data(self, **kwargs)
         animal = kwargs[DJ_OBJECT]
         show_permission = self.request.user.is_authenticated()
@@ -156,6 +157,8 @@ class GroupListView(ListView):
         group_list = get_groups_from_query(dict(), show_permission=show_permission)
         return group_list
 
+    # TODO: add base_context
+
 
 class GroupDetailView(ListView):
     # template group_detail
@@ -193,9 +196,11 @@ class FilterView(FormView):
     form_class = FilterForm
 
     def get_context_data(self, **kwargs):
+        show_permission = self.request.user.is_authenticated()
         context = FormView.get_context_data(self, **kwargs)
+        context.update(get_base_context(show_permission=show_permission))
         if self.request.GET.dict():
-            show_permission = self.request.user.is_authenticated()
+
             query = self.request.GET
             context['animals'] = get_animals_from_query(query.dict(), show_permission=show_permission)
             context['filter_string'] = get_filter_string(query)
