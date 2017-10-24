@@ -1,14 +1,12 @@
 from django.core.exceptions import FieldError
 from django.core.paginator import Paginator
-from django.db.models import QuerySet
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, FormView
 
-from cats.constants import FILTER_LABEL, GROUP_ALL_ANIMALS_NAME, ANIMAL_CREATED, ANIMAL_SHOW, DJ_PK, DJ_PAGE, DJ_OBJECT, \
-    GROUP_SHOW, ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_SHELTER, ANIMAL_LOCATION_STATUS_DEAD, \
-    GROUP_ALL_ANIMALS_KEY_NAME, ANIMAL_LOCATION_STATUS_CHOICE_HOME, ANIMAL_LOCATION_STATUS_CHOICE_DEAD, \
-    ANIMAL_LOCATION_STATUS_CHOICE_SHELTER, ANIMAL_LOCATION_STATUS
+from cats.constants import GROUP_ALL_ANIMALS_NAME, ANIMAL_CREATED, ANIMAL_SHOW, DJ_PK, DJ_PAGE, DJ_OBJECT, \
+    GROUP_SHOW, ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_SHELTER, GROUP_ALL_ANIMALS_KEY_NAME, \
+    ANIMAL_LOCATION_STATUS_CHOICE_HOME, ANIMAL_LOCATION_STATUS_CHOICE_SHELTER, ANIMAL_LOCATION_STATUS
 from cats.forms import FilterForm
 from cats.models import Animal, Group, Article
 
@@ -82,6 +80,7 @@ def get_base_context(show_permission=False):
     context = {
         'group_list': default_group_list + list(user_group_list),
         'helpful_info_list': Article.objects.all(),
+        # 'header_class': None  TODO: implement different background
     }
     return context
 
@@ -98,15 +97,15 @@ class AnimalListView(ListView):
         return res
 
     def get_context_data(self, **kwargs):
+        show_permission = self.request.user.is_authenticated()
         context = ListView.get_context_data(self, **kwargs)
         # TODO: Edit
         context['filter_string'] = get_filter_string(self.request.GET)
-        context['filter_label'] = FILTER_LABEL
+        context.update(get_base_context(show_permission=show_permission))
         return context
 
 
 class AnimalDetailView(DetailView):
-    # TODO: if show=False check admin login
     # template animal_detail
     model = Animal
     animal_paginate_by = 1

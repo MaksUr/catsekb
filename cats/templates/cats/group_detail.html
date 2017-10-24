@@ -1,15 +1,13 @@
 {# for base #}
     {# group_list #}
     {# helpful_info_list #}
+    {# header_class #}
 
 {# object #}
 {# object_list #}
 
 {% extends "cats/base.html" %}
 {% block base_body %}
-
         {% include 'cats/gallery.html' with object_list=object_list filter_parameters='?group_id='|add:object.id_str caption=object.name %}
-
-
 {% endblock base_body %}
 

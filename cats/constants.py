@@ -278,7 +278,3 @@ AGE_DISTANCE_CHOICES = (
     ('y2_y5', 'от двух до пяти лет'),
     ('y5_', 'более пяти лет'),
 )
-
-
-# Labels
-FILTER_LABEL = 'Фильтр'

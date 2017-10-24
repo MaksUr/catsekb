@@ -1,5 +1,8 @@
-{# group_list #}
-{# helpful_info_list #}
+{# for base #}
+    {# group_list #}
+    {# helpful_info_list #}
+    {# header_class #}
+
 {# shelter_group #}
 {# shelter_animals #}
 {% extends "cats/base.html" %}
@@ -49,7 +52,7 @@
 		<div class="full_container">
 		</div>
 	</section>
-        {% include 'cats/group_detail.html' with object=shelter_group  %}
+        {% include 'cats/group_detail.html' with object=shelter_group  object_list=shelter_animals %}
 	<section>
 
 	</section>
