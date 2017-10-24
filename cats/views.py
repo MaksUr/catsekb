@@ -1,13 +1,14 @@
 from django.core.exceptions import FieldError
 from django.core.paginator import Paginator
-from django.http import Http404
+from django.db.models import QuerySet
+from django.http import Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, FormView
 
 from cats.constants import FILTER_LABEL, GROUP_ALL_ANIMALS_NAME, ANIMAL_CREATED, ANIMAL_SHOW, DJ_PK, DJ_PAGE, DJ_OBJECT, \
     GROUP_SHOW
 from cats.forms import FilterForm
-from cats.models import Animal, Group
+from cats.models import Animal, Group, Article
 
 
 def get_group(group_id, show_permission=False):
@@ -120,6 +121,10 @@ class AnimalDetailView(DetailView):
             return page
 
 
+def InfoDetailView(request, pk):
+    return HttpResponse('InfoDetailView')
+
+
 class GroupListView(ListView):
     # template group_list
     model = Group
@@ -151,10 +156,12 @@ class GroupDetailView(ListView):
 def index_view(request):
     show_permission = request.user.is_authenticated()
     all_animals_group = get_group(GROUP_ALL_ANIMALS_NAME, show_permission=show_permission)
-    all_animals_list = get_animals_from_query(dict(), show_permission=show_permission)
     group_list = get_groups_from_query(dict(), show_permission=show_permission)
-    filter_label = FILTER_LABEL
-    return render(request, 'cats/index.html', locals())  # TODO: delete locals
+    context = {
+        'group_list': [all_animals_group] + list(group_list),
+        'helpful_info_list': Article.objects.all(),  # TODO: add helpful info
+    }
+    return render(request, 'cats/index.html', context)  # TODO: delete locals
 
 
 class FilterView(FormView):
@@ -174,7 +181,3 @@ class FilterView(FormView):
         res = FormView.get_form_kwargs(self)
         res['data'] = self.request.GET.dict()
         return res
-
-
-
-

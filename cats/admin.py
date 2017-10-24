@@ -7,7 +7,7 @@ from cats.constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPD
     ANIMAL_DESCRIPTION, GROUP_NAME, GROUP_SHOW, ANIMAL_LOCATION_STATUS, ANIMAL_TAG, ANIMAL_TAG_FIELD_SET, \
     ANIMAL_TAG_DISPLAY, ANIMAL_KEY_TAG_DISPLAY
 from cats.forms import AnimalForm
-from cats.models import Animal, AnimalImage, FieldValue, Group, FieldType
+from cats.models import Animal, AnimalImage, FieldValue, Group, FieldType, Article
 
 
 class ImageInline(admin.StackedInline):
@@ -89,3 +89,8 @@ class FieldTypeAdmin(admin.ModelAdmin):
 admin.site.register(FieldType, FieldTypeAdmin)
 
 admin.site.register(AnimalImage)
+
+
+class ArticleAdmin(admin.ModelAdmin):
+    model = Article
+admin.site.register(Article, ArticleAdmin)

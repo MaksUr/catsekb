@@ -1,0 +1,55 @@
+{# groups #}
+{# helps #}
+
+{% load static %}
+
+
+<div class="top_nav">
+    <nav class="mid font">
+        <ul class="mobile_list">
+            <li>
+                <a href="{% url 'index' %}">Главная</a>
+            </li>
+            <li>
+                {% include "cats/group_list.html" with group_list=groups ul_class='mobile_list_opening' %}
+            </li>
+            <li>
+                {% include "cats/helpful_info.html" with info_list=helps ul_class='mobile_list_opening' %}
+            </li>
+            <li>
+                <a href="#">Контакты</a>
+            </li>
+            <li>
+                <div class="mobile_menu mid">
+                    <img src="{% static 'catsekb/img/menu.png' %}" alt="">
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="hidden-xs col-sm-2 col-md-2 col-lg-2">
+                <div class="logo_top_nav mid">
+                    <img src="{% static 'catsekb/img/logo.png' %}" class="top_logo">
+                </div>
+            </div>
+            <div class="hidden-xs col-sm-10 col-sm-offset-0 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-4">
+                <nav class="font">
+                    <ul class="menu top_menu">
+                        <li>
+                            <a href="{% url 'index' %}">Главная</a>
+                        </li>
+                        <li>
+                            {% include "cats/group_list.html" with group_list=groups ul_class='menu_opening top_menu' %}
+                        </li>
+                        <li>
+                            {% include "cats/helpful_info.html" with info_list=helps ul_class='menu_opening top_menu' %}
+                        <li>
+                            <a href="#">Контакты</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

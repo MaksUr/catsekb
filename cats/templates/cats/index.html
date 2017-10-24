@@ -1,26 +1,52 @@
-{#all_animals_group#}
-{#all_animals_list#}
 {#group_list#}
-{#filter_label#}
-
+{% extends "cats/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <style type="text/css">
-        body {
+{% block base_body %}
+    <section>
+		<div class="about">
+			<img class="cat_a_mouse" src="{% static "catsekb/img/cat_and_mouse.png" %}">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-md-offset-4">
+						<div class="title mid">
+							<h2>
+								О нас
+							</h2>
+							<p></p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+						<p class="about_u">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+							consequat.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="full">
+		<a href="#">
+			<div class="line_container">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-10 col-xs-offset-1 col-lg-10">
+							<h2>
+								Что делать, если я нашел кота?
+							</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</a>
+		<div class="full_container">
+		</div>
+	</section>
+	<section>
 
-        }
-    </style>
-</head>
-<body>
-    <h1>Наши питомцы</h1>
-    {% include "cats/group_detail.html" with object=all_animals_group object_list=all_animals_list filter_label='' %}
-    {% include "cats/group_list.html" with group_list=group_list %}
-    <p><a href="{% url 'animal_filter' %}">{{ filter_label }}</a></p>
-
-
-</body>
-</html>
+	</section>
+{% endblock base_body %}
