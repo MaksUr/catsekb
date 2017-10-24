@@ -6,14 +6,22 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, FormView
 
 from cats.constants import FILTER_LABEL, GROUP_ALL_ANIMALS_NAME, ANIMAL_CREATED, ANIMAL_SHOW, DJ_PK, DJ_PAGE, DJ_OBJECT, \
-    GROUP_SHOW
+    GROUP_SHOW, ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_SHELTER, ANIMAL_LOCATION_STATUS_DEAD, \
+    GROUP_ALL_ANIMALS_KEY_NAME, ANIMAL_LOCATION_STATUS_CHOICE_HOME, ANIMAL_LOCATION_STATUS_CHOICE_DEAD, \
+    ANIMAL_LOCATION_STATUS_CHOICE_SHELTER, ANIMAL_LOCATION_STATUS
 from cats.forms import FilterForm
 from cats.models import Animal, Group, Article
 
+GROUP_MAPPING = {
+    GROUP_ALL_ANIMALS_NAME: GROUP_ALL_ANIMALS_KEY_NAME,
+    ANIMAL_LOCATION_STATUS_HOME: ANIMAL_LOCATION_STATUS_CHOICE_HOME,
+    ANIMAL_LOCATION_STATUS_SHELTER: ANIMAL_LOCATION_STATUS_CHOICE_SHELTER,
+    }
+
 
 def get_group(group_id, show_permission=False):
-    if group_id == GROUP_ALL_ANIMALS_NAME:
-        return Group.get_group_with_all_animals()
+    if group_id in GROUP_MAPPING:
+        return Group.get_group_with_certain_settings(name=GROUP_MAPPING[group_id], group_id=group_id)
     else:
         query = dict()
         query['id'] = group_id
@@ -64,6 +72,20 @@ def get_filter_string(query):
         return ''
 
 
+def get_base_context(show_permission=False):
+    default_group_list = list()
+    default_group_list.append(get_group(GROUP_ALL_ANIMALS_NAME))
+    default_group_list.append(get_group(ANIMAL_LOCATION_STATUS_SHELTER))
+    default_group_list.append(get_group(ANIMAL_LOCATION_STATUS_HOME))
+
+    user_group_list = get_groups_from_query(dict(), show_permission=show_permission)
+    context = {
+        'group_list': default_group_list + list(user_group_list),
+        'helpful_info_list': Article.objects.all(),
+    }
+    return context
+
+
 # TODO: доступен только админам или из фильтра с контролем параметров
 class AnimalListView(ListView):
     # template animal_list
@@ -77,6 +99,7 @@ class AnimalListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = ListView.get_context_data(self, **kwargs)
+        # TODO: Edit
         context['filter_string'] = get_filter_string(self.request.GET)
         context['filter_label'] = FILTER_LABEL
         return context
@@ -147,6 +170,7 @@ class GroupDetailView(ListView):
     def get_context_data(self, **kwargs):
         show_permission = self.request.user.is_authenticated()
         context = ListView.get_context_data(self, **kwargs)
+        context.update(get_base_context(show_permission=show_permission))
         group_id = self.kwargs[DJ_PK]
         group = get_group(group_id=group_id, show_permission=show_permission)
         context[DJ_OBJECT] = group
@@ -155,13 +179,14 @@ class GroupDetailView(ListView):
 
 def index_view(request):
     show_permission = request.user.is_authenticated()
-    all_animals_group = get_group(GROUP_ALL_ANIMALS_NAME, show_permission=show_permission)
-    group_list = get_groups_from_query(dict(), show_permission=show_permission)
-    context = {
-        'group_list': [all_animals_group] + list(group_list),
-        'helpful_info_list': Article.objects.all(),  # TODO: add helpful info
-    }
-    return render(request, 'cats/index.html', context)  # TODO: delete locals
+    context = get_base_context(show_permission=show_permission)
+    shelter_group = context['group_list'][1]
+    query = {ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_SHELTER}
+    # TODO: только с избранными изображениями
+    shelter_animals = get_animals_from_query(query=query, show_permission=show_permission)
+    context['shelter_group'] = shelter_group
+    context['shelter_animals'] = shelter_animals
+    return render(request, 'cats/index.html', context)
 
 
 class FilterView(FormView):
@@ -173,7 +198,7 @@ class FilterView(FormView):
         if self.request.GET.dict():
             show_permission = self.request.user.is_authenticated()
             query = self.request.GET
-            context['animal_list'] = get_animals_from_query(query.dict(), show_permission=show_permission)
+            context['animals'] = get_animals_from_query(query.dict(), show_permission=show_permission)
             context['filter_string'] = get_filter_string(query)
         return context
 

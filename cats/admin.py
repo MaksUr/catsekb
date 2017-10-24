@@ -75,7 +75,8 @@ class AnimalsInline(admin.StackedInline):
 
 class GroupAdmin(admin.ModelAdmin):
     list_display = (GROUP_NAME, GROUP_SHOW)
-    inlines = [AnimalsInline]
+    # TODO: Сделать поддержку просмотра котов группы и добавлять
+    # inlines = [AnimalsInline]
 admin.site.register(Group, GroupAdmin)
 
 

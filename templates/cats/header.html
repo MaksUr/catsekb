@@ -1,7 +1,8 @@
 {# group_list #}
 {# helpful_info_list #}
+{# class #}
 {% load static %}
-<header>
+<header{% if class %} class={{ class }}{% endif %}>
     <div class="header_layer">
         <div class="container-fluid">
             <div class="row">

@@ -1,29 +1,30 @@
 from datetime import date
 
 from django.db.models import Model, CharField, TextField, ForeignKey, DateTimeField, BooleanField, ManyToManyField, \
-    OneToOneField, ImageField, URLField, IntegerField, DateField
-
+    URLField, IntegerField, DateField
 # Create your models here.
+from django.urls import reverse
+
 from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOSE_NAME, ANIMAL_IMAGE_KEY_HEIGHT, \
-    ANIMAL_IMAGE_KEY_WIDTH, ANIMAL_IMAGE_KEY_ALT, ANIMAL_IMAGE_KEY_IMAGE_URL, ANIMAL_IMAGE_KEY_IMAGE, \
-    HASHTAG_TEMPLATE_INSTAGRAM, HASHTAG_TEMPLATE, HASHTAG_SUFFIX, \
+    ANIMAL_IMAGE_KEY_WIDTH, ANIMAL_IMAGE_KEY_ALT, ANIMAL_IMAGE_KEY_IMAGE_URL, HASHTAG_TEMPLATE_INSTAGRAM, \
+    HASHTAG_TEMPLATE, HASHTAG_SUFFIX, \
     ANIMAL_VERBOSE_NAME_PLURAL, ANIMAL_VERBOSE_NAME, ANIMAL_KEY_UPDATED, ANIMAL_KEY_CREATED, ANIMAL_KEY_SHOW, \
     ANIMAL_KEY_DATE_OF_BIRTH, ANIMAL_KEY_BIRTHDAY_PRECISION, ANIMAL_KEY_SEX, ANIMAL_KEY_NAME, \
-    ANIMAL_BIRTHDAY_PRECISION_DAY_CHOICE, ANIMAL_BIRTHDAY_PRECISION_MONTH_CHOICE, ANIMAL_BIRTHDAY_PRECISION_YEAR_CHOICE, \
-    ANIMAL_BIRTHDAY_PRECISION_DAY, ANIMAL_BIRTHDAY_PRECISION_MONTH, ANIMAL_BIRTHDAY_PRECISION_YEAR, ANIMAL_SEX_FEMALE, \
-    ANIMAL_SEX_MALE, ANIMAL_SEX_CHOICE_FEMALE, ANIMAL_SEX_CHOICE_MALE, FIELD_VALUE_STR_TEMPLATE, \
+    ANIMAL_BIRTHDAY_PRECISION_DAY, ANIMAL_BIRTHDAY_PRECISION_MONTH, ANIMAL_BIRTHDAY_PRECISION_YEAR, \
+    FIELD_VALUE_STR_TEMPLATE, \
     FIELD_VALUE_VERBOSE_NAME_PLURAL, FIELD_VALUE_VERBOSE_NAME, FIELD_VALUE_KEY_VALUE_TEXT, \
     FIELD_TYPE_VERBOSE_NAME_PLURAL, FIELD_TYPE_VERBOSE_NAME, FIELD_TYPE_KEY_DESCRIPTION, FIELD_TYPE_KEY_NAME, \
     GROUP_VERBOSE_NAME_PLURAL, GROUP_VERBOSE_NAME, GROUP_KEY_SHOW, GROUP_KEY_DESCRIPTION, GROUP_KEY_NAME, \
-    GROUP_ALL_ANIMALS_KEY_NAME, GROUP_ALL_ANIMALS_NAME, URL_NAME_ANIMAL, DJ_PK, ANIMAL_KEY_DESCRIPTION, \
+    URL_NAME_ANIMAL, DJ_PK, ANIMAL_KEY_DESCRIPTION, \
     ANIMAL_KEY_LOCATION_STATUS, ANIMAL_SEX_CHOICES, ANIMAL_BIRTHDAY_PRECISION_CHOICES, ANIMAL_LOCATION_STATUS_CHOICES, \
-    ANIMAL_LOCATION_STATUS_SHELTER, ANIMAL_KEY_TAG
+    ANIMAL_KEY_TAG, URL_NAME_GROUP
 from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
+from cats.validators import group_name_validator
 
 
 class Group(Model):
-    name = CharField(GROUP_KEY_NAME, max_length=32, unique=True)
+    name = CharField(GROUP_KEY_NAME, max_length=32, unique=True, validators=[group_name_validator])
     description = TextField(GROUP_KEY_DESCRIPTION, blank=True, default=None)
     show = BooleanField(GROUP_KEY_SHOW, default=True)
 
@@ -35,9 +36,12 @@ class Group(Model):
         return self.name
 
     @staticmethod
-    def get_group_with_all_animals():
-        res = Group(name=GROUP_ALL_ANIMALS_KEY_NAME, show=True, id=GROUP_ALL_ANIMALS_NAME)
+    def get_group_with_certain_settings(name, group_id):
+        res = Group(name=name, id=group_id, show=True)
         return res
+
+    def get_absolute_url(self):
+        return reverse(URL_NAME_GROUP, kwargs={DJ_PK: self.id})
 
     def id_str(self):
         return str(self.id)
@@ -136,7 +140,6 @@ class Animal(Model):
             return None
 
     def get_absolute_url(self):
-        from django.urls import reverse
         return reverse(URL_NAME_ANIMAL, kwargs={DJ_PK: self.id})
 
     def get_location_status(self):

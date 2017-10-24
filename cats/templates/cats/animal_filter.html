@@ -1,11 +1,15 @@
-<p>Фильтр. Форма</p>
+{# animals #}
+{# filter_string #}
 
-<form method="get">
-    {{ form.as_p }}
-    <input type="submit" value="Поиск">
-</form>
-<a href="{% url 'animal_filter' %}">Сбросить фильтры</a>
-{% if animal_list %}
-    {% include "cats/animal_list.html" with animal_list=animal_list filter_string=filter_string %}
-{% endif %}
+{% extends "cats/base.html" %}
 
+{% block base_body %}
+    <form method="get">
+        {{ form.as_p }}
+        <input type="submit" value="Поиск">
+    </form>
+    <a href="{% url 'animal_filter' %}">Сбросить фильтры</a>
+    {% if animals %}
+        {% include "cats/gallery.html" with object_list=animals filter_parameters=filter_string caption="Фильтр" %}
+    {% endif %}
+{% endblock %}

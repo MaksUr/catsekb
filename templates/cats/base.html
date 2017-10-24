@@ -1,5 +1,6 @@
 {# group_list #}
 {# helpful_info_list #}
+{# header_class #}
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -42,7 +43,7 @@
 
     {# Header #}
     {% block header %}
-        {% include 'cats/header.html' with groups=group_list helps=helpful_info_list %}
+        {% include 'cats/header.html' with groups=group_list helps=helpful_info_list class=header_class %}
     {% endblock header %}
 
     {# Main content goes here #}

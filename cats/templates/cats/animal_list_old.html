@@ -1,0 +1,24 @@
+{#animal_list#}
+{#filter_string#}
+{#filter_label?#}
+{% if filter_label %}
+    <h2>
+        <a href="{% url 'animal_list' %}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}">
+            {{ filter_label }}
+        </a>
+    </h2>
+{% endif %}
+
+{% for animal in animal_list %}
+    <li>
+        <a href="{% url 'animal_detail' pk=animal.id %}{{ filter_string }}">
+            {% if animal.name %}
+                {{ animal.name }}
+            {% else %}
+                Id: {{ animal.id }}
+            {% endif %}
+        </a>
+    </li>
+{% empty %}
+    <p>Сегодня здесь пусто</p>
+{% endfor %}

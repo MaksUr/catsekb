@@ -1,4 +1,7 @@
-{#group_list#}
+{# group_list #}
+{# helpful_info_list #}
+{# shelter_group #}
+{# shelter_animals #}
 {% extends "cats/base.html" %}
 {% load static %}
 {% block base_body %}
@@ -46,6 +49,7 @@
 		<div class="full_container">
 		</div>
 	</section>
+        {% include 'cats/group_detail.html' with object=shelter_group  %}
 	<section>
 
 	</section>
