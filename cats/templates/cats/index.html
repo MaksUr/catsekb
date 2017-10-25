@@ -3,8 +3,8 @@
     {# helpful_info_list #}
     {# header_class #}
 
-{# shelter_group #}
 {# shelter_animals #}
+{# shelter_caption #}
 {% extends "cats/base.html" %}
 {% load static %}
 {% block base_body %}
@@ -52,7 +52,8 @@
 		<div class="full_container">
 		</div>
 	</section>
-        {% include 'cats/group_detail.html' with object=shelter_group  object_list=shelter_animals %}
+        {% url 'group_detail' pk='S' as group_url %}
+        {% include 'cats/widgets/gallery.html' with object_list=shelter_animals filter_parameters='?group_id=S' caption=shelter_caption caption_url=group_url %}
 	<section>
 
 	</section>

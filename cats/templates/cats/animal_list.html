@@ -3,10 +3,12 @@
     {# helpful_info_list #}
     {# header_class #}
 
+{# caption #}
 {# object_list #}
 {# filter_string #}
+{# description #}
 
 {% extends "cats/base.html" %}
 {% block base_body %}
-        {% include 'cats/widgets/gallery.html' with object_list=object_list filter_parameters=filter_string %}
+    {% include 'cats/widgets/gallery.html' with object_list=object_list filter_parameters=filter_string caption=caption description=description %}
 {% endblock base_body %}

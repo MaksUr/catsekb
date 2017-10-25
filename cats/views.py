@@ -6,7 +6,8 @@ from django.views.generic import ListView, DetailView, FormView
 
 from cats.constants import GROUP_ALL_ANIMALS_NAME, ANIMAL_CREATED, ANIMAL_SHOW, DJ_PK, DJ_PAGE, DJ_OBJECT, \
     GROUP_SHOW, ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_SHELTER, GROUP_ALL_ANIMALS_KEY_NAME, \
-    ANIMAL_LOCATION_STATUS_CHOICE_HOME, ANIMAL_LOCATION_STATUS_CHOICE_SHELTER, ANIMAL_LOCATION_STATUS
+    ANIMAL_LOCATION_STATUS_CHOICE_HOME, ANIMAL_LOCATION_STATUS_CHOICE_SHELTER, ANIMAL_LOCATION_STATUS, \
+    CAPTION_ANIMAL_LIST_DEFAULT, GROUP_ID
 from cats.forms import FilterForm
 from cats.models import Animal, Group, Article
 
@@ -59,17 +60,6 @@ def get_groups_from_query(query, show_permission=False):
     return res
 
 
-def get_filter_string(query):
-    """
-
-    :type query: QueryDict
-    """
-    if query:
-        return '?'+query.urlencode()
-    else:
-        return ''
-
-
 def get_base_context(show_permission=False):
     default_group_list = list()
     default_group_list.append(get_group(GROUP_ALL_ANIMALS_NAME))
@@ -89,6 +79,9 @@ def get_base_context(show_permission=False):
 class AnimalListView(ListView):
     # template animal_list
     model = Animal
+    template_name = 'cats/animal_list.html'
+    caption = CAPTION_ANIMAL_LIST_DEFAULT
+    description = ''
 
     def get_queryset(self):
         show_permission = self.request.user.is_authenticated()
@@ -100,9 +93,21 @@ class AnimalListView(ListView):
         show_permission = self.request.user.is_authenticated()
         context = ListView.get_context_data(self, **kwargs)
         context.update(get_base_context(show_permission=show_permission))
-        # TODO: Edit
-        context['filter_string'] = get_filter_string(self.request.GET)
+        context['filter_string'] = self.get_filter_string()
+        context['caption'] = self.caption
+        context['description'] = self.description
         return context
+
+    def get_filter_string(self):
+        """
+
+        :type query: QueryDict
+        """
+        query = self.request.GET
+        if query:
+            return '?' + query.urlencode()
+        else:
+            return ''
 
 
 class AnimalDetailView(DetailView):
@@ -144,6 +149,7 @@ class AnimalDetailView(DetailView):
             return page
 
 
+# TODO: Create new app
 def InfoDetailView(request, pk):
     return HttpResponse('InfoDetailView')
 
@@ -160,34 +166,31 @@ class GroupListView(ListView):
     # TODO: add base_context
 
 
-class GroupDetailView(ListView):
-    # template group_detail
-    model = Group
-    template_name = 'cats/group_detail.html'
+class GroupDetailView(AnimalListView):
 
     def get_queryset(self):
-        show_permission = self.request.user.is_authenticated()
-        return Animal.objects.filter(group_id=self.kwargs[DJ_PK], show=show_permission)
+        return Animal.objects.filter(group_id=self.kwargs[DJ_PK], show=self.request.user.is_authenticated())
 
     def get_context_data(self, **kwargs):
-        show_permission = self.request.user.is_authenticated()
-        context = ListView.get_context_data(self, **kwargs)
-        context.update(get_base_context(show_permission=show_permission))
         group_id = self.kwargs[DJ_PK]
-        group = get_group(group_id=group_id, show_permission=show_permission)
-        context[DJ_OBJECT] = group
+        group = get_group(group_id=group_id, show_permission=self.request.user.is_authenticated())
+        self.caption = group.name
+        self.description = group.description
+        context = AnimalListView.get_context_data(self, **kwargs)
         return context
+
+    def get_filter_string(self):
+        return '?{key}={val}'.format(key=GROUP_ID, val=self.kwargs[DJ_PK])
 
 
 def index_view(request):
     show_permission = request.user.is_authenticated()
     context = get_base_context(show_permission=show_permission)
-    shelter_group = context['group_list'][1]
     query = {ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_SHELTER}
     # TODO: только с избранными изображениями
     shelter_animals = get_animals_from_query(query=query, show_permission=show_permission)
-    context['shelter_group'] = shelter_group
     context['shelter_animals'] = shelter_animals
+    context['shelter_caption'] = ANIMAL_LOCATION_STATUS_CHOICE_SHELTER
     return render(request, 'cats/index.html', context)
 
 
@@ -203,7 +206,7 @@ class FilterView(FormView):
 
             query = self.request.GET
             context['animals'] = get_animals_from_query(query.dict(), show_permission=show_permission)
-            context['filter_string'] = get_filter_string(query)
+            # context['filter_string'] = get_filter_string(query) TODO: edit
         return context
 
     def get_form_kwargs(self):

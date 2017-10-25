@@ -242,6 +242,7 @@ GROUP_VERBOSE_NAME_PLURAL = 'Группы'
 
 GROUP_ALL_ANIMALS_KEY_NAME = 'Все котики'
 GROUP_ALL_ANIMALS_NAME = 'all'
+GROUP_ID = 'group_id'
 
 # name
 GROUP_NAME = 'name'
@@ -278,3 +279,7 @@ AGE_DISTANCE_CHOICES = (
     ('y2_y5', 'от двух до пяти лет'),
     ('y5_', 'более пяти лет'),
 )
+
+
+# Captions
+CAPTION_ANIMAL_LIST_DEFAULT = 'Наши коты'
