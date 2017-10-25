@@ -154,15 +154,15 @@ class FilterForm(forms.Form):
         required=False,
         label=ANIMAL_KEY_NAME,
     )
-    sex = forms.ChoiceField(widget=forms.RadioSelect, required=False, choices=ANIMAL_SEX_CHOICES, label=ANIMAL_KEY_SEX)
+    sex = forms.ChoiceField(widget=forms.Select, required=False, choices=ANIMAL_SEX_CHOICES, label=ANIMAL_KEY_SEX)
     age_distance = forms.ChoiceField(
         label=AGE_DISTANCE_KEY,
-        widget=forms.RadioSelect,
+        widget=forms.Select,
         required=False,
         choices=AGE_DISTANCE_CHOICES
     )
     location_status = forms.ChoiceField(
-        widget=forms.RadioSelect,
+        widget=forms.Select,
         required=False,
         choices=ANIMAL_LOCATION_STATUS_CHOICES,
         label=ANIMAL_KEY_LOCATION_STATUS

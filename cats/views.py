@@ -209,6 +209,13 @@ class FilterView(FormView):
             # context['filter_string'] = get_filter_string(query) TODO: edit
         return context
 
+    def get_initial(self):
+        initial = FormView.get_initial(self)
+        initial['sex'] = ''
+        initial['age_distance'] = ''
+        initial['location_status'] = ''
+        return initial
+
     def get_form_kwargs(self):
         res = FormView.get_form_kwargs(self)
         res['data'] = self.request.GET.dict()
