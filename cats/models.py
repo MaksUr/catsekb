@@ -131,7 +131,7 @@ class Animal(Model):
 
         :rtype: AnimalImage
         """
-        return AnimalImage.objects.get(animal=self)
+        return AnimalImage.objects.filter(animal=self).first() # TODO: только избранные фото
 
     def get_age(self):
         if self.date_of_birth:
