@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{# link #}
+{# link_caption #}
+{# items #}
+{# items_class #}
+{# item_url #}
+<a href="{{ link }}">{{ link_caption }}</a>
+<ul class="{{ items_class }}">
+    {% for item in items %}
+        <li>
+            <a href="{% url item_url pk=item.id %}">{{ item }}</a>
+        </li>
+    {% empty %}
+        <li>Здесь пока пусто...</li>
+    {% endfor %}
+</ul>

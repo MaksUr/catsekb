@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{# info_list #}
+{# ul_class #}
 
-</body>
-</html>
+{% url 'helpful_info_list' as helpful_info_list_link %}
+{% include "cats/widgets/items.html" with items=info_list items_class=ul_class link_caption='Полезная информация' link=helpful_info_list_link item_url='info_detail' %}

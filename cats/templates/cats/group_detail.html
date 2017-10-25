@@ -8,6 +8,6 @@
 
 {% extends "cats/base.html" %}
 {% block base_body %}
-        {% include 'cats/gallery.html' with object_list=object_list filter_parameters='?group_id='|add:object.id_str caption=object.name %}
+        {% include 'cats/widgets/gallery.html' with object_list=object_list filter_parameters='?group_id='|add:object.id_str caption=object.name %}
 {% endblock base_body %}
 

@@ -11,10 +11,10 @@
                 <a href="{% url 'index' %}">Главная</a>
             </li>
             <li>
-                {% include "cats/group_list.html" with group_list=groups ul_class='mobile_list_opening' %}
+                {% include "cats/widgets/menu_items_group_list.html" with group_list=groups ul_class='mobile_list_opening' %}
             </li>
             <li>
-                {% include "cats/helpful_info.html" with info_list=helps ul_class='mobile_list_opening' %}
+                {% include "cats/widgets/menu_items_helpful_info.html" with info_list=helps ul_class='mobile_list_opening' %}
             </li>
             <li>
                 <a href="#">Контакты</a>
@@ -40,10 +40,10 @@
                             <a href="{% url 'index' %}">Главная</a>
                         </li>
                         <li>
-                            {% include "cats/group_list.html" with group_list=groups ul_class='menu_opening top_menu' %}
+                            {% include "cats/widgets/menu_items_group_list.html" with group_list=groups ul_class='menu_opening top_menu' %}
                         </li>
                         <li>
-                            {% include "cats/helpful_info.html" with info_list=helps ul_class='menu_opening top_menu' %}
+                            {% include "cats/widgets/menu_items_helpful_info.html" with info_list=helps ul_class='menu_opening top_menu' %}
                         <li>
                             <a href="#">Контакты</a>
                         </li>

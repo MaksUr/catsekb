@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{# group_list #}
+{# ul_class #}
 
-</body>
-</html>
+{% url 'group_list' as group_list_link %}
+{% include "cats/widgets/items.html" with items=group_list items_class=ul_class link_caption='Наши коты' link=group_list_link item_url='group_detail' %}
