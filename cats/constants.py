@@ -132,6 +132,9 @@ ANIMAL_LOCATION_STATUS_DEAD = 'D'    # для хранения в БД
 ANIMAL_LOCATION_STATUS_CHOICE_HOME = 'Пристроен'
 ANIMAL_LOCATION_STATUS_CHOICE_SHELTER = 'Ищут дом'
 ANIMAL_LOCATION_STATUS_CHOICE_DEAD = 'На радуге'
+ANIMAL_LOCATION_STATUS_HOME_DESСR = 'Они обрели свой дом'
+ANIMAL_LOCATION_STATUS_SHELTER_DESСR = 'Собаки привязываются к людям, кошки привязываются к дому. Не дай этим котикам привязаться к клетке. Помоги им обрести свой дом.'
+ANIMAL_LOCATION_STATUS_DEAD_DESСR = 'Пусть земля им будет пухом, они всегда останутся в наших сердцах.'
 ANIMAL_LOCATION_STATUS_CHOICES = (
     ('', ''),
     (ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_CHOICE_HOME),
@@ -244,6 +247,7 @@ GROUP_VERBOSE_NAME_PLURAL = 'Группы'
 
 GROUP_ALL_ANIMALS_KEY_NAME = 'Все котики'
 GROUP_ALL_ANIMALS_NAME = 'all'
+GROUP_ALL_ANIMALS_NAME_DESCR = 'Все животные которые попали к нам в приют.'
 GROUP_ID = 'group_id'
 
 # name

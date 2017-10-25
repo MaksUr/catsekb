@@ -7,18 +7,7 @@
 <div class="top_nav">
     <nav class="mid font">
         <ul class="mobile_list">
-            <li>
-                <a href="{% url 'index' %}">Главная</a>
-            </li>
-            <li>
-                {% include "cats/widgets/menu_items_group_list.html" with group_list=groups ul_class='mobile_list_opening' %}
-            </li>
-            <li>
-                {% include "cats/widgets/menu_items_helpful_info.html" with info_list=helps ul_class='mobile_list_opening' %}
-            </li>
-            <li>
-                <a href="#">Контакты</a>
-            </li>
+            {% include "cats/menu_sections.html" with menu_class='mobile_list_opening' %}
             <li>
                 <div class="mobile_menu mid">
                     <img src="{% static 'catsekb/img/menu.png' %}" alt="">
@@ -36,17 +25,7 @@
             <div class="hidden-xs col-sm-10 col-sm-offset-0 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-4">
                 <nav class="font">
                     <ul class="menu top_menu">
-                        <li>
-                            <a href="{% url 'index' %}">Главная</a>
-                        </li>
-                        <li>
-                            {% include "cats/widgets/menu_items_group_list.html" with group_list=groups ul_class='menu_opening top_menu' %}
-                        </li>
-                        <li>
-                            {% include "cats/widgets/menu_items_helpful_info.html" with info_list=helps ul_class='menu_opening top_menu' %}
-                        <li>
-                            <a href="#">Контакты</a>
-                        </li>
+                        {% include "cats/menu_sections.html" with menu_class='menu_opening top_menu' %}
                     </ul>
                 </nav>
             </div>

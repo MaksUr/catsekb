@@ -176,7 +176,7 @@ nav {
 .mobile_list {
 	visibility: hidden;
 	position: absolute;
-    top: -535px;
+    top: -462px;
     left: 0;
     width: 100%;
     transition: transform .65s cubic-bezier(0.02, 1.01, 0.58, 1);

@@ -36,8 +36,8 @@ class Group(Model):
         return self.name
 
     @staticmethod
-    def get_group_with_certain_settings(name, group_id):
-        res = Group(name=name, id=group_id, show=True)
+    def get_group_with_certain_settings(name, group_id, description=''):
+        res = Group(name=name, id=group_id, show=True, description=description)
         return res
 
     def get_absolute_url(self):

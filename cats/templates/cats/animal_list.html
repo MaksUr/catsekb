@@ -10,5 +10,5 @@
 
 {% extends "cats/base.html" %}
 {% block base_body %}
-    {% include 'cats/widgets/gallery.html' with object_list=object_list filter_parameters=filter_string caption=caption description=description %}
+    {% include 'cats/widgets/gallery.html' with object_list=object_list filter_parameters=filter_string caption=caption capt_descr=description %}
 {% endblock base_body %}

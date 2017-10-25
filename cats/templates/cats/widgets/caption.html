@@ -1,0 +1,23 @@
+{# caption #}
+{# caption_url #}
+
+{% if caption %}
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="title mid">
+                {% if caption_url %}
+                    <a href="{{ caption_url }}">
+                        <h2>
+                            {{ caption }}
+                        </h2>
+                    </a>
+                {% else %}
+                    <h2>
+                        {{ caption }}
+                    </h2>
+                {% endif %}
+                <p></p>
+            </div>
+        </div>
+    </div>
+{% endif %}

@@ -7,20 +7,42 @@ from django.views.generic import ListView, DetailView, FormView
 from cats.constants import GROUP_ALL_ANIMALS_NAME, ANIMAL_CREATED, ANIMAL_SHOW, DJ_PK, DJ_PAGE, DJ_OBJECT, \
     GROUP_SHOW, ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_SHELTER, GROUP_ALL_ANIMALS_KEY_NAME, \
     ANIMAL_LOCATION_STATUS_CHOICE_HOME, ANIMAL_LOCATION_STATUS_CHOICE_SHELTER, ANIMAL_LOCATION_STATUS, \
-    CAPTION_ANIMAL_LIST_DEFAULT, GROUP_ID
+    CAPTION_ANIMAL_LIST_DEFAULT, GROUP_ID, GROUP_ALL_ANIMALS_NAME_DESCR, ANIMAL_LOCATION_STATUS_HOME_DESСR, \
+    ANIMAL_LOCATION_STATUS_SHELTER_DESСR, ANIMAL_LOCATION_STATUS_DEAD, ANIMAL_LOCATION_STATUS_CHOICE_DEAD, \
+    ANIMAL_LOCATION_STATUS_DEAD_DESСR
 from cats.forms import FilterForm
 from cats.models import Animal, Group, Article
 
 GROUP_MAPPING = {
-    GROUP_ALL_ANIMALS_NAME: GROUP_ALL_ANIMALS_KEY_NAME,
-    ANIMAL_LOCATION_STATUS_HOME: ANIMAL_LOCATION_STATUS_CHOICE_HOME,
-    ANIMAL_LOCATION_STATUS_SHELTER: ANIMAL_LOCATION_STATUS_CHOICE_SHELTER,
-    }
+    GROUP_ALL_ANIMALS_NAME: {
+        'name': GROUP_ALL_ANIMALS_KEY_NAME,
+        'description': GROUP_ALL_ANIMALS_NAME_DESCR,
+    },
+    ANIMAL_LOCATION_STATUS_HOME: {
+        'name': ANIMAL_LOCATION_STATUS_CHOICE_HOME,
+        'description': ANIMAL_LOCATION_STATUS_HOME_DESСR,
+    },
+    ANIMAL_LOCATION_STATUS_SHELTER: {
+        'name': ANIMAL_LOCATION_STATUS_CHOICE_SHELTER,
+        'description': ANIMAL_LOCATION_STATUS_SHELTER_DESСR,
+    },
+    ANIMAL_LOCATION_STATUS_DEAD: {
+        'name': ANIMAL_LOCATION_STATUS_CHOICE_DEAD,
+        'description': ANIMAL_LOCATION_STATUS_DEAD_DESСR,
+    },
+}
+PRIVATE_GROUP = (
+    ANIMAL_LOCATION_STATUS_DEAD,
+)
 
 
 def get_group(group_id, show_permission=False):
     if group_id in GROUP_MAPPING:
-        return Group.get_group_with_certain_settings(name=GROUP_MAPPING[group_id], group_id=group_id)
+        if show_permission is False and group_id in PRIVATE_GROUP:
+            raise Http404('Нет прав для просмотра данной группы.')
+        return Group.get_group_with_certain_settings(name=GROUP_MAPPING[group_id]['name'],
+                                                     group_id=group_id,
+                                                     description=GROUP_MAPPING[group_id]['description'])
     else:
         query = dict()
         query['id'] = group_id
@@ -62,9 +84,11 @@ def get_groups_from_query(query, show_permission=False):
 
 def get_base_context(show_permission=False):
     default_group_list = list()
-    default_group_list.append(get_group(GROUP_ALL_ANIMALS_NAME))
-    default_group_list.append(get_group(ANIMAL_LOCATION_STATUS_SHELTER))
-    default_group_list.append(get_group(ANIMAL_LOCATION_STATUS_HOME))
+    default_group_list.append(get_group(group_id=GROUP_ALL_ANIMALS_NAME, show_permission=show_permission))
+    default_group_list.append(get_group(group_id=ANIMAL_LOCATION_STATUS_SHELTER, show_permission=show_permission))
+    default_group_list.append(get_group(group_id=ANIMAL_LOCATION_STATUS_HOME, show_permission=show_permission))
+    if show_permission:
+        default_group_list.append(get_group(group_id=ANIMAL_LOCATION_STATUS_DEAD, show_permission=show_permission))
 
     user_group_list = get_groups_from_query(dict(), show_permission=show_permission)
     context = {
@@ -203,7 +227,6 @@ class FilterView(FormView):
         context = FormView.get_context_data(self, **kwargs)
         context.update(get_base_context(show_permission=show_permission))
         if self.request.GET.dict():
-
             query = self.request.GET
             context['animals'] = get_animals_from_query(query.dict(), show_permission=show_permission)
             # context['filter_string'] = get_filter_string(query) TODO: edit

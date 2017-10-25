@@ -1,11 +1,18 @@
+{# for base #}
+    {# group_list #}
+    {# helpful_info_list #}
+    {# header_class #}
+
 {#group_list#}
-<h2><a href="{% url 'group_list' %}">Группы</a></h2>
-{% for group in group_list %}
-    <li>
-        <a href="{% url 'group_detail' pk=group.id  %}">{{ group.name }}</a>
-    </li>
-{% empty %}
-    <p>Групп еще нет</p>
-{% endfor %}
 
-
+{% extends "cats/base.html" %}
+{% block base_body %}
+    {% include 'cats/widgets/caption.html' with caption=caption caption_url=caption_url %}
+    {% for group in group_list %}
+        <li>
+            <a href="{% url 'group_detail' pk=group.id  %}">{{ group.name }}</a>
+        </li>
+    {% empty %}
+        <p>Групп еще нет</p>
+    {% endfor %}
+{% endblock base_body %}
