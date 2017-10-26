@@ -193,7 +193,10 @@ class GroupListView(ListView):
 class GroupDetailView(AnimalListView):
 
     def get_queryset(self):
-        return get_animals_from_query() # TODO:  Исправить
+        query = {
+            'group_id': self.kwargs[DJ_PK],
+        }
+        return get_animals_from_query(query=query, show_permission=self.request.user.is_authenticated()) # TODO:  Исправить    
         # return Animal.objects.filter(group_id=self.kwargs[DJ_PK], show=self.request.user.is_authenticated())
 
     def get_context_data(self, **kwargs):
