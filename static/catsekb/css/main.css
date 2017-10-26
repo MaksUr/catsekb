@@ -49,7 +49,7 @@ a:visited {
 	color: #4c3e3e;
 }
 
-a:hover { 
+.top_nav a:hover, .menu a:hover { 
 	border-bottom: 1px #705344 solid;
 }
 
@@ -70,15 +70,22 @@ ul {
 
 
 /* <---------- header BEGIN ----------> */
-header {
-    height: 700px;
+
+.index, .cats {
+	height: 700px;
     position: relative;
-	background: url(../img/header_mid.jpg) center center / cover no-repeat;
 	margin-bottom: 75px;
+}
+.index {
+	background: url(../img/header_index.jpg) center center / cover no-repeat;
+    
+}
+.cats {
+	background: url(../img/header_cats.jpg) center center / cover no-repeat;
 }
 
 .header_layer {
-	background-color: rgba(255, 255, 255, .41);
+	background-color: rgba(255, 255, 255, .55);
     height: 700px;
 }
 
@@ -92,7 +99,7 @@ header {
 
 .menu > li {
 	display: inline-block;
-	padding-left: 30px;
+	padding-left: 25px;
 	position: relative;
 }
 
@@ -103,8 +110,8 @@ header {
 .menu_opening {
 	position: absolute;
 	visibility: hidden;
-	top: 40px;
-	left: 30px;
+	top: 30px;
+	left: 25px;
 	opacity: 0;
     text-align: left;
     transition: all .8s 1s ease-out;
@@ -166,36 +173,36 @@ nav {
 }
 
 .mobile_menu {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .mobile_menu img {
 	height: 30px;
 }
-
 .mobile_list {
 	visibility: hidden;
-	position: absolute;
-    top: -462px;
+    position: absolute;
+    top: 0;
     left: 0;
     width: 100%;
     transition: transform .65s cubic-bezier(0.02, 1.01, 0.58, 1);
     margin: 20px 0 0 0;
-}
-
-.open {
-	transform: translateY(110%);
-	transition: transform .7s cubic-bezier(0.1, 0.68, 0.58, 1);
-	margin: 40px 0;
-}
-
-.mobile_list > li:first-child {
-	margin-top: 0;
+    transform: translateY(-95%);
 }
 
 .mobile_list > li:last-child {
-	margin: 40px 0 0 0;
-	}
+	margin-top: 25px;
+}
+
+.open {
+	transition: transform .7s cubic-bezier(0.1, 0.68, 0.58, 1);
+    margin: 40px 0;
+    transform: translateY(0%);
+}
+
+.mobile_list_1 > li:first-child {
+	margin-top: 0;
+}
 
 .mobile_nav_opened a:hover {
 	border-bottom: none;
@@ -206,7 +213,7 @@ nav {
 	transform: translate(0%);
 }
 
-.mobile_list > li {
+.mobile_list_1 > li {
 	margin-top: 20px;
 }
 
@@ -244,7 +251,7 @@ nav {
 	padding: 0;
 	background-color: rgba(241, 236, 233, .8);
 	top: 40px;
-	left: 20px;
+	left: 15px;
 	border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
 }
@@ -279,7 +286,7 @@ nav {
 	top: -20px;
     left: -50px;
     transform: rotate(59deg);
-    transition: all .7s cubic-bezier(0.22, 0.61, 0.36, 1)
+    transition: all .7s ease;
 }
 
 .cat_a_mouse:hover {
@@ -321,47 +328,63 @@ nav {
 /* <---------- .full BEGIN ----------> */
 
 
-/* <---------- .search_home BEGIN ----------> */
-.search_home img {
+/* <---------- .gallery BEGIN ----------> */
+
+.form_elem:first-child {
+	margin-top: 0;
+}
+.form_elem {
+	display: inline-block;
+	margin: 10px 10px 5px 0;
+}
+
+.form_elem label {
+	margin: 5px 5px 0 0;
+}
+
+.form_elem input, .form_elem select {
+	margin-top: 10px;
+}
+
+input[type="submit"] {
+	margin: 25px 0;
+}
+.gallery img {
     width: 100%;
     max-width: 390px;
     z-index: 1;
     transition: all .65s;
 }
 
-.search_home a {
+.gallery a {
 	display: inline;
 }
 
-.cat:hover img {
-	transform: scale(1.2);
-	position: relative;
+.cat_find  {
+    max-height: 390px;
+    height: 33vh;
+    transition: all .65s ease;
 }
 
-.name_cat {
-	position: absolute;
-    top: 100%;
-    left: -10%;
-    width: 120%;
-    height: 20%;
-    opacity: 0;
-    visibility: hidden;
-    z-index: 11;
-    background-color: rgba(244, 239, 236, .65);
-    transition: all 0.6s;
-    transition-timing-function: cubic-bezier(.22, .61, .36, 1);
+.cat_find_name {
+	opacity: 0;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0px;
+    font-size: 16px;
+    color: #333;
+    transition: opacity .5s;
 }
 
-.name_cat p {
-	padding-top: 8.5%;	
+.cat_find_block:hover .cat_find {
+	background-blend-mode: color;
+    background-color: rgba(255, 255, 255, .55) !important;
 }
-
-
-.cat:hover .name_cat {
+.cat_find_block:hover .cat_find_name {
 	opacity: 1;
-	transform: translateY(-50%);
-	visibility: visible;
 }
+
 /* <---------- .search_home END ----------> */
 
 
@@ -381,6 +404,9 @@ footer {
 	padding-top: 0;
 }
 
+.menu_foot li:nth-child(2) {
+	padding-top: 15px;
+}
 .menu_foot li {
 	padding-top: 10px;
 }

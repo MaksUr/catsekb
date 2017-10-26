@@ -5,11 +5,12 @@
 
 {# shelter_animals #}
 {# shelter_caption #}
+
 {% extends "cats/base.html" %}
 {% load static %}
 {% block base_body %}
     <section>
-		<div class="about">
+		<div class="about font line_height">
 			<img class="cat_a_mouse" src="{% static "catsekb/img/cat_and_mouse.png" %}">
 			<div class="container">
 				<div class="row">
@@ -51,10 +52,9 @@
 		</a>
 		<div class="full_container">
 		</div>
-	</section>
-        {% url 'group_detail' pk='S' as group_url %}
+	</section>        
+	<section class="find">
+		{% url 'group_detail' pk='S' as group_url %}
         {% include 'cats/widgets/gallery.html' with object_list=shelter_animals filter_parameters='?group_id=S' caption=shelter_caption caption_url=group_url %}
-	<section>
-
 	</section>
 {% endblock base_body %}
