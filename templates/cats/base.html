@@ -66,9 +66,12 @@
         <script type="text/javascript" src="{% static "catsekb/js/bootstrap.min.js" %}"></script>
     {% endblock %}
 
-    {# Custom JS #}
+    {# Base JS #}
     {% block body_js %}
         <script type="text/javascript" src="{% static "catsekb/js/script.js" %}"></script>
     {% endblock body_js %}
+
+    {# Custom JS #}
+    {% block custom_js %}{% endblock custom_js %}
 </body>
 </html>

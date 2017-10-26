@@ -1,3 +1,8 @@
+{# for base #}
+    {# group_list #}
+    {# helpful_info_list #}
+    {# header_class #}
+
 {# animals #}
 {# filter_string #}
 
@@ -10,6 +15,6 @@
     </form>
     <a href="{% url 'animal_filter' %}">Сбросить фильтры</a>
     {% if animals %}
-        {% include "cats/widgets/gallery.html" with object_list=animals filter_parameters=filter_string caption="Фильтр" %}
+        {% include "cats/widgets/gallery.html" with object_list=animals filter_parameters=filter_string caption="Результат поиска" %}
     {% endif %}
 {% endblock %}

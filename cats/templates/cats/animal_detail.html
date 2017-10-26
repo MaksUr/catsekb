@@ -1,114 +1,242 @@
-{#object#}
-{#page?#}
+{# for base #}
+    {# group_list #}
+    {# helpful_info_list #}
+    {# header_class #}
 
-{% load verbose_names %}
+{% extends "cats/base.html" %}
+{% load static %}
+{% block base_body %}
+    	<div class="increase_photo">
+		<div class="close_increase">
+			<span>Закрыть</span>
+		</div>
 
-{# Имя #}
-<div style="background-color: blanchedalmond">
-    {% if object.name %}
-        {# Кличка #}
-        <h1>{{ object.name }}</h1>
-        {# Ссылка #}
-        <a href="{{ object.get_instagram_link }}">{{ object.get_hashtag_name }}</a>
-        {# Кличка #}
-        <p>{% get_verbose_field_name object 'name' %}: {{ object.name}}</p>
-    {% else %}
-        <h1>Id: {{ object.id }}</h1>
-    {% endif %}
-</div>
+		<div class="item_photo active">
+			<img src="img/cats_p1.jpg">
+		</div>
+		<div class="item_photo">
+			<img src="img/cats_p2.jpg">
+		</div>
+		<div class="item_photo">
+			<img src="img/cats_p3.jpg">
+		</div>
+		<div class="item_photo">
+			<img src="img/cats_p4.jpg">
+		</div>
+			<img src="../img/prev_photo_v.3.png" class="prev_photo">
+			<img src="../img/next_photo_v.3.png" class="next_photo">
+	</div>
+	<section>
+		<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-md-offset-4">
+						<div class="title mid">
+							<h2>
+								#Тигр_catsekb
+							</h2>
+							<p></p>
+						</div>
+					</div>
+				</div>
 
-{# Статус #}
-{% if object.location_status %}
-    <div style="background-color: hotpink">
-        <p>{% get_verbose_field_name object 'location_status' %}: {{ object.get_location_status}}</p>
-    </div>
-{% endif %}
+				</div>
+				<div class="container">
+					<div class="prev_cat">
+					</div>
+					<div class="row">
+						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 col-lg-6 col-lg-offset-0">
+							<div class="preview_photo">
+								<img src="{% static 'catsekb/img/sad_cat.png' %}" class="img-responsive">
+								<span class="count_photo">1/4</span>
+							</div>
 
-{# Группа #}
-{% if object.group %}
-    <div style="background-color: antiquewhite">
-        <p>{% get_verbose_field_name object 'group' %}: {{ object.group}}</p>
-    </div>
-{% endif %}
+						</div>
+						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 col-lg-6 col-lg-offset-0">
+							<div class="description_cat">
+								<ul>
+									<li>
+										<span class="property_name">Имя: </span>Тигр
+									</li>
+									<li>
+										<span class="property_name">Пол: </span>М
+									</li>
+									<li>
+										<span class="property_name">Возраст: </span>2 года
+									</li>
+									<li>
+										<span class="property_name">Лоток: </span>без промаха
+									</li>
+									<li>
+										<span class="property_name">Кастрирован: </span>нет
+									</li>
+									<li>
+										<span class="property_name">К другим животным: </span>терпим
+									</li>
+									<li>
+										<span class="property_name">В приюте: </span>49 дней
+									</li>
+									<li>
+										<span class="property_name">Характеристика: </span>
+								 		<p class="character">
+											Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+											tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+											quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+											consequat.
+										</p>
+									</li>
+								</ul>
+							</div>
+						</div>
 
-{# Возраст #}
-{% if object.get_age %}
-    <div style="background-color: brown">
-        <p>{% get_verbose_field_name object 'date_of_birth' %}:</p>
-        {% with object.get_age as age %}
-            {% if age.years > 0 %}
-                <p>Лет: {{ age.years }}</p>
-            {% endif %}
-            {% if age.months > 0 %}
-                <p>Месяцев: {{ age.months }}</p>
-            {% endif %}
-            {% if age.days > 0 %}
-                <p>Дней: {{ age.days }}</p>
-            {% endif %}
-        {% endwith %}
-    </div>
-{% endif %}
-
-{# Особенности #}
-{% if object.field_value %}
-    <div style="background-color: aquamarine">
-        {% for field in object.field_value.all %}
-            <p>{{ field.field_type }}: {{ field.value_text }}</p>
-        {% endfor %}
-    </div>
-
-{% endif %}
-
-{# Описание #}
-{% if object.description %}
-    <div style="background-color: aliceblue">
-        <h4>{% get_verbose_field_name object 'description' %}</h4>
-        <p>{{ object.description }}</p>
-    </div>
-{% endif %}
-
-{# Фото #}
-{% for image in object.animalimage_set.all %}
-    <img src="{{ image.image_url }}" width=300 alt="{{ image.alt }}">
-{% empty %}
-    {# TODO: set image #}
-    <img src="https://pbs.twimg.com/profile_images/848471660860538880/pevXVsIp.jpg">
-{% endfor %}
+			    	</div>
+			    <div class="next_cat">
+						</div>
+				</div>
+				<div class="row">
+					<div class="request_container">
+						<div class="request mid font">
+							<a href="#">
+								Оставить заявку
+							</a>
+							<img src="../img/cat_a_letter.png" class="cat_a_letter">
 
 
-{# Время #}
-<div style="background-color: cornsilk">
-    <p>{% get_verbose_field_name object 'created' %}: {{ object.created|date:'SHORT_DATE_FORMAT'}}</p>
-    <p>{% get_verbose_field_name object 'updated' %}: {{ object.updated|date:'SHORT_DATE_FORMAT'}}</p>
-</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</section>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-md-offset-4">
+					<div class="title mid">
+						<h2>
+							Ищут дома
+						</h2>
+						<p></p>
+					</div>
+				</div>
+			</div>
+			<div class="search_home mid">
+				<div class="row slim">
+					<div class="col-md-12 slim">
+						<div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">
+							<div class="cat">
+								<img src="{% static 'catsekb/img/sad_cat.png' %}">
+								<a href="#">
+									<div class="name_cat">
+										<p>
+											#Тигр_catsekb
+										</p>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">
+							<div class="cat">
+								<img src="{% static 'catsekb/img/sad_cat.png' %}">
+								<a href="#">
+									<div class="name_cat">
+										<p>
+											#Лев_catsekb
+										</p>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">
+							<div class="cat">
+								<img src="{% static 'catsekb/img/sad_cat.png' %}">
+								<a href="#">
+									<div class="name_cat">
+										<p>
+											#Лев_catsekb
+										</p>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">
+							<div class="cat">
+								<img src="{% static 'catsekb/img/sad_cat.png' %}">
+								<a href="#">
+									<div class="name_cat">
+										<p>
+											#Лев_catsekb
+										</p>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">
+							<div class="cat">
+								<img src="{% static 'catsekb/img/sad_cat.png' %}">
+								<a href="#">
+									<div class="name_cat">
+										<p>
+											#Лев_catsekb
+										</p>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">
+							<div class="cat">
+								<img src="{% static 'catsekb/img/sad_cat.png' %}">
+								<a href="#">
+									<div class="name_cat">
+										<p>
+											#Лев_catsekb
+										</p>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">
+							<div class="cat">
+								<img src="{% static 'catsekb/img/sad_cat.png' %}">
+								<a href="#">
+									<div class="name_cat">
+										<p>
+											#Лев_catsekb
+										</p>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">
+							<div class="cat">
+								<img src="{% static 'catsekb/img/sad_cat.png' %}">
+								<a href="#">
+									<div class="name_cat">
+										<p>
+											#Лев_catsekb
+										</p>
+									</div>
+								</a>
 
-{# Pagination #}
-{% if page %}
-    {% load app_filters %}
+							</div>
+						</div>
+						<div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">
+							<div class="cat">
+								<img src="{% static 'catsekb/img/sad_cat.png' %}">
+								<a href="#">
+									<div class="name_cat">
+										<p>
+											#Майк_catsekb
+										</p>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock base_body %}
+{% block custom_js %}
+    <script type="text/javascript" src="{% static 'catsekb/js/script_cats.js' %}"></script>
+{% endblock %}
 
-    {# previous #}
-    <p>
-        {% if page.has_previous %}
-            {% with prev_id=page.paginator.object_list|return_item_by_index:page.previous_page_number %}
-                <a href="{% url 'animal_detail' pk=prev_id %}?{{ request.GET.urlencode }}">previous</a>
-            {% endwith %}
-        {% else %}
-            <span>previous</span>
-        {% endif %}
-    </p>
-
-    {# next #}
-    <p>
-        {% if page.has_next %}
-            {% with next_id=page.paginator.object_list|return_item_by_index:page.next_page_number %}
-                <a href="{% url 'animal_detail' pk=next_id %}?{{ request.GET.urlencode }}">next</a>
-            {% endwith %}
-        {% else %}
-            <span>next</span>
-        {% endif %}
-    </p>
-{% endif %}
-
-{% if request.GET %}
-    <a href="{% url 'animal_list' %}?{{ request.GET.urlencode }}">К списку</a>
-{% endif %}

@@ -1,8 +1,9 @@
 {# groups #}
 {# helps #}
 {# class #}
+{# header_style #}
 {% load static %}
-<header{% if class %} class={{ class }}{% endif %}>
+<header{% if header_style %} style="{{ header_style }}"{% elif class %} class={{ class }}{% endif %}>
     <div class="header_layer">
         <div class="container-fluid">
             <div class="row">

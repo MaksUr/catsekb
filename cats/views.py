@@ -141,9 +141,10 @@ class AnimalDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         # TODO: add base_context
-        context = DetailView.get_context_data(self, **kwargs)
-        animal = kwargs[DJ_OBJECT]
         show_permission = self.request.user.is_authenticated()
+        context = DetailView.get_context_data(self, **kwargs)
+        context.update(get_base_context(show_permission=show_permission))
+        animal = kwargs[DJ_OBJECT]
         if show_permission is False and animal.show is False:
             raise Http404("Нет прав для просмотра этой страницы")
         animals_query = self.get_animals_query()
@@ -196,8 +197,7 @@ class GroupDetailView(AnimalListView):
         query = {
             'group_id': self.kwargs[DJ_PK],
         }
-        return get_animals_from_query(query=query, show_permission=self.request.user.is_authenticated()) # TODO:  Исправить    
-        # return Animal.objects.filter(group_id=self.kwargs[DJ_PK], show=self.request.user.is_authenticated())
+        return get_animals_from_query(query=query, show_permission=self.request.user.is_authenticated())
 
     def get_context_data(self, **kwargs):
         group_id = self.kwargs[DJ_PK]
