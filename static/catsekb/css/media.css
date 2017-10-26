@@ -23,6 +23,9 @@
 	.social img:first-child {
 		padding-left: 0;
 	}
+
+	/* Наши коты */
+
 }
 
 /* Устройства с шириной экрана до 767px */
@@ -73,10 +76,32 @@
 
 
 	/* Наши коты */
-}
 
-@media (min-width: 644px) and (max-width: 844px) {
-	.name_cat p {
-    	padding-top: 4.5%;
+	.increase_photo {
+		overflow-y: auto;
+	}
+	div.item_photo {
+	    height: 100%;
+   		width: 100%;
+	    opacity: 1;
+	    background-size: cover !important;
+	    position: relative;
+	    top: 0;
+	    left: 0;
+	    margin: -1px 0 0 0;
+	}
+
+	.prev, .next {
+		display: none;
+	}
+
+	.request {
+		margin-top: 65px;
+	}
+	.search_form {
+		text-align: left;
+	}
+	.form_elem {
+		display: block;
 	}
 }

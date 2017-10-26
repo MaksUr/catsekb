@@ -2,7 +2,7 @@
 {# helps #}
 {# class #}
 {% load static %}
-<header{% if class %} class={{ class }}{% endif %}>
+<header class="{% if class %}{{ class }}{% else %}index{% endif %}">
     <div class="header_layer">
         <div class="container-fluid">
             <div class="row">

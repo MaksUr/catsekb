@@ -23,7 +23,7 @@ h1 {
 	font-size: 28px;
 	font-size: 1.75rem;
 	padding-top: 5px;
-    padding-bottom: 5px; 
+    padding-bottom: 15px; 
 }
 
 h2 {
@@ -32,28 +32,25 @@ h2 {
 }
 
 .mobile_list {
-	font-size: 20px;
+	font-size: 18px;
     font-weight: 600;
 }
 
 .mobile_list_opening {
-	font-size: 15px;
+	font-size: 14px;
 }
 
 .menu {
 	font-weight: 600;
 }
 
-.font, .about_u, p, .description_cat ul, span {
+.font {
 	font-family: 'Open Sans', sans-serif;
-}
-
-.font, p, .description_cat li {
 	font-size: 14px;
 	font-size: 0.875rem;
 }
 
-.about_u, p.character, footer {
+.line_height {
 	text-align: justify;
 	line-height: 20px;
 	line-height: 1.459375rem;
@@ -66,4 +63,9 @@ h2 {
 .copyright {
 	font-size: 14px;
 	font-size: .875rem;
+}
+
+.count_photo {
+	font-size: 12px;
+	font-size: .75rem;
 }
