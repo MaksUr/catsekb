@@ -18,7 +18,7 @@ function ready() {
 		colorAndHeight(true);
 		mobile_menu.addEventListener('click', mobileNav);
 	} else {
-		window.addEventListener('scroll', go.bind(this, 350));
+		window.addEventListener('scroll', go.bind(this, 250));
 	}
 }
 

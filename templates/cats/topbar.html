@@ -7,14 +7,19 @@
 <div class="top_nav">
     <nav class="mid font">
         <ul class="mobile_list">
-            {% include "cats/menu_sections.html" with menu_class='mobile_list_opening' %}
             <li>
-                <div class="mobile_menu mid">
+                <ul class="mobile_list_1">
+                    {% include "cats/menu_sections.html" with menu_class='mobile_list_opening' %}
+                </ul>
+            </li>
+            <li>
+               <div class="mobile_menu mid">
                     <img src="{% static 'catsekb/img/menu.png' %}" alt="">
                 </div>
             </li>
         </ul>
     </nav>
+
     <div class="container">
         <div class="row">
             <div class="hidden-xs col-sm-2 col-md-2 col-lg-2">
