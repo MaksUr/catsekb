@@ -4,7 +4,8 @@
 }
 
 .preview_photo img {
-	cursor: pointer;
+    cursor: pointer;
+	cursor: zoom-in;
 	width: 100%; /* Для IE */
 }
 
@@ -17,7 +18,7 @@
     width: 100%;
     left: 50%;
     margin-left: -50%;
-    z-index: 90;
+    z-index: 111;
     text-align: center;
     transform: translateX(100%);
     background-color: rgba(255, 255, 255, .7);
@@ -28,6 +29,9 @@
 }
 
 .item_photo {
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
 	height: 70%;
     width: 80%;
     position: absolute;
@@ -51,7 +55,7 @@
     position: fixed;
     top: 5vh;
     right: 30px;
-    z-index: 92;
+    z-index: 112;
     text-transform: uppercase;
     cursor: pointer;
     visibility: hidden;
@@ -131,23 +135,30 @@
 	position: relative;
 }
 
-.request a {
+a.but {
     padding-top: 16.5px;
+    background-color: #526aa5;
+}
+
+a.but:hover {
+    background-color: #475f9a;
 }
 .but {
 	color: white !important;
 	text-transform: uppercase;
 	width: 200px;
 	height: 50px;
-	background-color: #526aa5;
 	border: none;
 	border-radius: 3px;
 	position: relative;
     transition: background .6s;
 }
 
-.but:hover {     
-    background-color: #475f9a;
+input.but {
+    background-color: #f74343;
+}
+input.but:hover {     
+    background-color: #ff3535;
 }
 
 .cat_a_letter {

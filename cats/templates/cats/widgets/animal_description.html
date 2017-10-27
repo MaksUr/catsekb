@@ -1,7 +1,7 @@
 {# animal #}
 
 {% load verbose_names %}
-<div class="description_cat">
+<div class="description_cat font">
     <ul>
 
         {# name #}
@@ -47,7 +47,7 @@
         {# sex #}
         {% if animal.sex %}
             <li>
-                <span class="property_name">{% get_verbose_field_name animal 'sex' %}: </span>{{ animal.sex }}
+                <span class="property_name">{% get_verbose_field_name animal 'sex' %}: </span>{{ animal.sex }} {# TODO: Неправильное значение #}
             </li>
         {% endif %}
 
@@ -55,20 +55,20 @@
         {% if animal.get_age %}
             <li>
                 <span class="property_name">
-                    <p>{% get_verbose_field_name animal 'date_of_birth' %}:</p>
+                    {% get_verbose_field_name animal 'date_of_birth' %}: 
                 </span>
                 {% with animal.get_age as age %}
 
                     {% if age.years > 0 %}
-                         <p><span class="property_name">Лет: </span>{{ age.years }}</p>
+                        <span class="property_name">Лет: </span>{{ age.years }}
                     {% endif %}
 
                     {% if age.months > 0 %}
-                        <p><span class="property_name">Месяцев: </span>{{ age.months }}</p>
+                        <span class="property_name">Месяцев: </span>{{ age.months }}
                     {% endif %}
 
                     {% if age.days > 0 %}
-                        <p><span class="property_name">Дней: </span>{{ age.days }}</p>
+                        <span class="property_name">Дней: </span>{{ age.days }}
                     {% endif %}
 
                 {% endwith %}
@@ -78,8 +78,9 @@
         {# characteristics #}
         {% if animal.field_value %}
             <li>
+                <span class="property_name">{% get_verbose_field_name animal 'field_value' %}: </span>
                 {% for field in animal.field_value.all %}
-                    <p><span class="property_name">{{ field.field_type }}: </span>{{ field.value_text }}</p>
+                    <span class="property_name">{{ field.field_type }}: </span>{{ field.value_text }}
                 {% endfor %}
             </li>
         {% endif %}

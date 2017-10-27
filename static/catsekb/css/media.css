@@ -84,7 +84,7 @@
 	    height: 100%;
    		width: 100%;
 	    opacity: 1;
-	    background-size: cover !important;
+	    background-size: cover;
 	    position: relative;
 	    top: 0;
 	    left: 0;

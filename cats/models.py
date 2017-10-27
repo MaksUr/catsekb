@@ -181,9 +181,9 @@ class AnimalImage(Model):
     def image_thumb(self):
         # TODO: edit view
         if self.image_url:
-            return '<img src="%s" height="200" />' % self.image_url
+            return '<img src="%s" style="height: 200px">' % self.image_url
         else:
-            return '<img src="%s" height="200" />' % ''  # TODO: change default image
+            return '<img src="%s" style="height: 200px">' % ''  # TODO: change default image
     image_thumb.allow_tags = True
 
     class Meta:

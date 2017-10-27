@@ -17,9 +17,19 @@ body {
 	overflow-x: hidden;
 }
 
+/* Отступы между секциями */
 section {
-	padding: 75px 0;
+	padding: 60px 0;
 }
+
+header {
+	margin-bottom: 60px;
+}
+
+footer {
+	margin-top: 60px;
+}
+/* --------------------  */
 
 .mid {
 	text-align: center;
@@ -69,12 +79,36 @@ ul {
 }
 
 
+/* <---------- form BEGIN ----------> */
+
+.search {
+	background-color: #f5f5f5;
+}
+.form_elem:first-child {
+	margin-top: 0;
+}
+.form_elem {
+	display: block;
+	margin: 0 15px 20px 0;
+	text-align: left;
+}
+
+.form_elem input, .form_elem select {
+	margin-top: 4px;
+	display: block;
+}
+
+input[type="submit"] {
+	margin: 15px 0 0 0;
+}
+/* <---------- form END ----------> */
+
+
 /* <---------- header BEGIN ----------> */
 
 .index, .cats {
 	height: 700px;
     position: relative;
-	margin-bottom: 75px;
 }
 .index {
 	background: url(../img/header_index.jpg) center center / cover no-repeat;
@@ -85,7 +119,7 @@ ul {
 }
 
 .header_layer {
-	background-color: rgba(255, 255, 255, .55);
+	background-color: rgba(255, 255, 255, .6);
     height: 700px;
 }
 
@@ -97,6 +131,10 @@ ul {
 	margin: 10px 0;
 }
 
+.menu {
+	z-index: 110;
+    position: relative;
+}
 .menu > li {
 	display: inline-block;
 	padding-left: 25px;
@@ -149,7 +187,7 @@ ul {
 
 .top_nav_opened {
     height: 60px;
-    transition: height .6s cubic-bezier(0.1, 0.68, 0.58, 1), transform .6s cubic-bezier(0.1, 0.68, 0.58, 1);
+    transition: height .6s cubic-bezier(.1, .68, .58, 1), transform .6s cubic-bezier(.1, .68, .58, 1);
     opacity: 1;
 }
 
@@ -185,7 +223,7 @@ nav {
     top: 0;
     left: 0;
     width: 100%;
-    transition: transform .65s cubic-bezier(0.02, 1.01, 0.58, 1);
+    transition: transform .65s cubic-bezier(.02, 1.01, .58, 1);
     margin: 20px 0 0 0;
     transform: translateY(-95%);
 }
@@ -195,7 +233,7 @@ nav {
 }
 
 .open {
-	transition: transform .7s cubic-bezier(0.1, 0.68, 0.58, 1);
+	transition: transform .7s cubic-bezier(.1, .68, .58, 1);
     margin: 40px 0;
     transform: translateY(0%);
 }
@@ -330,62 +368,44 @@ nav {
 
 /* <---------- .gallery BEGIN ----------> */
 
-.form_elem:first-child {
-	margin-top: 0;
-}
-.form_elem {
-	display: inline-block;
-	margin: 10px 10px 5px 0;
-}
-
-.form_elem label {
-	margin: 5px 5px 0 0;
-}
-
-.form_elem input, .form_elem select {
-	margin-top: 10px;
-}
-
-input[type="submit"] {
-	margin: 25px 0;
-}
-.gallery img {
-    width: 100%;
-    max-width: 390px;
-    z-index: 1;
-    transition: all .65s;
-}
-
 .gallery a {
 	display: inline;
 }
 
-.cat_find  {
+.cat_find {
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
     max-height: 390px;
     height: 33vh;
-    transition: all .65s ease;
 }
 
-.cat_find_name {
+.cat_find_name, .cat_find_layer {
 	opacity: 0;
     width: 100%;
     position: absolute;
+    left: 0;
+}
+.cat_find_name {
     top: 50%;
-    left: 0px;
-    font-size: 16px;
     color: #333;
-    transition: opacity .5s;
+    z-index: 91;
+    transition: opacity .55s ease;
 }
 
-.cat_find_block:hover .cat_find {
-	background-blend-mode: color;
-    background-color: rgba(255, 255, 255, .55) !important;
+/* Наложение белого слоя (решение для поддержки всех браузеров) */
+.cat_find_layer {
+    height: 100%;
+    top: 0;
+    z-index: 90;
+    background-color: rgba(255, 255, 255, .65); 
+    transition: opacity .45s ease;
 }
-.cat_find_block:hover .cat_find_name {
-	opacity: 1;
+.cat_find_block:hover .cat_find_layer, .cat_find_block:hover .cat_find_name {
+    opacity: 1;
 }
 
-/* <---------- .search_home END ----------> */
+/* <---------- .gallery END ----------> */
 
 
 /* <---------- footer BEGIN ----------> */

@@ -1,10 +1,10 @@
 {# items #}
 
 {% load static %}
-<div class="increase_photo">
-    <div class="close_increase">
-        <span>Закрыть</span>
-    </div>
+<div class="close_increase">
+    <span>Закрыть</span>
+</div>
+<div class="increase_photo">    
     {% for item in items %}
         <div class="item_photo{% if forloop.first %} active{% endif %}">
             <img src="{{ item.image_url }}">
