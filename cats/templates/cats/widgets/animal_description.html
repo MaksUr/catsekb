@@ -1,0 +1,96 @@
+{# animal #}
+
+{% load verbose_names %}
+<div class="description_cat">
+    <ul>
+
+        {# name #}
+        <li>
+            {% if animal.name %}
+                <span class="property_name">{% get_verbose_field_name animal 'name' %}: </span>{{ animal.name }}
+            {% else %}
+                <span class="property_name">{% get_verbose_field_name animal 'id' %}: </span>{{ animal.id }}
+            {% endif %}
+        </li>
+
+        {# tag #}
+        {% if animal.get_hashtag_name %}
+            <li>
+                <span class="property_name">
+                    <a href="{{ object.get_instagram_link }}">{{ object.get_hashtag_name }}</a>
+                </span>
+            </li>
+        {% endif %}
+
+        {# status #}
+        {% if animal.location_status %}
+            <li>
+                <span class="property_name">{% get_verbose_field_name animal 'location_status' %}: </span>{{ animal.location_status }}
+            </li>
+        {% endif %}
+
+        {# group #}
+        {% if animal.group %}
+            <li>
+                <span class="property_name">{% get_verbose_field_name animal 'group' %}: </span>{{ animal.group }}
+            </li>
+        {% endif %}
+
+        {# stay_time TODO: implement stay time #}
+        <li>
+            <span class="property_name">В приюте: </span>49 дней (заглушка)
+            {# Если есть дата пристроя, отображается надпись обрел дом - количество дней #}
+            {# Иначе если есть дата пристроя в приют - отображается надпись в приюте - дней #}
+            {# Иначе ничего не выводить #}
+        </li>
+
+        {# sex #}
+        {% if animal.sex %}
+            <li>
+                <span class="property_name">{% get_verbose_field_name animal 'sex' %}: </span>{{ animal.sex }}
+            </li>
+        {% endif %}
+
+        {# age #}
+        {% if animal.get_age %}
+            <li>
+                <span class="property_name">
+                    <p>{% get_verbose_field_name animal 'date_of_birth' %}:</p>
+                </span>
+                {% with animal.get_age as age %}
+
+                    {% if age.years > 0 %}
+                         <p><span class="property_name">Лет: </span>{{ age.years }}</p>
+                    {% endif %}
+
+                    {% if age.months > 0 %}
+                        <p><span class="property_name">Месяцев: </span>{{ age.months }}</p>
+                    {% endif %}
+
+                    {% if age.days > 0 %}
+                        <p><span class="property_name">Дней: </span>{{ age.days }}</p>
+                    {% endif %}
+
+                {% endwith %}
+            </li>
+        {% endif %}
+
+        {# characteristics #}
+        {% if animal.field_value %}
+            <li>
+                {% for field in animal.field_value.all %}
+                    <p><span class="property_name">{{ field.field_type }}: </span>{{ field.value_text }}</p>
+                {% endfor %}
+            </li>
+        {% endif %}
+
+        {# description #}
+        {% if animal.description %}
+            <li>
+                <span class="property_name">{% get_verbose_field_name animal 'description' %}: </span>
+                {% include 'cats/widgets/description.html' with description=animal.description %}
+            </li>
+        {% endif %}
+    </ul>
+
+</div>

@@ -17,7 +17,7 @@ from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOS
     GROUP_VERBOSE_NAME_PLURAL, GROUP_VERBOSE_NAME, GROUP_KEY_SHOW, GROUP_KEY_DESCRIPTION, GROUP_KEY_NAME, \
     URL_NAME_ANIMAL, DJ_PK, ANIMAL_KEY_DESCRIPTION, \
     ANIMAL_KEY_LOCATION_STATUS, ANIMAL_SEX_CHOICES, ANIMAL_BIRTHDAY_PRECISION_CHOICES, ANIMAL_LOCATION_STATUS_CHOICES, \
-    ANIMAL_KEY_TAG, URL_NAME_GROUP
+    ANIMAL_KEY_TAG, URL_NAME_GROUP, ANIMAL_IMAGE_DEFAULT_URL
 from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
 from cats.validators import group_name_validator
@@ -126,12 +126,29 @@ class Animal(Model):
             template = HASHTAG_TEMPLATE_INSTAGRAM
             return template.format(name=name, suffix=HASHTAG_SUFFIX)
 
-    def get_image(self):
+    def get_main_image(self):
         """
 
         :rtype: AnimalImage
         """
-        return AnimalImage.objects.filter(animal=self).first() # TODO: только избранные фото
+        res = self.get_image(favourite=True)
+        return res
+
+    def get_background_image(self):
+        """
+
+        :rtype: AnimalImage
+        """
+        return self.get_image(background=True)
+
+    def get_image(self, **kwargs):
+        """
+
+        :rtype: AnimalImage
+        """
+        kwargs['animal'] = self
+        res = AnimalImage.objects.filter(**kwargs).first()  # TODO: только избранные фото
+        return res
 
     def get_age(self):
         if self.date_of_birth:
@@ -159,18 +176,22 @@ class AnimalImage(Model):
     width = IntegerField(ANIMAL_IMAGE_KEY_WIDTH, blank=True, default=None, null=True)
     height = IntegerField(ANIMAL_IMAGE_KEY_HEIGHT, blank=True, default=None, null=True)
     favourite = BooleanField("Избранное", default=False)
+    background = BooleanField("Использовать в качестве фона", default=False)
 
     def image_thumb(self):
         # TODO: edit view
         if self.image_url:
             return '<img src="%s" height="200" />' % self.image_url
         else:
-            return '<img src="%s" height="200" />' % r'https://a.d-cd.net/8338b22s-960.jpg'
+            return '<img src="%s" height="200" />' % ANIMAL_IMAGE_DEFAULT_URL  # TODO: change default image
     image_thumb.allow_tags = True
 
     class Meta:
         verbose_name = ANIMAL_IMAGE_VERBOSE_NAME
         verbose_name_plural = ANIMAL_IMAGE_VERBOSE_NAME_PLURAL
+
+    def __str__(self):
+        return 'Фото "{id}": {animal}'.format(id=self.id, animal=self.animal)
 
 
 class Article(Model):  # TODO: create new application

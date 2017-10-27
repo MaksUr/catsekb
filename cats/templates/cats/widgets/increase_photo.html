@@ -1,0 +1,18 @@
+{# items #}
+
+{% load static %}
+<div class="increase_photo">
+    <div class="close_increase">
+        <span>Закрыть</span>
+    </div>
+    {% for item in items %}
+        <div class="item_photo{% if forloop.first %} active{% endif %}">
+            <img src="{{ item.image_url }}">
+        </div>
+    {% empty %}
+        {# TODO: set empty #}
+        <p>Фотографий нет...</p>
+    {% endfor %}
+    <img src="{% static 'catsekb/img/prev_photo.png' %}" class="prev_photo">
+    <img src="{% static 'catsekb/img/next_photo.png' %}" class="next_photo">
+</div>
