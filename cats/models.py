@@ -17,7 +17,7 @@ from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOS
     GROUP_VERBOSE_NAME_PLURAL, GROUP_VERBOSE_NAME, GROUP_KEY_SHOW, GROUP_KEY_DESCRIPTION, GROUP_KEY_NAME, \
     URL_NAME_ANIMAL, DJ_PK, ANIMAL_KEY_DESCRIPTION, \
     ANIMAL_KEY_LOCATION_STATUS, ANIMAL_SEX_CHOICES, ANIMAL_BIRTHDAY_PRECISION_CHOICES, ANIMAL_LOCATION_STATUS_CHOICES, \
-    ANIMAL_KEY_TAG, URL_NAME_GROUP, ANIMAL_IMAGE_DEFAULT_URL
+    ANIMAL_KEY_TAG, URL_NAME_GROUP
 from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
 from cats.validators import group_name_validator
@@ -183,7 +183,7 @@ class AnimalImage(Model):
         if self.image_url:
             return '<img src="%s" height="200" />' % self.image_url
         else:
-            return '<img src="%s" height="200" />' % ANIMAL_IMAGE_DEFAULT_URL  # TODO: change default image
+            return '<img src="%s" height="200" />' % ''  # TODO: change default image
     image_thumb.allow_tags = True
 
     class Meta:

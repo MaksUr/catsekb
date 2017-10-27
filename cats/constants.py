@@ -34,7 +34,6 @@ URL_NAME_ANIMAL_FILTER = 'animal_filter'
 URL_NAME_ANIMALS = 'animal_list'
 URL_NAME_ANIMAL = 'animal_detail'
 
-
 APPLICATION_VERBOSE_NAME = 'Котики'  # Название приложения
 
 
