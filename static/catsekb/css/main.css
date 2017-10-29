@@ -82,13 +82,14 @@ ul {
 /* <---------- form BEGIN ----------> */
 
 .search {
-	background-color: #f5f5f5;
+	background-color: #eefff3;
+	padding: 30px 0;
 }
 .form_elem:first-child {
 	margin-top: 0;
 }
 .form_elem {
-	display: block;
+	display: inline-block;
 	margin: 0 15px 20px 0;
 	text-align: left;
 }
@@ -126,13 +127,15 @@ input[type="submit"] {
 .logo {
 	max-height: 150px;
 }
+/* <---------- header END ----------> */
 
+/* <---------- main_menu BEGIN ----------> */
 .main_menu {
 	margin: 10px 0;
 }
 
 .menu {
-	z-index: 110;
+	z-index: 109;
     position: relative;
 }
 .menu > li {
@@ -169,7 +172,7 @@ input[type="submit"] {
 	visibility: visible;
 	transition: all .8s 0s;
 }
-/* <---------- header END ----------> */
+/* <---------- main_menu END ----------> */
 
 
 /* <---------- .top_nav BEGIN ----------> */
@@ -182,12 +185,13 @@ input[type="submit"] {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 100;
+    z-index: 109;
 }
 
 .top_nav_opened {
     height: 60px;
     transition: height .6s cubic-bezier(.1, .68, .58, 1), transform .6s cubic-bezier(.1, .68, .58, 1);
+    z-index: 110;
     opacity: 1;
 }
 
@@ -317,17 +321,26 @@ nav {
     width: 100%;
 }
 
+.cat_container {
+	width: 100px;
+    height: 150px;
+    position: absolute;
+    top: -20px;
+    left: 0;
+    z-index: 10;
+}
 .cat_a_mouse {
-	height: 100px;
+	height: 90px;
 	position: absolute;
 	visibility: visible;
 	top: -20px;
-    left: -50px;
+    left: -45px;
+    z-index: 9;
     transform: rotate(59deg);
-    transition: all .7s ease;
+    transition: all .5s ease;
 }
 
-.cat_a_mouse:hover {
+.cat_container:hover + .cat_a_mouse {
 	 transform: translateX(-70%) rotate(45deg);
 }
 /* <---------- .about END ----------> */
@@ -387,10 +400,10 @@ nav {
     left: 0;
 }
 .cat_find_name {
-    top: 50%;
+    top: 60%;
     color: #333;
     z-index: 91;
-    transition: opacity .55s ease;
+    transition: opacity .55s ease, top .65s;
 }
 
 /* Наложение белого слоя (решение для поддержки всех браузеров) */
@@ -403,6 +416,10 @@ nav {
 }
 .cat_find_block:hover .cat_find_layer, .cat_find_block:hover .cat_find_name {
     opacity: 1;
+}
+
+.cat_find_block:hover .cat_find_name {
+	top: 50%;
 }
 
 /* <---------- .gallery END ----------> */

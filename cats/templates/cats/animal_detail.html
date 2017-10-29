@@ -20,9 +20,9 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 col-lg-6 col-lg-offset-0">
-                        <div class="preview_photo">
+                        <div class="preview_photo font">
                             {% if object.get_main_image %}
-                                <img src="{{ object.get_main_image }}" class="img-responsive">
+                                <img src="{{ object.get_main_image.image_url }}" class="img-responsive">
                             {% else %}
                                 <img src="{% static 'catsekb/img/sad_cat.png' %}" class="img-responsive">
                             {% endif %}
@@ -36,9 +36,7 @@
                 <div class="next_cat">
                 </div>
             </div>
-            <div class="row">
-                {% include 'cats/widgets/questionnaire_form.html' %}
-            </div>
+            {% include 'cats/widgets/questionnaire_form.html' %}
         </section>
     {% endwith %}
 {% endblock base_body %}

@@ -81,7 +81,6 @@
 		overflow-y: auto;
 	}
 	div.item_photo {
-	    height: 100%;
    		width: 100%;
 	    opacity: 1;
 	    background-size: cover;
@@ -91,7 +90,7 @@
 	    margin: -1px 0 0 0;
 	}
 
-	.prev, .next {
+	.prev_photo, .next_photo {
 		display: none;
 	}
 

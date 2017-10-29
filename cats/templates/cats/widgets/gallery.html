@@ -15,10 +15,10 @@
                         <div class="cat_find_block">
                             
                             <a href="{% url 'animal_detail' pk=animal.id %}{{ filter_parameters }}">
-                                <div class="cat_find" style="background: url({{ animal.get_image.image_url }}) center center / cover no-repeat;">
-                                        
+                                <div class="cat_find" style="background-image: url({{ animal.get_image.image_url }});">
                                 </div>
-                               <div class="cat_find_name mid">{{ animal.get_hashtag_name }}</div>                                
+                                <div class="cat_find_name mid">{{ animal.get_hashtag_name }}</div>
+                                <div class="cat_find_layer"></div>
                             </a>
                         </div>
                     </div>
