@@ -6,15 +6,16 @@ from cats.constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPD
     ANIMAL_AGE_FIELD_SET, DJ_CLASSES_COLLAPSE, DJ_CLASSES, DJ_FIELDS, ANIMAL_MAIN_FIELD_SET, DJ_ID, ANIMAL_SHOW, \
     ANIMAL_DESCRIPTION, GROUP_NAME, GROUP_SHOW, ANIMAL_LOCATION_STATUS, ANIMAL_TAG, ANIMAL_TAG_FIELD_SET, \
     ANIMAL_TAG_DISPLAY, ANIMAL_KEY_TAG_DISPLAY, ANIMAL_IMAGE_IMAGE_URL, ANIMAL_IMAGE_IMAGE_THUMB, \
-    ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND, ANIMAL_IMAGE_ALT, ANIMAL_IMAGE_WIDTH, ANIMAL_IMAGE_HEIGHT
-from cats.forms import AnimalForm
+    ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND, ANIMAL_IMAGE_ALT, ANIMAL_IMAGE_WIDTH, ANIMAL_IMAGE_HEIGHT, \
+    ANIMAL_IMAGE_BACKGROUND_Y_POSITION
+from cats.forms import AnimalForm, AnimalImageForm
 from cats.models import Animal, AnimalImage, FieldValue, Group, FieldType, Article
 
 
 class ImageInline(admin.StackedInline):
     extra = 0
     model = AnimalImage
-    # form = AnimalImageForm
+    form = AnimalImageForm
     classes = [DJ_CLASSES_COLLAPSE]
     # list_display = (...) TODO: implement
     fields = (
@@ -22,6 +23,7 @@ class ImageInline(admin.StackedInline):
         ANIMAL_IMAGE_IMAGE_THUMB,
         ANIMAL_IMAGE_FAVOURITE,
         ANIMAL_IMAGE_BACKGROUND,
+        ANIMAL_IMAGE_BACKGROUND_Y_POSITION,
         ANIMAL_IMAGE_ALT,
         ANIMAL_IMAGE_WIDTH,
         ANIMAL_IMAGE_HEIGHT,

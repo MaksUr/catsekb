@@ -63,8 +63,14 @@ ANIMAL_IMAGE_KEY_FAVOURITE_HELP_TEXT = 'Основное изображение 
 
 # background
 ANIMAL_IMAGE_BACKGROUND = 'background'
-ANIMAL_IMAGE_KEY_BACKGROUND = 'Избранное'
-ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT = 'Фоновое изображение страницы с котом. Рекомендуется использовать горизонтальные фото.'
+ANIMAL_IMAGE_KEY_BACKGROUND = 'Использовать для фона страницы с котом.'
+ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT = 'Фоновое изображение страницы с котом. Рекомендуется использовать предпросмотр.'
+
+# background_y_position
+ANIMAL_IMAGE_BACKGROUND_Y_POSITION = 'background_y_position'
+ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION = 'Настройка позиции фонового изображения по вертикали.'
+ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT = 'Значение от 0 до 100. Используется для корректного отображения вертикальных изображений'
+ANIMAL_IMAGE_VALIDATION_WRONG_Y_POS = '{val} имеет недопустимое значение. Значение должно быть от 0 до 100.'
 
 # image_thumb
 ANIMAL_IMAGE_IMAGE_THUMB = 'image_thumb'

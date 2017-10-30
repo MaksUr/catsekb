@@ -45,7 +45,7 @@
 
     {# Header #}
     {% block header %}
-        {% include 'cats/header.html' with groups=group_list helps=helpful_info_list class=header_class background_url=background_image.image_url %}
+        {% include 'cats/header.html' with groups=group_list helps=helpful_info_list class=header_class background_style=background_image.get_background_style %}
     {% endblock header %}
 
     {# Main content goes here #}

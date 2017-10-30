@@ -17,10 +17,11 @@ from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOS
     GROUP_VERBOSE_NAME_PLURAL, GROUP_VERBOSE_NAME, GROUP_KEY_SHOW, GROUP_KEY_DESCRIPTION, GROUP_KEY_NAME, \
     URL_NAME_ANIMAL, DJ_PK, ANIMAL_KEY_DESCRIPTION, \
     ANIMAL_KEY_LOCATION_STATUS, ANIMAL_SEX_CHOICES, ANIMAL_BIRTHDAY_PRECISION_CHOICES, ANIMAL_LOCATION_STATUS_CHOICES, \
-    ANIMAL_KEY_TAG, URL_NAME_GROUP
+    ANIMAL_KEY_TAG, URL_NAME_GROUP, ANIMAL_IMAGE_KEY_BACKGROUND, ANIMAL_IMAGE_KEY_FAVOURITE, \
+    ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION
 from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
-from cats.validators import group_name_validator
+from cats.validators import group_name_validator, background_y_position_validator
 
 
 class Group(Model):
@@ -131,7 +132,7 @@ class Animal(Model):
 
         :rtype: AnimalImage
         """
-        res = self.get_image(favourite=True)
+        res = self.get_image(favourite=True) or self.get_image()
         return res
 
     def get_background_image(self):
@@ -139,7 +140,7 @@ class Animal(Model):
 
         :rtype: AnimalImage
         """
-        return self.get_image(background=True)
+        return self.get_image(background=True) or self.get_image()
 
     def get_image(self, **kwargs):
         """
@@ -172,11 +173,14 @@ class Animal(Model):
 class AnimalImage(Model):
     animal = ForeignKey(Animal)
     image_url = URLField(ANIMAL_IMAGE_KEY_IMAGE_URL, default=None)
-    alt = CharField(ANIMAL_IMAGE_KEY_ALT, max_length=50)
+    alt = CharField(ANIMAL_IMAGE_KEY_ALT, max_length=50)  # TODO: Решить вопрос c alt
     width = IntegerField(ANIMAL_IMAGE_KEY_WIDTH, blank=True, default=None, null=True)
     height = IntegerField(ANIMAL_IMAGE_KEY_HEIGHT, blank=True, default=None, null=True)
-    favourite = BooleanField("Избранное", default=False)
-    background = BooleanField("Использовать в качестве фона", default=False)
+    favourite = BooleanField(ANIMAL_IMAGE_KEY_FAVOURITE, default=False)
+    background = BooleanField(ANIMAL_IMAGE_KEY_BACKGROUND, default=False)
+    background_y_position = IntegerField(
+        ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION, blank=True, default=50, validators=[background_y_position_validator]
+    )
 
     def image_thumb(self):
         # TODO: edit view
@@ -185,6 +189,12 @@ class AnimalImage(Model):
         else:
             return '<img src="%s" style="height: 200px">' % ''  # TODO: change default image
     image_thumb.allow_tags = True
+
+    def get_background_style(self):
+        res = 'background-image: url({url}); background-size: cover; background-position-y: {ypos}%;'.format(
+            url=self.image_url, ypos=self.background_y_position
+        )
+        return res
 
     class Meta:
         verbose_name = ANIMAL_IMAGE_VERBOSE_NAME
