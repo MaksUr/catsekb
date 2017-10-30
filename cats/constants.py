@@ -115,7 +115,6 @@ ANIMAL_SEX_MALE = "M"  # для хранения в БД
 ANIMAL_SEX_CHOICE_FEMALE = "Женский"
 ANIMAL_SEX_CHOICE_MALE = "Мужской"
 ANIMAL_SEX_CHOICES = (
-        ('', ''),
         (ANIMAL_SEX_MALE, ANIMAL_SEX_CHOICE_MALE),
         (ANIMAL_SEX_FEMALE, ANIMAL_SEX_CHOICE_FEMALE)
     )
@@ -135,7 +134,6 @@ ANIMAL_LOCATION_STATUS_HOME_DESСR = 'Они обрели свой дом'
 ANIMAL_LOCATION_STATUS_SHELTER_DESСR = 'Собаки привязываются к людям, кошки привязываются к дому. Не дай этим котикам привязаться к клетке. Помоги им обрести свой дом.'
 ANIMAL_LOCATION_STATUS_DEAD_DESСR = 'Пусть земля им будет пухом, они всегда останутся в наших сердцах.'
 ANIMAL_LOCATION_STATUS_CHOICES = (
-    ('', ''),
     (ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_CHOICE_HOME),
     (ANIMAL_LOCATION_STATUS_SHELTER, ANIMAL_LOCATION_STATUS_CHOICE_SHELTER),
     (ANIMAL_LOCATION_STATUS_DEAD, ANIMAL_LOCATION_STATUS_CHOICE_DEAD),
@@ -276,7 +274,6 @@ ANIMAL_KEY_ANIMAL_LINK_HELP_TEXT = '_help_text ANIMAL_KEY_ANIMAL_LINK'
 AGE_DISTANCE = 'age_distance'
 AGE_DISTANCE_KEY = 'Возраст'
 AGE_DISTANCE_CHOICES = (
-    ('', ''),
     ('_d5', 'до 5 дней'),
     ('d5_m1', 'от 5 дней до месяца'),
     ('m1_m6', 'от месяца до полугода'),

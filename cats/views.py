@@ -238,9 +238,6 @@ class FilterView(FormView):
 
     def get_initial(self):
         initial = FormView.get_initial(self)
-        initial['sex'] = ''
-        initial['age_distance'] = ''
-        initial['location_status'] = ''
         return initial
 
     def get_form_kwargs(self):
