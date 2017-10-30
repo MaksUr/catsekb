@@ -67,12 +67,12 @@
     {% endif %}
 
     {# characteristics #}
-    {% if animal.field_value %}
+    {% if animal.field_value.all %}
         <li>
             <span class="property_name">{% get_verbose_field_name animal 'field_value' %}: </span>
             <ul class="characteristics">
                     {% for field in animal.field_value.all %}
-                        <li>- {{ field.field_type }}: {{ field.value_text }}</li>
+                        <li>{{ field.field_type }}: {{ field.value_text }}</li>
                     {% endfor %}
             </ul>
             
@@ -86,8 +86,8 @@
             {% include 'cats/widgets/group_description.html' with description=animal.description %}
         </li>
     {% endif %}
-    {# tag #}
-        {% if animal.get_hashtag_name %}
-            <a href="{{ object.get_instagram_link }}">{{ object.get_hashtag_name }}</a>
-        {% endif %}
 </ul>
+{# tag #}
+    {% if animal.get_hashtag_name %}
+        <a href="{{ object.get_instagram_link }}" class="font">{{ object.get_hashtag_name }} </a>
+    {% endif %}
