@@ -55,7 +55,7 @@
 .close_increase {
     position: fixed;
     top: 5vh;
-    right: 30px;
+    right: 40px;
     z-index: 116;
     text-transform: uppercase;
     cursor: pointer;
@@ -101,10 +101,20 @@
 }
 
 .description_cat {
-	margin-top: 25px;
+	margin: 30px 0;
+    line-height: 16px;
 }
 
-.description_cat li {
+.description_cat a {
+    padding: 0;
+    border: none;
+    color: #7676ff;
+}
+
+.description_cat a:hover {
+    color: #5656ff;
+}
+.description_cat > li {
 	margin-bottom: 10px;
 }
 
@@ -112,18 +122,22 @@
 	margin-top: 20px;
 }
 
-.description_cat p {
-	margin: 10px 0 25px 0;
+.character {
+	margin: 5px 0 0 0;
 }
 .property_name {
 	color: #a3b1db;
+}
+
+.characteristics {
+    margin: 5px 0 0 30px;
 }
 
 .request_container {
 	overflow-y: hidden;
 }
 .request {
-	margin-top: 80px;
+	margin-top: 10vh;
 	position: relative;
     margin-bottom: -1px;
 }
@@ -148,10 +162,10 @@ a.but:hover {
 }
 
 input.but {
-    background-color: #f74343;
+    background-color: #d49e83;
 }
 input.but:hover {     
-    background-color: #ff3535;
+    background-color: #d49e83;
 }
 
 .cat_a_letter {

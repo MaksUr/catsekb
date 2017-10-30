@@ -19,7 +19,7 @@ body {
 
 /* Отступы между секциями */
 section {
-	padding: 60px 0;
+	padding: 70px 0;
 }
 
 header {
@@ -82,8 +82,8 @@ ul {
 /* <---------- form BEGIN ----------> */
 
 .search {
-	background-color: #eefff3;
-	padding: 30px 0;
+	background-color: #fff;
+	padding: 0 0 30px 0;
 }
 .form_elem:first-child {
 	margin-top: 0;
@@ -333,7 +333,7 @@ nav {
 	height: 90px;
 	position: absolute;
 	visibility: visible;
-	top: -20px;
+	top: -5px;
     left: -45px;
     z-index: 9;
     transform: rotate(59deg);

@@ -87,14 +87,15 @@
 	    position: relative;
 	    top: 0;
 	    left: 0;
-	    margin: -1px 0 0 0;
+	    margin: 0;
+	    height: 100%;
 	}
 
 	.prev_photo, .next_photo {
 		display: none;
 	}
 
-	.request {
+	div.request {
 		margin-top: 65px;
 	}
 	.search_form {
