@@ -1,19 +1,12 @@
 /* <---------- head BEGIN ----------> */
-.index, .cats {
-	height: 700px;
-    position: relative;
-}
-.index {
-	background: url(../img/header_index.jpg) center center / cover no-repeat;
-    
-}
-.cats {
-	background: url(../img/header_cats.jpg) center center / cover no-repeat;
+header {
+	background-size: cover;
+    background-position: center 70%;
 }
 
 .header_layer {
 	background-color: rgba(255, 255, 255, .6);
-    height: 700px;
+    height: 80vh;
 }
 
 .logo {
