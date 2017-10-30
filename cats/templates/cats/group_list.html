@@ -16,3 +16,9 @@
         <p>Групп еще нет</p>
     {% endfor %}
 {% endblock base_body %}
+
+{% block header %}
+    {% with 'cats' as header_class %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock header %}

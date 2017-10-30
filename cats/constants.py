@@ -56,6 +56,21 @@ ANIMAL_IMAGE_IMAGE_URL = 'image_url'
 ANIMAL_IMAGE_KEY_IMAGE_URL = 'URL изображения'
 ANIMAL_IMAGE_KEY_WIDTH_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_WIDTH'
 
+# favourite TODO: грамматическая ошибка
+ANIMAL_IMAGE_FAVOURITE = 'favourite'
+ANIMAL_IMAGE_KEY_FAVOURITE = 'Избранное'
+ANIMAL_IMAGE_KEY_FAVOURITE_HELP_TEXT = 'Основное изображение страницы с котом.'
+
+# background
+ANIMAL_IMAGE_BACKGROUND = 'background'
+ANIMAL_IMAGE_KEY_BACKGROUND = 'Избранное'
+ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT = 'Фоновое изображение страницы с котом. Рекомендуется использовать горизонтальные фото.'
+
+# image_thumb
+ANIMAL_IMAGE_IMAGE_THUMB = 'image_thumb'
+ANIMAL_IMAGE_KEY_IMAGE_THUMB = 'Фото'
+ANIMAL_IMAGE_KEY_IMAGE_THUMB_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_IMAGE_THUMB'
+
 # alt
 ANIMAL_IMAGE_ALT = 'alt'
 ANIMAL_IMAGE_KEY_ALT = 'Подпись к фото'

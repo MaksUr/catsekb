@@ -5,7 +5,8 @@ from cats.constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPD
     ANIMAL_FIELD_VALUE, ANIMAL_SEX, ANIMAL_DATE_OF_BIRTH, ANIMAL_DAYS, ANIMAL_MONTHS, ANIMAL_YEARS, \
     ANIMAL_AGE_FIELD_SET, DJ_CLASSES_COLLAPSE, DJ_CLASSES, DJ_FIELDS, ANIMAL_MAIN_FIELD_SET, DJ_ID, ANIMAL_SHOW, \
     ANIMAL_DESCRIPTION, GROUP_NAME, GROUP_SHOW, ANIMAL_LOCATION_STATUS, ANIMAL_TAG, ANIMAL_TAG_FIELD_SET, \
-    ANIMAL_TAG_DISPLAY, ANIMAL_KEY_TAG_DISPLAY
+    ANIMAL_TAG_DISPLAY, ANIMAL_KEY_TAG_DISPLAY, ANIMAL_IMAGE_IMAGE_URL, ANIMAL_IMAGE_IMAGE_THUMB, \
+    ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND, ANIMAL_IMAGE_ALT, ANIMAL_IMAGE_WIDTH, ANIMAL_IMAGE_HEIGHT
 from cats.forms import AnimalForm
 from cats.models import Animal, AnimalImage, FieldValue, Group, FieldType, Article
 
@@ -13,10 +14,22 @@ from cats.models import Animal, AnimalImage, FieldValue, Group, FieldType, Artic
 class ImageInline(admin.StackedInline):
     extra = 0
     model = AnimalImage
+    # form = AnimalImageForm
     classes = [DJ_CLASSES_COLLAPSE]
     # list_display = (...) TODO: implement
-    fields = ('image_url', 'image_thumb', 'alt', 'width', 'height', 'favourite')
-    readonly_fields = ('alt', 'width', 'height', 'image_thumb')
+    fields = (
+        ANIMAL_IMAGE_IMAGE_URL,
+        ANIMAL_IMAGE_IMAGE_THUMB,
+        ANIMAL_IMAGE_FAVOURITE,
+        ANIMAL_IMAGE_BACKGROUND,
+        ANIMAL_IMAGE_ALT,
+        ANIMAL_IMAGE_WIDTH,
+        ANIMAL_IMAGE_HEIGHT,
+    )
+    readonly_fields = (ANIMAL_IMAGE_ALT,
+                       ANIMAL_IMAGE_WIDTH,
+                       ANIMAL_IMAGE_HEIGHT,
+                       ANIMAL_IMAGE_IMAGE_THUMB)
     # TODO: form = AnimalImageForm
 
 

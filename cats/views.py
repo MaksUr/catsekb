@@ -140,7 +140,6 @@ class AnimalDetailView(DetailView):
     animal_paginate_by = 1
 
     def get_context_data(self, **kwargs):
-        # TODO: add base_context
         show_permission = self.request.user.is_authenticated()
         context = DetailView.get_context_data(self, **kwargs)
         context.update(get_base_context(show_permission=show_permission))
@@ -188,7 +187,10 @@ class GroupListView(ListView):
         group_list = get_groups_from_query(dict(), show_permission=show_permission)
         return group_list
 
-    # TODO: add base_context
+    def get_context_data(self, **kwargs):
+        context = ListView.get_context_data(self, **kwargs)
+        context.update(get_base_context(show_permission=self.request.user.is_authenticated()))
+        return context
 
 
 class GroupDetailView(AnimalListView):

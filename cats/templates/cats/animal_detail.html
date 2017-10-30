@@ -43,7 +43,9 @@
 
 {% block header %}
     {% with 'cats' as header_class %}
-        {{ block.super }}
+        {% with object.get_background_image as background_image %}
+                {{ block.super }}
+        {% endwith %}
     {% endwith %}
 {% endblock header %}
 
