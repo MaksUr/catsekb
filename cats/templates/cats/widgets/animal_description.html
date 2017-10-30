@@ -88,7 +88,7 @@
         {% if animal.description %}
             <li>
                 <span class="property_name">{% get_verbose_field_name animal 'description' %}: </span>
-                {% include 'cats/widgets/description.html' with description=animal.description %}
+                {% include 'cats/widgets/group_description.html' with description=animal.description %}
             </li>
         {% endif %}
     </ul>
