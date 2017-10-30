@@ -1,0 +1,30 @@
+{# page #}
+{# request #}
+{% if page %}
+    {% load app_filters %}
+
+    {# previous #}
+    <p>
+        {% if page.has_previous %}
+            {% with prev_id=page.paginator.object_list|return_item_by_index:page.previous_page_number %}
+                <a href="{% url 'animal_detail' pk=prev_id %}?{{ request.GET.urlencode }}">previous</a>
+            {% endwith %}
+        {% else %}
+            <span>previous</span>
+        {% endif %}
+    </p>
+
+    {# next #}
+    <p>
+        {% if page.has_next %}
+            {% with next_id=page.paginator.object_list|return_item_by_index:page.next_page_number %}
+                <a href="{% url 'animal_detail' pk=next_id %}?{{ request.GET.urlencode }}">next</a>
+            {% endwith %}
+        {% else %}
+            <span>next</span>
+        {% endif %}
+    </p>
+{% endif %}
+{% if request.GET %}
+    <a href="{% url 'animal_list' %}?{{ request.GET.urlencode }}">К списку</a>
+{% endif %}

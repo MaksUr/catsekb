@@ -13,7 +13,9 @@ from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECI
     ANIMAL_KEY_FIELD_VALUE_HELP_TEXT, ANIMAL_KEY_NAME, ANIMAL_KEY_SEX, AGE_DISTANCE_CHOICES, \
     AGE_DISTANCE_KEY, ANIMAL_DESCRIPTION, ANIMAL_KEY_DESCRIPTION_HELP_TEXT, ANIMAL_KEY_LOCATION_STATUS_HELP_TEXT, \
     ANIMAL_LOCATION_STATUS, ANIMAL_SEX_CHOICES, ANIMAL_LOCATION_STATUS_CHOICES, ANIMAL_KEY_LOCATION_STATUS, ANIMAL_TAG, \
-    ANIMAL_KEY_TAG_HELP_TEXT
+    ANIMAL_KEY_TAG_HELP_TEXT, ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND, ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT, \
+    ANIMAL_IMAGE_KEY_FAVOURITE_HELP_TEXT, ANIMAL_IMAGE_BACKGROUND_Y_POSITION, \
+    ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT
 from cats.models import Animal
 from cats.time import get_date_from_age, calc_age_uptoday
 
@@ -154,15 +156,15 @@ class FilterForm(forms.Form):
         required=False,
         label=ANIMAL_KEY_NAME,
     )
-    sex = forms.ChoiceField(widget=forms.Select, required=False, choices=ANIMAL_SEX_CHOICES, label=ANIMAL_KEY_SEX)
+    sex = forms.ChoiceField(widget=forms.RadioSelect, required=False, choices=ANIMAL_SEX_CHOICES, label=ANIMAL_KEY_SEX)
     age_distance = forms.ChoiceField(
         label=AGE_DISTANCE_KEY,
-        widget=forms.Select,
+        widget=forms.RadioSelect,
         required=False,
         choices=AGE_DISTANCE_CHOICES
     )
     location_status = forms.ChoiceField(
-        widget=forms.Select,
+        widget=forms.RadioSelect,
         required=False,
         choices=ANIMAL_LOCATION_STATUS_CHOICES,
         label=ANIMAL_KEY_LOCATION_STATUS
@@ -170,3 +172,16 @@ class FilterForm(forms.Form):
 
 
 # TODO: implement class AnimalImageForm
+class AnimalImageForm(forms.ModelForm):
+    fields = [
+        ANIMAL_IMAGE_FAVOURITE,
+        ANIMAL_IMAGE_BACKGROUND,
+        ANIMAL_IMAGE_BACKGROUND_Y_POSITION,
+        # TODO: Форму добавления фото
+    ]
+
+    help_texts = {
+        ANIMAL_IMAGE_FAVOURITE: ANIMAL_IMAGE_KEY_FAVOURITE_HELP_TEXT,
+        ANIMAL_IMAGE_BACKGROUND: ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT,
+        ANIMAL_IMAGE_BACKGROUND_Y_POSITION: ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT,
+    }

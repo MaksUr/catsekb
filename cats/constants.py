@@ -56,6 +56,27 @@ ANIMAL_IMAGE_IMAGE_URL = 'image_url'
 ANIMAL_IMAGE_KEY_IMAGE_URL = 'URL изображения'
 ANIMAL_IMAGE_KEY_WIDTH_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_WIDTH'
 
+# favourite TODO: грамматическая ошибка
+ANIMAL_IMAGE_FAVOURITE = 'favourite'
+ANIMAL_IMAGE_KEY_FAVOURITE = 'Избранное'
+ANIMAL_IMAGE_KEY_FAVOURITE_HELP_TEXT = 'Основное изображение страницы с котом.'
+
+# background
+ANIMAL_IMAGE_BACKGROUND = 'background'
+ANIMAL_IMAGE_KEY_BACKGROUND = 'Использовать для фона страницы с котом.'
+ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT = 'Фоновое изображение страницы с котом. Рекомендуется использовать предпросмотр.'
+
+# background_y_position
+ANIMAL_IMAGE_BACKGROUND_Y_POSITION = 'background_y_position'
+ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION = 'Настройка позиции фонового изображения по вертикали.'
+ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT = 'Значение от 0 до 100. Используется для корректного отображения вертикальных изображений'
+ANIMAL_IMAGE_VALIDATION_WRONG_Y_POS = '{val} имеет недопустимое значение. Значение должно быть от 0 до 100.'
+
+# image_thumb
+ANIMAL_IMAGE_IMAGE_THUMB = 'image_thumb'
+ANIMAL_IMAGE_KEY_IMAGE_THUMB = 'Фото'
+ANIMAL_IMAGE_KEY_IMAGE_THUMB_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_IMAGE_THUMB'
+
 # alt
 ANIMAL_IMAGE_ALT = 'alt'
 ANIMAL_IMAGE_KEY_ALT = 'Подпись к фото'
@@ -115,7 +136,6 @@ ANIMAL_SEX_MALE = "M"  # для хранения в БД
 ANIMAL_SEX_CHOICE_FEMALE = "Женский"
 ANIMAL_SEX_CHOICE_MALE = "Мужской"
 ANIMAL_SEX_CHOICES = (
-        ('', ''),
         (ANIMAL_SEX_MALE, ANIMAL_SEX_CHOICE_MALE),
         (ANIMAL_SEX_FEMALE, ANIMAL_SEX_CHOICE_FEMALE)
     )
@@ -135,7 +155,6 @@ ANIMAL_LOCATION_STATUS_HOME_DESСR = 'Они обрели свой дом'
 ANIMAL_LOCATION_STATUS_SHELTER_DESСR = 'Собаки привязываются к людям, кошки привязываются к дому. Не дай этим котикам привязаться к клетке. Помоги им обрести свой дом.'
 ANIMAL_LOCATION_STATUS_DEAD_DESСR = 'Пусть земля им будет пухом, они всегда останутся в наших сердцах.'
 ANIMAL_LOCATION_STATUS_CHOICES = (
-    ('', ''),
     (ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_CHOICE_HOME),
     (ANIMAL_LOCATION_STATUS_SHELTER, ANIMAL_LOCATION_STATUS_CHOICE_SHELTER),
     (ANIMAL_LOCATION_STATUS_DEAD, ANIMAL_LOCATION_STATUS_CHOICE_DEAD),
@@ -276,7 +295,6 @@ ANIMAL_KEY_ANIMAL_LINK_HELP_TEXT = '_help_text ANIMAL_KEY_ANIMAL_LINK'
 AGE_DISTANCE = 'age_distance'
 AGE_DISTANCE_KEY = 'Возраст'
 AGE_DISTANCE_CHOICES = (
-    ('', ''),
     ('_d5', 'до 5 дней'),
     ('d5_m1', 'от 5 дней до месяца'),
     ('m1_m6', 'от месяца до полугода'),
