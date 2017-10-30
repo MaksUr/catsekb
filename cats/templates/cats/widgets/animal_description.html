@@ -87,7 +87,8 @@
         </li>
     {% endif %}
 </ul>
+
 {# tag #}
-    {% if animal.get_hashtag_name %}
-        <a href="{{ object.get_instagram_link }}" class="font">{{ object.get_hashtag_name }} </a>
-    {% endif %}
+{% if animal.get_hashtag_name %}
+    <a href="{{ object.get_instagram_link }}" class="font">{{ object.get_hashtag_name }} </a>
+{% endif %}
