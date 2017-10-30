@@ -10,54 +10,17 @@
 
 {% block base_body %}
 
-    {# Django form #}
-    {# TODO: Реализовать динамическое создание формы #}
-{#    <form method="get">#}
-{#        {{ form.as_p }}#}
-{#        <input type="submit" value="Поиск">#}
-{#    </form>#}
-{#    <a href="{% url 'animal_filter' %}">Сбросить фильтры</a>#}
-    {###############}
-
     <section class="search">
         <div class="container">
             <div class="row">
                 <div class="col-xs-8 col-xs-offset-2 col-sm-12 col-sm-offset-0 col-md-12 col-md-offset-0 col-lg-12 col-lg-offset-0">
                     <form method="get" class="search_form font mid">
-                        <div class="form_elem">
-                            <label for="id_name">Имя:</label>
-                            <input id="id_name" name="name" type="text">
-                        </div>
-                        <div class="form_elem">
-                            <label for="id_sex">Пол:</label>
-                            <select id="id_sex" name="sex">
-                                <option value="" selected="selected"></option>
-                                <option value="M">Мужской</option>
-                                <option value="F">Женский</option>
-                            </select>
-                        </div>
-                        <div class="form_elem">
-                            <label for="id_age_distance">Возраст:</label>
-                            <select id="id_age_distance" name="age_distance">
-                                <option value=""></option>
-                                <option value="_d5" selected="selected">до 5 дней</option>
-                                <option value="d5_m1">от 5 дней до месяца</option>
-                                <option value="m1_m6">от месяца до полугода</option>
-                                <option value="m6_y1">от полугода до года</option>
-                                <option value="y1_y2">от года до двух</option>
-                                <option value="y2_y5">от двух до пяти лет</option>
-                                <option value="y5_">более пяти лет</option>
-                            </select>
-                        </div>
-                        <div class="form_elem">
-                        <label for="id_location_status">Статус:</label>
-                            <select id="id_location_status" name="location_status">
-                                <option value=""></option>
-                                <option value="H" selected="selected">Пристроен</option>
-                                <option value="S">Ищут дом</option>
-                                <option value="D">На радуге</option>
-                            </select>
-                        </div>
+                        {% for field in form %}
+                            <div class="form_elem">
+                                {{ field.label_tag }}
+                                {{ field.as_widget }}
+                            </div>
+                        {% endfor %}
                         <p class="font mid">
                             <input type="submit" value="Найти любимца" class="but">
                         </p>
