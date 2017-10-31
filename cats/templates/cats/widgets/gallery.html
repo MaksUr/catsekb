@@ -4,28 +4,30 @@
 {# caption_url #}
 {# capt_descr #}
 
-<div class="container">
-    {% include 'cats/widgets/caption.html' with caption=caption caption_url=caption_url %}
-    {% include 'cats/widgets/group_description.html' with description=capt_descr %}
-    <div class="gallery font">
-        <div class="row">
-            <div class="col-md-12 slim">
-                {% for animal in object_list %}
-                    <div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">
-                        <div class="cat_find_block">
-                            
-                            <a href="{% url 'animal_detail' pk=animal.id %}{{ filter_parameters }}">
-                                <div class="cat_find" style="background-image: url({{ animal.get_image.image_url }});">
-                                </div>
-                                <div class="cat_find_name mid">{{ animal.get_hashtag_name }}</div>
-                                <div class="cat_find_layer"></div>
-                            </a>
+<section id="gallery_cat">
+    <div class="container">
+        {% include 'cats/widgets/caption.html' with caption=caption caption_url=caption_url %}
+        {% include 'cats/widgets/group_description.html' with description=capt_descr %}
+        <div class="gallery font">
+            <div class="row">
+                <div class="col-md-12 slim">
+                    {% for animal in object_list %}
+                        <div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">
+                            <div class="cat_find_block">
+                                
+                                <a href="{% url 'animal_detail' pk=animal.id %}{{ filter_parameters }}">
+                                    <div class="cat_find" style="background-image: url({{ animal.get_image.image_url }});">
+                                    </div>
+                                    <div class="cat_find_name mid">{{ animal.get_hashtag_name }}</div>
+                                    <div class="cat_find_layer"></div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
 
