@@ -1,96 +1,94 @@
 {# animal #}
 
 {% load verbose_names %}
-<div class="description_cat font">
-    <ul>
-        {# name #}
+
+<ul class="description_cat font">
+    {# name #}
+    <li>
+        {% if animal.name %}
+            <span class="property_name">{% get_verbose_field_name animal 'name' %}: </span>{{ animal.name }}
+        {% else %}
+            <span class="property_name">{% get_verbose_field_name animal 'id' %}: </span>{{ animal.id }}
+        {% endif %}
+    </li>
+
+    
+
+    {# status #}
+    {% if animal.location_status %}
         <li>
-            {% if animal.name %}
-                <span class="property_name">{% get_verbose_field_name animal 'name' %}: </span>{{ animal.name }}
-            {% else %}
-                <span class="property_name">{% get_verbose_field_name animal 'id' %}: </span>{{ animal.id }}
-            {% endif %}
+            <span class="property_name">{% get_verbose_field_name animal 'location_status' %}: </span>{{ animal.location_status }}
         </li>
+    {% endif %}
 
-        {# tag #}
-        {% if animal.get_hashtag_name %}
-            <li>
-                <span class="property_name">
-                    <a href="{{ object.get_instagram_link }}">{{ object.get_hashtag_name }}</a>
-                </span>
-            </li>
-        {% endif %}
-
-        {# status #}
-        {% if animal.location_status %}
-            <li>
-                <span class="property_name">{% get_verbose_field_name animal 'location_status' %}: </span>{{ animal.location_status }}
-            </li>
-        {% endif %}
-
-        {# group #}
-        {% if animal.group %}
-            <li>
-                <span class="property_name">{% get_verbose_field_name animal 'group' %}: </span>{{ animal.group }}
-            </li>
-        {% endif %}
-
-        {# stay_time TODO: implement stay time #}
+    {# group #}
+    {% if animal.group %}
         <li>
-            <span class="property_name">В приюте: </span>49 дней (заглушка)
-            {# Если есть дата пристроя, отображается надпись обрел дом - количество дней #}
-            {# Иначе если есть дата пристроя в приют - отображается надпись в приюте - дней #}
-            {# Иначе ничего не выводить #}
+            <span class="property_name">{% get_verbose_field_name animal 'group' %}: </span>{{ animal.group }}
         </li>
+    {% endif %}
 
-        {# sex #}
-        {% if animal.sex %}
-            <li>
-                <span class="property_name">{% get_verbose_field_name animal 'sex' %}: </span>{{ animal.sex }} {# TODO: Неправильное значение #}
-            </li>
-        {% endif %}
+    {# stay_time TODO: implement stay time #}
+    <li>
+        <span class="property_name">В приюте: </span>49 дней (заглушка)
+        {# Если есть дата пристроя, отображается надпись обрел дом - количество дней #}
+        {# Иначе если есть дата пристроя в приют - отображается надпись в приюте - дней #}
+        {# Иначе ничего не выводить #}
+    </li>
 
-        {# age #}
-        {% if animal.get_age %}
-            <li>
-                <span class="property_name">
-                    {% get_verbose_field_name animal 'date_of_birth' %}: 
-                </span>
-                {% with animal.get_age as age %}
+    {# sex #}
+    {% if animal.sex %}
+        <li>
+            <span class="property_name">{% get_verbose_field_name animal 'sex' %}: </span>{{ animal.sex }} {# TODO: Неправильное значение #}
+        </li>
+    {% endif %}
 
+    {# age #}
+    {% if animal.get_age %}
+        <li>
+            <span class="property_name">
+                <!-- {% get_verbose_field_name animal 'date_of_birth' %}:  -->
+                Возраст:
+            </span> ~
+            {% with animal.get_age as age %}
+                <span>
                     {% if age.years > 0 %}
-                        <span class="property_name">Лет: </span>{{ age.years }}
+                    {{ age.years }} лет 
                     {% endif %}
-
                     {% if age.months > 0 %}
-                        <span class="property_name">Месяцев: </span>{{ age.months }}
+                    {{ age.months }} месяцев
                     {% endif %}
-
                     {% if age.days > 0 %}
-                        <span class="property_name">Дней: </span>{{ age.days }}
+                    {{ age.days }} дней
                     {% endif %}
+                </span>
+            {% endwith %}
+        </li>
+    {% endif %}
 
-                {% endwith %}
-            </li>
-        {% endif %}
+    {# characteristics #}
+    {% if animal.field_value.all %}
+        <li>
+            <span class="property_name">{% get_verbose_field_name animal 'field_value' %}: </span>
+            <ul class="characteristics">
+                    {% for field in animal.field_value.all %}
+                        <li>{{ field.field_type }}: {{ field.value_text }}</li>
+                    {% endfor %}
+            </ul>
+            
+        </li>
+    {% endif %}
 
-        {# characteristics #}
-        {% if animal.field_value %}
-            <li>
-                <span class="property_name">{% get_verbose_field_name animal 'field_value' %}: </span>
-                {% for field in animal.field_value.all %}
-                    <span class="property_name">{{ field.field_type }}: </span>{{ field.value_text }}
-                {% endfor %}
-            </li>
-        {% endif %}
+    {# description #}
+    {% if animal.description %}
+        <li>
+            <span class="property_name">{% get_verbose_field_name animal 'description' %}: </span>
+            {% include 'cats/widgets/group_description.html' with description=animal.description %}
+        </li>
+    {% endif %}
+</ul>
 
-        {# description #}
-        {% if animal.description %}
-            <li>
-                <span class="property_name">{% get_verbose_field_name animal 'description' %}: </span>
-                {% include 'cats/widgets/group_description.html' with description=animal.description %}
-            </li>
-        {% endif %}
-    </ul>
-
-</div>
+{# tag #}
+{% if animal.get_hashtag_name %}
+    <a href="{{ object.get_instagram_link }}" class="font">{{ object.get_hashtag_name }} </a>
+{% endif %}
