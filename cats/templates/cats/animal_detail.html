@@ -9,7 +9,7 @@
 {% extends "cats/base.html" %}
 {% load static %}
 {% block base_body %}
-    {% include 'cats/widgets/pagination.html' with page=page request=request %}
+    {% include 'cats/widgets/animal_pagination.html' with page=page request=request %}
     {% with object.animalimage_set.all as images %}
         {% include 'cats/widgets/increase_photo.html' with items=images %}
         <section>

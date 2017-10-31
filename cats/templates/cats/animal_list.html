@@ -7,8 +7,9 @@
 {# object_list #}
 {# filter_string #}
 {# description #}
+{# page_obj #}
 
 {% extends "cats/base.html" %}
 {% block base_body %}
-    {% include 'cats/widgets/gallery.html' with object_list=object_list filter_parameters=filter_string caption=caption capt_descr=description %}
+    {% include 'cats/widgets/gallery.html' with object_list=object_list filter_parameters=filter_string caption=caption capt_descr=description page_obj=page_obj %}
 {% endblock base_body %}
