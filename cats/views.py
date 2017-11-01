@@ -55,6 +55,7 @@ def get_group(group_id, show_permission=False):
 def get_animals_from_query(query, show_permission=False):
     """
 
+    :rtype: QueryDict
     :type show_permission: bool
     :type query: dict
     """
@@ -153,10 +154,6 @@ class AnimalListView(ListView):
         return context
 
     def get_filter_string(self):
-        """
-
-        :type query: QueryDict
-        """
         query = self.request.GET
         if query:
             return '?' + query.urlencode()
@@ -250,7 +247,7 @@ def index_view(request):
     context = get_base_context(show_permission=show_permission)
     query = {ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_SHELTER}
     # TODO: только с избранными изображениями
-    shelter_animals = get_animals_from_query(query=query, show_permission=show_permission)
+    shelter_animals = get_animals_from_query(query=query, show_permission=show_permission).order_by('?')[:9]
     context['shelter_animals'] = shelter_animals
     context['shelter_caption'] = ANIMAL_LOCATION_STATUS_CHOICE_SHELTER
     return render(request, 'cats/index.html', context)
