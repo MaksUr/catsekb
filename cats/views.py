@@ -96,7 +96,6 @@ def get_base_context(show_permission=False):
     context = {
         'group_list': default_group_list + list(user_group_list),
         'helpful_info_list': Article.objects.all(),
-        # 'header_class': None  TODO: implement different background
     }
     return context
 

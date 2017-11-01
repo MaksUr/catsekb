@@ -1,7 +1,6 @@
 {# for base #}
     {# group_list #}
     {# helpful_info_list #}
-    {# header_class #}
 
 {# object_list #}
 {# filter_string #}
@@ -36,3 +35,9 @@
         {% include "cats/widgets/gallery.html" with object_list=object_list filter_parameters=filter_string caption="Результат поиска" page_obj=page_obj %}
     {% endif %}
 {% endblock %}
+
+{% block header %}
+    {% with "catsekb/img/header_cats.jpg" as background_image_file %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock header %}

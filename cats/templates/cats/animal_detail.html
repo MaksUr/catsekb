@@ -1,7 +1,6 @@
 {# for base #}
     {# group_list #}
     {# helpful_info_list #}
-    {# header_class #}
 
 {# object #}
 {# page? #}
@@ -36,9 +35,9 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0 col-md-12 col-md-offset-0 col-lg-12 col-lg-offset-0">
-                        {% include 'cats/widgets/pagination.html' with page=page request=request %}
+                        {% include 'cats/widgets/animal_pagination.html' with page=page request=request %}
+                    </div>
                 </div>
-            </div>
             </div>
             {% include 'cats/widgets/questionnaire_form.html' %}
         </section>
@@ -46,10 +45,8 @@
 {% endblock base_body %}
 
 {% block header %}
-    {% with 'cats' as header_class %}
-        {% with object.get_background_image as background_image %}
-                {{ block.super }}
-        {% endwith %}
+    {% with object.get_background_image as background_image %}
+        {{ block.super }}
     {% endwith %}
 {% endblock header %}
 
