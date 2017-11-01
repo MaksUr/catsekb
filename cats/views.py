@@ -34,6 +34,7 @@ GROUP_MAPPING = {
 PRIVATE_GROUP = (
     ANIMAL_LOCATION_STATUS_DEAD,
 )
+GALLERY_DEFAULT_ITEMS_COUNT = 9
 
 
 def get_group(group_id, show_permission=False):
@@ -132,7 +133,7 @@ def get_paginator(object_list, per_page, page_number, context):
 # TODO: доступен только админам или из фильтра с контролем параметров
 class AnimalListView(ListView):
     # template animal_list
-    paginate_by = 9
+    paginate_by = GALLERY_DEFAULT_ITEMS_COUNT
     model = Animal
     template_name = 'cats/animal_list.html'
     caption = CAPTION_ANIMAL_LIST_DEFAULT
@@ -247,7 +248,9 @@ def index_view(request):
     context = get_base_context(show_permission=show_permission)
     query = {ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_SHELTER}
     # TODO: только с избранными изображениями
-    shelter_animals = get_animals_from_query(query=query, show_permission=show_permission).order_by('?')[:9]
+    shelter_animals = get_animals_from_query(
+        query=query, show_permission=show_permission
+    ).order_by('?')[:GALLERY_DEFAULT_ITEMS_COUNT]
     context['shelter_animals'] = shelter_animals
     context['shelter_caption'] = ANIMAL_LOCATION_STATUS_CHOICE_SHELTER
     return render(request, 'cats/index.html', context)
@@ -263,7 +266,7 @@ class FilterView(FormView):
         context.update(get_base_context(show_permission=show_permission))
         query = self.request.GET.dict()
         page_number = query.pop('page', None)
-        per_page = query.pop('per_page', 9)
+        per_page = query.pop('per_page', GALLERY_DEFAULT_ITEMS_COUNT)
         if query:
             animals = get_animals_from_query(query, show_permission=show_permission)
             get_paginator(object_list=animals, per_page=per_page, page_number=page_number, context=context)
