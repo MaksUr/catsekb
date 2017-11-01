@@ -2,7 +2,7 @@
 {# request #}
 {% if page %}
     {% load app_filters %}
-    <div class="pagination_cat font">
+    <div class="pagination_cat mid font">
             {# previous #}
             {% if page.has_previous %}
                 {% with prev_id=page.paginator.object_list|return_item_by_index:page.previous_page_number %}
@@ -10,13 +10,9 @@
                 {% endwith %}
             {% endif %}
 
-
-
             {% if request.GET %}
                 <a href="{% url 'animal_list' %}?{{ request.GET.urlencode }}#gallery_cat" class="tag">К списку</a>
             {% endif %}
-
-
 
             {# next #}           
             {% if page.has_next %}
@@ -24,6 +20,5 @@
                     <a href="{% url 'animal_detail' pk=next_id %}?{{ request.GET.urlencode }}#preview_cat" class="tag">Следующий</a>
                 {% endwith %}
             {% endif %}
-
     </div>
 {% endif %}
