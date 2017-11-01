@@ -4,6 +4,7 @@
 {# caption_url #}
 {# capt_descr #}
 {# page_obj #}
+{# show_count #}
 
 <section id="gallery_cat">
     <div class="container">
@@ -13,7 +14,10 @@
             <div class="col-xs-8 col-xs-offset-2 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
                 {% include 'cats/widgets/group_description.html' with description=capt_descr %}
                 {# TODO: Убрать со страницы группы #}
-                <p class="gallery_description mid font">Найдено {{ page_obj.paginator.count }} котиков</p>
+                {% if show_count and page_obj %}
+                    <p class="gallery_description mid font">Найдено {{ page_obj.paginator.count }} котиков</p>
+                {% endif %}
+
             </div>
         </div>
         
@@ -35,41 +39,42 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="row">
-                <div class="nav_gallery mid">
-                    {% if page_obj %}
-                        {# TODO: Не выводить при page_obj. Пагинатор. Каунт <= 1. #}
-                        {% load app_filters %} 
+            {% if page_obj and page_obj.paginator.num_pages > 1 %}
+                <div class="row">
+                    <div class="nav_gallery mid">
 
-                        {#######################}
-                        <!-- <p>Pages: {{ page_obj.paginator.num_pages }}</p> -->
-                        <p>Страница: {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</p>
-                        {#######################}
+                            {# TODO: Не выводить при page_obj. Пагинатор. Каунт <= 1. #}
+                            {% load app_filters %}
 
-                        {# previous #}
-                        <p>
-                            {% if page_obj.has_previous %}
-                                {% with prev_id=page_obj.paginator.object_list|return_item_by_index:page_obj.previous_page_number %}
-                                    <a href="?{{ request.GET|change_page:page_obj.previous_page_number }}#gallery_cat" class="tag">previous</a>
-                                {% endwith %}
-                            {% else %}
-                                <span>previous</span>
-                            {% endif %}
-                        </p>
+                            {#######################}
+                            <!-- <p>Pages: {{ page_obj.paginator.num_pages }}</p> -->
+                            <p>Страница: {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</p>
+                            {#######################}
 
-                        {# next #}
-                        <p>
-                            {% if page_obj.has_next %}
-                                {% with next_id=page_obj.paginator.object_list|return_item_by_index:page_obj.next_page_number %}
-                                    <a href="?{{ request.GET|change_page:page_obj.next_page_number }}#gallery_cat" class="tag">next</a>
-                                {% endwith %}
-                            {% else %}
-                                <span>next</span>
-                            {% endif %}
-                        </p>
-                    {% endif %}
+                            {# previous #}
+                            <p>
+                                {% if page_obj.has_previous %}
+                                    {% with prev_id=page_obj.paginator.object_list|return_item_by_index:page_obj.previous_page_number %}
+                                        <a href="?{{ request.GET|change_page:page_obj.previous_page_number }}#gallery_cat" class="tag">previous</a>
+                                    {% endwith %}
+                                {% else %}
+                                    <span>previous</span>
+                                {% endif %}
+                            </p>
+
+                            {# next #}
+                            <p>
+                                {% if page_obj.has_next %}
+                                    {% with next_id=page_obj.paginator.object_list|return_item_by_index:page_obj.next_page_number %}
+                                        <a href="?{{ request.GET|change_page:page_obj.next_page_number }}#gallery_cat" class="tag">next</a>
+                                    {% endwith %}
+                                {% else %}
+                                    <span>next</span>
+                                {% endif %}
+                            </p>
+                    </div>
                 </div>
-            </div>
+            {% endif %}
         </div>
     </div>
 </section>

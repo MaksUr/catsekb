@@ -32,7 +32,7 @@
 
 
     {% if object_list %}
-        {% include "cats/widgets/gallery.html" with object_list=object_list filter_parameters=filter_string caption="Результат поиска" page_obj=page_obj %}
+        {% include "cats/widgets/gallery.html" with object_list=object_list filter_parameters=filter_string caption="Результат поиска" page_obj=page_obj show_count=True %}
     {% endif %}
 {% endblock %}
 
