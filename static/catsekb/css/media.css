@@ -77,6 +77,10 @@
 
 	/* Наши коты */
 
+	.description_cat {
+		margin-top: 15px;
+	}
+
 	.increase_photo {
 		overflow-y: auto;
 	}
@@ -88,7 +92,7 @@
 	    top: 0;
 	    left: 0;
 	    margin: 0;
-	    height: 50%;
+	    height: 30%;
 	}
 
 	.prev_photo, .next_photo {
@@ -103,5 +107,11 @@
 	}
 	.form_elem {
 		display: block;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+	.description_cat {
+		margin-top: 15px;
 	}
 }

@@ -1,6 +1,7 @@
 {# animal #}
 
 {% load verbose_names %}
+{% load static %}
 
 <ul class="description_cat font">
     {# name #}
@@ -83,12 +84,13 @@
     {% if animal.description %}
         <li>
             <span class="property_name">{% get_verbose_field_name animal 'description' %}: </span>
-            {% include 'cats/widgets/group_description.html' with description=animal.description %}
+            <p class="line_height font">{{ animal.description}}</p>
         </li>
     {% endif %}
 </ul>
 
 {# tag #}
 {% if animal.get_hashtag_name %}
-    <a href="{{ object.get_instagram_link }}" class="font">{{ object.get_hashtag_name }} </a>
+    <a href="{{ object.get_instagram_link }}" class="font tag" target="_blank">{{ object.get_hashtag_name }} </a>
 {% endif %}
+    
