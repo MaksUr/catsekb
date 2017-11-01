@@ -2,12 +2,13 @@
 header {
 	background-size: cover;
     background-position: center 50%;
+    background-repeat: no-repeat;
     /*Под вопросом... background-attachment: fixed;*/
 }
 
 .header_layer {
 	background-color: rgba(255, 255, 255, .64);
-    height: 60vh;
+    height: 700px;
 }
 
 .logo {

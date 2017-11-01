@@ -78,7 +78,7 @@
 	/* Наши коты */
 
 	.description_cat {
-		margin-top: 15px;
+		margin-top: 13px;
 	}
 
 	.increase_photo {
@@ -99,9 +99,6 @@
 		display: none;
 	}
 
-	div.request {
-		margin-top: 65px;
-	}
 	.search_form {
 		text-align: left;
 	}
@@ -112,6 +109,6 @@
 
 @media (min-width: 768px) and (max-width: 992px) {
 	.description_cat {
-		margin-top: 15px;
+		margin-top: 13px;
 	}
 }

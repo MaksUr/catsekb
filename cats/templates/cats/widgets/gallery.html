@@ -6,62 +6,72 @@
 {# page_obj #}
 
 <section id="gallery_cat">
-<div class="container">
-    {% include 'cats/widgets/caption.html' with caption=caption caption_url=caption_url %}
-    {% include 'cats/widgets/group_description.html' with description=capt_descr %}
+    <div class="container">
+        {% include 'cats/widgets/caption.html' with caption=caption caption_url=caption_url %}
 
-    {% if page_obj %}
-        {% load app_filters %}
-
-        {#######################}
-        <p>Pages: {{ page_obj.paginator.num_pages }}</p>
-        <p>Animals: {{ page_obj.paginator.count }}</p>
-        <p>Current page: {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>
-        {#######################}
-
-        {# previous #}
-        <p>
-            {% if page_obj.has_previous %}
-                {% with prev_id=page_obj.paginator.object_list|return_item_by_index:page_obj.previous_page_number %}
-                    <a href="?{{ request.GET|change_page:page_obj.previous_page_number }}">previous</a>
-                {% endwith %}
-            {% else %}
-                <span>previous</span>
-            {% endif %}
-        </p>
-
-        {# next #}
-        <p>
-            {% if page_obj.has_next %}
-                {% with next_id=page_obj.paginator.object_list|return_item_by_index:page_obj.next_page_number %}
-                    <a href="?{{ request.GET|change_page:page_obj.next_page_number }}">next</a>
-                {% endwith %}
-            {% else %}
-                <span>next</span>
-            {% endif %}
-        </p>
-    {% endif %}
-
-    <div class="gallery font">
         <div class="row">
-            <div class="col-md-12 slim">
-                {% for animal in object_list %}
-                    <div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">
-                        <div class="cat_find_block">
-                            
-                            <a href="{% url 'animal_detail' pk=animal.id %}{{ filter_parameters }}">
-                                <div class="cat_find" style="background-image: url({{ animal.get_image.image_url }});">
-                                </div>
-                                <div class="cat_find_name mid">{{ animal.get_hashtag_name }}</div>
-                                <div class="cat_find_layer"></div>
-                            </a>
+            <div class="col-xs-8 col-xs-offset-2 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                {% include 'cats/widgets/group_description.html' with description=capt_descr %}
+                {# TODO: Убрать со страницы группы #}
+                <p class="gallery_description mid font">Найдено {{ page_obj.paginator.count }} котиков</p>
+            </div>
+        </div>
+        
+
+        <div class="gallery font">
+            <div class="row">
+                <div class="col-md-12 slim">
+                    {% for animal in object_list %}
+                        <div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">
+                            <div class="cat_find_block">
+                                <a href="{% url 'animal_detail' pk=animal.id %}{{ filter_parameters }}">
+                                    <div class="cat_find" style="background-image: url({{ animal.get_image.image_url }});">
+                                    </div>
+                                    <div class="cat_find_name mid">{{ animal.get_hashtag_name }}</div>
+                                    <div class="cat_find_layer"></div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="nav_gallery mid">
+                    {% if page_obj %}
+                        {# TODO: Не выводить при page_obj. Пагинатор. Каунт <= 1. #}
+                        {% load app_filters %} 
+
+                        {#######################}
+                        <!-- <p>Pages: {{ page_obj.paginator.num_pages }}</p> -->
+                        <p>Страница: {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</p>
+                        {#######################}
+
+                        {# previous #}
+                        <p>
+                            {% if page_obj.has_previous %}
+                                {% with prev_id=page_obj.paginator.object_list|return_item_by_index:page_obj.previous_page_number %}
+                                    <a href="?{{ request.GET|change_page:page_obj.previous_page_number }}#gallery_cat" class="tag">previous</a>
+                                {% endwith %}
+                            {% else %}
+                                <span>previous</span>
+                            {% endif %}
+                        </p>
+
+                        {# next #}
+                        <p>
+                            {% if page_obj.has_next %}
+                                {% with next_id=page_obj.paginator.object_list|return_item_by_index:page_obj.next_page_number %}
+                                    <a href="?{{ request.GET|change_page:page_obj.next_page_number }}#gallery_cat" class="tag">next</a>
+                                {% endwith %}
+                            {% else %}
+                                <span>next</span>
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
-</div>
 </section>
 
 

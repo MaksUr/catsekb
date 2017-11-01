@@ -3,9 +3,8 @@
 	display: inline;
 }
 
-.group_description {
-    text-align: center;
-    margin-bottom: 20px;
+.gallery_description {
+    margin-bottom: 13px;
 }
 
 .cat_find {
@@ -43,5 +42,9 @@
 
 .cat_find_block:hover .cat_find_name {
 	top: 50%;
+}
+
+.nav_gallery {
+    margin-top: 13px;
 }
 /* <---------- .gallery END ----------> */
