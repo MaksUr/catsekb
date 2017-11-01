@@ -6,18 +6,18 @@
             {# previous #}
             {% if page.has_previous %}
                 {% with prev_id=page.paginator.object_list|return_item_by_index:page.previous_page_number %}
-                    <a href="{% url 'animal_detail' pk=prev_id %}?{{ request.GET.urlencode }}#preview_cat" class="tag">Предыдущий</a>
+                    <a href="{% url 'animal_detail' pk=prev_id %}?{{ request.GET.urlencode }}#anchor_cat" class="tag">Предыдущий</a>
                 {% endwith %}
             {% endif %}
 
             {% if request.GET %}
-                <a href="{% url 'animal_list' %}?{{ request.GET.urlencode }}#gallery_cat" class="tag">К списку</a>
+                <a href="{% url 'animal_list' %}?{{ request.GET.urlencode }}#anchor_cat" class="tag">К списку</a>
             {% endif %}
 
             {# next #}           
             {% if page.has_next %}
                 {% with next_id=page.paginator.object_list|return_item_by_index:page.next_page_number %}
-                    <a href="{% url 'animal_detail' pk=next_id %}?{{ request.GET.urlencode }}#preview_cat" class="tag">Следующий</a>
+                    <a href="{% url 'animal_detail' pk=next_id %}?{{ request.GET.urlencode }}#anchor_cat" class="tag">Следующий</a>
                 {% endwith %}
             {% endif %}
     </div>

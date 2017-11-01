@@ -50,21 +50,19 @@
                         <p>
                             {% if page_obj.has_previous %}
                                 {% with prev_id=page_obj.paginator.object_list|return_item_by_index:page_obj.previous_page_number %}
-                                    <a href="?{{ request.GET|change_page:page_obj.previous_page_number }}#gallery_cat" class="tag">previous</a>
+                                    <a href="?{{ request.GET|change_page:page_obj.previous_page_number }}#anchor_cat" class="tag">Назад</a>
                                 {% endwith %}
                             {% else %}
-                                <span>previous</span>
+
                             {% endif %}
-                        </p>
 
                         {# next #}
-                        <p>
                             {% if page_obj.has_next %}
                                 {% with next_id=page_obj.paginator.object_list|return_item_by_index:page_obj.next_page_number %}
-                                    <a href="?{{ request.GET|change_page:page_obj.next_page_number }}#gallery_cat" class="tag">next</a>
+                                    <a href="?{{ request.GET|change_page:page_obj.next_page_number }}#anchor_cat" class="tag">Далее</a>
                                 {% endwith %}
                             {% else %}
-                                <span>next</span>
+
                             {% endif %}
                         </p>
                     {% endif %}

@@ -10,7 +10,7 @@
 {% block base_body %}
     {% with object.animalimage_set.all as images %}
         {% include 'cats/widgets/increase_photo.html' with items=images %}
-        <section id="preview_cat">
+        <section>
             <div class="container">
                 {% include 'cats/widgets/caption.html' with caption=object.name %}
                 

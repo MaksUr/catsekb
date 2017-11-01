@@ -67,11 +67,12 @@
 .close_increase {
     position: fixed;
     top: 5vh;
-    right: 50px;
+    right: 40px;
     z-index: 116;
     text-transform: uppercase;
     cursor: pointer;
     visibility: hidden;
+    padding: 10px;
 }
 
 .vis {
