@@ -59,6 +59,15 @@ a:visited {
 	color: #4c3e3e;
 }
 
+a.but {
+    padding-top: 16.5px;
+    background-color: #526aa5;
+}
+
+a.but:hover {
+    background-color: #475f9a;
+}
+
 .top_nav a:hover, .menu a:hover { 
 	border-bottom: 1px #705344 solid;
 }
@@ -94,14 +103,23 @@ ul {
 	text-align: left;
 }
 
-.form_elem input, .form_elem select {
-	margin-top: 4px;
-	display: block;
+.form_elem input {
+	margin: 4px 0 0 4px;
+	border-radius: 3px;
+	border: 1px #7ca2ff solid;
 }
 
 input[type="submit"] {
 	margin: 15px 0 0 0;
 }
+
+input.but {
+    background-color: #ff4e4e;
+}
+input.but:hover {     
+    background-color: #f93c3c;
+}
+
 /* <---------- form END ----------> */
 
 

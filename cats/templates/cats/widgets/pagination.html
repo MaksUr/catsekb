@@ -7,7 +7,7 @@
     {% if page.has_previous %}
         {% with prev_id=page.paginator.object_list|return_item_by_index:page.previous_page_number %}
         <div class="col-xs-4 col-md-4 col-sm-4 col-lg-4">
-        <a href="{% url 'animal_detail' pk=prev_id %}?{{ request.GET.urlencode }}#preview_cat" class="tag"><<< Предыдущий
+        <a href="{% url 'animal_detail' pk=prev_id %}?{{ request.GET.urlencode }}#preview_cat" class="tag">Предыдущий
         </a>
         </div>
     {% endwith %}
@@ -23,7 +23,7 @@
     {% if page.has_next %}
         {% with next_id=page.paginator.object_list|return_item_by_index:page.next_page_number %}
         <div class="col-xs-4 col-md-4 col-sm-4 col-lg-4">
-        <a href="{% url 'animal_detail' pk=next_id %}?{{ request.GET.urlencode }}#preview_cat" class="tag">Следующий >>>
+        <a href="{% url 'animal_detail' pk=next_id %}?{{ request.GET.urlencode }}#preview_cat" class="tag">Следующий
         </a>
         </div>
     {% endwith %}

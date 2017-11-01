@@ -12,12 +12,15 @@
     {% with object.animalimage_set.all as images %}
         {% include 'cats/widgets/increase_photo.html' with items=images %}
         <section id="preview_cat">
-            <div class="container">
+            <div class="container-fluid">
                 {% include 'cats/widgets/caption.html' with caption=object.name %}
                 
                
                 <div class="row">
-                    <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 col-lg-6 col-lg-offset-0">
+                    <div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0 col-md-12 col-md-offset-0 col-lg-2 col-lg-offset-0">
+                        {% include 'cats/widgets/pagination.html' with page=page request=request %}
+                     </div>
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 col-lg-4 col-lg-offset-0">
                         <div class="preview_photo font">
                             {% if object.get_main_image %}
                                 <img src="{{ object.get_main_image.image_url }}" class="img-responsive">
@@ -29,14 +32,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 col-lg-6 col-lg-offset-0">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 col-lg-4 col-lg-offset-0">
                         {% include 'cats/widgets/animal_description.html' with animal=object %}
                     </div>
                 </div>
+
+
                 <div class="row">
-                    <div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0 col-md-12 col-md-offset-0 col-lg-12 col-lg-offset-0">
-                        {% include 'cats/widgets/pagination.html' with page=page request=request %}
-                     </div>
+                    
                 </div>
             </div>
             {% include 'cats/widgets/questionnaire_form.html' %}

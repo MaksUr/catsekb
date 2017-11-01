@@ -124,7 +124,7 @@ a.tag {
 }
 
 a.tag:hover {
-    color: #5656ff;
+    color: #4747ff;
 }
 .description_cat > li {
 	margin-bottom: 10px;
@@ -157,14 +157,7 @@ a.tag:hover {
     margin-bottom: -1px;
 }
 
-a.but {
-    padding-top: 16.5px;
-    background-color: #526aa5;
-}
 
-a.but:hover {
-    background-color: #475f9a;
-}
 .but {
 	color: white !important;
 	text-transform: uppercase;
@@ -176,13 +169,6 @@ a.but:hover {
     transition: background .6s;
 }
 
-input.but {
-    background-color: #d49e83;
-}
-input.but:hover {     
-    background-color: #d49e83;
-}
-
 .cat_a_letter {
 	position: absolute;
     top: 0;
@@ -190,10 +176,10 @@ input.but:hover {
     margin-left: -45px;
     height: 90px;
     z-index: -1;
-    transition: all .8s ease;
+    transition: transform .7s ease;
 }
 .request a:hover + .cat_a_letter {
 	transform: translateY(-64%);
     position: absolute; 
-    transition: transform .8s ease;  
+    transition: transform .7s ease;  
 }
