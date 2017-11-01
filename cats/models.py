@@ -115,14 +115,18 @@ class Animal(Model):
         else:
             return str(self.id)
 
+    def get_name_for_tag(self):
+        res = self.tag or self.__str__()
+        return res.replace(' ', '_')
+
     def get_hashtag_name(self):
-        name = self.tag or self.__str__()
+        name = self.get_name_for_tag()
         if name:
             template = HASHTAG_TEMPLATE
             return template.format(name=name, suffix=HASHTAG_SUFFIX)
 
     def get_instagram_link(self):
-        name = self.tag or self.__str__()
+        name = self.get_name_for_tag()
         if name:
             template = HASHTAG_TEMPLATE_INSTAGRAM
             return template.format(name=name, suffix=HASHTAG_SUFFIX)

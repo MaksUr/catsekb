@@ -9,6 +9,7 @@
 {% extends "cats/base.html" %}
 {% load static %}
 {% block base_body %}
+    {% include 'cats/widgets/animal_pagination.html' with page=page request=request %}
     {% with object.animalimage_set.all as images %}
         {% include 'cats/widgets/increase_photo.html' with items=images %}
         <section id="preview_cat">
@@ -36,8 +37,8 @@
                 <div class="row">
                     <div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0 col-md-12 col-md-offset-0 col-lg-12 col-lg-offset-0">
                         {% include 'cats/widgets/pagination.html' with page=page request=request %}
-                     </div>
                 </div>
+            </div>
             </div>
             {% include 'cats/widgets/questionnaire_form.html' %}
         </section>

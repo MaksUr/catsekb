@@ -3,8 +3,9 @@
     {# helpful_info_list #}
     {# header_class #}
 
-{# animals #}
+{# object_list #}
 {# filter_string #}
+{# page_obj? #}
 
 {% extends "cats/base.html" %}
 
@@ -31,7 +32,7 @@
     </section>
 
 
-    {% if animals %}
-        {% include "cats/widgets/gallery.html" with object_list=animals filter_parameters=filter_string caption="Результат поиска" %}
+    {% if object_list %}
+        {% include "cats/widgets/gallery.html" with object_list=object_list filter_parameters=filter_string caption="Результат поиска" page_obj=page_obj %}
     {% endif %}
 {% endblock %}
