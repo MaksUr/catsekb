@@ -99,7 +99,7 @@
 }
 
 .prev_photo:hover, .next_photo:hover {
-    background-color: rgba(241, 236, 233, .8);
+    background-color: rgba(224, 224, 224, .45);
     cursor: pointer;
 }
 
@@ -114,7 +114,7 @@
 }
 
 .description_cat {
-	margin: 10px 0;
+	margin-bottom: 10px;
 }
 
 a.tag {

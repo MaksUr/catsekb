@@ -1,5 +1,5 @@
 from django.core.exceptions import FieldError
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, FormView
@@ -58,6 +58,8 @@ def get_animals_from_query(query, show_permission=False):
     :type show_permission: bool
     :type query: dict
     """
+    if query.get('page') is not None:
+        del query['page']
     if show_permission is False:
         query[ANIMAL_SHOW] = True
     try:
@@ -99,9 +101,38 @@ def get_base_context(show_permission=False):
     return context
 
 
+def get_filter_string(query):
+    """
+
+    :type query: QueryDict
+    """
+    if query:
+        return '?' + query.urlencode()
+    else:
+        return ''
+
+
+def get_page(page, paginator):
+    try:
+        res = paginator.page(page)
+    except PageNotAnInteger:
+        res = paginator.page(1)
+    except EmptyPage:
+        res = paginator.page(paginator.num_pages)
+    return res
+
+
+def get_paginator(object_list, per_page, page_number, context):
+    paginator = Paginator(object_list=object_list, per_page=per_page)
+    page = get_page(page=page_number, paginator=paginator)
+    context['page_obj'] = page
+    context['object_list'] = page.object_list
+
+
 # TODO: доступен только админам или из фильтра с контролем параметров
 class AnimalListView(ListView):
     # template animal_list
+    paginate_by = 9
     model = Animal
     template_name = 'cats/animal_list.html'
     caption = CAPTION_ANIMAL_LIST_DEFAULT
@@ -137,7 +168,6 @@ class AnimalListView(ListView):
 class AnimalDetailView(DetailView):
     # template animal_detail
     model = Animal
-    animal_paginate_by = 1
 
     def get_context_data(self, **kwargs):
         show_permission = self.request.user.is_authenticated()
@@ -210,7 +240,10 @@ class GroupDetailView(AnimalListView):
         return context
 
     def get_filter_string(self):
-        return '?{key}={val}'.format(key=GROUP_ID, val=self.kwargs[DJ_PK])
+        res = '?{key}={val}'.format(key=GROUP_ID, val=self.kwargs[DJ_PK])
+        if self.request.GET:
+            res += '&' + self.request.GET.urlencode()
+        return res
 
 
 def index_view(request):
@@ -232,10 +265,13 @@ class FilterView(FormView):
         show_permission = self.request.user.is_authenticated()
         context = FormView.get_context_data(self, **kwargs)
         context.update(get_base_context(show_permission=show_permission))
-        if self.request.GET.dict():
-            query = self.request.GET
-            context['animals'] = get_animals_from_query(query.dict(), show_permission=show_permission)
-            # context['filter_string'] = get_filter_string(query) TODO: edit
+        query = self.request.GET.dict()
+        page_number = query.pop('page', None)
+        per_page = query.pop('per_page', 9)
+        if query:
+            animals = get_animals_from_query(query, show_permission=show_permission)
+            get_paginator(object_list=animals, per_page=per_page, page_number=page_number, context=context)
+        context['filter_string'] = get_filter_string(query=self.request.GET)
         return context
 
     def get_initial(self):
@@ -246,3 +282,8 @@ class FilterView(FormView):
         res = FormView.get_form_kwargs(self)
         res['data'] = self.request.GET.dict()
         return res
+
+
+
+
+
