@@ -1,7 +1,7 @@
 {# group_list #}
 {# helpful_info_list #}
-{# header_class #}
 {# background_image #}
+{# background_image_file #}
 
 {% load static %}
 <!DOCTYPE html>
@@ -45,7 +45,7 @@
 
     {# Header #}
     {% block header %}
-        {% include 'cats/header.html' with groups=group_list helps=helpful_info_list class=header_class background_style=background_image.get_background_style %}
+        {% include 'cats/header.html' with groups=group_list helps=helpful_info_list background_style=background_image.get_background_style background_image_file=background_image_file %}
     {% endblock header %}
 
     {# Main content goes here #}

@@ -1,7 +1,6 @@
 {# for base #}
     {# group_list #}
     {# helpful_info_list #}
-    {# header_class #}
 
 {#group_list#}
 
@@ -18,7 +17,8 @@
 {% endblock base_body %}
 
 {% block header %}
-    {% with 'cats' as header_class %}
-        {{ block.super }}
+    {# TODO: set background_image #}
+    {% with "catsekb/img/header_small.jpg" as background_image_file %}
+            {{ block.super }}
     {% endwith %}
 {% endblock header %}
