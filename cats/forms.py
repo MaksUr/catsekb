@@ -170,6 +170,24 @@ class FilterForm(forms.Form):
         label=ANIMAL_KEY_LOCATION_STATUS
     )
 
+    def __init__(self, *args, **kwargs):
+        field_types = kwargs.pop('field_types', list())
+        forms.Form.__init__(self, *args, **kwargs)
+        for field_type in field_types:
+            try:
+                t_id = field_type['id']
+                choices = field_type['choices']
+                label = field_type['label']
+            except KeyError:
+                continue
+
+            self.fields[t_id] = forms.ChoiceField(
+                widget=forms.RadioSelect,
+                required=False,
+                choices=choices,
+                label=label
+            )
+
 
 # TODO: implement class AnimalImageForm
 class AnimalImageForm(forms.ModelForm):

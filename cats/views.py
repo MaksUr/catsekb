@@ -11,7 +11,7 @@ from cats.constants import GROUP_ALL_ANIMALS_NAME, ANIMAL_CREATED, ANIMAL_SHOW, 
     ANIMAL_LOCATION_STATUS_SHELTER_DESСR, ANIMAL_LOCATION_STATUS_DEAD, ANIMAL_LOCATION_STATUS_CHOICE_DEAD, \
     ANIMAL_LOCATION_STATUS_DEAD_DESСR
 from cats.forms import FilterForm
-from cats.models import Animal, Group, Article
+from cats.models import Animal, Group, Article, FieldType, FieldValue
 
 GROUP_MAPPING = {
     GROUP_ALL_ANIMALS_NAME: {
@@ -51,6 +51,18 @@ def get_group(group_id, show_permission=False):
             query['show'] = True
         res = get_object_or_404(Group, **query)
         return res
+
+
+def get_fields():
+    res = list()
+    field_types = FieldType.objects.all()
+    for field_type in field_types:
+        item = dict()
+        item['id'] = field_type.id
+        item['label'] = field_type.name
+        item['choices'] = [(i.id, i.value_text) for i in FieldValue.objects.filter(field_type=field_type)]
+        res.append(item)
+    return res
 
 
 def get_animals_from_query(query, show_permission=False):
@@ -250,9 +262,18 @@ def index_view(request):
     # TODO: только с избранными изображениями
     shelter_animals = get_animals_from_query(
         query=query, show_permission=show_permission
-    ).order_by('?')[:GALLERY_DEFAULT_ITEMS_COUNT]
-    context['shelter_animals'] = shelter_animals
+    ).order_by('?')
+    context['shelter_animals'] = shelter_animals[:GALLERY_DEFAULT_ITEMS_COUNT]
     context['shelter_caption'] = ANIMAL_LOCATION_STATUS_CHOICE_SHELTER
+    context['shelter_animals_count'] = shelter_animals.count()
+    context['home_animals_count'] = get_animals_from_query(
+        query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_HOME}, show_permission=True
+    ).count()
+    context['animals_count'] = get_animals_from_query(query=dict(), show_permission=True).count()
+    if show_permission is True:
+        context['dying_animals_count'] = get_animals_from_query(
+            query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_DEAD}, show_permission=True
+        ).count()
     return render(request, 'cats/index.html', context)
 
 
@@ -280,6 +301,7 @@ class FilterView(FormView):
     def get_form_kwargs(self):
         res = FormView.get_form_kwargs(self)
         res['data'] = self.request.GET.dict()
+        res['field_types'] = get_fields()
         return res
 
 
