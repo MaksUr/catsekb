@@ -3,13 +3,11 @@
     position: relative;
 }
 
-.pagination_cat { 
-    margin-top: 35px;
+.pagination { 
+    margin-top: 40px;
+    display: block;
 }
 
-.pagination_cat a {
-    margin: 0 10px;
-}
 .preview_photo a {
 	border: none;
 	padding: 0;
@@ -121,15 +119,6 @@
 	margin-bottom: 15px;
 }
 
-a.tag {
-    padding: 0;
-    border: none;
-    color: #7676ff;
-}
-
-a.tag:hover {
-    color: #4747ff;
-}
 .description_cat > li {
 	margin-bottom: 10px;
 }

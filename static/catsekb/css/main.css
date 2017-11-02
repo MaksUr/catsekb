@@ -68,6 +68,30 @@ a.but:hover {
     background-color: #475f9a;
 }
 
+a.tag {
+	display: inline-block !important;
+    color: #7676ff;
+    padding: 10px 15px;
+    border-radius: 3px;
+    margin-right: 10px;
+    border: 1px #c793ff solid;
+    transition: color .7s, border-color .7s;
+}
+
+a.tag:last-child {
+	margin-right: 0;
+}
+a.tag:hover {
+    color: #4747ff;
+    border-color: #4747ff;
+}
+
+a.hashtag {
+	color: #7676ff;
+}
+a.hashtag:hover {
+	color: #4747ff;
+}
 .top_nav a:hover, .menu a:hover { 
 	border-bottom: 1px #705344 solid;
 }
@@ -98,7 +122,7 @@ ul {
 	margin-top: 0;
 }
 .form_elem {
-	display: inline-block;
+	display: block;
 	margin: 0 15px 20px 0;
 	text-align: left;
 }

@@ -2,7 +2,7 @@
 {# request #}
 {% if page %}
     {% load app_filters %}
-    <div class="pagination_cat mid font">
+    <div class="pagination mid font">
             {# previous #}
             {% if page.has_previous %}
                 {% with prev_id=page.paginator.object_list|return_item_by_index:page.previous_page_number %}
