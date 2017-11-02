@@ -37,37 +37,39 @@
                 </div>
             </div>
             <div class="row">
-                <div class="nav_gallery mid">
-                    {% if page_obj %}
-                        {# TODO: Не выводить при page_obj. Пагинатор. Каунт <= 1. #}
-                        {% load app_filters %} 
+                <div class="col-xs-6 col-xs-offset-3 col-sm-8 col-sm-offset-2">
+                    <div class="nav_gallery mid">
+                        {% if page_obj %}
+                            {# TODO: Не выводить при page_obj. Пагинатор. Каунт <= 1. #}
+                            {% load app_filters %} 
 
-                        {#######################}
-                        <!-- <p>Pages: {{ page_obj.paginator.num_pages }}</p> -->
-                        <span>Страница: {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
-                        {#######################}
+                            {#######################}
+                            <!-- <p>Pages: {{ page_obj.paginator.num_pages }}</p> -->
+                            <span>Страница: {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+                            {#######################}
 
-                        {# previous #}
+                            {# previous #}
 
-                        <p class="pagination_cats mid font">
-                            {% if page_obj.has_previous %}
-                                {% with prev_id=page_obj.paginator.object_list|return_item_by_index:page_obj.previous_page_number %}
-                                    <a href="?{{ request.GET|change_page:page_obj.previous_page_number }}#anchor_cat" class="tag">Назад</a>
-                                {% endwith %}
-                            {% else %}
-                                <span class="tag no_active">Назад</span>
-                            {% endif %}
+                            <p class="pagination_cats mid font">
+                                {% if page_obj.has_previous %}
+                                    {% with prev_id=page_obj.paginator.object_list|return_item_by_index:page_obj.previous_page_number %}
+                                        <a href="?{{ request.GET|change_page:page_obj.previous_page_number }}#anchor_cat" class="tag">Назад</a>
+                                    {% endwith %}
+                                {% else %}
+                                    <span class="tag no_active">Назад</span>
+                                {% endif %}
 
-                        {# next #}
-                            {% if page_obj.has_next %}
-                                {% with next_id=page_obj.paginator.object_list|return_item_by_index:page_obj.next_page_number %}
-                                    <a href="?{{ request.GET|change_page:page_obj.next_page_number }}#anchor_cat" class="tag">Далее</a>
-                                {% endwith %}
-                            {% else %}
-                                <span class="tag no_active">Далее</span>
-                            {% endif %}
-                        </p>
-                    {% endif %}
+                            {# next #}
+                                {% if page_obj.has_next %}
+                                    {% with next_id=page_obj.paginator.object_list|return_item_by_index:page_obj.next_page_number %}
+                                        <a href="?{{ request.GET|change_page:page_obj.next_page_number }}#anchor_cat" class="tag">Далее</a>
+                                    {% endwith %}
+                                {% else %}
+                                    <span class="tag no_active">Далее</span>
+                                {% endif %}
+                            </p>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

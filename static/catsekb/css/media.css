@@ -31,6 +31,10 @@
 /* Устройства с шириной экрана до 767px */
 @media (max-width: 767px) {
 
+	a.tag, .tag.no_active {
+		display: block !important;
+		margin: 0 0 10px 0;
+	}
 	.mobile_list {
 		visibility: visible;
 	}
