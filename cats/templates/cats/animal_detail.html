@@ -33,9 +33,11 @@
                         {% include 'cats/widgets/animal_description.html' with animal=object %}
                     </div>
                 </div>
-                <div class="row">
-                    {% include 'cats/widgets/questionnaire_form.html' %}
-                </div>
+                {% ifequal object.location_status 'S' %}
+                    <div class="row">
+                        {% include 'cats/widgets/questionnaire_form.html' %}
+                    </div>
+                {% endifequal %}
                 <div class="row">
                     <div class="col-xs-6 col-xs-offset-3 col-sm-8 col-sm-offset-2">
                         {% include 'cats/widgets/animal_pagination.html' with page=page request=request type='prev' %}
