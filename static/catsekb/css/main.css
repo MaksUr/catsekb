@@ -80,7 +80,6 @@ a.tag {
     border-radius: 3px;
     margin: 10px 5px 0 5px;
     border: 1px #7676ff solid;
-    transition: color .7s, border-color .7s;
 }
 
 .tag:hover {

@@ -50,7 +50,7 @@
 	.line_container {
 		filter: none;
 		background-image: none;
-		background-color: rgba(227, 235, 236, 0.7);
+		background-color: rgba(241, 236, 233, .8);
 	}
 	.line_container h2 {	
 		text-align: center;

@@ -13,21 +13,15 @@
 {% load static %}
 {% block base_body %}
 
-    {% if shelter_animals_count %}
-        <p>Ищут дом: {{ shelter_animals_count }}</p>
-    {% endif %}
-
-    {% if home_animals_count %}
-        <p>Пристроено: {{ home_animals_count }}</p>
-    {% endif %}
-
-    {% if dying_animals_count %}
+    <!-- {% if dying_animals_count %}
+    {# TODO: Применить статистику #}
         <p>На радуге: {{ dying_animals_count }}</p>
+    }
     {% endif %}
 
     {% if animals_count %}
         <p>Всего животных: {{ animals_count }}</p>
-    {% endif %}
+    {% endif %} -->
 
     <section>
 		<div class="about font line_height">
@@ -65,7 +59,13 @@
 					<div class="row">
 						<div class="col-xs-10 col-xs-offset-1 col-lg-10">
 							<h2>
-								Что делать, если я нашел кота?
+								{% if shelter_animals_count %}
+							        <span>Ищут дом: {{ shelter_animals_count }} /</span>
+							    {% endif %}
+
+							    {% if home_animals_count %}
+							        <span>Пристроено: {{ home_animals_count }}</span>
+							    {% endif %}
 							</h2>
 						</div>
 					</div>
