@@ -4,10 +4,31 @@
 
 {# shelter_animals #}
 {# shelter_caption #}
+{# shelter_animals_count #}
+{# home_animals_count #}
+{# animals_count #}
+{# dying_animals_count #}
 
 {% extends "cats/base.html" %}
 {% load static %}
 {% block base_body %}
+
+    {% if shelter_animals_count %}
+        <p>Ищут дом: {{ shelter_animals_count }}</p>
+    {% endif %}
+
+    {% if home_animals_count %}
+        <p>Пристроено: {{ home_animals_count }}</p>
+    {% endif %}
+
+    {% if dying_animals_count %}
+        <p>На радуге: {{ dying_animals_count }}</p>
+    {% endif %}
+
+    {% if animals_count %}
+        <p>Всего животных: {{ animals_count }}</p>
+    {% endif %}
+
     <section>
 		<div class="about font line_height">
 			<div class="cat_container">

@@ -250,9 +250,18 @@ def index_view(request):
     # TODO: только с избранными изображениями
     shelter_animals = get_animals_from_query(
         query=query, show_permission=show_permission
-    ).order_by('?')[:GALLERY_DEFAULT_ITEMS_COUNT]
-    context['shelter_animals'] = shelter_animals
+    ).order_by('?')
+    context['shelter_animals'] = shelter_animals[:GALLERY_DEFAULT_ITEMS_COUNT]
     context['shelter_caption'] = ANIMAL_LOCATION_STATUS_CHOICE_SHELTER
+    context['shelter_animals_count'] = shelter_animals.count()
+    context['home_animals_count'] = get_animals_from_query(
+        query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_HOME}, show_permission=True
+    ).count()
+    context['animals_count'] = get_animals_from_query(query=dict(), show_permission=True).count()
+    if show_permission is True:
+        context['dying_animals_count'] = get_animals_from_query(
+            query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_DEAD}, show_permission=True
+        ).count()
     return render(request, 'cats/index.html', context)
 
 
