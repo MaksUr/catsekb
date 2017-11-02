@@ -3,7 +3,7 @@
     position: relative;
 }
 
-.pagination { 
+.pagination_cats { 
     margin-top: 40px;
     display: block;
 }
@@ -141,14 +141,13 @@
 .characteristics li {
     margin-bottom: 5px;
 }
-.request_container {
+/*.request_container {
 	overflow-y: hidden;
-}
+}*/
 .request {
-	margin-top: 80px;
-	position: relative;
+	margin-top: 30px;
 }
-.cat_a_letter {
+/*.cat_a_letter {
 	position: absolute;
     top: 0;
     left: 50%;
@@ -156,9 +155,10 @@
     height: 90px;
     z-index: -1;
     transition: transform .7s ease;
-}
-.request a:hover + .cat_a_letter {
+}*/
+/*.request a:hover + .cat_a_letter {
 	transform: translateY(-64%);
     position: absolute; 
     transition: transform .7s ease;  
 }
+*/

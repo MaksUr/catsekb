@@ -49,13 +49,13 @@
 
                         {# previous #}
 
-                        <p class="pagination mid font">
+                        <p class="pagination_cats mid font">
                             {% if page_obj.has_previous %}
                                 {% with prev_id=page_obj.paginator.object_list|return_item_by_index:page_obj.previous_page_number %}
                                     <a href="?{{ request.GET|change_page:page_obj.previous_page_number }}#anchor_cat" class="tag">Назад</a>
                                 {% endwith %}
                             {% else %}
-
+                                <span class="tag no_active">Назад</span>
                             {% endif %}
 
                         {# next #}
@@ -64,7 +64,7 @@
                                     <a href="?{{ request.GET|change_page:page_obj.next_page_number }}#anchor_cat" class="tag">Далее</a>
                                 {% endwith %}
                             {% else %}
-
+                                <span class="tag no_active">Далее</span>
                             {% endif %}
                         </p>
                     {% endif %}

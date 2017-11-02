@@ -2,12 +2,14 @@
 {# request #}
 {% if page %}
     {% load app_filters %}
-    <div class="pagination mid font">
+    <div class="pagination_cats mid font">
             {# previous #}
             {% if page.has_previous %}
                 {% with prev_id=page.paginator.object_list|return_item_by_index:page.previous_page_number %}
                     <a href="{% url 'animal_detail' pk=prev_id %}?{{ request.GET.urlencode }}#anchor_cat" class="tag">Предыдущий</a>
                 {% endwith %}
+            {% else %}
+                    <span class="tag no_active">Предыдущий</span>
             {% endif %}
 
             {% if request.GET %}
@@ -19,6 +21,8 @@
                 {% with next_id=page.paginator.object_list|return_item_by_index:page.next_page_number %}
                     <a href="{% url 'animal_detail' pk=next_id %}?{{ request.GET.urlencode }}#anchor_cat" class="tag">Следующий</a>
                 {% endwith %}
+            {% else %}
+                    <span class="tag no_active">Следующий</span>
             {% endif %}
     </div>
 {% endif %}

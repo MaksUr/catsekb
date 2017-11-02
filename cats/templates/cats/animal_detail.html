@@ -36,8 +36,12 @@
                 <div class="row">
                     {% include 'cats/widgets/questionnaire_form.html' %}
                 </div>
+                <div class="row">
+                    <div class="col-xs-8 col-xs-offset-2">
+                        {% include 'cats/widgets/animal_pagination.html' with page=page request=request type='prev' %}
+                    </div>
+                </div>
             </div>
-            {% include 'cats/widgets/animal_pagination.html' with page=page request=request type='prev' %}
         </section>
            
 
