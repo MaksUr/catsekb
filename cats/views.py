@@ -35,6 +35,9 @@ PRIVATE_GROUP = (
     ANIMAL_LOCATION_STATUS_DEAD,
 )
 GALLERY_DEFAULT_ITEMS_COUNT = 9
+PAGE = 'page'
+PER_PAGE = 'per_page'
+PER_PAGE_ALL = 'all'
 
 
 def get_group(group_id, show_permission=False):
@@ -72,8 +75,10 @@ def get_animals_from_query(query, show_permission=False):
     :type show_permission: bool
     :type query: dict
     """
-    if query.get('page') is not None:
-        del query['page']
+    query.pop(PAGE, None)
+    query.pop(PER_PAGE, None)
+    if query.get(PAGE) is not None:
+        del query[PAGE]
     if show_permission is False:
         query[ANIMAL_SHOW] = True
     try:
@@ -136,6 +141,8 @@ def get_page(page, paginator):
 
 
 def get_paginator(object_list, per_page, page_number, context):
+    if per_page == PER_PAGE_ALL:
+        per_page = len(object_list)
     paginator = Paginator(object_list=object_list, per_page=per_page)
     page = get_page(page=page_number, paginator=paginator)
     context['page_obj'] = page
@@ -172,6 +179,20 @@ class AnimalListView(ListView):
             return '?' + query.urlencode()
         else:
             return ''
+
+    def get_paginator(self, queryset, per_page, orphans=0,
+                      allow_empty_first_page=True, **kwargs):
+        if self.request.GET.dict().get(PER_PAGE) is not None:
+            per_page_param = self.request.GET.dict()[PER_PAGE]
+            if per_page_param == PER_PAGE_ALL:
+                per_page = len(queryset)
+            else:
+                try:
+                    per_page = int(per_page_param)
+                except ValueError:
+                    pass
+        return ListView.get_paginator(self, queryset=queryset, per_page=per_page, orphans=orphans,
+                                      allow_empty_first_page=allow_empty_first_page, **kwargs)
 
 
 class AnimalDetailView(DetailView):
@@ -286,8 +307,8 @@ class FilterView(FormView):
         context = FormView.get_context_data(self, **kwargs)
         context.update(get_base_context(show_permission=show_permission))
         query = self.request.GET.dict()
-        page_number = query.pop('page', None)
-        per_page = query.pop('per_page', GALLERY_DEFAULT_ITEMS_COUNT)
+        page_number = query.pop(PAGE, None)
+        per_page = query.pop(PER_PAGE, GALLERY_DEFAULT_ITEMS_COUNT)
         if query:
             animals = get_animals_from_query(query, show_permission=show_permission)
             get_paginator(object_list=animals, per_page=per_page, page_number=page_number, context=context)

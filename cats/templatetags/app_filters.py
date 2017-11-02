@@ -15,6 +15,7 @@ def change_page(query, page=None):
 
     :type query: QueryDict
     """
+    query = query.copy()
     query._mutable = True
     if page is not None:
         query['page'] = page

@@ -36,34 +36,41 @@
                     {% endfor %}
                 </div>
             </div>
-            {% if page_obj and page_obj.paginator.num_pages > 1 %}
-                <div class="row">
-                    <div class="col-xs-6 col-xs-offset-3 col-sm-8 col-sm-offset-2">
-                        <div class="nav_gallery mid">
-                            {% load app_filters %}
-                            <span>Страница: {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
-                            <p class="pagination_cats mid font">
-                                {# previous #}
-                                {% if page_obj.has_previous %}
-                                    {% with prev_id=page_obj.paginator.object_list|return_item_by_index:page_obj.previous_page_number %}
-                                        <a href="?{{ request.GET|change_page:page_obj.previous_page_number }}#anchor_cat" class="tag">Назад</a>
-                                    {% endwith %}
-                                {% else %}
-                                    <span class="tag no_active">Назад</span>
-                                {% endif %}
-                                {# next #}
-                                {% if page_obj.has_next %}
-                                    {% with next_id=page_obj.paginator.object_list|return_item_by_index:page_obj.next_page_number %}
-                                        <a href="?{{ request.GET|change_page:page_obj.next_page_number }}#anchor_cat" class="tag">Далее</a>
-                                    {% endwith %}
-                                {% else %}
-                                    <span class="tag no_active">Далее</span>
-                                {% endif %}
-                            </p>
+            {% if page_obj %}
+                {% if page_obj.paginator.num_pages > 1 %}
+                    <div class="row">
+                        <div class="col-xs-6 col-xs-offset-3 col-sm-8 col-sm-offset-2">
+                            <div class="nav_gallery mid">
+                                {% load app_filters %}
+                                <span>Страница: {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+                                <p class="pagination_cats mid font">
+
+                                    {# previous #}
+                                    {% if page_obj.has_previous %}
+                                        {% with prev_id=page_obj.paginator.object_list|return_item_by_index:page_obj.previous_page_number %}
+                                            <a href="?{{ request.GET|change_page:page_obj.previous_page_number }}#anchor_cat" class="tag">Назад</a>
+                                        {% endwith %}
+                                    {% else %}
+                                        <span class="tag no_active">Назад</span>
+                                    {% endif %}
+                                    {# next #}
+                                    {% if page_obj.has_next %}
+                                        {% with next_id=page_obj.paginator.object_list|return_item_by_index:page_obj.next_page_number %}
+                                            <a href="?{{ request.GET|change_page:page_obj.next_page_number }}#anchor_cat" class="tag">Далее</a>
+                                        {% endwith %}
+                                    {% else %}
+                                        <span class="tag no_active">Далее</span>
+                                    {% endif %}
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <a href="?per_page=all{% if request.GET.urlencode %}&{{ request.GET.urlencode }}{% endif %}">Показать всех</a>
+                {% else %}
+                    Кнопка показать всех - неактивна!
+                {% endif %}
             {% endif %}
+
         </div>
     </div>
 </section>
