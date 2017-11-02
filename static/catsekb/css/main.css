@@ -60,8 +60,13 @@ a:visited {
 }
 
 a.but {
-    padding-top: 16.5px;
     background-color: #526aa5;
+    color: white;
+	padding: 20px 40px;
+	text-transform: uppercase;
+	border: none;
+	border-radius: 3px;
+    transition: background-color .6s;
 }
 
 a.but:hover {

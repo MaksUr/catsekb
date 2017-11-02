@@ -147,21 +147,7 @@
 .request {
 	margin-top: 80px;
 	position: relative;
-    margin-bottom: -1px;
 }
-
-
-.but {
-	color: white !important;
-	text-transform: uppercase;
-	width: 200px;
-	height: 50px;
-	border: none;
-	border-radius: 3px;
-	position: relative;
-    transition: background .6s;
-}
-
 .cat_a_letter {
 	position: absolute;
     top: 0;
