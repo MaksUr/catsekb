@@ -32,7 +32,7 @@
     text-align: center;
     transform: translateX(100%);
     background-color: rgba(255, 255, 255, .8);
-    transition: transform .75s;
+    transition: transform .68s;
 }
 .increase_photo.vissible {
 	transform: translateX(0%);

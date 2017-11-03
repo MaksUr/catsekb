@@ -63,9 +63,9 @@ a:visited {
     background-color: #526aa5;
     color: white !important;
 	padding: 20px 40px;
-	text-transform: uppercase;
 	border: none;
 	border-radius: 3px;
+	text-transform: uppercase;
     transition: background-color .6s;
 }
 
@@ -75,16 +75,14 @@ a:visited {
 
 a.tag {
 	display: inline-block !important;
-    color: #7676ff;
-    padding: 10px 15px;
-    border-radius: 3px;
-    margin: 10px 5px 0 5px;
-    border: 1px #7676ff solid;
+    color: #333;
+    padding-bottom: 5px;
+    margin: 10px 10px 0 10px;
 }
 
 .tag:hover {
-    color: #4747ff;
-    border-color: #4747ff;
+	color: #a3b1db;
+
 }
 
 .tag:first-child, .tag.no_active:first-child {
@@ -101,7 +99,6 @@ a.tag {
     border-radius: 3px;
     margin: 10px 5px 0 5px;
 	color: #c5c5c5;
-	border: 1px #c5c5c5 solid;
 }
 a.hashtag {
 	color: #7676ff;
