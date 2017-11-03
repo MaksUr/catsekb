@@ -2,6 +2,7 @@
 {# helpful_info_list #}
 {# background_image #}
 {# background_image_file #}
+{# active_menu #}
 
 {% load static %}
 <!DOCTYPE html>
@@ -40,12 +41,12 @@
     {# Top navigation bar #}
 
     {% block topbar %}
-        {% include 'cats/topbar.html' with groups=group_list helps=helpful_info_list %}
+        {% include 'cats/topbar.html' with groups=group_list helps=helpful_info_list active_menu=active_menu %}
     {% endblock topbar %}
 
     {# Header #}
     {% block header %}
-        {% include 'cats/header.html' with groups=group_list helps=helpful_info_list background_style=background_image.get_background_style background_image_file=background_image_file %}
+        {% include 'cats/header.html' with groups=group_list helps=helpful_info_list background_style=background_image.get_background_style background_image_file=background_image_file active_menu=active_menu %}
     {% endblock header %}
 
     {# Main content goes here #}

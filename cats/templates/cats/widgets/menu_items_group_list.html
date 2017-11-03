@@ -1,5 +1,0 @@
-{# group_list #}
-{# ul_class #}
-
-{% url 'animal_filter' as group_list_link %}
-{% include "cats/widgets/items.html" with items=group_list items_class=ul_class link_caption='Наши питомцы' link=group_list_link item_url='group_detail' %}

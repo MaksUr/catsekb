@@ -1,5 +1,6 @@
 {# groups #}
 {# helps #}
+{# active_menu #}
 
 {% load static %}
 
@@ -9,7 +10,7 @@
         <ul class="mobile_list">
             <li>
                 <ul class="mobile_list_1">
-                    {% include "cats/menu_sections.html" with menu_class='mobile_list_opening' %}
+                    {% include "cats/menu_tabs.html" with menu_class='mobile_list_opening' active_menu=active_menu groups=groups helps=helps %}
                 </ul>
             </li>
             <li>
@@ -32,7 +33,7 @@
             <div class="hidden-xs col-sm-10 col-sm-offset-0 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-4">
                 <nav class="font">
                     <ul class="menu top_menu">
-                        {% include "cats/menu_sections.html" with menu_class='menu_opening top_menu' %}
+                        {% include "cats/menu_tabs.html" with menu_class='menu_opening top_menu' active_menu=active_menu groups=groups helps=helps %}
                     </ul>
                 </nav>
             </div>

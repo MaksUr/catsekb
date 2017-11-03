@@ -18,7 +18,7 @@
     {# status #}
     {% if animal.location_status %}
         <li>
-            <span class="property_name">{% get_verbose_field_name animal 'location_status' %}: </span>{{ animal.location_status }}
+            <span class="property_name">{% get_verbose_field_name animal 'location_status' %}: </span>{{ animal.get_location_status }}
         </li>
     {% endif %}
 
@@ -40,7 +40,7 @@
     {# sex #}
     {% if animal.sex %}
         <li>
-            <span class="property_name">{% get_verbose_field_name animal 'sex' %}: </span>{{ animal.sex }} {# TODO: Неправильное значение #}
+            <span class="property_name">{% get_verbose_field_name animal 'sex' %}: </span>{{ animal.get_sex }} {# TODO: Неправильное значение #}
         </li>
     {% endif %}
 

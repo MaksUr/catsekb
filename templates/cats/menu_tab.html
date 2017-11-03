@@ -1,0 +1,20 @@
+{# name #}
+{# active #}
+{# abs_url #}
+{# url_caption #}
+{# menu_items? #}
+{# menu_class? #}
+<li{% ifequal name active %} style="background-color: #2aabd2" {% endifequal %}>
+    <a href="{{ abs_url }}">{{ url_caption }}</a>
+    {% if menu_items %}
+        <ul class="{{ menu_class }}">
+        {% for item in menu_items %}
+            <li>
+                <a href="{{ item.get_absolute_url }}">{{ item }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</li>
+
+
