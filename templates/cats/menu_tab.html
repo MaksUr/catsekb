@@ -4,8 +4,8 @@
 {# url_caption #}
 {# menu_items? #}
 {# menu_class? #}
-<li{% ifequal name active %} style="background-color: #2aabd2" {% endifequal %}>
-    <a href="{{ abs_url }}">{{ url_caption }}</a>
+<li>
+    <a href="{{ abs_url }}"{% ifequal name active %} style="border-bottom: 1px #705344 solid;"{% endifequal %}>{{ url_caption }}</a>
     {% if menu_items %}
         <ul class="{{ menu_class }}">
         {% for item in menu_items %}
