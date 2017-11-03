@@ -9,7 +9,7 @@ from cats.constants import GROUP_ALL_ANIMALS_NAME, ANIMAL_CREATED, ANIMAL_SHOW, 
     ANIMAL_LOCATION_STATUS_CHOICE_HOME, ANIMAL_LOCATION_STATUS_CHOICE_SHELTER, ANIMAL_LOCATION_STATUS, \
     CAPTION_ANIMAL_LIST_DEFAULT, GROUP_ID, GROUP_ALL_ANIMALS_NAME_DESCR, ANIMAL_LOCATION_STATUS_HOME_DESСR, \
     ANIMAL_LOCATION_STATUS_SHELTER_DESСR, ANIMAL_LOCATION_STATUS_DEAD, ANIMAL_LOCATION_STATUS_CHOICE_DEAD, \
-    ANIMAL_LOCATION_STATUS_DEAD_DESСR, INDEX, ANIMALS
+    ANIMAL_LOCATION_STATUS_DEAD_DESСR, INDEX, ANIMALS, FIELD_TYPE_PREFIX
 from cats.forms import FilterForm
 from cats.models import Animal, Group, Article, FieldType, FieldValue
 
@@ -61,7 +61,7 @@ def get_fields():
     field_types = FieldType.objects.all()
     for field_type in field_types:
         item = dict()
-        item['id'] = field_type.id
+        item['id'] = FIELD_TYPE_PREFIX + str(field_type.id)
         item['label'] = field_type.name
         item['choices'] = [(i.id, i.value_text) for i in FieldValue.objects.filter(field_type=field_type)]
         res.append(item)

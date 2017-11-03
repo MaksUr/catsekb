@@ -257,6 +257,7 @@ FIELD_VALUE_KEY_FIELD_TYPE_HELP_TEXT = '_help_text FIELD_VALUE_KEY_VALUE_TEXT'
 # class FieldType
 FIELD_TYPE_VERBOSE_NAME = 'Тип особенности'
 FIELD_TYPE_VERBOSE_NAME_PLURAL = 'Типы особенностей'
+FIELD_TYPE_PREFIX = 'ft_'
 
 # name
 FIELD_TYPE_NAME = 'name'
