@@ -220,9 +220,7 @@ class AnimalDetailView(DetailView):
     @staticmethod
     def get_animal_page(animals, animal):
         if animal not in animals:
-            # TODO: redirect without group
             return None
-            # raise Http404('Анимал отсутствует в данной группе')
         else:
             animals_id_list = [i.id for i in animals]
             try:
@@ -232,7 +230,6 @@ class AnimalDetailView(DetailView):
             paginator = Paginator(animals_id_list, 1)
             page = paginator.page(page_number)
             return page
-
 
 # TODO: Create new app
 def InfoDetailView(request, pk):
@@ -281,7 +278,6 @@ def index_view(request):
     show_permission = request.user.is_authenticated()
     context = get_base_context(show_permission=show_permission, active_menu=INDEX)
     query = {ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_SHELTER}
-    # TODO: только с избранными изображениями
     shelter_animals = get_animals_from_query(
         query=query, show_permission=show_permission
     ).order_by('?')

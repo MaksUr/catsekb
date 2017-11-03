@@ -6,7 +6,7 @@ from django.db.models import Model, CharField, TextField, ForeignKey, DateTimeFi
 from django.urls import reverse
 
 from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOSE_NAME, ANIMAL_IMAGE_KEY_HEIGHT, \
-    ANIMAL_IMAGE_KEY_WIDTH, ANIMAL_IMAGE_KEY_ALT, ANIMAL_IMAGE_KEY_IMAGE_URL, HASHTAG_TEMPLATE_INSTAGRAM, \
+    ANIMAL_IMAGE_KEY_WIDTH, ANIMAL_IMAGE_KEY_IMAGE_URL, HASHTAG_TEMPLATE_INSTAGRAM, \
     HASHTAG_TEMPLATE, HASHTAG_SUFFIX, \
     ANIMAL_VERBOSE_NAME_PLURAL, ANIMAL_VERBOSE_NAME, ANIMAL_KEY_UPDATED, ANIMAL_KEY_CREATED, ANIMAL_KEY_SHOW, \
     ANIMAL_KEY_DATE_OF_BIRTH, ANIMAL_KEY_BIRTHDAY_PRECISION, ANIMAL_KEY_SEX, ANIMAL_KEY_NAME, \
@@ -174,7 +174,6 @@ class Animal(Model):
 class AnimalImage(Model):
     animal = ForeignKey(Animal)
     image_url = URLField(ANIMAL_IMAGE_KEY_IMAGE_URL, default=None)
-    alt = CharField(ANIMAL_IMAGE_KEY_ALT, max_length=50)  # TODO: Решить вопрос c alt
     width = IntegerField(ANIMAL_IMAGE_KEY_WIDTH, blank=True, default=None, null=True)
     height = IntegerField(ANIMAL_IMAGE_KEY_HEIGHT, blank=True, default=None, null=True)
     favourite = BooleanField(ANIMAL_IMAGE_KEY_FAVOURITE, default=False)
@@ -203,6 +202,9 @@ class AnimalImage(Model):
 
     def __str__(self):
         return 'Фото "{id}": {animal}'.format(id=self.id, animal=self.animal)
+
+    def get_alt(self):
+        return self.__str__()
 
 
 class Article(Model):  # TODO: create new application
