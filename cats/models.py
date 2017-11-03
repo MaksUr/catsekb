@@ -26,7 +26,7 @@ from cats.validators import group_name_validator, background_y_position_validato
 
 class Group(Model):
     name = CharField(GROUP_KEY_NAME, max_length=32, unique=True, validators=[group_name_validator])
-    description = TextField(GROUP_KEY_DESCRIPTION, blank=True, default=None)
+    description = TextField(GROUP_KEY_DESCRIPTION, blank=True, default=None, max_length=100)
     show = BooleanField(GROUP_KEY_SHOW, default=True)
 
     class Meta:
