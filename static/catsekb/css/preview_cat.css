@@ -5,6 +5,7 @@
 
 .pagination_cats { 
     margin-top: 40px;
+    background-color: rgba(241, 236, 233, .8);
     display: block;
 }
 
