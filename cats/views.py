@@ -9,7 +9,7 @@ from cats.constants import GROUP_ALL_ANIMALS_NAME, ANIMAL_CREATED, ANIMAL_SHOW, 
     ANIMAL_LOCATION_STATUS_CHOICE_HOME, ANIMAL_LOCATION_STATUS_CHOICE_SHELTER, ANIMAL_LOCATION_STATUS, \
     CAPTION_ANIMAL_LIST_DEFAULT, GROUP_ID, GROUP_ALL_ANIMALS_NAME_DESCR, ANIMAL_LOCATION_STATUS_HOME_DESСR, \
     ANIMAL_LOCATION_STATUS_SHELTER_DESСR, ANIMAL_LOCATION_STATUS_DEAD, ANIMAL_LOCATION_STATUS_CHOICE_DEAD, \
-    ANIMAL_LOCATION_STATUS_DEAD_DESСR
+    ANIMAL_LOCATION_STATUS_DEAD_DESСR, INDEX, ANIMALS
 from cats.forms import FilterForm
 from cats.models import Animal, Group, Article, FieldType, FieldValue
 
@@ -103,7 +103,7 @@ def get_groups_from_query(query, show_permission=False):
     return res
 
 
-def get_base_context(show_permission=False):
+def get_base_context(active_menu, show_permission=False):
     default_group_list = list()
     default_group_list.append(get_group(group_id=GROUP_ALL_ANIMALS_NAME, show_permission=show_permission))
     default_group_list.append(get_group(group_id=ANIMAL_LOCATION_STATUS_SHELTER, show_permission=show_permission))
@@ -115,6 +115,7 @@ def get_base_context(show_permission=False):
     context = {
         'group_list': default_group_list + list(user_group_list),
         'helpful_info_list': Article.objects.all(),
+        'active_menu': active_menu
     }
     return context
 
@@ -167,7 +168,7 @@ class AnimalListView(ListView):
     def get_context_data(self, **kwargs):
         show_permission = self.request.user.is_authenticated()
         context = ListView.get_context_data(self, **kwargs)
-        context.update(get_base_context(show_permission=show_permission))
+        context.update(get_base_context(show_permission=show_permission, active_menu=ANIMALS))
         context['filter_string'] = self.get_filter_string()
         context['caption'] = self.caption
         context['description'] = self.description
@@ -202,7 +203,7 @@ class AnimalDetailView(DetailView):
     def get_context_data(self, **kwargs):
         show_permission = self.request.user.is_authenticated()
         context = DetailView.get_context_data(self, **kwargs)
-        context.update(get_base_context(show_permission=show_permission))
+        context.update(get_base_context(show_permission=show_permission, active_menu=ANIMALS))
         animal = kwargs[DJ_OBJECT]
         if show_permission is False and animal.show is False:
             raise Http404("Нет прав для просмотра этой страницы")
@@ -249,7 +250,7 @@ class GroupListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = ListView.get_context_data(self, **kwargs)
-        context.update(get_base_context(show_permission=self.request.user.is_authenticated()))
+        context.update(get_base_context(show_permission=self.request.user.is_authenticated(), active_menu=ANIMALS))
         return context
 
 
@@ -278,7 +279,7 @@ class GroupDetailView(AnimalListView):
 
 def index_view(request):
     show_permission = request.user.is_authenticated()
-    context = get_base_context(show_permission=show_permission)
+    context = get_base_context(show_permission=show_permission, active_menu=INDEX)
     query = {ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_SHELTER}
     # TODO: только с избранными изображениями
     shelter_animals = get_animals_from_query(
@@ -305,7 +306,7 @@ class FilterView(FormView):
     def get_context_data(self, **kwargs):
         show_permission = self.request.user.is_authenticated()
         context = FormView.get_context_data(self, **kwargs)
-        context.update(get_base_context(show_permission=show_permission))
+        context.update(get_base_context(show_permission=show_permission, active_menu=ANIMALS))
         query = self.request.GET.dict()
         page_number = query.pop(PAGE, None)
         per_page = query.pop(PER_PAGE, GALLERY_DEFAULT_ITEMS_COUNT)

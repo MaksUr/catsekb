@@ -317,3 +317,9 @@ AGE_DISTANCE_CHOICES = (
 
 # Captions
 CAPTION_ANIMAL_LIST_DEFAULT = 'Наши коты'
+
+# Menu
+INDEX = 'index'
+ANIMALS = 'animals'
+HELPFUL = 'helpful'
+CONTACTS = 'contacts'
