@@ -75,12 +75,14 @@ a:visited {
 
 a.tag {
 	display: inline-block !important;
-    color: #333;
-    padding-bottom: 5px;
-    margin: 10px 10px 0 10px;
+    padding: 10px;
+    color: #476fff;
+    border-radius: 3px;
+    background-color: rgba(241, 236, 233, 1);
+    margin: 10px 5px 0 5px;
 }
 
-.tag:hover {
+a.tag:hover {
 	color: #a3b1db;
 
 }
@@ -95,7 +97,6 @@ a.tag {
 
 .tag.no_active {
 	display: inline-block;
-	padding: 10px 15px;
     border-radius: 3px;
     margin: 10px 5px 0 5px;
 	color: #c5c5c5;
