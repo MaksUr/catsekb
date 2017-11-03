@@ -18,7 +18,7 @@ from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOS
     URL_NAME_ANIMAL, DJ_PK, ANIMAL_KEY_DESCRIPTION, \
     ANIMAL_KEY_LOCATION_STATUS, ANIMAL_SEX_CHOICES, ANIMAL_BIRTHDAY_PRECISION_CHOICES, ANIMAL_LOCATION_STATUS_CHOICES, \
     ANIMAL_KEY_TAG, URL_NAME_GROUP, ANIMAL_IMAGE_KEY_BACKGROUND, ANIMAL_IMAGE_KEY_FAVOURITE, \
-    ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION, ANIMAL_LOCATION_STATUS_CHOICES_D
+    ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION, ANIMAL_LOCATION_STATUS_CHOICES_D, ANIMAL_SEX_CHOICES_D
 from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
 from cats.validators import group_name_validator, background_y_position_validator
@@ -166,6 +166,9 @@ class Animal(Model):
 
     def get_location_status(self):
         return ANIMAL_LOCATION_STATUS_CHOICES_D.get(self.location_status)
+
+    def get_sex(self):
+        return ANIMAL_SEX_CHOICES_D.get(self.sex)
 
 
 class AnimalImage(Model):
