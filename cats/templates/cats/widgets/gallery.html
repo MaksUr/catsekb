@@ -6,6 +6,7 @@
 {# page_obj #}
 {# show_count #}
 
+
 <section id="gallery_cat">
     <div class="container">
         {% include 'cats/widgets/caption.html' with caption=caption caption_url=caption_url %}
@@ -26,8 +27,15 @@
                         <div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-0">
                             <div class="cat_find_block">
                                 <a href="{% url 'animal_detail' pk=animal.id %}{{ filter_parameters }}">
-                                    <div class="cat_find" style="background-image: url({{ animal.get_image.image_url }});">
-                                    </div>
+                                    {% if animal.get_image.image_url %}
+                                        <div class="cat_find" style="background-image: url({{ animal.get_image.image_url }});">
+                                        </div>
+                                    {% else %}
+                                        {% load static %}
+                                        <div class="cat_find" style="background-image: url({% static 'catsekb/img/sad_cat.png' %});">
+                                        </div>
+                                    {% endif %}
+
                                     <div class="cat_find_name mid">{{ animal.get_hashtag_name }}</div>
                                     <div class="cat_find_layer"></div>
                                 </a>
