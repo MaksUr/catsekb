@@ -15,8 +15,8 @@ from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECI
     ANIMAL_LOCATION_STATUS, ANIMAL_SEX_CHOICES, ANIMAL_LOCATION_STATUS_CHOICES, ANIMAL_KEY_LOCATION_STATUS, ANIMAL_TAG, \
     ANIMAL_KEY_TAG_HELP_TEXT, ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND, ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT, \
     ANIMAL_IMAGE_KEY_FAVOURITE_HELP_TEXT, ANIMAL_IMAGE_BACKGROUND_Y_POSITION, \
-    ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT
-from cats.models import Animal
+    ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT, ANIMAL_IMAGE_KEY_WIDTH_HELP_TEXT, ANIMAL_IMAGE_IMAGE_URL
+from cats.models import Animal, AnimalImage
 from cats.time import get_date_from_age, calc_age_uptoday
 
 
@@ -191,15 +191,31 @@ class FilterForm(forms.Form):
 
 # TODO: implement class AnimalImageForm
 class AnimalImageForm(forms.ModelForm):
-    fields = [
-        ANIMAL_IMAGE_FAVOURITE,
-        ANIMAL_IMAGE_BACKGROUND,
-        ANIMAL_IMAGE_BACKGROUND_Y_POSITION,
-        # TODO: Форму добавления фото
-    ]
+    # image_url = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
+    image_url = forms.ImageField()
 
-    help_texts = {
-        ANIMAL_IMAGE_FAVOURITE: ANIMAL_IMAGE_KEY_FAVOURITE_HELP_TEXT,
-        ANIMAL_IMAGE_BACKGROUND: ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT,
-        ANIMAL_IMAGE_BACKGROUND_Y_POSITION: ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT,
-    }
+    class Meta:
+        model = AnimalImage
+        fields = [
+            ANIMAL_IMAGE_IMAGE_URL,
+            ANIMAL_IMAGE_FAVOURITE,
+            ANIMAL_IMAGE_BACKGROUND,
+            ANIMAL_IMAGE_BACKGROUND_Y_POSITION,
+            # TODO: Форму добавления фото
+        ]
+
+        help_texts = {
+            ANIMAL_IMAGE_IMAGE_URL: ANIMAL_IMAGE_KEY_WIDTH_HELP_TEXT,
+            ANIMAL_IMAGE_FAVOURITE: ANIMAL_IMAGE_KEY_FAVOURITE_HELP_TEXT,
+            ANIMAL_IMAGE_BACKGROUND: ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT,
+            ANIMAL_IMAGE_BACKGROUND_Y_POSITION: ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT,
+        }
+
+    def clean_image_url(self):
+        res = self.cleaned_data.get(ANIMAL_IMAGE_IMAGE_URL)
+        return res
+
+    def clean(self):
+        cleaned_data = forms.ModelForm.clean(self)
+        return cleaned_data
+

@@ -102,7 +102,22 @@ class FieldTypeAdmin(admin.ModelAdmin):
     inlines = [FieldValueInline]
 admin.site.register(FieldType, FieldTypeAdmin)
 
-admin.site.register(AnimalImage)
+
+class AnimalImageAdmin(admin.ModelAdmin):
+    form = AnimalImageForm
+    fields = (
+        ANIMAL_IMAGE_IMAGE_URL,
+        ANIMAL_IMAGE_IMAGE_THUMB,
+        ANIMAL_IMAGE_FAVOURITE,
+        ANIMAL_IMAGE_BACKGROUND,
+        ANIMAL_IMAGE_BACKGROUND_Y_POSITION,
+        ANIMAL_IMAGE_WIDTH,
+        ANIMAL_IMAGE_HEIGHT,
+    )
+    readonly_fields = (ANIMAL_IMAGE_WIDTH,
+                       ANIMAL_IMAGE_HEIGHT,
+                       ANIMAL_IMAGE_IMAGE_THUMB)
+admin.site.register(AnimalImage, AnimalImageAdmin)
 
 
 class ArticleAdmin(admin.ModelAdmin):
