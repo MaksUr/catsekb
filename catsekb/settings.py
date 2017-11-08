@@ -25,7 +25,7 @@ SECRET_KEY = '1j(lfw54!y!f3u%&8%e*(m)@k=p&@2iphm53p$$li&8hy#@gwl'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'maksur.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
