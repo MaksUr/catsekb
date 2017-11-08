@@ -24,12 +24,8 @@ class ImageInline(admin.StackedInline):
         ANIMAL_IMAGE_FAVOURITE,
         ANIMAL_IMAGE_BACKGROUND,
         ANIMAL_IMAGE_BACKGROUND_Y_POSITION,
-        ANIMAL_IMAGE_WIDTH,
-        ANIMAL_IMAGE_HEIGHT,
     )
-    readonly_fields = (ANIMAL_IMAGE_WIDTH,
-                       ANIMAL_IMAGE_HEIGHT,
-                       ANIMAL_IMAGE_IMAGE_THUMB)
+    readonly_fields = (ANIMAL_IMAGE_IMAGE_THUMB,)
     # TODO: form = AnimalImageForm
 
 
