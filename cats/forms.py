@@ -15,7 +15,8 @@ from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECI
     ANIMAL_LOCATION_STATUS, ANIMAL_SEX_CHOICES, ANIMAL_LOCATION_STATUS_CHOICES, ANIMAL_KEY_LOCATION_STATUS, ANIMAL_TAG, \
     ANIMAL_KEY_TAG_HELP_TEXT, ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND, ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT, \
     ANIMAL_IMAGE_KEY_FAVOURITE_HELP_TEXT, ANIMAL_IMAGE_BACKGROUND_Y_POSITION, \
-    ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT, ANIMAL_IMAGE_KEY_WIDTH_HELP_TEXT, ANIMAL_IMAGE_IMAGE_URL
+    ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT, ANIMAL_IMAGE_KEY_WIDTH_HELP_TEXT, ANIMAL_IMAGE_IMAGE_URL, \
+    ANIMAL_IMAGE_ANIMAL, ANIMAL_IMAGE_KEY_ANIMAL_HELP_TEXT, ANIMAL_IMAGE_WIDTH
 from cats.models import Animal, AnimalImage
 from cats.time import get_date_from_age, calc_age_uptoday
 
@@ -192,11 +193,12 @@ class FilterForm(forms.Form):
 # TODO: implement class AnimalImageForm
 class AnimalImageForm(forms.ModelForm):
     # image_url = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
-    image_url = forms.ImageField()
+    # image_url = forms.ImageField()
 
     class Meta:
         model = AnimalImage
         fields = [
+            ANIMAL_IMAGE_ANIMAL,
             ANIMAL_IMAGE_IMAGE_URL,
             ANIMAL_IMAGE_FAVOURITE,
             ANIMAL_IMAGE_BACKGROUND,
@@ -205,6 +207,7 @@ class AnimalImageForm(forms.ModelForm):
         ]
 
         help_texts = {
+            ANIMAL_IMAGE_ANIMAL: ANIMAL_IMAGE_KEY_ANIMAL_HELP_TEXT,
             ANIMAL_IMAGE_IMAGE_URL: ANIMAL_IMAGE_KEY_WIDTH_HELP_TEXT,
             ANIMAL_IMAGE_FAVOURITE: ANIMAL_IMAGE_KEY_FAVOURITE_HELP_TEXT,
             ANIMAL_IMAGE_BACKGROUND: ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT,

@@ -1,7 +1,7 @@
 from datetime import date
 
 from django.db.models import Model, CharField, TextField, ForeignKey, DateTimeField, BooleanField, ManyToManyField, \
-    URLField, IntegerField, DateField
+    URLField, IntegerField, DateField, ImageField
 # Create your models here.
 from django.urls import reverse
 
@@ -173,7 +173,7 @@ class Animal(Model):
 
 class AnimalImage(Model):
     animal = ForeignKey(Animal)
-    image_url = URLField(ANIMAL_IMAGE_KEY_IMAGE_URL, default=None)
+    image_url = ImageField(ANIMAL_IMAGE_KEY_IMAGE_URL, default=None)
     width = IntegerField(ANIMAL_IMAGE_KEY_WIDTH, blank=True, default=None, null=True)
     height = IntegerField(ANIMAL_IMAGE_KEY_HEIGHT, blank=True, default=None, null=True)
     favourite = BooleanField(ANIMAL_IMAGE_KEY_FAVOURITE, default=False)
