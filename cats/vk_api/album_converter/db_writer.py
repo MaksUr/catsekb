@@ -34,29 +34,37 @@ def save_vk_image(
     print_log('save image', animal, log_file=log_file)
 
 
-def save_image(animal, image_url, width=0, height=0, favourite=False, log_file=None):
+def save_image(animal, image_url, favourite, background, width=0, height=0, log_file=None):
     image_url = join(START_IMAGE_PTH, image_url)
     image_url = pathname2url(image_url)
     image_url = ROOT_PTH + image_url
     ai = AnimalImage(
         animal=animal,
         image_url=image_url,
-        width=width,
-        height=height,
-        favourite=favourite
+        favourite=favourite,
+        background=background
     )
     ai.save()
     print_log('save image', animal, log_file=log_file)
 
 
 def save_images(animal, images, use_local_photos, log_file=None):
+    images = iter(images)
     if use_local_photos:
-        for image_pth in images:
-            save_image(animal=animal, image_url=image_pth, log_file=log_file)
-    else:
-        images = iter(images)
         try:
+            image_pth = next(images)
+            save_image(animal=animal, image_url=image_pth, log_file=log_file, favourite=False, background=True)
 
+            image_pth = next(images)
+            save_image(animal=animal, image_url=image_pth, log_file=log_file, favourite=True, background=False)
+
+        except StopIteration:
+            return
+        for image_pth in images:
+            save_image(animal=animal, image_url=image_pth, log_file=log_file, favourite=False, background=True)
+
+    else:
+        try:
             image = next(images)
             save_vk_image(animal=animal, image=image, log_file=log_file, favourite=False, background=True)
 
