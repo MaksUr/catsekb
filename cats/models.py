@@ -1,7 +1,7 @@
 from datetime import date
 
 from django.db.models import Model, CharField, TextField, ForeignKey, DateTimeField, BooleanField, ManyToManyField, \
-    URLField, IntegerField, DateField, ImageField
+    URLField, IntegerField, DateField
 # Create your models here.
 from django.urls import reverse
 
@@ -100,7 +100,6 @@ class Animal(Model):
         blank=True
     )
     # TODO: add vk_album_url field
-    # TODO: vk_album_id
     created = DateTimeField(ANIMAL_KEY_CREATED, auto_now_add=True, auto_now=False)
     updated = DateTimeField(ANIMAL_KEY_UPDATED, auto_now_add=False, auto_now=True)
 
@@ -174,7 +173,9 @@ class Animal(Model):
 
 class AnimalImage(Model):
     animal = ForeignKey(Animal)
-    image_url = ImageField(ANIMAL_IMAGE_KEY_IMAGE_URL)
+    image_url = URLField(ANIMAL_IMAGE_KEY_IMAGE_URL, default=None)
+    width = IntegerField(ANIMAL_IMAGE_KEY_WIDTH, blank=True, default=None, null=True)
+    height = IntegerField(ANIMAL_IMAGE_KEY_HEIGHT, blank=True, default=None, null=True)
     favourite = BooleanField(ANIMAL_IMAGE_KEY_FAVOURITE, default=False)
     background = BooleanField(ANIMAL_IMAGE_KEY_BACKGROUND, default=False)
     background_y_position = IntegerField(
@@ -183,8 +184,8 @@ class AnimalImage(Model):
 
     def image_thumb(self):
         # TODO: edit view
-        if self.image_url.url:
-            return '<img src="%s" style="height: 200px">' % self.image_url.url
+        if self.image_url:
+            return '<img src="%s" style="height: 200px">' % self.image_url
         else:
             return '<img src="%s" style="height: 200px">' % ''  # TODO: change default image
     image_thumb.allow_tags = True
@@ -204,9 +205,6 @@ class AnimalImage(Model):
 
     def get_alt(self):
         return self.__str__()
-
-    def get_absolute_url(self):
-        return self.image_url.url
 
 
 class Article(Model):  # TODO: create new application
