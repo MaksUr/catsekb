@@ -18,10 +18,12 @@ from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOS
     URL_NAME_ANIMAL, DJ_PK, ANIMAL_KEY_DESCRIPTION, \
     ANIMAL_KEY_LOCATION_STATUS, ANIMAL_SEX_CHOICES, ANIMAL_BIRTHDAY_PRECISION_CHOICES, ANIMAL_LOCATION_STATUS_CHOICES, \
     ANIMAL_KEY_TAG, URL_NAME_GROUP, ANIMAL_IMAGE_KEY_BACKGROUND, ANIMAL_IMAGE_KEY_FAVOURITE, \
-    ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION, ANIMAL_LOCATION_STATUS_CHOICES_D, ANIMAL_SEX_CHOICES_D
+    ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION, ANIMAL_LOCATION_STATUS_CHOICES_D, ANIMAL_SEX_CHOICES_D, \
+    ANIMAL_KEY_VK_ALBUM_ID
 from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
 from cats.validators import group_name_validator, background_y_position_validator
+from cats.vk_api.vk_import import get_vk_url_from_album_id
 
 
 class Group(Model):
@@ -86,7 +88,7 @@ class Animal(Model):
         ANIMAL_KEY_BIRTHDAY_PRECISION, max_length=1, choices=ANIMAL_BIRTHDAY_PRECISION_CHOICES, null=True, default=''
     )
     tag = CharField(ANIMAL_KEY_TAG, max_length=32, blank=True, default='')
-    vk_album_id = IntegerField('ID альбома ВК', blank=True, default=None, null=True)
+    vk_album_id = IntegerField(ANIMAL_KEY_VK_ALBUM_ID, blank=True, default=None, null=True)
     date_of_birth = DateField(ANIMAL_KEY_DATE_OF_BIRTH, null=True, default=None, blank=True)
     group = ForeignKey(Group, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)
     show = BooleanField(ANIMAL_KEY_SHOW, default=True)
@@ -170,6 +172,9 @@ class Animal(Model):
 
     def get_sex(self):
         return ANIMAL_SEX_CHOICES_D.get(self.sex)
+
+    def get_vk_album_url(self):
+        return get_vk_url_from_album_id(self.vk_album_id)
 
 
 class AnimalImage(Model):

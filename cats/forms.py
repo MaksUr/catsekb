@@ -16,9 +16,13 @@ from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECI
     ANIMAL_KEY_TAG_HELP_TEXT, ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND, ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT, \
     ANIMAL_IMAGE_KEY_FAVOURITE_HELP_TEXT, ANIMAL_IMAGE_BACKGROUND_Y_POSITION, \
     ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT, ANIMAL_IMAGE_KEY_WIDTH_HELP_TEXT, ANIMAL_IMAGE_IMAGE_URL, \
-    ANIMAL_IMAGE_ANIMAL, ANIMAL_IMAGE_KEY_ANIMAL_HELP_TEXT, ANIMAL_IMAGE_WIDTH
+    ANIMAL_IMAGE_ANIMAL, ANIMAL_IMAGE_KEY_ANIMAL_HELP_TEXT, ANIMAL_IMAGE_WIDTH, ANIMAL_VK_ALBUM_ID, \
+    ANIMAL_KEY_FORM_VK_UPDATE_HELP_TEXT, ANIMAL_KEY_FORM_VK_UPDATE, \
+    ANIMAL_KEY_VK_ALBUM_ID, ANIMAL_FORM_VK_UPDATE, ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT, ANIMAL_KEY_VK_ALBUM_URL, \
+    ANIMAL_VK_ALBUM_URL, ANIMAL_KEY_VK_ALBUM_ID_HELP_TEXT
 from cats.models import Animal, AnimalImage
 from cats.time import get_date_from_age, calc_age_uptoday
+from cats.vk_api.vk_import import get_vk_album_id_from_url, get_vk_url_from_album_id
 
 
 def get_range(size):
@@ -35,6 +39,7 @@ def get_int_val(val):
 
 
 class AnimalForm(forms.ModelForm):
+    # age
     years = forms.ChoiceField(
         widget=forms.Select,
         choices=get_range(20),
@@ -57,6 +62,14 @@ class AnimalForm(forms.ModelForm):
         help_text=ANIMAL_KEY_DAYS_HELP_TEXT,
     )
 
+    # vk_import
+    vk_album_url = forms.URLField(label=ANIMAL_KEY_VK_ALBUM_URL,
+                                  help_text=ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT,
+                                  required=False)
+    vk_update = forms.BooleanField(label=ANIMAL_KEY_FORM_VK_UPDATE,
+                                   help_text=ANIMAL_KEY_FORM_VK_UPDATE_HELP_TEXT,
+                                   required=False)
+
     def __init__(self, *args, **kwargs):
         instance = kwargs.get(DJ_INSTANCE)
         if instance:
@@ -64,7 +77,9 @@ class AnimalForm(forms.ModelForm):
             upd[DJ_INITIAL] = dict()
             if getattr(instance, ANIMAL_DATE_OF_BIRTH, None):
                 upd[DJ_INITIAL].update(calc_age_uptoday(before_date=instance.date_of_birth, later_date=date.today()))
-                kwargs.update(upd)
+            if getattr(instance, ANIMAL_VK_ALBUM_ID, None):
+                upd[DJ_INITIAL][ANIMAL_VK_ALBUM_URL] = instance.get_vk_album_url()
+            kwargs.update(upd)
 
         forms.ModelForm.__init__(self, *args, **kwargs)
 
@@ -76,7 +91,8 @@ class AnimalForm(forms.ModelForm):
             ANIMAL_FIELD_VALUE, ANIMAL_SEX,
             ANIMAL_YEARS, ANIMAL_MONTHS,
             ANIMAL_DAYS, ANIMAL_DATE_OF_BIRTH,
-            ANIMAL_DESCRIPTION, ANIMAL_TAG,
+            ANIMAL_DESCRIPTION, ANIMAL_TAG, ANIMAL_VK_ALBUM_URL,
+            ANIMAL_FORM_VK_UPDATE,
         ]
         help_texts = {
             ANIMAL_UPDATED: ANIMAL_KEY_UPDATED_HELP_TEXT,
@@ -91,6 +107,8 @@ class AnimalForm(forms.ModelForm):
             ANIMAL_DESCRIPTION: ANIMAL_KEY_DESCRIPTION_HELP_TEXT,
             ANIMAL_LOCATION_STATUS: ANIMAL_KEY_LOCATION_STATUS_HELP_TEXT,
             ANIMAL_TAG: ANIMAL_KEY_TAG_HELP_TEXT,
+            ANIMAL_VK_ALBUM_URL: ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT,
+            ANIMAL_FORM_VK_UPDATE: ANIMAL_KEY_FORM_VK_UPDATE_HELP_TEXT,
         }
 
     def clean(self):
@@ -150,6 +168,16 @@ class AnimalForm(forms.ModelForm):
             message = ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST.format(name=name)
             raise ValidationError(message)
         return name
+
+    def clean_vk_album_url(self):
+        if self.cleaned_data.get(ANIMAL_FORM_VK_UPDATE):
+            vk_alb_url = self.cleaned_data.get(ANIMAL_VK_ALBUM_URL)
+            vk_album_id = get_vk_album_id_from_url(vk_alb_url)
+            self.instance.vk_album_id = vk_album_id
+            res = vk_alb_url
+        else:
+            res = None
+        return res
 
 
 class FilterForm(forms.Form):

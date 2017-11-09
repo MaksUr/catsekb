@@ -97,6 +97,7 @@ ANIMAL_IMAGE_KEY_HEIGHT_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_HEIGHT'
 ANIMAL_VERBOSE_NAME_PLURAL = 'Питомцы'
 ANIMAL_VERBOSE_NAME = 'Питомец'
 ANIMAL_MAIN_FIELD_SET = 'Общая информация'
+ANIMAL_VK_IMPORT_SET = 'Импорт данных из группы в VK'
 
 # tag
 ANIMAL_TAG_FIELD_SET = 'Настройка хэштега'
@@ -125,6 +126,20 @@ ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST = '"{name}" уже сущесв�
 ANIMAL_DESCRIPTION = 'description'
 ANIMAL_KEY_DESCRIPTION = 'Описание'
 ANIMAL_KEY_DESCRIPTION_HELP_TEXT = '_help_text ANIMAL_DESCRIPTION_KEY_DESCRIPTION'
+
+# vk_album_id
+ANIMAL_VK_ALBUM_ID = 'vk_album_id'
+ANIMAL_KEY_VK_ALBUM_ID = 'ID альбома в VK'
+ANIMAL_KEY_VK_ALBUM_ID_HELP_TEXT = 'ID альбома в VK'
+
+# vk_album_url
+ANIMAL_VK_ALBUM_URL = 'vk_album_url'
+ANIMAL_KEY_VK_ALBUM_URL = 'Ссылка на альбом в VK'
+ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT = 'Укажите ссылку на альбом питомца для загрузки фото.'
+
+ANIMAL_FORM_VK_UPDATE = 'vk_update'
+ANIMAL_KEY_FORM_VK_UPDATE = 'Обновить информацию из VK'
+ANIMAL_KEY_FORM_VK_UPDATE_HELP_TEXT = 'При наличии изменений информация обновится.'
 
 # sex
 ANIMAL_SEX = 'sex'
