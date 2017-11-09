@@ -29,8 +29,8 @@ class ImageInline(admin.StackedInline):
     )
     readonly_fields = (ANIMAL_IMAGE_WIDTH,
                        ANIMAL_IMAGE_HEIGHT,
+                       ANIMAL_IMAGE_IMAGE_URL,
                        ANIMAL_IMAGE_IMAGE_THUMB)
-    # TODO: form = AnimalImageForm
 
 
 class AnimalAdmin(admin.ModelAdmin):
@@ -117,6 +117,7 @@ class AnimalImageAdmin(admin.ModelAdmin):
     )
     readonly_fields = (ANIMAL_IMAGE_WIDTH,
                        ANIMAL_IMAGE_HEIGHT,
+                       ANIMAL_IMAGE_IMAGE_URL,
                        ANIMAL_IMAGE_IMAGE_THUMB)
 admin.site.register(AnimalImage, AnimalImageAdmin)
 

@@ -192,8 +192,6 @@ class FilterForm(forms.Form):
 
 # TODO: implement class AnimalImageForm
 class AnimalImageForm(forms.ModelForm):
-    # image_url = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
-    # image_url = forms.ImageField()
 
     class Meta:
         model = AnimalImage
@@ -203,7 +201,6 @@ class AnimalImageForm(forms.ModelForm):
             ANIMAL_IMAGE_FAVOURITE,
             ANIMAL_IMAGE_BACKGROUND,
             ANIMAL_IMAGE_BACKGROUND_Y_POSITION,
-            # TODO: Форму добавления фото
         ]
 
         help_texts = {

@@ -86,6 +86,7 @@ class Animal(Model):
         ANIMAL_KEY_BIRTHDAY_PRECISION, max_length=1, choices=ANIMAL_BIRTHDAY_PRECISION_CHOICES, null=True, default=''
     )
     tag = CharField(ANIMAL_KEY_TAG, max_length=32, blank=True, default='')
+    vk_album_id = IntegerField('ID альбома ВК', blank=True, default=None, null=True)
     date_of_birth = DateField(ANIMAL_KEY_DATE_OF_BIRTH, null=True, default=None, blank=True)
     group = ForeignKey(Group, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)
     show = BooleanField(ANIMAL_KEY_SHOW, default=True)
@@ -173,7 +174,7 @@ class Animal(Model):
 
 class AnimalImage(Model):
     animal = ForeignKey(Animal)
-    image_url = ImageField(ANIMAL_IMAGE_KEY_IMAGE_URL, default=None)
+    image_url = URLField(ANIMAL_IMAGE_KEY_IMAGE_URL, default=None)
     width = IntegerField(ANIMAL_IMAGE_KEY_WIDTH, blank=True, default=None, null=True)
     height = IntegerField(ANIMAL_IMAGE_KEY_HEIGHT, blank=True, default=None, null=True)
     favourite = BooleanField(ANIMAL_IMAGE_KEY_FAVOURITE, default=False)
@@ -213,6 +214,3 @@ class Article(Model):  # TODO: create new application
 
     def __str__(self):
         return self.name
-
-
-
