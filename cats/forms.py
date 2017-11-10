@@ -74,12 +74,15 @@ class AnimalForm(forms.ModelForm):
         instance = kwargs.get(DJ_INSTANCE)
         if instance:
             upd = dict()
-            upd[DJ_INITIAL] = dict()
             if getattr(instance, ANIMAL_DATE_OF_BIRTH, None):
-                upd[DJ_INITIAL].update(calc_age_uptoday(before_date=instance.date_of_birth, later_date=date.today()))
+                d = calc_age_uptoday(before_date=instance.date_of_birth, later_date=date.today())
+                d = self.get_age_by_precision(d, instance.birthday_precision)
+                upd.update(d)
             if getattr(instance, ANIMAL_VK_ALBUM_ID, None):
-                upd[DJ_INITIAL][ANIMAL_VK_ALBUM_URL] = instance.get_vk_album_url()
-            kwargs.update(upd)
+                upd[ANIMAL_VK_ALBUM_URL] = instance.get_vk_album_url()
+            if not kwargs.get(DJ_INITIAL):
+                kwargs[DJ_INITIAL] = dict()
+            kwargs[DJ_INITIAL].update(upd)
 
         forms.ModelForm.__init__(self, *args, **kwargs)
 
@@ -115,6 +118,7 @@ class AnimalForm(forms.ModelForm):
         if ANIMAL_DATE_OF_BIRTH in self.changed_data:
             if not self.cleaned_data[ANIMAL_DATE_OF_BIRTH]:
                 self.instance.birthday_precision = None
+                self.save_date_of_birth_from_age()
             else:
                 self.instance.birthday_precision = Animal.BIRTHDAY_PRECISION_D
         elif any((item in (ANIMAL_YEARS, ANIMAL_MONTHS, ANIMAL_DAYS)) for item in self.changed_data):
@@ -146,6 +150,19 @@ class AnimalForm(forms.ModelForm):
             days=get_int_val(days)
         )
         self.cleaned_data[ANIMAL_DATE_OF_BIRTH] = date_of_birth
+
+    @staticmethod
+    def get_age_by_precision(d, precision):
+        if not precision or precision == Animal.BIRTHDAY_PRECISION_D:
+            return d
+        d[ANIMAL_DAYS] = None
+        if precision == Animal.BIRTHDAY_PRECISION_M:
+            return d
+        d[ANIMAL_MONTHS] = None
+        if precision == Animal.BIRTHDAY_PRECISION_Y:
+            return d
+        d[ANIMAL_YEARS] = None
+        return d
 
     def clean_field_value(self):
         words = self.cleaned_data.get(ANIMAL_FIELD_VALUE)
