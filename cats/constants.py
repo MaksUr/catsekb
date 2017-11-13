@@ -137,9 +137,9 @@ ANIMAL_VK_ALBUM_URL = 'vk_album_url'
 ANIMAL_KEY_VK_ALBUM_URL = 'Ссылка на альбом в VK'
 ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT = 'Укажите ссылку на альбом питомца для загрузки фото.'
 
-ANIMAL_FORM_VK_UPDATE = 'vk_update'
-ANIMAL_KEY_FORM_VK_UPDATE = 'Обновить информацию из VK'
-ANIMAL_KEY_FORM_VK_UPDATE_HELP_TEXT = 'При наличии изменений информация обновится.'
+# ANIMAL_FORM_VK_UPDATE = 'vk_update'
+# ANIMAL_KEY_FORM_VK_UPDATE = 'Обновить информацию из VK'
+# ANIMAL_KEY_FORM_VK_UPDATE_HELP_TEXT = 'При наличии изменений информация обновится.'
 
 # sex
 ANIMAL_SEX = 'sex'
