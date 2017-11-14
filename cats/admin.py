@@ -1,8 +1,6 @@
 from django.contrib import admin
-
 # Register your models here.
 from django.urls import reverse
-from django.utils.html import format_html
 
 from cats.constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPDATED, ANIMAL_NAME, ANIMAL_GROUP, \
     ANIMAL_FIELD_VALUE, ANIMAL_SEX, ANIMAL_DATE_OF_BIRTH, ANIMAL_DAYS, ANIMAL_MONTHS, ANIMAL_YEARS, \
@@ -11,9 +9,13 @@ from cats.constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPD
     ANIMAL_TAG_DISPLAY, ANIMAL_KEY_TAG_DISPLAY, ANIMAL_IMAGE_IMAGE_URL, ANIMAL_IMAGE_IMAGE_THUMB, \
     ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND, ANIMAL_IMAGE_WIDTH, ANIMAL_IMAGE_HEIGHT, \
     ANIMAL_IMAGE_BACKGROUND_Y_POSITION, ANIMAL_IMAGE_ANIMAL, ANIMAL_VK_IMPORT_SET, ANIMAL_VK_ALBUM_ID, \
-    ANIMAL_VK_ALBUM_URL
+    ANIMAL_VK_ALBUM_URL, ANIMAL_KEY_FORM_VK_UPDATE, ANIMAL_KEY_TAG_DISPLAY_HELP_TEXT, ANIMAL_FORM_VK_UPDATE, \
+    ANIMAL_FORM_VK_UPDATE_DESCR, ANIMAL_FORM_VK_UPDATE_PHOTO, ANIMAL_KEY_FORM_VK_UPDATE_PHOTO, \
+    ANIMAL_KEY_FORM_VK_UPDATE_DESCR
 from cats.forms import AnimalForm, AnimalImageForm
 from cats.models import Animal, AnimalImage, FieldValue, Group, FieldType, Article
+
+UPDATE_BUTTON = '<a class="button" href="{link}?upd={upd}">Обновить</a>'
 
 
 class ImageInline(admin.StackedInline):
@@ -45,18 +47,38 @@ class AnimalAdmin(admin.ModelAdmin):
     tag_display.short_description = ANIMAL_KEY_TAG_DISPLAY
 
     def vk_update(self, obj):
-        url = 'admin:{label}_{name}_change'.format(label=self.model._meta.app_label, name=self.model._meta.model_name)
-        return '<a class="button" href="{link}?upd=vk">Обновить</a>'.format(link=reverse(url, args=(obj.pk,)))
-    vk_update.short_description = "Обновить из VK"
+        return UPDATE_BUTTON.format(
+            link=reverse('admin:cats_animal_change', args=(obj.pk,)),
+            upd=ANIMAL_FORM_VK_UPDATE
+        )
+    vk_update.short_description = ANIMAL_KEY_FORM_VK_UPDATE
     vk_update.allow_tags = True
 
-    list_display = (DJ_ID, ANIMAL_NAME, ANIMAL_LOCATION_STATUS, ANIMAL_SEX, ANIMAL_SHOW, 'vk_update')
+    def vk_update_photo(self, obj):
+        return UPDATE_BUTTON.format(
+            link=reverse('admin:cats_animal_change', args=(obj.pk,)),
+            upd=ANIMAL_FORM_VK_UPDATE_PHOTO
+        )
+    vk_update_photo.short_description = ANIMAL_KEY_FORM_VK_UPDATE_PHOTO
+    vk_update_photo.allow_tags = True
+
+    def vk_update_descr(self, obj):
+        return UPDATE_BUTTON.format(
+            link=reverse('admin:cats_animal_change', args=(obj.pk,)),
+            upd=ANIMAL_FORM_VK_UPDATE_DESCR
+        )
+    vk_update_descr.short_description = ANIMAL_KEY_FORM_VK_UPDATE_DESCR
+    vk_update_descr.allow_tags = True
+
+    list_display = (DJ_ID, ANIMAL_NAME, ANIMAL_LOCATION_STATUS, ANIMAL_SEX, ANIMAL_SHOW)
     list_display_links = (ANIMAL_NAME, DJ_ID)
     fieldsets = (
         (
             ANIMAL_VK_IMPORT_SET, {
                 DJ_FIELDS: (
-                    # ANIMAL_FORM_VK_UPDATE,
+                    ANIMAL_FORM_VK_UPDATE,
+                    ANIMAL_FORM_VK_UPDATE_PHOTO,
+                    ANIMAL_FORM_VK_UPDATE_DESCR,
                     ANIMAL_VK_ALBUM_ID,
                     ANIMAL_VK_ALBUM_URL,
                 ),
@@ -69,7 +91,7 @@ class AnimalAdmin(admin.ModelAdmin):
                     ANIMAL_NAME, ANIMAL_LOCATION_STATUS,
                     ANIMAL_SHOW, ANIMAL_DESCRIPTION,
                     ANIMAL_GROUP, ANIMAL_FIELD_VALUE, ANIMAL_SEX,
-                    ANIMAL_CREATED, ANIMAL_UPDATED, ANIMAL_TAG
+                    ANIMAL_CREATED, ANIMAL_UPDATED,
                 ),
             },
         ),
@@ -91,16 +113,22 @@ class AnimalAdmin(admin.ModelAdmin):
         ),
     )
 
-    readonly_fields = (ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPDATED, ANIMAL_TAG_DISPLAY, ANIMAL_VK_ALBUM_ID)
+    readonly_fields = (ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPDATED,
+                       ANIMAL_TAG_DISPLAY, ANIMAL_VK_ALBUM_ID,
+                       ANIMAL_FORM_VK_UPDATE, ANIMAL_FORM_VK_UPDATE_PHOTO, ANIMAL_FORM_VK_UPDATE_DESCR)
     form = AnimalForm
     inlines = [ImageInline]
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(AnimalAdmin, self).get_form(request, obj=None, **kwargs)
-        if request.GET.get('upd'):
-            form.vk_update = True
+        upd = request.GET.get('upd')
+        if upd:
+            form.vk_update = upd
+            if upd in (ANIMAL_FORM_VK_UPDATE, ANIMAL_FORM_VK_UPDATE_PHOTO):
+                # TODO: add inlines images
+                pass
         else:
-            form.vk_update = False
+            form.vk_update = None
         return form
 
 admin.site.register(Animal, AnimalAdmin)

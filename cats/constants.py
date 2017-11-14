@@ -77,11 +77,6 @@ ANIMAL_IMAGE_IMAGE_THUMB = 'image_thumb'
 ANIMAL_IMAGE_KEY_IMAGE_THUMB = 'Фото'
 ANIMAL_IMAGE_KEY_IMAGE_THUMB_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_IMAGE_THUMB'
 
-# # alt
-# ANIMAL_IMAGE_ALT = 'alt'
-# ANIMAL_IMAGE_KEY_ALT = 'Подпись к фото'
-# ANIMAL_IMAGE_KEY_ALT_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_ALT'
-
 # width
 ANIMAL_IMAGE_WIDTH = 'width'
 ANIMAL_IMAGE_KEY_WIDTH = 'Ширина'
@@ -137,9 +132,14 @@ ANIMAL_VK_ALBUM_URL = 'vk_album_url'
 ANIMAL_KEY_VK_ALBUM_URL = 'Ссылка на альбом в VK'
 ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT = 'Укажите ссылку на альбом питомца для загрузки фото.'
 
-# ANIMAL_FORM_VK_UPDATE = 'vk_update'
-# ANIMAL_KEY_FORM_VK_UPDATE = 'Обновить информацию из VK'
-# ANIMAL_KEY_FORM_VK_UPDATE_HELP_TEXT = 'При наличии изменений информация обновится.'
+ANIMAL_FORM_VK_UPDATE = 'vk_update'
+ANIMAL_KEY_FORM_VK_UPDATE = 'Обновить всю информацию из VK (фото, имя, описание)'
+
+ANIMAL_FORM_VK_UPDATE_PHOTO = 'vk_update_photo'
+ANIMAL_KEY_FORM_VK_UPDATE_PHOTO = 'Обновить фото'
+
+ANIMAL_FORM_VK_UPDATE_DESCR = 'vk_update_descr'
+ANIMAL_KEY_FORM_VK_UPDATE_DESCR = 'Обновить описание'
 
 # sex
 ANIMAL_SEX = 'sex'
