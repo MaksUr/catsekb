@@ -1,39 +1,32 @@
-from cats.constants import ANIMAL_DESCRIPTION, ANIMAL_NAME
+from cats.constants import ANIMAL_DESCRIPTION, ANIMAL_NAME, VK_GROUP_ID
 
 
 def get_vk_album_id_from_url(url):
-    # TODO: implement
-    if url:
-        return 666
+    group = "album-" + str(VK_GROUP_ID) + "_"
+    if url and url.find(group) >= 0:
+        album_id = url[url.find(group) + len(group):]
+        try:
+            album_id = int(album_id)
+        except ValueError:
+            return None
+        else:
+            return album_id
     else:
         return None
 
 
 def get_vk_url_from_album_id(album_id):
-    # TODO: implement
     if album_id:
-        return 'http://vk.com/album/{alb_id}'.format(alb_id=album_id)
+        return r"https://vk.com/album-{group_id}_{album_id}".format(group_id=VK_GROUP_ID, album_id=album_id)
     else:
-        return 'http://vk.com/album/{alb_id}'.format(alb_id=1)
+        return None
 
 
-def update_animal_name_from_vk_album(animal):
+def get_animal_name_from_vk_album(vk_album):
     # TODO: implement
-    #
-    # if animal.vk_album_id is not None:
-    #     return {'name': 'test__test'}
-    #     pass
-    # else:
-    #     return dict()
-    return {ANIMAL_NAME: 'test__test'}
+    return 'test__name_' + str(vk_album)
 
 
-def update_animal_descr_from_vk_album(animal):
+def get_animal_descr_from_vk_album(vk_album):
     # TODO: implement
-    #
-    # if animal.vk_album_id is not None:
-    #     return {'name': 'test__test'}
-    #     pass
-    # else:
-    #     return dict()
-    return {ANIMAL_DESCRIPTION: 'test__test'}
+    return 'test__description' + str(vk_album)
