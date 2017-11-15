@@ -36,6 +36,7 @@ URL_NAME_ANIMAL = 'animal_detail'
 
 APPLICATION_VERBOSE_NAME = 'Котики'  # Название приложения
 
+VK_GROUP_ID = 73666865
 
 # class AnimalImage
 ANIMAL_IMAGE_VERBOSE_NAME_PLURAL = 'Фотографии'

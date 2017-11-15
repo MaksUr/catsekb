@@ -21,8 +21,8 @@ from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECI
     ANIMAL_VK_ALBUM_URL, ANIMAL_FORM_VK_UPDATE, ANIMAL_FORM_VK_UPDATE_DESCR
 from cats.models import Animal, AnimalImage
 from cats.time import get_date_from_age, calc_age_uptoday
-from cats.vk_api.vk_import import update_animal_name_from_vk_album, get_vk_album_id_from_url, \
-    update_animal_descr_from_vk_album
+from cats.vk_api.vk_import import get_animal_name_from_vk_album, get_vk_album_id_from_url, \
+    get_animal_descr_from_vk_album
 
 
 def get_range(size):
@@ -66,7 +66,7 @@ class AnimalForm(forms.ModelForm):
     vk_album_url = forms.URLField(label=ANIMAL_KEY_VK_ALBUM_URL,
                                   help_text=ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT,
                                   required=False)
-    vk_update = None
+    update_form = None
 
     def __init__(self, *args, **kwargs):
         instance = kwargs.get(DJ_INSTANCE)
@@ -78,22 +78,28 @@ class AnimalForm(forms.ModelForm):
                 upd.update(d)
             if getattr(instance, ANIMAL_VK_ALBUM_ID, None):
                 upd[ANIMAL_VK_ALBUM_URL] = instance.get_vk_album_url()
+            if self.update_form:
+                upd.update(self.get_initial_update(instance=instance, upd_type=self.update_form))
             if not kwargs.get(DJ_INITIAL):
                 kwargs[DJ_INITIAL] = dict()
-            if self.vk_update:
-                upd.update(self.get_initial_update(instance=instance, upd_type=self.vk_update))
             kwargs[DJ_INITIAL].update(upd)
 
         forms.ModelForm.__init__(self, *args, **kwargs)
 
+    def get_initial_update(self, instance, upd_type):
+        res = dict()
+        if instance.vk_album_id is not None:
+            res.update(self.get_vk_update(instance, upd_type))
+        return res
+
     @staticmethod
-    def get_initial_update(instance, upd_type):
+    def get_vk_update(instance, upd_type):
         res = dict()
         if upd_type in (ANIMAL_FORM_VK_UPDATE, ANIMAL_FORM_VK_UPDATE_DESCR):
-            res.update(update_animal_descr_from_vk_album(animal=instance))
+            res[ANIMAL_DESCRIPTION] = get_animal_descr_from_vk_album(vk_album=instance.vk_album_id)
 
         if upd_type == ANIMAL_FORM_VK_UPDATE:
-            res.update(update_animal_name_from_vk_album(animal=instance))
+            res[ANIMAL_NAME] = get_animal_name_from_vk_album(vk_album=instance.vk_album_id)
 
         return res
 

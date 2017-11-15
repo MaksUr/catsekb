@@ -14,6 +14,7 @@ from cats.constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPD
     ANIMAL_KEY_FORM_VK_UPDATE_DESCR
 from cats.forms import AnimalForm, AnimalImageForm
 from cats.models import Animal, AnimalImage, FieldValue, Group, FieldType, Article
+from cats.vk_api.vk_import import add_images_from_album
 
 UPDATE_BUTTON = '<a class="button" href="{link}?upd={upd}">Обновить</a>'
 
@@ -122,13 +123,12 @@ class AnimalAdmin(admin.ModelAdmin):
     def get_form(self, request, obj=None, **kwargs):
         form = super(AnimalAdmin, self).get_form(request, obj=None, **kwargs)
         upd = request.GET.get('upd')
-        if upd:
-            form.vk_update = upd
+        if upd and obj:
+            form.update_form = upd
             if upd in (ANIMAL_FORM_VK_UPDATE, ANIMAL_FORM_VK_UPDATE_PHOTO):
-                # TODO: add inlines images
-                pass
+                add_images_from_album(animal=obj)
         else:
-            form.vk_update = None
+            form.update_form = None
         return form
 
 admin.site.register(Animal, AnimalAdmin)
