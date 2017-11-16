@@ -69,10 +69,8 @@ a, a:link, a:visited, a:hover, a:active  {
 }
 
 a.tag {
-    margin: 10px 15px 0 5px;
-    border-radius: 3px;
-    border: 1px #7676ff solid;
     padding: 10px;
+    font-weight: 600;
 }
 
 .tag:first-child, .tag.no_active:first-child {

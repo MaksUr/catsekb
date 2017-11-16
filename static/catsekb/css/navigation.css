@@ -162,7 +162,6 @@ nav {
 }
 
 .mobile_nav_opened a:hover, .logo_top_nav a:hover {
-	border-bottom: none;
 	color: #526aa5;
 }
 

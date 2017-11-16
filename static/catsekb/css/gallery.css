@@ -13,6 +13,7 @@
 	background-repeat: no-repeat;
     max-height: 390px;
     height: 32vh;
+    min-height: 300px;
 }
 
 .cat_find_name, .cat_find_layer {
@@ -45,6 +46,6 @@
 }
 
 .nav_gallery {
-    margin-top: 15px;
+    margin-top: 20px;
 }
 /* <---------- .gallery END ----------> */

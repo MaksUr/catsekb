@@ -72,8 +72,8 @@
 }
 
 
-.close_increase a {
-    margin: 0;
+.close_increase a:hover {
+    color: #526aa5;
 }
 .vis {
     visibility: visible;
@@ -145,7 +145,7 @@
 	overflow-y: hidden;
 }*/
 .request {
-	margin: 25px 0 30px 0;
+	margin: 20px 0 15px 0;
 }
 /*.cat_a_letter {
 	position: absolute;
