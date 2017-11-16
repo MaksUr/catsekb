@@ -11,7 +11,7 @@ from cats.constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPD
     ANIMAL_IMAGE_BACKGROUND_Y_POSITION, ANIMAL_IMAGE_ANIMAL, ANIMAL_VK_IMPORT_SET, ANIMAL_VK_ALBUM_ID, \
     ANIMAL_VK_ALBUM_URL, ANIMAL_KEY_FORM_VK_UPDATE, ANIMAL_KEY_TAG_DISPLAY_HELP_TEXT, ANIMAL_FORM_VK_UPDATE, \
     ANIMAL_FORM_VK_UPDATE_DESCR, ANIMAL_FORM_VK_UPDATE_PHOTO, ANIMAL_KEY_FORM_VK_UPDATE_PHOTO, \
-    ANIMAL_KEY_FORM_VK_UPDATE_DESCR
+    ANIMAL_KEY_FORM_VK_UPDATE_DESCR, ANIMAL_IMAGE_PHOTO_ID
 from cats.forms import AnimalForm, AnimalImageForm
 from cats.models import Animal, AnimalImage, FieldValue, Group, FieldType, Article
 from cats.vk_api.vk_import import add_images_from_album
@@ -33,11 +33,16 @@ class ImageInline(admin.StackedInline):
         ANIMAL_IMAGE_BACKGROUND_Y_POSITION,
         ANIMAL_IMAGE_WIDTH,
         ANIMAL_IMAGE_HEIGHT,
+        ANIMAL_IMAGE_PHOTO_ID,
     )
     readonly_fields = (ANIMAL_IMAGE_WIDTH,
                        ANIMAL_IMAGE_HEIGHT,
                        ANIMAL_IMAGE_IMAGE_URL,
-                       ANIMAL_IMAGE_IMAGE_THUMB)
+                       ANIMAL_IMAGE_IMAGE_THUMB,
+                       ANIMAL_IMAGE_PHOTO_ID)
+
+    def has_add_permission(self, request):
+        return False
 
 
 class AnimalAdmin(admin.ModelAdmin):

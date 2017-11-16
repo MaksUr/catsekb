@@ -55,7 +55,13 @@ ANIMAL_IMAGE_KEY_IMAGE_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_IMAGE'
 # image_url
 ANIMAL_IMAGE_IMAGE_URL = 'image_url'
 ANIMAL_IMAGE_KEY_IMAGE_URL = 'URL изображения'
-ANIMAL_IMAGE_KEY_WIDTH_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_WIDTH'
+ANIMAL_IMAGE_KEY_WIDTH_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_IMAGE_URL'
+
+# photo_id
+ANIMAL_IMAGE_PHOTO_ID = 'photo_id'
+ANIMAL_IMAGE_KEY_PHOTO_ID = 'ID фотографии'
+ANIMAL_IMAGE_KEY_PHOTO_ID_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_WIDTH'
+
 
 # favourite TODO: грамматическая ошибка
 ANIMAL_IMAGE_FAVOURITE = 'favourite'
@@ -131,7 +137,10 @@ ANIMAL_KEY_VK_ALBUM_ID_HELP_TEXT = 'ID альбома в VK'
 # vk_album_url
 ANIMAL_VK_ALBUM_URL = 'vk_album_url'
 ANIMAL_KEY_VK_ALBUM_URL = 'Ссылка на альбом в VK'
-ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT = 'Укажите ссылку на альбом питомца для загрузки фото.'
+ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT = 'Для изменения необходмо сохранить.'
+ANIMAL_VK_ALBUM_URL_WRONG_FORMAT = '''Ссылка имеет недопустимое значение. 
+Пример: https://vk.com/album-{group_id}_12345'''.format(group_id=VK_GROUP_ID)
+ANIMAL_VK_ALBUM_URL_IS_EMPTY = 'Необходимо заполнить поле "{VK_ALBUM_URL}"'.format(VK_ALBUM_URL=ANIMAL_KEY_VK_ALBUM_URL)
 
 ANIMAL_FORM_VK_UPDATE = 'vk_update'
 ANIMAL_KEY_FORM_VK_UPDATE = 'Обновить всю информацию из VK (фото, имя, описание)'

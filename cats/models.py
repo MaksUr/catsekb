@@ -1,5 +1,6 @@
 from datetime import date
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Model, CharField, TextField, ForeignKey, DateTimeField, BooleanField, ManyToManyField, \
     URLField, IntegerField, DateField, ImageField
 # Create your models here.
@@ -19,7 +20,7 @@ from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOS
     ANIMAL_KEY_LOCATION_STATUS, ANIMAL_SEX_CHOICES, ANIMAL_BIRTHDAY_PRECISION_CHOICES, ANIMAL_LOCATION_STATUS_CHOICES, \
     ANIMAL_KEY_TAG, URL_NAME_GROUP, ANIMAL_IMAGE_KEY_BACKGROUND, ANIMAL_IMAGE_KEY_FAVOURITE, \
     ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION, ANIMAL_LOCATION_STATUS_CHOICES_D, ANIMAL_SEX_CHOICES_D, \
-    ANIMAL_KEY_VK_ALBUM_ID, ANIMAL_IMAGE_ANIMAL
+    ANIMAL_KEY_VK_ALBUM_ID, ANIMAL_IMAGE_ANIMAL, ANIMAL_IMAGE_KEY_PHOTO_ID, ANIMAL_IMAGE_PHOTO_ID
 from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
 from cats.validators import group_name_validator, background_y_position_validator
@@ -178,6 +179,15 @@ class Animal(Model):
 
     def add_animal_image(self, **kwargs):
         kwargs[ANIMAL_IMAGE_ANIMAL] = self
+        if kwargs.get(ANIMAL_IMAGE_PHOTO_ID) is not None:
+            try:
+                AnimalImage.objects.get(**kwargs)
+            except (AnimalImage.MultipleObjectsReturned,):
+                return True
+            except ObjectDoesNotExist:
+                pass
+            else:
+                return True
         try:
             ai = AnimalImage(**kwargs)
         except TypeError:
@@ -191,6 +201,7 @@ class Animal(Model):
 class AnimalImage(Model):
     animal = ForeignKey(Animal)
     image_url = URLField(ANIMAL_IMAGE_KEY_IMAGE_URL, default=None)
+    photo_id = IntegerField(ANIMAL_IMAGE_KEY_PHOTO_ID, blank=True, default=None, null=True)
     width = IntegerField(ANIMAL_IMAGE_KEY_WIDTH, blank=True, default=None, null=True)
     height = IntegerField(ANIMAL_IMAGE_KEY_HEIGHT, blank=True, default=None, null=True)
     favourite = BooleanField(ANIMAL_IMAGE_KEY_FAVOURITE, default=False)

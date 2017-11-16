@@ -18,7 +18,8 @@ from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECI
     ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT, ANIMAL_IMAGE_KEY_WIDTH_HELP_TEXT, ANIMAL_IMAGE_IMAGE_URL, \
     ANIMAL_IMAGE_ANIMAL, ANIMAL_IMAGE_KEY_ANIMAL_HELP_TEXT, ANIMAL_VK_ALBUM_ID, \
     ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT, ANIMAL_KEY_VK_ALBUM_URL, \
-    ANIMAL_VK_ALBUM_URL, ANIMAL_FORM_VK_UPDATE, ANIMAL_FORM_VK_UPDATE_DESCR
+    ANIMAL_VK_ALBUM_URL, ANIMAL_FORM_VK_UPDATE, ANIMAL_FORM_VK_UPDATE_DESCR, ANIMAL_VK_ALBUM_URL_WRONG_FORMAT
+
 from cats.models import Animal, AnimalImage
 from cats.time import get_date_from_age, calc_age_uptoday
 from cats.vk_api.vk_import import get_animal_name_from_vk_album, get_vk_album_id_from_url, \
@@ -203,8 +204,11 @@ class AnimalForm(forms.ModelForm):
 
     def clean_vk_album_url(self):
         vk_alb_url = self.cleaned_data.get(ANIMAL_VK_ALBUM_URL)
-        vk_album_id = get_vk_album_id_from_url(vk_alb_url)
-        self.instance.vk_album_id = vk_album_id
+        if vk_alb_url:
+            vk_album_id = get_vk_album_id_from_url(vk_alb_url)
+            if vk_album_id is None:
+                raise ValidationError(ANIMAL_VK_ALBUM_URL_WRONG_FORMAT)
+            self.instance.vk_album_id = vk_album_id
         return vk_alb_url
 
 
