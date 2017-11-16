@@ -67,18 +67,16 @@
     top: 5vh;
     right: 40px;
     z-index: 116;
-    text-transform: uppercase;
     cursor: pointer;
     visibility: hidden;
-    padding: 10px;
 }
 
+
+.close_increase a {
+    margin: 0;
+}
 .vis {
     visibility: visible;
-}
-
-.close_increase:hover span  {
-    color: #a3b1db;
 }
 
 .prev_photo {

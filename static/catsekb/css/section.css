@@ -6,10 +6,10 @@
 }
 
 .cat_container {
-	width: 100px;
+	width: 80px;
     height: 150px;
     position: absolute;
-    top: -20px;
+    top: 0;
     left: 0;
     z-index: 10;
 }

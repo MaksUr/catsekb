@@ -69,13 +69,10 @@ a, a:link, a:visited, a:hover, a:active  {
 }
 
 a.tag {
-	display: inline-block !important;
     margin: 10px 15px 0 5px;
-}
-
-a.tag:hover {
-	color: #526aa5;
-
+    border-radius: 3px;
+    border: 1px #7676ff solid;
+    padding: 10px;
 }
 
 .tag:first-child, .tag.no_active:first-child {
@@ -92,11 +89,16 @@ a.tag:hover {
     margin: 10px 5px 0 5px;
 	color: #c5c5c5;
 }
-a.hashtag {
+
+.tag.no_active:hover {
+	color: #c5c5c5;
+}
+a.hashtag, .tag {
 	color: #7676ff;
 }
-a.hashtag:hover {
+a.hashtag:hover, .tag:hover {
 	color: #4747ff;
+	border-color: #4747ff;
 }
 .top_nav a:hover, .menu a:hover { 
 	color: #526aa5;
