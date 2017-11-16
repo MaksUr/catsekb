@@ -201,6 +201,7 @@ class Animal(Model):
 class AnimalImage(Model):
     animal = ForeignKey(Animal)
     image_url = URLField(ANIMAL_IMAGE_KEY_IMAGE_URL, default=None)
+    # TODO: add small_image_url
     photo_id = IntegerField(ANIMAL_IMAGE_KEY_PHOTO_ID, blank=True, default=None, null=True)
     width = IntegerField(ANIMAL_IMAGE_KEY_WIDTH, blank=True, default=None, null=True)
     height = IntegerField(ANIMAL_IMAGE_KEY_HEIGHT, blank=True, default=None, null=True)

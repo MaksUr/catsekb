@@ -22,8 +22,8 @@ from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECI
 
 from cats.models import Animal, AnimalImage
 from cats.time import get_date_from_age, calc_age_uptoday
-from cats.vk_api.vk_import import get_animal_name_from_vk_album, get_vk_album_id_from_url, \
-    get_animal_descr_from_vk_album
+from cats.vk_api.vk_import import get_animal_name_from_vk_response, get_vk_album_id_from_url, \
+    get_animal_descr_from_vk_response
 
 
 def get_range(size):
@@ -94,13 +94,15 @@ class AnimalForm(forms.ModelForm):
         return res
 
     @staticmethod
+    # TODO: get response
     def get_vk_update(instance, upd_type):
         res = dict()
+
         if upd_type in (ANIMAL_FORM_VK_UPDATE, ANIMAL_FORM_VK_UPDATE_DESCR):
-            res[ANIMAL_DESCRIPTION] = get_animal_descr_from_vk_album(vk_album=instance.vk_album_id)
+            res[ANIMAL_DESCRIPTION] = get_animal_descr_from_vk_response(response=instance.vk_album_id)
 
         if upd_type == ANIMAL_FORM_VK_UPDATE:
-            res[ANIMAL_NAME] = get_animal_name_from_vk_album(vk_album=instance.vk_album_id)
+            res[ANIMAL_NAME] = get_animal_name_from_vk_response(vk_album=instance.vk_album_id)
 
         return res
 
