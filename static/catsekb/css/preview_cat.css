@@ -4,8 +4,7 @@
 }
 
 .pagination_cats { 
-    margin-top: 40px;
-    background-color: rgba(241, 236, 233, .8);
+    margin-top: 20px;
     display: block;
 }
 
@@ -96,14 +95,16 @@
     height: 10%;
     width: 10%;
     top: 40%;
+    opacity: .7;
+    transition: opacity .5s;
     background-position: 50% 43%;
     background-size: 30px;
     background-repeat: no-repeat;
 }
 
 .prev_photo:hover, .next_photo:hover {
-    background-color: rgba(224, 224, 224, .45);
     cursor: pointer;
+    opacity: 1;
 }
 
 .count_photo_layer {
@@ -146,7 +147,7 @@
 	overflow-y: hidden;
 }*/
 .request {
-	margin-top: 20px;
+	margin: 25px 0 30px 0;
 }
 /*.cat_a_letter {
 	position: absolute;

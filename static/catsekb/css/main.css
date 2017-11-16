@@ -47,16 +47,11 @@ footer {
 a {
 	padding-bottom: 5px;
 	display: inline-block;
-	border-bottom: 1px rgba(255, 0, 0, 0) solid;
+	color: #004040;
 }
 
 a, a:link, a:visited, a:hover, a:active  {
 	text-decoration: none;
-	color: #2f2727;
-}
-
-a:visited { 
-	color: #4c3e3e;
 }
 
 .but {
@@ -75,10 +70,7 @@ a:visited {
 
 a.tag {
 	display: inline-block !important;
-    color: #333;
-    border-radius: 3px;
-    background-color: rgba(241, 236, 233, 1);
-    margin: 10px 5px 0 5px;
+    margin: 10px 15px 0 5px;
 }
 
 a.tag:hover {
@@ -107,7 +99,7 @@ a.hashtag:hover {
 	color: #4747ff;
 }
 .top_nav a:hover, .menu a:hover { 
-	border-bottom: 1px #705344 solid;
+	color: #526aa5;
 }
 
 ul {

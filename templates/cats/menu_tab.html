@@ -5,7 +5,7 @@
 {# menu_items? #}
 {# menu_class? #}
 <li>
-    <a href="{{ abs_url }}"{% ifequal name active %} style="border-bottom: 1px #705344 solid;"{% endifequal %}>{{ url_caption }}</a>
+    <a href="{{ abs_url }}"{% ifequal name active %} style="color: #526aa5;"{% endifequal %}>{{ url_caption }}</a>
     {% if menu_items %}
         <ul class="{{ menu_class }}">
         {% for item in menu_items %}
