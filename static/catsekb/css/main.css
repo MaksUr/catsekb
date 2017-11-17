@@ -71,6 +71,7 @@ a, a:link, a:visited, a:hover, a:active  {
 a.tag {
     padding: 10px;
     font-weight: 600;
+    text-transform: uppercase;
 }
 
 .tag:first-child, .tag.no_active:first-child {
@@ -83,21 +84,20 @@ a.tag {
 
 .tag.no_active {
 	display: inline-block;
-    border-radius: 3px;
-    margin: 10px 5px 0 5px;
 	color: #c5c5c5;
+	padding: 10px;
 }
 
 .tag.no_active:hover {
 	color: #c5c5c5;
 }
 a.hashtag, .tag {
-	color: #7676ff;
+	color: #8c8cff;
 }
 a.hashtag:hover, .tag:hover {
-	color: #4747ff;
-	border-color: #4747ff;
+	color: #5858ff;
 }
+
 .top_nav a:hover, .menu a:hover { 
 	color: #526aa5;
 }

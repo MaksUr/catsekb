@@ -34,10 +34,6 @@
 	.tag.pag_gallery {
 		display: inline-block;	
 	}
-	a.tag, .tag.no_active {
-		display: block;
-		margin: 0 0 10px 0;
-	}
 	.mobile_list {
 		visibility: visible;
 	}
@@ -97,7 +93,7 @@
 	    top: 0;
 	    left: 0;
 	    margin: 0;
-	    height: 90%;
+	    height: 85%;
 	}
 
 	.prev_photo, .next_photo {
