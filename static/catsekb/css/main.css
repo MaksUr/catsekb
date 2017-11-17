@@ -17,6 +17,9 @@ body {
 	overflow-x: hidden;
 }
 
+.overY {
+	overflow-y: hidden;
+}
 /* Отступы между секциями */
 section {
 	padding: 50px 0;
@@ -71,16 +74,9 @@ a, a:link, a:visited, a:hover, a:active  {
 a.tag {
     padding: 10px;
     font-weight: 600;
-    text-transform: uppercase;
+    background-color: rgba(255, 255, 255, .75);
+    border-radius: 3px;
 }
-
-.tag:first-child, .tag.no_active:first-child {
-	margin-left: 0;
-}
-.tag:last-child, .tag.no_active:last-child {
-	margin-right: 0;
-}
-
 
 .tag.no_active {
 	display: inline-block;
@@ -91,10 +87,10 @@ a.tag {
 .tag.no_active:hover {
 	color: #c5c5c5;
 }
-a.hashtag, .tag {
-	color: #8c8cff;
+.hashtag, .tag {
+	color: #8585ff;
 }
-a.hashtag:hover, .tag:hover {
+.hashtag:hover, .tag:hover {
 	color: #5858ff;
 }
 
@@ -151,5 +147,4 @@ input.but:hover {
 }
 
 /* <---------- form END ----------> */
-
 

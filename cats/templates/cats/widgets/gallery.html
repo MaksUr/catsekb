@@ -28,7 +28,7 @@
                                 <a href="{% url 'animal_detail' pk=animal.id %}{{ filter_parameters }}">
                                     <div class="cat_find" style="background-image: url({{ animal.get_image.image_url }});">
                                     </div>
-                                    <div class="cat_find_name mid">{{ animal.get_hashtag_name }}</div>
+                                    <div class="hashtag cat_find_name mid">{{ animal.get_hashtag_name }}</div> <!-- # T0D0: #Зефир,_Крем,_Сливка,_Трюфелька_catsekb..... - обрезать строку если больше 25 символов # -->
                                     <div class="cat_find_layer"></div>
                                 </a>
                             </div>
@@ -36,11 +36,11 @@
                     {% endfor %}
                 </div>
             </div>
-            {% if page_obj %}
-                {% if page_obj.paginator.num_pages > 1 %}
-                    <div class="row">
-                        <div class="col-xs-12 col-xs-offset-0">
-                            <div class="nav_gallery mid">
+            {% if page_obj %}                
+                <div class="row">
+                    <div class="col-xs-12 col-xs-offset-0">
+                        <div class="nav_gallery mid">
+                            {% if page_obj.paginator.num_pages > 1 %}
                                 {% load app_filters %}
                                 <span>Страница: {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
                                 <p class="pagination_cats mid font">
@@ -51,29 +51,34 @@
                                             <a href="?{{ request.GET|change_page:page_obj.previous_page_number }}#anchor_cat" class="tag pag_gallery">Назад</a>
                                         {% endwith %}
                                     {% else %}
-                                        <span class="tag no_active">Назад</span>
+                                        <a class="tag no_active pag_gallery">Назад</a>
                                     {% endif %}
-                                        <a href="?per_page=all{% if request.GET.urlencode %}&{{ request.GET.urlencode }}{% endif %}" class="tag pag_gallery">Показать всех</a>
-                                        {% else %}
-                                            Кнопка показать всех - неактивна!
-                                        {% endif %}
+
+
+                                    <a href="?per_page=all{% if request.GET.urlencode %}&{{ request.GET.urlencode }}{% endif %}" class="tag pag_gallery">Показать всех</a>
+                                        
+
+
                                     {# next #}
                                     {% if page_obj.has_next %}
                                         {% with next_id=page_obj.paginator.object_list|return_item_by_index:page_obj.next_page_number %}
                                             <a href="?{{ request.GET|change_page:page_obj.next_page_number }}#anchor_cat" class="tag pag_gallery">Далее</a>
                                         {% endwith %}
                                     {% else %}
-                                        <span class="tag no_active">Далее</span>
+                                        <a class="tag no_active pag_gallery">Далее</a>
                                     {% endif %}
                                     
                                 </p>
-                            </div>
+                            {% else %}
+                                <!-- Кнопка показать всех - неактивна! -->
+                                <a class="tag no_active pag_gallery">Назад</a>
+                                <a class="tag no_active pag_gallery">Показать всех</a>
+                                <a class="tag no_active pag_gallery">Далее</a>
+                            {% endif %}
                         </div>
                     </div>
-                    
-                
+                </div>                
             {% endif %}
-
         </div>
     </div>
 </section>
