@@ -54,8 +54,15 @@ ANIMAL_IMAGE_KEY_IMAGE_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_IMAGE'
 
 # image_url
 ANIMAL_IMAGE_IMAGE_URL = 'image_url'
+ANIMAL_IMAGE_IMAGE_URL_TAG = 'image_url_tag'
 ANIMAL_IMAGE_KEY_IMAGE_URL = 'URL изображения'
-ANIMAL_IMAGE_KEY_WIDTH_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_IMAGE_URL'
+ANIMAL_IMAGE_KEY_IMAGE_URL_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_IMAGE_URL'
+
+# image_small_url
+ANIMAL_IMAGE_IMAGE_SMALL_URL = 'image_small_url'
+ANIMAL_IMAGE_IMAGE_SMALL_URL_TAG = 'image_small_url_tag'
+ANIMAL_IMAGE_KEY_IMAGE_SMALL_URL = 'URL сжатого изображения'
+ANIMAL_IMAGE_KEY_IMAGE_SMALL_URL_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_IMAGE_SMALL_URL'
 
 # photo_id
 ANIMAL_IMAGE_PHOTO_ID = 'photo_id'
@@ -73,6 +80,11 @@ ANIMAL_IMAGE_BACKGROUND = 'background'
 ANIMAL_IMAGE_KEY_BACKGROUND = 'Использовать для фона страницы с котом.'
 ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT = 'Фоновое изображение страницы с котом. Рекомендуется использовать предпросмотр.'
 
+# created
+ANIMAL_IMAGE_CREATED = 'created'
+ANIMAL_IMAGE_KEY_CREATED = 'Дата создания'
+ANIMAL_IMAGE_KEY_CREATED_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_CREATED'
+
 # background_y_position
 ANIMAL_IMAGE_BACKGROUND_Y_POSITION = 'background_y_position'
 ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION = 'Настройка позиции фонового изображения по вертикали.'
@@ -83,16 +95,6 @@ ANIMAL_IMAGE_VALIDATION_WRONG_Y_POS = '{val} имеет недопустимое
 ANIMAL_IMAGE_IMAGE_THUMB = 'image_thumb'
 ANIMAL_IMAGE_KEY_IMAGE_THUMB = 'Фото'
 ANIMAL_IMAGE_KEY_IMAGE_THUMB_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_IMAGE_THUMB'
-
-# width
-ANIMAL_IMAGE_WIDTH = 'width'
-ANIMAL_IMAGE_KEY_WIDTH = 'Ширина'
-ANIMAL_IMAGE_KEY_IMAGE_URL_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_IMAGE_URL'
-
-# height
-ANIMAL_IMAGE_HEIGHT = 'height'
-ANIMAL_IMAGE_KEY_HEIGHT = 'Высота'
-ANIMAL_IMAGE_KEY_HEIGHT_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_HEIGHT'
 
 
 # class Animal
@@ -219,6 +221,11 @@ ANIMAL_BIRTHDAY_PRECISION_CHOICES = (
 ANIMAL_DATE_OF_BIRTH = 'date_of_birth'
 ANIMAL_KEY_DATE_OF_BIRTH = 'День рождения'
 ANIMAL_KEY_DATE_OF_BIRTH_HELP_TEXT = '_help_text ANIMAL_KEY_DATE_OF_BIRTH'
+
+# shelter_date
+ANIMAL_SHELTER_DATE = 'shelter_date'
+ANIMAL_KEY_SHELTER_DATE = 'В приюте'
+ANIMAL_KEY_SHELTER_DATE_HELP_TEXT = 'Примерная дата попадания в приют'
 
 # group
 ANIMAL_GROUP = 'group'

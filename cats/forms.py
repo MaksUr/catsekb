@@ -15,13 +15,15 @@ from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECI
     ANIMAL_LOCATION_STATUS, ANIMAL_SEX_CHOICES, ANIMAL_LOCATION_STATUS_CHOICES, ANIMAL_KEY_LOCATION_STATUS, ANIMAL_TAG, \
     ANIMAL_KEY_TAG_HELP_TEXT, ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND, ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT, \
     ANIMAL_IMAGE_KEY_FAVOURITE_HELP_TEXT, ANIMAL_IMAGE_BACKGROUND_Y_POSITION, \
-    ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT, ANIMAL_IMAGE_KEY_WIDTH_HELP_TEXT, ANIMAL_IMAGE_IMAGE_URL, \
+    ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT, ANIMAL_IMAGE_IMAGE_URL, \
     ANIMAL_IMAGE_ANIMAL, ANIMAL_IMAGE_KEY_ANIMAL_HELP_TEXT, ANIMAL_VK_ALBUM_ID, \
     ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT, ANIMAL_KEY_VK_ALBUM_URL, \
-    ANIMAL_VK_ALBUM_URL, ANIMAL_FORM_VK_UPDATE, ANIMAL_FORM_VK_UPDATE_DESCR, ANIMAL_VK_ALBUM_URL_WRONG_FORMAT
+    ANIMAL_VK_ALBUM_URL, ANIMAL_FORM_VK_UPDATE, ANIMAL_FORM_VK_UPDATE_DESCR, ANIMAL_VK_ALBUM_URL_WRONG_FORMAT, \
+    ANIMAL_IMAGE_KEY_IMAGE_URL_HELP_TEXT, VK_GROUP_ID, ANIMAL_IMAGE_CREATED, ANIMAL_IMAGE_KEY_CREATED_HELP_TEXT
 
 from cats.models import Animal, AnimalImage
 from cats.time import get_date_from_age, calc_age_uptoday
+from cats.vk_api.vk_api_functions import get_album
 from cats.vk_api.vk_import import get_animal_name_from_vk_response, get_vk_album_id_from_url, \
     get_animal_descr_from_vk_response
 
@@ -97,13 +99,16 @@ class AnimalForm(forms.ModelForm):
     # TODO: get response
     def get_vk_update(instance, upd_type):
         res = dict()
-
+        response = get_album(group_id=VK_GROUP_ID, album_id=instance.vk_album_id)
         if upd_type in (ANIMAL_FORM_VK_UPDATE, ANIMAL_FORM_VK_UPDATE_DESCR):
-            res[ANIMAL_DESCRIPTION] = get_animal_descr_from_vk_response(response=instance.vk_album_id)
+            descr = get_animal_descr_from_vk_response(response=response)
+            if descr:
+                res[ANIMAL_DESCRIPTION] = descr
 
         if upd_type == ANIMAL_FORM_VK_UPDATE:
-            res[ANIMAL_NAME] = get_animal_name_from_vk_response(vk_album=instance.vk_album_id)
-
+            name = get_animal_name_from_vk_response(response=response)
+            if name:
+                res[ANIMAL_NAME] = name
         return res
 
     class Meta:
@@ -252,30 +257,25 @@ class FilterForm(forms.Form):
             )
 
 
-# TODO: implement class AnimalImageForm
 class AnimalImageForm(forms.ModelForm):
 
     class Meta:
         model = AnimalImage
         fields = [
             ANIMAL_IMAGE_ANIMAL,
-            ANIMAL_IMAGE_IMAGE_URL,
             ANIMAL_IMAGE_FAVOURITE,
             ANIMAL_IMAGE_BACKGROUND,
             ANIMAL_IMAGE_BACKGROUND_Y_POSITION,
+            ANIMAL_IMAGE_CREATED,
         ]
 
         help_texts = {
             ANIMAL_IMAGE_ANIMAL: ANIMAL_IMAGE_KEY_ANIMAL_HELP_TEXT,
-            ANIMAL_IMAGE_IMAGE_URL: ANIMAL_IMAGE_KEY_WIDTH_HELP_TEXT,
             ANIMAL_IMAGE_FAVOURITE: ANIMAL_IMAGE_KEY_FAVOURITE_HELP_TEXT,
             ANIMAL_IMAGE_BACKGROUND: ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT,
             ANIMAL_IMAGE_BACKGROUND_Y_POSITION: ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT,
+            ANIMAL_IMAGE_CREATED: ANIMAL_IMAGE_KEY_CREATED_HELP_TEXT,
         }
-
-    def clean_image_url(self):
-        res = self.cleaned_data.get(ANIMAL_IMAGE_IMAGE_URL)
-        return res
 
     def clean(self):
         cleaned_data = forms.ModelForm.clean(self)
