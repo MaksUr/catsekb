@@ -13,7 +13,7 @@
             {% endif %}
 
             {% if request.GET %}
-                <a href="{% url 'animal_list' %}?{{ request.GET.urlencode }}#anchor_cat" class="tag">К списку</a>
+                <a href="{% url 'animal_list' %}?{{ request.GET.urlencode }}#anchor_cat" class="tag">Вернуться к списку</a>
             {% endif %}
 
             {# next #}           

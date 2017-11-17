@@ -71,7 +71,7 @@ a, a:link, a:visited, a:hover, a:active  {
     background-color: #475f9a;
 }
 
-a.tag {
+.tag {
     padding: 10px;
     font-weight: 600;
     background-color: rgba(255, 255, 255, .75);
@@ -116,6 +116,10 @@ ul {
 
 /* <---------- form BEGIN ----------> */
 
+.search_form {
+	border: 1px #a2e5ff solid;
+	padding: 50px;
+}
 .search {
 	background-color: #fff;
 	padding: 0 0 30px 0;
@@ -132,9 +136,14 @@ ul {
 .form_elem input {
 	margin: 4px 0 0 4px;
 	border-radius: 3px;
-	border: 1px #7ca2ff solid;
+	border: 1px #8585ff solid;
+	padding-left: 5px;
 }
 
+
+.form_elem li {
+	margin: 1px 0;
+}
 input[type="submit"] {
 	margin: 15px 0 0 0;
 }

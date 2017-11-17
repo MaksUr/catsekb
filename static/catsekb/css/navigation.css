@@ -119,11 +119,6 @@
 
 .mobile_nav_opened a {
 	padding: 0;
-	border: none;
-}
-
-nav {
-	position: relative;
 }
 
 .mobile_menu {
@@ -156,10 +151,6 @@ nav {
 
 .mobile_list_1 > li:first-child {
 	margin-top: 0;
-}
-
-.mobile_nav_opened a:hover, .logo_top_nav a:hover {
-	color: #526aa5;
 }
 
 .mobile_nav_opened .top_logo {
