@@ -36,6 +36,7 @@ URL_NAME_ANIMAL = 'animal_detail'
 
 APPLICATION_VERBOSE_NAME = 'Котики'  # Название приложения
 
+VK_GROUP_ID = 73666865
 
 # class AnimalImage
 ANIMAL_IMAGE_VERBOSE_NAME_PLURAL = 'Фотографии'
@@ -53,8 +54,21 @@ ANIMAL_IMAGE_KEY_IMAGE_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_IMAGE'
 
 # image_url
 ANIMAL_IMAGE_IMAGE_URL = 'image_url'
+ANIMAL_IMAGE_IMAGE_URL_TAG = 'image_url_tag'
 ANIMAL_IMAGE_KEY_IMAGE_URL = 'URL изображения'
-ANIMAL_IMAGE_KEY_WIDTH_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_WIDTH'
+ANIMAL_IMAGE_KEY_IMAGE_URL_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_IMAGE_URL'
+
+# image_small_url
+ANIMAL_IMAGE_IMAGE_SMALL_URL = 'image_small_url'
+ANIMAL_IMAGE_IMAGE_SMALL_URL_TAG = 'image_small_url_tag'
+ANIMAL_IMAGE_KEY_IMAGE_SMALL_URL = 'URL сжатого изображения'
+ANIMAL_IMAGE_KEY_IMAGE_SMALL_URL_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_IMAGE_SMALL_URL'
+
+# photo_id
+ANIMAL_IMAGE_PHOTO_ID = 'photo_id'
+ANIMAL_IMAGE_KEY_PHOTO_ID = 'ID фотографии'
+ANIMAL_IMAGE_KEY_PHOTO_ID_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_WIDTH'
+
 
 # favourite TODO: грамматическая ошибка
 ANIMAL_IMAGE_FAVOURITE = 'favourite'
@@ -65,6 +79,11 @@ ANIMAL_IMAGE_KEY_FAVOURITE_HELP_TEXT = 'Основное изображение 
 ANIMAL_IMAGE_BACKGROUND = 'background'
 ANIMAL_IMAGE_KEY_BACKGROUND = 'Использовать для фона страницы с котом.'
 ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT = 'Фоновое изображение страницы с котом. Рекомендуется использовать предпросмотр.'
+
+# created
+ANIMAL_IMAGE_CREATED = 'created'
+ANIMAL_IMAGE_KEY_CREATED = 'Дата создания'
+ANIMAL_IMAGE_KEY_CREATED_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_CREATED'
 
 # background_y_position
 ANIMAL_IMAGE_BACKGROUND_Y_POSITION = 'background_y_position'
@@ -77,26 +96,12 @@ ANIMAL_IMAGE_IMAGE_THUMB = 'image_thumb'
 ANIMAL_IMAGE_KEY_IMAGE_THUMB = 'Фото'
 ANIMAL_IMAGE_KEY_IMAGE_THUMB_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_IMAGE_THUMB'
 
-# alt
-ANIMAL_IMAGE_ALT = 'alt'
-ANIMAL_IMAGE_KEY_ALT = 'Подпись к фото'
-ANIMAL_IMAGE_KEY_HEIGHT_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_HEIGHT'
-
-# width
-ANIMAL_IMAGE_WIDTH = 'width'
-ANIMAL_IMAGE_KEY_WIDTH = 'Ширина'
-ANIMAL_IMAGE_KEY_IMAGE_URL_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_IMAGE_URL'
-
-# height
-ANIMAL_IMAGE_HEIGHT = 'height'
-ANIMAL_IMAGE_KEY_HEIGHT = 'Высота'
-ANIMAL_IMAGE_KEY_ALT_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_ALT'
-
 
 # class Animal
 ANIMAL_VERBOSE_NAME_PLURAL = 'Питомцы'
 ANIMAL_VERBOSE_NAME = 'Питомец'
 ANIMAL_MAIN_FIELD_SET = 'Общая информация'
+ANIMAL_VK_IMPORT_SET = 'Импорт данных из группы в VK'
 
 # tag
 ANIMAL_TAG_FIELD_SET = 'Настройка хэштега'
@@ -119,12 +124,34 @@ HASHTAG_SUFFIX = 'catsekb'
 ANIMAL_NAME = 'name'
 ANIMAL_KEY_NAME = 'Имя'
 ANIMAL_KEY_NAME_HELP_TEXT = '_help_text ANIMAL_KEY_NAME'
-ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST = '"{name}" уже сущесвтует'
+ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST = '"{name}" уже существует'
 
 # description
 ANIMAL_DESCRIPTION = 'description'
 ANIMAL_KEY_DESCRIPTION = 'Описание'
 ANIMAL_KEY_DESCRIPTION_HELP_TEXT = '_help_text ANIMAL_DESCRIPTION_KEY_DESCRIPTION'
+
+# vk_album_id
+ANIMAL_VK_ALBUM_ID = 'vk_album_id'
+ANIMAL_KEY_VK_ALBUM_ID = 'ID альбома в VK'
+ANIMAL_KEY_VK_ALBUM_ID_HELP_TEXT = 'ID альбома в VK'
+
+# vk_album_url
+ANIMAL_VK_ALBUM_URL = 'vk_album_url'
+ANIMAL_KEY_VK_ALBUM_URL = 'Ссылка на альбом в VK'
+ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT = 'Для изменения необходмо сохранить.'
+ANIMAL_VK_ALBUM_URL_WRONG_FORMAT = '''Ссылка имеет недопустимое значение. 
+Пример: https://vk.com/album-{group_id}_12345'''.format(group_id=VK_GROUP_ID)
+ANIMAL_VK_ALBUM_URL_IS_EMPTY = 'Необходимо заполнить поле "{VK_ALBUM_URL}"'.format(VK_ALBUM_URL=ANIMAL_KEY_VK_ALBUM_URL)
+
+ANIMAL_FORM_VK_UPDATE = 'vk_update'
+ANIMAL_KEY_FORM_VK_UPDATE = 'Обновить всю информацию из VK (фото, имя, описание)'
+
+ANIMAL_FORM_VK_UPDATE_PHOTO = 'vk_update_photo'
+ANIMAL_KEY_FORM_VK_UPDATE_PHOTO = 'Обновить фото'
+
+ANIMAL_FORM_VK_UPDATE_DESCR = 'vk_update_descr'
+ANIMAL_KEY_FORM_VK_UPDATE_DESCR = 'Обновить описание'
 
 # sex
 ANIMAL_SEX = 'sex'
@@ -195,6 +222,11 @@ ANIMAL_DATE_OF_BIRTH = 'date_of_birth'
 ANIMAL_KEY_DATE_OF_BIRTH = 'День рождения'
 ANIMAL_KEY_DATE_OF_BIRTH_HELP_TEXT = '_help_text ANIMAL_KEY_DATE_OF_BIRTH'
 
+# shelter_date
+ANIMAL_SHELTER_DATE = 'shelter_date'
+ANIMAL_KEY_SHELTER_DATE = 'В приюте'
+ANIMAL_KEY_SHELTER_DATE_HELP_TEXT = 'Примерная дата попадания в приют'
+
 # group
 ANIMAL_GROUP = 'group'
 ANIMAL_KEY_GROUP_HELP_TEXT = '_help_text ANIMAL_KEY_GROUP'
@@ -257,6 +289,7 @@ FIELD_VALUE_KEY_FIELD_TYPE_HELP_TEXT = '_help_text FIELD_VALUE_KEY_VALUE_TEXT'
 # class FieldType
 FIELD_TYPE_VERBOSE_NAME = 'Тип особенности'
 FIELD_TYPE_VERBOSE_NAME_PLURAL = 'Типы особенностей'
+FIELD_TYPE_PREFIX = 'ft_'
 
 # name
 FIELD_TYPE_NAME = 'name'

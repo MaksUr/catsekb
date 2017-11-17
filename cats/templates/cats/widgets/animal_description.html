@@ -29,14 +29,6 @@
         </li>
     {% endif %}
 
-    {# stay_time TODO: implement stay time #}
-    <li>
-        <span class="property_name">В приюте: </span>49 дней (заглушка)
-        {# Если есть дата пристроя, отображается надпись обрел дом - количество дней #}
-        {# Иначе если есть дата пристроя в приют - отображается надпись в приюте - дней #}
-        {# Иначе ничего не выводить #}
-    </li>
-
     {# sex #}
     {% if animal.sex %}
         <li>
@@ -55,6 +47,28 @@
                 <span>
                     {% if age.years > 0 %}
                     {{ age.years }} лет 
+                    {% endif %}
+                    {% if age.months > 0 %}
+                    {{ age.months }} месяцев
+                    {% endif %}
+                    {% if age.days > 0 %}
+                    {{ age.days }} дней
+                    {% endif %}
+                </span>
+            {% endwith %}
+        </li>
+    {% endif %}
+
+    {# shelter_date #}
+    {% if animal.shelter_date %}
+        <li>
+            <span class="property_name">
+                {% get_verbose_field_name animal 'shelter_date' %}:
+            </span> ~
+            {% with animal.get_shelter_time as age %}
+                <span>
+                    {% if age.years > 0 %}
+                    {{ age.years }} лет
                     {% endif %}
                     {% if age.months > 0 %}
                     {{ age.months }} месяцев

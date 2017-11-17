@@ -9,7 +9,7 @@ from cats.constants import GROUP_ALL_ANIMALS_NAME, ANIMAL_CREATED, ANIMAL_SHOW, 
     ANIMAL_LOCATION_STATUS_CHOICE_HOME, ANIMAL_LOCATION_STATUS_CHOICE_SHELTER, ANIMAL_LOCATION_STATUS, \
     CAPTION_ANIMAL_LIST_DEFAULT, GROUP_ID, GROUP_ALL_ANIMALS_NAME_DESCR, ANIMAL_LOCATION_STATUS_HOME_DESСR, \
     ANIMAL_LOCATION_STATUS_SHELTER_DESСR, ANIMAL_LOCATION_STATUS_DEAD, ANIMAL_LOCATION_STATUS_CHOICE_DEAD, \
-    ANIMAL_LOCATION_STATUS_DEAD_DESСR, INDEX, ANIMALS
+    ANIMAL_LOCATION_STATUS_DEAD_DESСR, INDEX, ANIMALS, FIELD_TYPE_PREFIX
 from cats.forms import FilterForm
 from cats.models import Animal, Group, Article, FieldType, FieldValue
 
@@ -61,7 +61,7 @@ def get_fields():
     field_types = FieldType.objects.all()
     for field_type in field_types:
         item = dict()
-        item['id'] = field_type.id
+        item['id'] = FIELD_TYPE_PREFIX + str(field_type.id)
         item['label'] = field_type.name
         item['choices'] = [(i.id, i.value_text) for i in FieldValue.objects.filter(field_type=field_type)]
         res.append(item)
@@ -220,9 +220,7 @@ class AnimalDetailView(DetailView):
     @staticmethod
     def get_animal_page(animals, animal):
         if animal not in animals:
-            # TODO: redirect without group
             return None
-            # raise Http404('Анимал отсутствует в данной группе')
         else:
             animals_id_list = [i.id for i in animals]
             try:
@@ -232,7 +230,6 @@ class AnimalDetailView(DetailView):
             paginator = Paginator(animals_id_list, 1)
             page = paginator.page(page_number)
             return page
-
 
 # TODO: Create new app
 def InfoDetailView(request, pk):
@@ -281,7 +278,6 @@ def index_view(request):
     show_permission = request.user.is_authenticated()
     context = get_base_context(show_permission=show_permission, active_menu=INDEX)
     query = {ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_SHELTER}
-    # TODO: только с избранными изображениями
     shelter_animals = get_animals_from_query(
         query=query, show_permission=show_permission
     ).order_by('?')
