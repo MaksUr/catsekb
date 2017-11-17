@@ -1,8 +1,6 @@
+var nav_bar = document.querySelector('.nav_bar');
+
 var top_nav = document.querySelector('.top_nav');
-
-var top_logo = document.querySelector('.top_logo');
-
-var top_menu = document.querySelector('.top_menu');
 
 var mobile_menu = document.querySelector('.mobile_menu');
 
@@ -35,14 +33,12 @@ function go(val) {
 
 function colorAndHeight(bool) {
 	if (bool) {
+		nav_bar.classList.add('nav_bar_opened'); 
 		top_nav.classList.add('top_nav_opened'); 
-		top_logo.classList.add('top_logo_opened');
-		top_menu.classList.add('top_menu_opened'); 
 		
 	} else {
-		top_nav.classList.remove('top_nav_opened'); 
-		top_logo.classList.remove('top_logo_opened');
-		top_menu.classList.remove('top_menu_opened'); 	
+		nav_bar.classList.remove('nav_bar_opened'); 
+		top_nav.classList.remove('top_nav_opened'); 	
 	} 
 }
 

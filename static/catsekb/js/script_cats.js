@@ -43,16 +43,16 @@ btn_next.onclick = function() {
 
 function exit() {
 	increase_photo.classList.remove('vissible');
-	body[0].classList.toggle('overY');
 	top_nav.classList.toggle('top_nav_increase_photo');
 	close_increase_photo.classList.remove('vis');
+	body[0].classList.toggle('overY');
 }
 
 function increase() {
 	increase_photo.classList.add('vissible');
-	body[0].classList.toggle('overY');
 	top_nav.classList.toggle('top_nav_increase_photo');
 	close_increase_photo.classList.add('vis');
+	body[0].classList.toggle('overY');
 
 }
 
