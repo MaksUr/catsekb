@@ -21,7 +21,7 @@ from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOS
     ANIMAL_KEY_TAG, URL_NAME_GROUP, ANIMAL_IMAGE_KEY_BACKGROUND, ANIMAL_IMAGE_KEY_FAVOURITE, \
     ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION, ANIMAL_LOCATION_STATUS_CHOICES_D, ANIMAL_SEX_CHOICES_D, \
     ANIMAL_KEY_VK_ALBUM_ID, ANIMAL_IMAGE_ANIMAL, ANIMAL_IMAGE_KEY_PHOTO_ID, ANIMAL_IMAGE_PHOTO_ID, \
-    ANIMAL_IMAGE_KEY_IMAGE_SMALL_URL, ANIMAL_IMAGE_KEY_IMAGE_THUMB, ANIMAL_IMAGE_KEY_CREATED
+    ANIMAL_IMAGE_KEY_IMAGE_SMALL_URL, ANIMAL_IMAGE_KEY_IMAGE_THUMB, ANIMAL_IMAGE_KEY_CREATED, ANIMAL_KEY_SHELTER_DATE
 from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
 from cats.validators import group_name_validator, background_y_position_validator
@@ -93,7 +93,7 @@ class Animal(Model):
     vk_album_id = IntegerField(ANIMAL_KEY_VK_ALBUM_ID, blank=True, default=None, null=True)
     date_of_birth = DateField(ANIMAL_KEY_DATE_OF_BIRTH, null=True, default=None, blank=True)
     # TODO: Применить данное поле, добавить метод отображение возроста по годам, месяцам и дням
-    shelter_date = DateField("В приюте", null=True, default=None, blank=True)
+    shelter_date = DateField(ANIMAL_KEY_SHELTER_DATE, null=True, default=None, blank=True)
     group = ForeignKey(Group, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)
     show = BooleanField(ANIMAL_KEY_SHOW, default=True)
     field_value = ManyToManyField(
@@ -199,6 +199,16 @@ class Animal(Model):
         else:
             ai.save()
             return True
+
+    def update_from_vk(self, type_update):
+        # TODO: implement
+        pass
+
+    def get_shelter_time(self):
+        if self.shelter_date:
+            return calc_age_uptoday(before_date=self.shelter_date, later_date=date.today())
+        else:
+            return None
 
 
 class AnimalImage(Model):

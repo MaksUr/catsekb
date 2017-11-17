@@ -13,7 +13,7 @@ from cats.constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPD
     ANIMAL_FORM_VK_UPDATE_DESCR, ANIMAL_FORM_VK_UPDATE_PHOTO, ANIMAL_KEY_FORM_VK_UPDATE_PHOTO, \
     ANIMAL_KEY_FORM_VK_UPDATE_DESCR, ANIMAL_IMAGE_PHOTO_ID, ANIMAL_IMAGE_KEY_IMAGE_URL, \
     ANIMAL_IMAGE_KEY_IMAGE_SMALL_URL, ANIMAL_IMAGE_IMAGE_SMALL_URL, ANIMAL_IMAGE_IMAGE_URL_TAG, \
-    ANIMAL_IMAGE_IMAGE_SMALL_URL_TAG, VK_GROUP_ID, ANIMAL_IMAGE_CREATED
+    ANIMAL_IMAGE_IMAGE_SMALL_URL_TAG, VK_GROUP_ID, ANIMAL_IMAGE_CREATED, ANIMAL_KEY_SHELTER_DATE, ANIMAL_SHELTER_DATE
 from cats.forms import AnimalForm, AnimalImageForm
 from cats.models import Animal, AnimalImage, FieldValue, Group, FieldType, Article
 from cats.vk_api.vk_api_functions import get_album
@@ -101,6 +101,7 @@ class AnimalAdmin(admin.ModelAdmin):
             ANIMAL_MAIN_FIELD_SET, {
                 DJ_FIELDS: (
                     ANIMAL_NAME, ANIMAL_LOCATION_STATUS,
+                    ANIMAL_SHELTER_DATE,
                     ANIMAL_SHOW, ANIMAL_DESCRIPTION,
                     ANIMAL_GROUP, ANIMAL_FIELD_VALUE, ANIMAL_SEX,
                     ANIMAL_CREATED, ANIMAL_UPDATED,
@@ -137,6 +138,7 @@ class AnimalAdmin(admin.ModelAdmin):
         if upd and obj and obj.vk_album_id is not None:
             form.update_form = upd
             if upd in (ANIMAL_FORM_VK_UPDATE, ANIMAL_FORM_VK_UPDATE_PHOTO):
+                # TODO: Перенести логику обновления в модель
                 response = get_album(group_id=VK_GROUP_ID, album_id=obj.vk_album_id)
                 add_images_from_response(animal=obj, response=response)
         else:

@@ -19,7 +19,8 @@ from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECI
     ANIMAL_IMAGE_ANIMAL, ANIMAL_IMAGE_KEY_ANIMAL_HELP_TEXT, ANIMAL_VK_ALBUM_ID, \
     ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT, ANIMAL_KEY_VK_ALBUM_URL, \
     ANIMAL_VK_ALBUM_URL, ANIMAL_FORM_VK_UPDATE, ANIMAL_FORM_VK_UPDATE_DESCR, ANIMAL_VK_ALBUM_URL_WRONG_FORMAT, \
-    ANIMAL_IMAGE_KEY_IMAGE_URL_HELP_TEXT, VK_GROUP_ID, ANIMAL_IMAGE_CREATED, ANIMAL_IMAGE_KEY_CREATED_HELP_TEXT
+    ANIMAL_IMAGE_KEY_IMAGE_URL_HELP_TEXT, VK_GROUP_ID, ANIMAL_IMAGE_CREATED, ANIMAL_IMAGE_KEY_CREATED_HELP_TEXT, \
+    ANIMAL_KEY_SHELTER_DATE, ANIMAL_KEY_SHELTER_DATE_HELP_TEXT, ANIMAL_SHELTER_DATE
 
 from cats.models import Animal, AnimalImage
 from cats.time import get_date_from_age, calc_age_uptoday
@@ -92,6 +93,7 @@ class AnimalForm(forms.ModelForm):
     def get_initial_update(self, instance, upd_type):
         res = dict()
         if instance.vk_album_id is not None:
+            # TODO: Перенести логику обновления в модель
             res.update(self.get_vk_update(instance, upd_type))
         return res
 
@@ -120,6 +122,7 @@ class AnimalForm(forms.ModelForm):
             ANIMAL_YEARS, ANIMAL_MONTHS,
             ANIMAL_DAYS, ANIMAL_DATE_OF_BIRTH,
             ANIMAL_DESCRIPTION, ANIMAL_TAG, ANIMAL_VK_ALBUM_URL,
+            ANIMAL_SHELTER_DATE,
         ]
         help_texts = {
             ANIMAL_UPDATED: ANIMAL_KEY_UPDATED_HELP_TEXT,
@@ -135,6 +138,7 @@ class AnimalForm(forms.ModelForm):
             ANIMAL_LOCATION_STATUS: ANIMAL_KEY_LOCATION_STATUS_HELP_TEXT,
             ANIMAL_TAG: ANIMAL_KEY_TAG_HELP_TEXT,
             ANIMAL_VK_ALBUM_URL: ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT,
+            ANIMAL_SHELTER_DATE: ANIMAL_KEY_SHELTER_DATE_HELP_TEXT,
         }
 
     def clean(self):
