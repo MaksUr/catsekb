@@ -18,12 +18,12 @@
 
     {# Bootstrap CSS #}
     {% block bootstrap_css %}
-        <link rel="stylesheet" type="text/css" href="{% static "catsekb/css/bootstrap/bootstrap.min.css" %}">
+        <link rel="stylesheet" type="text/css" href="{% static "catsekb/dist/css/bootstrap.min.css" %}">
     {% endblock bootstrap_css %}
 
     {# Base CSS #}
     {% block base_css %}
-        <link rel="stylesheet" type="text/css" href="{% static "catsekb/css/base.css" %}">
+        <link rel="stylesheet" type="text/css" href="{% static "catsekb/dist/css/base.min.css" %}">
     {% endblock base_css %}
 
 
@@ -60,17 +60,17 @@
 
     {# JQuery #}
     {% block jquery_js %}
-        <script type="text/javascript" src="{% static "catsekb/js/jquery-3.2.1.js" %}"></script>
+        <script type="text/javascript" src="{% static "catsekb/dist/js/jquery-3.2.1.js" %}"></script>
     {% endblock jquery_js %}
 
     {# Bootstrap #}
     {% block bootstrap_js %}
-        <script type="text/javascript" src="{% static "catsekb/js/bootstrap.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "catsekb/dist/js/bootstrap.min.js" %}"></script>
     {% endblock %}
 
     {# Base JS #}
     {% block base_js %}
-        <script type="text/javascript" src="{% static "catsekb/js/script.js" %}"></script>
+        <script type="text/javascript" src="{% static "catsekb/dist/js/script.js" %}"></script>
     {% endblock base_js %}
 
     {# Custom JS #}

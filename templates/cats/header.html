@@ -8,7 +8,7 @@
     {% if background_style %}
         {{ background_style }}
     {% else %}
-        background-image: url({% static background_image_file|default:"catsekb/img/header_index.jpg" %});
+        background-image: url({% static background_image_file|default:"catsekb/dist/img/header_index.jpg" %});
     {% endif %}
 ">
     <div class="header_layer">
@@ -16,7 +16,7 @@
             <div class="row">
                     <div class="main_menu mid">
                         <a href="{% url 'index' %}">
-                            <img src="{% static 'catsekb/img/logo.png' %}" class="logo">
+                            <img src="{% static 'catsekb/dist/img/logo.png' %}" class="logo">
                         </a>
                         <h1>
                             Возьми кота домой!

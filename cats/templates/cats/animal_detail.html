@@ -21,7 +21,7 @@
                             {% if object.get_main_image %}
                                 <img src="{{ object.get_main_image.image_url }}" class="img-responsive" alt="{{ object.get_main_image.get_alt }}">
                             {% else %}
-                                <img src="{% static 'catsekb/img/sad_cat.png' %}" class="img-responsive">
+                                <img src="{% static 'catsekb/dist/img/sad_cat.png' %}" class="img-responsive">
                             {% endif %}
                             <div class="count_photo_layer">
                                 <span class="count_photo">{{ images.count }} фото</span>
@@ -58,5 +58,5 @@
 {% endblock header %}
 
 {% block custom_js %}
-    <script type="text/javascript" src="{% static 'catsekb/js/script_cats.js' %}"></script>
+    <script type="text/javascript" src="{% static 'catsekb/dist/js/script_cats.js' %}"></script>
 {% endblock %}
