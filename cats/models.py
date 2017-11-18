@@ -1,12 +1,13 @@
 from datetime import date
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Model, CharField, TextField, ForeignKey, DateTimeField, BooleanField, ManyToManyField, \
-    URLField, IntegerField, DateField
+    URLField, IntegerField, DateField, ImageField
 # Create your models here.
 from django.urls import reverse
 
-from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOSE_NAME, ANIMAL_IMAGE_KEY_HEIGHT, \
-    ANIMAL_IMAGE_KEY_WIDTH, ANIMAL_IMAGE_KEY_IMAGE_URL, HASHTAG_TEMPLATE_INSTAGRAM, \
+from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOSE_NAME, \
+    ANIMAL_IMAGE_KEY_IMAGE_URL, HASHTAG_TEMPLATE_INSTAGRAM, \
     HASHTAG_TEMPLATE, HASHTAG_SUFFIX, \
     ANIMAL_VERBOSE_NAME_PLURAL, ANIMAL_VERBOSE_NAME, ANIMAL_KEY_UPDATED, ANIMAL_KEY_CREATED, ANIMAL_KEY_SHOW, \
     ANIMAL_KEY_DATE_OF_BIRTH, ANIMAL_KEY_BIRTHDAY_PRECISION, ANIMAL_KEY_SEX, ANIMAL_KEY_NAME, \
@@ -18,10 +19,13 @@ from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOS
     URL_NAME_ANIMAL, DJ_PK, ANIMAL_KEY_DESCRIPTION, \
     ANIMAL_KEY_LOCATION_STATUS, ANIMAL_SEX_CHOICES, ANIMAL_BIRTHDAY_PRECISION_CHOICES, ANIMAL_LOCATION_STATUS_CHOICES, \
     ANIMAL_KEY_TAG, URL_NAME_GROUP, ANIMAL_IMAGE_KEY_BACKGROUND, ANIMAL_IMAGE_KEY_FAVOURITE, \
-    ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION, ANIMAL_LOCATION_STATUS_CHOICES_D, ANIMAL_SEX_CHOICES_D
+    ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION, ANIMAL_LOCATION_STATUS_CHOICES_D, ANIMAL_SEX_CHOICES_D, \
+    ANIMAL_KEY_VK_ALBUM_ID, ANIMAL_IMAGE_ANIMAL, ANIMAL_IMAGE_KEY_PHOTO_ID, ANIMAL_IMAGE_PHOTO_ID, \
+    ANIMAL_IMAGE_KEY_IMAGE_SMALL_URL, ANIMAL_IMAGE_KEY_IMAGE_THUMB, ANIMAL_IMAGE_KEY_CREATED, ANIMAL_KEY_SHELTER_DATE
 from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
 from cats.validators import group_name_validator, background_y_position_validator
+from cats.vk_api.vk_import import get_vk_url_from_album_id
 
 
 class Group(Model):
@@ -86,7 +90,10 @@ class Animal(Model):
         ANIMAL_KEY_BIRTHDAY_PRECISION, max_length=1, choices=ANIMAL_BIRTHDAY_PRECISION_CHOICES, null=True, default=''
     )
     tag = CharField(ANIMAL_KEY_TAG, max_length=32, blank=True, default='')
+    vk_album_id = IntegerField(ANIMAL_KEY_VK_ALBUM_ID, blank=True, default=None, null=True)
     date_of_birth = DateField(ANIMAL_KEY_DATE_OF_BIRTH, null=True, default=None, blank=True)
+    # TODO: Применить данное поле, добавить метод отображение возроста по годам, месяцам и дням
+    shelter_date = DateField(ANIMAL_KEY_SHELTER_DATE, null=True, default=None, blank=True)
     group = ForeignKey(Group, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)
     show = BooleanField(ANIMAL_KEY_SHOW, default=True)
     field_value = ManyToManyField(
@@ -99,8 +106,7 @@ class Animal(Model):
         default='',
         blank=True
     )
-    # TODO: add vk_album_url field
-    created = DateTimeField(ANIMAL_KEY_CREATED, auto_now_add=True, auto_now=False)
+    created = DateTimeField(ANIMAL_KEY_CREATED, null=True, default=None, blank=True)
     updated = DateTimeField(ANIMAL_KEY_UPDATED, auto_now_add=False, auto_now=True)
 
     objects = AnimalQuerySet.as_manager()
@@ -170,25 +176,77 @@ class Animal(Model):
     def get_sex(self):
         return ANIMAL_SEX_CHOICES_D.get(self.sex)
 
+    def get_vk_album_url(self):
+        return get_vk_url_from_album_id(self.vk_album_id)
+
+    def add_animal_image(self, **kwargs):
+        kwargs[ANIMAL_IMAGE_ANIMAL] = self
+        if kwargs.get(ANIMAL_IMAGE_PHOTO_ID) is not None:
+            try:
+                # TODO: получить только по полю id и animal
+                AnimalImage.objects.get(**kwargs)
+            except (AnimalImage.MultipleObjectsReturned,):
+                return True
+            except ObjectDoesNotExist:
+                pass
+            else:
+                return True
+        try:
+            ai = AnimalImage(**kwargs)
+        except TypeError:
+            # TODO: check exceptions
+            return False
+        else:
+            ai.save()
+            return True
+
+    def update_from_vk(self, type_update):
+        # TODO: implement
+        pass
+
+    def get_shelter_time(self):
+        if self.shelter_date:
+            return calc_age_uptoday(before_date=self.shelter_date, later_date=date.today())
+        else:
+            return None
+
 
 class AnimalImage(Model):
     animal = ForeignKey(Animal)
-    image_url = URLField(ANIMAL_IMAGE_KEY_IMAGE_URL, default=None)
-    width = IntegerField(ANIMAL_IMAGE_KEY_WIDTH, blank=True, default=None, null=True)
-    height = IntegerField(ANIMAL_IMAGE_KEY_HEIGHT, blank=True, default=None, null=True)
+    image_url = URLField(ANIMAL_IMAGE_KEY_IMAGE_URL)
+    image_small_url = URLField(ANIMAL_IMAGE_KEY_IMAGE_SMALL_URL, blank=True, default=None, null=True)
+    photo_id = IntegerField(ANIMAL_IMAGE_KEY_PHOTO_ID, blank=True, default=None, null=True)
     favourite = BooleanField(ANIMAL_IMAGE_KEY_FAVOURITE, default=False)
     background = BooleanField(ANIMAL_IMAGE_KEY_BACKGROUND, default=False)
+    created = DateField(ANIMAL_IMAGE_KEY_CREATED, null=True, default=None, blank=True)
     background_y_position = IntegerField(
         ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION, blank=True, default=50, validators=[background_y_position_validator]
     )
 
     def image_thumb(self):
         # TODO: edit view
-        if self.image_url:
-            return '<img src="%s" style="height: 200px">' % self.image_url
-        else:
-            return '<img src="%s" style="height: 200px">' % ''  # TODO: change default image
+        image_url = self.image_small_url or self.image_url
+        return '<img src="%s" style="height: 200px">' % image_url
     image_thumb.allow_tags = True
+    image_thumb.short_description = ANIMAL_IMAGE_KEY_IMAGE_THUMB
+
+    def image_url_tag(self):
+        if self.image_url:
+            res = '<a href="{url}">{label}</a>'.format(url=self.image_url, label=self.image_url)
+        else:
+            res = ''
+        return res
+    image_url_tag.allow_tags = True
+    image_url_tag.short_description = ANIMAL_IMAGE_KEY_IMAGE_URL
+
+    def image_small_url_tag(self):
+        if self.image_small_url:
+            res = '<a href="{url}">{label}</a>'.format(url=self.image_small_url, label=self.image_small_url)
+        else:
+            res = ''
+        return res
+    image_small_url_tag.allow_tags = True
+    image_small_url_tag.short_description = ANIMAL_IMAGE_KEY_IMAGE_SMALL_URL
 
     def get_background_style(self):
         res = 'background-image: url({url}); background-size: cover; background-position-y: {ypos}%;'.format(
@@ -213,6 +271,3 @@ class Article(Model):  # TODO: create new application
 
     def __str__(self):
         return self.name
-
-
-

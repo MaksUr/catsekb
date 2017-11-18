@@ -34,29 +34,46 @@ def save_vk_image(
     print_log('save image', animal, log_file=log_file)
 
 
-def save_image(animal, image_url, width=0, height=0, favourite=False, log_file=None):
-    image_url = join(START_IMAGE_PTH, image_url)
-    image_url = pathname2url(image_url)
-    image_url = ROOT_PTH + image_url
+def save_image(animal, image_info, favourite, background, log_file=None):
+    image_url, info = image_info
+    width, height = info
+    image_url = get_local_image_url(image_url)
     ai = AnimalImage(
         animal=animal,
         image_url=image_url,
+        favourite=favourite,
+        background=background,
         width=width,
-        height=height,
-        favourite=favourite
+        height=height
     )
     ai.save()
     print_log('save image', animal, log_file=log_file)
 
 
-def save_images(animal, images, use_local_photos, log_file=None):
-    if use_local_photos:
-        for image_pth in images:
-            save_image(animal=animal, image_url=image_pth, log_file=log_file)
-    else:
-        images = iter(images)
-        try:
+def get_local_image_url(image_url):
+    image_url = join(START_IMAGE_PTH, image_url)
+    image_url = pathname2url(image_url)
+    image_url = ROOT_PTH + image_url
+    return image_url
 
+
+def save_images(animal, images, use_local_photos, log_file=None):
+    images = iter(images)
+    if use_local_photos:
+        try:
+            image_pth = next(images)
+            save_image(animal=animal, image_info=image_pth, log_file=log_file, favourite=False, background=True)
+
+            image_pth = next(images)
+            save_image(animal=animal, image_info=image_pth, log_file=log_file, favourite=True, background=False)
+
+        except StopIteration:
+            return
+        for image_pth in images:
+            save_image(animal=animal, image_info=image_pth, log_file=log_file, favourite=False, background=True)
+
+    else:
+        try:
             image = next(images)
             save_vk_image(animal=animal, image=image, log_file=log_file, favourite=False, background=True)
 
@@ -69,8 +86,14 @@ def save_images(animal, images, use_local_photos, log_file=None):
             save_vk_image(animal=animal, image=image, log_file=log_file, favourite=False, background=False)
 
 
-def get_images_info(local_ph, info):
-    pass  # TODO: implement
+def get_images_info(vk_photos):
+    res = list()
+    for photo in vk_photos:
+        width = photo['vk_src']['width']
+        height = photo['vk_src']['height']
+        item = (width, height)
+        res.append(item)
+    return res
 
 
 def save_animal(animal_d, log_file=None, use_local_photos=True):
@@ -85,17 +108,17 @@ def save_animal(animal_d, log_file=None, use_local_photos=True):
     animal.save()
     if use_local_photos:
         images = animal_d['local_photos']
+        images_info = get_images_info(vk_photos=animal_d['vk_photos'])
+        images = zip(images, images_info)
     else:
         images = animal_d['vk_photos']
-    # images_info = get_images_info(local_ph=images, info=animal_d['vk_photos'])
-
     print_log('save', animal, log_file=log_file)
     save_images(animal=animal, images=images, log_file=log_file, use_local_photos=use_local_photos)
 
 
 def save_animal_from_config(use_local_photos, conf_pth=CONFIG, log_file=None):
     c = open_json(conf_pth)
-    for animal in c:
+    for animal in c[35:36]:
         save_animal(animal, use_local_photos=use_local_photos, log_file=log_file)
 
 if __name__ == '__main__':

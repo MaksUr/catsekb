@@ -17,6 +17,9 @@ body {
 	overflow-x: hidden;
 }
 
+.overY {
+	overflow-y: hidden;
+}
 /* Отступы между секциями */
 section {
 	padding: 50px 0;
@@ -47,16 +50,11 @@ footer {
 a {
 	padding-bottom: 5px;
 	display: inline-block;
-	border-bottom: 1px rgba(255, 0, 0, 0) solid;
+	color: #004040;
 }
 
 a, a:link, a:visited, a:hover, a:active  {
 	text-decoration: none;
-	color: #2f2727;
-}
-
-a:visited { 
-	color: #4c3e3e;
 }
 
 .but {
@@ -73,41 +71,31 @@ a:visited {
     background-color: #475f9a;
 }
 
-a.tag {
-	display: inline-block !important;
-    color: #333;
+.tag {
+    padding: 10px;
+    font-weight: 600;
+    background-color: rgba(255, 255, 255, .75);
     border-radius: 3px;
-    background-color: rgba(241, 236, 233, 1);
-    margin: 10px 5px 0 5px;
 }
-
-a.tag:hover {
-	color: #526aa5;
-
-}
-
-.tag:first-child, .tag.no_active:first-child {
-	margin-left: 0;
-}
-.tag:last-child, .tag.no_active:last-child {
-	margin-right: 0;
-}
-
 
 .tag.no_active {
 	display: inline-block;
-    border-radius: 3px;
-    margin: 10px 5px 0 5px;
+	color: #c5c5c5;
+	padding: 10px;
+}
+
+.tag.no_active:hover {
 	color: #c5c5c5;
 }
-a.hashtag {
-	color: #7676ff;
+.hashtag, .tag {
+	color: #8585ff;
 }
-a.hashtag:hover {
-	color: #4747ff;
+.hashtag:hover, .tag:hover {
+	color: #5858ff;
 }
+
 .top_nav a:hover, .menu a:hover { 
-	border-bottom: 1px #705344 solid;
+	color: #526aa5;
 }
 
 ul {
@@ -128,6 +116,10 @@ ul {
 
 /* <---------- form BEGIN ----------> */
 
+.search_form {
+	border: 1px #a2e5ff solid;
+	padding: 50px;
+}
 .search {
 	background-color: #fff;
 	padding: 0 0 30px 0;
@@ -144,9 +136,14 @@ ul {
 .form_elem input {
 	margin: 4px 0 0 4px;
 	border-radius: 3px;
-	border: 1px #7ca2ff solid;
+	border: 1px #8585ff solid;
+	padding-left: 5px;
 }
 
+
+.form_elem li {
+	margin: 1px 0;
+}
 input[type="submit"] {
 	margin: 15px 0 0 0;
 }
@@ -159,5 +156,4 @@ input.but:hover {
 }
 
 /* <---------- form END ----------> */
-
 

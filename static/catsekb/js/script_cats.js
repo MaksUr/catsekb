@@ -10,6 +10,8 @@ var btn_next = document.querySelector('.next_photo');
 
 var images = document.querySelectorAll('.item_photo');
 
+var body = document.getElementsByTagName('body');
+
 var n = 0;
 
 close_increase_photo.addEventListener('click', exit);
@@ -43,12 +45,14 @@ function exit() {
 	increase_photo.classList.remove('vissible');
 	top_nav.classList.toggle('top_nav_increase_photo');
 	close_increase_photo.classList.remove('vis');
+	body[0].classList.toggle('overY');
 }
 
 function increase() {
 	increase_photo.classList.add('vissible');
 	top_nav.classList.toggle('top_nav_increase_photo');
 	close_increase_photo.classList.add('vis');
+	body[0].classList.toggle('overY');
 
 }
 

@@ -31,10 +31,9 @@
 /* Устройства с шириной экрана до 767px */
 @media (max-width: 767px) {
 
-/*	a.tag, .tag.no_active {
-		display: block !important;
-		margin: 0 0 10px 0;
-	}*/
+	a.tag, .tag.pag_gallery {
+		display: block;
+	}
 	.mobile_list {
 		visibility: visible;
 	}
@@ -94,7 +93,8 @@
 	    top: 0;
 	    left: 0;
 	    margin: 0;
-	    height: 35%;
+	    height: 85%;
+	    border: 1px rgb(255, 255, 255) solid;
 	}
 
 	.prev_photo, .next_photo {

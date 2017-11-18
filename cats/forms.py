@@ -15,9 +15,18 @@ from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECI
     ANIMAL_LOCATION_STATUS, ANIMAL_SEX_CHOICES, ANIMAL_LOCATION_STATUS_CHOICES, ANIMAL_KEY_LOCATION_STATUS, ANIMAL_TAG, \
     ANIMAL_KEY_TAG_HELP_TEXT, ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND, ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT, \
     ANIMAL_IMAGE_KEY_FAVOURITE_HELP_TEXT, ANIMAL_IMAGE_BACKGROUND_Y_POSITION, \
-    ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT
-from cats.models import Animal
+    ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT, ANIMAL_IMAGE_IMAGE_URL, \
+    ANIMAL_IMAGE_ANIMAL, ANIMAL_IMAGE_KEY_ANIMAL_HELP_TEXT, ANIMAL_VK_ALBUM_ID, \
+    ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT, ANIMAL_KEY_VK_ALBUM_URL, \
+    ANIMAL_VK_ALBUM_URL, ANIMAL_FORM_VK_UPDATE, ANIMAL_FORM_VK_UPDATE_DESCR, ANIMAL_VK_ALBUM_URL_WRONG_FORMAT, \
+    ANIMAL_IMAGE_KEY_IMAGE_URL_HELP_TEXT, VK_GROUP_ID, ANIMAL_IMAGE_CREATED, ANIMAL_IMAGE_KEY_CREATED_HELP_TEXT, \
+    ANIMAL_KEY_SHELTER_DATE, ANIMAL_KEY_SHELTER_DATE_HELP_TEXT, ANIMAL_SHELTER_DATE
+
+from cats.models import Animal, AnimalImage
 from cats.time import get_date_from_age, calc_age_uptoday
+from cats.vk_api.vk_api_functions import get_album
+from cats.vk_api.vk_import import get_animal_name_from_vk_response, get_vk_album_id_from_url, \
+    get_animal_descr_from_vk_response
 
 
 def get_range(size):
@@ -34,6 +43,7 @@ def get_int_val(val):
 
 
 class AnimalForm(forms.ModelForm):
+    # age
     years = forms.ChoiceField(
         widget=forms.Select,
         choices=get_range(20),
@@ -56,16 +66,52 @@ class AnimalForm(forms.ModelForm):
         help_text=ANIMAL_KEY_DAYS_HELP_TEXT,
     )
 
+    # vk_import
+    vk_album_url = forms.URLField(label=ANIMAL_KEY_VK_ALBUM_URL,
+                                  help_text=ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT,
+                                  required=False)
+    update_form = None
+
     def __init__(self, *args, **kwargs):
         instance = kwargs.get(DJ_INSTANCE)
         if instance:
             upd = dict()
-            upd[DJ_INITIAL] = dict()
             if getattr(instance, ANIMAL_DATE_OF_BIRTH, None):
-                upd[DJ_INITIAL].update(calc_age_uptoday(before_date=instance.date_of_birth, later_date=date.today()))
-                kwargs.update(upd)
+                d = calc_age_uptoday(before_date=instance.date_of_birth, later_date=date.today())
+                d = self.get_age_by_precision(d, instance.birthday_precision)
+                upd.update(d)
+            if getattr(instance, ANIMAL_VK_ALBUM_ID, None):
+                upd[ANIMAL_VK_ALBUM_URL] = instance.get_vk_album_url()
+            if self.update_form:
+                upd.update(self.get_initial_update(instance=instance, upd_type=self.update_form))
+            if not kwargs.get(DJ_INITIAL):
+                kwargs[DJ_INITIAL] = dict()
+            kwargs[DJ_INITIAL].update(upd)
 
         forms.ModelForm.__init__(self, *args, **kwargs)
+
+    def get_initial_update(self, instance, upd_type):
+        res = dict()
+        if instance.vk_album_id is not None:
+            # TODO: Перенести логику обновления в модель
+            res.update(self.get_vk_update(instance, upd_type))
+        return res
+
+    @staticmethod
+    # TODO: get response
+    def get_vk_update(instance, upd_type):
+        res = dict()
+        response = get_album(group_id=VK_GROUP_ID, album_id=instance.vk_album_id)
+        if upd_type in (ANIMAL_FORM_VK_UPDATE, ANIMAL_FORM_VK_UPDATE_DESCR):
+            descr = get_animal_descr_from_vk_response(response=response)
+            if descr:
+                res[ANIMAL_DESCRIPTION] = descr
+
+        if upd_type == ANIMAL_FORM_VK_UPDATE:
+            name = get_animal_name_from_vk_response(response=response)
+            if name:
+                res[ANIMAL_NAME] = name
+        return res
 
     class Meta:
         model = Animal
@@ -75,7 +121,8 @@ class AnimalForm(forms.ModelForm):
             ANIMAL_FIELD_VALUE, ANIMAL_SEX,
             ANIMAL_YEARS, ANIMAL_MONTHS,
             ANIMAL_DAYS, ANIMAL_DATE_OF_BIRTH,
-            ANIMAL_DESCRIPTION, ANIMAL_TAG,
+            ANIMAL_DESCRIPTION, ANIMAL_TAG, ANIMAL_VK_ALBUM_URL,
+            ANIMAL_SHELTER_DATE,
         ]
         help_texts = {
             ANIMAL_UPDATED: ANIMAL_KEY_UPDATED_HELP_TEXT,
@@ -90,12 +137,15 @@ class AnimalForm(forms.ModelForm):
             ANIMAL_DESCRIPTION: ANIMAL_KEY_DESCRIPTION_HELP_TEXT,
             ANIMAL_LOCATION_STATUS: ANIMAL_KEY_LOCATION_STATUS_HELP_TEXT,
             ANIMAL_TAG: ANIMAL_KEY_TAG_HELP_TEXT,
+            ANIMAL_VK_ALBUM_URL: ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT,
+            ANIMAL_SHELTER_DATE: ANIMAL_KEY_SHELTER_DATE_HELP_TEXT,
         }
 
     def clean(self):
         if ANIMAL_DATE_OF_BIRTH in self.changed_data:
             if not self.cleaned_data[ANIMAL_DATE_OF_BIRTH]:
                 self.instance.birthday_precision = None
+                self.save_date_of_birth_from_age()
             else:
                 self.instance.birthday_precision = Animal.BIRTHDAY_PRECISION_D
         elif any((item in (ANIMAL_YEARS, ANIMAL_MONTHS, ANIMAL_DAYS)) for item in self.changed_data):
@@ -128,6 +178,19 @@ class AnimalForm(forms.ModelForm):
         )
         self.cleaned_data[ANIMAL_DATE_OF_BIRTH] = date_of_birth
 
+    @staticmethod
+    def get_age_by_precision(d, precision):
+        if not precision or precision == Animal.BIRTHDAY_PRECISION_D:
+            return d
+        d[ANIMAL_DAYS] = None
+        if precision == Animal.BIRTHDAY_PRECISION_M:
+            return d
+        d[ANIMAL_MONTHS] = None
+        if precision == Animal.BIRTHDAY_PRECISION_Y:
+            return d
+        d[ANIMAL_YEARS] = None
+        return d
+
     def clean_field_value(self):
         words = self.cleaned_data.get(ANIMAL_FIELD_VALUE)
         types = set()
@@ -149,6 +212,15 @@ class AnimalForm(forms.ModelForm):
             message = ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST.format(name=name)
             raise ValidationError(message)
         return name
+
+    def clean_vk_album_url(self):
+        vk_alb_url = self.cleaned_data.get(ANIMAL_VK_ALBUM_URL)
+        if vk_alb_url:
+            vk_album_id = get_vk_album_id_from_url(vk_alb_url)
+            if vk_album_id is None:
+                raise ValidationError(ANIMAL_VK_ALBUM_URL_WRONG_FORMAT)
+            self.instance.vk_album_id = vk_album_id
+        return vk_alb_url
 
 
 class FilterForm(forms.Form):
@@ -189,17 +261,27 @@ class FilterForm(forms.Form):
             )
 
 
-# TODO: implement class AnimalImageForm
 class AnimalImageForm(forms.ModelForm):
-    fields = [
-        ANIMAL_IMAGE_FAVOURITE,
-        ANIMAL_IMAGE_BACKGROUND,
-        ANIMAL_IMAGE_BACKGROUND_Y_POSITION,
-        # TODO: Форму добавления фото
-    ]
 
-    help_texts = {
-        ANIMAL_IMAGE_FAVOURITE: ANIMAL_IMAGE_KEY_FAVOURITE_HELP_TEXT,
-        ANIMAL_IMAGE_BACKGROUND: ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT,
-        ANIMAL_IMAGE_BACKGROUND_Y_POSITION: ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT,
-    }
+    class Meta:
+        model = AnimalImage
+        fields = [
+            ANIMAL_IMAGE_ANIMAL,
+            ANIMAL_IMAGE_FAVOURITE,
+            ANIMAL_IMAGE_BACKGROUND,
+            ANIMAL_IMAGE_BACKGROUND_Y_POSITION,
+            ANIMAL_IMAGE_CREATED,
+        ]
+
+        help_texts = {
+            ANIMAL_IMAGE_ANIMAL: ANIMAL_IMAGE_KEY_ANIMAL_HELP_TEXT,
+            ANIMAL_IMAGE_FAVOURITE: ANIMAL_IMAGE_KEY_FAVOURITE_HELP_TEXT,
+            ANIMAL_IMAGE_BACKGROUND: ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT,
+            ANIMAL_IMAGE_BACKGROUND_Y_POSITION: ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT,
+            ANIMAL_IMAGE_CREATED: ANIMAL_IMAGE_KEY_CREATED_HELP_TEXT,
+        }
+
+    def clean(self):
+        cleaned_data = forms.ModelForm.clean(self)
+        return cleaned_data
+

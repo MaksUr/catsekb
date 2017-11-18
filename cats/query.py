@@ -58,12 +58,11 @@ class AnimalQuerySet(QuerySet):
                         kwargs[DATE_OF_BIRTH__GTE] = end_date
             finally:
                 del kwargs[AGE_DISTANCE]
-
-        # field_types = [k for k in kwargs.keys() if k.startswith(FIELD_TYPE_PREFIX)]
-        # for field_type in field_types:
-        # TODO: собрать id field_value
-        # TODO: сформировать запрос, при котором id vield value животных должны иметь собранные field_value
-        #
+        field_types = list(kwargs.keys())
+        for field_type in field_types:
+            if field_type.startswith(FIELD_TYPE_PREFIX):
+                kwargs['field_value__id'] = kwargs[field_type]
+                del kwargs[field_type]
 
         res = QuerySet.filter(self, *args, **kwargs)
         return res
