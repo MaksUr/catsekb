@@ -7,7 +7,7 @@ from cats.vk_api.helper_functions import open_json, print_log
 
 # http://127.0.0.1:8000/media/images/cats/albums/Багира/photos/246566509_456241041.jpg
 
-CONFIG = r'cats\vk_api\album_analyzer\parse_album_list.json'
+CONFIG = join('cats', 'vk_api', 'album_analyzer', 'parse_album_list.json')
 ROOT_PTH = r'http://127.0.0.1:8000/'
 START_IMAGE_PTH = join('media', 'images', 'cats')
 
@@ -99,4 +99,4 @@ def save_animal_from_config(use_local_photos, conf_pth=CONFIG, log_file=None):
         save_animal(animal, use_local_photos=use_local_photos, log_file=log_file)
 
 if __name__ == '__main__':
-    save_animal_from_config(use_local_photos=True)
+    save_animal_from_config(use_local_photos=False)
