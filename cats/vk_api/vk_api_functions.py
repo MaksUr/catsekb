@@ -1,7 +1,8 @@
 import json
 from os.path import abspath
 
-import requests
+# import requests TODO: import
+from cats.vk_api.helper_functions import open_json
 
 RESPONSE = "response"
 TITLE = "title"
@@ -12,27 +13,33 @@ CREATED = "created"
 SIZES = "sizes"
 TYPE = "type"
 SRC = "src"
+DESCRIPTION = "description"
 
 
-def get_album(group_id, album_id):
+def get_album_photos(group_id, album_id):
     group_id = -1 * group_id
-    photos = requests.get(r'https://api.vk.com/method/photos.get', params={
-        'album_id': album_id,
-        'owner_id': group_id,
-        'photo_sizes': 1,
-    }).json()
+    # TODO: use requests
+    # photos = requests.get(r'https://api.vk.com/method/photos.get', params={
+    #     'album_id': album_id,
+    #     'owner_id': group_id,
+    #     'photo_sizes': 1,
+    # }).json()
+    ###############################################
+    photos = open_json(r'other\album_example.json')
+    ###############################################
     return photos
 
 
-def get_album_list(group_id):
-    r = requests.get(r'https://api.vk.com/method/photos.getAlbums', params={
-        'owner_id': -1 * group_id,
-    }).json()
+def get_albums_info(group_id, album_ids):
+    params = dict()
+    params['owner_id'] = -1 * group_id
+    if album_ids:
+        params['album_ids'] = ','.join(map(str, album_ids))
+    # TODO: use requests
+    # r = requests.get(r'https://api.vk.com/method/photos.getAlbums', params={
+    #     'owner_id': -1 * group_id,
+    # }).json()
+    ###############################################
+    r = open_json(r'other\albums.json')
+    ###############################################
     return r
-
-
-def save_json(file_name, data):
-    file_name = abspath(file_name)
-    with open(file_name + '.json', 'w', encoding="utf-8") as f:
-        json.dump(data, f, indent=4, ensure_ascii=False)
-    print('create file:', file_name)

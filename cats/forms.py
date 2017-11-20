@@ -15,16 +15,15 @@ from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECI
     ANIMAL_LOCATION_STATUS, ANIMAL_SEX_CHOICES, ANIMAL_LOCATION_STATUS_CHOICES, ANIMAL_KEY_LOCATION_STATUS, ANIMAL_TAG, \
     ANIMAL_KEY_TAG_HELP_TEXT, ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND, ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT, \
     ANIMAL_IMAGE_KEY_FAVOURITE_HELP_TEXT, ANIMAL_IMAGE_BACKGROUND_Y_POSITION, \
-    ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT, ANIMAL_IMAGE_IMAGE_URL, \
-    ANIMAL_IMAGE_ANIMAL, ANIMAL_IMAGE_KEY_ANIMAL_HELP_TEXT, ANIMAL_VK_ALBUM_ID, \
+    ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT, ANIMAL_IMAGE_ANIMAL, ANIMAL_IMAGE_KEY_ANIMAL_HELP_TEXT, \
+    ANIMAL_VK_ALBUM_ID, \
     ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT, ANIMAL_KEY_VK_ALBUM_URL, \
     ANIMAL_VK_ALBUM_URL, ANIMAL_FORM_VK_UPDATE, ANIMAL_FORM_VK_UPDATE_DESCR, ANIMAL_VK_ALBUM_URL_WRONG_FORMAT, \
-    ANIMAL_IMAGE_KEY_IMAGE_URL_HELP_TEXT, VK_GROUP_ID, ANIMAL_IMAGE_CREATED, ANIMAL_IMAGE_KEY_CREATED_HELP_TEXT, \
-    ANIMAL_KEY_SHELTER_DATE, ANIMAL_KEY_SHELTER_DATE_HELP_TEXT, ANIMAL_SHELTER_DATE
-
+    VK_GROUP_ID, ANIMAL_IMAGE_CREATED, ANIMAL_IMAGE_KEY_CREATED_HELP_TEXT, \
+    ANIMAL_KEY_SHELTER_DATE_HELP_TEXT, ANIMAL_SHELTER_DATE
 from cats.models import Animal, AnimalImage
 from cats.time import get_date_from_age, calc_age_uptoday
-from cats.vk_api.vk_api_functions import get_album
+from cats.vk_api.vk_api_functions import get_albums_info, RESPONSE
 from cats.vk_api.vk_import import get_animal_name_from_vk_response, get_vk_album_id_from_url, \
     get_animal_descr_from_vk_response
 
@@ -101,16 +100,21 @@ class AnimalForm(forms.ModelForm):
     # TODO: get response
     def get_vk_update(instance, upd_type):
         res = dict()
-        response = get_album(group_id=VK_GROUP_ID, album_id=instance.vk_album_id)
+        response = get_albums_info(album_ids=(instance.vk_album_id,), group_id=VK_GROUP_ID)
+        if not response.get(RESPONSE):
+            return res
+
         if upd_type in (ANIMAL_FORM_VK_UPDATE, ANIMAL_FORM_VK_UPDATE_DESCR):
             descr = get_animal_descr_from_vk_response(response=response)
             if descr:
                 res[ANIMAL_DESCRIPTION] = descr
 
         if upd_type == ANIMAL_FORM_VK_UPDATE:
-            name = get_animal_name_from_vk_response(response=response)
+            status, name = get_animal_name_from_vk_response(response=response)
+
             if name:
                 res[ANIMAL_NAME] = name
+            res[ANIMAL_LOCATION_STATUS] = status
         return res
 
     class Meta:

@@ -1,13 +1,10 @@
 import datetime
-from os.path import join
-from urllib.request import pathname2url
 
 from cats.constants import VK_GROUP_ID, ANIMAL_IMAGE_IMAGE_URL, ANIMAL_IMAGE_IMAGE_SMALL_URL, ANIMAL_IMAGE_PHOTO_ID, \
     ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND, ANIMAL_IMAGE_CREATED
-from cats.vk_api import vk_api_functions
 from cats.vk_api.album_analyzer.analyze_albums import SIZES
 from cats.vk_api.name_analyzer import analyse_animal_name
-from cats.vk_api.vk_api_functions import TITLE, TEXT, ITEMS, PID, CREATED, TYPE, SRC, RESPONSE
+from cats.vk_api.vk_api_functions import TITLE, PID, CREATED, TYPE, SRC, RESPONSE, DESCRIPTION
 
 
 def get_vk_album_id_from_url(url):
@@ -24,27 +21,28 @@ def get_vk_album_id_from_url(url):
         return None
 
 
-def get_vk_url_from_album_id(album_id):
+def get_vk_url_from_album_id(album_id, group_id=VK_GROUP_ID):
     if album_id:
-        return r"https://vk.com/album-{group_id}_{album_id}".format(group_id=VK_GROUP_ID, album_id=album_id)
+        return r"https://vk.com/album-{group_id}_{album_id}".format(group_id=group_id, album_id=album_id)
     else:
         return None
 
 
 def get_animal_name_from_vk_response(response):
-    if not response.get(RESPONSE):
-        return None
-    name = response[RESPONSE].get(TITLE)
+    status = None
+    try:
+        name = response[RESPONSE][0][TITLE]
+    except (KeyError, IndexError):
+        name = None
     if name:
-        name = analyse_animal_name(name)[1]
-    return name
+        status, name = analyse_animal_name(name)
+    return status, name
 
 
 def get_animal_descr_from_vk_response(response):
-    if not response.get(RESPONSE):
-        return None
-    album_descr = response[RESPONSE].get(TEXT)
-    if album_descr is None:
+    try:
+        album_descr = response[RESPONSE][0][DESCRIPTION]
+    except (KeyError, IndexError):
         return None
     else:
         return album_descr
@@ -90,28 +88,13 @@ def save_image(animal, photo, favourite=False, background=False):
 
 
 def add_images_from_response(animal, response):
-    # TODO: implement
-    ###############################
-    # p = join('media', 'test_images')
-    # photos = (
-    #     ('1.jpg', 1),
-    #     ('2.jpg', 2),
-    #     ('NPOA_logo_st_pos_cmyk.jpg', 3),
-    #     ('на листе.jpg', 4),
-    #     ('ракета_логотипы.jpg', 5),
-    #     ('ракета_логотипы_priv.jpg', 6),
-    #     ('1.jpg', 7)
-    # )
-    # for image_url, photo_id in photos:
-    #     image_url = join(p, image_url)
-    #     image_url = pathname2url(image_url)
-    #     image_url = r'http://127.0.0.1:8000/' + image_url
-    #     animal.add_animal_image(image_url=image_url, photo_id=photo_id)
-    ###############################
-    response = response.get(RESPONSE)
-    if response is None:
-        return response
-    photos = iter(response.get(ITEMS, ()))
+    photos = response.get(RESPONSE)
+    if photos is None:
+        return photos
+    try:
+        photos = iter(photos)
+    except TypeError:
+        return
     try:
         save_image(animal=animal, photo=next(photos), background=True)
         save_image(animal=animal, photo=next(photos), favourite=True)
