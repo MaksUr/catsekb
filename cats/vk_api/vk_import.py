@@ -36,6 +36,7 @@ def get_animal_name_from_vk_response(response):
         name = None
     if name:
         status, name = analyse_animal_name(name)
+        # TODO: get sex
     return status, name
 
 
@@ -45,6 +46,7 @@ def get_animal_descr_from_vk_response(response):
     except (KeyError, IndexError):
         return None
     else:
+        # TODO: extra info
         return album_descr
 
 
