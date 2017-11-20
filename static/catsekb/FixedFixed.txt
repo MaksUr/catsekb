@@ -1,0 +1,52 @@
+.section {	
+	padding: 50px 0;
+    background-color: #fff;
+}
+
+.full {
+	position: relative;
+	min-height: 67vh;
+    z-index: -1;
+}
+
+.full_container {
+    background-image: url(/static/catsekb/dist/img/cat.jpg);
+	background-position: 25%;
+	position: fixed;
+	top: 0;
+	background-size: cover;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
+/* + Отступы между секциями не margin, а padding
+
+Исправление мобильного меню (для корректной анимации) */
+.mobile_list {
+	position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+	margin: 20px 0 0;
+	z-index: 109;
+	background-color: rgba(255, 255, 255, 0.7);
+}
+
+.open {
+    transition: -webkit-transform .7s cubic-bezier(.1,.68,.58,1);
+    transition: transform .7s cubic-bezier(.1,.68,.58,1);
+    transition: transform .7s cubic-bezier(.1,.68,.58,1),-webkit-transform .7s cubic-bezier(.1,.68,.58,1);
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    height: 100vh;
+	padding: 20px 0;
+}
+
+@media (max-width: 767px)
+.top_nav {
+	display: none;
+}
+.mobile_list {
+    visibility: visible;
+}

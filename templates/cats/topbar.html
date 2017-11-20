@@ -4,23 +4,21 @@
 
 {% load static %}
 
-
+<nav class="mid font">
+    <ul class="mobile_list">
+        <li>
+            <ul class="mobile_list_1">
+                {% include "cats/menu_tabs.html" with menu_class='mobile_list_opening' active_menu=active_menu groups=groups helps=helps %}
+                <li>
+                   <div class="mobile_menu mid">
+                        <img src="{% static 'catsekb/dist/img/menu.png' %}" alt="">
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
 <div class="top_nav">
-    <nav class="mid font">
-        <ul class="mobile_list">
-            <li>
-                <ul class="mobile_list_1">
-                    {% include "cats/menu_tabs.html" with menu_class='mobile_list_opening' active_menu=active_menu groups=groups helps=helps %}
-                </ul>
-            </li>
-            <li>
-               <div class="mobile_menu mid">
-                    <img src="{% static 'catsekb/dist/img/menu.png' %}" alt="">
-                </div>
-            </li>
-        </ul>
-    </nav>
-
     <div class="nav_bar">
         <div class="container">
             <div class="row">

@@ -26,11 +26,11 @@ section {
 }
 
 header {
-	margin-bottom: 50px;
+	padding-bottom: 50px;
 }
 
 footer {
-	margin-top: 50px;
+	padding-top: 50px;
 }
 /* --------------------  */
 
@@ -71,9 +71,23 @@ a, a:link, a:visited, a:hover, a:active  {
     background-color: #475f9a;
 }
 
+.ghost_but {
+	margin-top: 10px;
+	padding: 20px 40px;
+    border: 1px #f9965c solid;
+    border-radius: 3px;
+    color: #f9965c;
+    text-transform: uppercase;
+    transition: background-color .6s;
+    display: inline-block;
+}
+
+.ghost_but:hover {
+	background-color: #f9965c;
+	color: #fff;
+}
 .tag {
     padding: 10px;
-    font-weight: 600;
     background-color: rgba(255, 255, 255, .75);
     border-radius: 3px;
 }
@@ -117,8 +131,6 @@ ul {
 /* <---------- form BEGIN ----------> */
 
 .search_form {
-	border: 1px #a2e5ff solid;
-	padding: 50px;
 }
 .search {
 	background-color: #fff;
@@ -136,7 +148,7 @@ ul {
 .form_elem input {
 	margin: 4px 0 0 4px;
 	border-radius: 3px;
-	border: 1px #8585ff solid;
+	border: 1px #705344 solid;
 	padding-left: 5px;
 }
 

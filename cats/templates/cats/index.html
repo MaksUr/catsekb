@@ -53,25 +53,23 @@
 		</div>
 	</section>
 	<section class="full">
-		<a href="#">
-			<div class="line_container">
-				<div class="container">
-					<div class="row">
-						<div class="col-xs-10 col-xs-offset-1 col-lg-10">
-							<h2>
-								{% if shelter_animals_count %}
-							        <span>Ищут дом: {{ shelter_animals_count }} /</span>
-							    {% endif %}
+		<div class="line_container">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-10 col-xs-offset-1 col-lg-10">
+						<h2>
+							{% if shelter_animals_count %}
+						        <span>Ищут дом: {{ shelter_animals_count }} /</span>
+						    {% endif %}
 
-							    {% if home_animals_count %}
-							        <span>Пристроено: {{ home_animals_count }}</span>
-							    {% endif %}
-							</h2>
-						</div>
+						    {% if home_animals_count %}
+						        <span>Пристроено: {{ home_animals_count }}</span>
+						    {% endif %}
+						</h2>
 					</div>
 				</div>
 			</div>
-		</a>
+		</div>
 		<div class="full_container">
 		</div>
 	</section>        

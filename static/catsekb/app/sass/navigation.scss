@@ -4,7 +4,7 @@
 }
 
 .menu {
-	z-index: 109;
+	/*z-index: 109; Вроде как исправляет проблему с наложением слоев при увеличении фоток кота*/ 
     position: relative;
 }
 .menu > li {
@@ -54,13 +54,12 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 109;
+    z-index: 110;
 }
 
 .top_nav_opened {
     height: 60px;
     transition: height .55s cubic-bezier(.1, .68, .58, 1), transform .55s cubic-bezier(.1, .68, .58, 1);
-    z-index: 110;
     opacity: 1;
 }
 
@@ -114,6 +113,7 @@
 /* <---------- mobile_menu! BEGIN ----------> */
 .mobile_nav_opened {
 	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
 	height: 101vh;
 }
 
