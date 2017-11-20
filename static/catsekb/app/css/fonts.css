@@ -1,17 +1,24 @@
 @font-face {
   font-family: Neucha;
-  src: url("../fonts/Neucha/Neucha.ttf");
+  src: url(../fonts/Neucha/Neucha.ttf);
   font-style: normal;
   font-weight: 400; }
 
 @font-face {
-  font-family: "Open Sans";
-  src: url("../fonts/Open Sans/OpenSans-Regular.ttf");
-  font-style: normal; }
+  font-family: Open Sans;
+  src: url(../fonts/OpenSans/OpenSans-Regular.ttf);
+  font-style: normal;
+  font-weight: 400; }
+
+@font-face {
+  font-family: Open Sans;
+  src: url(../fonts/OpenSans/OpenSans-SemiBold.ttf);
+  font-style: normal;
+  font-weight: 600; }
 
 h1, h2 {
   color: #333;
-  font-family: 'Neucha', cursive;
+  font-family: Neucha,cursive;
   letter-spacing: 1px;
   text-transform: uppercase; }
 
@@ -27,18 +34,20 @@ h2 {
 
 .mobile_list {
   font-size: 18px;
+  font-style: normal;
   font-weight: 600; }
 
 .mobile_list_opening {
   font-size: 14px; }
 
 .menu {
+  font-style: normal;
   font-weight: 600; }
 
 .font {
-  font-family: 'Open Sans', sans-serif;
+  font-family: Open Sans,sans-serif;
   font-size: 14px;
-  font-size: 0.875rem; }
+  font-size: .875rem; }
 
 .line_height {
   text-align: justify;
@@ -56,3 +65,7 @@ h2 {
 .count_photo {
   font-size: 12px;
   font-size: .75rem; }
+
+.tag {
+  font-style: normal;
+  font-weight: 600; }

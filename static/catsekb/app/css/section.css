@@ -23,7 +23,6 @@
       -ms-transform: rotate(59deg);
           transform: rotate(59deg);
   -webkit-transition: all .5s ease;
-  -o-transition: all .5s ease;
   transition: all .5s ease; }
 
 .cat_container:hover + .cat_a_mouse {
@@ -38,8 +37,7 @@
 
 .full_container, .line_container {
   background: url(../img/cat.jpg) center center/cover no-repeat fixed;
-  -webkit-background-size: cover;
-          background-size: cover;
+  background-size: cover;
   background-position: 25%;
   width: 100%; }
 
