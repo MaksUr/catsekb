@@ -31,7 +31,16 @@ def save_animal(data):
     kwargs['vk_album_id'] = data["aid"]
     animal = Animal(**kwargs)
     animal.save()
-    photo_response = get_album_photos(group_id=data["owner_id"], album_id=data["aid"])
+    # photo_response = get_album_photos(group_id=data["owner_id"], album_id=data["aid"])
+
+    ########################################
+    # TODO: локальная заглушка
+    try:
+        photo_response = get_album_photos(group_id=data["owner_id"], album_id=(data["aid"], data["title"]))
+    except ValueError:
+        return
+    ########################################
+
     add_images_from_response(animal=animal, response=photo_response)
 
 
@@ -49,7 +58,7 @@ def update_all_animals_from_response(response):
         albums = response['response']
     except KeyError:
         return
-    for animal in albums[:30]:
+    for animal in albums:
         if animal.get('title') in ignore_list:
             continue
         try:
