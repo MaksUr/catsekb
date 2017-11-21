@@ -3,7 +3,7 @@ import datetime
 from cats.constants import VK_GROUP_ID, ANIMAL_IMAGE_IMAGE_URL, ANIMAL_IMAGE_IMAGE_SMALL_URL, ANIMAL_IMAGE_PHOTO_ID, \
     ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND, ANIMAL_IMAGE_CREATED
 from cats.vk_api.album_analyzer.analyze_albums import SIZES
-from cats.vk_api.name_analyzer import analyse_animal_name
+from cats.vk_api.name_analyzer import analyse_animal_name, get_sex
 from cats.vk_api.vk_api_functions import TITLE, PID, CREATED, TYPE, SRC, RESPONSE, DESCRIPTION
 
 
@@ -30,14 +30,17 @@ def get_vk_url_from_album_id(album_id, group_id=VK_GROUP_ID):
 
 def get_animal_name_from_vk_response(response):
     status = None
+    sex = None
+    name = None
     try:
-        name = response[RESPONSE][0][TITLE]
+        title = response[RESPONSE][0][TITLE]
     except (KeyError, IndexError):
-        name = None
-    if name:
-        status, name = analyse_animal_name(name)
-        # TODO: get sex
-    return status, name
+        title = None
+    if title:
+        status, name = analyse_animal_name(title)
+        sex = get_sex(title)
+    res = status, name, sex
+    return res
 
 
 def get_animal_descr_from_vk_response(response):
@@ -47,7 +50,7 @@ def get_animal_descr_from_vk_response(response):
         return None
     else:
         # TODO: extra info
-        return album_descr
+        return album_descr.replace('<br>', '')
 
 
 SIZE_TYPES = ("w", "z", "y", "r", "x", "q", "p", "o", "m", "s",)

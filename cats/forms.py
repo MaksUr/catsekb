@@ -110,10 +110,12 @@ class AnimalForm(forms.ModelForm):
                 res[ANIMAL_DESCRIPTION] = descr
 
         if upd_type == ANIMAL_FORM_VK_UPDATE:
-            status, name = get_animal_name_from_vk_response(response=response)
+            status, name, sex = get_animal_name_from_vk_response(response=response)
 
             if name:
                 res[ANIMAL_NAME] = name
+            if sex:
+                res[ANIMAL_SEX] = sex
             res[ANIMAL_LOCATION_STATUS] = status
         return res
 
