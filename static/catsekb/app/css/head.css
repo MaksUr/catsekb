@@ -1,8 +1,9 @@
 @charset "UTF-8";
 /* <---------- head BEGIN ----------> */
 header {
-  background-size: cover;
-  background-position: center 50%;
+  -webkit-background-size: cover;
+          background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   /*Под вопросом... background-attachment: fixed;*/ }
 

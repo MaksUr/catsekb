@@ -72,7 +72,7 @@
 	transform: translate(0%);
 }
 
-.top_nav_increase_photo {
+.top_nav.top_nav_increase_photo, .mobile_list.top_nav_increase_photo {
 	transform: translateY(-100%);
 }
 
@@ -111,16 +111,14 @@
 /* <---------- .top_nav END ----------> */
 
 /* <---------- mobile_menu! BEGIN ----------> */
-.mobile_nav_opened {
-	-webkit-overflow-scrolling: touch;
-	overflow-y: auto;	
+/*.mobile_nav_opened {	
 	height: 101vh;
 }
 
 .mobile_nav_opened a {
 	padding: 0;
 }
-
+*/
 .mobile_menu {
     cursor: pointer;
 }
@@ -140,6 +138,8 @@
     padding-bottom: 10px;
     transition: transform .7s cubic-bezier(.1, .68, .58, 1);
     visibility: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .mobile_list > li:last-child {
