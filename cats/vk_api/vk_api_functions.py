@@ -1,3 +1,12 @@
+import json
+from os.path import abspath, join, dirname
+
+# import requests TODO: import
+from os import listdir
+from urllib.request import pathname2url
+
+from cats.vk_api.helper_functions import open_json
+
 RESPONSE = "response"
 TITLE = "title"
 TEXT = "text"
@@ -7,61 +16,52 @@ CREATED = "created"
 SIZES = "sizes"
 TYPE = "type"
 SRC = "src"
+DESCRIPTION = "description"
 
 
-def get_album(group_id, album_id):
-    res = {
-        "response": {
-            "count": 2,
-            "title": "ПРИСТРОЕН Бернард",
-            "text": "🐱 Нежная девочка Розанна, ищет новый дом🌷 <br>Роза живёт с Пушком, хозяева вынуждены были отказаться от них - сильная аллергия у ребенка😕, поэтому внук не может приходить в гости к бабушке. Что бы хозяева не пытались предпринять - бесполезно, с болью в сердце приходится искать новый дом.😒 💕Розанна очень человекоориентированная девочка, в не знакомой обстановке предпочитает находиться на ручках или на коленках, главное рядом с человеком, ведь он такой хороший, он точно защитит🙌. Ласковая обнимательно-муррчательная девочка очень нуждается в заботливых руках ❤ <br>✅ стерильна <br>✅ возраст - 2-3 года <br>✅ к другим кошкам - спокойно <br>✅ к людям - ласкуша <br>✅ на качественный корм <br>✅ лоток без промаха <br>звоните +7 (912) 224-19-87 Татьяна☎<br>Альбом Розы https://vk.com/album-73666865_237194718",
-            "items": [
-                {
-                    "owner_id": -73666865,
-                    "user_id": 100,
-                    "pid": 456241041,
-                    "text": "",
-                    "sizes": [
-                        {
-                            "type": "r",
-                            "height": 765,
-                            "width": 510,
-                            "src": "http://127.0.0.1:8000/media/test_images/1.jpg"
-                        },
-                        {
-                            "type": "w",
-                            "height": 2160,
-                            "width": 1440,
-                            "src": "http://127.0.0.1:8000/media/test_images/1.jpg"
-                        }
-                    ],
-                    "created": 1502698630,
-                    "aid": 246566509
-                },
-                {
-                    "owner_id": -73666865,
-                    "user_id": 100,
-                    "pid": 456241042,
-                    "text": "",
-                    "sizes": [
-                        {
-                            "type": "r",
-                            "height": 765,
-                            "width": 510,
-                            "src": "http://127.0.0.1:8000/media/test_images/2.jpg"
-                        },
-                        {
-                            "type": "w",
-                            "height": 2160,
-                            "width": 1440,
-                            "src": "http://127.0.0.1:8000/media/test_images/2.jpg"
-                        }
-                    ],
-                    "created": 1502698636,
-                    "aid": 246566509
-                }
-            ]
-        }
-    }
-    return res
+def get_album_photos(group_id, album_id):
+    # group_id = -1 * group_id
+    # TODO: use requests
+    # photos = requests.get(r'https://api.vk.com/method/photos.get', params={
+    #     'album_id': album_id,
+    #     'owner_id': group_id,
+    #     'photo_sizes': 1,
+    # }).json()
 
+    ###############################################
+    # TODO: локальная заглушка
+    def get_local_image_url(image_url):
+        image_url = pathname2url(image_url)
+        image_url = r'http://127.0.0.1:8000/' + image_url
+        return image_url
+
+    photos_config_file = r'media\images\cats\albums\{title}\{aid}.json'.format(title=album_id[1], aid=album_id[0])
+    photos = open_json(photos_config_file)
+    photos = {'response': photos}
+    local_photo_dir = join(dirname(photos_config_file), 'photos')
+    file_names = listdir(local_photo_dir)
+    for photo_d, file_name in zip(photos['response'], file_names):
+        for photo_link in photo_d['sizes']:
+            photo_link['src'] = get_local_image_url(join(local_photo_dir, file_name))
+    ###############################################
+
+    return photos
+
+
+def get_albums_info(group_id, album_ids):
+    # params = dict()
+
+    # params['owner_id'] = -1 * group_id
+    # if album_ids:
+    #     params['album_ids'] = ','.join(map(str, album_ids))
+    # TODO: use requests
+    # r = requests.get(r'https://api.vk.com/method/photos.getAlbums', params={
+    #     'owner_id': -1 * group_id,
+    # }).json()
+
+    ###############################################
+    # TODO: локальная заглушка
+    r = open_json(r'other\albums.json')
+    ###############################################
+
+    return r
