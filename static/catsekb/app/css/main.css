@@ -48,9 +48,11 @@ a, a:link, a:visited, a:hover, a:active {
   color: white !important;
   padding: 20px 40px;
   border: none;
-  border-radius: 3px;
+  -webkit-border-radius: 3px;
+          border-radius: 3px;
   text-transform: uppercase;
   -webkit-transition: background-color .6s;
+  -o-transition: background-color .6s;
   transition: background-color .6s; }
 
 .but:hover {
@@ -60,10 +62,12 @@ a, a:link, a:visited, a:hover, a:active {
   margin-top: 10px;
   padding: 10px 20px;
   border: 1px #f9965c solid;
-  border-radius: 3px;
+  -webkit-border-radius: 3px;
+          border-radius: 3px;
   color: #f9965c;
   text-transform: uppercase;
   -webkit-transition: background-color .6s;
+  -o-transition: background-color .6s;
   transition: background-color .6s;
   display: inline-block; }
 
@@ -73,7 +77,8 @@ a, a:link, a:visited, a:hover, a:active {
 
 .tag {
   padding: 10px;
-  border-radius: 3px; }
+  -webkit-border-radius: 3px;
+          border-radius: 3px; }
 
 .tag.no_active {
   display: inline-block;
@@ -119,8 +124,9 @@ ul {
 
 .form_elem input {
   margin: 4px 0 0 4px;
-  border-radius: 3px;
-  border: 1px #705344 solid;
+  -webkit-border-radius: 3px;
+          border-radius: 3px;
+  border: 1px #b4b4b4 solid;
   padding-left: 5px; }
 
 .form_elem li {
