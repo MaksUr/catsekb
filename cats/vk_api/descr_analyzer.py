@@ -1,7 +1,8 @@
 import re
 
 from cats.constants import ANIMAL_TAG, ANIMAL_DATE_OF_BIRTH, ANIMAL_BIRTHDAY_PRECISION, ANIMAL_FIELD_VALUE, \
-    ANIMAL_YEARS, ANIMAL_MONTHS, ANIMAL_DAYS
+    ANIMAL_BIRTHDAY_PRECISION_DAY, ANIMAL_BIRTHDAY_PRECISION_MONTH, \
+    ANIMAL_BIRTHDAY_PRECISION_YEAR
 
 WEEKS = 'weeks'
 
@@ -39,9 +40,9 @@ def get_time_period(age_info):
     if 'нед' in age_info:
         return WEEKS
     elif 'мес' in age_info:
-        return ANIMAL_MONTHS
+        return ANIMAL_BIRTHDAY_PRECISION_MONTH
     elif 'год' in age_info or 'лет' in age_info:
-        return ANIMAL_YEARS
+        return ANIMAL_BIRTHDAY_PRECISION_YEAR
     else:
         return None
 
@@ -60,7 +61,7 @@ def get_age_info(description):
             age_number = 1
         if time_period and age_number:
             if time_period == WEEKS:
-                time_period = ANIMAL_DAYS
+                time_period = ANIMAL_BIRTHDAY_PRECISION_DAY
                 age_number *= 7
             res[time_period] = age_number
     return res
@@ -80,10 +81,16 @@ def get_animal_tag(description):
         return None
 
 
+def get_precision_from_age(age):
+    # TODO: implement
+    return ANIMAL_BIRTHDAY_PRECISION_DAY or ANIMAL_BIRTHDAY_PRECISION_MONTH or ANIMAL_BIRTHDAY_PRECISION_YEAR
+
+
 def get_info_from_description(description):
-    date_of_birth, age_precision = get_age_info(description)
+    age = get_age_info(description)
+    age_precision = get_precision_from_age(age)
     field_value_info = get_field_value_info(description)
     tag = get_animal_tag(description)
-    vals = (tag, date_of_birth, age_precision, field_value_info)
+    vals = (tag, age, age_precision, field_value_info)
     res = {key: val for key, val in zip(DESCR_DATA_KEYS, vals) if val}
     return res
