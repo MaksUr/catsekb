@@ -13,24 +13,19 @@
 	zoom:1;
 }
 
+html {
+	-webkit-text-size-adjust: none;
+}
 body {
 	overflow-x: hidden;
 }
 
-.overY {
-	overflow-y: hidden;
-}
 /* Отступы между секциями */
 section {
 	padding: 70px 0;
     background-color: #fff;
 }
 
-header {
-}
-
-footer {
-}
 /* --------------------  */
 
 .mid {

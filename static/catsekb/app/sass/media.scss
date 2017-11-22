@@ -52,7 +52,9 @@
 
 /* Устройства с шириной экрана до 767px */
 @media (max-width: 767px) {
-
+	.overY {
+		overflow-y: hidden;
+	}
 	a.tag, .tag.pag_gallery {
 		display: block;
 	}
@@ -88,8 +90,7 @@
 		display: none;
 	}
 	.cat_a_mouse {
-   		/*transform: translateY(15%) rotate(59deg);*/
-   		display: none;
+   		transform: translateY(15%) rotate(59deg);
 	}
 
 	footer a {
