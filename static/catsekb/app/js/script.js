@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", ready);
 function ready() {
 	var widthScreen = document.documentElement.clientWidth;
 
-	if (widthScreen < 767) {
+	if (widthScreen < 766) {
 		console.log(widthScreen);
 		colorAndHeight(true);
 		mobile_menu.addEventListener('click', mobileNav);
