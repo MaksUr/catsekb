@@ -10,6 +10,7 @@ PATTERN_SEARCH_AGE_INFO = re.compile(
     r'([-,\d]*)(([\d]+)|(года?))([ -х]*)(мес|год|нед|лет)|(возраст[ -~]*(около|до)?[ -]*года)'
 )
 PATTERN_AGE_NUMBER = re.compile(r"[\.\d,]+")
+PATTERN_TAG = re.compile(r"#\w+_c")
 
 
 def get_number_from_string(s):
@@ -50,6 +51,7 @@ def get_age_info(description):
     age_info = re.search(PATTERN_SEARCH_AGE_INFO, description)
     if age_info:
         age_info_string = age_info.group()
+        # TODO: check len(group)>1
         age_number_list = re.findall(PATTERN_AGE_NUMBER, age_info_string)
         time_period = get_time_period(age_info_string)
         if age_number_list:
@@ -65,11 +67,17 @@ def get_age_info(description):
 
 
 def get_field_value_info(description):
-    return 'get_field_value_info'
+    return None
 
 
 def get_animal_tag(description):
-    return 'tag'
+    match = re.search(PATTERN_TAG, description)
+    if match:
+        tag = match.group()
+        tag = tag.replace('_c', '_catsekb')
+        return tag
+    else:
+        return None
 
 
 def get_info_from_description(description):
