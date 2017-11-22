@@ -61,7 +61,7 @@ def check_name_status(name, status):
     return res
 
 
-def analyse_animal_name(name):
+def get_info_from_title(name):
     r = check_name_status(name, STATUS_HOME)
     if r is not None:
         return STATUS_HOME, r
