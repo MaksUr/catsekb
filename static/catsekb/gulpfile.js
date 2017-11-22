@@ -9,13 +9,13 @@ var gulp       = require('gulp'), // Подключаем Gulp
 gulp.task('sass', function(){ // Создаем таск Sass
     return gulp.src('app/sass/**/*') // Берем источник
         .pipe(sass()) // Преобразуем Sass в CSS посредством gulp-sass
-        .pipe(autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true })) // Создаем префиксы
+        .pipe(autoprefixer(['last 16 versions', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'], { cascade: false })) // Создаем префиксы
         .pipe(gulp.dest('app/css')) // Выгружаем результата в папку app/css
 });
 
 gulp.task('css-libs', ['sass'], function() {
     return gulp.src('app/css/*.css') // Выбираем файл для минификации
-        .pipe(cssnano()) // Сжимаем
+        // .pipe(cssnano({zindex: false})) // Сжимаем
         .pipe(rename({suffix: '.min'})) // Добавляем суффикс .min
         .pipe(gulp.dest('app/css/min')); // Выгружаем в папку app/css
 });

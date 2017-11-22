@@ -1,9 +1,10 @@
+@charset "UTF-8";
 /* <---------- main_menu BEGIN ----------> */
 .main_menu {
   margin: 10px 0; }
 
 .menu {
-  z-index: 109;
+  /*z-index: 109; Вроде как исправляет проблему с наложением слоев при увеличении фоток кота*/
   position: relative; }
 
 .menu > li {
@@ -51,7 +52,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 109; }
+  z-index: 110; }
 
 .top_nav_opened {
   height: 60px;
@@ -60,7 +61,6 @@
   -o-transition: height 0.55s cubic-bezier(0.1, 0.68, 0.58, 1), transform 0.55s cubic-bezier(0.1, 0.68, 0.58, 1);
   transition: height 0.55s cubic-bezier(0.1, 0.68, 0.58, 1), transform 0.55s cubic-bezier(0.1, 0.68, 0.58, 1);
   transition: height 0.55s cubic-bezier(0.1, 0.68, 0.58, 1), transform 0.55s cubic-bezier(0.1, 0.68, 0.58, 1), -webkit-transform 0.55s cubic-bezier(0.1, 0.68, 0.58, 1);
-  z-index: 110;
   opacity: 1; }
 
 .nav_bar {
@@ -78,7 +78,7 @@
       -ms-transform: translate(0%);
           transform: translate(0%); }
 
-.top_nav_increase_photo {
+.top_nav.top_nav_increase_photo, .mobile_list.top_nav_increase_photo {
   -webkit-transform: translateY(-100%);
       -ms-transform: translateY(-100%);
           transform: translateY(-100%); }
@@ -113,13 +113,14 @@
 
 /* <---------- .top_nav END ----------> */
 /* <---------- mobile_menu! BEGIN ----------> */
-.mobile_nav_opened {
-  overflow-y: auto;
-  height: 101vh; }
+/*.mobile_nav_opened {	
+	height: 101vh;
+}
 
 .mobile_nav_opened a {
-  padding: 0; }
-
+	padding: 0;
+}
+*/
 .mobile_menu {
   cursor: pointer; }
 
@@ -127,20 +128,25 @@
   height: 30px; }
 
 .mobile_list {
-  visibility: hidden;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  -webkit-transition: -webkit-transform 0.65s cubic-bezier(0.02, 1.01, 0.58, 1);
-  transition: -webkit-transform 0.65s cubic-bezier(0.02, 1.01, 0.58, 1);
-  -o-transition: transform 0.65s cubic-bezier(0.02, 1.01, 0.58, 1);
-  transition: transform 0.65s cubic-bezier(0.02, 1.01, 0.58, 1);
-  transition: transform 0.65s cubic-bezier(0.02, 1.01, 0.58, 1), -webkit-transform 0.65s cubic-bezier(0.02, 1.01, 0.58, 1);
-  margin: 20px 0 0 0;
-  -webkit-transform: translateY(-92%);
-      -ms-transform: translateY(-92%);
-          transform: translateY(-92%); }
+  margin: 0;
+  z-index: 109;
+  background-color: rgba(255, 255, 255, 0.7);
+  -webkit-transform: translateY(-86%);
+      -ms-transform: translateY(-86%);
+          transform: translateY(-86%);
+  padding-bottom: 10px;
+  -webkit-transition: -webkit-transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
+  transition: -webkit-transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
+  -o-transition: transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
+  transition: transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
+  transition: transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1), -webkit-transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
+  visibility: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; }
 
 .mobile_list > li:last-child {
   margin-top: 25px; }
@@ -151,12 +157,13 @@
   -o-transition: transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
   transition: transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
   transition: transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1), -webkit-transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
-  margin: 40px 0;
   -webkit-transform: translateY(0%);
       -ms-transform: translateY(0%);
-          transform: translateY(0%); }
+          transform: translateY(0%);
+  height: 100vh;
+  padding: 20px 0; }
 
-.mobile_list_1 > li:first-child {
+.mobile_list > li:first-child {
   margin-top: 0; }
 
 .mobile_nav_opened .top_logo {
@@ -164,7 +171,7 @@
       -ms-transform: translate(0%);
           transform: translate(0%); }
 
-.mobile_list_1 > li {
+.mobile_list > li {
   margin-top: 20px; }
 
 .mobile_list_opening > li {

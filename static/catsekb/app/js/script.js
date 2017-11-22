@@ -6,6 +6,8 @@ var mobile_menu = document.querySelector('.mobile_menu');
 
 var mobile_list =  document.querySelector('.mobile_list');
 
+var body = document.getElementsByTagName('body');
+
 document.addEventListener("DOMContentLoaded", ready);
 
 function ready() {
@@ -43,6 +45,6 @@ function colorAndHeight(bool) {
 }
 
 function mobileNav() {
-	mobile_list.classList.toggle('open');
-	top_nav.classList.toggle('mobile_nav_opened'); 
+	mobile_list.classList.toggle('open'); 
+	body[0].classList.toggle('overY');
 }

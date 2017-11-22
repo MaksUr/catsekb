@@ -7,15 +7,16 @@
 
 @font-face {
     font-family: Open Sans;
-    src: url(../fonts/Open\ Sans/OpenSans-Regular.ttf);
-    font-style: normal
+    src: url(../fonts/OpenSans/OpenSans-Regular.ttf);
+    font-style: normal;
+    font-weight: 400;
 }
 
 @font-face {
     font-family: Open Sans;
-    src: url(../fonts/Open \ Sans/OpenSans-SemiBold.ttf);
-    font-style: semi-bold;
-    font-weight: 600
+    src: url(../fonts/OpenSans/OpenSans-SemiBold.ttf);
+    font-style: normal;
+    font-weight: 600;   
 }
 
 h1,h2 {
@@ -39,7 +40,7 @@ h2 {
 
 .mobile_list {
     font-size: 18px;
-    font-style: semi-bold;
+    font-style: normal;
     font-weight: 600;
 }
 
@@ -48,8 +49,8 @@ h2 {
 }
 
 .menu {
-    font-style: semi-bold;
-    font-weight: 600
+    font-style: normal;
+    font-weight: 600;
 }
 
 .font {
@@ -80,6 +81,6 @@ h2 {
 }
 
 .tag {
-	font-style: semi-bold;
+	font-style: normal;
 	font-weight: 600;
 }

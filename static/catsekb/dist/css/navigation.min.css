@@ -1,1 +1,180 @@
-.main_menu{margin:10px 0}.menu{z-index:109}.menu,.menu>li{position:relative}.menu>li{display:inline-block;padding-left:25px}.menu>li:first-child{padding-left:0}.menu_opening{position:absolute;visibility:hidden;top:30px;left:25px;opacity:0;text-align:left;transition:all .8s ease-out 1s}.menu_opening>li{margin:10px 15px 0 0}.menu_opening li:first-child{margin-top:0}.menu li:hover .menu_opening{opacity:1;visibility:visible;transition:all .8s 0s}.top_nav{width:100%;height:0;background-color:hsla(0,0%,100%,.8);transition:all 1s;opacity:0;position:fixed;top:0;left:0;z-index:110}.top_nav_opened{height:60px;transition:height .55s cubic-bezier(.1,.68,.58,1),-webkit-transform .55s cubic-bezier(.1,.68,.58,1);transition:height .55s cubic-bezier(.1,.68,.58,1),transform .55s cubic-bezier(.1,.68,.58,1);transition:height .55s cubic-bezier(.1,.68,.58,1),transform .55s cubic-bezier(.1,.68,.58,1),-webkit-transform .55s cubic-bezier(.1,.68,.58,1);opacity:1}.nav_bar{transition:-webkit-transform .57s;transition:transform .57s;transition:transform .57s,-webkit-transform .57s;-webkit-transform:translateY(-120%);transform:translateY(-120%)}.nav_bar_opened{-webkit-transform:translate(0);transform:translate(0)}.top_nav_increase_photo{-webkit-transform:translateY(-100%);transform:translateY(-100%)}.top_logo{height:50px;padding-top:2px}.menu.top_menu{text-align:right;padding-top:20px}.menu_opening.top_menu{padding:0;background-color:hsla(0,0%,100%,.8);top:40px;left:15px;border-bottom-left-radius:3px;border-bottom-right-radius:3px}.menu_opening.top_menu>li{padding-top:0;margin:15px 10px 0}.menu_opening.top_menu li:first-child{margin-top:0}.menu_opening.top_menu li:last-child{margin-bottom:15px}.mobile_nav_opened{overflow-y:auto;height:101vh}.mobile_nav_opened a{padding:0}.mobile_menu{cursor:pointer}.mobile_menu img{height:30px}.mobile_list{visibility:hidden;position:absolute;top:0;left:0;width:100%;transition:-webkit-transform .65s cubic-bezier(.02,1.01,.58,1);transition:transform .65s cubic-bezier(.02,1.01,.58,1);transition:transform .65s cubic-bezier(.02,1.01,.58,1),-webkit-transform .65s cubic-bezier(.02,1.01,.58,1);margin:20px 0 0;-webkit-transform:translateY(-92%);transform:translateY(-92%)}.mobile_list>li:last-child{margin-top:25px}.open{transition:-webkit-transform .7s cubic-bezier(.1,.68,.58,1);transition:transform .7s cubic-bezier(.1,.68,.58,1);transition:transform .7s cubic-bezier(.1,.68,.58,1),-webkit-transform .7s cubic-bezier(.1,.68,.58,1);margin:40px 0;-webkit-transform:translateY(0);transform:translateY(0)}.mobile_list_1>li:first-child{margin-top:0}.mobile_nav_opened .top_logo{-webkit-transform:translate(0);transform:translate(0)}.mobile_list_1>li{margin-top:20px}.mobile_list_opening>li{margin-top:15px}
+@charset "UTF-8";
+/* <---------- main_menu BEGIN ----------> */
+.main_menu {
+  margin: 10px 0; }
+
+.menu {
+  /*z-index: 109; Вроде как исправляет проблему с наложением слоев при увеличении фоток кота*/
+  position: relative; }
+
+.menu > li {
+  display: inline-block;
+  padding-left: 25px;
+  position: relative; }
+
+.menu > li:first-child {
+  padding-left: 0; }
+
+.menu_opening {
+  position: absolute;
+  visibility: hidden;
+  top: 30px;
+  left: 25px;
+  opacity: 0;
+  text-align: left;
+  -webkit-transition: all .8s 1s ease-out;
+  -o-transition: all .8s 1s ease-out;
+  transition: all .8s 1s ease-out; }
+
+.menu_opening > li {
+  margin: 10px 15px 0 0; }
+
+.menu_opening li:first-child {
+  margin-top: 0; }
+
+.menu li:hover .menu_opening {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: all .8s 0s;
+  -o-transition: all .8s 0s;
+  transition: all .8s 0s; }
+
+/* <---------- main_menu END ----------> */
+/* <---------- .top_nav BEGIN ----------> */
+.top_nav {
+  width: 100%;
+  height: 0px;
+  background-color: rgba(255, 255, 255, 0.8);
+  -webkit-transition: all 1s;
+  -o-transition: all 1s;
+  transition: all 1s;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 110; }
+
+.top_nav_opened {
+  height: 60px;
+  -webkit-transition: height 0.55s cubic-bezier(0.1, 0.68, 0.58, 1), -webkit-transform 0.55s cubic-bezier(0.1, 0.68, 0.58, 1);
+  transition: height 0.55s cubic-bezier(0.1, 0.68, 0.58, 1), -webkit-transform 0.55s cubic-bezier(0.1, 0.68, 0.58, 1);
+  -o-transition: height 0.55s cubic-bezier(0.1, 0.68, 0.58, 1), transform 0.55s cubic-bezier(0.1, 0.68, 0.58, 1);
+  transition: height 0.55s cubic-bezier(0.1, 0.68, 0.58, 1), transform 0.55s cubic-bezier(0.1, 0.68, 0.58, 1);
+  transition: height 0.55s cubic-bezier(0.1, 0.68, 0.58, 1), transform 0.55s cubic-bezier(0.1, 0.68, 0.58, 1), -webkit-transform 0.55s cubic-bezier(0.1, 0.68, 0.58, 1);
+  opacity: 1; }
+
+.nav_bar {
+  -webkit-transition: -webkit-transform .57s;
+  transition: -webkit-transform .57s;
+  -o-transition: transform .57s;
+  transition: transform .57s;
+  transition: transform .57s, -webkit-transform .57s;
+  -webkit-transform: translateY(-120%);
+      -ms-transform: translateY(-120%);
+          transform: translateY(-120%); }
+
+.nav_bar_opened {
+  -webkit-transform: translate(0%);
+      -ms-transform: translate(0%);
+          transform: translate(0%); }
+
+.top_nav.top_nav_increase_photo, .mobile_list.top_nav_increase_photo {
+  -webkit-transform: translateY(-100%);
+      -ms-transform: translateY(-100%);
+          transform: translateY(-100%); }
+
+.top_logo {
+  height: 50px;
+  padding-top: 2px; }
+
+.menu.top_menu {
+  text-align: right;
+  padding-top: 20px; }
+
+.menu_opening.top_menu {
+  padding: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  top: 40px;
+  left: 15px;
+  -webkit-border-bottom-left-radius: 3px;
+          border-bottom-left-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+          border-bottom-right-radius: 3px; }
+
+.menu_opening.top_menu > li {
+  padding-top: 0;
+  margin: 15px 10px 0 10px; }
+
+.menu_opening.top_menu li:first-child {
+  margin-top: 0; }
+
+.menu_opening.top_menu li:last-child {
+  margin-bottom: 15px; }
+
+/* <---------- .top_nav END ----------> */
+/* <---------- mobile_menu! BEGIN ----------> */
+/*.mobile_nav_opened {	
+	height: 101vh;
+}
+
+.mobile_nav_opened a {
+	padding: 0;
+}
+*/
+.mobile_menu {
+  cursor: pointer; }
+
+.mobile_menu img {
+  height: 30px; }
+
+.mobile_list {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  z-index: 109;
+  background-color: rgba(255, 255, 255, 0.7);
+  -webkit-transform: translateY(-86%);
+      -ms-transform: translateY(-86%);
+          transform: translateY(-86%);
+  padding-bottom: 10px;
+  -webkit-transition: -webkit-transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
+  transition: -webkit-transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
+  -o-transition: transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
+  transition: transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
+  transition: transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1), -webkit-transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
+  visibility: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; }
+
+.mobile_list > li:last-child {
+  margin-top: 25px; }
+
+.open {
+  -webkit-transition: -webkit-transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
+  transition: -webkit-transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
+  -o-transition: transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
+  transition: transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
+  transition: transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1), -webkit-transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
+  -webkit-transform: translateY(0%);
+      -ms-transform: translateY(0%);
+          transform: translateY(0%);
+  height: 100vh;
+  padding: 20px 0; }
+
+.mobile_list > li:first-child {
+  margin-top: 0; }
+
+.mobile_nav_opened .top_logo {
+  -webkit-transform: translate(0%);
+      -ms-transform: translate(0%);
+          transform: translate(0%); }
+
+.mobile_list > li {
+  margin-top: 20px; }
+
+.mobile_list_opening > li {
+  margin-top: 15px; }
+
+/* <---------- mobile_menu! END ----------> */

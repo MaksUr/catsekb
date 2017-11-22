@@ -3,7 +3,7 @@
 header {
   -webkit-background-size: cover;
           background-size: cover;
-  background-position: center 50%;
+  background-position: center;
   background-repeat: no-repeat;
   /*Под вопросом... background-attachment: fixed;*/ }
 

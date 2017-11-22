@@ -43,6 +43,5 @@ function colorAndHeight(bool) {
 }
 
 function mobileNav() {
-	mobile_list.classList.toggle('open');
-	top_nav.classList.toggle('mobile_nav_opened'); 
+	mobile_list.classList.toggle('open'); 
 }

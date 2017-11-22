@@ -40,8 +40,7 @@
 .increase_photo.vissible {
   -webkit-transform: translateX(0%);
       -ms-transform: translateX(0%);
-          transform: translateX(0%);
-  z-index: 115; }
+          transform: translateX(0%); }
 
 .item_photo {
   background-position: center;
@@ -58,7 +57,8 @@
   -webkit-transition: all .6s;
   -o-transition: all .6s;
   transition: all .6s;
-  overflow: hidden; }
+  overflow: hidden;
+  z-index: 115; }
 
 .increase_photo.vissible > .item_photo.active {
   opacity: 1; }

@@ -1,18 +1,41 @@
 @charset "UTF-8";
+@media (min-width: 992px) {
+  .full {
+    position: relative; }
+  .full_container, .line_container {
+    background-image: url(../img/cat.jpg);
+    -webkit-background-size: cover;
+            background-size: cover;
+    background-attachment: fixed;
+    background-position: 25%;
+    background-repeat: no-repeat;
+    width: 100%; }
+  .full_container {
+    height: 67vh;
+    -webkit-filter: brightness(90%);
+            filter: brightness(90%);
+    position: relative; }
+  .line_container {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    -webkit-filter: brightness(100%);
+            filter: brightness(100%);
+    height: 80px;
+    top: 40%; }
+  .line_container h2 {
+    padding-top: 28px;
+    text-align: right; } }
+
 /* Устройства с шириной экрана от 768px до 1200px */
 @media (min-width: 768px) and (max-width: 1200px) {
   .slider img {
     width: 100%; }
-  .full_container, .line_container {
-    background-position: 21%; }
   .line_container {
     -webkit-filter: none;
             filter: none;
     background-image: none;
     background-color: rgba(227, 235, 236, 0.7); }
-  .line_container h2 {
-    text-align: center;
-    padding-top: 28px; }
   .social img:first-child {
     padding-left: 0; }
   /* Наши коты */ }
@@ -21,26 +44,29 @@
 @media (max-width: 767px) {
   a.tag, .tag.pag_gallery {
     display: block; }
+  .tag {
+    background-color: rgba(255, 255, 255, 0.75); }
   .mobile_list {
     visibility: visible; }
+  .top_nav {
+    display: none; }
   .slider img {
     width: 100%; }
   .main_menu {
     margin-top: 20px; }
-  .full_container, .line_container {
-    background-position: 20%; }
+  .full_container {
+    background-image: url(/static/catsekb/dist/img/cat.jpg);
+    background-position: 25%; }
   .line_container {
     -webkit-filter: none;
             filter: none;
     background-image: none;
     background-color: rgba(241, 236, 233, 0.8); }
-  .line_container h2 {
-    text-align: center;
-    padding-top: 5%; }
+  .cat_container {
+    display: none; }
   .cat_a_mouse {
-    -webkit-transform: translateY(15%) rotate(59deg);
-        -ms-transform: translateY(15%) rotate(59deg);
-            transform: translateY(15%) rotate(59deg); }
+    /*transform: translateY(15%) rotate(59deg);*/
+    display: none; }
   footer a {
     padding-bottom: 0px; }
   .about_company {
@@ -54,7 +80,8 @@
   .description_cat {
     margin-top: 13px; }
   .increase_photo {
-    overflow-y: auto; }
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; }
   div.item_photo {
     width: 100%;
     opacity: 1;
@@ -65,11 +92,10 @@
     left: 0;
     margin: 0;
     height: 85%;
-    border: 1px white solid; }
+    border: 1px white solid;
+    min-height: 650px; }
   .prev_photo, .next_photo {
     display: none; }
-  .search_form {
-    text-align: left; }
   .form_elem {
     display: block; } }
 

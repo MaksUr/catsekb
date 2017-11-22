@@ -21,13 +21,8 @@ body {
 
 /* Отступы между секциями */
 section {
-  padding: 50px 0; }
-
-header {
-  margin-bottom: 50px; }
-
-footer {
-  margin-top: 50px; }
+  padding: 70px 0;
+  background-color: #fff; }
 
 /* --------------------  */
 .mid {
@@ -63,10 +58,25 @@ a, a:link, a:visited, a:hover, a:active {
 .but:hover {
   background-color: #475f9a; }
 
+.ghost_but {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: 1px #f9965c solid;
+  -webkit-border-radius: 3px;
+          border-radius: 3px;
+  color: #f9965c;
+  text-transform: uppercase;
+  -webkit-transition: background-color .6s;
+  -o-transition: background-color .6s;
+  transition: background-color .6s;
+  display: inline-block; }
+
+.ghost_but:hover {
+  background-color: #f9965c;
+  color: #fff; }
+
 .tag {
   padding: 10px;
-  font-weight: 600;
-  background-color: rgba(255, 255, 255, 0.75);
   -webkit-border-radius: 3px;
           border-radius: 3px; }
 
@@ -100,10 +110,6 @@ ul {
   margin: auto; }
 
 /* <---------- form BEGIN ----------> */
-.search_form {
-  border: 1px #a2e5ff solid;
-  padding: 50px; }
-
 .search {
   background-color: #fff;
   padding: 0 0 30px 0; }
@@ -120,7 +126,7 @@ ul {
   margin: 4px 0 0 4px;
   -webkit-border-radius: 3px;
           border-radius: 3px;
-  border: 1px #8585ff solid;
+  border: 1px #b4b4b4 solid;
   padding-left: 5px; }
 
 .form_elem li {
@@ -128,6 +134,9 @@ ul {
 
 input[type="submit"] {
   margin: 15px 0 0 0; }
+
+input[type="text"]:active {
+  border-color: #846aa5; }
 
 input.but {
   background-color: #ff4e4e; }
