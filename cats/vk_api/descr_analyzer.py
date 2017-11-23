@@ -2,7 +2,8 @@ import re
 
 from cats.constants import ANIMAL_TAG, ANIMAL_DATE_OF_BIRTH, ANIMAL_BIRTHDAY_PRECISION, ANIMAL_FIELD_VALUE, \
     ANIMAL_BIRTHDAY_PRECISION_DAY, ANIMAL_BIRTHDAY_PRECISION_MONTH, \
-    ANIMAL_BIRTHDAY_PRECISION_YEAR
+    ANIMAL_BIRTHDAY_PRECISION_YEAR, FIELD_VALUE_INST_LITTER_BOX_SKILL_LEVEL_A, FIELD_VALUE_INST_LITTER_BOX_SKILL_LEVEL_C, \
+    FIELD_VALUE_INST_LITTER_BOX_SKILL_LEVEL_B, FIELD_TYPE_INST_LITTER_BOX_SKILL
 
 WEEKS = 'weeks'
 
@@ -12,6 +13,7 @@ PATTERN_SEARCH_AGE_INFO = re.compile(
 )
 PATTERN_AGE_NUMBER = re.compile(r"[\.\d,]+")
 PATTERN_TAG = re.compile(r"#\w+_c")
+
 
 
 def get_number_from_string(s):
@@ -66,9 +68,32 @@ def get_age_info(description):
             res[time_period] = age_number
     return res
 
+PATTERN_LITTER_BOX = re.compile(r"(([\w]+)([\W]*))лото?к(ом)?(([\W]*)([\w]+)){3}")
+PATTERN_LITTER_BOX_SKILL_LEVEL_A = re.compile(r"((без (промах|пробл))|лоток с |отличн|идеальн)")
+PATTERN_LITTER_BOX_SKILL_LEVEL_B = re.compile(r"будет приучен")
+PATTERN_LITTER_BOX_SKILL_LEVEL_C = re.compile(r"(плох|пробл|не ходит|мимо|не попад|гадит)")
+
+
+def get_litter_box_skill(description):
+    match = re.search(PATTERN_LITTER_BOX, description)
+    res = dict()
+    if match:
+        if re.search(PATTERN_LITTER_BOX_SKILL_LEVEL_A, description):
+            val = FIELD_VALUE_INST_LITTER_BOX_SKILL_LEVEL_A
+        elif re.search(PATTERN_LITTER_BOX_SKILL_LEVEL_B, description):
+            val = FIELD_VALUE_INST_LITTER_BOX_SKILL_LEVEL_B
+        elif re.search(PATTERN_LITTER_BOX_SKILL_LEVEL_C, description):
+            val = FIELD_VALUE_INST_LITTER_BOX_SKILL_LEVEL_C
+        else:
+            val = None
+        if val:
+            res[FIELD_TYPE_INST_LITTER_BOX_SKILL] = val
+    return res
+
 
 def get_field_value_info(description):
-    return None
+    res = dict()
+    res.update(get_litter_box_skill(description))
 
 
 def get_animal_tag(description):
