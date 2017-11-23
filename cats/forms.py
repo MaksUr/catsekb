@@ -107,16 +107,12 @@ class AnimalForm(forms.ModelForm):
         if upd_type in (ANIMAL_FORM_VK_UPDATE, ANIMAL_FORM_VK_UPDATE_DESCR):
             descr = get_animal_descr_from_vk_response(response=response)
             if descr:
+                # TODO: вычислить дату рождения по возрасту
                 res[ANIMAL_DESCRIPTION] = descr
 
         if upd_type == ANIMAL_FORM_VK_UPDATE:
-            status, name, sex = get_animal_name_from_vk_response(response=response)
-
-            if name:
-                res[ANIMAL_NAME] = name
-            if sex:
-                res[ANIMAL_SEX] = sex
-            res[ANIMAL_LOCATION_STATUS] = status
+            name_data = get_animal_name_from_vk_response(response=response)
+            res.update(name_data)
         return res
 
     class Meta:

@@ -18,17 +18,12 @@ def save_animal(data):
             data
         ]
     }
-    status, name, sex = get_animal_name_from_vk_response(response=response)
+    name_data = get_animal_name_from_vk_response(response=response)
     descr = get_animal_descr_from_vk_response(response=response)
     kwargs = dict()
-    if name:
-        kwargs[ANIMAL_NAME] = name
+    kwargs.update(name_data)
     if descr:
         kwargs[ANIMAL_DESCRIPTION] = descr
-    if status:
-        kwargs[ANIMAL_LOCATION_STATUS] = status
-    if sex:
-        kwargs[ANIMAL_SEX] = sex
     kwargs[ANIMAL_SHELTER_DATE] = datetime.date.fromtimestamp(int(data['created']))
     # TODO: group
     kwargs['vk_album_id'] = data["aid"]
