@@ -6,12 +6,14 @@ var mobile_menu = document.querySelector('.mobile_menu');
 
 var mobile_list =  document.querySelector('.mobile_list');
 
+var body = document.getElementsByTagName('body');
+
 document.addEventListener("DOMContentLoaded", ready);
 
 function ready() {
 	var widthScreen = document.documentElement.clientWidth;
 
-	if (widthScreen < 767) {
+	if (widthScreen < 766) {
 		console.log(widthScreen);
 		colorAndHeight(true);
 		mobile_menu.addEventListener('click', mobileNav);
@@ -44,4 +46,5 @@ function colorAndHeight(bool) {
 
 function mobileNav() {
 	mobile_list.classList.toggle('open'); 
+	body[0].classList.toggle('overY');
 }

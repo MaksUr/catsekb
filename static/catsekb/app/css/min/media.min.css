@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   .full {
     position: relative; }
   .full_container, .line_container {
@@ -42,6 +42,8 @@
 
 /* Устройства с шириной экрана до 767px */
 @media (max-width: 767px) {
+  .overY {
+    overflow-y: hidden; }
   a.tag, .tag.pag_gallery {
     display: block; }
   .tag {
@@ -65,8 +67,9 @@
   .cat_container {
     display: none; }
   .cat_a_mouse {
-    /*transform: translateY(15%) rotate(59deg);*/
-    display: none; }
+    -webkit-transform: translateY(15%) rotate(59deg);
+        -ms-transform: translateY(15%) rotate(59deg);
+            transform: translateY(15%) rotate(59deg); }
   footer a {
     padding-bottom: 0px; }
   .about_company {
