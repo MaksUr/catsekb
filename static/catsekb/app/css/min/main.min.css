@@ -19,9 +19,15 @@ html {
 body {
   overflow-x: hidden; }
 
+.overY {
+  overflow-y: hidden; }
+
 /* Отступы между секциями */
 section {
   padding: 50px 0; }
+
+.overY {
+  overflow-y: hidden; }
 
 /* --------------------  */
 .mid {
@@ -100,13 +106,13 @@ ul {
   list-style-type: none; }
 
 .title {
-  margin-bottom: 50px; }
+  margin-bottom: 35px; }
 
 .title p {
   padding-bottom: 20px;
   width: 100px;
   border-bottom: 1px #705344 solid;
-  margin: auto; }
+  margin: 0 auto; }
 
 /* <---------- form BEGIN ----------> */
 .form_elem:first-child {

@@ -1,5 +1,31 @@
 @charset "UTF-8";
-@media (min-width: 768px) {
+@media (hover) {
+  .cat_find_name, .cat_find_layer {
+    opacity: 0;
+    width: 100%;
+    position: absolute;
+    left: 0; }
+  .cat_find_name {
+    top: 60%;
+    z-index: 91;
+    -webkit-transition: opacity .55s ease, top .65s;
+    -o-transition: opacity .55s ease, top .65s;
+    transition: opacity .55s ease, top .65s; }
+  /* Наложение белого слоя (решение для поддержки всех браузеров) */
+  .cat_find_layer {
+    height: 100%;
+    top: 0;
+    z-index: 90;
+    background-color: rgba(255, 255, 255, 0.75);
+    -webkit-transition: opacity .45s ease;
+    -o-transition: opacity .45s ease;
+    transition: opacity .45s ease; }
+  .cat_find_block:hover .cat_find_layer, .cat_find_block:hover .cat_find_name {
+    opacity: 1; }
+  .cat_find_block:hover .cat_find_name {
+    top: 50%; } }
+
+@media (min-width: 992px) {
   .full {
     position: relative; }
   .full_container, .line_container {
@@ -11,7 +37,7 @@
     background-repeat: no-repeat;
     width: 100%; }
   .full_container {
-    height: 67vh;
+    height: 600px;
     -webkit-filter: brightness(90%);
             filter: brightness(90%);
     position: relative; }
@@ -42,8 +68,6 @@
 
 /* Устройства с шириной экрана до 767px */
 @media (max-width: 767px) {
-  .overY {
-    overflow-y: hidden; }
   a.tag, .tag.pag_gallery {
     display: block; }
   .tag {
@@ -84,7 +108,7 @@
     margin-top: 13px; }
   .increase_photo {
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch; }
+    /*-webkit-overflow-scrolling: touch;*/ }
   div.item_photo {
     width: 100%;
     opacity: 1;
