@@ -1,8 +1,6 @@
 /* <---------- .about BEGIN ----------> */
 .about {
 	position: relative;
-	overflow: hidden;
-    width: 100%;
 }
 
 .cat_container {
@@ -16,12 +14,11 @@
 .cat_a_mouse {
 	height: 90px;
 	position: absolute;
-	visibility: visible;
 	top: -5px;
     left: -45px;
     z-index: 0;
     transform: rotate(59deg);
-    transition: all .5s ease;
+    transition: transform .5s ease;
 }
 
 .cat_container:hover + .cat_a_mouse {

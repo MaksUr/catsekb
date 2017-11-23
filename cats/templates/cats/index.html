@@ -24,21 +24,21 @@
     {% endif %} -->
 
     <section>
-		<div class="about font line_height">
+		<div class="about">
 			<div class="cat_container">
 			</div>
 			<img class="cat_a_mouse" src="{% static "catsekb/dist/img/cat_and_mouse.png" %}">
-			<div class="container">
-				{% include 'cats/widgets/caption.html' with caption="О нас" %}
-				<div class="row">
-					<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-						<p class="about_u">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-							consequat.
-						</p>
-					</div>
+		</div>
+		<div class="container">
+			{% include 'cats/widgets/caption.html' with caption="О нас" %}
+			<div class="row">
+				<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+					<p class="font line_height">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat.
+					</p>
 				</div>
 			</div>
 		</div>
