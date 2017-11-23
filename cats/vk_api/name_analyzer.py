@@ -1,6 +1,7 @@
 import re
 
-from cats.constants import ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_DEAD, ANIMAL_LOCATION_STATUS_SHELTER
+from cats.constants import ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_DEAD, ANIMAL_LOCATION_STATUS_SHELTER, \
+    ANIMAL_SEX_MALE, ANIMAL_SEX_FEMALE
 
 CHANGE_NAME_PATTERN = re.compile(r"(^[\W_]*)|([\W_]*$)")
 
@@ -60,7 +61,7 @@ def check_name_status(name, status):
     return res
 
 
-def analyse_animal_name(name):
+def get_info_from_title(name):
     r = check_name_status(name, STATUS_HOME)
     if r is not None:
         return STATUS_HOME, r
@@ -73,3 +74,16 @@ def analyse_animal_name(name):
             if r is None:
                 return None, None
             return STATUS_SHELTER, r
+
+
+PATTERN_SEX_M = re.compile(r"ПРИСТРОЕН(?!А)", flags=re.IGNORECASE)
+PATTERN_SEX_F = re.compile(r"ПРИСТРОЕНА", flags=re.IGNORECASE)
+
+
+def get_sex(title):
+    if re.search(PATTERN_SEX_M, title) is not None:
+        return ANIMAL_SEX_MALE
+    elif re.search(PATTERN_SEX_F, title) is not None:
+        return ANIMAL_SEX_FEMALE
+    else:
+        return None

@@ -1,8 +1,10 @@
+import datetime
 from os.path import join
 
 from django.core.exceptions import ObjectDoesNotExist
 
-from cats.constants import VK_GROUP_ID, ANIMAL_NAME, ANIMAL_DESCRIPTION, ANIMAL_LOCATION_STATUS
+from cats.constants import VK_GROUP_ID, ANIMAL_NAME, ANIMAL_DESCRIPTION, ANIMAL_LOCATION_STATUS, ANIMAL_SEX, \
+    ANIMAL_SHELTER_DATE
 from cats.models import Animal
 from cats.vk_api.helper_functions import open_json
 from cats.vk_api.vk_api_functions import get_album_photos, get_albums_info
@@ -16,17 +18,13 @@ def save_animal(data):
             data
         ]
     }
-    status, name = get_animal_name_from_vk_response(response=response)
+    name_data = get_animal_name_from_vk_response(response=response)
     descr = get_animal_descr_from_vk_response(response=response)
     kwargs = dict()
-    if name:
-        kwargs[ANIMAL_NAME] = name
+    kwargs.update(name_data)
     if descr:
         kwargs[ANIMAL_DESCRIPTION] = descr
-    if status:
-        kwargs[ANIMAL_LOCATION_STATUS] = status
-    # TODO: sex
-    # TODO: shelter_date
+    kwargs[ANIMAL_SHELTER_DATE] = datetime.date.fromtimestamp(int(data['created']))
     # TODO: group
     kwargs['vk_album_id'] = data["aid"]
     animal = Animal(**kwargs)
