@@ -81,9 +81,7 @@
 
 /* Устройства с шириной экрана до 767px */
 @media (max-width: 767px) {
-	.overY {
-		overflow-y: hidden;
-	}
+	
 	a.tag, .tag.pag_gallery {
 		display: block;
 	}

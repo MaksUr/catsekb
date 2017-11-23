@@ -19,12 +19,17 @@ html {
 body {
 	overflow-x: hidden;
 }
-
+.overY {
+	overflow-y: hidden;
+}
 /* Отступы между секциями */
 section {
 	padding: 70px 0;
     background-color: #fff;
 }
+.overY {
+		overflow-y: hidden;
+	}
 
 /* --------------------  */
 

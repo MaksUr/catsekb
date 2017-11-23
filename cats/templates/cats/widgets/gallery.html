@@ -63,10 +63,7 @@
                                         <a class="tag no_active pag_gallery">Назад</a>
                                     {% endif %}
 
-
-                                    <a href="?per_page=all{% if request.GET.urlencode %}&{{ request.GET.urlencode }}{% endif %}" class="tag pag_gallery">Показать всех</a>
-                                        
-
+                                    <a href="?per_page=all{% if request.GET.urlencode %}&{{ request.GET.urlencode }}{% endif %}" class="tag pag_gallery">Показать всех</a>                    
 
                                     {# next #}
                                     {% if page_obj.has_next %}
