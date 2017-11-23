@@ -6,7 +6,9 @@ from cats.constants import ANIMAL_TAG, ANIMAL_DATE_OF_BIRTH, ANIMAL_BIRTHDAY_PRE
     FIELD_VALUE_INST_LITTER_BOX_SKILL_LEVEL_C, \
     FIELD_VALUE_INST_LITTER_BOX_SKILL_LEVEL_B, FIELD_TYPE_INST_LITTER_BOX_SKILL, \
     FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_A, FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_C, \
-    FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_B, FIELD_TYPE_INST_RELATIONSHIPS_WITH_PEOPLE
+    FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_B, FIELD_TYPE_INST_RELATIONSHIPS_WITH_PEOPLE, \
+    FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_A, FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_B, \
+    FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_C, FIELD_TYPE_INST_RELATIONSHIPS_WITH_ANIMALS
 
 WEEKS = 'weeks'
 
@@ -101,7 +103,7 @@ def get_litter_box_skill(description):
     )
 
 
-PATTERN_RELATIONSHIPS_WITH_PEOPLE = re.compile(r"([кс] )(люд|чел)(\w*)(([\W]*)([\w]+)){4}")
+PATTERN_RELATIONSHIPS_WITH_PEOPLE = re.compile(r"([кс][ ]+)(люд|чел)(\w*)(([\W]*)([\w]+)){4}")
 PATTERN_RELATIONSHIPS_WITH_PEOPLE_VAL_A = re.compile(r"(неж|спок|ласк|мурч|обним|добр)")
 PATTERN_RELATIONSHIPS_WITH_PEOPLE_VAL_B = re.compile(r"(трус|бо(як|ит)|скром)")
 PATTERN_RELATIONSHIPS_WITH_PEOPLE_VAL_C = re.compile(r"(подчин|с характ|не даст|насторож)")
@@ -117,6 +119,34 @@ def get_relationships_with_people(description):
             (PATTERN_RELATIONSHIPS_WITH_PEOPLE_VAL_C, FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_C),
         ),
         field_type=FIELD_TYPE_INST_RELATIONSHIPS_WITH_PEOPLE
+    )
+
+
+PATTERN_RELATIONSHIPS_WITH_ANIMALS = re.compile(
+    r"(([\w]+)([\W]*)){3}([кс])([ ]+)(другими?[ ]+)?((ко[шт])|(жив)[\w]+)(([\W]*)([\w]+)){4}"
+)
+
+PATTERN_RELATIONSHIPS_WITH_ANIMALS_VAL_A = re.compile(
+    r"(хор|не боит|ужив|друж|норм|отличн|не конф|спок|ладит|((?<!не) (нашел|нашла|находит) общий язык))")
+PATTERN_RELATIONSHIPS_WITH_ANIMALS_VAL_B = re.compile(
+    r"(стрес|бо(ит|яз)|сторон)|боит"
+)
+PATTERN_RELATIONSHIPS_WITH_ANIMALS_VAL_C = re.compile(
+    r"(домин|с характ|не даст|насторож|конфл|актив|(не (нашел|нашла|находит) общий язык))"
+)
+
+
+def get_relationships_with_animals(description):
+    # TODO: check patterns
+    return get_field_value_type_from_descr(
+        description=description,
+        pattern=PATTERN_RELATIONSHIPS_WITH_ANIMALS,
+        field_vals=(
+            (PATTERN_RELATIONSHIPS_WITH_ANIMALS_VAL_A, FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_A),
+            (PATTERN_RELATIONSHIPS_WITH_ANIMALS_VAL_B, FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_B),
+            (PATTERN_RELATIONSHIPS_WITH_ANIMALS_VAL_C, FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_C),
+        ),
+        field_type=FIELD_TYPE_INST_RELATIONSHIPS_WITH_ANIMALS
     )
 
 
