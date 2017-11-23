@@ -24,7 +24,7 @@
 .increase_photo {
 	position: fixed;
     top: 0;
-    height: 100vh;
+    height: 100%; /* 100% вместо 100vh, т.к. сафари не понимает vh и vw */
     width: 100%;
     left: 50%;
     z-index: 109;
@@ -51,7 +51,7 @@
     opacity: 0;
     transition: all .6s;
     overflow: hidden;
-    z-index: 115;
+    z-index: 110;
 }
 .increase_photo.vissible > .item_photo.active {
     opacity: 1;
@@ -64,9 +64,9 @@
 
 .close_increase {
     position: fixed;
-    top: 5vh;
+    top: 5%;
     right: 40px;
-    z-index: 116;
+    z-index: 111;
     cursor: pointer;
     visibility: hidden;
 }

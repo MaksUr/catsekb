@@ -45,18 +45,18 @@ btn_next.onclick = function() {
 
 function exit() {
 	increase_photo.classList.remove('vissible');
-	top_nav.classList.toggle('top_nav_increase_photo');
-	mobile_list.classList.toggle('top_nav_increase_photo');
+	top_nav.classList.remove('top_nav_increase_photo');
+	mobile_list.classList.remove('top_nav_increase_photo');
 	close_increase_photo.classList.remove('vis');
-	body[0].classList.toggle('overY');
+	body[0].classList.remove('overY');
 }
 
 function increase() {
 	increase_photo.classList.add('vissible');
-	top_nav.classList.toggle('top_nav_increase_photo');
-	mobile_list.classList.toggle('top_nav_increase_photo');
+	top_nav.classList.add('top_nav_increase_photo');
+	mobile_list.classList.add('top_nav_increase_photo');
 	close_increase_photo.classList.add('vis');
-	body[0].classList.toggle('overY');
+	body[0].classList.add('overY');
 
 }
 
