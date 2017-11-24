@@ -23,8 +23,8 @@ from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECI
     ANIMAL_KEY_SHELTER_DATE_HELP_TEXT, ANIMAL_SHELTER_DATE
 from cats.models import Animal, AnimalImage
 from cats.time import get_date_from_age, calc_age_uptoday
-from cats.vk_api.vk_api_functions import get_albums_info, RESPONSE
-from cats.vk_api.vk_import import get_animal_name_from_vk_response, get_vk_album_id_from_url, \
+from cats.updater.vk_request import get_albums_info, RESPONSE
+from cats.updater.vk_import import get_animal_name_from_vk_response, get_vk_album_id_from_url, \
     get_animal_descr_from_vk_response
 
 
@@ -286,4 +286,3 @@ class AnimalImageForm(forms.ModelForm):
     def clean(self):
         cleaned_data = forms.ModelForm.clean(self)
         return cleaned_data
-
