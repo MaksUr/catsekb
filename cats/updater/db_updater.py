@@ -5,8 +5,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from cats.constants import VK_GROUP_ID, ANIMAL_DESCRIPTION, ANIMAL_SHELTER_DATE
 from cats.models import Animal
 from cats.updater.vk_request import get_album_photos, get_albums_info
-from cats.updater.vk_import import get_animal_name_from_vk_response, get_animal_descr_from_vk_response, \
-    add_images_from_response
+# from cats.updater.vk_import import get_animal_name_from_vk_response, get_animal_descr_from_vk_response, \
+#     add_images_from_response
 
 
 def save_animal(data):

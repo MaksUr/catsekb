@@ -24,8 +24,8 @@ from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECI
 from cats.models import Animal, AnimalImage
 from cats.time import get_date_from_age, calc_age_uptoday
 from cats.updater.vk_request import get_albums_info, RESPONSE
-from cats.updater.vk_import import get_animal_name_from_vk_response, get_vk_album_id_from_url, \
-    get_animal_descr_from_vk_response
+# from cats.updater.vk_import import get_animal_name_from_vk_response, get_vk_album_id_from_url, \
+#     get_animal_descr_from_vk_response
 
 
 def get_range(size):

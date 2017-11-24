@@ -3,7 +3,6 @@ from os import listdir
 from os.path import join, dirname
 from urllib.request import pathname2url
 
-from cats.updater.helper_functions import open_json
 
 RESPONSE = "response"
 TITLE = "title"
@@ -28,6 +27,7 @@ def get_album_photos(group_id, album_id):
 
     ###############################################
     # TODO: локальная заглушка
+    from cats.updater.helper_functions import open_json
     def get_local_image_url(image_url):
         image_url = pathname2url(image_url)
         image_url = r'http://127.0.0.1:8000/' + image_url
@@ -59,6 +59,7 @@ def get_albums_info(group_id, album_ids):
 
     ###############################################
     # TODO: локальная заглушка
+    from cats.updater.helper_functions import open_json
     r = open_json(r'other\albums.json')
     ###############################################
 

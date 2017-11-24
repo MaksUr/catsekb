@@ -16,7 +16,7 @@ from cats.constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPD
 from cats.forms import AnimalForm, AnimalImageForm
 from cats.models import Animal, AnimalImage, FieldValue, Group, FieldType, Article
 from cats.updater.vk_request import get_album_photos
-from cats.updater.vk_import import add_images_from_response
+# from cats.updater.vk_import import add_images_from_response
 
 UPDATE_BUTTON = '<a class="button" href="{link}?upd={upd}">Обновить</a><p class="help">Help.</p>'
 

@@ -25,7 +25,7 @@ from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOS
 from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
 from cats.validators import group_name_validator, background_y_position_validator
-from cats.updater.vk_import import get_vk_url_from_album_id
+# from cats.updater.vk_import import get_vk_url_from_album_id
 
 
 class Group(Model):
