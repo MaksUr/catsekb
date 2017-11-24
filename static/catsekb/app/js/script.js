@@ -48,3 +48,13 @@ function mobileNav() {
 	mobile_list.classList.toggle('open'); 
 	body[0].classList.toggle('overY');
 }
+
+var cat_find_block = document.querySelectorAll('.cat_find_block');
+
+for (i = 0; i <= cat_find_block.length - 1; i++) {
+	cat_find_block[i].addEventListener('click', view_name.bind(this, i));
+}
+
+function view_name(i) {
+	cat_find_block[i].classList.toggle('cat_find_view');
+}

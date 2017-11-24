@@ -1,4 +1,20 @@
-@media (hover) {
+@media (hover: hover) {
+	.cat_a_mouse {
+   		transform: translateY(15%) rotate(59deg);
+	}
+
+	.cat_container:hover + .cat_a_mouse {
+	 transform: translateX(-70%) rotate(45deg);
+	}
+	.cat_container {
+		width: 80px;
+	    height: 125px;
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    z-index: 1;
+	}
+
 	.cat_find_name, .cat_find_layer {
 		opacity: 0;
 	    width: 100%;
@@ -19,7 +35,7 @@
 	    background-color: rgba(255, 255, 255, .75); 
 	    transition: opacity .45s ease;
 	}
-	.cat_find_block:hover .cat_find_layer, .cat_find_block:hover .cat_find_name {
+	.cat_find_block:hover .cat_find_layer, .cat_find_block:hover .cat_find_name, .cat_find_name_view, .cat_find_layer_view {
 	    opacity: 1;
 	}
 
@@ -91,7 +107,7 @@
 	.mobile_list {
 		visibility: visible;
 	}
-	.top_nav {
+	.top_nav, .top_nav_opened {
 		display: none;
 	}
 	.slider img {
@@ -105,26 +121,15 @@
 		background-image: url(/static/catsekb/dist/img/cat.jpg);
 		background-position: 25%;
 	}
-	.full {
-
-	}
 	.line_container {
 		filter: none;
 		background-image: none;
 		background-color: rgba(241, 236, 233, .8);
 	}
-	.cat_container {
-		display: none;
-	}
-	.cat_a_mouse {
-   		transform: translateY(15%) rotate(59deg);
-	}
 
 	footer a {
 		 padding-bottom: 0px;
 	}
-
-
 	.about_company { 
 		margin-top: 40px;
 	}
@@ -144,7 +149,7 @@
 
 	.increase_photo {
 		overflow-y: auto;
-    	/*-webkit-overflow-scrolling: touch;*/
+    	-webkit-overflow-scrolling: touch;
 	}
 	div.item_photo {
    		width: 100%;
