@@ -104,8 +104,8 @@ def get_litter_box_skill(description):
 
 
 PATTERN_RELATIONSHIPS_WITH_PEOPLE = re.compile(r"([кс][ ]+)(люд|чел)(\w*)(([\W]*)([\w]+)){4}")
-PATTERN_RELATIONSHIPS_WITH_PEOPLE_VAL_A = re.compile(r"(неж|спок|ласк|мурч|обним|добр)")
-PATTERN_RELATIONSHIPS_WITH_PEOPLE_VAL_B = re.compile(r"(трус|бо(як|ит)|скром)")
+PATTERN_RELATIONSHIPS_WITH_PEOPLE_VAL_A = re.compile(r"(неж|спок|ласк|мурч|обним|добр|(?<!не) люби)")
+PATTERN_RELATIONSHIPS_WITH_PEOPLE_VAL_B = re.compile(r"(трус|бо(як|ит)|скром)|не люби")
 PATTERN_RELATIONSHIPS_WITH_PEOPLE_VAL_C = re.compile(r"(подчин|с характ|не даст|насторож)")
 
 
@@ -123,16 +123,16 @@ def get_relationships_with_people(description):
 
 
 PATTERN_RELATIONSHIPS_WITH_ANIMALS = re.compile(
-    r"(([\w]+)([\W]*)){3}([кс])([ ]+)(другими?[ ]+)?((ко[шт])|(жив)[\w]+)(([\W]*)([\w]+)){4}"
+    r"(([\w]+)([\W]*)){4}([кс])([ ]+)(другими?[ ]+)?((ко[шт])|(жив)[\w]+)(([\W]*)([\w]+)){4}"
 )
 
 PATTERN_RELATIONSHIPS_WITH_ANIMALS_VAL_A = re.compile(
-    r"(хор|не боит|ужив|друж|норм|отличн|не конф|спок|ладит|((?<!не) (нашел|нашла|находит) общий язык))")
+    r"(хор|не боит|ужив|друж|нормально|отличн|не конф|спок|ладит|((?<!не) (нашел|нашла|находит) общий язык)|(?<!не) (люби|адекв))")
 PATTERN_RELATIONSHIPS_WITH_ANIMALS_VAL_B = re.compile(
-    r"(стрес|бо(ит|яз)|сторон)|боит"
+    r"(стрес|бо(ит|яз)|сторон)|боит|опас[ка]"
 )
 PATTERN_RELATIONSHIPS_WITH_ANIMALS_VAL_C = re.compile(
-    r"(домин|с характ|не даст|насторож|конфл|актив|(не (нашел|нашла|находит) общий язык))"
+    r"(домин|с характ|не даст|насторож|конфл|актив|(не (нашел|нашла|находит) общий язык)|убий|не люби)"
 )
 
 
