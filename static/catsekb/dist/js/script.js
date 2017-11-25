@@ -49,8 +49,6 @@ function mobileNav() {
 	body[0].classList.toggle('overY');
 }
 
-
-
 var cat_find_block = document.querySelectorAll('.cat_find_block');
 
 for (i = 0; i <= cat_find_block.length - 1; i++) {

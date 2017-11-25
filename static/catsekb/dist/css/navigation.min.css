@@ -122,12 +122,7 @@
 }
 */
 .mobile_menu {
-  cursor: pointer;
-  -webkit-background-size: 30px 30px;
-          background-size: 30px;
-  height: 30px;
-  background-position: center;
-  background-repeat: no-repeat; }
+  display: none; }
 
 .mobile_list {
   position: fixed;
@@ -137,35 +132,30 @@
   margin: 0;
   z-index: 112;
   background-color: rgba(255, 255, 255, 0.8);
-  padding: 20px 0 10px 0;
-  -webkit-transition: -webkit-transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
-  transition: -webkit-transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
-  -o-transition: transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
-  transition: transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
-  transition: transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1), -webkit-transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
-  -webkit-transform: translateY(-86%);
-      -ms-transform: translateY(-86%);
-          transform: translateY(-86%);
+  padding: 20px 0 20px 0;
+  -webkit-transition: all 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+  -o-transition: all 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: all 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+  -webkit-transform: translateY(-140%);
+      -ms-transform: translateY(-140%);
+          transform: translateY(-140%);
   visibility: hidden;
-  /*overflow-y: auto;*/
-  /*-webkit-overflow-scrolling: touch;*/ }
+  height: 100%; }
 
 .mobile_list > li:last-child {
   margin-top: 25px; }
 
 .open {
-  -webkit-transition: -webkit-transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
-  transition: -webkit-transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
-  -o-transition: transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
-  transition: transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
-  transition: transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1), -webkit-transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
+  -webkit-transition: all 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
+  -o-transition: all 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
+  transition: all 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
   -webkit-transform: translateY(0%);
       -ms-transform: translateY(0%);
           transform: translateY(0%);
-  height: 100%;
-  padding: 20px 0;
   top: 0;
-  overflow-y: auto; }
+  overflow-y: auto;
+  opacity: 1;
+  visibility: visible; }
 
 .mobile_list > li:first-child {
   margin-top: 0; }

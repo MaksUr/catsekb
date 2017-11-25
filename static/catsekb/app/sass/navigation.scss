@@ -120,11 +120,7 @@
 }
 */
 .mobile_menu {
-    cursor: pointer;
-    background-size: 30px;
-    height: 30px;
-    background-position: center;
-    background-repeat: no-repeat;
+    display: none;
 }
 .mobile_list {
 	position: fixed;
@@ -133,13 +129,12 @@
     width: 100%;
     margin: 0;
     z-index: 112;
-    background-color: rgba(255, 255, 255, .8);
-    padding: 20px 0 10px 0;
-    transition: transform 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
-    transform: translateY(-86%);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px 0 20px 0;
+    transition: all 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+    transform: translateY(-140%);
     visibility: hidden;
-    /*overflow-y: auto;*/
-    /*-webkit-overflow-scrolling: touch;*/
+    height: 100%;
 }
 
 .mobile_list > li:last-child {
@@ -147,12 +142,12 @@
 }
 
 .open {
-	transition: transform .7s cubic-bezier(.1, .68, .58, 1);
+    transition: all 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
     transform: translateY(0%);
-    height: 100%;
-	padding: 20px 0;
-	top: 0;
-	overflow-y: auto;
+    top: 0;
+    overflow-y: auto;
+    opacity: 1;
+    visibility: visible;
 }
 
 .mobile_list > li:first-child {

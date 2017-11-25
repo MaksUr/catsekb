@@ -70,14 +70,10 @@
 
 .close_increase {
   position: fixed;
-  top: 5%;
-  right: 40px;
+  top: 2%;
+  right: 25px;
   z-index: 111;
-  cursor: pointer;
-  visibility: hidden; }
-
-.vis {
-  visibility: visible; }
+  cursor: pointer; }
 
 .prev_photo {
   background-image: url(../img/prev_photo.png); }

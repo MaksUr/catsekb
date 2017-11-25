@@ -2,14 +2,6 @@
 .about {
   position: relative; }
 
-.cat_container {
-  width: 80px;
-  height: 125px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1; }
-
 .cat_a_mouse {
   height: 90px;
   position: absolute;
@@ -24,11 +16,6 @@
   -o-transition: transform .5s ease;
   transition: transform .5s ease;
   transition: transform .5s ease, -webkit-transform .5s ease; }
-
-.cat_container:hover + .cat_a_mouse {
-  -webkit-transform: translateX(-70%) rotate(45deg);
-      -ms-transform: translateX(-70%) rotate(45deg);
-          transform: translateX(-70%) rotate(45deg); }
 
 /* <---------- .about END ----------> */
 .line_container h2 {
