@@ -1,11 +1,9 @@
-@charset "UTF-8";
 /* <---------- head BEGIN ----------> */
 header {
   -webkit-background-size: cover;
           background-size: cover;
-  background-position-y: 50%;
-  background-repeat: no-repeat;
-  /*Под вопросом... background-attachment: fixed;*/ }
+  background-position: center center;
+  background-repeat: no-repeat; }
 
 .header_layer {
   background-color: rgba(255, 255, 255, 0.64);
