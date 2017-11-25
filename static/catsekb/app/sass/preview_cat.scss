@@ -31,8 +31,8 @@
     margin-left: -50%;
     text-align: center;
     transform: translateX(100%);
-    background-color: rgba(255, 255, 255, .8);
     transition: transform .68s;
+    background-color: rgba(255, 255, 255, .8);
 }
 .increase_photo.vissible {
 	transform: translateX(0%);  
@@ -65,7 +65,7 @@
 .close_increase {
     position: fixed;
     top: 2%;
-    right: 25px;
+    right: 20px;
     z-index: 111;
     cursor: pointer;
 }

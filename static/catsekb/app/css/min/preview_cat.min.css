@@ -31,12 +31,12 @@
   -webkit-transform: translateX(100%);
       -ms-transform: translateX(100%);
           transform: translateX(100%);
-  background-color: rgba(255, 255, 255, 0.8);
   -webkit-transition: -webkit-transform .68s;
   transition: -webkit-transform .68s;
   -o-transition: transform .68s;
   transition: transform .68s;
-  transition: transform .68s, -webkit-transform .68s; }
+  transition: transform .68s, -webkit-transform .68s;
+  background-color: rgba(255, 255, 255, 0.8); }
 
 .increase_photo.vissible {
   -webkit-transform: translateX(0%);
@@ -71,7 +71,7 @@
 .close_increase {
   position: fixed;
   top: 2%;
-  right: 25px;
+  right: 20px;
   z-index: 111;
   cursor: pointer; }
 
