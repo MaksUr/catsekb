@@ -1,34 +1,3 @@
-@media (hover: hover) {
-	.cat_container:hover + .cat_a_mouse {
-		transform: translateX(-70%) rotate(45deg);
-	}
-	.cat_container {
-		width: 80px;
-	    height: 125px;
-	    position: absolute;
-	    top: 0;
-	    left: 0;
-	    z-index: 1;
-	}
-    .cat_find_block:hover .cat_find_layer, .cat_find_block:hover .cat_find_name {
-    	opacity: 1;
-		visibility: visible;
-	}
-  	.cat_find_block:hover .cat_find_name {
-    	top: 50%; 
-    } 
-}
-
-@media (hover: none) {
-    .cat_find_view .cat_find_layer, .cat_find_view .cat_find_name {
-    	opacity: 1;
-		visibility: visible;	
-	}
-    .cat_find_view .cat_find_name {
-    	top: 50%; 
-    } 
-}
-
 @media (min-width: 992px) {
 	.full {
 		position: relative;
@@ -89,9 +58,6 @@
 	}
 	.tag {
 		background-color: rgba(255, 255, 255, .75);	    
-	}
-	.mobile_list {
-		visibility: visible;
 	}
 	.top_nav, .top_nav_opened {
 		display: none;
@@ -157,20 +123,21 @@
 	.form_elem {
 		display: block;
 	}
-	.mobile_menu {
-		display: block;
-	    cursor: pointer;
-	    background-size: 25px;
-	    background-position: 10px;
-	    background-repeat: no-repeat;
-	    position: fixed;
-	    top: 2%;
-	    left: 20px;
-	    height: 40px;
-	    width: 45px;
+	.burger {
+		cursor: pointer;
 	    z-index: 113;
 	    background-color: rgba(255, 255, 255, 0.75);
 	    border-radius: 3px;
+	    top: 2%;
+	    left: 10px;
+		display: inline-block;
+		position: fixed;
+	    overflow: hidden;
+	    padding: 0;
+	    width: 40px;
+	    height: 35px;
+	    font-size: 0;
+	    transition: background .3s, opacity .4s ease, visibility .4s ease;
 	}
 }
 

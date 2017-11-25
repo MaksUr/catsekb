@@ -4,8 +4,10 @@
 
 {% load static %}
 
-<div class="mobile_menu mid vis" style="background-image: url({% static 'catsekb/dist/img/menu.png' %})">
+<div class="mid burger vis">
+    <span>toggle menu</span>
 </div>   
+
 <nav class="mid font">
     <ul class="mobile_list">
         {% include "cats/menu_tabs.html" with menu_class='mobile_list_opening' active_menu=active_menu groups=groups helps=helps %}

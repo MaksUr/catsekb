@@ -41,3 +41,19 @@
     margin-top: 10px;
 }
 /* <---------- .gallery END ----------> */
+
+.can-hover .cat_find_block:hover .cat_find_layer, .can-hover .cat_find_block:hover .cat_find_name {
+	opacity: 1;
+	visibility: visible;	
+}
+.can-hover .cat_find_block:hover .cat_find_name {
+	top: 50%; 
+} 
+
+.cat_find_view .cat_find_layer, .cat_find_view .cat_find_name {
+    	opacity: 1;
+		visibility: visible;	
+	}
+.cat_find_view .cat_find_name {
+	top: 50%; 
+} 

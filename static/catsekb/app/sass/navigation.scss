@@ -167,3 +167,41 @@
 }
 
 /* <---------- mobile_menu! END ----------> */
+
+.burger {
+    display: none;
+}
+
+.burger span {
+	display: block;
+    position: absolute;
+    top: 17px;
+    left: 8px;
+    right: 8px;
+    height: 2px;
+    background: #004040;
+    transition: transform 0.3s;
+}
+
+.burger span::before {
+    top: -8px;
+}
+
+.burger span::before, .burger span::after {
+    position: absolute;
+    display: block;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #004040;
+    content: "";
+    border-radius: 3px;
+}
+
+.burger span::after {
+    bottom: -8px;
+}
+
+.burger.is-active span {
+    transform: rotate(90deg);
+}
