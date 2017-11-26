@@ -133,30 +133,32 @@
   z-index: 112;
   background-color: rgba(255, 255, 255, 0.8);
   padding: 40px 0;
-  -webkit-transition: opacity 1s cubic-bezier(0.22, 0.61, 0.36, 1), -webkit-transform 1s cubic-bezier(0.22, 0.61, 0.36, 1);
-  transition: opacity 1s cubic-bezier(0.22, 0.61, 0.36, 1), -webkit-transform 1s cubic-bezier(0.22, 0.61, 0.36, 1);
-  -o-transition: transform 1s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 1s cubic-bezier(0.22, 0.61, 0.36, 1);
-  transition: transform 1s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 1s cubic-bezier(0.22, 0.61, 0.36, 1);
-  transition: transform 1s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 1s cubic-bezier(0.22, 0.61, 0.36, 1), -webkit-transform 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+  -webkit-transition: opacity .9s ease, -webkit-transform .9s ease;
+  transition: opacity .9s ease, -webkit-transform .9s ease;
+  -o-transition: transform .9s ease, opacity .9s ease;
+  transition: transform .9s ease, opacity .9s ease;
+  transition: transform .9s ease, opacity .9s ease, -webkit-transform .9s ease;
   -webkit-transform: translateY(-120%);
       -ms-transform: translateY(-120%);
-          transform: translateY(-120%); }
+          transform: translateY(-120%);
+  height: 100vh;
+  height: 100%; }
 
 .mobile_list > li:last-child {
   margin-top: 25px; }
 
 .open {
-  -webkit-transition: all 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
-  -o-transition: all 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
-  transition: all 0.7s cubic-bezier(0.1, 0.68, 0.58, 1);
+  -webkit-transition: opacity .95s ease, -webkit-transform .95s ease;
+  transition: opacity .95s ease, -webkit-transform .95s ease;
+  -o-transition: transform .95s ease, opacity .95s ease;
+  transition: transform .95s ease, opacity .95s ease;
+  transition: transform .95s ease, opacity .95s ease, -webkit-transform .95s ease;
   -webkit-transform: translateY(0%);
       -ms-transform: translateY(0%);
           transform: translateY(0%);
   top: 0;
   overflow-y: auto;
-  opacity: 1;
-  height: 100vh;
-  height: 100%; }
+  opacity: 1; }
 
 .mobile_list > li:first-child {
   margin-top: 0; }
