@@ -131,9 +131,9 @@
     z-index: 112;
     background-color: rgba(255, 255, 255, 0.8);
     padding: 40px 0;
-    transition: transform .9s ease, opacity .9s ease, visibility .9s ease;
-    transform: translateY(-120%);
-    visibility: hidden;
+    transition: transform .85s ease, opacity .85s ease;
+    transform: translateY(-130%);
+    opacity: 0;
     height: 100vh;
     height: 100%;
 }
@@ -143,12 +143,11 @@
 }
 
 .open {
-    transition: transform .9s ease, opacity .9s ease, visibility .9s ease;
+    transition: transform .85s ease, opacity .85s ease;
     transform: translateY(0%);
     top: 0;
     overflow-y: auto;
     opacity: 1;
-    visibility: visible;
 }
 
 .mobile_list > li:first-child {

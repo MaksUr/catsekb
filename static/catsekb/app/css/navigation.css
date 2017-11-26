@@ -133,15 +133,15 @@
   z-index: 112;
   background-color: rgba(255, 255, 255, 0.8);
   padding: 40px 0;
-  -webkit-transition: opacity .9s ease, visibility .9s ease, -webkit-transform .9s ease;
-  transition: opacity .9s ease, visibility .9s ease, -webkit-transform .9s ease;
-  -o-transition: transform .9s ease, opacity .9s ease, visibility .9s ease;
-  transition: transform .9s ease, opacity .9s ease, visibility .9s ease;
-  transition: transform .9s ease, opacity .9s ease, visibility .9s ease, -webkit-transform .9s ease;
-  -webkit-transform: translateY(-120%);
-      -ms-transform: translateY(-120%);
-          transform: translateY(-120%);
-  visibility: hidden;
+  -webkit-transition: opacity .85s ease, -webkit-transform .85s ease;
+  transition: opacity .85s ease, -webkit-transform .85s ease;
+  -o-transition: transform .85s ease, opacity .85s ease;
+  transition: transform .85s ease, opacity .85s ease;
+  transition: transform .85s ease, opacity .85s ease, -webkit-transform .85s ease;
+  -webkit-transform: translateY(-130%);
+      -ms-transform: translateY(-130%);
+          transform: translateY(-130%);
+  opacity: 0;
   height: 100vh;
   height: 100%; }
 
@@ -149,18 +149,17 @@
   margin-top: 25px; }
 
 .open {
-  -webkit-transition: opacity .9s ease, visibility .9s ease, -webkit-transform .9s ease;
-  transition: opacity .9s ease, visibility .9s ease, -webkit-transform .9s ease;
-  -o-transition: transform .9s ease, opacity .9s ease, visibility .9s ease;
-  transition: transform .9s ease, opacity .9s ease, visibility .9s ease;
-  transition: transform .9s ease, opacity .9s ease, visibility .9s ease, -webkit-transform .9s ease;
+  -webkit-transition: opacity .85s ease, -webkit-transform .85s ease;
+  transition: opacity .85s ease, -webkit-transform .85s ease;
+  -o-transition: transform .85s ease, opacity .85s ease;
+  transition: transform .85s ease, opacity .85s ease;
+  transition: transform .85s ease, opacity .85s ease, -webkit-transform .85s ease;
   -webkit-transform: translateY(0%);
       -ms-transform: translateY(0%);
           transform: translateY(0%);
   top: 0;
   overflow-y: auto;
-  opacity: 1;
-  visibility: visible; }
+  opacity: 1; }
 
 .mobile_list > li:first-child {
   margin-top: 0; }
