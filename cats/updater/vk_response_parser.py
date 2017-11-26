@@ -10,21 +10,6 @@ NAME_DATA_KEYS = (ANIMAL_NAME, ANIMAL_LOCATION_STATUS, ANIMAL_SEX)
 DESCR_DATA_KEYS = (ANIMAL_DESCRIPTION, ANIMAL_TAG, ANIMAL_DATE_OF_BIRTH, ANIMAL_BIRTHDAY_PRECISION, ANIMAL_FIELD_VALUE)
 
 
-def get_info_from_album_title(vk_albums_response):
-    status = None
-    sex = None
-    name = None
-    try:
-        title = vk_albums_response[RESPONSE][0][TITLE]
-    except (KeyError, IndexError):
-        title = None
-    if title:
-        status, name = get_info_from_title(title)
-        sex = get_sex(title)
-    res = {key: val for key, val in zip(NAME_DATA_KEYS, (name, status, sex)) if val}
-    return res
-
-
 def get_description(title=None, vk_descr=None, name=None):
     if name:
         tag = HASHTAG_TEMPLATE.format(name=name, suffix=HASHTAG_SUFFIX)
@@ -53,7 +38,22 @@ def get_description(title=None, vk_descr=None, name=None):
     return None
 
 
-def get_info_from_album_description(vk_albums_response, name=None):
+def get_kwargs_from_album_response_title(vk_albums_response):
+    status = None
+    sex = None
+    name = None
+    try:
+        title = vk_albums_response[RESPONSE][0][TITLE]
+    except (KeyError, IndexError):
+        title = None
+    if title:
+        status, name = get_info_from_title(title)
+        sex = get_sex(title)
+    res = {key: val for key, val in zip(NAME_DATA_KEYS, (name, status, sex)) if val}
+    return res
+
+
+def get_kwargs_from_album_response_descr(vk_albums_response, name=None):
     res = dict()
     try:
         vk_descr = vk_albums_response[RESPONSE][0][DESCRIPTION]
@@ -70,6 +70,19 @@ def get_info_from_album_description(vk_albums_response, name=None):
         res.update(get_info_from_description(description))
         res[ANIMAL_DESCRIPTION] = description
     return res
+
+
+def get_animal_kwargs_from_vk_response(vk_albums_response):
+    res = dict()
+
+    res.update(get_kwargs_from_album_response_title(vk_albums_response=vk_albums_response)) # name, location_status, sex
+    name = res.get(ANIMAL_NAME)
+    res.update(
+        get_kwargs_from_album_response_descr(
+            vk_albums_response=vk_albums_response,
+            name=name
+        )
+    )
 
 
 SIZE_TYPES = ("w", "z", "y", "r", "x", "q", "p", "o", "m", "s",)

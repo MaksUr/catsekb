@@ -63,6 +63,7 @@ def update_all_animals_from_response(response, ignore_list=None):
             m = 'Одинаковые vk_album_id={aid} у разных экземпляров.'.format(aid=animal["aid"])
             raise ValueError(m)
         except ObjectDoesNotExist:
+            animal_kwargs =
             save_animal(data=animal)
 
 
