@@ -49,7 +49,7 @@
     width: 100%;
     height: 0px;
     background-color: rgba(255, 255, 255, .8);
-    transition: all 1s;
+    transition: height 1s, opacity 1s;
     opacity: 0;
     position: fixed;
     top: 0;
@@ -111,14 +111,6 @@
 /* <---------- .top_nav END ----------> */
 
 /* <---------- mobile_menu! BEGIN ----------> */
-/*.mobile_nav_opened {	
-	height: 101vh;
-}
-
-.mobile_nav_opened a {
-	padding: 0;
-}
-*/
 .mobile_menu {
     display: none;
 }
