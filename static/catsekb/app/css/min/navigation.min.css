@@ -124,11 +124,11 @@
   margin: 0;
   z-index: 110;
   background-color: rgba(255, 255, 255, 0.8);
-  -webkit-transition: opacity 2s cubic-bezier(0, 0, 0.2, 1), -webkit-transform 0.95s cubic-bezier(0, 0, 0.2, 1);
-  transition: opacity 2s cubic-bezier(0, 0, 0.2, 1), -webkit-transform 0.95s cubic-bezier(0, 0, 0.2, 1);
-  -o-transition: transform 0.95s cubic-bezier(0, 0, 0.2, 1), opacity 2s cubic-bezier(0, 0, 0.2, 1);
-  transition: transform 0.95s cubic-bezier(0, 0, 0.2, 1), opacity 2s cubic-bezier(0, 0, 0.2, 1);
-  transition: transform 0.95s cubic-bezier(0, 0, 0.2, 1), opacity 2s cubic-bezier(0, 0, 0.2, 1), -webkit-transform 0.95s cubic-bezier(0, 0, 0.2, 1);
+  -webkit-transition: opacity 3s cubic-bezier(0, 0, 0.2, 1), -webkit-transform 0.95s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity 3s cubic-bezier(0, 0, 0.2, 1), -webkit-transform 0.95s cubic-bezier(0, 0, 0.2, 1);
+  -o-transition: transform 0.95s cubic-bezier(0, 0, 0.2, 1), opacity 3s cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 0.95s cubic-bezier(0, 0, 0.2, 1), opacity 3s cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 0.95s cubic-bezier(0, 0, 0.2, 1), opacity 3s cubic-bezier(0, 0, 0.2, 1), -webkit-transform 0.95s cubic-bezier(0, 0, 0.2, 1);
   -webkit-transform: translateY(-130%);
       -ms-transform: translateY(-130%);
           transform: translateY(-130%);

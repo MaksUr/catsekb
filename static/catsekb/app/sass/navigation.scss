@@ -122,7 +122,7 @@
     margin: 0;
     z-index: 110;
     background-color: rgba(255, 255, 255, 0.8);
-    transition: transform .95s cubic-bezier(0, 0, .2, 1), opacity 2s cubic-bezier(0, 0, .2, 1);
+    transition: transform .95s cubic-bezier(0, 0, .2, 1), opacity 3s cubic-bezier(0, 0, .2, 1);
     transform: translateY(-130%);
     opacity: 0;
     overflow-y: auto;

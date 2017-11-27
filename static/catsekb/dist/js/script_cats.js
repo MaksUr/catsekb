@@ -48,21 +48,21 @@ btn_next.onclick = function() {
 function exit() {
 	increase_photo.classList.remove('vissible');
 	top_nav.classList.remove('top_nav_increase_photo');
-	burger.classList.add('vis');
-	burger.classList.remove('no-vis');
+	burger.classList.toggle('vis');
+	burger.classList.toggle('no-vis');
 	close_increase_photo.classList.add('no-vis');
 	close_increase_photo.classList.remove('vis');
-	body[0].classList.remove('overY');
+	body[0].classList.toggle('overY');
 }
 
 function increase() {
 	increase_photo.classList.add('vissible');
 	top_nav.classList.add('top_nav_increase_photo');
-	burger.classList.add('no-vis');
-	burger.classList.remove('vis');
+	burger.classList.toggle('no-vis');
+	burger.classList.toggle('vis');
 	close_increase_photo.classList.remove('no-vis');
 	close_increase_photo.classList.add('vis');
-	body[0].classList.add('overY');
+	body[0].classList.toggle('overY');
 
 }
 
