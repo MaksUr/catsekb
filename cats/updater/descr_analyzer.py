@@ -185,6 +185,7 @@ def get_precision_from_age(age):
 def get_animal_date_of_birth(description, created_time_stamp):
     age = get_age_info(description)
     if created_time_stamp is not None:
+        # TODO: check time stamp
         created_date = date.fromtimestamp(created_time_stamp)
     else:
         created_date = None

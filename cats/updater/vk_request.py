@@ -3,6 +3,7 @@ from os import listdir
 from os.path import join, dirname
 from urllib.request import pathname2url
 
+from cats.constants import VK_GROUP_ID
 
 RESPONSE = "response"
 TITLE = "title"
@@ -65,3 +66,24 @@ def get_albums_info(group_id, album_ids):
     ###############################################
 
     return r
+
+
+def get_vk_album_id_from_url(url):
+    group = "album-" + str(VK_GROUP_ID) + "_"
+    if url and r'vk.com/' in url and url.find(group) >= 0:
+        album_id = url[url.find(group) + len(group):]
+        try:
+            album_id = int(album_id)
+        except ValueError:
+            return None
+        else:
+            return album_id
+    else:
+        return None
+
+
+def get_vk_url_from_album_id(album_id, group_id=VK_GROUP_ID):
+    if album_id:
+        return r"https://vk.com/album-{group_id}_{album_id}".format(group_id=group_id, album_id=album_id)
+    else:
+        return None

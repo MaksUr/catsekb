@@ -1,76 +1,100 @@
 import datetime
 
-from django.core.exceptions import ObjectDoesNotExist
+from cats.constants import ANIMAL_VK_ALBUM_ID, VK_GROUP_ID, ANIMAL_FIELD_VALUE, FIELD_TYPE_NAME, FIELD_VALUE_VALUE_TEXT, \
+    FIELD_VALUE_FIELD_TYPE, ANIMAL_IMAGE_IMAGE_URL, ANIMAL_IMAGE_IMAGE_SMALL_URL, ANIMAL_IMAGE_PHOTO_ID, \
+    ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND, ANIMAL_IMAGE_CREATED, ANIMAL_IMAGE_ANIMAL
+from cats.models import Animal, FieldType, FieldValue, AnimalImage
+from cats.updater.helper_functions import open_json
+from cats.updater.vk_request import get_albums_info, RESPONSE, TITLE, AID, get_album_photos, PID, CREATED, SIZES
+from cats.updater.vk_response_parser import get_animal_kwargs_from_vk_response, get_photo_from_size
 
-from cats.constants import VK_GROUP_ID, ANIMAL_DESCRIPTION, ANIMAL_SHELTER_DATE
-from cats.models import Animal
-from cats.updater.vk_request import get_album_photos, get_albums_info
-# from cats.updater.vk_import import get_animal_name_from_vk_response, get_animal_descr_from_vk_response, \
-#     add_images_from_response
+KEY_IGNORE_TITLES = 'ignore_albums_titles'
 
 
-def save_animal(data):
-    response = {
-        'response': [
-            data
-        ]
-    }
-    name_data = get_animal_name_from_vk_response(response=response)
-    descr = get_animal_descr_from_vk_response(response=response)
+def set_field_values_to_animal(animal, field_values):
+    for field_type in field_values:
+        kwargs = {FIELD_TYPE_NAME: field_type}
+        field_type_instance, created= FieldType.objects.get_or_create(**kwargs)
+        kwargs = {
+            FIELD_VALUE_VALUE_TEXT: field_values[field_type],
+            FIELD_VALUE_FIELD_TYPE: field_type_instance
+        }
+        field_value, created = FieldValue.objects.get_or_create(**kwargs)
+        animal.field_value.add(field_value)
+
+
+def save_image(animal, photo, favourite=False, background=False):
+    photos = photo.get(SIZES, ())
+    biggest_photo = get_photo_from_size(photos, biggest=True)
+    small_photo = get_photo_from_size(photos, biggest=False)
+    pid = photo.get(PID)
+    created = photo.get(CREATED)
+    if created is not None:
+        created = datetime.datetime.fromtimestamp(created).date()
+
     kwargs = dict()
-    kwargs.update(name_data)
-    if descr:
-        kwargs[ANIMAL_DESCRIPTION] = descr
-    kwargs[ANIMAL_SHELTER_DATE] = datetime.date.fromtimestamp(int(data['created']))
-    # TODO: group
-    kwargs['vk_album_id'] = data["aid"]
-    animal = Animal(**kwargs)
-    animal.save()
-    # photo_response = get_album_photos(group_id=data["owner_id"], album_id=data["aid"])
+    kwargs[ANIMAL_IMAGE_PHOTO_ID] = pid
+    kwargs[ANIMAL_IMAGE_ANIMAL] = animal
+    image = AnimalImage.objects.get_or_create(**kwargs)
+    if biggest_photo:
+        image.__setattr__(ANIMAL_IMAGE_IMAGE_URL, biggest_photo)
+    if small_photo:
+        image.__setattr__(ANIMAL_IMAGE_IMAGE_SMALL_URL, small_photo)
+    if created:
+        image.__setattr__(ANIMAL_IMAGE_CREATED, created)
 
-    ########################################
-    # TODO: локальная заглушка
+    image.__setattr__(ANIMAL_IMAGE_FAVOURITE, favourite)
+    image.__setattr__(ANIMAL_IMAGE_BACKGROUND, background)
+
+
+def update_images_for_animal(animal, album_id):
     try:
-        photo_response = get_album_photos(group_id=data["owner_id"], album_id=(data["aid"], data["title"]))
-    except ValueError:
-        return
-    ########################################
-
-    add_images_from_response(animal=animal, response=photo_response)
-
-
-def update_all_animals_from_response(response, ignore_list=None):
-    """
-    Добавляет Animal по полю vk_album_id
-    :param ignore_list: 
-    :type ignore_list: 
-    :param response: 
-    :type response: 
-    :return: 
-    :rtype: 
-    """
-    ignore_list = ignore_list or list()
-    try:
-        albums = response['response']
+        images = get_album_photos(VK_GROUP_ID, album_id)[RESPONSE]
     except KeyError:
+        return None
+    try:
+        images = iter(images)
+    except TypeError:
+        return None
+    try:
+        save_image(animal=animal, photo=next(images), background=True)
+        save_image(animal=animal, photo=next(images), favourite=True)
+    except StopIteration:
         return
-    for animal in albums:
-        if animal.get('title') in ignore_list:
+    for image in images:
+        save_image(animal=animal, photo=image)
+
+
+def update_all_animals_from_vk(conf_pth='config.json'):
+    try:
+        albums = get_albums_info(group_id=VK_GROUP_ID, album_ids=None)[RESPONSE]
+    except KeyError:
+        return None
+    try:
+        config = open_json(conf_pth)
+        ignore_titles = config[KEY_IGNORE_TITLES]
+    except (ValueError, KeyError, IndexError):
+        ignore_titles = ()
+
+    for item in albums:
+        aid = item.get(AID)
+        if (
+                (item.get(TITLE) in ignore_titles) or (aid is None)
+        ):
             continue
-        try:
-            Animal.objects.get(vk_album_id=animal["aid"])
-        except (Animal.MultipleObjectsReturned,):
-            m = 'Одинаковые vk_album_id={aid} у разных экземпляров.'.format(aid=animal["aid"])
-            raise ValueError(m)
-        except ObjectDoesNotExist:
-            animal_kwargs =
-            save_animal(data=animal)
+
+        animal, created = Animal.objects.get_or_create(**{ANIMAL_VK_ALBUM_ID: aid})
+
+        kwargs = get_animal_kwargs_from_vk_response({RESPONSE: (item,)})
+        field_values = kwargs.pop(ANIMAL_FIELD_VALUE, dict())
+        set_field_values_to_animal(animal, field_values)
+        update_images_for_animal(animal, aid)
 
 
-def update_all_animals(ignore_list=None):
-    response = get_albums_info(album_ids=None, group_id=VK_GROUP_ID)
-    ignore_list = ignore_list or list()
-    update_all_animals_from_response(response=response, ignore_list=ignore_list)
+
+
+
+
 
 
 
