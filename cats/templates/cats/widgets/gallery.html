@@ -28,7 +28,7 @@
                             <div class="cat_find_block">
                                 <a href="{% url 'animal_detail' pk=animal.id %}{{ filter_parameters }}">
                                     {# TODO: default image #}
-                                    <div class="cat_find" style="background-image: url({{ animal.get_image.image_url }});">
+                                    <div class="cat_find" style="background-image: url({{ animal.get_main_image.image_small_url }});">
                                     </div>
                                     <div class="hashtag cat_find_name mid">{{ animal.get_hashtag_name }}</div> <!-- # T0D0: #Зефир,_Крем,_Сливка,_Трюфелька_catsekb..... - обрезать строку если больше 25 символов # -->
                                     <div class="cat_find_layer"></div>
