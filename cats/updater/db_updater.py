@@ -64,7 +64,7 @@ def update_images_for_animal(animal, album_id):
     for image in images:
         save_image(animal=animal, photo=image)
 
-
+# todo join config json
 def update_all_animals_from_vk(conf_pth='config.json'):
     try:
         albums = get_albums_info(group_id=VK_GROUP_ID, album_ids=None)[RESPONSE]
@@ -88,6 +88,12 @@ def update_all_animals_from_vk(conf_pth='config.json'):
         kwargs = get_animal_kwargs_from_vk_response({RESPONSE: (item,)})
         field_values = kwargs.pop(ANIMAL_FIELD_VALUE, dict())
         set_field_values_to_animal(animal, field_values)
+        for k in kwargs:
+            animal.__setattr__(k, kwargs[k])
+        try:
+            animal.save(update_fields=kwargs.keys())
+        except (KeyError, ValueError, TypeError):
+            pass
         update_images_for_animal(animal, aid)
 
 
