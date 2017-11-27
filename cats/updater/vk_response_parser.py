@@ -4,10 +4,9 @@ from cats.constants import ANIMAL_SEX, ANIMAL_LOCATION_STATUS, \
 from cats.updater.descr_analyzer import get_animal_tag, get_info_from_description
 from cats.updater.inst_response_parser import get_the_oldest_photo_descr_from_tag
 from cats.updater.name_analyzer import get_info_from_title, get_sex
-from cats.updater.vk_request import RESPONSE, TITLE, DESCRIPTION, TYPE, SRC
+from cats.updater.vk_request import RESPONSE, TITLE, DESCRIPTION, TYPE, SRC, CREATED
 
 NAME_DATA_KEYS = (ANIMAL_NAME, ANIMAL_LOCATION_STATUS, ANIMAL_SEX)
-DESCR_DATA_KEYS = (ANIMAL_DESCRIPTION, ANIMAL_TAG, ANIMAL_DATE_OF_BIRTH, ANIMAL_BIRTHDAY_PRECISION, ANIMAL_FIELD_VALUE)
 
 
 def get_description(title=None, vk_descr=None, name=None):
@@ -61,13 +60,18 @@ def get_kwargs_from_album_response_descr(vk_albums_response, name=None):
         vk_descr = None
 
     try:
+        created_stamp = vk_albums_response[RESPONSE][0][CREATED]
+    except (KeyError, IndexError):
+        created_stamp = None
+
+    try:
         title = vk_albums_response[RESPONSE][0][TITLE]
     except (KeyError, IndexError):
         title = None
 
     description = get_description(title=title, vk_descr=vk_descr, name=name)
     if description:
-        res.update(get_info_from_description(description))
+        res.update(get_info_from_description(description, created_stamp))
         res[ANIMAL_DESCRIPTION] = description
     return res
 
@@ -83,6 +87,7 @@ def get_animal_kwargs_from_vk_response(vk_albums_response):
             name=name
         )
     )
+    return res
 
 
 SIZE_TYPES = ("w", "z", "y", "r", "x", "q", "p", "o", "m", "s",)
@@ -104,5 +109,4 @@ def get_photo_from_size(list_size, biggest=True):
         return None
 
 
-# TODO: get_animal_args
 # TODO: get_image_args

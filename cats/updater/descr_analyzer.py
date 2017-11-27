@@ -1,5 +1,7 @@
 import re
 
+from datetime import date
+
 from cats.constants import ANIMAL_TAG, ANIMAL_DATE_OF_BIRTH, ANIMAL_BIRTHDAY_PRECISION, ANIMAL_FIELD_VALUE, \
     ANIMAL_BIRTHDAY_PRECISION_DAY, ANIMAL_BIRTHDAY_PRECISION_MONTH, \
     ANIMAL_BIRTHDAY_PRECISION_YEAR, FIELD_VALUE_INST_LITTER_BOX_SKILL_LEVEL_A, \
@@ -8,7 +10,9 @@ from cats.constants import ANIMAL_TAG, ANIMAL_DATE_OF_BIRTH, ANIMAL_BIRTHDAY_PRE
     FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_A, FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_C, \
     FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_B, FIELD_TYPE_INST_RELATIONSHIPS_WITH_PEOPLE, \
     FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_A, FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_B, \
-    FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_C, FIELD_TYPE_INST_RELATIONSHIPS_WITH_ANIMALS
+    FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_C, FIELD_TYPE_INST_RELATIONSHIPS_WITH_ANIMALS, ANIMAL_DAYS, \
+    ANIMAL_MONTHS, ANIMAL_YEARS
+from cats.time import get_date_from_age
 
 WEEKS = 'weeks'
 
@@ -154,6 +158,7 @@ def get_field_value_info(description):
     res = dict()
     res.update(get_litter_box_skill(description))
     res.update(get_relationships_with_people(description))
+    return res
 
 
 def get_animal_tag(description):
@@ -167,15 +172,31 @@ def get_animal_tag(description):
 
 
 def get_precision_from_age(age):
-    # TODO: implement
-    return ANIMAL_BIRTHDAY_PRECISION_DAY or ANIMAL_BIRTHDAY_PRECISION_MONTH or ANIMAL_BIRTHDAY_PRECISION_YEAR
+    if age.get[ANIMAL_DAYS] is not None:
+        return ANIMAL_BIRTHDAY_PRECISION_DAY
+    elif age.get[ANIMAL_MONTHS] is not None:
+        return ANIMAL_BIRTHDAY_PRECISION_MONTH
+    elif age.get[ANIMAL_YEARS] is not None:
+        return ANIMAL_BIRTHDAY_PRECISION_YEAR
+    else:
+        return None
 
 
-def get_info_from_description(description):
+def get_animal_date_of_birth(description, created_time_stamp):
     age = get_age_info(description)
+    if created_time_stamp is not None:
+        created_date = date.fromtimestamp(created_time_stamp)
+    else:
+        created_date = None
+    date_of_birth = get_date_from_age(start_date=created_date, **age)
     age_precision = get_precision_from_age(age)
+    return date_of_birth, age_precision
+
+
+def get_info_from_description(description, created_time_stamp):
+    animal_date_of_birth, age_precision = get_animal_date_of_birth(description, created_time_stamp)
     field_value_info = get_field_value_info(description)
     tag = get_animal_tag(description)
-    vals = (tag, age, age_precision, field_value_info)
+    vals = (tag, animal_date_of_birth, age_precision, field_value_info)
     res = {key: val for key, val in zip(DESCR_DATA_KEYS, vals) if val}
     return res

@@ -14,6 +14,7 @@ SIZES = "sizes"
 TYPE = "type"
 SRC = "src"
 DESCRIPTION = "description"
+AID = "aid"
 
 
 def get_album_photos(group_id, album_id):
