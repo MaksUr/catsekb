@@ -26,9 +26,6 @@ body {
 section {
   padding: 50px 0; }
 
-.overY {
-  overflow-y: hidden; }
-
 .vis {
   visibility: visible;
   opacity: 1;

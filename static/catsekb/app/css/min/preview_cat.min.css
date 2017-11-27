@@ -23,6 +23,7 @@
   top: 0;
   height: 100%;
   /* 100% вместо 100vh, т.к. сафари не понимает vh и vw */
+  height: 100vh;
   width: 100%;
   left: 50%;
   z-index: 110;
@@ -70,7 +71,7 @@
 
 .close_increase {
   position: fixed;
-  top: 2%;
+  top: 4%;
   right: 20px;
   z-index: 111;
   cursor: pointer; }
@@ -86,7 +87,7 @@
   position: absolute;
   height: 150px;
   width: 10%;
-  top: 35%;
+  top: 40%;
   opacity: .55;
   -webkit-transition: opacity .5s;
   -o-transition: opacity .5s;

@@ -29,8 +29,6 @@
 
 /* Устройства с шириной экрана от 768px до 1200px */
 @media (min-width: 768px) and (max-width: 1200px) {
-  .slider img {
-    width: 100%; }
   .line_container {
     -webkit-filter: none;
             filter: none;
@@ -48,18 +46,17 @@
     background-color: rgba(255, 255, 255, 0.75); }
   .top_nav, .top_nav_opened {
     display: none; }
-  .slider img {
-    width: 100%; }
   .main_menu {
     margin-top: 20px; }
   .full_container {
-    background-image: url(/static/catsekb/dist/img/cat.jpg);
-    background-position: 25%; }
+    background-image: none; }
   .line_container {
     -webkit-filter: none;
             filter: none;
     background-image: none;
     background-color: rgba(241, 236, 233, 0.8); }
+  .line_container h2 {
+    line-height: 30px; }
   footer a {
     padding-bottom: 0px; }
   .about_company {
@@ -98,7 +95,7 @@
     background-color: rgba(255, 255, 255, 0.75);
     -webkit-border-radius: 3px;
             border-radius: 3px;
-    top: 2%;
+    top: 4%;
     left: 10px;
     display: inline-block;
     position: fixed;

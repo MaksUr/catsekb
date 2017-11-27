@@ -45,9 +45,9 @@
   width: 100%;
   height: 0px;
   background-color: rgba(255, 255, 255, 0.8);
-  -webkit-transition: all 1s;
-  -o-transition: all 1s;
-  transition: all 1s;
+  -webkit-transition: height 1s, opacity 1s;
+  -o-transition: height 1s, opacity 1s;
+  transition: height 1s, opacity 1s;
   opacity: 0;
   position: fixed;
   top: 0;
@@ -113,14 +113,6 @@
 
 /* <---------- .top_nav END ----------> */
 /* <---------- mobile_menu! BEGIN ----------> */
-/*.mobile_nav_opened {	
-	height: 101vh;
-}
-
-.mobile_nav_opened a {
-	padding: 0;
-}
-*/
 .mobile_menu {
   display: none; }
 
@@ -130,35 +122,34 @@
   left: 0;
   width: 100%;
   margin: 0;
-  z-index: 112;
+  z-index: 110;
   background-color: rgba(255, 255, 255, 0.8);
-  padding: 40px 0;
-  -webkit-transition: opacity .85s ease, -webkit-transform .85s ease;
-  transition: opacity .85s ease, -webkit-transform .85s ease;
-  -o-transition: transform .85s ease, opacity .85s ease;
-  transition: transform .85s ease, opacity .85s ease;
-  transition: transform .85s ease, opacity .85s ease, -webkit-transform .85s ease;
+  -webkit-transition: opacity 2s cubic-bezier(0, 0, 0.2, 1), -webkit-transform 0.95s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity 2s cubic-bezier(0, 0, 0.2, 1), -webkit-transform 0.95s cubic-bezier(0, 0, 0.2, 1);
+  -o-transition: transform 0.95s cubic-bezier(0, 0, 0.2, 1), opacity 2s cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 0.95s cubic-bezier(0, 0, 0.2, 1), opacity 2s cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 0.95s cubic-bezier(0, 0, 0.2, 1), opacity 2s cubic-bezier(0, 0, 0.2, 1), -webkit-transform 0.95s cubic-bezier(0, 0, 0.2, 1);
   -webkit-transform: translateY(-130%);
       -ms-transform: translateY(-130%);
           transform: translateY(-130%);
   opacity: 0;
-  height: 100vh;
+  overflow-y: auto;
+  padding: 40px 0;
   height: 100%; }
 
 .mobile_list > li:last-child {
   margin-top: 25px; }
 
 .open {
-  -webkit-transition: opacity .85s ease, -webkit-transform .85s ease;
-  transition: opacity .85s ease, -webkit-transform .85s ease;
-  -o-transition: transform .85s ease, opacity .85s ease;
-  transition: transform .85s ease, opacity .85s ease;
-  transition: transform .85s ease, opacity .85s ease, -webkit-transform .85s ease;
+  -webkit-transition: opacity .9s ease, -webkit-transform .85s ease;
+  transition: opacity .9s ease, -webkit-transform .85s ease;
+  -o-transition: transform .85s ease, opacity .9s ease;
+  transition: transform .85s ease, opacity .9s ease;
+  transition: transform .85s ease, opacity .9s ease, -webkit-transform .85s ease;
   -webkit-transform: translateY(0%);
       -ms-transform: translateY(0%);
           transform: translateY(0%);
   top: 0;
-  overflow-y: auto;
   opacity: 1; }
 
 .mobile_list > li:first-child {
@@ -187,6 +178,8 @@
   right: 8px;
   height: 2px;
   background: #004040;
+  -webkit-border-radius: 3px;
+          border-radius: 3px;
   -webkit-transition: -webkit-transform .3s;
   transition: -webkit-transform .3s;
   -o-transition: transform .3s;
