@@ -48,7 +48,6 @@ btn_next.onclick = function() {
 function exit() {
 	increase_photo.classList.remove('vissible');
 	top_nav.classList.remove('top_nav_increase_photo');
-	mobile_list.classList.remove('top_nav_increase_photo');
 	burger.classList.add('vis');
 	burger.classList.remove('no-vis');
 	close_increase_photo.classList.add('no-vis');
@@ -59,7 +58,6 @@ function exit() {
 function increase() {
 	increase_photo.classList.add('vissible');
 	top_nav.classList.add('top_nav_increase_photo');
-	mobile_list.classList.add('top_nav_increase_photo');
 	burger.classList.add('no-vis');
 	burger.classList.remove('vis');
 	close_increase_photo.classList.remove('no-vis');
