@@ -12,10 +12,6 @@
 .clear {
 	zoom:1;
 }
-
-html {
-	-webkit-text-size-adjust: none;
-}
 body {
 	overflow-x: hidden;
 }
@@ -154,10 +150,6 @@ ul {
 
 /* <---------- form BEGIN ----------> */
 
-.search_form {
-}
-.search {
-}
 .form_elem:first-child {
 	margin-top: 0;
 }
