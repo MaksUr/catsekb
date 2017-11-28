@@ -122,7 +122,7 @@
     margin: 0;
     z-index: 110;
     background-color: rgba(255, 255, 255, 0.8);
-    transition: transform .95s cubic-bezier(0, 0, .2, 1), opacity 3s cubic-bezier(0, 0, .2, 1);
+    transition: transform .95s cubic-bezier(0, 0, .2, 1), opacity 4s cubic-bezier(0, 0, .2, 1);
     transform: translateY(-130%);
     opacity: 0;
     overflow-y: auto;
@@ -135,7 +135,7 @@
 }
 
 .open {
-    transition: transform .85s ease, opacity .9s ease;
+    transition: transform .85s ease;
     transform: translateY(0%);
     top: 0;
     opacity: 1;
@@ -172,7 +172,7 @@
     height: 2px;
     background: #004040;
     border-radius: 3px;
-    transition: transform .3s;
+    transition: transform .4s;
 }
 
 .burger span::before {
