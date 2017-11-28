@@ -39,6 +39,7 @@ section {
     border-radius: 3px;
     color: #004040;
     transition: opacity 3s 2s, visibility 3s 2s;
+    display: none;
 }
 
 .message.vis {

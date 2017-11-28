@@ -49,7 +49,7 @@
 /* Устройства с шириной экрана до 767px */
 @media (max-width: 767px) {
 	
-	a.tag, .tag.pag_gallery {
+	a.tag, .tag.pag_gallery, .form_elem, .message {
 		display: block;
 	}
 	.tag {
@@ -119,9 +119,6 @@
 		display: none;
 	}
 
-	.form_elem {
-		display: block;
-	}
 	.burger {
 		cursor: pointer;
 	    z-index: 113;
