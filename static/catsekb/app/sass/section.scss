@@ -19,7 +19,7 @@
     left: -45px;
     z-index: 9;
     transform: rotate(59deg);
-    transition: all .5s ease;
+    transition: transform .5s ease;
 }
 
 .can-hover .cat_container:hover + .cat_a_mouse {
