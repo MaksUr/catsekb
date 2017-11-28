@@ -144,14 +144,10 @@ ANIMAL_VK_ALBUM_URL_WRONG_FORMAT = '''Ссылка имеет недопусти
 Пример: https://vk.com/album-{group_id}_12345'''.format(group_id=VK_GROUP_ID)
 ANIMAL_VK_ALBUM_URL_IS_EMPTY = 'Необходимо заполнить поле "{VK_ALBUM_URL}"'.format(VK_ALBUM_URL=ANIMAL_KEY_VK_ALBUM_URL)
 
-ANIMAL_FORM_VK_UPDATE = 'vk_update'
-ANIMAL_KEY_FORM_VK_UPDATE = 'Обновить всю информацию из VK (фото, имя, описание)'
 
 ANIMAL_FORM_VK_UPDATE_PHOTO = 'vk_update_photo'
 ANIMAL_KEY_FORM_VK_UPDATE_PHOTO = 'Обновить фото'
-
-ANIMAL_FORM_VK_UPDATE_DESCR = 'vk_update_descr'
-ANIMAL_KEY_FORM_VK_UPDATE_DESCR = 'Обновить описание'
+ANIMAL_KEY_FORM_VK_UPDATE_PHOTO_HELP_TEXT = 'Перед обновлением сохранить ссылку на альбом.'
 
 # sex
 ANIMAL_SEX = 'sex'
@@ -237,6 +233,11 @@ ANIMAL_SHOW = SHOW
 ANIMAL_KEY_SHOW = 'Показывать котика'
 ANIMAL_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удаления или чтобы скрыть.'
 
+# valid_info
+ANIMAL_VALID_INFO = 'valid_info'
+ANIMAL_KEY_VALID_INFO = 'Проверено'
+ANIMAL_KEY_VALID_INFO_HELP_TEXT = 'Информация проверена вручную.'
+
 # field_value (foreign key)
 ANIMAL_FIELD_VALUE = 'field_value'
 ANIMAL_KEY_FIELD_VALUE_HELP_TEXT = '_help_text ANIMAL_KEY_FIELD_VALUE'
@@ -300,6 +301,22 @@ FIELD_TYPE_KEY_NAME_HELP_TEXT = '_help_text FIELD_TYPE_KEY_NAME'
 FIELD_TYPE_DESCRIPTION = 'description'
 FIELD_TYPE_KEY_DESCRIPTION = 'Описание'
 FIELD_TYPE_KEY_DESCRIPTION_HELP_TEXT = '_help_text FIELD_TYPE_KEY_DESCRIPTION'
+
+# FieldValue and FieldType instances
+FIELD_TYPE_INST_LITTER_BOX_SKILL = 'Лоток'
+FIELD_VALUE_INST_LITTER_BOX_SKILL_LEVEL_A = 'Без промаху'
+FIELD_VALUE_INST_LITTER_BOX_SKILL_LEVEL_B = 'Научится'
+FIELD_VALUE_INST_LITTER_BOX_SKILL_LEVEL_C = 'Имеются проблемы'
+
+FIELD_TYPE_INST_RELATIONSHIPS_WITH_PEOPLE = 'Отношение к людям'
+FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_A = 'Доброжелательное'
+FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_B = 'Трусливое'
+FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_C = 'С характером'
+
+FIELD_TYPE_INST_RELATIONSHIPS_WITH_ANIMALS = 'Отношение к другим животным'
+FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_A = 'Доброжелательное'
+FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_B = 'Стрессовое'
+FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_C = 'Доминирующее'
 
 
 # class Group

@@ -25,16 +25,20 @@ def calc_age_uptoday(before_date, later_date):
     return result
 
 
-def get_date_from_age(years=0, months=0, days=0):
+def get_date_from_age(years=0, months=0, days=0, start_date=None):
 
     """
 
+    :type start_date: date
+    :param start_date: 
     :type days: int
     :type months: int
     :type years: int
     """
     diff = relativedelta(years=years, months=months, days=days)
-    return date.today() - diff
+    if start_date is None:
+        start_date = date.today()
+    return start_date - diff
 
 
 def get_age_from_string(age_string):
