@@ -18,10 +18,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 from catsekb import settings
+from catsekb.views import contact_view, info_view
 
 urlpatterns = [
     url(r'^', include('cats.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^contacts/$', contact_view, name='contacts'),
+    url(r'^info/$', info_view, name='info'),
 ] + \
               static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
               static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
