@@ -2,6 +2,8 @@ import datetime
 
 from os.path import join
 
+from instagram_no_api.client import Client
+
 from cats.constants import ANIMAL_VK_ALBUM_ID, VK_GROUP_ID, ANIMAL_FIELD_VALUE, FIELD_TYPE_NAME, FIELD_VALUE_VALUE_TEXT, \
     FIELD_VALUE_FIELD_TYPE, ANIMAL_IMAGE_IMAGE_URL, ANIMAL_IMAGE_IMAGE_SMALL_URL, ANIMAL_IMAGE_PHOTO_ID, \
     ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND, ANIMAL_IMAGE_CREATED, ANIMAL_IMAGE_ANIMAL
@@ -86,6 +88,8 @@ def update_all_animals_from_vk(conf_pth=None):
     except (ValueError, KeyError, IndexError):
         ignore_titles = ()
 
+    client = Client()
+
     for item in albums:
         aid = item.get(AID)
         if (
@@ -99,7 +103,7 @@ def update_all_animals_from_vk(conf_pth=None):
         else:
             c = 'Обновлен'
         print('{c} "{a}"'.format(c=c, a=animal))
-        kwargs = get_animal_kwargs_from_vk_response({RESPONSE: (item,)})
+        kwargs = get_animal_kwargs_from_vk_response({RESPONSE: (item,)}, client=client)
         field_values = kwargs.pop(ANIMAL_FIELD_VALUE, dict())
         set_field_values_to_animal(animal, field_values)
         for k in kwargs:
@@ -109,7 +113,7 @@ def update_all_animals_from_vk(conf_pth=None):
         except (KeyError, ValueError, TypeError):
             pass
         update_images_for_animal(animal, aid)
-
+        break
 
 
 
