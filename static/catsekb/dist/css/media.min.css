@@ -40,7 +40,7 @@
 
 /* Устройства с шириной экрана до 767px */
 @media (max-width: 767px) {
-  a.tag, .tag.pag_gallery {
+  a.tag, .tag.pag_gallery, .form_elem, .message {
     display: block; }
   .tag {
     background-color: rgba(255, 255, 255, 0.75); }
@@ -48,6 +48,8 @@
     display: none; }
   .main_menu {
     margin-top: 20px; }
+  .full {
+    padding: 20px 0; }
   .full_container {
     background-image: none; }
   .line_container {
@@ -83,12 +85,10 @@
     margin: 0;
     height: 85%;
     border: 1px white solid;
-    min-height: 650px;
+    min-height: 600px;
     background-color: rgba(255, 255, 255, 0.8); }
   .prev_photo, .next_photo {
     display: none; }
-  .form_elem {
-    display: block; }
   .burger {
     cursor: pointer;
     z-index: 113;
@@ -103,9 +103,9 @@
     width: 40px;
     height: 35px;
     font-size: 0;
-    -webkit-transition: background .3s, opacity .4s ease, visibility .4s ease;
-    -o-transition: background .3s, opacity .4s ease, visibility .4s ease;
-    transition: background .3s, opacity .4s ease, visibility .4s ease; } }
+    -webkit-transition: opacity .4s ease, visibility .4s ease;
+    -o-transition: opacity .4s ease, visibility .4s ease;
+    transition: opacity .4s ease, visibility .4s ease; } }
 
 @media (min-width: 768px) and (max-width: 992px) {
   .description_cat {

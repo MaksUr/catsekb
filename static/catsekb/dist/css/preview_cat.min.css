@@ -22,12 +22,10 @@
   position: fixed;
   top: 0;
   height: 100%;
-  /* 100% вместо 100vh, т.к. сафари не понимает vh и vw */
   height: 100vh;
   width: 100%;
-  left: 50%;
+  left: 0;
   z-index: 110;
-  margin-left: -50%;
   text-align: center;
   -webkit-transform: translateX(100%);
       -ms-transform: translateX(100%);
@@ -53,12 +51,11 @@
   width: 80%;
   position: absolute;
   top: 10%;
-  left: 50%;
-  margin-left: -40%;
+  left: 10%;
   opacity: 0;
-  -webkit-transition: all .6s;
-  -o-transition: all .6s;
-  transition: all .6s;
+  -webkit-transition: opacity .6s;
+  -o-transition: opacity .6s;
+  transition: opacity .6s;
   overflow: hidden;
   z-index: 110; }
 
@@ -85,14 +82,14 @@
 
 .prev_photo, .next_photo {
   position: absolute;
-  height: 150px;
+  height: 10%;
   width: 10%;
-  top: 40%;
+  top: 45%;
   opacity: .55;
   -webkit-transition: opacity .5s;
   -o-transition: opacity .5s;
   transition: opacity .5s;
-  background-position: 50% 43%;
+  background-position: 50% 50%;
   -webkit-background-size: 30px 30px;
           background-size: 30px;
   background-repeat: no-repeat; }
@@ -117,25 +114,26 @@
 .description_cat p {
   margin-top: 3px; }
 
-.character {
-  margin-top: 5px; }
-
 .property_name {
   color: #a3b1db; }
 
-.characteristics {
-  list-style-type: initial;
-  margin: 5px 0 0 20px; }
-
-.characteristics li {
-  margin-bottom: 5px; }
-
-/*.request_container {
-	overflow-y: hidden;
-}*/
 .request {
   margin-top: 20px; }
 
+/*.character {
+    margin-top: 5px;
+}*/
+/*.characteristics {
+    list-style-type: initial;
+    margin: 5px 0 0 20px;
+}
+
+.characteristics li {
+    margin-bottom: 5px;
+}*/
+/*.request_container {
+	overflow-y: hidden;
+}*/
 /*.cat_a_letter {
 	position: absolute;
     top: 0;

@@ -124,11 +124,11 @@
   margin: 0;
   z-index: 110;
   background-color: rgba(255, 255, 255, 0.8);
-  -webkit-transition: opacity 3s cubic-bezier(0, 0, 0.2, 1), -webkit-transform 0.95s cubic-bezier(0, 0, 0.2, 1);
-  transition: opacity 3s cubic-bezier(0, 0, 0.2, 1), -webkit-transform 0.95s cubic-bezier(0, 0, 0.2, 1);
-  -o-transition: transform 0.95s cubic-bezier(0, 0, 0.2, 1), opacity 3s cubic-bezier(0, 0, 0.2, 1);
-  transition: transform 0.95s cubic-bezier(0, 0, 0.2, 1), opacity 3s cubic-bezier(0, 0, 0.2, 1);
-  transition: transform 0.95s cubic-bezier(0, 0, 0.2, 1), opacity 3s cubic-bezier(0, 0, 0.2, 1), -webkit-transform 0.95s cubic-bezier(0, 0, 0.2, 1);
+  -webkit-transition: opacity 4s cubic-bezier(0, 0, 0.2, 1), -webkit-transform 0.95s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity 4s cubic-bezier(0, 0, 0.2, 1), -webkit-transform 0.95s cubic-bezier(0, 0, 0.2, 1);
+  -o-transition: transform 0.95s cubic-bezier(0, 0, 0.2, 1), opacity 4s cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 0.95s cubic-bezier(0, 0, 0.2, 1), opacity 4s cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 0.95s cubic-bezier(0, 0, 0.2, 1), opacity 4s cubic-bezier(0, 0, 0.2, 1), -webkit-transform 0.95s cubic-bezier(0, 0, 0.2, 1);
   -webkit-transform: translateY(-130%);
       -ms-transform: translateY(-130%);
           transform: translateY(-130%);
@@ -141,11 +141,11 @@
   margin-top: 25px; }
 
 .open {
-  -webkit-transition: opacity .9s ease, -webkit-transform .85s ease;
-  transition: opacity .9s ease, -webkit-transform .85s ease;
-  -o-transition: transform .85s ease, opacity .9s ease;
-  transition: transform .85s ease, opacity .9s ease;
-  transition: transform .85s ease, opacity .9s ease, -webkit-transform .85s ease;
+  -webkit-transition: -webkit-transform .85s ease;
+  transition: -webkit-transform .85s ease;
+  -o-transition: transform .85s ease;
+  transition: transform .85s ease;
+  transition: transform .85s ease, -webkit-transform .85s ease;
   -webkit-transform: translateY(0%);
       -ms-transform: translateY(0%);
           transform: translateY(0%);
@@ -180,11 +180,11 @@
   background: #004040;
   -webkit-border-radius: 3px;
           border-radius: 3px;
-  -webkit-transition: -webkit-transform .3s;
-  transition: -webkit-transform .3s;
-  -o-transition: transform .3s;
-  transition: transform .3s;
-  transition: transform .3s, -webkit-transform .3s; }
+  -webkit-transition: -webkit-transform .4s;
+  transition: -webkit-transform .4s;
+  -o-transition: transform .4s;
+  transition: transform .4s;
+  transition: transform .4s, -webkit-transform .4s; }
 
 .burger span::before {
   top: -8px; }

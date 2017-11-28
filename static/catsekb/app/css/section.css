@@ -20,9 +20,11 @@
   -webkit-transform: rotate(59deg);
       -ms-transform: rotate(59deg);
           transform: rotate(59deg);
-  -webkit-transition: all .5s ease;
-  -o-transition: all .5s ease;
-  transition: all .5s ease; }
+  -webkit-transition: -webkit-transform .5s ease;
+  transition: -webkit-transform .5s ease;
+  -o-transition: transform .5s ease;
+  transition: transform .5s ease;
+  transition: transform .5s ease, -webkit-transform .5s ease; }
 
 .can-hover .cat_container:hover + .cat_a_mouse {
   -webkit-transform: translateX(-70%) rotate(45deg);
