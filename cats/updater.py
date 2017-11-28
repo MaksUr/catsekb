@@ -48,7 +48,7 @@ def get_album_photos(group_id, album_id):
     from urllib.request import pathname2url
     from os.path import join, dirname
     from os import listdir
-    from other.updater.helper_functions import open_json
+    from cats.update_scripts.all_update import open_json
     # TODO: локальная заглушка
 
     def get_local_image_url(image_url):
@@ -82,7 +82,7 @@ def get_albums_info(group_id, album_ids):
 
     ###############################################
     # TODO: локальная заглушка
-    from other.updater.helper_functions import open_json
+    from cats.update_scripts.all_update import open_json
     r = open_json(r'other\albums.json')
     ###############################################
 
