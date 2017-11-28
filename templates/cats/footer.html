@@ -8,10 +8,10 @@
                         Карта сайта
                     </li>
                     <li>
-                        <a href="#">Главная</a>
+                        <a href="{% url 'index' %}">Главная</a>
                     </li>
                     <li>
-                        <a href="#">Наши коты</a>
+                        <a href="{% url 'animal_filter' %}">Наши коты</a>
                     </li>
                     <li>
                         <a href="{% url 'group_list' %}">Группы</a>
@@ -24,16 +24,16 @@
             <div class="col-xs-6 col-xs-offset-2 col-sm-2 col-sm-offset-0 col-md-2 col-md-offset-0  col-lg-2 col-lg-offset-0">
                 <ul class="about_company menu_foot font">
                     <li class="caption">
-                        Компания
+                        Помощь проекту
                     </li>
                     <li>
-                        <a href="{% url 'contacts' %}">Контакты</a>
+                        <a href="{% url 'contacts' %}">Помощь приюту</a>
                     </li>
                     <li>
-                        <a href="#">Реклама на сайте</a>
+                        <a href="#">Помощь разработчикам</a>
                     </li>
                     <li>
-                        <a href="#">Прислать статью</a>
+                        <a href="#">Предложения и пожелания</a>
                     </li>
                 </ul>
             </div>
