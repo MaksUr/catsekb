@@ -144,14 +144,9 @@ ANIMAL_VK_ALBUM_URL_WRONG_FORMAT = '''Ссылка имеет недопусти
 Пример: https://vk.com/album-{group_id}_12345'''.format(group_id=VK_GROUP_ID)
 ANIMAL_VK_ALBUM_URL_IS_EMPTY = 'Необходимо заполнить поле "{VK_ALBUM_URL}"'.format(VK_ALBUM_URL=ANIMAL_KEY_VK_ALBUM_URL)
 
-ANIMAL_FORM_VK_UPDATE = 'vk_update'
-ANIMAL_KEY_FORM_VK_UPDATE = 'Обновить всю информацию из VK (фото, имя, описание)'
 
 ANIMAL_FORM_VK_UPDATE_PHOTO = 'vk_update_photo'
-ANIMAL_KEY_FORM_VK_UPDATE_PHOTO = 'Обновить фото'
-
-ANIMAL_FORM_VK_UPDATE_DESCR = 'vk_update_descr'
-ANIMAL_KEY_FORM_VK_UPDATE_DESCR = 'Обновить описание'
+ANIMAL_KEY_FORM_VK_UPDATE_PHOTO = 'Обновить фото (перед обновлением сохранить)'
 
 # sex
 ANIMAL_SEX = 'sex'
@@ -236,6 +231,11 @@ ANIMAL_FORM_VALIDATION_ERROR_MULTIPLY_GROUPS = 'Группа "{type}" имеет
 ANIMAL_SHOW = SHOW
 ANIMAL_KEY_SHOW = 'Показывать котика'
 ANIMAL_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удаления или чтобы скрыть.'
+
+# valid_info
+ANIMAL_VALID_INFO = 'valid_info'
+ANIMAL_KEY_VALID_INFO = 'Проверено'
+ANIMAL_KEY_VALID_INFO_HELP_TEXT = 'Информация проверена вручную.'
 
 # field_value (foreign key)
 ANIMAL_FIELD_VALUE = 'field_value'

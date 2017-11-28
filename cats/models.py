@@ -20,7 +20,7 @@ from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOS
     ANIMAL_KEY_TAG, URL_NAME_GROUP, ANIMAL_IMAGE_KEY_BACKGROUND, ANIMAL_IMAGE_KEY_FAVOURITE, \
     ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION, ANIMAL_LOCATION_STATUS_CHOICES_D, ANIMAL_SEX_CHOICES_D, \
     ANIMAL_KEY_VK_ALBUM_ID, ANIMAL_IMAGE_KEY_PHOTO_ID, ANIMAL_IMAGE_KEY_IMAGE_SMALL_URL, ANIMAL_IMAGE_KEY_IMAGE_THUMB, \
-    ANIMAL_IMAGE_KEY_CREATED, ANIMAL_KEY_SHELTER_DATE
+    ANIMAL_IMAGE_KEY_CREATED, ANIMAL_KEY_SHELTER_DATE, ANIMAL_KEY_VALID_INFO
 from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
 from cats.updater.vk_request import get_vk_url_from_album_id
@@ -96,6 +96,7 @@ class Animal(Model):
     shelter_date = DateField(ANIMAL_KEY_SHELTER_DATE, null=True, default=None, blank=True)
     group = ForeignKey(Group, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)
     show = BooleanField(ANIMAL_KEY_SHOW, default=True)
+    valid_info = BooleanField(ANIMAL_KEY_VALID_INFO, default=False)
     field_value = ManyToManyField(
         FieldValue, verbose_name=FieldValue._meta.verbose_name, blank=True, default=None
     )
