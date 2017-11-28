@@ -1,5 +1,4 @@
 import re
-
 from datetime import date
 
 from cats.constants import ANIMAL_TAG, ANIMAL_DATE_OF_BIRTH, ANIMAL_BIRTHDAY_PRECISION, ANIMAL_FIELD_VALUE, \
@@ -10,8 +9,7 @@ from cats.constants import ANIMAL_TAG, ANIMAL_DATE_OF_BIRTH, ANIMAL_BIRTHDAY_PRE
     FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_A, FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_C, \
     FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_B, FIELD_TYPE_INST_RELATIONSHIPS_WITH_PEOPLE, \
     FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_A, FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_B, \
-    FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_C, FIELD_TYPE_INST_RELATIONSHIPS_WITH_ANIMALS, ANIMAL_DAYS, \
-    ANIMAL_MONTHS, ANIMAL_YEARS
+    FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_C, FIELD_TYPE_INST_RELATIONSHIPS_WITH_ANIMALS
 from cats.time import get_date_from_age
 
 WEEKS = 'weeks'
@@ -166,18 +164,20 @@ def get_animal_tag(description):
     if match:
         tag = match.group()
         tag = tag.replace('_c', '_catsekb')
-        return tag
+        return tag[1:]
     else:
         return None
 
 
 def get_precision_from_age(age):
-    if age.get[ANIMAL_DAYS] is not None:
-        return ANIMAL_BIRTHDAY_PRECISION_DAY
-    elif age.get[ANIMAL_MONTHS] is not None:
-        return ANIMAL_BIRTHDAY_PRECISION_MONTH
-    elif age.get[ANIMAL_YEARS] is not None:
-        return ANIMAL_BIRTHDAY_PRECISION_YEAR
+
+    for precision in (
+        ANIMAL_BIRTHDAY_PRECISION_DAY,
+        ANIMAL_BIRTHDAY_PRECISION_MONTH,
+        ANIMAL_BIRTHDAY_PRECISION_YEAR,
+    ):
+        if precision in age:
+            return precision
     else:
         return None
 
@@ -194,7 +194,13 @@ def get_animal_date_of_birth(description, created_time_stamp):
         created_date = date.fromtimestamp(created_time_stamp)
     else:
         created_date = None
-    date_of_birth = get_date_from_age(start_date=created_date, **age)
+
+    date_of_birth = get_date_from_age(
+        start_date=created_date,
+        years=age.get(ANIMAL_BIRTHDAY_PRECISION_YEAR, 0),
+        months=age.get(ANIMAL_BIRTHDAY_PRECISION_MONTH, 0),
+        days=age.get(ANIMAL_BIRTHDAY_PRECISION_DAY, 0)
+    )
     age_precision = get_precision_from_age(age)
     return date_of_birth, age_precision
 

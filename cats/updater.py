@@ -57,7 +57,10 @@ def get_album_photos(group_id, album_id):
         return image_url
 
     photos_config_file = r'media\images\cats\albums\{aid}\{aid}.json'.format(aid=album_id)
-    photos = open_json(photos_config_file)
+    try:
+        photos = open_json(photos_config_file)
+    except ValueError:
+        return {'response': ()}
     photos = {'response': photos}
     local_photo_dir = join(dirname(photos_config_file), 'photos')
     file_names = listdir(local_photo_dir)
