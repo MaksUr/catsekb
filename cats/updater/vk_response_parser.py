@@ -9,10 +9,10 @@ from cats.updater.vk_request import RESPONSE, TITLE, DESCRIPTION, TYPE, SRC, CRE
 NAME_DATA_KEYS = (ANIMAL_NAME, ANIMAL_LOCATION_STATUS, ANIMAL_SEX)
 
 
-def get_description(title=None, vk_descr=None, name=None):
+def get_description(client, title=None, vk_descr=None, name=None):
     if name:
         tag = HASHTAG_TEMPLATE.format(name=name, suffix=HASHTAG_SUFFIX)
-        description = get_the_oldest_photo_descr_from_tag(tag)
+        description = get_the_oldest_photo_descr_from_tag(tag, client=client)
         if description:
             return description
 
@@ -20,14 +20,14 @@ def get_description(title=None, vk_descr=None, name=None):
         title_name = get_info_from_title(title)[1]
         if title_name:
             tag = HASHTAG_TEMPLATE.format(name=title_name, suffix=HASHTAG_SUFFIX)
-            description = get_the_oldest_photo_descr_from_tag(tag)
+            description = get_the_oldest_photo_descr_from_tag(tag, client=client)
             if description:
                 return description
 
     if vk_descr:
         tag = get_animal_tag(vk_descr)
         if tag:
-            description = get_the_oldest_photo_descr_from_tag(tag)
+            description = get_the_oldest_photo_descr_from_tag(tag, client=client)
             if description:
                 return description
         else:
@@ -52,7 +52,7 @@ def get_kwargs_from_album_response_title(vk_albums_response):
     return res
 
 
-def get_kwargs_from_album_response_descr(vk_albums_response, name=None):
+def get_kwargs_from_album_response_descr(vk_albums_response, client, name=None):
     res = dict()
     try:
         vk_descr = vk_albums_response[RESPONSE][0][DESCRIPTION]
@@ -69,14 +69,14 @@ def get_kwargs_from_album_response_descr(vk_albums_response, name=None):
     except (KeyError, IndexError):
         title = None
 
-    description = get_description(title=title, vk_descr=vk_descr, name=name)
+    description = get_description(title=title, vk_descr=vk_descr, name=name, client=client)
     if description:
         res.update(get_info_from_description(description, created_stamp))
         res[ANIMAL_DESCRIPTION] = description
     return res
 
 
-def get_animal_kwargs_from_vk_response(vk_albums_response):
+def get_animal_kwargs_from_vk_response(vk_albums_response, client):
     res = dict()
 
     res.update(get_kwargs_from_album_response_title(vk_albums_response=vk_albums_response)) # name, location_status, sex
@@ -84,7 +84,8 @@ def get_animal_kwargs_from_vk_response(vk_albums_response):
     res.update(
         get_kwargs_from_album_response_descr(
             vk_albums_response=vk_albums_response,
-            name=name
+            name=name,
+            client=client
         )
     )
     return res

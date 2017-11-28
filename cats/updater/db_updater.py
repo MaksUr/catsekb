@@ -1,5 +1,9 @@
 import datetime
 
+from os.path import join
+
+from instagram_no_api.client import Client
+
 from cats.constants import ANIMAL_VK_ALBUM_ID, VK_GROUP_ID, ANIMAL_FIELD_VALUE, FIELD_TYPE_NAME, FIELD_VALUE_VALUE_TEXT, \
     FIELD_VALUE_FIELD_TYPE, ANIMAL_IMAGE_IMAGE_URL, ANIMAL_IMAGE_IMAGE_SMALL_URL, ANIMAL_IMAGE_PHOTO_ID, \
     ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND, ANIMAL_IMAGE_CREATED, ANIMAL_IMAGE_ANIMAL
@@ -14,7 +18,7 @@ KEY_IGNORE_TITLES = 'ignore_albums_titles'
 def set_field_values_to_animal(animal, field_values):
     for field_type in field_values:
         kwargs = {FIELD_TYPE_NAME: field_type}
-        field_type_instance, created= FieldType.objects.get_or_create(**kwargs)
+        field_type_instance, created = FieldType.objects.get_or_create(**kwargs)
         kwargs = {
             FIELD_VALUE_VALUE_TEXT: field_values[field_type],
             FIELD_VALUE_FIELD_TYPE: field_type_instance
@@ -35,7 +39,12 @@ def save_image(animal, photo, favourite=False, background=False):
     kwargs = dict()
     kwargs[ANIMAL_IMAGE_PHOTO_ID] = pid
     kwargs[ANIMAL_IMAGE_ANIMAL] = animal
-    image = AnimalImage.objects.get_or_create(**kwargs)
+    image, c = AnimalImage.objects.get_or_create(**kwargs)
+    if c:
+        c = 'Создан'
+    else:
+        c = 'Обновлен'
+    print('\t{c} "{i}"'.format(c=c, i=image))
     if biggest_photo:
         image.__setattr__(ANIMAL_IMAGE_IMAGE_URL, biggest_photo)
     if small_photo:
@@ -45,6 +54,7 @@ def save_image(animal, photo, favourite=False, background=False):
 
     image.__setattr__(ANIMAL_IMAGE_FAVOURITE, favourite)
     image.__setattr__(ANIMAL_IMAGE_BACKGROUND, background)
+    image.save()
 
 
 def update_images_for_animal(animal, album_id):
@@ -64,8 +74,10 @@ def update_images_for_animal(animal, album_id):
     for image in images:
         save_image(animal=animal, photo=image)
 
-# todo join config json
-def update_all_animals_from_vk(conf_pth='config.json'):
+
+def update_all_animals_from_vk(conf_pth=None):
+    if conf_pth is None:
+        conf_pth = join('cats', 'updater', 'config.json')
     try:
         albums = get_albums_info(group_id=VK_GROUP_ID, album_ids=None)[RESPONSE]
     except KeyError:
@@ -76,6 +88,8 @@ def update_all_animals_from_vk(conf_pth='config.json'):
     except (ValueError, KeyError, IndexError):
         ignore_titles = ()
 
+    client = Client()
+
     for item in albums:
         aid = item.get(AID)
         if (
@@ -84,8 +98,12 @@ def update_all_animals_from_vk(conf_pth='config.json'):
             continue
 
         animal, created = Animal.objects.get_or_create(**{ANIMAL_VK_ALBUM_ID: aid})
-
-        kwargs = get_animal_kwargs_from_vk_response({RESPONSE: (item,)})
+        if created:
+            c = 'Создан'
+        else:
+            c = 'Обновлен'
+        print('{c} "{a}"'.format(c=c, a=animal))
+        kwargs = get_animal_kwargs_from_vk_response({RESPONSE: (item,)}, client=client)
         field_values = kwargs.pop(ANIMAL_FIELD_VALUE, dict())
         set_field_values_to_animal(animal, field_values)
         for k in kwargs:
@@ -95,7 +113,7 @@ def update_all_animals_from_vk(conf_pth='config.json'):
         except (KeyError, ValueError, TypeError):
             pass
         update_images_for_animal(animal, aid)
-
+        break
 
 
 
