@@ -16,6 +16,8 @@ var mobile_list =  document.querySelector('.mobile_list');
 
 var burger = document.querySelector('.burger');
 
+var message = document.querySelector('.message');
+
 var n = 0;
 
 close_increase_photo.addEventListener('click', exit);
@@ -52,6 +54,7 @@ function exit() {
 	burger.classList.toggle('no-vis');
 	close_increase_photo.classList.add('no-vis');
 	close_increase_photo.classList.remove('vis');
+	message.classList.toggle('vis');
 	body[0].classList.toggle('overY');
 }
 
@@ -62,7 +65,7 @@ function increase() {
 	burger.classList.toggle('vis');
 	close_increase_photo.classList.remove('no-vis');
 	close_increase_photo.classList.add('vis');
+	message.classList.toggle('vis');
 	body[0].classList.toggle('overY');
-
 }
 

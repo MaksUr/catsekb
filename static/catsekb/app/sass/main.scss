@@ -27,6 +27,24 @@ section {
 	padding: 50px 0;
 }
 
+.message {
+    position: absolute;
+    top: 85%;
+    left: 15%;
+    margin: 0;
+    padding: 10px;
+    z-index: 112;
+    width: 70%;
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 3px;
+    color: #004040;
+    transition: opacity 3s 2s, visibility 3s 2s;
+}
+
+.message.vis {
+	visibility: visible;
+    opacity: 1;
+}
 .vis {
     visibility: visible;
     opacity: 1;
