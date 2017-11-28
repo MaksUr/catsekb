@@ -24,12 +24,11 @@
 .increase_photo {
 	position: fixed;
     top: 0;
-    height: 100%; /* 100% вместо 100vh, т.к. сафари не понимает vh и vw */
+    height: 100%;
     height: 100vh;
     width: 100%;
-    left: 50%;
+    left: 0;
     z-index: 110;
-    margin-left: -50%;
     text-align: center;
     transform: translateX(100%);
     transition: transform .68s;
@@ -47,10 +46,9 @@
     width: 80%;
     position: absolute;
     top: 10%;
-    left: 50%;
-    margin-left: -40%;
+    left: 10%;
     opacity: 0;
-    transition: all .6s;
+    transition: opacity .6s;
     overflow: hidden;
     z-index: 110;
 }
@@ -82,12 +80,12 @@
 
 .prev_photo, .next_photo {
     position: absolute;
-    height: 150px;
+    height: 10%;
     width: 10%;
-    top: 40%;
+    top: 45%;
     opacity: .55;
     transition: opacity .5s;
-    background-position: 50% 43%;
+    background-position: 50% 50%;
     background-size: 30px;
     background-repeat: no-repeat;
 }
