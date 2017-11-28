@@ -18,14 +18,15 @@ from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECI
     ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT, ANIMAL_IMAGE_ANIMAL, ANIMAL_IMAGE_KEY_ANIMAL_HELP_TEXT, \
     ANIMAL_VK_ALBUM_ID, \
     ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT, ANIMAL_KEY_VK_ALBUM_URL, \
-    ANIMAL_VK_ALBUM_URL, ANIMAL_FORM_VK_UPDATE, ANIMAL_FORM_VK_UPDATE_DESCR, ANIMAL_VK_ALBUM_URL_WRONG_FORMAT, \
-    VK_GROUP_ID, ANIMAL_IMAGE_CREATED, ANIMAL_IMAGE_KEY_CREATED_HELP_TEXT, \
+    ANIMAL_VK_ALBUM_URL, ANIMAL_VK_ALBUM_URL_WRONG_FORMAT, \
+    ANIMAL_IMAGE_CREATED, ANIMAL_IMAGE_KEY_CREATED_HELP_TEXT, \
     ANIMAL_KEY_SHELTER_DATE_HELP_TEXT, ANIMAL_SHELTER_DATE, ANIMAL_VALID_INFO, ANIMAL_KEY_VALID_INFO_HELP_TEXT
 from cats.models import Animal, AnimalImage
 from cats.time import get_date_from_age, calc_age_uptoday
-from cats.updater.vk_request import get_albums_info, RESPONSE
+
 # from cats.updater.vk_import import get_animal_name_from_vk_response, get_vk_album_id_from_url, \
 #     get_animal_descr_from_vk_response
+from cats.updater import get_vk_album_id_from_url
 
 
 def get_range(size):
@@ -69,7 +70,6 @@ class AnimalForm(forms.ModelForm):
     vk_album_url = forms.URLField(label=ANIMAL_KEY_VK_ALBUM_URL,
                                   help_text=ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT,
                                   required=False)
-    update_form = None
 
     def __init__(self, *args, **kwargs):
         instance = kwargs.get(DJ_INSTANCE)
@@ -81,39 +81,11 @@ class AnimalForm(forms.ModelForm):
                 upd.update(d)
             if getattr(instance, ANIMAL_VK_ALBUM_ID, None):
                 upd[ANIMAL_VK_ALBUM_URL] = instance.get_vk_album_url()
-            if self.update_form:
-                upd.update(self.get_initial_update(instance=instance, upd_type=self.update_form))
             if not kwargs.get(DJ_INITIAL):
                 kwargs[DJ_INITIAL] = dict()
             kwargs[DJ_INITIAL].update(upd)
 
         forms.ModelForm.__init__(self, *args, **kwargs)
-
-    def get_initial_update(self, instance, upd_type):
-        res = dict()
-        if instance.vk_album_id is not None:
-            # TODO: Перенести логику обновления в модель
-            res.update(self.get_vk_update(instance, upd_type))
-        return res
-
-    @staticmethod
-    # TODO: get response
-    def get_vk_update(instance, upd_type):
-        res = dict()
-        response = get_albums_info(album_ids=(instance.vk_album_id,), group_id=VK_GROUP_ID)
-        if not response.get(RESPONSE):
-            return res
-
-        if upd_type in (ANIMAL_FORM_VK_UPDATE, ANIMAL_FORM_VK_UPDATE_DESCR):
-            descr = get_animal_descr_from_vk_response(response=response)
-            if descr:
-                # TODO: вычислить дату рождения по возрасту
-                res[ANIMAL_DESCRIPTION] = descr
-
-        if upd_type == ANIMAL_FORM_VK_UPDATE:
-            name_data = get_animal_name_from_vk_response(response=response)
-            res.update(name_data)
-        return res
 
     class Meta:
         model = Animal

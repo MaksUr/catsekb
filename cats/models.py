@@ -20,10 +20,10 @@ from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOS
     ANIMAL_KEY_TAG, URL_NAME_GROUP, ANIMAL_IMAGE_KEY_BACKGROUND, ANIMAL_IMAGE_KEY_FAVOURITE, \
     ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION, ANIMAL_LOCATION_STATUS_CHOICES_D, ANIMAL_SEX_CHOICES_D, \
     ANIMAL_KEY_VK_ALBUM_ID, ANIMAL_IMAGE_KEY_PHOTO_ID, ANIMAL_IMAGE_KEY_IMAGE_SMALL_URL, ANIMAL_IMAGE_KEY_IMAGE_THUMB, \
-    ANIMAL_IMAGE_KEY_CREATED, ANIMAL_KEY_SHELTER_DATE, ANIMAL_KEY_VALID_INFO
+    ANIMAL_IMAGE_KEY_CREATED, ANIMAL_KEY_SHELTER_DATE, ANIMAL_KEY_VALID_INFO, VK_GROUP_ID
 from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
-from cats.updater.vk_request import get_vk_url_from_album_id
+
 from cats.validators import group_name_validator, background_y_position_validator
 # from cats.updater.vk_import import get_vk_url_from_album_id
 
@@ -178,7 +178,10 @@ class Animal(Model):
         return ANIMAL_SEX_CHOICES_D.get(self.sex)
 
     def get_vk_album_url(self):
-        return get_vk_url_from_album_id(self.vk_album_id)
+        if self.vk_album_id:
+            return r"https://vk.com/album-{group_id}_{album_id}".format(group_id=VK_GROUP_ID, album_id=self.vk_album_id)
+        else:
+            return None
 
     def get_shelter_time(self):
         if self.shelter_date:

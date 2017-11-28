@@ -146,7 +146,8 @@ ANIMAL_VK_ALBUM_URL_IS_EMPTY = 'Необходимо заполнить поле
 
 
 ANIMAL_FORM_VK_UPDATE_PHOTO = 'vk_update_photo'
-ANIMAL_KEY_FORM_VK_UPDATE_PHOTO = 'Обновить фото (перед обновлением сохранить)'
+ANIMAL_KEY_FORM_VK_UPDATE_PHOTO = 'Обновить фото'
+ANIMAL_KEY_FORM_VK_UPDATE_PHOTO_HELP_TEXT = 'Перед обновлением сохранить ссылку на альбом.'
 
 # sex
 ANIMAL_SEX = 'sex'

@@ -12,13 +12,13 @@ from cats.constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPD
     ANIMAL_VK_ALBUM_URL, \
     ANIMAL_FORM_VK_UPDATE_PHOTO, ANIMAL_KEY_FORM_VK_UPDATE_PHOTO, \
     ANIMAL_IMAGE_PHOTO_ID, ANIMAL_IMAGE_IMAGE_URL_TAG, \
-    ANIMAL_IMAGE_IMAGE_SMALL_URL_TAG, VK_GROUP_ID, ANIMAL_IMAGE_CREATED, ANIMAL_SHELTER_DATE, ANIMAL_VALID_INFO
+    ANIMAL_IMAGE_IMAGE_SMALL_URL_TAG, ANIMAL_IMAGE_CREATED, ANIMAL_SHELTER_DATE, ANIMAL_VALID_INFO, \
+    ANIMAL_KEY_FORM_VK_UPDATE_PHOTO_HELP_TEXT
 from cats.forms import AnimalForm, AnimalImageForm
 from cats.models import Animal, AnimalImage, FieldValue, Group, FieldType, Article
-from cats.updater.vk_request import get_album_photos
-# from cats.updater.vk_import import add_images_from_response
+from cats.updater import update_images_for_animal
 
-UPDATE_BUTTON = '<a class="button" href="{link}?upd={upd}">Обновить</a><p class="help">Help.</p>'
+UPDATE_BUTTON = '<a class="button" href="{link}?upd={upd}">Обновить</a><p class="help">{help}</p>'
 
 ANIMAL_IMAGE_FIELDS = (
         ANIMAL_IMAGE_IMAGE_THUMB,
@@ -60,7 +60,8 @@ class AnimalAdmin(admin.ModelAdmin):
     def vk_update_photo(self, obj):
         return UPDATE_BUTTON.format(
             link=reverse('admin:cats_animal_change', args=(obj.pk,)),
-            upd=ANIMAL_FORM_VK_UPDATE_PHOTO
+            upd=ANIMAL_FORM_VK_UPDATE_PHOTO,
+            help=ANIMAL_KEY_FORM_VK_UPDATE_PHOTO_HELP_TEXT
         )
     vk_update_photo.short_description = ANIMAL_KEY_FORM_VK_UPDATE_PHOTO
     vk_update_photo.allow_tags = True
@@ -117,13 +118,8 @@ class AnimalAdmin(admin.ModelAdmin):
         form = super(AnimalAdmin, self).get_form(request, obj=None, **kwargs)
         upd = request.GET.get('upd')
         if upd and obj and obj.vk_album_id is not None:
-            form.update_form = upd
             if upd == ANIMAL_FORM_VK_UPDATE_PHOTO:
-                # TODO: Перенести логику обновления в модель
-                response = get_album_photos(group_id=VK_GROUP_ID, album_id=obj.vk_album_id)
-                add_images_from_response(animal=obj, response=response)
-        else:
-            form.update_form = None
+                update_images_for_animal(obj, obj.vk_album_id)
         return form
 
 admin.site.register(Animal, AnimalAdmin)
