@@ -26,8 +26,19 @@ body {
 section {
   padding: 50px 0; }
 
-.overY {
-  overflow-y: hidden; }
+.vis {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: opacity .4s ease, visibility .4s ease;
+  -o-transition: opacity .4s ease, visibility .4s ease;
+  transition: opacity .4s ease, visibility .4s ease; }
+
+.no-vis {
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity .4s ease, visibility .4s ease;
+  -o-transition: opacity .4s ease, visibility .4s ease;
+  transition: opacity .4s ease, visibility .4s ease; }
 
 /* --------------------  */
 .mid {

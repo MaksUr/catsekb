@@ -23,6 +23,7 @@
   top: 0;
   height: 100%;
   /* 100% вместо 100vh, т.к. сафари не понимает vh и vw */
+  height: 100vh;
   width: 100%;
   left: 50%;
   z-index: 110;
@@ -31,12 +32,12 @@
   -webkit-transform: translateX(100%);
       -ms-transform: translateX(100%);
           transform: translateX(100%);
-  background-color: rgba(255, 255, 255, 0.8);
   -webkit-transition: -webkit-transform .68s;
   transition: -webkit-transform .68s;
   -o-transition: transform .68s;
   transition: transform .68s;
-  transition: transform .68s, -webkit-transform .68s; }
+  transition: transform .68s, -webkit-transform .68s;
+  background-color: rgba(255, 255, 255, 0.8); }
 
 .increase_photo.vissible {
   -webkit-transform: translateX(0%);
@@ -48,10 +49,10 @@
   -webkit-background-size: contain;
           background-size: contain;
   background-repeat: no-repeat;
-  height: 70%;
+  height: 80%;
   width: 80%;
   position: absolute;
-  top: 10vh;
+  top: 10%;
   left: 50%;
   margin-left: -40%;
   opacity: 0;
@@ -70,14 +71,10 @@
 
 .close_increase {
   position: fixed;
-  top: 5%;
-  right: 40px;
+  top: 4%;
+  right: 20px;
   z-index: 111;
-  cursor: pointer;
-  visibility: hidden; }
-
-.vis {
-  visibility: visible; }
+  cursor: pointer; }
 
 .prev_photo {
   background-image: url(../img/prev_photo.png); }
@@ -90,7 +87,7 @@
   position: absolute;
   height: 150px;
   width: 10%;
-  top: 35%;
+  top: 40%;
   opacity: .55;
   -webkit-transition: opacity .5s;
   -o-transition: opacity .5s;

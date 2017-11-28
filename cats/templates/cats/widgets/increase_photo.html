@@ -1,17 +1,19 @@
 {# items #}
 
-<div class="close_increase font">
+<div class="close_increase no-vis font">
     <a class="tag">Закрыть</a>
 </div>
+
 <div class="increase_photo">    
     {% for item in items %}
         <div class="item_photo{% if forloop.first %} active{% endif %}" style="background-image: url({{ item.image_url }})">
 {#            <img src="{{ item.image_url }}">#}
-
         </div>
     {% empty %}
-
     {% endfor %}
+    <div class="message vis">
+        <span>Листай вверх или вниз для просмотра фото</span>
+    </div>
     <div class="prev_photo">
     </div>
     <div class="next_photo">

@@ -25,14 +25,15 @@
 	position: fixed;
     top: 0;
     height: 100%; /* 100% вместо 100vh, т.к. сафари не понимает vh и vw */
+    height: 100vh;
     width: 100%;
     left: 50%;
     z-index: 110;
     margin-left: -50%;
     text-align: center;
     transform: translateX(100%);
-    background-color: rgba(255, 255, 255, .8);
     transition: transform .68s;
+    background-color: rgba(255, 255, 255, .8);
 }
 .increase_photo.vissible {
 	transform: translateX(0%);  
@@ -42,10 +43,10 @@
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-	height: 70%;
+	height: 80%;
     width: 80%;
     position: absolute;
-    top: 10vh;
+    top: 10%;
     left: 50%;
     margin-left: -40%;
     opacity: 0;
@@ -64,15 +65,10 @@
 
 .close_increase {
     position: fixed;
-    top: 5%;
-    right: 40px;
+    top: 4%;
+    right: 20px;
     z-index: 111;
     cursor: pointer;
-    visibility: hidden;
-}
-
-.vis {
-    visibility: visible;
 }
 
 .prev_photo {
@@ -88,7 +84,7 @@
     position: absolute;
     height: 150px;
     width: 10%;
-    top: 35%;
+    top: 40%;
     opacity: .55;
     transition: opacity .5s;
     background-position: 50% 43%;

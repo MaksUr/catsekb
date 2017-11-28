@@ -18,7 +18,7 @@
 
 h1, h2 {
   color: #333;
-  font-family: Neucha,cursive;
+  font-family: Neucha, Arial, cursive;
   letter-spacing: 1px;
   text-transform: uppercase; }
 
@@ -45,7 +45,7 @@ h2 {
   font-weight: 600; }
 
 .font {
-  font-family: Open Sans,sans-serif;
+  font-family: Open Sans, Arial, sans-serif;
   font-size: 14px;
   font-size: .875rem; }
 
