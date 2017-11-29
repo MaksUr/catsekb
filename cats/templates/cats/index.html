@@ -62,8 +62,6 @@
 		<div class="full_container">
 		</div>
 	</section>        
-	<section class="find">
-		{% url 'group_detail' pk='S' as group_url %}
-        {% include 'cats/widgets/gallery.html' with object_list=shelter_animals filter_parameters='?group_id=S' caption=shelter_caption caption_url=group_url %}
-	</section>
+	{% url 'group_detail' pk='S' as group_url %}
+    {% include 'cats/widgets/gallery.html' with object_list=shelter_animals filter_parameters='?group_id=S' caption=shelter_caption caption_url=group_url %}
 {% endblock base_body %}
