@@ -21,30 +21,25 @@ body {
 
 /* Отступы между секциями */
 section {
-  padding: 50px 0; }
+  padding: 70px 0; }
 
 .message {
-  position: absolute;
-  top: 85%;
+  position: fixed;
+  bottom: 4%;
   left: 15%;
   margin: 0;
   padding: 10px;
-  z-index: 112;
+  z-index: 111;
   width: 70%;
   background-color: rgba(255, 255, 255, 0.75);
   -webkit-border-radius: 3px;
           border-radius: 3px;
   color: #004040;
-  -webkit-transition: opacity 3s 2s, visibility 3s 2s;
-  -o-transition: opacity 3s 2s, visibility 3s 2s;
-  transition: opacity 3s 2s, visibility 3s 2s;
-  display: none; }
+  display: none;
+  visibility: hidden;
+  opacity: 0; }
 
-.message.vis {
-  visibility: visible;
-  opacity: 1; }
-
-.vis {
+.vis, .message.vis {
   visibility: visible;
   opacity: 1;
   -webkit-transition: opacity .4s ease, visibility .4s ease;

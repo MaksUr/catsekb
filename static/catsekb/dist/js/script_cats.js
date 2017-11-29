@@ -18,6 +18,8 @@ var burger = document.querySelector('.burger');
 
 var message = document.querySelector('.message');
 
+var scrolled =  window.pageYOffset || document.documentElement.scrollTop;
+
 var n = 0;
 
 close_increase_photo.addEventListener('click', exit);
@@ -54,18 +56,18 @@ function exit() {
 	burger.classList.toggle('no-vis');
 	close_increase_photo.classList.add('no-vis');
 	close_increase_photo.classList.remove('vis');
-	message.classList.toggle('no-vis');
 	body[0].classList.toggle('overY');
 }
 
 function increase() {
+
+
 	increase_photo.classList.add('vissible');
 	top_nav.classList.add('top_nav_increase_photo');
 	burger.classList.toggle('no-vis');
 	burger.classList.toggle('vis');
 	close_increase_photo.classList.remove('no-vis');
 	close_increase_photo.classList.add('vis');
-	message.classList.toggle('no-vis');
 	body[0].classList.toggle('overY');
+	
 }
-
