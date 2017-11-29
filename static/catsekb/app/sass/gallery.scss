@@ -15,7 +15,7 @@
     left: 0; 
 }
 .cat_find_name {
-    top: 60%;
+    top: 58%;
     z-index: 91;
     transition: opacity .55s ease, top .65s; 
 }
@@ -33,6 +33,7 @@
 	background-size: cover;
 	background-repeat: no-repeat;
     max-height: 390px;
+    height: 34%;
     height: 34vh;
     min-height: 300px;
 }

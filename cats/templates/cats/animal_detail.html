@@ -12,7 +12,7 @@
         {% if images.count > 0 %}
             {% include 'cats/widgets/increase_photo.html' with items=images %}
         {% endif %}
-        <section>
+        <section class="cat_detail">
             <div class="container">
                 {% include 'cats/widgets/caption.html' with caption=object.name %}
 
