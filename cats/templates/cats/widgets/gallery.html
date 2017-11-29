@@ -27,7 +27,7 @@
                      {% for animal in object_list %}
                         <div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0">
                             {% if animal.get_image.image_url %}
-                                <div class="cat_find_block" style="background-image: url({{ animal.get_image.image_url }});">
+                                <div class="cat_find_block" style="background-image: url({{ animal.get_image.image_small_url }});">
                                     <div class="cat_find_name mid">
                                         <a href="{% url 'animal_detail' pk=animal.id %}{{ filter_parameters }}" class="hashtag">{{ animal.name }}</a>
                                     </div> 
