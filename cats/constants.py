@@ -245,12 +245,12 @@ ANIMAL_KEY_VALID_INFO_HELP_TEXT = 'Информация проверена вр�
 
 # created
 ANIMAL_CREATED = 'created'
-ANIMAL_KEY_CREATED = 'Дата публикации'
+ANIMAL_KEY_CREATED = 'Создано'
 ANIMAL_KEY_CREATED_HELP_TEXT = '_help_text ANIMAL_KEY_CREATED'
 
 # updated
 ANIMAL_UPDATED = 'updated'
-ANIMAL_KEY_UPDATED = 'Дата обновления'
+ANIMAL_KEY_UPDATED = 'Обновлено'
 ANIMAL_KEY_UPDATED_HELP_TEXT = '_help_text ANIMAL_KEY_UPDATED'
 
 # Возраст. Определяет date_of_birth в том случае, если date_of_birth не редактировался пользователем.

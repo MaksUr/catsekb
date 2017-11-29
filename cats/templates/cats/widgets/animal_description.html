@@ -8,7 +8,7 @@
     {# updated #}
     {% if animal.updated %}
         <li>
-            <span class="property_name">{% get_verbose_field_name animal 'updated' %}: </span>{{ animal.updated }}
+            <span class="property_name">{% get_verbose_field_name animal 'updated' %}: </span>{{ animal.updated.date }}
         </li>
     {% endif %}
 
@@ -58,12 +58,15 @@
 
     {# shelter_date #}
     {% if animal.shelter_date %}
+        {% ifequal animal.location_status 'S' %}
         <li>
             <span class="property_name">
-                {% get_verbose_field_name animal 'shelter_date' %}:
+                <!-- {% get_verbose_field_name animal 'shelter_date' %}: -->
+                В приюте:
             </span> ~
             {% include 'cats/widgets/age.html' with age=animal.get_shelter_time %}
         </li>
+        {% endifequal %}
     {% endif %}
    
 

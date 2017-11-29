@@ -131,6 +131,7 @@ class Animal(Model):
         return res
 
     def get_age(self):
+        # TODO: учесть birthday_precision
         if self.date_of_birth:
             return calc_age_uptoday(before_date=self.date_of_birth, later_date=date.today())
         else:
