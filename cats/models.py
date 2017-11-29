@@ -17,11 +17,11 @@ from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOS
     ANIMAL_KEY_TAG, URL_NAME_GROUP, ANIMAL_IMAGE_KEY_BACKGROUND, ANIMAL_IMAGE_KEY_FAVOURITE, \
     ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION, ANIMAL_LOCATION_STATUS_CHOICES_D, ANIMAL_SEX_CHOICES_D, \
     ANIMAL_KEY_VK_ALBUM_ID, ANIMAL_IMAGE_KEY_PHOTO_ID, ANIMAL_IMAGE_KEY_IMAGE_SMALL_URL, ANIMAL_IMAGE_KEY_IMAGE_THUMB, \
-    ANIMAL_IMAGE_KEY_CREATED, ANIMAL_KEY_SHELTER_DATE, ANIMAL_KEY_VALID_INFO, VK_GROUP_ID
+    ANIMAL_IMAGE_KEY_CREATED, ANIMAL_KEY_SHELTER_DATE, ANIMAL_KEY_VALID_INFO, VK_GROUP_ID, ANIMAL_DAYS, ANIMAL_MONTHS, \
+    ANIMAL_YEARS
 from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
 from cats.validators import group_name_validator, background_y_position_validator
-# from cats.updater.vk_import import get_vk_url_from_album_id
 
 
 class Group(Model):
@@ -133,9 +133,25 @@ class Animal(Model):
     def get_age(self):
         # TODO: учесть birthday_precision
         if self.date_of_birth:
-            return calc_age_uptoday(before_date=self.date_of_birth, later_date=date.today())
+            d = calc_age_uptoday(before_date=self.date_of_birth, later_date=date.today())
+            d = self.get_age_by_precision(d, self.birthday_precision)
+            return d
         else:
             return None
+
+    @staticmethod
+    def get_age_by_precision(d, precision):
+        # TODO: use from model
+        if not precision or precision == Animal.BIRTHDAY_PRECISION_D:
+            return d
+        d[ANIMAL_DAYS] = None
+        if precision == Animal.BIRTHDAY_PRECISION_M:
+            return d
+        d[ANIMAL_MONTHS] = None
+        if precision == Animal.BIRTHDAY_PRECISION_Y:
+            return d
+        d[ANIMAL_YEARS] = None
+        return d
 
     def get_absolute_url(self):
         return reverse(URL_NAME_ANIMAL, kwargs={DJ_PK: self.id})

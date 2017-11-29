@@ -25,8 +25,6 @@ from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECI
 from cats.models import Animal, AnimalImage
 from cats.time import get_date_from_age, calc_age_uptoday
 
-# from cats.updater.vk_import import get_animal_name_from_vk_response, get_vk_album_id_from_url, \
-#     get_animal_descr_from_vk_response
 from cats.update_scripts.vk_response_parser import get_animal_kwargs_from_vk_response
 from cats.updater import get_vk_album_id_from_url, get_albums_info
 
@@ -170,6 +168,7 @@ class AnimalForm(forms.ModelForm):
 
     @staticmethod
     def get_age_by_precision(d, precision):
+        # TODO: use from model
         if not precision or precision == Animal.BIRTHDAY_PRECISION_D:
             return d
         d[ANIMAL_DAYS] = None

@@ -1,5 +1,7 @@
 import datetime
 
+import requests
+
 from cats.constants import ANIMAL_IMAGE_PHOTO_ID, ANIMAL_IMAGE_ANIMAL, ANIMAL_IMAGE_IMAGE_URL, \
     ANIMAL_IMAGE_IMAGE_SMALL_URL, ANIMAL_IMAGE_CREATED, ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND, VK_GROUP_ID
 from cats.models import AnimalImage
@@ -36,38 +38,13 @@ def get_vk_album_id_from_url(url):
 
 
 def get_album_photos(group_id, album_id):
-    # group_id = -1 * group_id
-    # # TODO: use requests
-    # photos = requests.get(r'https://api.vk.com/method/photos.get', params={
-    #     'album_id': album_id,
-    #     'owner_id': group_id,
-    #     'photo_sizes': 1,
-    # }).json()
-
-    ###############################################
-    from urllib.request import pathname2url
-    from os.path import join, dirname
-    from os import listdir
-    from cats.update_scripts.all_update import open_json
-    # TODO: локальная заглушка
-
-    def get_local_image_url(image_url):
-        image_url = pathname2url(image_url)
-        image_url = r'http://127.0.0.1:8000/' + image_url
-        return image_url
-
-    photos_config_file = r'media\images\cats\albums\{aid}\{aid}.json'.format(aid=album_id)
-    try:
-        photos = open_json(photos_config_file)
-    except ValueError:
-        return {'response': ()}
-    photos = {'response': photos}
-    local_photo_dir = join(dirname(photos_config_file), 'photos')
-    file_names = listdir(local_photo_dir)
-    for photo_d, file_name in zip(photos['response'], file_names):
-        for photo_link in photo_d['sizes']:
-            photo_link['src'] = get_local_image_url(join(local_photo_dir, file_name))
-    ###############################################
+    group_id = -1 * group_id
+    # TODO: use requests
+    photos = requests.get(r'https://api.vk.com/method/photos.get', params={
+        'album_id': album_id,
+        'owner_id': group_id,
+        'photo_sizes': 1,
+    }).json()
 
     return photos
 
@@ -79,20 +56,9 @@ def get_albums_info(group_id, album_ids):
     if album_ids:
         params['album_ids'] = ','.join(map(str, album_ids))
     # TODO: use requests
-    # r = requests.get(r'https://api.vk.com/method/photos.getAlbums', params={
-    #     'owner_id': -1 * group_id,
-    # }).json()
-
-    ###############################################
-    # TODO: локальная заглушка
-    from cats.update_scripts.all_update import open_json
-    r = open_json(r'other\albums.json')
-    if album_ids:
-        l = r['response']
-        l = filter((lambda x: x['aid'] in album_ids), l)
-        l = filter((lambda x: x['aid'] in album_ids), l)
-        r['response'] = list(l)
-    ###############################################
+    r = requests.get(r'https://api.vk.com/method/photos.getAlbums', params={
+        'owner_id': -1 * group_id,
+    }).json()
 
     return r
 
