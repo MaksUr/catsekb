@@ -7,7 +7,6 @@ urlpatterns = [
 
     url(r'^group_list/$', views.GroupListView.as_view(), name='group_list'),
     url(r'^group_(?P<pk>([0-9]+)|(all)|(S)|(H)|(D))/$', views.GroupDetailView.as_view(), name='group_detail'),
-    url(r'^info_(?P<pk>([0-9]+))/$', views.InfoDetailView, name='info_detail'),
 
 
     url(r'^animal_filter/$', views.FilterView.as_view(), name='animal_filter'),

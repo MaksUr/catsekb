@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import reverse
 
 from cats.constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPDATED, ANIMAL_NAME, ANIMAL_GROUP, \
-    ANIMAL_FIELD_VALUE, ANIMAL_SEX, ANIMAL_DATE_OF_BIRTH, ANIMAL_DAYS, ANIMAL_MONTHS, ANIMAL_YEARS, \
+    ANIMAL_SEX, ANIMAL_DAYS, ANIMAL_MONTHS, ANIMAL_YEARS, \
     ANIMAL_AGE_FIELD_SET, DJ_CLASSES_COLLAPSE, DJ_CLASSES, DJ_FIELDS, ANIMAL_MAIN_FIELD_SET, DJ_ID, ANIMAL_SHOW, \
     ANIMAL_DESCRIPTION, GROUP_NAME, GROUP_SHOW, ANIMAL_LOCATION_STATUS, ANIMAL_TAG, ANIMAL_TAG_FIELD_SET, \
     ANIMAL_TAG_DISPLAY, ANIMAL_KEY_TAG_DISPLAY, ANIMAL_IMAGE_IMAGE_THUMB, \
@@ -13,9 +13,10 @@ from cats.constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPD
     ANIMAL_FORM_VK_UPDATE_PHOTO, ANIMAL_KEY_FORM_VK_UPDATE_PHOTO, \
     ANIMAL_IMAGE_PHOTO_ID, ANIMAL_IMAGE_IMAGE_URL_TAG, \
     ANIMAL_IMAGE_IMAGE_SMALL_URL_TAG, ANIMAL_IMAGE_CREATED, ANIMAL_SHELTER_DATE, ANIMAL_VALID_INFO, \
-    ANIMAL_KEY_FORM_VK_UPDATE_PHOTO_HELP_TEXT
+    ANIMAL_KEY_FORM_VK_UPDATE_PHOTO_HELP_TEXT, ANIMAL_KEY_FORM_VK_UPDATE_INFO_HELP_TEXT, ANIMAL_FORM_VK_UPDATE_INFO, \
+    ANIMAL_KEY_FORM_VK_UPDATE_INFO, ANIMAL_KEY_TAG_DISPLAY_HELP_TEXT
 from cats.forms import AnimalForm, AnimalImageForm
-from cats.models import Animal, AnimalImage, FieldValue, Group, FieldType, Article
+from cats.models import Animal, AnimalImage, Group
 from cats.updater import update_images_for_animal
 
 UPDATE_BUTTON = '<a class="button" href="{link}?upd={upd}">Обновить</a><p class="help">{help}</p>'
@@ -52,7 +53,11 @@ class ImageInline(admin.StackedInline):
 
 class AnimalAdmin(admin.ModelAdmin):
     def tag_display(self, obj):
-        res = '<a href="{url}">{label}</a>'.format(url=obj.get_instagram_link(), label=obj.get_hashtag_name())
+        res = '<a href="{url}">{label}</a><p class="help">{help}</p>'.format(
+            url=obj.get_instagram_link(),
+            label=obj.get_hashtag_name(),
+            help=ANIMAL_KEY_TAG_DISPLAY_HELP_TEXT
+        )
         return res
     tag_display.allow_tags = True
     tag_display.short_description = ANIMAL_KEY_TAG_DISPLAY
@@ -66,6 +71,15 @@ class AnimalAdmin(admin.ModelAdmin):
     vk_update_photo.short_description = ANIMAL_KEY_FORM_VK_UPDATE_PHOTO
     vk_update_photo.allow_tags = True
 
+    def vk_update_info(self, obj):
+        return UPDATE_BUTTON.format(
+            link=reverse('admin:cats_animal_change', args=(obj.pk,)),
+            upd=ANIMAL_FORM_VK_UPDATE_INFO,
+            help=ANIMAL_KEY_FORM_VK_UPDATE_INFO_HELP_TEXT
+        )
+    vk_update_info.short_description = ANIMAL_KEY_FORM_VK_UPDATE_INFO
+    vk_update_info.allow_tags = True
+
     list_display = (DJ_ID, ANIMAL_NAME, ANIMAL_LOCATION_STATUS, ANIMAL_SEX, ANIMAL_SHOW, ANIMAL_VALID_INFO)
     list_display_links = (ANIMAL_NAME, DJ_ID)
     fieldsets = (
@@ -73,6 +87,7 @@ class AnimalAdmin(admin.ModelAdmin):
             ANIMAL_VK_IMPORT_SET, {
                 DJ_FIELDS: (
                     ANIMAL_FORM_VK_UPDATE_PHOTO,
+                    ANIMAL_FORM_VK_UPDATE_INFO,
                     ANIMAL_VK_ALBUM_ID,
                     ANIMAL_VK_ALBUM_URL,
                 ),
@@ -85,7 +100,7 @@ class AnimalAdmin(admin.ModelAdmin):
                     ANIMAL_NAME, ANIMAL_LOCATION_STATUS,
                     ANIMAL_SHELTER_DATE,
                     ANIMAL_SHOW, ANIMAL_DESCRIPTION, ANIMAL_VALID_INFO,
-                    ANIMAL_GROUP, ANIMAL_FIELD_VALUE, ANIMAL_SEX,
+                    ANIMAL_GROUP, ANIMAL_SEX,
                     ANIMAL_CREATED, ANIMAL_UPDATED,
                 ),
             },
@@ -100,8 +115,6 @@ class AnimalAdmin(admin.ModelAdmin):
             ANIMAL_AGE_FIELD_SET, {
                 DJ_FIELDS: (
                     (ANIMAL_YEARS, ANIMAL_MONTHS, ANIMAL_DAYS),
-                    ANIMAL_DATE_OF_BIRTH,
-                    ANIMAL_BIRTHDAY_PRECISION
                 ),
                 DJ_CLASSES: (DJ_CLASSES_COLLAPSE,)
             },
@@ -110,7 +123,7 @@ class AnimalAdmin(admin.ModelAdmin):
 
     readonly_fields = (ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPDATED,
                        ANIMAL_TAG_DISPLAY, ANIMAL_VK_ALBUM_ID,
-                       ANIMAL_FORM_VK_UPDATE_PHOTO,)
+                       ANIMAL_FORM_VK_UPDATE_PHOTO, ANIMAL_FORM_VK_UPDATE_INFO,)
     form = AnimalForm
     inlines = [ImageInline]
 
@@ -118,6 +131,7 @@ class AnimalAdmin(admin.ModelAdmin):
         form = super(AnimalAdmin, self).get_form(request, obj=None, **kwargs)
         upd = request.GET.get('upd')
         if upd and obj and obj.vk_album_id is not None:
+            form.update_form = upd
             if upd == ANIMAL_FORM_VK_UPDATE_PHOTO:
                 update_images_for_animal(obj, obj.vk_album_id)
         return form
@@ -140,23 +154,8 @@ class GroupAdmin(admin.ModelAdmin):
 admin.site.register(Group, GroupAdmin)
 
 
-class FieldValueInline(admin.StackedInline):
-    model = FieldValue
-    extra = 0
-
-
-class FieldTypeAdmin(admin.ModelAdmin):
-    inlines = [FieldValueInline]
-admin.site.register(FieldType, FieldTypeAdmin)
-
-
 class AnimalImageAdmin(admin.ModelAdmin):
     form = AnimalImageForm
     fields = ANIMAL_IMAGE_FIELDS
     readonly_fields = ANIMAL_IMAGE_READONLY_FIELDS
 admin.site.register(AnimalImage, AnimalImageAdmin)
-
-
-class ArticleAdmin(admin.ModelAdmin):
-    model = Article
-admin.site.register(Article, ArticleAdmin)

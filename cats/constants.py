@@ -5,8 +5,6 @@
 # field_set - объединение полей (заголовок)
 #
 # ANIMAL - питомец
-# FIELD_TYPE - название свойства
-# FIELD_VALUE - значение свойства
 # GROUP - группа
 #
 # foreign_key служит для связи текущей модели с другой моделью. Например модель - AnimalImage,
@@ -88,7 +86,8 @@ ANIMAL_IMAGE_KEY_CREATED_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_CREATED'
 # background_y_position
 ANIMAL_IMAGE_BACKGROUND_Y_POSITION = 'background_y_position'
 ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION = 'Настройка позиции фонового изображения по вертикали.'
-ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT = 'Значение от 0 до 100. Используется для корректного отображения вертикальных изображений'
+ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT = 'Значение от 0 до 100. Используется для корректного отображения ' \
+                                                   'вертикальных изображений'
 ANIMAL_IMAGE_VALIDATION_WRONG_Y_POS = '{val} имеет недопустимое значение. Значение должно быть от 0 до 100.'
 
 # image_thumb
@@ -104,17 +103,18 @@ ANIMAL_MAIN_FIELD_SET = 'Общая информация'
 ANIMAL_VK_IMPORT_SET = 'Импорт данных из группы в VK'
 
 # tag
-ANIMAL_TAG_FIELD_SET = 'Настройка хэштега'
+ANIMAL_TAG_FIELD_SET = 'Настройка тега'
 
 ANIMAL_TAG = 'tag'
-ANIMAL_KEY_TAG = 'Редактирование хештега'
-ANIMAL_KEY_TAG_HELP_TEXT = 'При заполнении этого поля, будет использоваться данный пользовательский хэштег.'
+ANIMAL_KEY_TAG = 'Тэг животного'
+ANIMAL_KEY_TAG_HELP_TEXT = 'При заполнении этого поля, будет использоваться данный пользовательский тег. ' \
+                           'Символ "#" и окончание "_catsekb" подставляется автоматически.'
 
 # tag display
 
 ANIMAL_TAG_DISPLAY = 'tag_display'
-ANIMAL_KEY_TAG_DISPLAY = 'Сгенерированный хэштег'
-ANIMAL_KEY_TAG_DISPLAY_HELP_TEXT = 'Убедитесь в корректности ссылки.'  # TODO: display in admin form
+ANIMAL_KEY_TAG_DISPLAY = 'Текущий тег'
+ANIMAL_KEY_TAG_DISPLAY_HELP_TEXT = 'Для обновления необходимо сохранить. Убедитесь в корректности ссылки.'
 
 HASHTAG_TEMPLATE_INSTAGRAM = 'https://www.instagram.com/explore/tags/{name}_{suffix}/'
 HASHTAG_TEMPLATE = '#{name}_{suffix}'
@@ -147,7 +147,16 @@ ANIMAL_VK_ALBUM_URL_IS_EMPTY = 'Необходимо заполнить поле
 
 ANIMAL_FORM_VK_UPDATE_PHOTO = 'vk_update_photo'
 ANIMAL_KEY_FORM_VK_UPDATE_PHOTO = 'Обновить фото'
-ANIMAL_KEY_FORM_VK_UPDATE_PHOTO_HELP_TEXT = 'Перед обновлением сохранить ссылку на альбом.'
+ANIMAL_KEY_FORM_VK_UPDATE_PHOTO_HELP_TEXT = 'Перед нажатием нужно сохранить ссылку на альбом. ' \
+                                            'Фото добавляется автоматически.'
+
+
+ANIMAL_FORM_VK_UPDATE_INFO = 'vk_update_info'
+ANIMAL_KEY_FORM_VK_UPDATE_INFO = 'Обновить описание и имя кота. '
+ANIMAL_KEY_FORM_VK_UPDATE_INFO_HELP_TEXT = 'Для изменения требуется сохранить. ' \
+                                           '(При возмозжности обновится статус, пол, возраст, ' \
+                                           'дата дата попадания в приют)'
+
 
 # sex
 ANIMAL_SEX = 'sex'
@@ -180,7 +189,8 @@ ANIMAL_LOCATION_STATUS_CHOICE_HOME = 'Пристроен'
 ANIMAL_LOCATION_STATUS_CHOICE_SHELTER = 'Ищут дом'
 ANIMAL_LOCATION_STATUS_CHOICE_DEAD = 'На радуге'
 ANIMAL_LOCATION_STATUS_HOME_DESСR = 'Они обрели свой дом'
-ANIMAL_LOCATION_STATUS_SHELTER_DESСR = 'Собаки привязываются к людям, кошки привязываются к дому. Не дай этим котикам привязаться к клетке. Помоги им обрести свой дом.'
+ANIMAL_LOCATION_STATUS_SHELTER_DESСR = 'Собаки привязываются к людям, кошки привязываются к дому. ' \
+                                       'Не дай этим котикам привязаться к клетке. Помоги им обрести свой дом.'
 ANIMAL_LOCATION_STATUS_DEAD_DESСR = 'Пусть земля им будет пухом, они всегда останутся в наших сердцах.'
 ANIMAL_LOCATION_STATUS_CHOICES = (
     (ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_CHOICE_HOME),
@@ -197,8 +207,6 @@ ANIMAL_LOCATION_STATUS_CHOICES_D = {
 # Точность. Устанавливается в соответствии задаными параметрами возраста.
 # При установки date_of_birth устанавливается точность DAY
 ANIMAL_BIRTHDAY_PRECISION = 'birthday_precision'
-ANIMAL_KEY_BIRTHDAY_PRECISION = 'Точность даты рождения'
-ANIMAL_KEY_BIRTHDAY_PRECISION_HELP_TEXT = '_help_text ANIMAL_KEY_BIRTHDAY_PRECISION'
 
 ANIMAL_BIRTHDAY_PRECISION_DAY_CHOICE = "до дня"
 ANIMAL_BIRTHDAY_PRECISION_MONTH_CHOICE = "до месяца"
@@ -213,10 +221,7 @@ ANIMAL_BIRTHDAY_PRECISION_CHOICES = (
     )
 
 # date_of_birth
-# При выборе этого поля, при сохранении возраст (days, months, years) устанавливается автоматом.
 ANIMAL_DATE_OF_BIRTH = 'date_of_birth'
-ANIMAL_KEY_DATE_OF_BIRTH = 'День рождения'
-ANIMAL_KEY_DATE_OF_BIRTH_HELP_TEXT = '_help_text ANIMAL_KEY_DATE_OF_BIRTH'
 
 # shelter_date
 ANIMAL_SHELTER_DATE = 'shelter_date'
@@ -225,8 +230,7 @@ ANIMAL_KEY_SHELTER_DATE_HELP_TEXT = 'Примерная дата попадан�
 
 # group
 ANIMAL_GROUP = 'group'
-ANIMAL_KEY_GROUP_HELP_TEXT = '_help_text ANIMAL_KEY_GROUP'
-ANIMAL_FORM_VALIDATION_ERROR_MULTIPLY_GROUPS = 'Группа "{type}" имеет более одного значения.'
+ANIMAL_KEY_GROUP_HELP_TEXT = 'Назначить группу для питомца.'
 
 # show
 ANIMAL_SHOW = SHOW
@@ -238,9 +242,6 @@ ANIMAL_VALID_INFO = 'valid_info'
 ANIMAL_KEY_VALID_INFO = 'Проверено'
 ANIMAL_KEY_VALID_INFO_HELP_TEXT = 'Информация проверена вручную.'
 
-# field_value (foreign key)
-ANIMAL_FIELD_VALUE = 'field_value'
-ANIMAL_KEY_FIELD_VALUE_HELP_TEXT = '_help_text ANIMAL_KEY_FIELD_VALUE'
 
 # created
 ANIMAL_CREATED = 'created'
@@ -270,55 +271,6 @@ ANIMAL_FORM_KEY_YEARS = 'Лет'
 ANIMAL_KEY_YEARS_HELP_TEXT = '_help_text ANIMAL_KEY_YEARS'
 
 
-# class FieldValue
-# Только одно значение FieldValue в одном Animal может принадлежать одному FieldType
-FIELD_VALUE_VERBOSE_NAME = 'Особенность'
-FIELD_VALUE_VERBOSE_NAME_PLURAL = 'Значения особенностей'
-FIELD_VALUE_STR_TEMPLATE = '{field_type} - {val}'
-
-# value_text
-FIELD_VALUE_VALUE_TEXT = 'value_text'
-FIELD_VALUE_KEY_VALUE_TEXT = 'Особенность'
-FIELD_VALUE_KEY_VALUE_TEXT_HELP_TEXT = '_help_text FIELD_VALUE_KEY_VALUE_TEXT'
-
-# field_type (foreign key for class FieldType)
-FIELD_VALUE_FIELD_TYPE = 'field_type'
-FIELD_VALUE_KEY_FIELD_TYPE = '_?'  # TODO: edit value
-FIELD_VALUE_KEY_FIELD_TYPE_HELP_TEXT = '_help_text FIELD_VALUE_KEY_VALUE_TEXT'
-
-
-# class FieldType
-FIELD_TYPE_VERBOSE_NAME = 'Тип особенности'
-FIELD_TYPE_VERBOSE_NAME_PLURAL = 'Типы особенностей'
-FIELD_TYPE_PREFIX = 'ft_'
-
-# name
-FIELD_TYPE_NAME = 'name'
-FIELD_TYPE_KEY_NAME = 'Название'
-FIELD_TYPE_KEY_NAME_HELP_TEXT = '_help_text FIELD_TYPE_KEY_NAME'
-
-# description
-FIELD_TYPE_DESCRIPTION = 'description'
-FIELD_TYPE_KEY_DESCRIPTION = 'Описание'
-FIELD_TYPE_KEY_DESCRIPTION_HELP_TEXT = '_help_text FIELD_TYPE_KEY_DESCRIPTION'
-
-# FieldValue and FieldType instances
-FIELD_TYPE_INST_LITTER_BOX_SKILL = 'Лоток'
-FIELD_VALUE_INST_LITTER_BOX_SKILL_LEVEL_A = 'Без промаху'
-FIELD_VALUE_INST_LITTER_BOX_SKILL_LEVEL_B = 'Научится'
-FIELD_VALUE_INST_LITTER_BOX_SKILL_LEVEL_C = 'Имеются проблемы'
-
-FIELD_TYPE_INST_RELATIONSHIPS_WITH_PEOPLE = 'Отношение к людям'
-FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_A = 'Доброжелательное'
-FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_B = 'Трусливое'
-FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_C = 'С характером'
-
-FIELD_TYPE_INST_RELATIONSHIPS_WITH_ANIMALS = 'Отношение к другим животным'
-FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_A = 'Доброжелательное'
-FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_B = 'Стрессовое'
-FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_C = 'Доминирующее'
-
-
 # class Group
 GROUP_VERBOSE_NAME = 'Группа'
 GROUP_VERBOSE_NAME_PLURAL = 'Группы'
@@ -331,22 +283,19 @@ GROUP_ID = 'group_id'
 # name
 GROUP_NAME = 'name'
 GROUP_KEY_NAME = 'Имя'
-GROUP_KEY_NAME_HELP_TEXT = '_help_text GROUP_KEY_NAME'
+GROUP_KEY_NAME_HELP_TEXT = 'Данна группа появится на сайте как раздел меню в вкладке "Наши коты"'
 GROUP_FORM_VALIDATION_ERROR_NAME_IS_DEFAULT = 'Группа "{name}" имеет недопустимое значение.'
 
 # description
 GROUP_DESCRIPTION = 'description'
 GROUP_KEY_DESCRIPTION = 'Описание'
-GROUP_KEY_DESCRIPTION_HELP_TEXT = '_help_text GROUP_KEY_DESCRIPTION'
+GROUP_KEY_DESCRIPTION_HELP_TEXT = 'Краткое описание группы'
 
 # show
 GROUP_SHOW = SHOW
 GROUP_KEY_SHOW = 'Показывать группу'
-GROUP_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удаления или чтобы скрыть.'
-
-ANIMAL_ANIMAL_LINK = 'animal_link'
-ANIMAL_KEY_ANIMAL_LINK = 'Ссылка на сайт'
-ANIMAL_KEY_ANIMAL_LINK_HELP_TEXT = '_help_text ANIMAL_KEY_ANIMAL_LINK'
+GROUP_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удаления или чтобы скрыть. ' \
+                           'Скрытые группы доступны для персонала на сайте.'
 
 
 # class FilterForm

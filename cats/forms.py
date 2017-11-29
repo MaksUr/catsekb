@@ -4,13 +4,13 @@ from django import forms
 from django.forms import ValidationError
 
 from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECISION, ANIMAL_KEY_UPDATED_HELP_TEXT, \
-    ANIMAL_KEY_CREATED_HELP_TEXT, ANIMAL_KEY_SHOW_HELP_TEXT, ANIMAL_KEY_DATE_OF_BIRTH_HELP_TEXT, \
-    ANIMAL_KEY_BIRTHDAY_PRECISION_HELP_TEXT, ANIMAL_KEY_SEX_HELP_TEXT, ANIMAL_KEY_NAME_HELP_TEXT, \
-    ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST, ANIMAL_FORM_VALIDATION_ERROR_MULTIPLY_GROUPS, DJ_INSTANCE, \
+    ANIMAL_KEY_CREATED_HELP_TEXT, ANIMAL_KEY_SHOW_HELP_TEXT,\
+    ANIMAL_KEY_SEX_HELP_TEXT, ANIMAL_KEY_NAME_HELP_TEXT, \
+    ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST, DJ_INSTANCE, \
     DJ_INITIAL, ANIMAL_DAYS, ANIMAL_FORM_KEY_DAYS, ANIMAL_KEY_DAYS_HELP_TEXT, ANIMAL_MONTHS, ANIMAL_FORM_KEY_MONTHS, \
     ANIMAL_KEY_MONTHS_HELP_TEXT, ANIMAL_YEARS, ANIMAL_FORM_KEY_YEARS, ANIMAL_KEY_YEARS_HELP_TEXT, ANIMAL_SEX, \
-    ANIMAL_FIELD_VALUE, ANIMAL_SHOW, ANIMAL_GROUP, ANIMAL_KEY_GROUP_HELP_TEXT, ANIMAL_NAME, ANIMAL_DATE_OF_BIRTH, \
-    ANIMAL_KEY_FIELD_VALUE_HELP_TEXT, ANIMAL_KEY_NAME, ANIMAL_KEY_SEX, AGE_DISTANCE_CHOICES, \
+    ANIMAL_SHOW, ANIMAL_GROUP, ANIMAL_KEY_GROUP_HELP_TEXT, ANIMAL_NAME, ANIMAL_DATE_OF_BIRTH, \
+    ANIMAL_KEY_NAME, ANIMAL_KEY_SEX, AGE_DISTANCE_CHOICES, \
     AGE_DISTANCE_KEY, ANIMAL_DESCRIPTION, ANIMAL_KEY_DESCRIPTION_HELP_TEXT, ANIMAL_KEY_LOCATION_STATUS_HELP_TEXT, \
     ANIMAL_LOCATION_STATUS, ANIMAL_SEX_CHOICES, ANIMAL_LOCATION_STATUS_CHOICES, ANIMAL_KEY_LOCATION_STATUS, ANIMAL_TAG, \
     ANIMAL_KEY_TAG_HELP_TEXT, ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND, ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT, \
@@ -20,13 +20,15 @@ from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECI
     ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT, ANIMAL_KEY_VK_ALBUM_URL, \
     ANIMAL_VK_ALBUM_URL, ANIMAL_VK_ALBUM_URL_WRONG_FORMAT, \
     ANIMAL_IMAGE_CREATED, ANIMAL_IMAGE_KEY_CREATED_HELP_TEXT, \
-    ANIMAL_KEY_SHELTER_DATE_HELP_TEXT, ANIMAL_SHELTER_DATE, ANIMAL_VALID_INFO, ANIMAL_KEY_VALID_INFO_HELP_TEXT
+    ANIMAL_KEY_SHELTER_DATE_HELP_TEXT, ANIMAL_SHELTER_DATE, ANIMAL_VALID_INFO, ANIMAL_KEY_VALID_INFO_HELP_TEXT, \
+    ANIMAL_FORM_VK_UPDATE_INFO, VK_GROUP_ID
 from cats.models import Animal, AnimalImage
 from cats.time import get_date_from_age, calc_age_uptoday
 
 # from cats.updater.vk_import import get_animal_name_from_vk_response, get_vk_album_id_from_url, \
 #     get_animal_descr_from_vk_response
-from cats.updater import get_vk_album_id_from_url
+from cats.update_scripts.vk_response_parser import get_animal_kwargs_from_vk_response
+from cats.updater import get_vk_album_id_from_url, get_albums_info
 
 
 def get_range(size):
@@ -70,6 +72,7 @@ class AnimalForm(forms.ModelForm):
     vk_album_url = forms.URLField(label=ANIMAL_KEY_VK_ALBUM_URL,
                                   help_text=ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT,
                                   required=False)
+    update_form = None
 
     def __init__(self, *args, **kwargs):
         instance = kwargs.get(DJ_INSTANCE)
@@ -81,20 +84,35 @@ class AnimalForm(forms.ModelForm):
                 upd.update(d)
             if getattr(instance, ANIMAL_VK_ALBUM_ID, None):
                 upd[ANIMAL_VK_ALBUM_URL] = instance.get_vk_album_url()
+            if self.update_form:
+                upd.update(self.get_initial_update(instance=instance, upd_type=self.update_form))
             if not kwargs.get(DJ_INITIAL):
                 kwargs[DJ_INITIAL] = dict()
             kwargs[DJ_INITIAL].update(upd)
 
         forms.ModelForm.__init__(self, *args, **kwargs)
 
+    @staticmethod
+    def get_initial_update(instance, upd_type):
+        res = dict()
+        if (instance.vk_album_id is not None) and (upd_type == ANIMAL_FORM_VK_UPDATE_INFO):
+            response = get_albums_info(album_ids=(instance.vk_album_id,), group_id=VK_GROUP_ID)
+            animal_update = get_animal_kwargs_from_vk_response(response)
+            if animal_update.get(ANIMAL_DATE_OF_BIRTH):
+                d = calc_age_uptoday(before_date=animal_update[ANIMAL_DATE_OF_BIRTH], later_date=date.today())
+                d = AnimalForm.get_age_by_precision(d, animal_update.get(ANIMAL_BIRTHDAY_PRECISION))
+                animal_update.update(d)
+            res.update(animal_update)
+        return res
+
     class Meta:
         model = Animal
         fields = [
             ANIMAL_NAME, ANIMAL_LOCATION_STATUS,
             ANIMAL_GROUP, ANIMAL_SHOW,
-            ANIMAL_FIELD_VALUE, ANIMAL_SEX,
+            ANIMAL_SEX,
             ANIMAL_YEARS, ANIMAL_MONTHS,
-            ANIMAL_DAYS, ANIMAL_DATE_OF_BIRTH,
+            ANIMAL_DAYS,
             ANIMAL_DESCRIPTION, ANIMAL_TAG, ANIMAL_VK_ALBUM_URL,
             ANIMAL_SHELTER_DATE, ANIMAL_VALID_INFO
         ]
@@ -102,12 +120,9 @@ class AnimalForm(forms.ModelForm):
             ANIMAL_UPDATED: ANIMAL_KEY_UPDATED_HELP_TEXT,
             ANIMAL_CREATED: ANIMAL_KEY_CREATED_HELP_TEXT,
             ANIMAL_SHOW: ANIMAL_KEY_SHOW_HELP_TEXT,
-            ANIMAL_DATE_OF_BIRTH: ANIMAL_KEY_DATE_OF_BIRTH_HELP_TEXT,
-            ANIMAL_BIRTHDAY_PRECISION: ANIMAL_KEY_BIRTHDAY_PRECISION_HELP_TEXT,
             ANIMAL_SEX: ANIMAL_KEY_SEX_HELP_TEXT,
             ANIMAL_NAME: ANIMAL_KEY_NAME_HELP_TEXT,
             ANIMAL_GROUP: ANIMAL_KEY_GROUP_HELP_TEXT,
-            ANIMAL_FIELD_VALUE: ANIMAL_KEY_FIELD_VALUE_HELP_TEXT,
             ANIMAL_DESCRIPTION: ANIMAL_KEY_DESCRIPTION_HELP_TEXT,
             ANIMAL_LOCATION_STATUS: ANIMAL_KEY_LOCATION_STATUS_HELP_TEXT,
             ANIMAL_TAG: ANIMAL_KEY_TAG_HELP_TEXT,
@@ -166,19 +181,6 @@ class AnimalForm(forms.ModelForm):
         d[ANIMAL_YEARS] = None
         return d
 
-    def clean_field_value(self):
-        words = self.cleaned_data.get(ANIMAL_FIELD_VALUE)
-        types = set()
-        errors = set()
-        for w in words:
-            if w.field_type in types:
-                message = ANIMAL_FORM_VALIDATION_ERROR_MULTIPLY_GROUPS.format(type=w.field_type)
-                errors.add(message)
-            types.add(w.field_type)
-        if len(errors):
-            raise ValidationError(list(errors))
-        return words
-
     def clean_name(self):
         name = self.cleaned_data.get(ANIMAL_NAME, None)
         if name == "" or self.instance.name == name:
@@ -218,22 +220,7 @@ class FilterForm(forms.Form):
     )
 
     def __init__(self, *args, **kwargs):
-        field_types = kwargs.pop('field_types', list())
         forms.Form.__init__(self, *args, **kwargs)
-        for field_type in field_types:
-            try:
-                t_id = field_type['id']
-                choices = field_type['choices']
-                label = field_type['label']
-            except KeyError:
-                continue
-
-            self.fields[t_id] = forms.ChoiceField(
-                widget=forms.RadioSelect,
-                required=False,
-                choices=choices,
-                label=label
-            )
 
 
 class AnimalImageForm(forms.ModelForm):
