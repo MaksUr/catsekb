@@ -26,25 +26,20 @@ section {
 .message {
     position: fixed;
     bottom: 4%;
-    left: 20%;
+    left: 15%;
     margin: 0;
     padding: 10px;
     z-index: 111;
-    width: 60%;
+    width: 70%;
     background-color: rgba(255, 255, 255, .75);
     border-radius: 3px;
     color: #004040;
-    transition: opacity 3s 2s, visibility 3s 2s;
-    opacity: 1;
-    visibility: visible;
     display: none;
-}
-
-.message.no-vis {
-	visibility: hidden;
+    visibility: hidden;
     opacity: 0;
 }
-.vis {
+
+.vis, .message.vis {
     visibility: visible;
     opacity: 1;
     transition: opacity .4s ease, visibility .4s ease;

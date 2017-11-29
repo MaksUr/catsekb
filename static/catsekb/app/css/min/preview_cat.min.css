@@ -69,7 +69,7 @@
 .close_increase {
   position: fixed;
   top: 4%;
-  right: 20px;
+  right: 3%;
   z-index: 111;
   cursor: pointer; }
 
@@ -120,14 +120,13 @@
 .request {
   margin-top: 20px; }
 
-/*.character {
-    margin-top: 5px;
-}*/
+.character {
+  margin-top: 5px; }
+
 /*.characteristics {
     list-style-type: initial;
     margin: 5px 0 0 20px;
 }
-
 .characteristics li {
     margin-bottom: 5px;
 }*/

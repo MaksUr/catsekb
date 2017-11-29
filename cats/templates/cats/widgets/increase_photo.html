@@ -3,9 +3,9 @@
 <div class="close_increase no-vis font">
     <a class="tag">Закрыть</a>
 </div>
-<div class="message no-vis">
+<!-- <div class="mid message no-vis">
     <span>Листай вверх или вниз для просмотра фото</span>
-</div>
+</div> -->
 <div class="increase_photo">    
     {% for item in items %}
         <div class="item_photo{% if forloop.first %} active{% endif %}" style="background-image: url({{ item.image_url }})">
