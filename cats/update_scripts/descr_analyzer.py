@@ -9,17 +9,17 @@ from cats.constants import ANIMAL_TAG, ANIMAL_DATE_OF_BIRTH, ANIMAL_BIRTHDAY_PRE
     FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_A, FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_C, \
     FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_B, FIELD_TYPE_INST_RELATIONSHIPS_WITH_PEOPLE, \
     FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_A, FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_B, \
-    FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_C, FIELD_TYPE_INST_RELATIONSHIPS_WITH_ANIMALS
+    FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_C, FIELD_TYPE_INST_RELATIONSHIPS_WITH_ANIMALS, ANIMAL_SHELTER_DATE
 from cats.time import get_date_from_age
 
 WEEKS = 'weeks'
 
-DESCR_DATA_KEYS = (ANIMAL_TAG, ANIMAL_DATE_OF_BIRTH, ANIMAL_BIRTHDAY_PRECISION, ANIMAL_FIELD_VALUE)
+DESCR_DATA_KEYS = (ANIMAL_TAG, ANIMAL_DATE_OF_BIRTH, ANIMAL_BIRTHDAY_PRECISION, ANIMAL_FIELD_VALUE, ANIMAL_SHELTER_DATE)
 PATTERN_SEARCH_AGE_INFO = re.compile(
     r'([-,\d]*)(([\d]+)|(года?))([ -х]*)(мес|год|нед|лет)|(возраст[ -~]*(около|до)?[ -]*года)'
 )
 PATTERN_AGE_NUMBER = re.compile(r"[\.\d,]+")
-PATTERN_TAG = re.compile(r"#\w+_c")
+PATTERN_TAG = re.compile(r"(?<=#)\w+(?=_c)")
 
 
 def get_number_from_string(s):
@@ -163,8 +163,7 @@ def get_animal_tag(description):
     match = re.search(PATTERN_TAG, description)
     if match:
         tag = match.group()
-        tag = tag.replace('_c', '_catsekb')
-        return tag[1:]
+        return tag
     else:
         return None
 
@@ -202,13 +201,13 @@ def get_animal_date_of_birth(description, created_time_stamp):
         days=age.get(ANIMAL_BIRTHDAY_PRECISION_DAY, 0)
     )
     age_precision = get_precision_from_age(age)
-    return date_of_birth, age_precision
+    return date_of_birth, age_precision, created_date
 
 
 def get_info_from_description(description, created_time_stamp):
-    animal_date_of_birth, age_precision = get_animal_date_of_birth(description, created_time_stamp)
+    animal_date_of_birth, age_precision, shelter_date = get_animal_date_of_birth(description, created_time_stamp)
     field_value_info = get_field_value_info(description)
     tag = get_animal_tag(description)
-    vals = (tag, animal_date_of_birth, age_precision, field_value_info)
+    vals = (tag, animal_date_of_birth, age_precision, field_value_info, shelter_date)
     res = {key: val for key, val in zip(DESCR_DATA_KEYS, vals) if val}
     return res

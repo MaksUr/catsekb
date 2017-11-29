@@ -88,7 +88,8 @@ ANIMAL_IMAGE_KEY_CREATED_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_CREATED'
 # background_y_position
 ANIMAL_IMAGE_BACKGROUND_Y_POSITION = 'background_y_position'
 ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION = 'Настройка позиции фонового изображения по вертикали.'
-ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT = 'Значение от 0 до 100. Используется для корректного отображения вертикальных изображений'
+ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT = 'Значение от 0 до 100. Используется для корректного отображения ' \
+                                                   'вертикальных изображений'
 ANIMAL_IMAGE_VALIDATION_WRONG_Y_POS = '{val} имеет недопустимое значение. Значение должно быть от 0 до 100.'
 
 # image_thumb
@@ -104,17 +105,18 @@ ANIMAL_MAIN_FIELD_SET = 'Общая информация'
 ANIMAL_VK_IMPORT_SET = 'Импорт данных из группы в VK'
 
 # tag
-ANIMAL_TAG_FIELD_SET = 'Настройка хэштега'
+ANIMAL_TAG_FIELD_SET = 'Настройка тега'
 
 ANIMAL_TAG = 'tag'
-ANIMAL_KEY_TAG = 'Редактирование хештега'
-ANIMAL_KEY_TAG_HELP_TEXT = 'При заполнении этого поля, будет использоваться данный пользовательский хэштег.'
+ANIMAL_KEY_TAG = 'Тэг животного'
+ANIMAL_KEY_TAG_HELP_TEXT = 'При заполнении этого поля, будет использоваться данный пользовательский тег. ' \
+                           'Символ "#" и окончание "_catsekb" подставляется автоматически.'
 
 # tag display
 
 ANIMAL_TAG_DISPLAY = 'tag_display'
-ANIMAL_KEY_TAG_DISPLAY = 'Сгенерированный хэштег'
-ANIMAL_KEY_TAG_DISPLAY_HELP_TEXT = 'Убедитесь в корректности ссылки.'  # TODO: display in admin form
+ANIMAL_KEY_TAG_DISPLAY = 'Текущий тег'
+ANIMAL_KEY_TAG_DISPLAY_HELP_TEXT = 'Для обновления необходимо сохранить. Убедитесь в корректности ссылки.'
 
 HASHTAG_TEMPLATE_INSTAGRAM = 'https://www.instagram.com/explore/tags/{name}_{suffix}/'
 HASHTAG_TEMPLATE = '#{name}_{suffix}'
@@ -147,7 +149,16 @@ ANIMAL_VK_ALBUM_URL_IS_EMPTY = 'Необходимо заполнить поле
 
 ANIMAL_FORM_VK_UPDATE_PHOTO = 'vk_update_photo'
 ANIMAL_KEY_FORM_VK_UPDATE_PHOTO = 'Обновить фото'
-ANIMAL_KEY_FORM_VK_UPDATE_PHOTO_HELP_TEXT = 'Перед обновлением сохранить ссылку на альбом.'
+ANIMAL_KEY_FORM_VK_UPDATE_PHOTO_HELP_TEXT = 'Перед нажатием нужно сохранить ссылку на альбом. ' \
+                                            'Фото добавляется автоматически.'
+
+
+ANIMAL_FORM_VK_UPDATE_INFO = 'vk_update_info'
+ANIMAL_KEY_FORM_VK_UPDATE_INFO = 'Обновить описание и имя кота. '
+ANIMAL_KEY_FORM_VK_UPDATE_INFO_HELP_TEXT = 'Для изменения требуется сохранить. ' \
+                                           '(При возмозжности обновится статус, пол, возраст, ' \
+                                           'дата дата попадания в приют)'
+
 
 # sex
 ANIMAL_SEX = 'sex'
@@ -180,7 +191,8 @@ ANIMAL_LOCATION_STATUS_CHOICE_HOME = 'Пристроен'
 ANIMAL_LOCATION_STATUS_CHOICE_SHELTER = 'Ищут дом'
 ANIMAL_LOCATION_STATUS_CHOICE_DEAD = 'На радуге'
 ANIMAL_LOCATION_STATUS_HOME_DESСR = 'Они обрели свой дом'
-ANIMAL_LOCATION_STATUS_SHELTER_DESСR = 'Собаки привязываются к людям, кошки привязываются к дому. Не дай этим котикам привязаться к клетке. Помоги им обрести свой дом.'
+ANIMAL_LOCATION_STATUS_SHELTER_DESСR = 'Собаки привязываются к людям, кошки привязываются к дому. ' \
+                                       'Не дай этим котикам привязаться к клетке. Помоги им обрести свой дом.'
 ANIMAL_LOCATION_STATUS_DEAD_DESСR = 'Пусть земля им будет пухом, они всегда останутся в наших сердцах.'
 ANIMAL_LOCATION_STATUS_CHOICES = (
     (ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_CHOICE_HOME),
@@ -197,8 +209,6 @@ ANIMAL_LOCATION_STATUS_CHOICES_D = {
 # Точность. Устанавливается в соответствии задаными параметрами возраста.
 # При установки date_of_birth устанавливается точность DAY
 ANIMAL_BIRTHDAY_PRECISION = 'birthday_precision'
-ANIMAL_KEY_BIRTHDAY_PRECISION = 'Точность даты рождения'
-ANIMAL_KEY_BIRTHDAY_PRECISION_HELP_TEXT = '_help_text ANIMAL_KEY_BIRTHDAY_PRECISION'
 
 ANIMAL_BIRTHDAY_PRECISION_DAY_CHOICE = "до дня"
 ANIMAL_BIRTHDAY_PRECISION_MONTH_CHOICE = "до месяца"
@@ -213,10 +223,7 @@ ANIMAL_BIRTHDAY_PRECISION_CHOICES = (
     )
 
 # date_of_birth
-# При выборе этого поля, при сохранении возраст (days, months, years) устанавливается автоматом.
 ANIMAL_DATE_OF_BIRTH = 'date_of_birth'
-ANIMAL_KEY_DATE_OF_BIRTH = 'День рождения'
-ANIMAL_KEY_DATE_OF_BIRTH_HELP_TEXT = '_help_text ANIMAL_KEY_DATE_OF_BIRTH'
 
 # shelter_date
 ANIMAL_SHELTER_DATE = 'shelter_date'

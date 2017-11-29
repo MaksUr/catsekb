@@ -9,7 +9,7 @@ from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOS
     ANIMAL_IMAGE_KEY_IMAGE_URL, HASHTAG_TEMPLATE_INSTAGRAM, \
     HASHTAG_TEMPLATE, HASHTAG_SUFFIX, \
     ANIMAL_VERBOSE_NAME_PLURAL, ANIMAL_VERBOSE_NAME, ANIMAL_KEY_UPDATED, ANIMAL_KEY_CREATED, ANIMAL_KEY_SHOW, \
-    ANIMAL_KEY_DATE_OF_BIRTH, ANIMAL_KEY_BIRTHDAY_PRECISION, ANIMAL_KEY_SEX, ANIMAL_KEY_NAME, \
+    ANIMAL_KEY_SEX, ANIMAL_KEY_NAME, \
     ANIMAL_BIRTHDAY_PRECISION_DAY, ANIMAL_BIRTHDAY_PRECISION_MONTH, ANIMAL_BIRTHDAY_PRECISION_YEAR, \
     FIELD_VALUE_STR_TEMPLATE, \
     FIELD_VALUE_VERBOSE_NAME_PLURAL, FIELD_VALUE_VERBOSE_NAME, FIELD_VALUE_KEY_VALUE_TEXT, \
@@ -87,11 +87,11 @@ class Animal(Model):
     description = TextField(ANIMAL_KEY_DESCRIPTION, blank=True, default='')
     sex = CharField(ANIMAL_KEY_SEX, max_length=1, choices=ANIMAL_SEX_CHOICES, blank=True, default='')
     birthday_precision = CharField(
-        ANIMAL_KEY_BIRTHDAY_PRECISION, max_length=1, choices=ANIMAL_BIRTHDAY_PRECISION_CHOICES, null=True, default=''
+        max_length=1, choices=ANIMAL_BIRTHDAY_PRECISION_CHOICES, null=True, default=''
     )
     tag = CharField(ANIMAL_KEY_TAG, max_length=32, blank=True, default='')
     vk_album_id = IntegerField(ANIMAL_KEY_VK_ALBUM_ID, blank=True, default=None, null=True)
-    date_of_birth = DateField(ANIMAL_KEY_DATE_OF_BIRTH, null=True, default=None, blank=True)
+    date_of_birth = DateField(null=True, default=None, blank=True)
     # TODO: Применить данное поле, добавить метод отображение возроста по годам, месяцам и дням
     shelter_date = DateField(ANIMAL_KEY_SHELTER_DATE, null=True, default=None, blank=True)
     group = ForeignKey(Group, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)
@@ -107,8 +107,8 @@ class Animal(Model):
         default='',
         blank=True
     )
-    created = DateTimeField(ANIMAL_KEY_CREATED, null=True, default=None, blank=True)
-    updated = DateTimeField(ANIMAL_KEY_UPDATED, auto_now_add=False, auto_now=True)
+    created = DateTimeField(ANIMAL_KEY_CREATED, auto_now_add=True)
+    updated = DateTimeField(ANIMAL_KEY_UPDATED, auto_now=True)
 
     objects = AnimalQuerySet.as_manager()
 

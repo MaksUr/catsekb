@@ -1,7 +1,7 @@
-from cats.constants import ANIMAL_NAME, ANIMAL_LOCATION_STATUS, ANIMAL_SEX, HASHTAG_TEMPLATE, ANIMAL_DESCRIPTION
+from cats.constants import ANIMAL_NAME, ANIMAL_LOCATION_STATUS, ANIMAL_SEX, ANIMAL_DESCRIPTION
 from cats.update_scripts.descr_analyzer import get_info_from_description
 from cats.update_scripts.name_analyzer import get_info_from_title, get_sex
-from cats.updater import TITLE, RESPONSE, DESCRIPTION, CREATED, TYPE, SRC
+from cats.updater import TITLE, RESPONSE, DESCRIPTION, CREATED
 
 NAME_DATA_KEYS = (ANIMAL_NAME, ANIMAL_LOCATION_STATUS, ANIMAL_SEX)
 
@@ -49,8 +49,9 @@ def get_kwargs_from_album_response_descr(vk_albums_response):
 
 def get_animal_kwargs_from_vk_response(vk_albums_response):
     res = dict()
-
-    res.update(get_kwargs_from_album_response_title(vk_albums_response=vk_albums_response)) # name, location_status, sex
+    # name, location_status, sex
+    res.update(get_kwargs_from_album_response_title(vk_albums_response=vk_albums_response))
+    # description tag date_of_birth birthday_precision field_value
     res.update(
         get_kwargs_from_album_response_descr(
             vk_albums_response=vk_albums_response,

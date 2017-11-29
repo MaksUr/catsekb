@@ -87,6 +87,11 @@ def get_albums_info(group_id, album_ids):
     # TODO: локальная заглушка
     from cats.update_scripts.all_update import open_json
     r = open_json(r'other\albums.json')
+    if album_ids:
+        l = r['response']
+        l = filter((lambda x: x['aid'] in album_ids), l)
+        l = filter((lambda x: x['aid'] in album_ids), l)
+        r['response'] = list(l)
     ###############################################
 
     return r
