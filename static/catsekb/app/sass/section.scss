@@ -7,7 +7,7 @@
     width: 80px;
     height: 150px;
     position: absolute;
-    top: 0;
+    top: 15px;
     left: 0;
     z-index: 10;
 }
@@ -15,11 +15,16 @@
     height: 90px;
     position: absolute;
     visibility: visible;
-    top: -5px;
+    top: 40px;
     left: -45px;
     z-index: 9;
     transform: rotate(59deg);
     transition: transform .5s ease;
+}
+
+.about .tag {
+    padding: 0;
+    display: inline;
 }
 
 .can-hover .cat_container:hover + .cat_a_mouse {

@@ -54,7 +54,7 @@ function exit() {
 	burger.classList.toggle('no-vis');
 	close_increase_photo.classList.add('no-vis');
 	close_increase_photo.classList.remove('vis');
-	message.classList.toggle('vis');
+	message.classList.toggle('no-vis');
 	body[0].classList.toggle('overY');
 }
 
@@ -65,7 +65,8 @@ function increase() {
 	burger.classList.toggle('vis');
 	close_increase_photo.classList.remove('no-vis');
 	close_increase_photo.classList.add('vis');
-	message.classList.toggle('vis');
+	message.classList.toggle('no-vis');
 	body[0].classList.toggle('overY');
 }
+
 

@@ -20,27 +20,29 @@ body {
 }
 /* Отступы между секциями */
 section {
-	padding: 50px 0;
+	padding: 70px 0;
 }
 
 .message {
-    position: absolute;
-    top: 85%;
-    left: 15%;
+    position: fixed;
+    bottom: 4%;
+    left: 20%;
     margin: 0;
     padding: 10px;
-    z-index: 112;
-    width: 70%;
+    z-index: 111;
+    width: 60%;
     background-color: rgba(255, 255, 255, 0.75);
     border-radius: 3px;
     color: #004040;
     transition: opacity 3s 2s, visibility 3s 2s;
+    opacity: 1;
+    visibility: visible;
     display: none;
 }
 
-.message.vis {
-	visibility: visible;
-    opacity: 1;
+.message.no-vis {
+	visibility: hidden;
+    opacity: 0;
 }
 .vis {
     visibility: visible;
