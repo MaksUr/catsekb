@@ -4,6 +4,15 @@
 {% load static %}
 
 <ul class="description_cat font">
+    
+    {# updated #}
+    {% if animal.updated %}
+        <li>
+            <span class="property_name">{% get_verbose_field_name animal 'updated' %}: </span>{{ animal.updated }}
+        </li>
+    {% endif %}
+
+
     {# name #}
     <li>
         {% if animal.name %}
@@ -43,19 +52,7 @@
                 <!-- {% get_verbose_field_name animal 'date_of_birth' %}:  -->
                 Возраст:
             </span> ~
-            {% with animal.get_age as age %}
-                <span>
-                    {% if age.years > 0 %}
-                    {{ age.years }} лет 
-                    {% endif %}
-                    {% if age.months > 0 %}
-                    {{ age.months }} месяцев
-                    {% endif %}
-                    {% if age.days > 0 %}
-                    {{ age.days }} дней
-                    {% endif %}
-                </span>
-            {% endwith %}
+            {% include 'cats/widgets/age.html' with age=animal.get_age %}
         </li>
     {% endif %}
 
@@ -65,34 +62,10 @@
             <span class="property_name">
                 {% get_verbose_field_name animal 'shelter_date' %}:
             </span> ~
-            {% with animal.get_shelter_time as age %}
-                <span>
-                    {% if age.years > 0 %}
-                    {{ age.years }} лет
-                    {% endif %}
-                    {% if age.months > 0 %}
-                    {{ age.months }} месяцев
-                    {% endif %}
-                    {% if age.days > 0 %}
-                    {{ age.days }} дней
-                    {% endif %}
-                </span>
-            {% endwith %}
+            {% include 'cats/widgets/age.html' with age=animal.get_shelter_time %}
         </li>
     {% endif %}
-
-    {# characteristics #}
-    {% if animal.field_value.all %}
-        <li>
-            <span class="property_name">{% get_verbose_field_name animal 'field_value' %}: </span>
-            <ul class="characteristics">
-                    {% for field in animal.field_value.all %}
-                        <li>{{ field.field_type }}: {{ field.value_text }}</li>
-                    {% endfor %}
-            </ul>
-
-        </li>
-    {% endif %}
+   
 
     {# description #}
     {% if animal.description %}
