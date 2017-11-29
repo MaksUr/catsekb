@@ -66,6 +66,6 @@ h2 {
   font-size: 12px;
   font-size: .75rem; }
 
-.tag {
+.tag, .gallery .hashtag {
   font-style: normal;
   font-weight: 600; }

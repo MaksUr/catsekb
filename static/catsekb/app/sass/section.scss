@@ -23,8 +23,9 @@
 }
 
 .about .tag {
-    padding: 0;
+    padding: 0 5px;
     display: inline;
+    background-color: #fbecec; 
 }
 
 .can-hover .cat_container:hover + .cat_a_mouse {
@@ -35,5 +36,5 @@
 
 .line_container h2 {
     text-align: center;
-    padding: 10px 0;    
+    padding: 10px 0;   
 }
