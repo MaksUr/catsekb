@@ -9,9 +9,9 @@ from cats.constants import GROUP_ALL_ANIMALS_NAME, ANIMAL_CREATED, ANIMAL_SHOW, 
     ANIMAL_LOCATION_STATUS_CHOICE_HOME, ANIMAL_LOCATION_STATUS_CHOICE_SHELTER, ANIMAL_LOCATION_STATUS, \
     CAPTION_ANIMAL_LIST_DEFAULT, GROUP_ID, GROUP_ALL_ANIMALS_NAME_DESCR, ANIMAL_LOCATION_STATUS_HOME_DESСR, \
     ANIMAL_LOCATION_STATUS_SHELTER_DESСR, ANIMAL_LOCATION_STATUS_DEAD, ANIMAL_LOCATION_STATUS_CHOICE_DEAD, \
-    ANIMAL_LOCATION_STATUS_DEAD_DESСR, INDEX, ANIMALS, FIELD_TYPE_PREFIX
+    ANIMAL_LOCATION_STATUS_DEAD_DESСR, INDEX, ANIMALS
 from cats.forms import FilterForm
-from cats.models import Animal, Group, Article, FieldType, FieldValue
+from cats.models import Animal, Group
 
 GROUP_MAPPING = {
     GROUP_ALL_ANIMALS_NAME: {
@@ -54,18 +54,6 @@ def get_group(group_id, show_permission=False):
             query['show'] = True
         res = get_object_or_404(Group, **query)
         return res
-
-
-def get_fields():
-    res = list()
-    field_types = FieldType.objects.all()
-    for field_type in field_types:
-        item = dict()
-        item['id'] = FIELD_TYPE_PREFIX + str(field_type.id)
-        item['label'] = field_type.name
-        item['choices'] = [(i.id, i.value_text) for i in FieldValue.objects.filter(field_type=field_type)]
-        res.append(item)
-    return res
 
 
 def get_animals_from_query(query, show_permission=False):
@@ -114,7 +102,7 @@ def get_base_context(active_menu, show_permission=False):
     user_group_list = get_groups_from_query(dict(), show_permission=show_permission)
     context = {
         'group_list': default_group_list + list(user_group_list),
-        'helpful_info_list': Article.objects.all(),
+        'helpful_info_list': (),
         'active_menu': active_menu
     }
     return context
@@ -231,9 +219,6 @@ class AnimalDetailView(DetailView):
             page = paginator.page(page_number)
             return page
 
-# TODO: Create new app
-def InfoDetailView(request, pk):
-    return HttpResponse('InfoDetailView')
 
 
 class GroupListView(ListView):
@@ -319,7 +304,6 @@ class FilterView(FormView):
     def get_form_kwargs(self):
         res = FormView.get_form_kwargs(self)
         res['data'] = self.request.GET.dict()
-        res['field_types'] = get_fields()
         return res
 
 

@@ -3,7 +3,7 @@ from django.db.models import QuerySet
 from cats.constants import GROUP_ALL_ANIMALS_KEY_NAME, ANIMAL_GROUP, ANIMAL_NAME, GROUP_ALL_ANIMALS_NAME, AGE_DISTANCE, \
     ANIMAL_DATE_OF_BIRTH, GROUP_NAME, DJ_PK, ANIMAL_LOCATION_STATUS_CHOICE_SHELTER, ANIMAL_LOCATION_STATUS_CHOICE_HOME, \
     ANIMAL_LOCATION_STATUS_CHOICE_DEAD, ANIMAL_LOCATION_STATUS_DEAD, ANIMAL_LOCATION_STATUS_SHELTER, \
-    ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS, GROUP_ID, FIELD_TYPE_PREFIX
+    ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS, GROUP_ID
 from cats.time import get_age_from_string, get_date_from_age
 
 TEMPLATE = '{arg1}__{arg2}'
@@ -58,11 +58,6 @@ class AnimalQuerySet(QuerySet):
                         kwargs[DATE_OF_BIRTH__GTE] = end_date
             finally:
                 del kwargs[AGE_DISTANCE]
-        field_types = list(kwargs.keys())
-        for field_type in field_types:
-            if field_type.startswith(FIELD_TYPE_PREFIX):
-                kwargs['field_value__id'] = kwargs[field_type]
-                del kwargs[field_type]
 
         res = QuerySet.filter(self, *args, **kwargs)
         return res

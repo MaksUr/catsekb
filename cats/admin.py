@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import reverse
 
 from cats.constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPDATED, ANIMAL_NAME, ANIMAL_GROUP, \
-    ANIMAL_FIELD_VALUE, ANIMAL_SEX, ANIMAL_DATE_OF_BIRTH, ANIMAL_DAYS, ANIMAL_MONTHS, ANIMAL_YEARS, \
+    ANIMAL_SEX, ANIMAL_DAYS, ANIMAL_MONTHS, ANIMAL_YEARS, \
     ANIMAL_AGE_FIELD_SET, DJ_CLASSES_COLLAPSE, DJ_CLASSES, DJ_FIELDS, ANIMAL_MAIN_FIELD_SET, DJ_ID, ANIMAL_SHOW, \
     ANIMAL_DESCRIPTION, GROUP_NAME, GROUP_SHOW, ANIMAL_LOCATION_STATUS, ANIMAL_TAG, ANIMAL_TAG_FIELD_SET, \
     ANIMAL_TAG_DISPLAY, ANIMAL_KEY_TAG_DISPLAY, ANIMAL_IMAGE_IMAGE_THUMB, \
@@ -16,7 +16,7 @@ from cats.constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPD
     ANIMAL_KEY_FORM_VK_UPDATE_PHOTO_HELP_TEXT, ANIMAL_KEY_FORM_VK_UPDATE_INFO_HELP_TEXT, ANIMAL_FORM_VK_UPDATE_INFO, \
     ANIMAL_KEY_FORM_VK_UPDATE_INFO, ANIMAL_KEY_TAG_DISPLAY_HELP_TEXT
 from cats.forms import AnimalForm, AnimalImageForm
-from cats.models import Animal, AnimalImage, FieldValue, Group, FieldType, Article
+from cats.models import Animal, AnimalImage, Group
 from cats.updater import update_images_for_animal
 
 UPDATE_BUTTON = '<a class="button" href="{link}?upd={upd}">Обновить</a><p class="help">{help}</p>'
@@ -100,7 +100,7 @@ class AnimalAdmin(admin.ModelAdmin):
                     ANIMAL_NAME, ANIMAL_LOCATION_STATUS,
                     ANIMAL_SHELTER_DATE,
                     ANIMAL_SHOW, ANIMAL_DESCRIPTION, ANIMAL_VALID_INFO,
-                    ANIMAL_GROUP, ANIMAL_FIELD_VALUE, ANIMAL_SEX,
+                    ANIMAL_GROUP, ANIMAL_SEX,
                     ANIMAL_CREATED, ANIMAL_UPDATED,
                 ),
             },
@@ -154,23 +154,8 @@ class GroupAdmin(admin.ModelAdmin):
 admin.site.register(Group, GroupAdmin)
 
 
-class FieldValueInline(admin.StackedInline):
-    model = FieldValue
-    extra = 0
-
-
-class FieldTypeAdmin(admin.ModelAdmin):
-    inlines = [FieldValueInline]
-admin.site.register(FieldType, FieldTypeAdmin)
-
-
 class AnimalImageAdmin(admin.ModelAdmin):
     form = AnimalImageForm
     fields = ANIMAL_IMAGE_FIELDS
     readonly_fields = ANIMAL_IMAGE_READONLY_FIELDS
 admin.site.register(AnimalImage, AnimalImageAdmin)
-
-
-class ArticleAdmin(admin.ModelAdmin):
-    model = Article
-admin.site.register(Article, ArticleAdmin)

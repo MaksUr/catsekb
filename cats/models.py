@@ -11,9 +11,6 @@ from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOS
     ANIMAL_VERBOSE_NAME_PLURAL, ANIMAL_VERBOSE_NAME, ANIMAL_KEY_UPDATED, ANIMAL_KEY_CREATED, ANIMAL_KEY_SHOW, \
     ANIMAL_KEY_SEX, ANIMAL_KEY_NAME, \
     ANIMAL_BIRTHDAY_PRECISION_DAY, ANIMAL_BIRTHDAY_PRECISION_MONTH, ANIMAL_BIRTHDAY_PRECISION_YEAR, \
-    FIELD_VALUE_STR_TEMPLATE, \
-    FIELD_VALUE_VERBOSE_NAME_PLURAL, FIELD_VALUE_VERBOSE_NAME, FIELD_VALUE_KEY_VALUE_TEXT, \
-    FIELD_TYPE_VERBOSE_NAME_PLURAL, FIELD_TYPE_VERBOSE_NAME, FIELD_TYPE_KEY_DESCRIPTION, FIELD_TYPE_KEY_NAME, \
     GROUP_VERBOSE_NAME_PLURAL, GROUP_VERBOSE_NAME, GROUP_KEY_SHOW, GROUP_KEY_DESCRIPTION, GROUP_KEY_NAME, \
     URL_NAME_ANIMAL, DJ_PK, ANIMAL_KEY_DESCRIPTION, \
     ANIMAL_KEY_LOCATION_STATUS, ANIMAL_SEX_CHOICES, ANIMAL_BIRTHDAY_PRECISION_CHOICES, ANIMAL_LOCATION_STATUS_CHOICES, \
@@ -23,7 +20,6 @@ from cats.constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOS
     ANIMAL_IMAGE_KEY_CREATED, ANIMAL_KEY_SHELTER_DATE, ANIMAL_KEY_VALID_INFO, VK_GROUP_ID
 from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
-
 from cats.validators import group_name_validator, background_y_position_validator
 # from cats.updater.vk_import import get_vk_url_from_album_id
 
@@ -52,31 +48,6 @@ class Group(Model):
         return str(self.id)
 
 
-class FieldType(Model):
-    name = CharField(FIELD_TYPE_KEY_NAME, max_length=32, unique=True)
-    description = CharField(FIELD_TYPE_KEY_DESCRIPTION, max_length=32, blank=True, default=None)
-
-    class Meta:
-        verbose_name = FIELD_TYPE_VERBOSE_NAME
-        verbose_name_plural = FIELD_TYPE_VERBOSE_NAME_PLURAL
-
-    def __str__(self):
-        return self.name
-
-
-class FieldValue(Model):
-    field_type = ForeignKey(FieldType)
-    value_text = CharField(FIELD_VALUE_KEY_VALUE_TEXT, max_length=32, blank=True, null=True, default=None)
-
-    class Meta:
-        verbose_name = FIELD_VALUE_VERBOSE_NAME
-        verbose_name_plural = FIELD_VALUE_VERBOSE_NAME_PLURAL
-
-    def __str__(self):
-        val = self.value_text
-        return FIELD_VALUE_STR_TEMPLATE.format(field_type=self.field_type, val=val)
-
-
 class Animal(Model):
     BIRTHDAY_PRECISION_Y = ANIMAL_BIRTHDAY_PRECISION_YEAR
     BIRTHDAY_PRECISION_M = ANIMAL_BIRTHDAY_PRECISION_MONTH
@@ -97,9 +68,6 @@ class Animal(Model):
     group = ForeignKey(Group, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)
     show = BooleanField(ANIMAL_KEY_SHOW, default=True)
     valid_info = BooleanField(ANIMAL_KEY_VALID_INFO, default=False)
-    field_value = ManyToManyField(
-        FieldValue, verbose_name=FieldValue._meta.verbose_name, blank=True, default=None
-    )
     location_status = CharField(
         ANIMAL_KEY_LOCATION_STATUS,
         max_length=1,
@@ -242,11 +210,3 @@ class AnimalImage(Model):
 
     def get_alt(self):
         return self.__str__()
-
-
-class Article(Model):  # TODO: create new application
-    name = CharField("Название статьи", max_length=100)
-    text = TextField("Текст статьи", blank=True, default='')
-
-    def __str__(self):
-        return self.name

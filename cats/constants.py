@@ -5,8 +5,6 @@
 # field_set - объединение полей (заголовок)
 #
 # ANIMAL - питомец
-# FIELD_TYPE - название свойства
-# FIELD_VALUE - значение свойства
 # GROUP - группа
 #
 # foreign_key служит для связи текущей модели с другой моделью. Например модель - AnimalImage,
@@ -232,8 +230,7 @@ ANIMAL_KEY_SHELTER_DATE_HELP_TEXT = 'Примерная дата попадан�
 
 # group
 ANIMAL_GROUP = 'group'
-ANIMAL_KEY_GROUP_HELP_TEXT = '_help_text ANIMAL_KEY_GROUP'
-ANIMAL_FORM_VALIDATION_ERROR_MULTIPLY_GROUPS = 'Группа "{type}" имеет более одного значения.'
+ANIMAL_KEY_GROUP_HELP_TEXT = 'Назначить группу для питомца.'
 
 # show
 ANIMAL_SHOW = SHOW
@@ -245,9 +242,6 @@ ANIMAL_VALID_INFO = 'valid_info'
 ANIMAL_KEY_VALID_INFO = 'Проверено'
 ANIMAL_KEY_VALID_INFO_HELP_TEXT = 'Информация проверена вручную.'
 
-# field_value (foreign key)
-ANIMAL_FIELD_VALUE = 'field_value'
-ANIMAL_KEY_FIELD_VALUE_HELP_TEXT = '_help_text ANIMAL_KEY_FIELD_VALUE'
 
 # created
 ANIMAL_CREATED = 'created'
@@ -277,55 +271,6 @@ ANIMAL_FORM_KEY_YEARS = 'Лет'
 ANIMAL_KEY_YEARS_HELP_TEXT = '_help_text ANIMAL_KEY_YEARS'
 
 
-# class FieldValue
-# Только одно значение FieldValue в одном Animal может принадлежать одному FieldType
-FIELD_VALUE_VERBOSE_NAME = 'Особенность'
-FIELD_VALUE_VERBOSE_NAME_PLURAL = 'Значения особенностей'
-FIELD_VALUE_STR_TEMPLATE = '{field_type} - {val}'
-
-# value_text
-FIELD_VALUE_VALUE_TEXT = 'value_text'
-FIELD_VALUE_KEY_VALUE_TEXT = 'Особенность'
-FIELD_VALUE_KEY_VALUE_TEXT_HELP_TEXT = '_help_text FIELD_VALUE_KEY_VALUE_TEXT'
-
-# field_type (foreign key for class FieldType)
-FIELD_VALUE_FIELD_TYPE = 'field_type'
-FIELD_VALUE_KEY_FIELD_TYPE = '_?'  # TODO: edit value
-FIELD_VALUE_KEY_FIELD_TYPE_HELP_TEXT = '_help_text FIELD_VALUE_KEY_VALUE_TEXT'
-
-
-# class FieldType
-FIELD_TYPE_VERBOSE_NAME = 'Тип особенности'
-FIELD_TYPE_VERBOSE_NAME_PLURAL = 'Типы особенностей'
-FIELD_TYPE_PREFIX = 'ft_'
-
-# name
-FIELD_TYPE_NAME = 'name'
-FIELD_TYPE_KEY_NAME = 'Название'
-FIELD_TYPE_KEY_NAME_HELP_TEXT = '_help_text FIELD_TYPE_KEY_NAME'
-
-# description
-FIELD_TYPE_DESCRIPTION = 'description'
-FIELD_TYPE_KEY_DESCRIPTION = 'Описание'
-FIELD_TYPE_KEY_DESCRIPTION_HELP_TEXT = '_help_text FIELD_TYPE_KEY_DESCRIPTION'
-
-# FieldValue and FieldType instances
-FIELD_TYPE_INST_LITTER_BOX_SKILL = 'Лоток'
-FIELD_VALUE_INST_LITTER_BOX_SKILL_LEVEL_A = 'Без промаху'
-FIELD_VALUE_INST_LITTER_BOX_SKILL_LEVEL_B = 'Научится'
-FIELD_VALUE_INST_LITTER_BOX_SKILL_LEVEL_C = 'Имеются проблемы'
-
-FIELD_TYPE_INST_RELATIONSHIPS_WITH_PEOPLE = 'Отношение к людям'
-FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_A = 'Доброжелательное'
-FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_B = 'Трусливое'
-FIELD_VALUE_INST_RELATIONSHIPS_WITH_PEOPLE_C = 'С характером'
-
-FIELD_TYPE_INST_RELATIONSHIPS_WITH_ANIMALS = 'Отношение к другим животным'
-FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_A = 'Доброжелательное'
-FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_B = 'Стрессовое'
-FIELD_VALUE_INST_RELATIONSHIPS_WITH_ANIMALS_C = 'Доминирующее'
-
-
 # class Group
 GROUP_VERBOSE_NAME = 'Группа'
 GROUP_VERBOSE_NAME_PLURAL = 'Группы'
@@ -338,22 +283,19 @@ GROUP_ID = 'group_id'
 # name
 GROUP_NAME = 'name'
 GROUP_KEY_NAME = 'Имя'
-GROUP_KEY_NAME_HELP_TEXT = '_help_text GROUP_KEY_NAME'
+GROUP_KEY_NAME_HELP_TEXT = 'Данна группа появится на сайте как раздел меню в вкладке "Наши коты"'
 GROUP_FORM_VALIDATION_ERROR_NAME_IS_DEFAULT = 'Группа "{name}" имеет недопустимое значение.'
 
 # description
 GROUP_DESCRIPTION = 'description'
 GROUP_KEY_DESCRIPTION = 'Описание'
-GROUP_KEY_DESCRIPTION_HELP_TEXT = '_help_text GROUP_KEY_DESCRIPTION'
+GROUP_KEY_DESCRIPTION_HELP_TEXT = 'Краткое описание группы'
 
 # show
 GROUP_SHOW = SHOW
 GROUP_KEY_SHOW = 'Показывать группу'
-GROUP_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удаления или чтобы скрыть.'
-
-ANIMAL_ANIMAL_LINK = 'animal_link'
-ANIMAL_KEY_ANIMAL_LINK = 'Ссылка на сайт'
-ANIMAL_KEY_ANIMAL_LINK_HELP_TEXT = '_help_text ANIMAL_KEY_ANIMAL_LINK'
+GROUP_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удаления или чтобы скрыть. ' \
+                           'Скрытые группы доступны для персонала на сайте.'
 
 
 # class FilterForm

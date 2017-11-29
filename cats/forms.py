@@ -6,11 +6,11 @@ from django.forms import ValidationError
 from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECISION, ANIMAL_KEY_UPDATED_HELP_TEXT, \
     ANIMAL_KEY_CREATED_HELP_TEXT, ANIMAL_KEY_SHOW_HELP_TEXT,\
     ANIMAL_KEY_SEX_HELP_TEXT, ANIMAL_KEY_NAME_HELP_TEXT, \
-    ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST, ANIMAL_FORM_VALIDATION_ERROR_MULTIPLY_GROUPS, DJ_INSTANCE, \
+    ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST, DJ_INSTANCE, \
     DJ_INITIAL, ANIMAL_DAYS, ANIMAL_FORM_KEY_DAYS, ANIMAL_KEY_DAYS_HELP_TEXT, ANIMAL_MONTHS, ANIMAL_FORM_KEY_MONTHS, \
     ANIMAL_KEY_MONTHS_HELP_TEXT, ANIMAL_YEARS, ANIMAL_FORM_KEY_YEARS, ANIMAL_KEY_YEARS_HELP_TEXT, ANIMAL_SEX, \
-    ANIMAL_FIELD_VALUE, ANIMAL_SHOW, ANIMAL_GROUP, ANIMAL_KEY_GROUP_HELP_TEXT, ANIMAL_NAME, ANIMAL_DATE_OF_BIRTH, \
-    ANIMAL_KEY_FIELD_VALUE_HELP_TEXT, ANIMAL_KEY_NAME, ANIMAL_KEY_SEX, AGE_DISTANCE_CHOICES, \
+    ANIMAL_SHOW, ANIMAL_GROUP, ANIMAL_KEY_GROUP_HELP_TEXT, ANIMAL_NAME, ANIMAL_DATE_OF_BIRTH, \
+    ANIMAL_KEY_NAME, ANIMAL_KEY_SEX, AGE_DISTANCE_CHOICES, \
     AGE_DISTANCE_KEY, ANIMAL_DESCRIPTION, ANIMAL_KEY_DESCRIPTION_HELP_TEXT, ANIMAL_KEY_LOCATION_STATUS_HELP_TEXT, \
     ANIMAL_LOCATION_STATUS, ANIMAL_SEX_CHOICES, ANIMAL_LOCATION_STATUS_CHOICES, ANIMAL_KEY_LOCATION_STATUS, ANIMAL_TAG, \
     ANIMAL_KEY_TAG_HELP_TEXT, ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND, ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT, \
@@ -110,7 +110,7 @@ class AnimalForm(forms.ModelForm):
         fields = [
             ANIMAL_NAME, ANIMAL_LOCATION_STATUS,
             ANIMAL_GROUP, ANIMAL_SHOW,
-            ANIMAL_FIELD_VALUE, ANIMAL_SEX,
+            ANIMAL_SEX,
             ANIMAL_YEARS, ANIMAL_MONTHS,
             ANIMAL_DAYS,
             ANIMAL_DESCRIPTION, ANIMAL_TAG, ANIMAL_VK_ALBUM_URL,
@@ -123,7 +123,6 @@ class AnimalForm(forms.ModelForm):
             ANIMAL_SEX: ANIMAL_KEY_SEX_HELP_TEXT,
             ANIMAL_NAME: ANIMAL_KEY_NAME_HELP_TEXT,
             ANIMAL_GROUP: ANIMAL_KEY_GROUP_HELP_TEXT,
-            ANIMAL_FIELD_VALUE: ANIMAL_KEY_FIELD_VALUE_HELP_TEXT,
             ANIMAL_DESCRIPTION: ANIMAL_KEY_DESCRIPTION_HELP_TEXT,
             ANIMAL_LOCATION_STATUS: ANIMAL_KEY_LOCATION_STATUS_HELP_TEXT,
             ANIMAL_TAG: ANIMAL_KEY_TAG_HELP_TEXT,
@@ -182,19 +181,6 @@ class AnimalForm(forms.ModelForm):
         d[ANIMAL_YEARS] = None
         return d
 
-    def clean_field_value(self):
-        words = self.cleaned_data.get(ANIMAL_FIELD_VALUE)
-        types = set()
-        errors = set()
-        for w in words:
-            if w.field_type in types:
-                message = ANIMAL_FORM_VALIDATION_ERROR_MULTIPLY_GROUPS.format(type=w.field_type)
-                errors.add(message)
-            types.add(w.field_type)
-        if len(errors):
-            raise ValidationError(list(errors))
-        return words
-
     def clean_name(self):
         name = self.cleaned_data.get(ANIMAL_NAME, None)
         if name == "" or self.instance.name == name:
@@ -234,22 +220,7 @@ class FilterForm(forms.Form):
     )
 
     def __init__(self, *args, **kwargs):
-        field_types = kwargs.pop('field_types', list())
         forms.Form.__init__(self, *args, **kwargs)
-        for field_type in field_types:
-            try:
-                t_id = field_type['id']
-                choices = field_type['choices']
-                label = field_type['label']
-            except KeyError:
-                continue
-
-            self.fields[t_id] = forms.ChoiceField(
-                widget=forms.RadioSelect,
-                required=False,
-                choices=choices,
-                label=label
-            )
 
 
 class AnimalImageForm(forms.ModelForm):
