@@ -11,6 +11,8 @@ var body = document.getElementsByTagName('body');
 document.addEventListener("DOMContentLoaded", ready);
 
 function ready() {
+	var burger_menu =  document.querySelector('.burger');
+
 	const canHover = !(matchMedia('(hover: none)').matches);
 
 	if(canHover) {
@@ -19,8 +21,6 @@ function ready() {
 
 	if(body[0].classList.contains('can-hover') == false) {
 		var cat_find_block = document.querySelectorAll('.cat_find_block');
-
-		var burger_menu =  document.querySelector('.burger');
 
 		burger_menu.classList.add('burger_block');
 
