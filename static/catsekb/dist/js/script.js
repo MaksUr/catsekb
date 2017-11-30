@@ -30,10 +30,17 @@ function ready() {
 		for (i = 0; i <= cat_find_block.length - 1; i++) {
 			cat_find_block[i].addEventListener('click', view_name.bind(this, i));
 		}
-	}
+	} else {
+		var widthScreen = document.documentElement.clientWidth;
 
-	else {
+		if (widthScreen < 766) {
+			console.log(widthScreen);
+			colorAndHeight(true);
+			burger.addEventListener('click', mobileNav);
+
+		} else {
 			window.addEventListener('scroll', go.bind(this, 325));
+		}
 	}
 }
 
