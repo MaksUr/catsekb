@@ -122,8 +122,8 @@ HASHTAG_SUFFIX = 'catsekb'
 
 # name
 ANIMAL_NAME = 'name'
-ANIMAL_KEY_NAME = 'Имя'
-ANIMAL_KEY_NAME_HELP_TEXT = '_help_text ANIMAL_KEY_NAME'
+ANIMAL_KEY_NAME = 'Имя.'
+ANIMAL_KEY_NAME_HELP_TEXT = 'Введите только имя. Хэштэг генерируется автоматически'
 ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST = '"{name}" уже существует'
 
 # description
@@ -161,7 +161,7 @@ ANIMAL_KEY_FORM_VK_UPDATE_INFO_HELP_TEXT = 'Для изменения требу
 # sex
 ANIMAL_SEX = 'sex'
 ANIMAL_KEY_SEX = 'Пол'
-ANIMAL_KEY_SEX_HELP_TEXT = '_help_text ANIMAL_KEY_SEX'
+ANIMAL_KEY_SEX_HELP_TEXT = 'Выберите пол'
 
 ANIMAL_SEX_FEMALE = "F"  # для хранения в БД
 ANIMAL_SEX_MALE = "M"  # для хранения в БД
@@ -246,29 +246,29 @@ ANIMAL_KEY_VALID_INFO_HELP_TEXT = 'Информация проверена вр�
 # created
 ANIMAL_CREATED = 'created'
 ANIMAL_KEY_CREATED = 'Создано'
-ANIMAL_KEY_CREATED_HELP_TEXT = '_help_text ANIMAL_KEY_CREATED'
+ANIMAL_KEY_CREATED_HELP_TEXT = ''
 
 # updated
 ANIMAL_UPDATED = 'updated'
 ANIMAL_KEY_UPDATED = 'Обновлено'
-ANIMAL_KEY_UPDATED_HELP_TEXT = '_help_text ANIMAL_KEY_UPDATED'
+ANIMAL_KEY_UPDATED_HELP_TEXT = ''
 
 # Возраст. Определяет date_of_birth в том случае, если date_of_birth не редактировался пользователем.
-ANIMAL_AGE_FIELD_SET = 'Настройки возраста'
+ANIMAL_AGE_FIELD_SET = 'Возраст котика'
 # days (AnimalForm) - возраст
 ANIMAL_DAYS = 'days'
 ANIMAL_FORM_KEY_DAYS = 'Дней'
-ANIMAL_KEY_DAYS_HELP_TEXT = '_help_text ANIMAL_KEY_DAYS'
+ANIMAL_KEY_DAYS_HELP_TEXT = 'Указывается точность до дня'
 
 # months (AnimalForm) - возраст
 ANIMAL_MONTHS = 'months'
 ANIMAL_FORM_KEY_MONTHS = 'Месяцев'
-ANIMAL_KEY_MONTHS_HELP_TEXT = '_help_text ANIMAL_KEY_MONTHS'
+ANIMAL_KEY_MONTHS_HELP_TEXT = 'Указывается точность до месяца'
 
 # years (AnimalForm) - возраст
 ANIMAL_YEARS = 'years'
 ANIMAL_FORM_KEY_YEARS = 'Лет'
-ANIMAL_KEY_YEARS_HELP_TEXT = '_help_text ANIMAL_KEY_YEARS'
+ANIMAL_KEY_YEARS_HELP_TEXT = 'Указывается точность до года'
 
 
 # class Group
