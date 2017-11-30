@@ -36,6 +36,7 @@ function ready() {
 		if (widthScreen < 766) {
 			console.log(widthScreen);
 			colorAndHeight(true);
+			burger_menu.classList.add('burger_block');
 			burger.addEventListener('click', mobileNav);
 
 		} else {
