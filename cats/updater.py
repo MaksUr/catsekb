@@ -1,6 +1,6 @@
 import datetime
 
-import requests
+# import requests
 
 from cats.constants import ANIMAL_IMAGE_PHOTO_ID, ANIMAL_IMAGE_ANIMAL, ANIMAL_IMAGE_IMAGE_URL, \
     ANIMAL_IMAGE_IMAGE_SMALL_URL, ANIMAL_IMAGE_CREATED, ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND, VK_GROUP_ID
@@ -38,29 +38,29 @@ def get_vk_album_id_from_url(url):
 
 
 def get_album_photos(group_id, album_id):
-    group_id = -1 * group_id
-    # TODO: use requests
-    photos = requests.get(r'https://api.vk.com/method/photos.get', params={
-        'album_id': album_id,
-        'owner_id': group_id,
-        'photo_sizes': 1,
-    }).json()
+    # group_id = -1 * group_id
+    # # TODO: use requests
+    # photos = requests.get(r'https://api.vk.com/method/photos.get', params={
+    #     'album_id': album_id,
+    #     'owner_id': group_id,
+    #     'photo_sizes': 1,
+    # }).json()
 
-    return photos
+    return []
 
 
 def get_albums_info(group_id, album_ids):
-    params = dict()
+    # params = dict()
 
-    params['owner_id'] = -1 * group_id
-    if album_ids:
-        params['album_ids'] = ','.join(map(str, album_ids))
-    # TODO: use requests
-    r = requests.get(r'https://api.vk.com/method/photos.getAlbums', params={
-        'owner_id': -1 * group_id,
-    }).json()
+    # params['owner_id'] = -1 * group_id
+    # if album_ids:
+    #     params['album_ids'] = ','.join(map(str, album_ids))
+    # # TODO: use requests
+    # r = requests.get(r'https://api.vk.com/method/photos.getAlbums', params={
+    #     'owner_id': -1 * group_id,
+    # }).json()
 
-    return r
+    return []
 
 
 def get_photo_from_size(list_size, biggest=True):

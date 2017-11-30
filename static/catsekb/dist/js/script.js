@@ -68,7 +68,6 @@ function view_name(i) {
 	cat_find_block[i].classList.toggle('cat_find_view');
 }
 
-
 (function() {
  
   "use strict";

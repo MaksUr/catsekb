@@ -1,22 +1,22 @@
 /* <---------- main_menu BEGIN ----------> */
-.main_menu {
+.can-hover .main_menu {
 	margin: 10px 0;
 }
 
-.menu {
+.can-hover .menu {
     position: relative;
 }
-.menu > li {
+.can-hover .menu > li {
 	display: inline-block;
 	padding-left: 25px;
 	position: relative;
 }
 
-.menu > li:first-child {
+.can-hover .menu > li:first-child {
 	padding-left: 0;
 }
 
-.menu_opening {
+.can-hover .menu_opening {
 	position: absolute;
 	visibility: hidden;
 	top: 30px;
@@ -26,11 +26,11 @@
     transition: all .8s 1s ease-out;
 }
 
-.menu_opening > li {
+.can-hover .menu_opening > li {
     margin: 10px 15px 0 0;
 }
 
-.menu_opening li:first-child {
+.can-hover .menu_opening li:first-child {
 	margin-top: 0;
 }
 
@@ -44,7 +44,7 @@
 
 /* <---------- .top_nav BEGIN ----------> */
 
-.top_nav {
+.can-hover .top_nav {
     width: 100%;
     height: 0px;
     background-color: rgba(255, 255, 255, .8);
@@ -56,36 +56,36 @@
     z-index: 112;
 }
 
-.top_nav_opened {
+.can-hover .top_nav_opened {
     height: 60px;
     transition: height .55s cubic-bezier(.1, .68, .58, 1), transform .55s cubic-bezier(.1, .68, .58, 1);
     opacity: 1;
 }
 
-.nav_bar {
+.can-hover .nav_bar {
 	transition: transform .57s;
     transform: translateY(-120%);
 }
 
-.nav_bar_opened {
+.can-hover .nav_bar_opened {
 	transform: translate(0%);
 }
 
-.top_nav.top_nav_increase_photo, .mobile_list.top_nav_increase_photo {
+.can-hover .top_nav.top_nav_increase_photo, .mobile_list.top_nav_increase_photo {
 	transform: translateY(-100%);
 }
 
-.top_logo {
+.can-hover .top_logo {
 	height: 50px;
 	padding-top: 2px;
 }
 
-.menu.top_menu {
+.can-hover .menu.top_menu {
 	text-align: right;
     padding-top: 20px;
 }
 
-.menu_opening.top_menu {
+.can-hover .menu_opening.top_menu {
 	padding: 0;
 	background-color: rgba(255, 255, 255, .8);
 	top: 40px;
@@ -94,16 +94,16 @@
     border-bottom-right-radius: 3px;
 }
 
-.menu_opening.top_menu > li {
+.can-hover .menu_opening.top_menu > li {
 	padding-top: 0;
 	margin: 15px 10px 0 10px;
 }
 
-.menu_opening.top_menu li:first-child {
+.can-hover .menu_opening.top_menu li:first-child {
 	margin-top: 0;
 }
 
-.menu_opening.top_menu li:last-child {
+.can-hover .menu_opening.top_menu li:last-child {
 	margin-bottom: 15px;
 }
 

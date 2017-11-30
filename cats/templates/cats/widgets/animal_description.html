@@ -4,15 +4,6 @@
 {% load static %}
 
 <ul class="description_cat font">
-    
-    {# updated #}
-    {% if animal.updated %}
-        <li>
-            <span class="property_name">{% get_verbose_field_name animal 'updated' %}: </span>{{ animal.updated.date }}
-        </li>
-    {% endif %}
-
-
     {# name #}
     <li>
         {% if animal.name %}
@@ -83,4 +74,9 @@
 {% if animal.get_hashtag_name %}
     <a href="{{ object.get_instagram_link }}" class="hashtag font" target="_blank">{{ object.get_hashtag_name }} </a>
 {% endif %}
-    
+<!-- 
+{# updated #}
+{% if animal.updated %}
+    <p class="tag no_active font">{% get_verbose_field_name animal 'updated' %}: {{ animal.updated.date }}</p>
+{% endif %}
+     -->
