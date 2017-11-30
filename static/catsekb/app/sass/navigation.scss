@@ -4,7 +4,6 @@
 }
 
 .menu {
-	/*z-index: 109; Вроде как исправляет проблему с наложением слоев при увеличении фоток кота*/ 
     position: relative;
 }
 .menu > li {
@@ -35,7 +34,7 @@
 	margin-top: 0;
 }
 
-.menu li:hover .menu_opening {
+.can-hover .menu li:hover .menu_opening {
 	opacity: 1;
 	visibility: visible;
 	transition: all .8s 0s;
