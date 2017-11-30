@@ -1,19 +1,29 @@
 {# name #}
 {# active #}
-{# abs_url #}
+{# abs_url? #}
 {# url_caption #}
 {# menu_items? #}
 {# menu_class? #}
 <li>
-    <a href="{{ abs_url }}"{% ifequal name active %} style="color: #526aa5;"{% endifequal %}>{{ url_caption }}</a>
+    {% if abs_url %}
+        <a href="{{ abs_url }}"{% ifequal name active %} style="color: #526aa5;"{% endifequal %}>{{ url_caption }}</a>
+    {% else %}
+        <p{% ifequal name active %} style="color: #526aa5;"{% endifequal %}>{{ url_caption }}</p>
+    {% endif %}
+
     {% if menu_items %}
         <ul class="{{ menu_class }}">
-        {% for item in menu_items %}
-            <li>
-                <a href="{{ item.get_absolute_url }}">{{ item }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+            {% for item in menu_items %}
+                <li>
+                    {% if item.get_absolute_url %}
+                        <a href="{{ item.get_absolute_url }}">{{ item }}</a>
+                    {% else %}
+                        <a href="{% url item.url %}">{{ item.caption }}</a>
+                    {% endif %}
+
+                </li>
+            {% endfor %}
+        </ul>
     {% endif %}
 </li>
 

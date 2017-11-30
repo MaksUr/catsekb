@@ -9,7 +9,7 @@ from cats.constants import GROUP_ALL_ANIMALS_NAME, ANIMAL_CREATED, ANIMAL_SHOW, 
     ANIMAL_LOCATION_STATUS_CHOICE_HOME, ANIMAL_LOCATION_STATUS_CHOICE_SHELTER, ANIMAL_LOCATION_STATUS, \
     CAPTION_ANIMAL_LIST_DEFAULT, GROUP_ID, GROUP_ALL_ANIMALS_NAME_DESCR, ANIMAL_LOCATION_STATUS_HOME_DESСR, \
     ANIMAL_LOCATION_STATUS_SHELTER_DESСR, ANIMAL_LOCATION_STATUS_DEAD, ANIMAL_LOCATION_STATUS_CHOICE_DEAD, \
-    ANIMAL_LOCATION_STATUS_DEAD_DESСR, INDEX, ANIMALS
+    ANIMAL_LOCATION_STATUS_DEAD_DESСR, INDEX, ANIMALS, URL_NAME_ANIMAL_FILTER
 from cats.forms import FilterForm
 from cats.models import Animal, Group
 
@@ -100,8 +100,11 @@ def get_base_context(active_menu, show_permission=False):
         default_group_list.append(get_group(group_id=ANIMAL_LOCATION_STATUS_DEAD, show_permission=show_permission))
 
     user_group_list = get_groups_from_query(dict(), show_permission=show_permission)
+    animal_filter_url = dict()
+    animal_filter_url['caption'] = 'Поиск'
+    animal_filter_url['url'] = URL_NAME_ANIMAL_FILTER
     context = {
-        'group_list': default_group_list + list(user_group_list),
+        'group_list': default_group_list + list(user_group_list) + [animal_filter_url],
         'helpful_info_list': (),
         'active_menu': active_menu
     }
