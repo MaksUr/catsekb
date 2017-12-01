@@ -164,7 +164,7 @@ class AnimalForm(forms.ModelForm):
             months=get_int_val(months),
             days=get_int_val(days)
         )
-        self.cleaned_data[ANIMAL_DATE_OF_BIRTH] = date_of_birth
+        self.instance.date_of_birth = date_of_birth
 
     @staticmethod
     def get_age_by_precision(d, precision):
