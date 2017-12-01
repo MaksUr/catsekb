@@ -104,7 +104,7 @@ def get_base_context(active_menu, show_permission=False):
     animal_filter_url['caption'] = 'Поиск'
     animal_filter_url['url'] = URL_NAME_ANIMAL_FILTER
     context = {
-        'group_list': default_group_list + list(user_group_list) + [animal_filter_url],
+        'group_list': [animal_filter_url] + default_group_list + list(user_group_list),
         'helpful_info_list': (),
         'active_menu': active_menu
     }
