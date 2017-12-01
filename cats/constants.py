@@ -122,7 +122,7 @@ HASHTAG_SUFFIX = 'catsekb'
 
 # name
 ANIMAL_NAME = 'name'
-ANIMAL_KEY_NAME = 'Имя.'
+ANIMAL_KEY_NAME = 'Имя'
 ANIMAL_KEY_NAME_HELP_TEXT = 'Введите только имя. Хэштэг генерируется автоматически'
 ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST = '"{name}" уже существует'
 
@@ -186,7 +186,7 @@ ANIMAL_LOCATION_STATUS_HOME = 'H'    # для хранения в БД
 ANIMAL_LOCATION_STATUS_SHELTER = 'S'    # для хранения в БД
 ANIMAL_LOCATION_STATUS_DEAD = 'D'    # для хранения в БД
 ANIMAL_LOCATION_STATUS_CHOICE_HOME = 'Пристроен'
-ANIMAL_LOCATION_STATUS_CHOICE_SHELTER = 'Ищут дом'
+ANIMAL_LOCATION_STATUS_CHOICE_SHELTER = 'В поиске дома'
 ANIMAL_LOCATION_STATUS_CHOICE_DEAD = 'На радуге'
 ANIMAL_LOCATION_STATUS_HOME_DESСR = 'Они обрели свой дом'
 ANIMAL_LOCATION_STATUS_SHELTER_DESСR = 'Собаки привязываются к людям, кошки привязываются к дому. ' \
@@ -283,7 +283,7 @@ GROUP_ID = 'group_id'
 # name
 GROUP_NAME = 'name'
 GROUP_KEY_NAME = 'Имя'
-GROUP_KEY_NAME_HELP_TEXT = 'Данна группа появится на сайте как раздел меню в вкладке "Наши коты"'
+GROUP_KEY_NAME_HELP_TEXT = 'Данная группа появится на сайте как раздел меню в вкладке "Наши коты"'
 GROUP_FORM_VALIDATION_ERROR_NAME_IS_DEFAULT = 'Группа "{name}" имеет недопустимое значение.'
 
 # description

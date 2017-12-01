@@ -138,6 +138,7 @@ class AnimalForm(forms.ModelForm):
                 self.instance.birthday_precision = Animal.BIRTHDAY_PRECISION_D
         elif any((item in (ANIMAL_YEARS, ANIMAL_MONTHS, ANIMAL_DAYS)) for item in self.changed_data):
             self.save_date_of_birth_from_age()
+        # TODO: not save
 
     def save_date_of_birth_from_age(self):
         years = self.cleaned_data.get(ANIMAL_YEARS)

@@ -33,7 +33,6 @@
     {# Custom head JS #}
     {% block head_js %}{% endblock head_js %}
 
-
 </head>
 <body {% block body_attr %}{% endblock body_attr %}>
 
@@ -74,5 +73,9 @@
 
     {# Custom JS #}
     {% block custom_js %}{% endblock custom_js %}
+
+    <!--[if !IE]><!-->
+        <script>if(/*@cc_on!@*/false){document.body.classList.add('can-hover')}</script>
+    <!--<![endif]-->
 </body>
 </html>

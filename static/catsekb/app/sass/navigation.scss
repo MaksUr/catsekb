@@ -129,10 +129,6 @@
     height: 100%;
 }
 
-.mobile_list > li:last-child {
-	margin-top: 25px;
-}
-
 .open {
     transition: transform .85s ease;
     transform: translateY(0%);
@@ -149,7 +145,7 @@
 }
 
 .mobile_list > li {
-	margin-top: 20px;
+	margin-top: 25px;
 }
 
 .mobile_list_opening > li {

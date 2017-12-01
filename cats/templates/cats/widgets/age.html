@@ -1,14 +1,8 @@
 {# age #}
-<span>
-     {% if age.years > 0 %}
-          {{ age.years }} г.
-     {% endif %}
-     
-     {% if age.months > 0 %}
-          {{ age.months }} м.
-     {% endif %}
-     
-     {% if age.days > 0 %}
-          {{ age.days }} д.
-     {% endif %}
- </span>
+{% if age %}~
+	<span>
+	     {% if age.years > 0 %}{{ age.years }} г.{% endif %}
+	     {% if age.months > 0 %}{{ age.months }} м.{% endif %}
+	     {% if age.days > 0 %}{{ age.days }} д.{% endif %}
+	 </span>
+{% endif %}

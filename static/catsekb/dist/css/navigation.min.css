@@ -141,8 +141,12 @@
   padding: 40px 0;
   height: 100%; }
 
-.mobile_list > li:last-child {
-  margin-top: 25px; }
+.mobile_list a:active {
+  color: #526aa5;
+}
+.mobile_list a:hover {
+  color: #526aa5;
+}
 
 .open {
   -webkit-transition: -webkit-transform .85s ease;
@@ -165,7 +169,7 @@
           transform: translate(0%); }
 
 .mobile_list > li {
-  margin-top: 20px; }
+  margin-top: 25px; }
 
 .mobile_list_opening > li {
   margin-top: 15px; }

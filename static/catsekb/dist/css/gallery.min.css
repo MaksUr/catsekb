@@ -14,18 +14,15 @@
   left: 0; }
 
 .cat_find_name {
-  top: 58%;
-  z-index: 91;
-  -webkit-transition: opacity .55s ease, top .65s;
-  -o-transition: opacity .55s ease, top .65s;
-  transition: opacity .55s ease, top .65s; }
+  top: 36%;
+  z-index: 91; }
 
 /* Наложение белого слоя (решение для поддержки всех браузеров) */
 .cat_find_layer {
   height: 100%;
   top: 0;
   z-index: 90;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.83);
   -webkit-transition: opacity .45s ease;
   -o-transition: opacity .45s ease;
   transition: opacity .45s ease; }
@@ -43,10 +40,18 @@
 .nav_gallery {
   margin-top: 10px; }
 
+ .description_link {
+  margin-top: 10% }
+
 /* <---------- .gallery END ----------> */
 .can-hover .cat_find_block:hover .cat_find_layer, .can-hover .cat_find_block:hover .cat_find_name, .cat_find_view .cat_find_layer, .cat_find_view .cat_find_name {
   opacity: 1;
-  visibility: visible; }
+  visibility: visible;
+  -webkit-transition: opacity .55s ease, top .65s;
+  -o-transition: opacity .55s ease, top .65s;
+  transition: opacity .45s ease, top .65s, visibility .45s; }
 
 .can-hover .cat_find_block:hover .cat_find_name, .cat_find_view .cat_find_name {
-  top: 50%; }
+  top: 30%; }
+
+
