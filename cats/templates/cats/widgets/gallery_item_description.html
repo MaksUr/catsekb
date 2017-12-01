@@ -1,0 +1,61 @@
+{# animal #}
+
+{% load verbose_names %}
+{% load static %}
+
+<ul class="description_cat font">
+    {# name #}
+    <li>
+        {% if animal.name %}
+            <span>{% get_verbose_field_name animal 'name' %}: </span>{{ animal.name }}
+        {% else %}
+            <span>{% get_verbose_field_name animal 'id' %}: </span>{{ animal.id }}
+        {% endif %}
+    </li>
+
+    {# status #}
+    {% if animal.location_status %}
+        <li>
+            <span>{% get_verbose_field_name animal 'location_status' %}: </span>{{ animal.get_location_status }}
+        </li>
+    {% endif %}
+
+    {# group #}
+    {% if animal.group %}
+        <li>
+            <span>{% get_verbose_field_name animal 'group' %}: </span>{{ animal.group }}
+        </li>
+    {% endif %}
+
+    {# sex #}
+    {% if animal.sex %}
+        <li>
+            <span>{% get_verbose_field_name animal 'sex' %}: </span>{{ animal.get_sex }} {# TODO: Неправильное значение #}
+        </li>
+    {% endif %}
+
+    {# age #}
+    {% if animal.get_age %}
+        <li>
+            <span>
+                <!-- {% get_verbose_field_name animal 'date_of_birth' %}:  -->
+                Возраст:
+            </span>
+            {% include 'cats/widgets/age.html' with age=animal.get_age %}
+        </li>
+    {% endif %}
+
+    {# shelter_date #}
+    {% if animal.shelter_date %}
+        {% ifequal animal.location_status 'S' %}
+        <li>
+            <span>
+                <!-- {% get_verbose_field_name animal 'shelter_date' %}: -->
+                В приюте:
+            </span>
+            {% include 'cats/widgets/age.html' with age=animal.get_shelter_time %}
+        </li>
+        {% endifequal %}
+    {% endif %}
+</ul>
+

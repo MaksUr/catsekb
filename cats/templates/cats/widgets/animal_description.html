@@ -13,8 +13,6 @@
         {% endif %}
     </li>
 
-    
-
     {# status #}
     {% if animal.location_status %}
         <li>
@@ -39,10 +37,7 @@
     {# age #}
     {% if animal.get_age %}
         <li>
-            <span class="property_name">
-                <!-- {% get_verbose_field_name animal 'date_of_birth' %}:  -->
-                Возраст:
-            </span> ~
+            <span class="property_name">Возраст:</span>
             {% include 'cats/widgets/age.html' with age=animal.get_age %}
         </li>
     {% endif %}
@@ -51,10 +46,7 @@
     {% if animal.shelter_date %}
         {% ifequal animal.location_status 'S' %}
         <li>
-            <span class="property_name">
-                <!-- {% get_verbose_field_name animal 'shelter_date' %}: -->
-                В приюте:
-            </span> ~
+            <span class="property_name">В приюте:</span>
             {% include 'cats/widgets/age.html' with age=animal.get_shelter_time %}
         </li>
         {% endifequal %}

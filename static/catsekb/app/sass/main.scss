@@ -75,6 +75,13 @@ a, a:link, a:visited, a:hover, a:active  {
 	text-decoration: none;
 }
 
+.mobile_list a:active {
+  color: #526aa5;
+}
+.mobile_list a:hover {
+  color: #526aa5;
+}
+
 .but {
     background-color: #526aa5;
     color: white !important;
