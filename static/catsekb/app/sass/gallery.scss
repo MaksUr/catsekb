@@ -15,7 +15,7 @@
     left: 0; 
 }
 .cat_find_name {
-    top: 36%;
+    top: 30%;
     z-index: 91; 
 }
 /* Наложение белого слоя (решение для поддержки всех браузеров) */
@@ -52,5 +52,5 @@
     transition: opacity .45s ease, top .65s, visibility .45s;	
 }
 .can-hover .cat_find_block:hover .cat_find_name, .cat_find_view .cat_find_name {
-	top: 30%; 
+	top: 25%; 
 } 

@@ -1,10 +1,8 @@
-@charset "UTF-8";
 /* <---------- main_menu BEGIN ----------> */
 .main_menu {
   margin: 10px 0; }
 
 .menu {
-  /*z-index: 109; Вроде как исправляет проблему с наложением слоев при увеличении фоток кота*/
   position: relative; }
 
 .menu > li {
@@ -15,6 +13,11 @@
 .menu > li:first-child {
   padding-left: 0; }
 
+.can-hover .menu_opening {
+  -webkit-transition: all .8s 1s ease-out;
+  -o-transition: all .8s 1s ease-out;
+  transition: all .8s 1s ease-out; }
+
 .menu_opening {
   position: absolute;
   visibility: hidden;
@@ -22,9 +25,9 @@
   left: 25px;
   opacity: 0;
   text-align: left;
-  -webkit-transition: all .8s 1s ease-out;
-  -o-transition: all .8s 1s ease-out;
-  transition: all .8s 1s ease-out; }
+  -webkit-transition: all .8s 0s ease-out;
+  -o-transition: all .8s 0s ease-out;
+  transition: all .8s 0s ease-out; }
 
 .menu_opening > li {
   margin: 10px 15px 0 0; }
@@ -32,7 +35,7 @@
 .menu_opening li:first-child {
   margin-top: 0; }
 
-.menu li:hover .menu_opening {
+.can-hover .menu li:hover .menu_opening, .menu_opening_view {
   opacity: 1;
   visibility: visible;
   -webkit-transition: all .8s 0s;
@@ -137,9 +140,6 @@
   padding: 40px 0;
   height: 100%; }
 
-.mobile_list > li:last-child {
-  margin-top: 25px; }
-
 .open {
   -webkit-transition: -webkit-transform .85s ease;
   transition: -webkit-transform .85s ease;
@@ -161,7 +161,7 @@
           transform: translate(0%); }
 
 .mobile_list > li {
-  margin-top: 20px; }
+  margin-top: 25px; }
 
 .mobile_list_opening > li {
   margin-top: 15px; }

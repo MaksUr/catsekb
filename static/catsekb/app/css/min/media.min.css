@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@media (min-width: 992px) {
+@supports (background-attachment: fixed) and (min-width: 768px) {
   .full {
     position: relative; }
   .full_container, .line_container {
@@ -83,10 +83,12 @@
     top: 0;
     left: 0;
     margin: 0;
-    height: 85%;
+    height: 95%;
     border: 1px white solid;
-    min-height: 600px;
+    min-height: 500px;
     background-color: rgba(255, 255, 255, 0.8); }
+  div.item_one_photo {
+    height: 100%; }
   .prev_photo, .next_photo {
     display: none; }
   .burger {

@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@media (min-width: 992px) {
+@supports (background-attachment: fixed) and (min-width: 768px) {
   .full {
     position: relative; }
   .full_container, .line_container {
@@ -42,10 +42,10 @@
 @media (max-width: 767px) {
   a.tag, .tag.pag_gallery, .form_elem, .message {
     display: block; }
-  .top_nav, .top_nav_opened, .menu {
-    display: none !important; }
   .tag {
     background-color: rgba(255, 255, 255, 0.75); }
+  .top_nav, .top_nav_opened {
+    display: none; }
   .main_menu {
     margin-top: 20px; }
   .full {
@@ -70,8 +70,7 @@
     display: inline-block; }
   /* Наши коты */
   .description_cat {
-    margin-top: 13px;
-  }
+    margin-top: 13px; }
   .increase_photo {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch; }
@@ -84,16 +83,31 @@
     top: 0;
     left: 0;
     margin: 0;
-    height: 85%;
+    height: 95%;
     border: 1px white solid;
-    min-height: 600px;
+    min-height: 500px;
     background-color: rgba(255, 255, 255, 0.8); }
-    div.item_one_photo {
-    height: 100%;
-  }
+  div.item_one_photo {
+    height: 100%; }
   .prev_photo, .next_photo {
     display: none; }
-}
+  .burger {
+    cursor: pointer;
+    z-index: 113;
+    background-color: rgba(255, 255, 255, 0.75);
+    -webkit-border-radius: 3px;
+            border-radius: 3px;
+    top: 4%;
+    left: 3%;
+    display: inline-block;
+    position: fixed;
+    padding: 0;
+    width: 40px;
+    height: 35px;
+    font-size: 0;
+    -webkit-transition: opacity .4s ease, visibility .4s ease;
+    -o-transition: opacity .4s ease, visibility .4s ease;
+    transition: opacity .4s ease, visibility .4s ease; } }
 
 @media (min-width: 768px) and (max-width: 992px) {
   .description_cat {

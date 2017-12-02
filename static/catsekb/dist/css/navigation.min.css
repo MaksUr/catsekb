@@ -1,41 +1,41 @@
-@charset "UTF-8";
-.top_nav, .top_nav_opened, .menu {
-    display: none; }
 /* <---------- main_menu BEGIN ----------> */
 .main_menu {
   margin: 10px 0; }
 
-.can-hover .menu {
-  /*z-index: 109; Вроде как исправляет проблему с наложением слоев при увеличении фоток кота*/
-  position: relative;
-  display: block; }
+.menu {
+  position: relative; }
 
-.can-hover .menu > li {
+.menu > li {
   display: inline-block;
   padding-left: 25px;
   position: relative; }
 
-.can-hover .menu > li:first-child {
+.menu > li:first-child {
   padding-left: 0; }
 
 .can-hover .menu_opening {
+  -webkit-transition: all .8s 1s ease-out;
+  -o-transition: all .8s 1s ease-out;
+  transition: all .8s 1s ease-out; }
+
+.menu_opening {
   position: absolute;
   visibility: hidden;
   top: 30px;
   left: 25px;
   opacity: 0;
   text-align: left;
-  -webkit-transition: all .8s 1s ease-out;
-  -o-transition: all .8s 1s ease-out;
-  transition: all .8s 1s ease-out; }
+  -webkit-transition: all .8s 0s ease-out;
+  -o-transition: all .8s 0s ease-out;
+  transition: all .8s 0s ease-out; }
 
-.can-hover .menu_opening > li {
+.menu_opening > li {
   margin: 10px 15px 0 0; }
 
-.can-hover .menu_opening li:first-child {
+.menu_opening li:first-child {
   margin-top: 0; }
 
-.can-hover .menu li:hover .menu_opening {
+.can-hover .menu li:hover .menu_opening, .menu_opening_view {
   opacity: 1;
   visibility: visible;
   -webkit-transition: all .8s 0s;
@@ -44,7 +44,7 @@
 
 /* <---------- main_menu END ----------> */
 /* <---------- .top_nav BEGIN ----------> */
-.can-hover .top_nav {
+.top_nav {
   width: 100%;
   height: 0px;
   background-color: rgba(255, 255, 255, 0.8);
@@ -55,10 +55,9 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 112;
-  display: block; }
+  z-index: 112; }
 
-.can-hover .top_nav_opened {
+.top_nav_opened {
   height: 60px;
   -webkit-transition: height 0.55s cubic-bezier(0.1, 0.68, 0.58, 1), -webkit-transform 0.55s cubic-bezier(0.1, 0.68, 0.58, 1);
   transition: height 0.55s cubic-bezier(0.1, 0.68, 0.58, 1), -webkit-transform 0.55s cubic-bezier(0.1, 0.68, 0.58, 1);
@@ -67,7 +66,7 @@
   transition: height 0.55s cubic-bezier(0.1, 0.68, 0.58, 1), transform 0.55s cubic-bezier(0.1, 0.68, 0.58, 1), -webkit-transform 0.55s cubic-bezier(0.1, 0.68, 0.58, 1);
   opacity: 1; }
 
-.can-hover .nav_bar {
+.nav_bar {
   -webkit-transition: -webkit-transform .57s;
   transition: -webkit-transform .57s;
   -o-transition: transform .57s;
@@ -77,25 +76,25 @@
       -ms-transform: translateY(-120%);
           transform: translateY(-120%); }
 
-.can-hover .nav_bar_opened {
+.nav_bar_opened {
   -webkit-transform: translate(0%);
       -ms-transform: translate(0%);
           transform: translate(0%); }
 
-.can-hover .top_nav.top_nav_increase_photo, .mobile_list.top_nav_increase_photo {
+.top_nav.top_nav_increase_photo, .mobile_list.top_nav_increase_photo {
   -webkit-transform: translateY(-100%);
       -ms-transform: translateY(-100%);
           transform: translateY(-100%); }
 
-.can-hover .top_logo {
+.top_logo {
   height: 50px;
   padding-top: 2px; }
 
-.can-hover .menu.top_menu {
+.menu.top_menu {
   text-align: right;
   padding-top: 20px; }
 
-.can-hover .menu_opening.top_menu {
+.menu_opening.top_menu {
   padding: 0;
   background-color: rgba(255, 255, 255, 0.8);
   top: 40px;
@@ -105,14 +104,14 @@
   -webkit-border-bottom-right-radius: 3px;
           border-bottom-right-radius: 3px; }
 
-.can-hover .menu_opening.top_menu > li {
+.menu_opening.top_menu > li {
   padding-top: 0;
-  margin: 10px 10px 0 10px; }
+  margin: 15px 10px 0 10px; }
 
-.can-hover .menu_opening.top_menu li:first-child {
+.menu_opening.top_menu li:first-child {
   margin-top: 0; }
 
-.can-hover .menu_opening.top_menu li:last-child {
+.menu_opening.top_menu li:last-child {
   margin-bottom: 15px; }
 
 /* <---------- .top_nav END ----------> */
@@ -141,13 +140,6 @@
   padding: 40px 0;
   height: 100%; }
 
-.mobile_list a:active {
-  color: #526aa5;
-}
-.mobile_list a:hover {
-  color: #526aa5;
-}
-
 .open {
   -webkit-transition: -webkit-transform .85s ease;
   transition: -webkit-transform .85s ease;
@@ -175,6 +167,9 @@
   margin-top: 15px; }
 
 /* <---------- mobile_menu! END ----------> */
+.burger {
+  display: none; }
+
 .burger span {
   display: block;
   position: absolute;
@@ -212,26 +207,3 @@
   -webkit-transform: rotate(90deg);
       -ms-transform: rotate(90deg);
           transform: rotate(90deg); }
-
-.burger {
-  display: none;
-  cursor: pointer;
-  z-index: 113;
-  background-color: rgba(255, 255, 255, 0.75);
-  -webkit-border-radius: 3px;
-          border-radius: 3px;
-  top: 4%;
-  left: 3%;
-  position: fixed;
-  padding: 0;
-  width: 40px;
-  height: 35px;
-  font-size: 0;
-  -webkit-transition: opacity .4s ease, visibility .4s ease;
-  -o-transition: opacity .4s ease, visibility .4s ease;
-  transition: opacity .4s ease, visibility .4s ease; 
-}
-
-.burger.burger_block {
-  display: block;
-}

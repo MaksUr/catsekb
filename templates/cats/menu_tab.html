@@ -8,7 +8,7 @@
     {% if abs_url %}
         <a href="{{ abs_url }}"{% ifequal name active %} style="color: #526aa5;"{% endifequal %}>{{ url_caption }}</a>
     {% else %}
-        <p{% ifequal name active %} style="color: #526aa5;"{% endifequal %}>{{ url_caption }}</p>
+        <p{% ifequal name active %} style="color: #526aa5;"{% endifequal %} class="open_next_menu">{{ url_caption }}</p>
     {% endif %}
 
     {% if menu_items %}

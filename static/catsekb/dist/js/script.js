@@ -1,49 +1,47 @@
 var nav_bar = document.querySelector('.nav_bar');
-
 var top_nav = document.querySelector('.top_nav');
-
 var burger = document.querySelector('.burger');
-
 var mobile_list =  document.querySelector('.mobile_list');
-
 var body = document.getElementsByTagName('body');
+var cat_find_block = document.querySelectorAll('.cat_find_block');
+var open_next_menu = document.querySelectorAll('.open_next_menu');
 
 document.addEventListener("DOMContentLoaded", ready);
 
+const canHover = !(matchMedia('(hover: none)').matches);
+
 function ready() {
-	var burger_menu =  document.querySelector('.burger');
-
-	const canHover = !(matchMedia('(hover: none)').matches);
-
 	if(canHover) {
-	  	document.body.classList.add('can-hover');
+  		document.body.classList.add('can-hover');
 	}
 
 	if(body[0].classList.contains('can-hover') == false) {
-		var cat_find_block = document.querySelectorAll('.cat_find_block');
-
-		burger_menu.classList.add('burger_block');
-
-		colorAndHeight(true);
-		burger.addEventListener('click', mobileNav);
+		for (i = 0; i <= open_next_menu.length - 1; i++) {
+			open_next_menu[i].addEventListener('click', view_menu_opening.bind(this, i));
+		}
 
 		for (i = 0; i <= cat_find_block.length - 1; i++) {
 			cat_find_block[i].addEventListener('click', view_name.bind(this, i));
 		}
+	} 
+	
+	var widthScreen = document.documentElement.clientWidth;
+
+	if (widthScreen < 767) {
+		console.log(widthScreen);
+		colorAndHeight(true);
+		burger.addEventListener('click', mobileNav);
+
 	} else {
-		var widthScreen = document.documentElement.clientWidth;
-
-		if (widthScreen < 766) {
-			console.log(widthScreen);
-			colorAndHeight(true);
-			burger_menu.classList.add('burger_block');
-			burger.addEventListener('click', mobileNav);
-
-		} else {
-			window.addEventListener('scroll', go.bind(this, 325));
-		}
+		window.addEventListener('scroll', go.bind(this, 325));
 	}
+	
 }
+
+
+
+
+
 
 function go(val) {		
 		var scrolled =  window.pageYOffset || document.documentElement.scrollTop;
@@ -75,6 +73,10 @@ function mobileNav() {
 
 function view_name(i) {
 	cat_find_block[i].classList.toggle('cat_find_view');
+}
+
+function view_menu_opening(i) {
+	open_next_menu[i].nextElementSibling.classList.toggle('menu_opening_view')
 }
 
 (function() {
