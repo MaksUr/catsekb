@@ -26,10 +26,6 @@
 	    top: 40%;
 	}
 
-	.line_container h2 {
-		padding-top: 28px;
-		text-align: right;
-	}
 }
 /* Устройства с шириной экрана от 768px до 1200px */
 @media (min-width: 768px) and (max-width: 1200px) {
@@ -65,17 +61,17 @@
 	.full {
 		padding: 20px 0;
 	}
-	.full_container {
-		background-image: none;
-	}
 	.line_container {
 		filter: none;
 		background-image: none;
 		background-color: rgba(241, 236, 233, .8);
+		height: auto;
 	}
 
 	.line_container h2 {
 	    line-height: 30px;
+	    text-align: center;
+     	padding: 10px 0; 
 	}
 	footer a {
 		 padding-bottom: 0px;

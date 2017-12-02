@@ -2,6 +2,10 @@
 .about {
   position: relative; }
 
+.line_container h2 {
+  padding-top: 28px;
+  text-align: right; }
+
 .cat_container {
   width: 80px;
   height: 150px;
@@ -37,6 +41,3 @@
           transform: translateX(-70%) rotate(45deg); }
 
 /* <---------- .about END ----------> */
-.line_container h2 {
-  text-align: center;
-  padding: 10px 0; }

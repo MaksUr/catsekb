@@ -1,25 +1,14 @@
 var preview_photo = document.querySelector('.preview_photo');
-
 var increase_photo = document.querySelector('.increase_photo');
-
 var close_increase_photo = document.querySelector('.close_increase');
-
 var btn_prev = document.querySelector('.prev_photo');
-
 var btn_next = document.querySelector('.next_photo');
-
 var images = document.querySelectorAll('.item_photo');
-
 var body = document.getElementsByTagName('body');
-
 var mobile_list =  document.querySelector('.mobile_list');
-
 var burger = document.querySelector('.burger');
-
 var message = document.querySelector('.message');
-
 var scrolled =  window.pageYOffset || document.documentElement.scrollTop;
-
 var n = 0;
 
 close_increase_photo.addEventListener('click', exit);
@@ -60,8 +49,6 @@ function exit() {
 }
 
 function increase() {
-
-
 	increase_photo.classList.add('vissible');
 	top_nav.classList.add('top_nav_increase_photo');
 	burger.classList.toggle('no-vis');
@@ -69,5 +56,4 @@ function increase() {
 	close_increase_photo.classList.remove('no-vis');
 	close_increase_photo.classList.add('vis');
 	body[0].classList.toggle('overY');
-	
 }

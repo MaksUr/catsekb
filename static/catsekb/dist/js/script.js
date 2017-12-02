@@ -38,11 +38,6 @@ function ready() {
 	
 }
 
-
-
-
-
-
 function go(val) {		
 		var scrolled =  window.pageYOffset || document.documentElement.scrollTop;
 		
