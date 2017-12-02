@@ -16,6 +16,10 @@
 	padding-left: 0;
 }
 
+.open_next_menu {
+    cursor: default;
+}
+
 .can-hover .menu_opening {
     transition: all .8s 1s ease-out;
 }

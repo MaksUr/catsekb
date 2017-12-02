@@ -5,86 +5,8 @@
 {% extends "cats/base.html" %}
 {% load static %}
 {% block base_body %}
-	<style type="text/css">
-		.block {
-			margin: 0 auto;
-			color: white;
-			background-color: black;
-		}
-
-		.block input[type='radio']:checked ~ .info {
-			height: 130px;
-			transition: .3s ease-out;
-		}
-
-		input[type='radio'] {
-			width: 100%;
-			display: none;
-		}
-
-		label {
-			width: 450px;
-			max-width: 100%;
-			cursor: pointer;
-		}
-
-		span {
-			display: block;
-		}
-
-		.info {
-			background: #fff;
-			color: #222;
-			width: 100%;
-			height: 0;
-			line-height: 2;
-			display: block;
-			overflow: hidden;
-			box-sizing: border-box;
-			transition: .3s ease-out;
-		}
-
-
-
-
-	</style>
-    <section>
-		<div class="block">
-			<input type="radio" name="city" id="cityA">
-			<label for="cityA"><span>Kuku</span></label>
-			<div class="info">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			</div>
-		</div>
-		<div class="block">
-			<input type="radio" name="city" id="cityB">
-			<label for="cityB"><span>Kuku</span></label>
-			<div class="info">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			</div>
-		</div>
-		<div class="block">
-			<input type="radio" name="city" id="cityC">
-			<label for="cityC"><span>Kuku</span></label>
-			<div class="info">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			</div>
-		</div>
-	</section>
+	<section class="info">
+    	{% include 'cats/widgets/caption.html' with caption="Я нашел котика, что делать?" caption_url=caption_url %}
+    </section>
 {% endblock base_body %}
 

@@ -75,10 +75,10 @@ a, a:link, a:visited, a:hover, a:active  {
 	text-decoration: none;
 }
 
-.mobile_list a:active {
+.mobile_list a:active, .open_next_menu:active {
   color: #526aa5;
 }
-.mobile_list a:hover {
+.mobile_list a:hover, .open_next_menu:hover {
   color: #526aa5;
 }
 

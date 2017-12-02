@@ -13,6 +13,9 @@
 .menu > li:first-child {
   padding-left: 0; }
 
+.open_next_menu {
+  cursor: default; }
+
 .can-hover .menu_opening {
   -webkit-transition: all .8s 1s ease-out;
   -o-transition: all .8s 1s ease-out;
