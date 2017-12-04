@@ -1,29 +1,7 @@
 @supports (background-attachment: fixed) and (min-width: 768px) {
-	.full {
-		position: relative;
-	}
-
 	.full_container, .line_container {
-		background-image: url(../img/cat.jpg);
-	    background-size: cover;
-	    background-attachment: fixed;
-	    background-position: 25%;
-	    background-repeat: no-repeat;
-	    width: 100%;
-	} 
-	.full_container {
-		height: 600px;
-	    filter: brightness(90%);
-	    position: relative;
-	}
-
-	.line_container {
-		position: absolute;
-		z-index: 10;
-	    width: 100%;
-	    filter: brightness(100%);
-	    height: 80px;
-	    top: 40%;
+		background-attachment: fixed;
+    	background-position: 25%;
 	}
 
 }
@@ -107,7 +85,7 @@
 	    margin: 0;
 	    height: 90%;
 	    border: 1px rgb(255, 255, 255) solid;
-	    min-height: 440px;
+	    min-height: 435px;
 	    background-color: rgba(255, 255, 255, .8);
 	}
 	div.item_one_photo {
