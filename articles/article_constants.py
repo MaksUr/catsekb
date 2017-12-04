@@ -12,6 +12,16 @@ AUTHOR_KEY_NAME = 'Автор'
 AUTHOR_KEY_NAME_HELP_TEXT = ''
 
 
+# class Subject
+SUBJECT_VERBOSE_NAME = 'Тема'
+SUBJECT_VERBOSE_NAME_PLURAL = 'Темы'
+
+# name
+SUBJECT_NAME = 'name'
+SUBJECT_KEY_NAME = SUBJECT_VERBOSE_NAME
+SUBJECT_KEY_NAME_HELP_TEXT = 'Укажи тематику статьи'
+
+
 # class Article
 ARTICLE_VERBOSE_NAME = 'Статья'
 ARTICLE_VERBOSE_NAME_PLURAL = APPLICATION_VERBOSE_NAME
@@ -42,8 +52,13 @@ ARTICLE_SHOW = 'show'
 ARTICLE_KEY_SHOW = 'Показывать статью'
 ARTICLE_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удаления или чтобы скрыть. ' \
                            'Скрытые статьи доступны для персонала на сайте.'
-
+# author
 ARTICLE_AUTHOR = 'author'
+
+# subject
+ARTICLE_SUBJECT = 'subject'
+
+
 
 
 
