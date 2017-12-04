@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'maksur.pythonanywhere.com']
 
 INSTALLED_APPS = [
     'cats.apps.CatsConfig',
+    'articles.apps.ArticlesConfig',
     
     'django.contrib.admin',
     'django.contrib.auth',
