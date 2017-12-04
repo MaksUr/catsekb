@@ -332,5 +332,5 @@ CAPTION_ANIMAL_LIST_DEFAULT = 'Наши коты'
 # Menu
 INDEX = 'index'
 ANIMALS = 'animals'
-HELPFUL = 'helpful'
+ARTICLES = 'articles'
 CONTACTS = 'contacts'
