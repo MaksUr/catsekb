@@ -188,10 +188,7 @@ ANIMAL_LOCATION_STATUS_DEAD = 'D'    # для хранения в БД
 ANIMAL_LOCATION_STATUS_CHOICE_HOME = 'Пристроен'
 ANIMAL_LOCATION_STATUS_CHOICE_SHELTER = 'В поиске дома'
 ANIMAL_LOCATION_STATUS_CHOICE_DEAD = 'На радуге'
-ANIMAL_LOCATION_STATUS_HOME_DESСR = 'Они обрели свой дом'
-ANIMAL_LOCATION_STATUS_SHELTER_DESСR = 'Собаки привязываются к людям, кошки привязываются к дому. ' \
-                                       'Не дай этим котикам привязаться к клетке. Помоги им обрести свой дом.'
-ANIMAL_LOCATION_STATUS_DEAD_DESСR = 'Пусть земля им будет пухом, они всегда останутся в наших сердцах.'
+
 ANIMAL_LOCATION_STATUS_CHOICES = (
     (ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_CHOICE_HOME),
     (ANIMAL_LOCATION_STATUS_SHELTER, ANIMAL_LOCATION_STATUS_CHOICE_SHELTER),
@@ -275,9 +272,6 @@ ANIMAL_KEY_YEARS_HELP_TEXT = 'Указывается точность до го�
 GROUP_VERBOSE_NAME = 'Группа'
 GROUP_VERBOSE_NAME_PLURAL = 'Группы'
 
-GROUP_ALL_ANIMALS_KEY_NAME = 'Все котики'
-GROUP_ALL_ANIMALS_NAME = 'all'
-GROUP_ALL_ANIMALS_NAME_DESCR = 'Все животные которые попали к нам в приют.'
 GROUP_ID = 'group_id'
 
 # name
@@ -296,6 +290,24 @@ GROUP_SHOW = SHOW
 GROUP_KEY_SHOW = 'Показывать группу'
 GROUP_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удаления или чтобы скрыть. ' \
                            'Скрытые группы доступны для персонала на сайте.'
+
+# instances Group
+
+GROUP_INSTANCE_ALL_ID = 'all'
+GROUP_INSTANCE_ALL_NAME = 'Все котики'
+GROUP_INSTANCE_ALL_DESCR = 'Все животные которые попали к нам в приют.'
+
+GROUP_INSTANCE_HOME_ID = ANIMAL_LOCATION_STATUS_HOME
+GROUP_INSTANCE_HOME_NAME = 'Пристроены'
+GROUP_INSTANCE_HOME_DESCR = 'Они обрели свой дом'
+
+GROUP_INSTANCE_SHELTER_ID = ANIMAL_LOCATION_STATUS_SHELTER
+GROUP_INSTANCE_SHELTER_NAME = 'Ищут дом'
+GROUP_INSTANCE_SHELTER_DESCR = 'Собаки привязываются к людям, кошки привязываются к дому. ' \
+                                       'Не дай этим котикам привязаться к клетке. Помоги им обрести свой дом.'
+GROUP_INSTANCE_DEAD_ID = ANIMAL_LOCATION_STATUS_DEAD
+GROUP_INSTANCE_DEAD_NAME = ANIMAL_LOCATION_STATUS_CHOICE_DEAD
+GROUP_INSTANCE_DEAD_DESCR = 'Пусть земля им будет пухом, они всегда останутся в наших сердцах.'
 
 
 # class FilterForm

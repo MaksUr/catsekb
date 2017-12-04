@@ -1,38 +1,40 @@
 from django.core.exceptions import FieldError
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import Http404, HttpResponse
+from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, FormView
 
-from cats.constants import GROUP_ALL_ANIMALS_NAME, ANIMAL_CREATED, ANIMAL_SHOW, DJ_PK, DJ_PAGE, DJ_OBJECT, \
-    GROUP_SHOW, ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_SHELTER, GROUP_ALL_ANIMALS_KEY_NAME, \
-    ANIMAL_LOCATION_STATUS_CHOICE_HOME, ANIMAL_LOCATION_STATUS_CHOICE_SHELTER, ANIMAL_LOCATION_STATUS, \
-    CAPTION_ANIMAL_LIST_DEFAULT, GROUP_ID, GROUP_ALL_ANIMALS_NAME_DESCR, ANIMAL_LOCATION_STATUS_HOME_DESСR, \
-    ANIMAL_LOCATION_STATUS_SHELTER_DESСR, ANIMAL_LOCATION_STATUS_DEAD, ANIMAL_LOCATION_STATUS_CHOICE_DEAD, \
-    ANIMAL_LOCATION_STATUS_DEAD_DESСR, INDEX, ANIMALS, URL_NAME_ANIMAL_FILTER
+from cats.constants import GROUP_INSTANCE_ALL_ID, ANIMAL_CREATED, ANIMAL_SHOW, DJ_PK, DJ_PAGE, DJ_OBJECT, \
+    GROUP_SHOW, ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_SHELTER, GROUP_INSTANCE_ALL_NAME, \
+    ANIMAL_LOCATION_STATUS, \
+    CAPTION_ANIMAL_LIST_DEFAULT, GROUP_ID, GROUP_INSTANCE_ALL_DESCR, GROUP_INSTANCE_HOME_DESCR, \
+    GROUP_INSTANCE_SHELTER_DESCR, ANIMAL_LOCATION_STATUS_DEAD, GROUP_INSTANCE_DEAD_DESCR, INDEX, ANIMALS, \
+    URL_NAME_ANIMAL_FILTER, GROUP_INSTANCE_SHELTER_ID, \
+    GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, GROUP_INSTANCE_SHELTER_NAME, GROUP_INSTANCE_HOME_NAME, \
+    GROUP_INSTANCE_DEAD_NAME
 from cats.forms import FilterForm
 from cats.models import Animal, Group
 
 GROUP_MAPPING = {
-    GROUP_ALL_ANIMALS_NAME: {
-        'name': GROUP_ALL_ANIMALS_KEY_NAME,
-        'description': GROUP_ALL_ANIMALS_NAME_DESCR,
+    GROUP_INSTANCE_ALL_ID: {
+        'name': GROUP_INSTANCE_ALL_NAME,
+        'description': GROUP_INSTANCE_ALL_DESCR,
     },
-    ANIMAL_LOCATION_STATUS_HOME: {
-        'name': ANIMAL_LOCATION_STATUS_CHOICE_HOME,
-        'description': ANIMAL_LOCATION_STATUS_HOME_DESСR,
+    GROUP_INSTANCE_HOME_ID: {
+        'name': GROUP_INSTANCE_HOME_NAME,
+        'description': GROUP_INSTANCE_HOME_DESCR,
     },
-    ANIMAL_LOCATION_STATUS_SHELTER: {
-        'name': ANIMAL_LOCATION_STATUS_CHOICE_SHELTER,
-        'description': ANIMAL_LOCATION_STATUS_SHELTER_DESСR,
+    GROUP_INSTANCE_SHELTER_ID: {
+        'name': GROUP_INSTANCE_SHELTER_NAME,
+        'description': GROUP_INSTANCE_SHELTER_DESCR,
     },
-    ANIMAL_LOCATION_STATUS_DEAD: {
-        'name': ANIMAL_LOCATION_STATUS_CHOICE_DEAD,
-        'description': ANIMAL_LOCATION_STATUS_DEAD_DESСR,
+    GROUP_INSTANCE_DEAD_ID: {
+        'name': GROUP_INSTANCE_DEAD_NAME,
+        'description': GROUP_INSTANCE_DEAD_DESCR,
     },
 }
 PRIVATE_GROUP = (
-    ANIMAL_LOCATION_STATUS_DEAD,
+    GROUP_INSTANCE_DEAD_ID,
 )
 GALLERY_DEFAULT_ITEMS_COUNT = 9
 PAGE = 'page'
@@ -93,11 +95,11 @@ def get_groups_from_query(query, show_permission=False):
 
 def get_base_context(active_menu, show_permission=False):
     default_group_list = list()
-    default_group_list.append(get_group(group_id=GROUP_ALL_ANIMALS_NAME, show_permission=show_permission))
-    default_group_list.append(get_group(group_id=ANIMAL_LOCATION_STATUS_SHELTER, show_permission=show_permission))
-    default_group_list.append(get_group(group_id=ANIMAL_LOCATION_STATUS_HOME, show_permission=show_permission))
+    default_group_list.append(get_group(group_id=GROUP_INSTANCE_ALL_ID, show_permission=show_permission))
+    default_group_list.append(get_group(group_id=GROUP_INSTANCE_SHELTER_ID, show_permission=show_permission))
+    default_group_list.append(get_group(group_id=GROUP_INSTANCE_HOME_ID, show_permission=show_permission))
     if show_permission:
-        default_group_list.append(get_group(group_id=ANIMAL_LOCATION_STATUS_DEAD, show_permission=show_permission))
+        default_group_list.append(get_group(group_id=GROUP_INSTANCE_DEAD_ID, show_permission=show_permission))
 
     user_group_list = get_groups_from_query(dict(), show_permission=show_permission)
     animal_filter_url = dict()
@@ -270,11 +272,11 @@ def index_view(request):
         query=query, show_permission=show_permission
     ).order_by('?')
     context['shelter_animals'] = shelter_animals[:GALLERY_DEFAULT_ITEMS_COUNT]
-    context['shelter_caption'] = ANIMAL_LOCATION_STATUS_CHOICE_SHELTER
+    context['shelter_caption'] = GROUP_INSTANCE_SHELTER_NAME
     context['shelter_animals_count'] = shelter_animals.count()
     context['home_animals_count'] = get_animals_from_query(
         query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_HOME}, show_permission=True
-    ).count()
+    ).count()  # TODO: need correct number
     context['animals_count'] = get_animals_from_query(query=dict(), show_permission=True).count()
     if show_permission is True:
         context['dying_animals_count'] = get_animals_from_query(
