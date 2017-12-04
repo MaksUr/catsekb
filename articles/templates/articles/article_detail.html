@@ -1,0 +1,15 @@
+{# for base #}
+    {# group_list #}
+    {# helpful_info_list #}
+
+{# object #}
+{% extends "cats/base.html" %}
+
+{% block base_body %}
+    <p>{{ object.title }}</p>
+    <p>{{ object.created }}</p>
+    <p>{{ object.updated }}</p>
+    <p>{{ object.author }}</p>
+    <p>{{ object.subject }}</p>
+    <p>{{ object.text }}</p>
+{% endblock base_body %}

@@ -9,7 +9,7 @@
 {% include "cats/menu_tab.html" with name='animals' active=active_menu url_caption='Наши коты' menu_items=groups menu_class=menu_class %}
 
 {% url 'info' as helpful_url %}
-{% include "cats/menu_tab.html" with name='helpful' active=active_menu abs_url=helpful_url url_caption='Полезная информация' menu_items=helps menu_class=menu_class %}
+{% include "cats/menu_tab.html" with name='articles' active=active_menu abs_url=helpful_url url_caption='Полезная информация' menu_items=helps menu_class=menu_class %}
 
 {% url 'contacts' as cont_url %}
 {% include "cats/menu_tab.html" with name='contacts' active=active_menu abs_url=cont_url url_caption='Контакты' %}

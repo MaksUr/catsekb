@@ -22,6 +22,7 @@ from catsekb.views import contact_view, info_view
 
 urlpatterns = [
     url(r'^', include('cats.urls')),
+    url(r'^articles/', include('articles.urls'), name='articles'),
     url(r'^admin/', admin.site.urls),
     url(r'^contacts/$', contact_view, name='contacts'),
     url(r'^info/$', info_view, name='info'),

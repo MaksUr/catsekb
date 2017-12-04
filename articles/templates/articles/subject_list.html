@@ -1,0 +1,13 @@
+{# for base #}
+    {# group_list #}
+    {# helpful_info_list #}
+
+{# object_list #}
+{% extends "cats/base.html" %}
+
+{% block base_body %}
+    {% for object in object_list %}
+        <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
+    {% endfor %}
+
+{% endblock base_body %}

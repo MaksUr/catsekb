@@ -1,3 +1,7 @@
+# URLs
+URL_NAME_SUBJECTS = 'subjects'
+URL_NAME_SUBJECT = 'subject'
+URL_NAME_ARTICLE = 'article'
 
 
 APPLICATION_VERBOSE_NAME = 'Статьи'

@@ -93,18 +93,25 @@ def get_groups_from_query(query, show_permission=False):
     return res
 
 
-def get_base_context(active_menu, show_permission=False):
+def get_default_group_list(show_permission=False):
     default_group_list = list()
     default_group_list.append(get_group(group_id=GROUP_INSTANCE_ALL_ID, show_permission=show_permission))
     default_group_list.append(get_group(group_id=GROUP_INSTANCE_SHELTER_ID, show_permission=show_permission))
     default_group_list.append(get_group(group_id=GROUP_INSTANCE_HOME_ID, show_permission=show_permission))
     if show_permission:
         default_group_list.append(get_group(group_id=GROUP_INSTANCE_DEAD_ID, show_permission=show_permission))
+    return default_group_list
 
+
+def get_base_context(active_menu, show_permission=False):
+    default_group_list = get_default_group_list(show_permission=show_permission)
     user_group_list = get_groups_from_query(dict(), show_permission=show_permission)
     animal_filter_url = dict()
     animal_filter_url['caption'] = 'Поиск'
     animal_filter_url['url'] = URL_NAME_ANIMAL_FILTER
+
+    articles = ()
+
     context = {
         'group_list': [animal_filter_url] + default_group_list + list(user_group_list),
         'helpful_info_list': (),
