@@ -20,9 +20,14 @@ body {
 }
 /* Отступы между секциями */
 section {
-	padding: 70px 0;
+	padding: 50px 0;
 }
-
+header {
+	margin-bottom: 50px;
+}
+footer {
+	margin-top: 50px;
+}
 .message {
     position: fixed;
     bottom: 4%;
@@ -145,7 +150,7 @@ ul {
 }
 
 .title p {
-	padding-bottom: 20px;
+	padding-bottom: 15px;
 	width: 100px;
 	border-bottom: 1px #705344 solid;
 	margin: 0 auto;
