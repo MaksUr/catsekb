@@ -2,6 +2,31 @@
 .about {
   position: relative; }
 
+.full {
+  position: relative; }
+
+.full_container, .line_container {
+  background-image: url(../img/cat.jpg);
+  -webkit-background-size: cover;
+          background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%; }
+
+.full_container {
+  height: 600px;
+  -webkit-filter: brightness(90%);
+          filter: brightness(90%);
+  position: relative; }
+
+.line_container {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  -webkit-filter: brightness(100%);
+          filter: brightness(100%);
+  height: 80px;
+  top: 40%; }
+
 .line_container h2 {
   padding-top: 28px;
   text-align: right; }
@@ -41,3 +66,7 @@
           transform: translateX(-70%) rotate(45deg); }
 
 /* <---------- .about END ----------> */
+.article img {
+  display: block;
+  max-width: 100%;
+  height: auto; }

@@ -129,7 +129,7 @@
   width: 100%;
   margin: 0;
   z-index: 110;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.85);
   -webkit-transition: opacity 4s cubic-bezier(0, 0, 0.2, 1), -webkit-transform 0.95s cubic-bezier(0, 0, 0.2, 1);
   transition: opacity 4s cubic-bezier(0, 0, 0.2, 1), -webkit-transform 0.95s cubic-bezier(0, 0, 0.2, 1);
   -o-transition: transform 0.95s cubic-bezier(0, 0, 0.2, 1), opacity 4s cubic-bezier(0, 0, 0.2, 1);
