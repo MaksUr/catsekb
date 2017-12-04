@@ -176,3 +176,9 @@ input.but:hover {
   background-color: #f93c3c; }
 
 /* <---------- form END ----------> */
+
+.article img {
+  max-width: 100%;
+  display: block;
+  height: auto;
+}
