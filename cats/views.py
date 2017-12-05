@@ -3,6 +3,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, FormView
+from django.views.generic.edit import ModelFormMixin, FormMixin
 
 from articles.article_constants import URL_NAME_SUBJECTS, ARTICLES_DEFAULT, ARTICLE_FIND_CAT_ID, URL_NAME_FIND_CAT
 from articles.models import Subject
@@ -16,6 +17,7 @@ from cats.constants import GROUP_INSTANCE_ALL_ID, ANIMAL_CREATED, ANIMAL_SHOW, D
     GROUP_INSTANCE_DEAD_NAME
 from cats.forms import FilterForm
 from cats.models import Animal, Group
+from cats.query import ANIMAL_QUERY_KEYS
 
 GROUP_MAPPING = {
     GROUP_INSTANCE_ALL_ID: {
@@ -113,10 +115,6 @@ def get_base_context(active_menu, show_permission=False):
     animal_filter_url['caption'] = 'Поиск'
     animal_filter_url['url'] = URL_NAME_ANIMAL_FILTER
 
-    # articles_url = dict()
-    # articles_url['caption'] = 'Темы статей'
-    # articles_url['url'] = URL_NAME_SUBJECTS
-
     find_cat_url = dict()
     find_cat_url['caption'] = ARTICLES_DEFAULT[ARTICLE_FIND_CAT_ID]
     find_cat_url['url'] = URL_NAME_FIND_CAT
@@ -161,19 +159,24 @@ def get_paginator(object_list, per_page, page_number, context):
     context['object_list'] = page.object_list
 
 
-# TODO: доступен только админам или из фильтра с контролем параметров
-class AnimalListView(ListView):
-    # template animal_list
+class AnimalListView(ListView, FormMixin):
     paginate_by = GALLERY_DEFAULT_ITEMS_COUNT
     model = Animal
+    form_class = FilterForm
     template_name = 'cats/animal_list.html'
     caption = CAPTION_ANIMAL_LIST_DEFAULT
     description = ''
+    show_filter = False
 
-    def get_queryset(self):
+    def get_queryset(self, **kwargs):
         show_permission = self.request.user.is_authenticated()
         query = self.request.GET.dict()
-        res = get_animals_from_query(query, show_permission=show_permission)
+        query.update(kwargs)
+        self.show_filter = query.pop('show_filter', False)
+        if self.show_filter and not(set(query) & set(ANIMAL_QUERY_KEYS)):
+            res = ()
+        else:
+            res = get_animals_from_query(query, show_permission=show_permission)
         return res
 
     def get_context_data(self, **kwargs):
@@ -183,10 +186,19 @@ class AnimalListView(ListView):
         context['filter_string'] = self.get_filter_string()
         context['caption'] = self.caption
         context['description'] = self.description
+        if self.show_filter:
+            u = FormMixin.get_context_data(self, **kwargs)
+            context.update(u)
+            context['description'] = 'Результат поиска'
+        else:
+            del context['form']
         return context
 
-    def get_filter_string(self):
-        query = self.request.GET
+    def get_filter_string(self, update_dict=None):
+        query = self.request.GET.copy()
+        query._mutable = True
+        if update_dict:
+            query.update(update_dict)
         if query:
             return '?' + query.urlencode()
         else:
@@ -205,6 +217,11 @@ class AnimalListView(ListView):
                     pass
         return ListView.get_paginator(self, queryset=queryset, per_page=per_page, orphans=orphans,
                                       allow_empty_first_page=allow_empty_first_page, **kwargs)
+
+    def get_form_kwargs(self):
+        res = super(AnimalListView, self).get_form_kwargs()
+        res['data'] = self.request.GET.dict()
+        return res
 
 
 class AnimalDetailView(DetailView):
@@ -261,23 +278,20 @@ class GroupListView(ListView):
 class GroupDetailView(AnimalListView):
 
     def get_queryset(self):
-        query = {
-            'group_id': self.kwargs[DJ_PK],
-        }
-        return get_animals_from_query(query=query, show_permission=self.request.user.is_authenticated())
+        res = super(GroupDetailView, self).get_queryset(group_id=self.kwargs[DJ_PK])
+        return res
 
     def get_context_data(self, **kwargs):
         group_id = self.kwargs[DJ_PK]
         group = get_group(group_id=group_id, show_permission=self.request.user.is_authenticated())
         self.caption = group.name
         self.description = group.description
-        context = AnimalListView.get_context_data(self, **kwargs)
+        context = super(GroupDetailView, self).get_context_data(**kwargs)
         return context
 
-    def get_filter_string(self):
-        res = '?{key}={val}'.format(key=GROUP_ID, val=self.kwargs[DJ_PK])
-        if self.request.GET:
-            res += '&' + self.request.GET.urlencode()
+    def get_filter_string(self, update_dict=None):
+        upd = {GROUP_ID: self.kwargs[DJ_PK]}
+        res = super(GroupDetailView, self).get_filter_string(update_dict=upd)
         return res
 
 
@@ -302,6 +316,7 @@ def index_view(request):
     return render(request, 'cats/index.html', context)
 
 
+# TODO: delete
 class FilterView(FormView):
     template_name = 'cats/animal_filter.html'
     form_class = FilterForm
@@ -318,10 +333,6 @@ class FilterView(FormView):
             get_paginator(object_list=animals, per_page=per_page, page_number=page_number, context=context)
         context['filter_string'] = get_filter_string(query=self.request.GET)
         return context
-
-    def get_initial(self):
-        initial = FormView.get_initial(self)
-        return initial
 
     def get_form_kwargs(self):
         res = FormView.get_form_kwargs(self)

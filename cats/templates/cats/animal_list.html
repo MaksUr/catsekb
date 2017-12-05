@@ -7,15 +7,20 @@
 {# filter_string #}
 {# description #}
 {# page_obj #}
+{# form #}
 
 {% extends "cats/base.html" %}
 {% block base_body %}
+    {% if form %}
+        {% include 'cats/widgets/form.html' with form=form %}
+    {% endif %}
     {% include 'cats/widgets/gallery.html' with object_list=object_list filter_parameters=filter_string caption=caption capt_descr=description page_obj=page_obj %}
 {% endblock base_body %}
 
 {% block header %}
     {# TODO: set background_image #}
     {% with "catsekb/dist/img/header_small.jpg" as background_image_file %}
+    {# {% with "catsekb/dist/img/header_cats.jpg" as background_image_file %} #}
             {{ block.super }}
     {% endwith %}
 {% endblock header %}
