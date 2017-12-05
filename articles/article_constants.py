@@ -1,8 +1,11 @@
+DJ_ID = 'id'
+
 # URLs
 URL_NAME_SUBJECTS = 'subjects'
 URL_NAME_SUBJECT = 'subject'
 URL_NAME_ARTICLE = 'article'
-
+URL_NAME_CONTACTS = 'contacts'
+URL_NAME_FIND_CAT = 'find_cat'
 
 APPLICATION_VERBOSE_NAME = 'Статьи'
 
@@ -62,8 +65,11 @@ ARTICLE_AUTHOR = 'author'
 # subject
 ARTICLE_SUBJECT = 'subject'
 
+# Article instances
+ARTICLE_CONTACTS_ID = 1
+ARTICLE_FIND_CAT_ID = 2
 
-
-
-
-
+ARTICLES_DEFAULT = {
+    ARTICLE_CONTACTS_ID: 'Контакты',
+    ARTICLE_FIND_CAT_ID: 'Что делать я нашел кота',
+}

@@ -4,7 +4,7 @@ from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, FormView
 
-from articles.article_constants import URL_NAME_SUBJECTS
+from articles.article_constants import URL_NAME_SUBJECTS, ARTICLES_DEFAULT, ARTICLE_FIND_CAT_ID, URL_NAME_FIND_CAT
 from articles.models import Subject
 from cats.constants import GROUP_INSTANCE_ALL_ID, ANIMAL_CREATED, ANIMAL_SHOW, DJ_PK, DJ_PAGE, DJ_OBJECT, \
     GROUP_SHOW, ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_SHELTER, GROUP_INSTANCE_ALL_NAME, \
@@ -108,15 +108,20 @@ def get_default_group_list(show_permission=False):
 def get_base_context(active_menu, show_permission=False):
     default_group_list = get_default_group_list(show_permission=show_permission)
     user_group_list = get_groups_from_query(dict(), show_permission=show_permission)
+
     animal_filter_url = dict()
     animal_filter_url['caption'] = 'Поиск'
     animal_filter_url['url'] = URL_NAME_ANIMAL_FILTER
 
     articles_url = dict()
-    articles_url['caption'] = 'Статьи'
+    articles_url['caption'] = 'Темы статей'
     articles_url['url'] = URL_NAME_SUBJECTS
 
-    articles = [articles_url] + list(Subject.objects.all())
+    find_cat_url = dict()
+    find_cat_url['caption'] = ARTICLES_DEFAULT[ARTICLE_FIND_CAT_ID]
+    find_cat_url['url'] = URL_NAME_FIND_CAT
+
+    articles = [articles_url, find_cat_url] + list(Subject.objects.all())
 
     context = {
         'group_list': [animal_filter_url] + default_group_list + list(user_group_list),
@@ -236,7 +241,6 @@ class AnimalDetailView(DetailView):
             paginator = Paginator(animals_id_list, 1)
             page = paginator.page(page_number)
             return page
-
 
 
 class GroupListView(ListView):
