@@ -1,9 +1,10 @@
-@supports (background-attachment: fixed) and (min-width: 768px) {
-	.full_container, .line_container {
-		background-attachment: fixed;
-    	background-position: 25%;
+@supports not (background-attachment: fixed) {
+	.line_container {
+		background-image: none;
 	}
-
+    .full_container, .line_container {
+    	background-attachment: initial;
+  	}
 }
 /* Устройства с шириной экрана от 768px до 1200px */
 @media (min-width: 768px) and (max-width: 1200px) {

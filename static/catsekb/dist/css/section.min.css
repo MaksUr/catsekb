@@ -7,10 +7,13 @@
 
 .full_container, .line_container {
   background-image: url(../img/cat.jpg);
+  background-size: 100%;
   -webkit-background-size: cover;
           background-size: cover;
   background-repeat: no-repeat;
-  width: 100%; }
+  background-attachment: fixed;
+  width: 100%;
+  background-position: 23%; }
 
 .full_container {
   height: 600px;
