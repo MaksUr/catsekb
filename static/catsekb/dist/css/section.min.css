@@ -5,7 +5,7 @@
 .full {
   position: relative; }
 
-.full_container, .line_container {
+.full_container {
   background-image: url(../img/cat.jpg);
   background-size: 100%;
   -webkit-background-size: cover;
@@ -16,7 +16,7 @@
   background-position: 23%; }
 
 .full_container {
-  height: 600px;
+  height: 400px;
   -webkit-filter: brightness(90%);
           filter: brightness(90%);
   position: relative; }

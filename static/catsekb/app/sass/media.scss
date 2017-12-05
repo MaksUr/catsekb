@@ -52,6 +52,10 @@
 	    text-align: center;
      	padding: 10px 0; 
 	}
+	.full_container {
+		background-attachment: scroll; /* для проверки на iphone */
+		background-position: 20%;
+	}
 	footer a {
 		 padding-bottom: 0px;
 	}
