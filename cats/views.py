@@ -113,15 +113,15 @@ def get_base_context(active_menu, show_permission=False):
     animal_filter_url['caption'] = 'Поиск'
     animal_filter_url['url'] = URL_NAME_ANIMAL_FILTER
 
-    articles_url = dict()
-    articles_url['caption'] = 'Темы статей'
-    articles_url['url'] = URL_NAME_SUBJECTS
+    # articles_url = dict()
+    # articles_url['caption'] = 'Темы статей'
+    # articles_url['url'] = URL_NAME_SUBJECTS
 
     find_cat_url = dict()
     find_cat_url['caption'] = ARTICLES_DEFAULT[ARTICLE_FIND_CAT_ID]
     find_cat_url['url'] = URL_NAME_FIND_CAT
 
-    articles = [articles_url, find_cat_url] + list(Subject.objects.all())
+    articles = [find_cat_url] + list(Subject.objects.all())
 
     context = {
         'group_list': [animal_filter_url] + default_group_list + list(user_group_list),
