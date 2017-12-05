@@ -1,17 +1,7 @@
-@supports not (background-attachment: fixed) {
-	.line_container {
-		background-image: none;
-	}
-    .full_container, .line_container {
-    	background-attachment: initial;
-  	}
-}
 /* Устройства с шириной экрана от 768px до 1200px */
 @media (min-width: 768px) and (max-width: 1200px) {
 	.line_container {
-		filter: none;
-		background-image: none;
-		background-color: rgba(227, 235, 236, 0.7);
+		background-color: rgba(255, 255, 255, 0.6);
 	}
 	.social img:first-child {
 		padding-left: 0;
@@ -41,20 +31,14 @@
 		padding: 20px 0;
 	}
 	.line_container {
-		filter: none;
-		background-image: none;
-		background-color: rgba(241, 236, 233, .8);
 		height: auto;
+		background-color: rgba(255, 255, 255, 0.6);
 	}
 
 	.line_container h2 {
 	    line-height: 30px;
 	    text-align: center;
      	padding: 10px 0; 
-	}
-	.full_container {
-		background-attachment: scroll; /* для проверки на iphone */
-		background-position: 20%;
 	}
 	footer a {
 		 padding-bottom: 0px;

@@ -3,30 +3,20 @@
   position: relative; }
 
 .full {
-  position: relative; }
-
-.full_container {
   background-image: url(../img/cat.jpg);
-  background-size: 100%;
   -webkit-background-size: cover;
           background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   width: 100%;
-  background-position: 23%; }
-
-.full_container {
-  height: 400px;
-  -webkit-filter: brightness(90%);
-          filter: brightness(90%);
-  position: relative; }
+  background-position: 22%;
+  position: relative;
+  height: 450px; }
 
 .line_container {
   position: absolute;
   z-index: 10;
   width: 100%;
-  -webkit-filter: brightness(100%);
-          filter: brightness(100%);
   height: 80px;
   top: 40%; }
 

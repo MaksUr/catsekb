@@ -4,10 +4,12 @@
 }
 
 .full {
+    height: 450px;
+    filter: brightness(90%);
     position: relative;
 }
-
-.full_container, .line_container {
+.full, .line_container {
+    position: relative;
     background-image: url(../img/cat.jpg);
     background-size: 100%;
     background-size: cover;
@@ -15,12 +17,6 @@
     background-attachment: fixed;
     background-position: 23%;
     width: 100%;
-} 
-
-.full_container {
-    height: 400px;
-    filter: brightness(90%);
-    position: relative;
 }
 
 .line_container {
