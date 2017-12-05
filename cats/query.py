@@ -19,6 +19,13 @@ LOCATION_GROUP_MAPPING = (
         ANIMAL_LOCATION_STATUS_DEAD,
 )
 
+ANIMAL_QUERY_KEYS = (
+    GROUP_ID,
+    ANIMAL_GROUP,
+    ANIMAL_NAME,
+    AGE_DISTANCE,
+)
+
 
 class AnimalQuerySet(QuerySet):
     def filter(self, *args, **kwargs):
