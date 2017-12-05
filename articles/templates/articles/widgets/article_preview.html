@@ -1,10 +1,35 @@
 {# object #}
 
-<p>{{ object.title }}</p>
-<p>{{ object.created }}</p>
-<p>{{ object.updated }}</p>
-<p>{{ object.author }}</p>
-<p>{{ object.subject }}</p>
-<p>{{ object.text|truncatechars:10 }}...</p>
-<a href="{{ object.get_absolute_url }}">читать далее</a>
+<div class="article font line_height">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-10 col-xs-offset-0 col-sm-6 col-sm-offset-0 col-md-4 col-md-offset-2">
+				<p><span class="property_name">Дата публикации:</span> {{ object.created }}</p>
+				<p><span class="property_name">Обновлено:</span> {{ object.updated }}</p> <!-- # T0D0: Создать условие, которое проверяет была обновлена статья или нет -->
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+				<h3><b>{{ object.subject }}</b></h3>
+			</div>
+			<div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+				<p class="autor right">Автор: {{ object.author }}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+				<p>{{ object.text|truncatechars:270 }}</p>
+			</div>
+		<div class="row">
+			<div class="col-xs-6 col-xs-offset-6 col-sm-4 col-sm-offset-8 col-md-8 col-md-offset-2">
+				<a href="{{ object.get_absolute_url }}" class="tag right">Читать далее</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-4 col-xs-offset-0 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-2">
+				
+			</div>
+		</div>
+	</div>
+</div>
 

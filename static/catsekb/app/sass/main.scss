@@ -61,6 +61,11 @@ footer {
 	text-align: center;
 }
 
+.right {
+  text-align: right;
+}
+
+
 .row.slim {
 	line-height: 0;
 }
@@ -130,6 +135,10 @@ a, a:link, a:visited, a:hover, a:active  {
 .tag.no_active:hover {
 	color: #c5c5c5;
 }
+.article .tag {
+  padding: 0;
+  display: block;
+}
 .hashtag, .tag {
 	color: #8585ff;
 }
@@ -197,6 +206,9 @@ input.but:hover {
 }
 
 /* <---------- form END ----------> */
+.article {
+  margin-bottom: 40px;
+}
 
 .article img {
 	max-width: 100%;

@@ -12,17 +12,6 @@
 {% extends "cats/base.html" %}
 {% load static %}
 {% block base_body %}
-
-    <!-- {% if dying_animals_count %}
-    {# TODO: Применить статистику #}
-        <p>На радуге: {{ dying_animals_count }}</p>
-    }
-    {% endif %}
-
-    {% if animals_count %}
-        <p>Всего животных: {{ animals_count }}</p>
-    {% endif %} -->
-
     <section class="about">
 		<div class="cat_container">
 		</div>
@@ -55,8 +44,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="full_container">
 		</div>
 	</section>        
 	{% url 'group_detail' pk='S' as group_url %}

@@ -1,6 +1,7 @@
 {# object #}
+{# shelter_caption #}
 
-<p>{{ object.title }}</p>
+{% include 'cats/widgets/caption.html' with caption=object.title %}
 <p>{{ object.created }}</p>
 <p>{{ object.updated }}</p>
 <p>{{ object.author }}</p>
