@@ -6,5 +6,6 @@
 {% extends "cats/base.html" %}
 
 {% block base_body %}
-    {% lorem 10 p %}
+    <h2>Contacts</h2>
+    {% include 'articles/widgets/article.html' with object=object %}
 {% endblock base_body %}
