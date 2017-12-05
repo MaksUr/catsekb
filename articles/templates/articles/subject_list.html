@@ -7,7 +7,7 @@
 
 {% block base_body %}
     {% for object in object_list %}
-        <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
+        <p><a href="{{ object.get_absolute_url }}">{{ object.name }}</a>||||Статей: {{ object.article_set.all.count }}</p>
     {% endfor %}
 
 {% endblock base_body %}

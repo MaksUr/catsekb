@@ -40,8 +40,8 @@ class Article(Model):
     created = DateTimeField(ARTICLE_KEY_CREATED, auto_now_add=True)
     updated = DateTimeField(ARTICLE_KEY_UPDATED, auto_now=True)
     show = BooleanField(ARTICLE_KEY_SHOW, default=True)
-    author = ForeignKey(Author, verbose_name=Author._meta.verbose_name)
-    subject = ForeignKey(Subject, verbose_name=Subject._meta.verbose_name)
+    author = ForeignKey(Author, verbose_name=Author._meta.verbose_name, null=True, blank=True)
+    subject = ForeignKey(Subject, verbose_name=Subject._meta.verbose_name, null=True, blank=True)
 
     class Meta:
         verbose_name = ARTICLE_VERBOSE_NAME
