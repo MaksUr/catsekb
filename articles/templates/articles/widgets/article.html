@@ -2,7 +2,21 @@
 {# shelter_caption #}
 
 {% include 'cats/widgets/caption.html' with caption=object.title %}
-<p>{{ object.created.date }}</p>
-<p>{{ object.author }}</p>
-<p>{{ object.subject }}</p>
-<p>{{ object.text }}</p>
+<div class="article font line_height">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+				<p>{{ object.text }}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-5 col-xs-offset-0 col-sm-4 col-sm-offset-0 col-md-4 col-md-offset-1 col-lg-4 col-lg-offset-2">
+				<p class="date_article">{{ object.created.date }}</p>
+			</div>
+			<div class="col-xs-7 col-xs-offset-0 col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-0">
+				<p class="date_article right">Автор: {{ object.author }}</p>
+			</div>
+		</div>
+	</div>
+</div>
+

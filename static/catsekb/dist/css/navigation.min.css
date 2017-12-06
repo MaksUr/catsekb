@@ -30,7 +30,7 @@
   text-align: left;
   -webkit-transition: all .8s 0s ease-out;
   -o-transition: all .8s 0s ease-out;
-  transition: all .8s 0s ease-out; }
+  transition: all .55s 0s ease-out; }
 
 .menu_opening > li {
   margin: 10px 15px 0 0; }
