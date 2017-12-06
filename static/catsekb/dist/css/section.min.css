@@ -3,13 +3,14 @@
   position: relative; }
 
 .full {
-  background-image: url(../img/cat.jpg);
+  background-image: url(../img/header_small.jpg);
   -webkit-background-size: cover;
           background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   width: 100%;
-  background-position: 22%;
+  /*background-position: 22%;*/
+  background-position: center;
   position: relative;
   height: 450px; }
 
