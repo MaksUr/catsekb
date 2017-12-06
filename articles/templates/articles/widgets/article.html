@@ -2,8 +2,7 @@
 {# shelter_caption #}
 
 {% include 'cats/widgets/caption.html' with caption=object.title %}
-<p>{{ object.created }}</p>
-<p>{{ object.updated }}</p>
+<p>{{ object.created.date }}</p>
 <p>{{ object.author }}</p>
 <p>{{ object.subject }}</p>
 <p>{{ object.text }}</p>

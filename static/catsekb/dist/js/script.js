@@ -5,7 +5,7 @@ var mobile_list =  document.querySelector('.mobile_list');
 var body = document.getElementsByTagName('body');
 var cat_find_block = document.querySelectorAll('.cat_find_block');
 var open_next_menu = document.querySelectorAll('.open_next_menu');
-
+var widthScreen = document.documentElement.clientWidth;
 document.addEventListener("DOMContentLoaded", ready);
 
 const canHover = !(matchMedia('(hover: none)').matches);
@@ -25,8 +25,6 @@ function ready() {
 		}
 	} 
 	
-	var widthScreen = document.documentElement.clientWidth;
-
 	if (widthScreen < 767) {
 		console.log(widthScreen);
 		colorAndHeight(true);

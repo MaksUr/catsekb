@@ -194,6 +194,9 @@ input.but:hover {
 
 /* <---------- form END ----------> */
 
+.date_article {
+  color: #9E9E9E;
+}
 .article {
   margin-bottom: 40px;
 }
