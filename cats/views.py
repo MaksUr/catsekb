@@ -2,19 +2,20 @@ from django.core.exceptions import FieldError
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView, FormView
-from django.views.generic.edit import ModelFormMixin, FormMixin
+from django.urls import reverse
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import FormMixin
 
-from articles.article_constants import URL_NAME_SUBJECTS, ARTICLES_DEFAULT, ARTICLE_FIND_CAT_ID, URL_NAME_FIND_CAT
+from articles.article_constants import ARTICLES_DEFAULT, ARTICLE_FIND_CAT_ID, URL_NAME_FIND_CAT
 from articles.models import Subject
 from cats.constants import GROUP_INSTANCE_ALL_ID, ANIMAL_CREATED, ANIMAL_SHOW, DJ_PK, DJ_PAGE, DJ_OBJECT, \
     GROUP_SHOW, ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_SHELTER, GROUP_INSTANCE_ALL_NAME, \
     ANIMAL_LOCATION_STATUS, \
     CAPTION_ANIMAL_LIST_DEFAULT, GROUP_ID, GROUP_INSTANCE_ALL_DESCR, GROUP_INSTANCE_HOME_DESCR, \
     GROUP_INSTANCE_SHELTER_DESCR, ANIMAL_LOCATION_STATUS_DEAD, GROUP_INSTANCE_DEAD_DESCR, INDEX, ANIMALS, \
-    URL_NAME_ANIMAL_FILTER, GROUP_INSTANCE_SHELTER_ID, \
+    GROUP_INSTANCE_SHELTER_ID, \
     GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, GROUP_INSTANCE_SHELTER_NAME, GROUP_INSTANCE_HOME_NAME, \
-    GROUP_INSTANCE_DEAD_NAME
+    GROUP_INSTANCE_DEAD_NAME, URL_NAME_ANIMALS
 from cats.forms import FilterForm
 from cats.models import Animal, Group
 from cats.query import ANIMAL_QUERY_KEYS
@@ -44,6 +45,8 @@ GALLERY_DEFAULT_ITEMS_COUNT = 9
 PAGE = 'page'
 PER_PAGE = 'per_page'
 PER_PAGE_ALL = 'all'
+
+SHOW_FILTER_KEY = 'filter'
 
 
 def get_group(group_id, show_permission=False):
@@ -113,11 +116,11 @@ def get_base_context(active_menu, show_permission=False):
 
     animal_filter_url = dict()
     animal_filter_url['caption'] = 'Поиск'
-    animal_filter_url['url'] = URL_NAME_ANIMAL_FILTER
+    animal_filter_url['url'] = "{url}?{key}=1".format(url=reverse(URL_NAME_ANIMALS), key=SHOW_FILTER_KEY)
 
     find_cat_url = dict()
     find_cat_url['caption'] = ARTICLES_DEFAULT[ARTICLE_FIND_CAT_ID]
-    find_cat_url['url'] = URL_NAME_FIND_CAT
+    find_cat_url['url'] = reverse(URL_NAME_FIND_CAT)
 
     articles = [find_cat_url] + list(Subject.objects.all())
 
@@ -172,7 +175,7 @@ class AnimalListView(ListView, FormMixin):
         show_permission = self.request.user.is_authenticated()
         query = self.request.GET.dict()
         query.update(kwargs)
-        self.show_filter = query.pop('show_filter', False)
+        self.show_filter = query.pop(SHOW_FILTER_KEY, False)
         if self.show_filter and not(set(query) & set(ANIMAL_QUERY_KEYS)):
             res = ()
         else:
@@ -314,32 +317,3 @@ def index_view(request):
             query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_DEAD}, show_permission=True
         ).count()
     return render(request, 'cats/index.html', context)
-
-
-# TODO: delete
-class FilterView(FormView):
-    template_name = 'cats/animal_filter.html'
-    form_class = FilterForm
-
-    def get_context_data(self, **kwargs):
-        show_permission = self.request.user.is_authenticated()
-        context = FormView.get_context_data(self, **kwargs)
-        context.update(get_base_context(show_permission=show_permission, active_menu=ANIMALS))
-        query = self.request.GET.dict()
-        page_number = query.pop(PAGE, None)
-        per_page = query.pop(PER_PAGE, GALLERY_DEFAULT_ITEMS_COUNT)
-        if query:
-            animals = get_animals_from_query(query, show_permission=show_permission)
-            get_paginator(object_list=animals, per_page=per_page, page_number=page_number, context=context)
-        context['filter_string'] = get_filter_string(query=self.request.GET)
-        return context
-
-    def get_form_kwargs(self):
-        res = FormView.get_form_kwargs(self)
-        res['data'] = self.request.GET.dict()
-        return res
-
-
-
-
-
