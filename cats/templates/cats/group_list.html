@@ -8,9 +8,11 @@
 {% block base_body %}
     {% include 'cats/widgets/caption.html' with caption=caption caption_url=caption_url %}
     {% for group in group_list %}
-        <li>
-            <a href="{% url 'group_detail' pk=group.id  %}">{{ group.name }}</a>
-        </li>
+        {% if group.id %}
+            <li>
+                <a href="{% url 'group_detail' pk=group.id  %}">{{ group.name }}</a>
+            </li>
+        {% endif %}
     {% empty %}
         <p>Групп еще нет</p>
     {% endfor %}

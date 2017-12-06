@@ -66,7 +66,8 @@ def get_group(group_id, show_permission=False):
 
 
 def filter_animals_query(query):
-    return {key: query[key] for key in query if key in ANIMAL_QUERY_KEYS}
+    res = {key: query[key] for key in query if key in ANIMAL_QUERY_KEYS}
+    return res
 
 
 def get_animals_from_query(query, show_permission=False):
@@ -158,7 +159,7 @@ class AnimalListView(ListView, FormMixin):
         query.update(kwargs)
         self.show_filter = query.pop(SHOW_FILTER_KEY, False)
         if self.show_filter and not(set(query) & set(ANIMAL_QUERY_KEYS)):
-            res = ()
+            res = Animal.objects.none()
         else:
             res = get_animals_from_query(query, show_permission=show_permission)
         return res
@@ -169,12 +170,12 @@ class AnimalListView(ListView, FormMixin):
         context.update(get_base_context(show_permission=show_permission, active_menu=ANIMALS))
         context['filter_string'] = self.get_filter_string()
         context['caption'] = self.caption
-        context['description'] = self.description
         if self.show_filter:
             u = FormMixin.get_context_data(self, **kwargs)
             context.update(u)
-            context['description'] = 'Результат поиска'
+            context['description'] = 'Найдено {count} котиков'.format(count=len(self.object_list))
         else:
+            context['description'] = self.description
             del context['form']
         return context
 
