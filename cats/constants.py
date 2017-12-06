@@ -315,15 +315,17 @@ GROUP_INSTANCE_DEAD_DESCR = 'Пусть земля им будет пухом, �
 AGE_DISTANCE = 'age_distance'
 AGE_DISTANCE_KEY = 'Возраст'
 AGE_DISTANCE_CHOICES = (
-    ('_d5', 'до 5 дней'),
-    ('d5_m1', 'от 5 дней до месяца'),
+    ('_m1', 'до месяца'),
     ('m1_m6', 'от месяца до полугода'),
     ('m6_y1', 'от полугода до года'),
     ('y1_y2', 'от года до двух'),
-    ('y2_y5', 'от двух до пяти лет'),
-    ('y5_', 'более пяти лет'),
+    ('y2_', 'более двух лет'),
 )
 
+# shelter_distance
+SHELTER_DISTANCE = 'shelter_distance'
+SHELTER_DISTANCE_KEY = 'Время в приюте'
+SHELTER_DISTANCE_CHOICES = AGE_DISTANCE_CHOICES
 
 # Captions
 CAPTION_ANIMAL_LIST_DEFAULT = 'Наши коты'

@@ -4,7 +4,7 @@ from django import forms
 from django.forms import ValidationError
 
 from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECISION, ANIMAL_KEY_UPDATED_HELP_TEXT, \
-    ANIMAL_KEY_CREATED_HELP_TEXT, ANIMAL_KEY_SHOW_HELP_TEXT,\
+    ANIMAL_KEY_CREATED_HELP_TEXT, ANIMAL_KEY_SHOW_HELP_TEXT, \
     ANIMAL_KEY_SEX_HELP_TEXT, ANIMAL_KEY_NAME_HELP_TEXT, \
     ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST, DJ_INSTANCE, \
     DJ_INITIAL, ANIMAL_DAYS, ANIMAL_FORM_KEY_DAYS, ANIMAL_KEY_DAYS_HELP_TEXT, ANIMAL_MONTHS, ANIMAL_FORM_KEY_MONTHS, \
@@ -21,7 +21,7 @@ from cats.constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECI
     ANIMAL_VK_ALBUM_URL, ANIMAL_VK_ALBUM_URL_WRONG_FORMAT, \
     ANIMAL_IMAGE_CREATED, ANIMAL_IMAGE_KEY_CREATED_HELP_TEXT, \
     ANIMAL_KEY_SHELTER_DATE_HELP_TEXT, ANIMAL_SHELTER_DATE, ANIMAL_VALID_INFO, ANIMAL_KEY_VALID_INFO_HELP_TEXT, \
-    ANIMAL_FORM_VK_UPDATE_INFO, VK_GROUP_ID
+    ANIMAL_FORM_VK_UPDATE_INFO, VK_GROUP_ID, SHELTER_DISTANCE_KEY, SHELTER_DISTANCE_CHOICES
 from cats.models import Animal, AnimalImage
 from cats.time import get_date_from_age, calc_age_uptoday
 
@@ -211,6 +211,12 @@ class FilterForm(forms.Form):
         widget=forms.RadioSelect,
         required=False,
         choices=AGE_DISTANCE_CHOICES
+    )
+    shelter_distance = forms.ChoiceField(
+        label=SHELTER_DISTANCE_KEY,
+        widget=forms.RadioSelect,
+        required=False,
+        choices=SHELTER_DISTANCE_CHOICES
     )
     location_status = forms.ChoiceField(
         widget=forms.RadioSelect,
