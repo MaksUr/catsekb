@@ -14,7 +14,9 @@
     {% if form %}
         {% include 'cats/widgets/form.html' with form=form %}
     {% endif %}
-    {% include 'cats/widgets/gallery.html' with object_list=object_list filter_parameters=filter_string caption=caption capt_descr=description page_obj=page_obj %}
+    {% if object_list %}
+        {% include 'cats/widgets/gallery.html' with object_list=object_list filter_parameters=filter_string caption=caption capt_descr=description page_obj=page_obj %}
+    {% endif %}
 {% endblock base_body %}
 
 {% block header %}

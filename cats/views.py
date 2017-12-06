@@ -65,6 +65,10 @@ def get_group(group_id, show_permission=False):
         return res
 
 
+def filter_animals_query(query):
+    return {key: query[key] for key in query if key in ANIMAL_QUERY_KEYS}
+
+
 def get_animals_from_query(query, show_permission=False):
     """
 
@@ -72,10 +76,7 @@ def get_animals_from_query(query, show_permission=False):
     :type show_permission: bool
     :type query: dict
     """
-    query.pop(PAGE, None)
-    query.pop(PER_PAGE, None)
-    if query.get(PAGE) is not None:
-        del query[PAGE]
+    query = filter_animals_query(query)
     if show_permission is False:
         query[ANIMAL_SHOW] = True
     try:
@@ -132,17 +133,6 @@ def get_base_context(active_menu, show_permission=False):
     return context
 
 
-def get_filter_string(query):
-    """
-
-    :type query: QueryDict
-    """
-    if query:
-        return '?' + query.urlencode()
-    else:
-        return ''
-
-
 def get_page(page, paginator):
     try:
         res = paginator.page(page)
@@ -151,15 +141,6 @@ def get_page(page, paginator):
     except EmptyPage:
         res = paginator.page(paginator.num_pages)
     return res
-
-
-def get_paginator(object_list, per_page, page_number, context):
-    if per_page == PER_PAGE_ALL:
-        per_page = len(object_list)
-    paginator = Paginator(object_list=object_list, per_page=per_page)
-    page = get_page(page=page_number, paginator=paginator)
-    context['page_obj'] = page
-    context['object_list'] = page.object_list
 
 
 class AnimalListView(ListView, FormMixin):
@@ -202,24 +183,26 @@ class AnimalListView(ListView, FormMixin):
         query._mutable = True
         if update_dict:
             query.update(update_dict)
+        if self.show_filter:
+            query[SHOW_FILTER_KEY] = 1
         if query:
             return '?' + query.urlencode()
         else:
             return ''
 
-    def get_paginator(self, queryset, per_page, orphans=0,
-                      allow_empty_first_page=True, **kwargs):
-        if self.request.GET.dict().get(PER_PAGE) is not None:
-            per_page_param = self.request.GET.dict()[PER_PAGE]
+    def get_paginate_by(self, queryset):
+        if self.request.GET.get(PER_PAGE) is not None:
+            per_page_param = self.request.GET.get(PER_PAGE)
             if per_page_param == PER_PAGE_ALL:
-                per_page = len(queryset)
+                self.kwargs[PAGE] = 1
+                return len(queryset)
             else:
                 try:
-                    per_page = int(per_page_param)
+                    return int(per_page_param)
                 except ValueError:
-                    pass
-        return ListView.get_paginator(self, queryset=queryset, per_page=per_page, orphans=orphans,
-                                      allow_empty_first_page=allow_empty_first_page, **kwargs)
+                    return self.paginate_by
+        else:
+            return self.paginate_by
 
     def get_form_kwargs(self):
         res = super(AnimalListView, self).get_form_kwargs()
