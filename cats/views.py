@@ -132,17 +132,6 @@ def get_base_context(active_menu, show_permission=False):
     return context
 
 
-def get_filter_string(query):
-    """
-
-    :type query: QueryDict
-    """
-    if query:
-        return '?' + query.urlencode()
-    else:
-        return ''
-
-
 def get_page(page, paginator):
     try:
         res = paginator.page(page)
@@ -202,6 +191,8 @@ class AnimalListView(ListView, FormMixin):
         query._mutable = True
         if update_dict:
             query.update(update_dict)
+        if self.show_filter:
+            query[SHOW_FILTER_KEY] = 1
         if query:
             return '?' + query.urlencode()
         else:
