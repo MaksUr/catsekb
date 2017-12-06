@@ -10,8 +10,8 @@
 {% load static %}
 <section id="gallery_cat">
     <!-- # T0D0: #Зефир,_Крем,_Сливка,_Трюфелька_catsekb..... - обрезать строку если больше 25 символов # -->
+    {% include 'cats/widgets/caption.html' with caption=caption caption_url=caption_url %}
     <div class="container">
-        {% include 'cats/widgets/caption.html' with caption=caption caption_url=caption_url %}
         <div class="row">
             <div class="col-xs-10 col-xs-offset-1">
                 {% include 'cats/widgets/group_description.html' with description=capt_descr %}
@@ -20,8 +20,6 @@
                 {% endif %}
             </div>
         </div>
-        
-
         <div class="gallery font">
             <div class="row">
                 <div class="col-md-12 slim">
