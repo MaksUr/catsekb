@@ -28,7 +28,6 @@ DJ_OBJECT = 'object'
 URL_NAME_INDEX = 'index'
 URL_NAME_GROUPS = 'group_list'
 URL_NAME_GROUP = 'group_detail'
-URL_NAME_ANIMAL_FILTER = 'animal_filter'
 URL_NAME_ANIMALS = 'animal_list'
 URL_NAME_ANIMAL = 'animal_detail'
 

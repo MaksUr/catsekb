@@ -18,7 +18,7 @@
                     {% if item.get_absolute_url %}
                         <a href="{{ item.get_absolute_url }}">{{ item }}</a>
                     {% else %}
-                        <a href="{% url item.url %}">{{ item.caption }}</a>
+                        <a href="{{ item.url }}">{{ item.caption }}</a>
                     {% endif %}
                 </li>
             {% endfor %}
