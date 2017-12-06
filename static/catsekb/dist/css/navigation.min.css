@@ -43,7 +43,7 @@
   visibility: visible;
   -webkit-transition: all .8s 0s;
   -o-transition: all .8s 0s;
-  transition: all .8s 0s; }
+  transition: all .5s 0s; }
 
 /* <---------- main_menu END ----------> */
 /* <---------- .top_nav BEGIN ----------> */
