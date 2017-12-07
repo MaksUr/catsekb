@@ -231,7 +231,7 @@ class FilterForm(forms.Form):
     )
 
     def __init__(self, *args, **kwargs):
-        kwargs['auto_id'] = False
+        # kwargs['auto_id'] = False
         forms.Form.__init__(self, *args, **kwargs)
 
 

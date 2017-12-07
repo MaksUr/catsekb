@@ -5,6 +5,7 @@ var mobile_list =  document.querySelector('.mobile_list');
 var body = document.getElementsByTagName('body');
 var cat_find_block = document.querySelectorAll('.cat_find_block');
 var open_next_menu = document.querySelectorAll('.open_next_menu');
+var widthScreen = document.documentElement.clientWidth;
 
 document.addEventListener("DOMContentLoaded", ready);
 
@@ -25,8 +26,6 @@ function ready() {
 		}
 	} 
 	
-	var widthScreen = document.documentElement.clientWidth;
-
 	if (widthScreen < 751) {
 		console.log(widthScreen);
 		colorAndHeight(true);
@@ -93,3 +92,25 @@ function view_menu_opening(i) {
   }
  
 })();
+
+
+var formShel = document.documentElement.querySelectorAll('.shelter_distance');
+var formLoc = document.documentElement.querySelectorAll('.location_status');
+
+for (i = 0; i <= formLoc.length - 1; i++) {
+			formLoc[i].addEventListener('click', elemBlock.bind(this, i));
+		}
+
+
+function elemBlock(i) {
+	if (formLoc[1].checked == false) {
+	for(i = 0; i <= formShel.length - 1; i++) {
+		formShel[i].disabled = 'disable';
+	} 
+	} else {
+		for(i = 0; i <= formShel.length - 1; i++) {
+			formShel[i].disabled = '';
+		}
+	}
+}
+
