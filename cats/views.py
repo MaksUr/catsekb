@@ -4,10 +4,10 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormMixin
 
-from cats.cats_constants import ANIMAL_CREATED, DJ_PK, DJ_PAGE, DJ_OBJECT, \
-    ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_SHELTER, ANIMAL_LOCATION_STATUS, \
-    CAPTION_ANIMAL_LIST_DEFAULT, GROUP_ID, ANIMAL_LOCATION_STATUS_DEAD, INDEX, ANIMALS, \
-    GROUP_INSTANCE_SHELTER_NAME, SHOW_FILTER_KEY, PER_PAGE, PER_PAGE_ALL, PAGE
+from cats.cats_constants import ANIMAL_CREATED, ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_SHELTER, ANIMAL_LOCATION_STATUS, \
+    GROUP_ID, ANIMAL_LOCATION_STATUS_DEAD, GROUP_INSTANCE_SHELTER_NAME
+from catsekb.constants import CAPTION_ANIMAL_LIST_DEFAULT, INDEX, ANIMALS, PAGE, PER_PAGE, PER_PAGE_ALL, \
+    SHOW_FILTER_KEY, DJ_PK, DJ_PAGE, DJ_OBJECT
 from cats.forms import FilterForm
 from cats.models import Animal, Group
 from cats.query import ANIMAL_QUERY_KEYS
@@ -83,14 +83,14 @@ class AnimalListView(ListView, FormMixin):
             return ''
 
     def get_paginate_by(self, queryset):
-        if self.request.GET.get(PER_PAGE) is not None:
-            per_page_param = self.request.GET.get(PER_PAGE)
-            if per_page_param == PER_PAGE_ALL:
+        per_page = self.request.GET.get(PER_PAGE)
+        if per_page is not None:
+            if per_page == PER_PAGE_ALL:
                 self.kwargs[PAGE] = 1
                 return len(queryset)
             else:
                 try:
-                    return int(per_page_param)
+                    return int(per_page)
                 except ValueError:
                     return self.paginate_by
         else:

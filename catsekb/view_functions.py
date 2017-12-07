@@ -3,11 +3,12 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 
-from articles.article_constants import ARTICLES_DEFAULT, ARTICLE_FIND_CAT_ID, CAPTION, URL_NAME_FIND_CAT
+from articles.article_constants import ARTICLES_DEFAULT, ARTICLE_FIND_CAT_ID, CAPTION
 from articles.models import Subject
 
-from cats.cats_constants import SHOW, URL_NAME_ANIMALS, GROUP_INSTANCE_ALL_ID, GROUP_INSTANCE_SHELTER_ID, \
-    GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, GROUP_MAPPING, PRIVATE_GROUP, SHOW_FILTER_KEY
+from cats.cats_constants import GROUP_INSTANCE_ALL_ID, GROUP_INSTANCE_SHELTER_ID, \
+    GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, GROUP_MAPPING, PRIVATE_GROUP
+from catsekb.constants import SHOW, SHOW_FILTER_KEY, URL_NAME_ANIMALS, URL_NAME_FIND_CAT
 from cats.models import Group
 
 

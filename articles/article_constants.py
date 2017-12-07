@@ -1,15 +1,4 @@
-CAPTION = 'caption'
-NAME = 'name'
-URL = 'url'
-
-DJ_ID = 'id'
-
-# URLs
-URL_NAME_SUBJECTS = 'subjects'
-URL_NAME_SUBJECT = 'subject'
-URL_NAME_ARTICLE = 'article'
-URL_NAME_CONTACTS = 'contacts'
-URL_NAME_FIND_CAT = 'find_cat'
+from catsekb.constants import URL_NAME_CONTACTS, URL_NAME_FIND_CAT, CAPTION, URL
 
 APPLICATION_VERBOSE_NAME = 'Статьи'
 

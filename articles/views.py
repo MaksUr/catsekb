@@ -1,10 +1,10 @@
 # Create your views here.
 from django.views.generic import DetailView, ListView
 
-from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_TITLE, ARTICLES_DEFAULT, ARTICLE_FIND_CAT_ID, DJ_ID, \
+from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_TITLE, ARTICLES_DEFAULT, ARTICLE_FIND_CAT_ID, \
     CAPTION
 from articles.models import Subject, Article
-from cats.cats_constants import ARTICLES, CONTACTS
+from catsekb.constants import ARTICLES, CONTACTS, DJ_ID
 from catsekb.view_functions import get_base_context
 
 
