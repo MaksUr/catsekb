@@ -5,7 +5,7 @@ from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_TITLE, ARTIC
     CAPTION
 from articles.models import Subject, Article
 from cats.constants import ARTICLES, CONTACTS
-from cats.views import get_base_context
+from catsekb.view_functions import get_base_context
 
 
 class SubjectListView(ListView):

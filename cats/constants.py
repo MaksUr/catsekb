@@ -12,6 +12,13 @@
 # Это значит поле animal в AnimalImage относится к определенному Animal
 
 SHOW = 'show'
+NAME = 'name'
+DESCRIPTION = 'description'
+
+PAGE = 'page'
+PER_PAGE = 'per_page'
+PER_PAGE_ALL = 'all'
+SHOW_FILTER_KEY = 'filter'
 
 # Служебные переменные
 DJ_INSTANCE = 'instance'
@@ -307,6 +314,30 @@ GROUP_INSTANCE_SHELTER_DESCR = 'Собаки привязываются к лю�
 GROUP_INSTANCE_DEAD_ID = ANIMAL_LOCATION_STATUS_DEAD
 GROUP_INSTANCE_DEAD_NAME = ANIMAL_LOCATION_STATUS_CHOICE_DEAD
 GROUP_INSTANCE_DEAD_DESCR = 'Пусть земля им будет пухом, они всегда останутся в наших сердцах.'
+
+
+GROUP_MAPPING = {
+    GROUP_INSTANCE_ALL_ID: {
+        NAME: GROUP_INSTANCE_ALL_NAME,
+        DESCRIPTION: GROUP_INSTANCE_ALL_DESCR,
+    },
+    GROUP_INSTANCE_HOME_ID: {
+        NAME: GROUP_INSTANCE_HOME_NAME,
+        DESCRIPTION: GROUP_INSTANCE_HOME_DESCR,
+    },
+    GROUP_INSTANCE_SHELTER_ID: {
+        NAME: GROUP_INSTANCE_SHELTER_NAME,
+        DESCRIPTION: GROUP_INSTANCE_SHELTER_DESCR,
+    },
+    GROUP_INSTANCE_DEAD_ID: {
+        NAME: GROUP_INSTANCE_DEAD_NAME,
+        DESCRIPTION: GROUP_INSTANCE_DEAD_DESCR,
+    },
+}
+
+PRIVATE_GROUP = (
+    GROUP_INSTANCE_DEAD_ID,
+)
 
 
 # class FilterForm
