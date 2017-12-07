@@ -41,15 +41,27 @@
   margin-top: 10px; }
 
 .description_link {
-  margin-top: 10%; }
+    position: absolute;
+    top: 80%;
+    left: 0;
+    z-index: 91;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    width: 100%; }
 
 /* <---------- .gallery END ----------> */
-.can-hover .cat_find_block:hover .cat_find_layer, .can-hover .cat_find_block:hover .cat_find_name, .cat_find_view .cat_find_layer, .cat_find_view .cat_find_name {
+.can-hover .cat_find_block:hover .cat_find_layer, 
+.can-hover .cat_find_block:hover .cat_find_name, 
+.cat_find_view .cat_find_layer, 
+.cat_find_view .cat_find_name, 
+.can-hover .cat_find_block:hover .description_link,
+.cat_find_view .description_link {
   opacity: 1;
   visibility: visible;
   -webkit-transition: opacity .45s ease, top .65s, visibility .45s;
-  -o-transition: opacity .45s ease, top .65s, visibility .45s;
-  transition: opacity .45s ease, top .65s, visibility .45s; }
+  -o-transition: opacity .45s ease, transform .65s, visibility .45s;
+  transition: opacity .5s ease, top .55s, visibility .5s; }
 
 .can-hover .cat_find_block:hover .cat_find_name, .cat_find_view .cat_find_name {
   top: 25%; }
