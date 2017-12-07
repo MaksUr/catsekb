@@ -7,9 +7,6 @@
 
 {% block base_body %}
 <section>
-	{% include 'cats/widgets/caption.html' with caption=object.name %}
-	 {% for article in object.article_set.all %}
-        {% include 'articles/widgets/article_preview.html' with object=article %}
-    {% endfor %}
+    {% include "articles/widgets/subject.html" with object=object %}
 </section>
 {% endblock base_body %}

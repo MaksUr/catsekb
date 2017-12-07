@@ -3,18 +3,26 @@
     {# helpful_info_list #}
 
 {# object_list #}
+{# find_cat #}
 {% extends "cats/base.html" %}
 
 {% block base_body %}
 	<section class="font line_height">
-		{% include 'cats/widgets/caption.html' with caption="Полезная информация" %}
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-4">
-			    {% for object in object_list %}
-			        <a href="{{ object.get_absolute_url }}#anchor_cat" class="hashtag">{{ object.name }}</a>
-			        <p>Статей: {{ object.article_set.all.count }}</p>
-			    {% endfor %}
+                    {% include 'cats/widgets/caption.html' with caption="Важно!" %}
+                    {% include 'articles/widgets/article_preview.html' with object=find_cat %}
+                    {% for object in object_list %}
+                        {% include 'cats/widgets/caption.html' with caption=object.name %}
+                        {% for article in object.article_set.all|slice:":3" %}
+                            {% if forloop.counter < 3 %}
+                                {% include 'articles/widgets/article_preview.html' with object=article %}
+                            {% else %}
+                                <a href="{{ object.get_absolute_url }}">Смотреть еще</a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
 			    </div>
 			</div>
 		</div>

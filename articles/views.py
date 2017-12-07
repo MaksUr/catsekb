@@ -15,6 +15,13 @@ class SubjectListView(ListView):
         show_permission = self.request.user.is_authenticated()
         context = ListView.get_context_data(self, **kwargs)
         context.update(get_base_context(show_permission=show_permission, active_menu=ARTICLES))
+        article, updated = Article.objects.get_or_create(
+            id=ARTICLE_FIND_CAT_ID, defaults={
+                ARTICLE_TITLE: ARTICLES_DEFAULT_MAPPING[ARTICLE_FIND_CAT_ID][CAPTION],
+                DJ_ID: ARTICLE_FIND_CAT_ID
+            }
+        )
+        context['find_cat'] = article
         return context
 
 
