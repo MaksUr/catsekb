@@ -1,7 +1,7 @@
 import json
 from os.path import abspath
 
-from cats.constants import ANIMAL_LOCATION_STATUS, ANIMAL_VK_ALBUM_ID, ANIMAL_TAG, ANIMAL_SEX, ANIMAL_DESCRIPTION, \
+from cats.cats_constants import ANIMAL_LOCATION_STATUS, ANIMAL_VK_ALBUM_ID, ANIMAL_TAG, ANIMAL_SEX, ANIMAL_DESCRIPTION, \
     ANIMAL_NAME
 from cats.models import Animal
 

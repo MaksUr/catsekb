@@ -10,30 +10,9 @@
 # foreign_key служит для связи текущей модели с другой моделью. Например модель - AnimalImage,
 # foreign_key: animal ссылается на модель Animal.
 # Это значит поле animal в AnimalImage относится к определенному Animal
-
-SHOW = 'show'
-
-# Служебные переменные
-DJ_INSTANCE = 'instance'
-DJ_INITIAL = 'initial'
-DJ_CLASSES_COLLAPSE = 'collapse'
-DJ_CLASSES = 'classes'
-DJ_FIELDS = 'fields'
-DJ_PK = 'pk'
-DJ_ID = 'id'
-DJ_PAGE = 'page'
-DJ_OBJECT = 'object'
-
-# URLs
-URL_NAME_INDEX = 'index'
-URL_NAME_GROUPS = 'group_list'
-URL_NAME_GROUP = 'group_detail'
-URL_NAME_ANIMALS = 'animal_list'
-URL_NAME_ANIMAL = 'animal_detail'
+from catsekb.constants import SHOW, NAME, DESCRIPTION, VK_GROUP_ID
 
 APPLICATION_VERBOSE_NAME = 'Котики'  # Название приложения
-
-VK_GROUP_ID = 73666865
 
 # class AnimalImage
 ANIMAL_IMAGE_VERBOSE_NAME_PLURAL = 'Фотографии'
@@ -309,6 +288,30 @@ GROUP_INSTANCE_DEAD_NAME = ANIMAL_LOCATION_STATUS_CHOICE_DEAD
 GROUP_INSTANCE_DEAD_DESCR = 'Пусть земля им будет пухом, они всегда останутся в наших сердцах.'
 
 
+GROUP_MAPPING = {
+    GROUP_INSTANCE_ALL_ID: {
+        NAME: GROUP_INSTANCE_ALL_NAME,
+        DESCRIPTION: GROUP_INSTANCE_ALL_DESCR,
+    },
+    GROUP_INSTANCE_HOME_ID: {
+        NAME: GROUP_INSTANCE_HOME_NAME,
+        DESCRIPTION: GROUP_INSTANCE_HOME_DESCR,
+    },
+    GROUP_INSTANCE_SHELTER_ID: {
+        NAME: GROUP_INSTANCE_SHELTER_NAME,
+        DESCRIPTION: GROUP_INSTANCE_SHELTER_DESCR,
+    },
+    GROUP_INSTANCE_DEAD_ID: {
+        NAME: GROUP_INSTANCE_DEAD_NAME,
+        DESCRIPTION: GROUP_INSTANCE_DEAD_DESCR,
+    },
+}
+
+PRIVATE_GROUP = (
+    GROUP_INSTANCE_DEAD_ID,
+)
+
+
 # class FilterForm
 
 # age_distance
@@ -327,11 +330,3 @@ SHELTER_DISTANCE = 'shelter_distance'
 SHELTER_DISTANCE_KEY = 'Время в приюте'
 SHELTER_DISTANCE_CHOICES = AGE_DISTANCE_CHOICES
 
-# Captions
-CAPTION_ANIMAL_LIST_DEFAULT = 'Наши коты'
-
-# Menu
-INDEX = 'index'
-ANIMALS = 'animals'
-ARTICLES = 'articles'
-CONTACTS = 'contacts'

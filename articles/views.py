@@ -1,10 +1,11 @@
 # Create your views here.
 from django.views.generic import DetailView, ListView
 
-from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_TITLE, ARTICLES_DEFAULT, ARTICLE_FIND_CAT_ID, DJ_ID
+from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_TITLE, ARTICLES_DEFAULT_MAPPING, ARTICLE_FIND_CAT_ID, \
+    CAPTION
 from articles.models import Subject, Article
-from cats.constants import ARTICLES, CONTACTS
-from cats.views import get_base_context
+from catsekb.constants import ARTICLES, CONTACTS, DJ_ID
+from catsekb.view_functions import get_base_context
 
 
 class SubjectListView(ListView):
@@ -42,10 +43,10 @@ class DefaultArticleDetailView(ArticleDetailView):
     article_id = None  # abstract
 
     def get_object(self, queryset=None):
-        title = ARTICLES_DEFAULT.get(self.article_id)
+        title = ARTICLES_DEFAULT_MAPPING.get(self.article_id)
         if title is not None:
             article, updated = Article.objects.get_or_create(
-                id=self.article_id, defaults={ARTICLE_TITLE: title, DJ_ID: self.article_id})
+                id=self.article_id, defaults={ARTICLE_TITLE: title[CAPTION], DJ_ID: self.article_id})
             return article
         else:
             return None

@@ -1,68 +1,19 @@
-from django.core.exceptions import FieldError
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.core.paginator import Paginator
 from django.http import Http404
-from django.shortcuts import render, get_object_or_404
-from django.urls import reverse
+from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormMixin
 
-from articles.article_constants import ARTICLES_DEFAULT, ARTICLE_FIND_CAT_ID, URL_NAME_FIND_CAT
-from articles.models import Subject
-from cats.constants import GROUP_INSTANCE_ALL_ID, ANIMAL_CREATED, ANIMAL_SHOW, DJ_PK, DJ_PAGE, DJ_OBJECT, \
-    GROUP_SHOW, ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_SHELTER, GROUP_INSTANCE_ALL_NAME, \
-    ANIMAL_LOCATION_STATUS, \
-    CAPTION_ANIMAL_LIST_DEFAULT, GROUP_ID, GROUP_INSTANCE_ALL_DESCR, GROUP_INSTANCE_HOME_DESCR, \
-    GROUP_INSTANCE_SHELTER_DESCR, ANIMAL_LOCATION_STATUS_DEAD, GROUP_INSTANCE_DEAD_DESCR, INDEX, ANIMALS, \
-    GROUP_INSTANCE_SHELTER_ID, \
-    GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, GROUP_INSTANCE_SHELTER_NAME, GROUP_INSTANCE_HOME_NAME, \
-    GROUP_INSTANCE_DEAD_NAME, URL_NAME_ANIMALS
+from cats.cats_constants import ANIMAL_CREATED, ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_SHELTER, ANIMAL_LOCATION_STATUS, \
+    GROUP_ID, ANIMAL_LOCATION_STATUS_DEAD, GROUP_INSTANCE_SHELTER_NAME
+from catsekb.constants import CAPTION_ANIMAL_LIST_DEFAULT, INDEX, ANIMALS, GET_PAR_KEY_PAGE, GET_PAR_KEY_PER_PAGE, GET_PAR_VAL_PAGE, \
+    GET_PAR_KEY_FILTER, DJ_PK, DJ_PAGE, DJ_OBJECT
 from cats.forms import FilterForm
 from cats.models import Animal, Group
 from cats.query import ANIMAL_QUERY_KEYS
+from catsekb.view_functions import get_objects_from_query, get_base_context, get_group
 
-GROUP_MAPPING = {
-    GROUP_INSTANCE_ALL_ID: {
-        'name': GROUP_INSTANCE_ALL_NAME,
-        'description': GROUP_INSTANCE_ALL_DESCR,
-    },
-    GROUP_INSTANCE_HOME_ID: {
-        'name': GROUP_INSTANCE_HOME_NAME,
-        'description': GROUP_INSTANCE_HOME_DESCR,
-    },
-    GROUP_INSTANCE_SHELTER_ID: {
-        'name': GROUP_INSTANCE_SHELTER_NAME,
-        'description': GROUP_INSTANCE_SHELTER_DESCR,
-    },
-    GROUP_INSTANCE_DEAD_ID: {
-        'name': GROUP_INSTANCE_DEAD_NAME,
-        'description': GROUP_INSTANCE_DEAD_DESCR,
-    },
-}
-PRIVATE_GROUP = (
-    GROUP_INSTANCE_DEAD_ID,
-)
 GALLERY_DEFAULT_ITEMS_COUNT = 9
-PAGE = 'page'
-PER_PAGE = 'per_page'
-PER_PAGE_ALL = 'all'
-
-SHOW_FILTER_KEY = 'filter'
-
-
-def get_group(group_id, show_permission=False):
-    if group_id in GROUP_MAPPING:
-        if show_permission is False and group_id in PRIVATE_GROUP:
-            raise Http404('Нет прав для просмотра данной группы.')
-        return Group.get_group_with_certain_settings(name=GROUP_MAPPING[group_id]['name'],
-                                                     group_id=group_id,
-                                                     description=GROUP_MAPPING[group_id]['description'])
-    else:
-        query = dict()
-        query['id'] = group_id
-        if show_permission is False:
-            query['show'] = True
-        res = get_object_or_404(Group, **query)
-        return res
 
 
 def filter_animals_query(query):
@@ -78,69 +29,9 @@ def get_animals_from_query(query, show_permission=False):
     :type query: dict
     """
     query = filter_animals_query(query)
-    if show_permission is False:
-        query[ANIMAL_SHOW] = True
-    try:
-        res = Animal.objects.filter(**query).order_by(ANIMAL_CREATED)
-    except FieldError:
-        raise Http404("Запрос неверный")
-    return res
-
-
-def get_groups_from_query(query, show_permission=False):
-    """
-
-    :type show_permission: bool
-    :type query: dict
-    """
-    if show_permission is False:
-        query[GROUP_SHOW] = True
-    try:
-        res = Group.objects.filter(**query)
-    except FieldError:
-        raise Http404("Запрос неверный")
-    return res
-
-
-def get_default_group_list(show_permission=False):
-    default_group_list = list()
-    default_group_list.append(get_group(group_id=GROUP_INSTANCE_ALL_ID, show_permission=show_permission))
-    default_group_list.append(get_group(group_id=GROUP_INSTANCE_SHELTER_ID, show_permission=show_permission))
-    default_group_list.append(get_group(group_id=GROUP_INSTANCE_HOME_ID, show_permission=show_permission))
-    if show_permission:
-        default_group_list.append(get_group(group_id=GROUP_INSTANCE_DEAD_ID, show_permission=show_permission))
-    return default_group_list
-
-
-def get_base_context(active_menu, show_permission=False):
-    default_group_list = get_default_group_list(show_permission=show_permission)
-    user_group_list = get_groups_from_query(dict(), show_permission=show_permission)
-
-    animal_filter_url = dict()
-    animal_filter_url['caption'] = 'Поиск'
-    animal_filter_url['url'] = "{url}?{key}=1".format(url=reverse(URL_NAME_ANIMALS), key=SHOW_FILTER_KEY)
-
-    find_cat_url = dict()
-    find_cat_url['caption'] = ARTICLES_DEFAULT[ARTICLE_FIND_CAT_ID]
-    find_cat_url['url'] = reverse(URL_NAME_FIND_CAT)
-
-    articles = [find_cat_url] + list(Subject.objects.all())
-
-    context = {
-        'group_list': [animal_filter_url] + default_group_list + list(user_group_list),
-        'helpful_info_list': articles,
-        'active_menu': active_menu
-    }
-    return context
-
-
-def get_page(page, paginator):
-    try:
-        res = paginator.page(page)
-    except PageNotAnInteger:
-        res = paginator.page(1)
-    except EmptyPage:
-        res = paginator.page(paginator.num_pages)
+    res = get_objects_from_query(
+        model_cls=Animal, query=query, show_permission=show_permission, order_by=ANIMAL_CREATED
+    )
     return res
 
 
@@ -157,7 +48,7 @@ class AnimalListView(ListView, FormMixin):
         show_permission = self.request.user.is_authenticated()
         query = self.request.GET.dict()
         query.update(kwargs)
-        self.show_filter = query.pop(SHOW_FILTER_KEY, False)
+        self.show_filter = query.pop(GET_PAR_KEY_FILTER, False)
         if self.show_filter and not(set(query) & set(ANIMAL_QUERY_KEYS)):
             res = Animal.objects.none()
         else:
@@ -185,21 +76,21 @@ class AnimalListView(ListView, FormMixin):
         if update_dict:
             query.update(update_dict)
         if self.show_filter:
-            query[SHOW_FILTER_KEY] = 1
+            query[GET_PAR_KEY_FILTER] = 1
         if query:
             return '?' + query.urlencode()
         else:
             return ''
 
     def get_paginate_by(self, queryset):
-        if self.request.GET.get(PER_PAGE) is not None:
-            per_page_param = self.request.GET.get(PER_PAGE)
-            if per_page_param == PER_PAGE_ALL:
-                self.kwargs[PAGE] = 1
+        per_page = self.request.GET.get(GET_PAR_KEY_PER_PAGE)
+        if per_page is not None:
+            if per_page == GET_PAR_VAL_PAGE:
+                self.kwargs[GET_PAR_KEY_PAGE] = 1
                 return len(queryset)
             else:
                 try:
-                    return int(per_page_param)
+                    return int(per_page)
                 except ValueError:
                     return self.paginate_by
         else:
@@ -253,7 +144,7 @@ class GroupListView(ListView):
 
     def get_queryset(self):
         show_permission = self.request.user.is_authenticated()
-        group_list = get_groups_from_query(dict(), show_permission=show_permission)
+        group_list = get_objects_from_query(model_cls=Group, query=dict(), show_permission=show_permission)
         return group_list
 
     def get_context_data(self, **kwargs):

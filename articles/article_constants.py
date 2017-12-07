@@ -1,11 +1,4 @@
-DJ_ID = 'id'
-
-# URLs
-URL_NAME_SUBJECTS = 'subjects'
-URL_NAME_SUBJECT = 'subject'
-URL_NAME_ARTICLE = 'article'
-URL_NAME_CONTACTS = 'contacts'
-URL_NAME_FIND_CAT = 'find_cat'
+from catsekb.constants import URL_NAME_CONTACTS, URL_NAME_FIND_CAT, CAPTION, URL
 
 APPLICATION_VERBOSE_NAME = 'Статьи'
 
@@ -69,7 +62,16 @@ ARTICLE_SUBJECT = 'subject'
 ARTICLE_CONTACTS_ID = 1
 ARTICLE_FIND_CAT_ID = 2
 
-ARTICLES_DEFAULT = {
-    ARTICLE_CONTACTS_ID: 'Контакты',
-    ARTICLE_FIND_CAT_ID: 'Что делать я нашел кота',
+ARTICLES_DEFAULT_MAPPING = {
+    ARTICLE_CONTACTS_ID: {
+        CAPTION: 'Контакты',
+        URL: URL_NAME_CONTACTS,
+    },
+    ARTICLE_FIND_CAT_ID: {
+        CAPTION: 'Что делать я нашел кота',
+        URL: URL_NAME_FIND_CAT,
+    }
 }
+
+
+ARTICLES_DEFAULT_CAPTIONS = tuple((ARTICLES_DEFAULT_MAPPING[i][CAPTION] for i in ARTICLES_DEFAULT_MAPPING))

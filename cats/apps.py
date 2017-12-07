@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
-from cats.constants import APPLICATION_VERBOSE_NAME
+from cats.cats_constants import APPLICATION_VERBOSE_NAME
 
 
 class CatsConfig(AppConfig):
