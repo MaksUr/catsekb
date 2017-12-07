@@ -2,17 +2,28 @@
     {# group_list #}
     {# helpful_info_list #}
 
-{#group_list#}
+{# shelter_animals #}
+{# home_animals #}
+{# dying_animals #}
+{# groups #}
 
 {% extends "cats/base.html" %}
 {% block base_body %}
-    {% include 'cats/widgets/caption.html' with caption=caption caption_url=caption_url %}
-    {% for group in group_list %}
-        {% if group.id %}
-            <li>
-                <a href="{% url 'group_detail' pk=group.id  %}">{{ group.name }}</a>
-            </li>
-        {% endif %}
+
+    {% if shelter_animals %}
+        {% include 'cats/widgets/gallery.html' with object_list=shelter_animals filter_parameters='?group_id=S' caption=shelter_caption caption_url=shelter_url %}
+    {% endif %}
+
+    {% if home_animals %}
+        {% include 'cats/widgets/gallery.html' with object_list=home_animals filter_parameters='?group_id=H' caption=home_caption caption_url=home_url %}
+    {% endif %}
+
+    {% if dying_animals %}
+        {% include 'cats/widgets/gallery.html' with object_list=dying_animals filter_parameters='?group_id=D' caption=dying_caption caption_url=dying_url %}
+    {% endif %}
+
+    {% for group in groups %}
+            {% include 'cats/widgets/gallery.html' with object_list=group.get_preview_animals_by_group  filter_parameters='?group_id='|add:group.id caption=group.name caption_url=group.get_absolute_url %}
     {% empty %}
         <p>Групп еще нет</p>
     {% endfor %}
