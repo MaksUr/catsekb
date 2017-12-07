@@ -3,7 +3,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 
-from articles.article_constants import ARTICLES_DEFAULT, ARTICLE_FIND_CAT_ID, CAPTION
+from articles.article_constants import ARTICLES_DEFAULT_MAPPING, ARTICLE_FIND_CAT_ID, CAPTION
 from articles.models import Subject
 
 from cats.cats_constants import GROUP_INSTANCE_ALL_ID, GROUP_INSTANCE_SHELTER_ID, \
@@ -67,7 +67,7 @@ def get_base_context(active_menu, show_permission=False):
     animal_filter_url['url'] = "{url}?{key}=1".format(url=reverse(URL_NAME_ANIMALS), key=GET_PAR_KEY_FILTER)
 
     find_cat_url = dict()
-    find_cat_url['caption'] = ARTICLES_DEFAULT[ARTICLE_FIND_CAT_ID][CAPTION]
+    find_cat_url['caption'] = ARTICLES_DEFAULT_MAPPING[ARTICLE_FIND_CAT_ID][CAPTION]
     find_cat_url['url'] = reverse(URL_NAME_FIND_CAT)
 
     user_articles = get_objects_from_query(model_cls=Subject, query=dict(), show_permission=show_permission)
