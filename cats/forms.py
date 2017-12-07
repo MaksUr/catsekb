@@ -201,31 +201,37 @@ class AnimalForm(forms.ModelForm):
 
 
 class FilterForm(forms.Form):
+
     name = forms.CharField(
         required=False,
         label=ANIMAL_KEY_NAME,
     )
+
     sex = forms.ChoiceField(widget=forms.RadioSelect, required=False, choices=ANIMAL_SEX_CHOICES, label=ANIMAL_KEY_SEX)
+
     age_distance = forms.ChoiceField(
         label=AGE_DISTANCE_KEY,
-        widget=forms.RadioSelect,
+        widget=forms.RadioSelect(attrs={'class': 'age_distance'}),
         required=False,
         choices=AGE_DISTANCE_CHOICES
     )
+
     shelter_distance = forms.ChoiceField(
         label=SHELTER_DISTANCE_KEY,
-        widget=forms.RadioSelect,
+        widget=forms.RadioSelect(attrs={'class': 'shelter_distance'}),
         required=False,
         choices=SHELTER_DISTANCE_CHOICES
     )
+
     location_status = forms.ChoiceField(
-        widget=forms.RadioSelect,
+        widget=forms.RadioSelect(attrs={'class': 'location_status'}),
         required=False,
         choices=ANIMAL_LOCATION_STATUS_CHOICES,
         label=ANIMAL_KEY_LOCATION_STATUS
     )
 
     def __init__(self, *args, **kwargs):
+        kwargs['auto_id'] = False
         forms.Form.__init__(self, *args, **kwargs)
 
 
