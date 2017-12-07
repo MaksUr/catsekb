@@ -16,10 +16,11 @@ CAPTION = 'caption'
 URL = 'url'
 
 
-PER_PAGE_ALL = 'all'  # Ключ в GET параметра, .
-PER_PAGE = 'per_page'
-PAGE = 'page'
-SHOW_FILTER_KEY = 'filter'  # Ключ в GET параметра, включающий поиск по галереи.
+GET_PAR_KEY_PER_PAGE = 'per_page'
+GET_PAR_KEY_PAGE = 'page'
+GET_PAR_KEY_FILTER = 'filter'  # Ключ в GET параметра, включающий поиск по галереи.
+
+GET_PAR_VAL_PAGE = 'all'  # Ключ в GET параметра, .
 
 # Служебные переменные
 DJ_INSTANCE = 'instance'

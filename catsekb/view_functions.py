@@ -8,7 +8,7 @@ from articles.models import Subject
 
 from cats.cats_constants import GROUP_INSTANCE_ALL_ID, GROUP_INSTANCE_SHELTER_ID, \
     GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, GROUP_MAPPING, PRIVATE_GROUP
-from catsekb.constants import SHOW, SHOW_FILTER_KEY, URL_NAME_ANIMALS, URL_NAME_FIND_CAT
+from catsekb.constants import SHOW, GET_PAR_KEY_FILTER, URL_NAME_ANIMALS, URL_NAME_FIND_CAT
 from cats.models import Group
 
 
@@ -64,7 +64,7 @@ def get_base_context(active_menu, show_permission=False):
 
     animal_filter_url = dict()
     animal_filter_url['caption'] = 'Поиск'
-    animal_filter_url['url'] = "{url}?{key}=1".format(url=reverse(URL_NAME_ANIMALS), key=SHOW_FILTER_KEY)
+    animal_filter_url['url'] = "{url}?{key}=1".format(url=reverse(URL_NAME_ANIMALS), key=GET_PAR_KEY_FILTER)
 
     find_cat_url = dict()
     find_cat_url['caption'] = ARTICLES_DEFAULT[ARTICLE_FIND_CAT_ID][CAPTION]

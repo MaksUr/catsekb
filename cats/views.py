@@ -6,8 +6,8 @@ from django.views.generic.edit import FormMixin
 
 from cats.cats_constants import ANIMAL_CREATED, ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_SHELTER, ANIMAL_LOCATION_STATUS, \
     GROUP_ID, ANIMAL_LOCATION_STATUS_DEAD, GROUP_INSTANCE_SHELTER_NAME
-from catsekb.constants import CAPTION_ANIMAL_LIST_DEFAULT, INDEX, ANIMALS, PAGE, PER_PAGE, PER_PAGE_ALL, \
-    SHOW_FILTER_KEY, DJ_PK, DJ_PAGE, DJ_OBJECT
+from catsekb.constants import CAPTION_ANIMAL_LIST_DEFAULT, INDEX, ANIMALS, GET_PAR_KEY_PAGE, GET_PAR_KEY_PER_PAGE, GET_PAR_VAL_PAGE, \
+    GET_PAR_KEY_FILTER, DJ_PK, DJ_PAGE, DJ_OBJECT
 from cats.forms import FilterForm
 from cats.models import Animal, Group
 from cats.query import ANIMAL_QUERY_KEYS
@@ -48,7 +48,7 @@ class AnimalListView(ListView, FormMixin):
         show_permission = self.request.user.is_authenticated()
         query = self.request.GET.dict()
         query.update(kwargs)
-        self.show_filter = query.pop(SHOW_FILTER_KEY, False)
+        self.show_filter = query.pop(GET_PAR_KEY_FILTER, False)
         if self.show_filter and not(set(query) & set(ANIMAL_QUERY_KEYS)):
             res = Animal.objects.none()
         else:
@@ -76,17 +76,17 @@ class AnimalListView(ListView, FormMixin):
         if update_dict:
             query.update(update_dict)
         if self.show_filter:
-            query[SHOW_FILTER_KEY] = 1
+            query[GET_PAR_KEY_FILTER] = 1
         if query:
             return '?' + query.urlencode()
         else:
             return ''
 
     def get_paginate_by(self, queryset):
-        per_page = self.request.GET.get(PER_PAGE)
+        per_page = self.request.GET.get(GET_PAR_KEY_PER_PAGE)
         if per_page is not None:
-            if per_page == PER_PAGE_ALL:
-                self.kwargs[PAGE] = 1
+            if per_page == GET_PAR_VAL_PAGE:
+                self.kwargs[GET_PAR_KEY_PAGE] = 1
                 return len(queryset)
             else:
                 try:
