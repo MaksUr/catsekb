@@ -50,18 +50,18 @@
                                     {# previous #}
                                     {% if page_obj.has_previous %}
                                         {% with prev_id=page_obj.paginator.object_list|return_item_by_index:page_obj.previous_page_number %}
-                                            <a href="?{{ request.GET|change_page:page_obj.previous_page_number }}#anchor_cat" class="tag pag_gallery">Назад</a>
+                                            <a href="?{{ request.GET|change_page:page_obj.previous_page_number }}#gallery_cat" class="tag pag_gallery">Назад</a>
                                         {% endwith %}
                                     {% else %}
                                         <a class="tag no_active pag_gallery">Назад</a>
                                     {% endif %}
 
-                                    <a href="?per_page=all{% if request.GET.urlencode %}&{{ request.GET.urlencode }}{% endif %}" class="tag pag_gallery">Показать всех</a>                    
+                                    <a href="?per_page=all{% if request.GET.urlencode %}&{{ request.GET.urlencode }}{% endif %}#gallery_cat" class="tag pag_gallery">Показать всех</a>                    
 
                                     {# next #}
                                     {% if page_obj.has_next %}
                                         {% with next_id=page_obj.paginator.object_list|return_item_by_index:page_obj.next_page_number %}
-                                            <a href="?{{ request.GET|change_page:page_obj.next_page_number }}#anchor_cat" class="tag pag_gallery">Далее</a>
+                                            <a href="?{{ request.GET|change_page:page_obj.next_page_number }}#gallery_cat" class="tag pag_gallery">Далее</a>
                                         {% endwith %}
                                     {% else %}
                                         <a class="tag no_active pag_gallery">Далее</a>
