@@ -7,24 +7,22 @@
 {% extends "cats/base.html" %}
 
 {% block base_body %}
-	<section class="font line_height">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-4">
-                    {% include 'cats/widgets/caption.html' with caption="Важно!" %}
-                    {% include 'articles/widgets/article_preview.html' with object=find_cat %}
-                    {% for object in object_list %}
-                        {% include 'cats/widgets/caption.html' with caption=object.name %}
-                        {% for article in object.article_set.all|slice:":3" %}
-                            {% if forloop.counter < 3 %}
-                                {% include 'articles/widgets/article_preview.html' with object=article %}
-                            {% else %}
-                                <a href="{{ object.get_absolute_url }}">Смотреть еще</a>
-                            {% endif %}
-                        {% endfor %}
-                    {% endfor %}
-			    </div>
-			</div>
-		</div>
-    </section>
+	<section class="font mid">   
+    {% include 'cats/widgets/caption.html' with caption="Важно!" %}
+    {% include 'articles/widgets/article_preview.html' with object=find_cat %}
+    </section>   
+    
+        {% for object in object_list %}
+        	<section class="font mid">    
+            {% include 'cats/widgets/caption.html' with caption=object.name %}
+            {% for article in object.article_set.all|slice:":3" %}
+                {% if forloop.counter < 3 %}
+                    {% include 'articles/widgets/article_preview.html' with object=article %}
+                {% else %}
+                    <a href="{{ object.get_absolute_url }}#anchor_cat" class="tag">Смотреть еще</a>
+                {% endif %}
+            {% endfor %}
+        	</section>
+        {% endfor %}
+    
 {% endblock base_body %}

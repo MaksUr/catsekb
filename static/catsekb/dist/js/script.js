@@ -25,7 +25,7 @@ function ready() {
 		}
 	} 
 	
-	if (widthScreen < 767) {
+	if (widthScreen < 751) {
 		console.log(widthScreen);
 		colorAndHeight(true);
 		burger.addEventListener('click', mobileNav);
