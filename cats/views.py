@@ -1,13 +1,18 @@
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.shortcuts import render
+from django.urls import reverse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormMixin
 
-from cats.cats_constants import ANIMAL_CREATED, ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_SHELTER, ANIMAL_LOCATION_STATUS, \
-    GROUP_ID, ANIMAL_LOCATION_STATUS_DEAD, GROUP_INSTANCE_SHELTER_NAME
-from catsekb.constants import CAPTION_ANIMAL_LIST_DEFAULT, INDEX, ANIMALS, GET_PAR_KEY_PAGE, GET_PAR_KEY_PER_PAGE, GET_PAR_VAL_PAGE, \
-    GET_PAR_KEY_FILTER, DJ_PK, DJ_PAGE, DJ_OBJECT
+from cats.cats_constants import ANIMAL_CREATED, ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_SHELTER, \
+    ANIMAL_LOCATION_STATUS, \
+    GROUP_ID, ANIMAL_LOCATION_STATUS_DEAD, GROUP_INSTANCE_SHELTER_NAME, GROUP_INSTANCE_HOME_NAME, \
+    GROUP_INSTANCE_DEAD_NAME, GROUP_INSTANCE_SHELTER_ID, GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, \
+    GROUP_ANIMALS_PREVIEW_COUNT
+from catsekb.constants import CAPTION_ANIMAL_LIST_DEFAULT, INDEX, ANIMALS, GET_PAR_KEY_PAGE, GET_PAR_KEY_PER_PAGE, \
+    GET_PAR_VAL_PAGE, \
+    GET_PAR_KEY_FILTER, DJ_PK, DJ_PAGE, DJ_OBJECT, URL_NAME_GROUP
 from cats.forms import FilterForm
 from cats.models import Animal, Group
 from cats.query import ANIMAL_QUERY_KEYS
@@ -148,8 +153,33 @@ class GroupListView(ListView):
         return group_list
 
     def get_context_data(self, **kwargs):
+        show_permission = self.request.user.is_authenticated()
         context = ListView.get_context_data(self, **kwargs)
-        context.update(get_base_context(show_permission=self.request.user.is_authenticated(), active_menu=ANIMALS))
+        context.update(get_base_context(show_permission=show_permission, active_menu=ANIMALS))
+
+        context['shelter_caption'] = GROUP_INSTANCE_SHELTER_NAME
+        context['shelter_url'] = reverse(URL_NAME_GROUP, kwargs={DJ_PK: GROUP_INSTANCE_SHELTER_ID})
+        context['shelter_animals'] = get_animals_from_query(
+            query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_SHELTER},
+            show_permission=show_permission
+        ).order_by('?')[:GROUP_ANIMALS_PREVIEW_COUNT]
+
+        context['home_caption'] = GROUP_INSTANCE_HOME_NAME
+        context['home_url'] = reverse(URL_NAME_GROUP, kwargs={DJ_PK: GROUP_INSTANCE_HOME_ID})
+        context['home_animals'] = get_animals_from_query(
+            query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_HOME},
+            show_permission=show_permission
+        ).order_by('?')[:GROUP_ANIMALS_PREVIEW_COUNT]
+
+        if show_permission is True:
+            context['dying_caption'] = GROUP_INSTANCE_DEAD_NAME
+            context['dying_url'] = reverse(URL_NAME_GROUP, kwargs={DJ_PK: GROUP_INSTANCE_DEAD_ID})
+            context['dying_animals'] = get_animals_from_query(
+                query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_DEAD},
+                show_permission=show_permission
+            ).order_by('?')[:GROUP_ANIMALS_PREVIEW_COUNT]
+
+        context['groups'] = get_objects_from_query(model_cls=Group, query=dict(), show_permission=show_permission)
         return context
 
 
