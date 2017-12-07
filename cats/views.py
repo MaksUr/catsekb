@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormMixin
 
-from articles.article_constants import ARTICLES_DEFAULT, ARTICLE_FIND_CAT_ID, URL_NAME_FIND_CAT
+from articles.article_constants import ARTICLES_DEFAULT, ARTICLE_FIND_CAT_ID, URL_NAME_FIND_CAT, CAPTION
 from articles.models import Subject
 from cats.constants import GROUP_INSTANCE_ALL_ID, ANIMAL_CREATED, ANIMAL_SHOW, DJ_PK, DJ_PAGE, DJ_OBJECT, \
     GROUP_SHOW, ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_SHELTER, GROUP_INSTANCE_ALL_NAME, \
@@ -121,7 +121,7 @@ def get_base_context(active_menu, show_permission=False):
     animal_filter_url['url'] = "{url}?{key}=1".format(url=reverse(URL_NAME_ANIMALS), key=SHOW_FILTER_KEY)
 
     find_cat_url = dict()
-    find_cat_url['caption'] = ARTICLES_DEFAULT[ARTICLE_FIND_CAT_ID]
+    find_cat_url['caption'] = ARTICLES_DEFAULT[ARTICLE_FIND_CAT_ID][CAPTION]
     find_cat_url['url'] = reverse(URL_NAME_FIND_CAT)
 
     articles = [find_cat_url] + list(Subject.objects.all())

@@ -4,7 +4,7 @@ from django.urls import reverse
 from articles.article_constants import ARTICLE_KEY_TITLE, ARTICLE_KEY_TEXT, ARTICLE_KEY_CREATED, ARTICLE_KEY_UPDATED, \
     ARTICLE_KEY_SHOW, AUTHOR_KEY_NAME, ARTICLE_VERBOSE_NAME, ARTICLE_VERBOSE_NAME_PLURAL, AUTHOR_VERBOSE_NAME, \
     AUTHOR_VERBOSE_NAME_PLURAL, SUBJECT_KEY_NAME, SUBJECT_VERBOSE_NAME, SUBJECT_VERBOSE_NAME_PLURAL, URL_NAME_SUBJECT, \
-    URL_NAME_ARTICLE
+    URL_NAME_ARTICLE, ARTICLES_DEFAULT, CAPTION, URL
 from articles.validators import article_name_validator
 from cats.constants import DJ_PK
 
@@ -51,4 +51,7 @@ class Article(Model):
         return '{title}: {text}...'.format(title=self.title, text=self.text[:15])
 
     def get_absolute_url(self):
-        return reverse(URL_NAME_ARTICLE, kwargs={DJ_PK: self.id})
+        if ARTICLES_DEFAULT.get(self.id) is not None:
+            return reverse(ARTICLES_DEFAULT[self.id][URL])
+        else:
+            return reverse(URL_NAME_ARTICLE, kwargs={DJ_PK: self.id})

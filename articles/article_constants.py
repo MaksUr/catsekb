@@ -1,3 +1,7 @@
+CAPTION = 'caption'
+NAME = 'name'
+URL = 'url'
+
 DJ_ID = 'id'
 
 # URLs
@@ -70,6 +74,12 @@ ARTICLE_CONTACTS_ID = 1
 ARTICLE_FIND_CAT_ID = 2
 
 ARTICLES_DEFAULT = {
-    ARTICLE_CONTACTS_ID: 'Контакты',
-    ARTICLE_FIND_CAT_ID: 'Что делать я нашел кота',
+    ARTICLE_CONTACTS_ID: {
+        CAPTION: 'Контакты',
+        URL: URL_NAME_CONTACTS,
+    },
+    ARTICLE_FIND_CAT_ID: {
+        CAPTION: 'Что делать я нашел кота',
+        URL: URL_NAME_FIND_CAT,
+    }
 }
