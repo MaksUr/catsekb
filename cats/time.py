@@ -3,7 +3,7 @@ from datetime import date
 import re
 from dateutil.relativedelta import relativedelta
 
-from cats.constants import ANIMAL_YEARS, ANIMAL_MONTHS, ANIMAL_DAYS
+from cats.cats_constants import ANIMAL_YEARS, ANIMAL_MONTHS, ANIMAL_DAYS
 
 PATTERN_SEARCH_YEARS_AGE = re.compile(r'(?<=y)(?P<years>\d+)')
 PATTERN_SEARCH_MONTHS_AGE = re.compile(r'(?<=m)(?P<months>\d+)')

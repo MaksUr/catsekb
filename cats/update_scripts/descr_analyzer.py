@@ -1,7 +1,7 @@
 import re
 from datetime import date
 
-from cats.constants import ANIMAL_TAG, ANIMAL_DATE_OF_BIRTH, ANIMAL_BIRTHDAY_PRECISION, \
+from cats.cats_constants import ANIMAL_TAG, ANIMAL_DATE_OF_BIRTH, ANIMAL_BIRTHDAY_PRECISION, \
     ANIMAL_BIRTHDAY_PRECISION_DAY, ANIMAL_BIRTHDAY_PRECISION_MONTH, \
     ANIMAL_BIRTHDAY_PRECISION_YEAR, ANIMAL_SHELTER_DATE
 from cats.time import get_date_from_age

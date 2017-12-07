@@ -6,7 +6,7 @@ from django.urls import reverse
 from articles.article_constants import ARTICLES_DEFAULT, ARTICLE_FIND_CAT_ID, CAPTION, URL_NAME_FIND_CAT
 from articles.models import Subject
 
-from cats.constants import SHOW, URL_NAME_ANIMALS, GROUP_INSTANCE_ALL_ID, GROUP_INSTANCE_SHELTER_ID, \
+from cats.cats_constants import SHOW, URL_NAME_ANIMALS, GROUP_INSTANCE_ALL_ID, GROUP_INSTANCE_SHELTER_ID, \
     GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, GROUP_MAPPING, PRIVATE_GROUP, SHOW_FILTER_KEY
 from cats.models import Group
 

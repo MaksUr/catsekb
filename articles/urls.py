@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
 from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_FIND_CAT_ID
-from cats.constants import DJ_PK
+from cats.cats_constants import DJ_PK
 from . import views
 
 urlpatterns = [

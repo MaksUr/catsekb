@@ -6,7 +6,7 @@ from articles.article_constants import ARTICLE_KEY_TITLE, ARTICLE_KEY_TEXT, ARTI
     AUTHOR_VERBOSE_NAME_PLURAL, SUBJECT_KEY_NAME, SUBJECT_VERBOSE_NAME, SUBJECT_VERBOSE_NAME_PLURAL, URL_NAME_SUBJECT, \
     URL_NAME_ARTICLE, ARTICLES_DEFAULT, CAPTION, URL
 from articles.validators import article_name_validator
-from cats.constants import DJ_PK
+from cats.cats_constants import DJ_PK
 
 
 class Author(Model):

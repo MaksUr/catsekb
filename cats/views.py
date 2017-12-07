@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormMixin
 
-from cats.constants import ANIMAL_CREATED, DJ_PK, DJ_PAGE, DJ_OBJECT, \
+from cats.cats_constants import ANIMAL_CREATED, DJ_PK, DJ_PAGE, DJ_OBJECT, \
     ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_SHELTER, ANIMAL_LOCATION_STATUS, \
     CAPTION_ANIMAL_LIST_DEFAULT, GROUP_ID, ANIMAL_LOCATION_STATUS_DEAD, INDEX, ANIMALS, \
     GROUP_INSTANCE_SHELTER_NAME, SHOW_FILTER_KEY, PER_PAGE, PER_PAGE_ALL, PAGE

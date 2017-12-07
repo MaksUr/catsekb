@@ -1,4 +1,4 @@
-from cats.constants import ANIMAL_NAME, ANIMAL_LOCATION_STATUS, ANIMAL_SEX, ANIMAL_DESCRIPTION
+from cats.cats_constants import ANIMAL_NAME, ANIMAL_LOCATION_STATUS, ANIMAL_SEX, ANIMAL_DESCRIPTION
 from cats.update_scripts.descr_analyzer import get_info_from_description
 from cats.update_scripts.name_analyzer import get_info_from_title, get_sex
 from cats.updater import TITLE, RESPONSE, DESCRIPTION, CREATED
