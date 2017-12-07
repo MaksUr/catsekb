@@ -6,10 +6,17 @@
 {% extends "cats/base.html" %}
 
 {% block base_body %}
-	<section>
+	<section class="font line_height">
 		{% include 'cats/widgets/caption.html' with caption="Полезная информация" %}
-	    {% for object in object_list %}
-	        <p><a href="{{ object.get_absolute_url }}#anchor_cat">{{ object.name }}</a>Статей: {{ object.article_set.all.count }}</p>
-	    {% endfor %}
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-4">
+			    {% for object in object_list %}
+			        <a href="{{ object.get_absolute_url }}#anchor_cat" class="hashtag">{{ object.name }}</a>
+			        <p>Статей: {{ object.article_set.all.count }}</p>
+			    {% endfor %}
+			    </div>
+			</div>
+		</div>
     </section>
 {% endblock base_body %}
