@@ -1,9 +1,12 @@
 {# field #}
 
-{% for choice in field.field.choices %}
-    <p>id_for_label: {{ form.sex.id_for_label }}
-    <p>{{ choice }}</p>
-    {% if forloop.first %}
-        : checked
-    {% endif %}
-{% endfor %}
+<label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+<ul id="id_{{ field.name }}">
+	{% for choice in field.field.choices %}
+		<li>
+			<label for="id_{{ field.name }}_{{ forloop.counter0 }}">
+				<input class="{{ field.name }}" id="id_{{ field.name }}_{{ forloop.counter0 }}" name="{{ field.name }}" type="radio" value="{{ choice.0 }}"{% if forloop.first %} checked="checked" {% endif %}> {{ choice.1 }}
+			</label>
+		</li>	
+	{% endfor %}
+</ul>

@@ -15,45 +15,17 @@
                             {{ form.name.as_widget }}
                         </div>
                         <div class="form_elem">
-                            {{ form.sex.label_tag }}
-                            {{ form.sex.as_widget }}
                             {% include 'cats/widgets/form_field.html' with field=form.sex %}
                         </div>
                         <div class="form_elem">
-                            {{ form.age_distance.label_tag }}
-                            {{ form.age_distance.as_widget }}
+                            {% include 'cats/widgets/form_field.html' with field=form.location_status %}
+                        </div> 
+                        <div class="form_elem">
                             {% include 'cats/widgets/form_field.html' with field=form.age_distance %}
                         </div>
                         <div class="form_elem">
-                            {{ form.shelter_distance.label_tag }}
-                            {{ form.shelter_distance.as_widget }}
                             {% include 'cats/widgets/form_field.html' with field=form.shelter_distance %}
-                        </div>
-                        <div class="form_elem">
-                            {{ form.location_status.label_tag }}
-                            {{ form.location_status.as_widget }}
-                            {% include 'cats/widgets/form_field.html' with field=form.shelter_distancelocation_status %}
-                        </div>
-
-{#                        <p>++++++++++++</p>#}
-{#                        <p>Пример:</p>#}
-{#<p>data: {{ form.sex.data }}#}
-{#<p>field: {{ form.sex.field }}#}
-{#<p>field_choices: {{ form.sex.field.choices }}#}
-{#<p>field_choices0: {{ form.sex.field.choices.0 }}#}
-{#<p>field_choices0: {{ form.sex.field.choices.0 }}#}
-{#<p>field_choices0: {{ form.sex.field.choices.0 }}#}
-{#<p>help_text: {{ form.sex.help_text }}#}
-{#<p>html_name: {{ form.sex.html_name }}#}
-{#<p>id_for_label: {{ form.sex.id_for_label }}#}
-{#<p>label: {{ form.sex.label }}#}
-{#<p>name: {{ form.sex.name }}#}
-{#<p>as_hidden: {{ form.sex.as_hidden }}#}
-{#<p>as_widget: {{ form.sex.as_widget }}#}
-{#<p>css_classes: {{ form.sex.css_classes }}#}
-{#<p>label_tag: {{ form.sex.label_tag }}#}
-{#<p>value: {{ form.sex.value }}#}
-{#                        <p>++++++++++++</p>#}
+                        </div>                            
                     <p class="font mid">
                         <input type="submit" value="Найти любимца" class="but">
                     </p>
