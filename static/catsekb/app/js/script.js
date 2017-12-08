@@ -8,7 +8,7 @@ var top_nav = document.querySelector('.top_nav'),
 
 document.addEventListener("DOMContentLoaded", ready);
 
-const canHover = !(matchMedia('(hover: none)').matches);
+var canHover = !(matchMedia('(hover: none)').matches);
 
 function ready() {
 	if(canHover) {
@@ -85,19 +85,19 @@ var formShel = document.documentElement.querySelectorAll('.shelter_distance'),
     formLoc = document.documentElement.querySelectorAll('.location_status');
 
 for (i = 0; i <= formLoc.length - 1; i++) {
-			formLoc[i].addEventListener('click', elemBlock.bind(this, i));
-		}
+		formLoc[i].addEventListener('click', shelDisDisable.bind(this, i));
+	}
 
 
-function elemBlock(i) {
-	if (formLoc[2].checked == false) {
-	for(i = 0; i <= formShel.length - 1; i++) {
-		formShel[i].disabled = 'disable';
+function shelDisDisable(i) {
+	if (formLoc[2].checked == true || formLoc[0].checked == true) {
+		for(i = 0; i <= formShel.length - 1; i++) {
+			formShel[i].disabled = '';
 		} 
 	} else {
 		for(i = 0; i <= formShel.length - 1; i++) {
-			formShel[i].disabled = '';
-		}
+			formShel[i].disabled = 'disable';
+		} 
 	}
 }
 

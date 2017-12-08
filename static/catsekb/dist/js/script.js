@@ -8,7 +8,7 @@ var top_nav = document.querySelector('.top_nav'),
 
 document.addEventListener("DOMContentLoaded", ready);
 
-const canHover = !(matchMedia('(hover: none)').matches);
+var canHover = !(matchMedia('(hover: none)').matches);
 
 function ready() {
 	if(canHover) {
