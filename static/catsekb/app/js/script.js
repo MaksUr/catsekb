@@ -90,7 +90,7 @@ for (i = 0; i <= formLoc.length - 1; i++) {
 
 
 function elemBlock(i) {
-	if (formLoc[1].checked == false) {
+	if (formLoc[2].checked == false) {
 	for(i = 0; i <= formShel.length - 1; i++) {
 		formShel[i].disabled = 'disable';
 		} 
