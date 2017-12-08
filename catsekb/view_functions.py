@@ -58,7 +58,7 @@ def get_default_group_list(show_permission=False):
     return default_group_list
 
 
-def get_base_context(active_menu, show_permission=False):
+def get_base_context(active_menu, extra_title, show_permission=False):
     default_group_list = get_default_group_list(show_permission=show_permission)
     user_group_list = get_objects_from_query(model_cls=Group, query=dict(), show_permission=show_permission)
 
@@ -80,7 +80,8 @@ def get_base_context(active_menu, show_permission=False):
     context = {
         'group_list': [animal_filter_url] + default_group_list + list(user_group_list),
         'helpful_info_list': [find_cat_url] + list(user_articles),
-        'active_menu': active_menu
+        'active_menu': active_menu,
+        'extra_title': extra_title,
     }
     return context
 

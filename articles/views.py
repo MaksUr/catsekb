@@ -4,7 +4,8 @@ from django.views.generic import DetailView, ListView
 from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_TITLE, ARTICLES_DEFAULT_MAPPING, ARTICLE_FIND_CAT_ID, \
     CAPTION
 from articles.models import Subject, Article
-from catsekb.constants import ARTICLES, CONTACTS, DJ_ID
+from catsekb.constants import ARTICLES, CONTACTS, DJ_ID, URL_NAME_SUBJECTS_TITLE, URL_NAME_SUBJECT_TITLE, \
+    URL_NAME_ARTICLE_TITLE
 from catsekb.view_functions import get_base_context
 
 
@@ -14,7 +15,7 @@ class SubjectListView(ListView):
     def get_context_data(self, **kwargs):
         show_permission = self.request.user.is_authenticated()
         context = ListView.get_context_data(self, **kwargs)
-        context.update(get_base_context(show_permission=show_permission, active_menu=ARTICLES))
+        context.update(get_base_context(show_permission=show_permission, active_menu=ARTICLES, extra_title=URL_NAME_SUBJECTS_TITLE))
         article, updated = Article.objects.get_or_create(
             id=ARTICLE_FIND_CAT_ID, defaults={
                 ARTICLE_TITLE: ARTICLES_DEFAULT_MAPPING[ARTICLE_FIND_CAT_ID][CAPTION],
@@ -31,7 +32,11 @@ class SubjectDetailView(DetailView):
     def get_context_data(self, **kwargs):
         show_permission = self.request.user.is_authenticated()
         context = DetailView.get_context_data(self, **kwargs)
-        context.update(get_base_context(show_permission=show_permission, active_menu=ARTICLES))
+        context.update(
+            get_base_context(
+                show_permission=show_permission,
+                active_menu=ARTICLES,
+                extra_title=URL_NAME_SUBJECT_TITLE.format(subj=self.object.name)))
         return context
 
 
@@ -42,7 +47,13 @@ class ArticleDetailView(DetailView):
     def get_context_data(self, **kwargs):
         show_permission = self.request.user.is_authenticated()
         context = DetailView.get_context_data(self, **kwargs)
-        context.update(get_base_context(show_permission=show_permission, active_menu=self.active_menu))
+        context.update(
+            get_base_context(
+                show_permission=show_permission,
+                active_menu=self.active_menu,
+                extra_title=URL_NAME_ARTICLE_TITLE.format(title=self.object.title)
+            )
+        )
         return context
 
 

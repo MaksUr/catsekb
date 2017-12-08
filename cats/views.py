@@ -9,10 +9,11 @@ from cats.cats_constants import ANIMAL_CREATED, ANIMAL_LOCATION_STATUS_HOME, ANI
     ANIMAL_LOCATION_STATUS, \
     GROUP_ID, ANIMAL_LOCATION_STATUS_DEAD, GROUP_INSTANCE_SHELTER_NAME, GROUP_INSTANCE_HOME_NAME, \
     GROUP_INSTANCE_DEAD_NAME, GROUP_INSTANCE_SHELTER_ID, GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, \
-    GROUP_ANIMALS_PREVIEW_COUNT
+    GROUP_ANIMALS_PREVIEW_COUNT, ANIMAL_LOCATION_STATUS_CHOICES_D, GROUP_MAPPING
 from catsekb.constants import CAPTION_ANIMAL_LIST_DEFAULT, INDEX, ANIMALS, GET_PAR_KEY_PAGE, GET_PAR_KEY_PER_PAGE, \
     GET_PAR_VAL_PAGE, \
-    GET_PAR_KEY_FILTER, DJ_PK, DJ_PAGE, DJ_OBJECT, URL_NAME_GROUP
+    GET_PAR_KEY_FILTER, DJ_PK, DJ_PAGE, DJ_OBJECT, URL_NAME_GROUP, NAME, DESCRIPTION, URL_NAME_GROUPS_TITLE, \
+    URL_NAME_INDEX_TITLE
 from cats.forms import FilterForm
 from cats.models import Animal, Group
 from cats.query import ANIMAL_QUERY_KEYS
@@ -49,11 +50,20 @@ class AnimalListView(ListView, FormMixin):
     description = ''
     show_filter = False
 
+    def set_description_and_caption(self, query):
+        if len(query) == 1 and ANIMAL_LOCATION_STATUS in query:
+            try:
+                self.caption = GROUP_MAPPING[query[ANIMAL_LOCATION_STATUS]][NAME]
+                self.description = GROUP_MAPPING[query[ANIMAL_LOCATION_STATUS]][DESCRIPTION]
+            except KeyError:
+                pass
+
     def get_queryset(self, **kwargs):
         show_permission = self.request.user.is_authenticated()
         query = self.request.GET.dict()
         query.update(kwargs)
         self.show_filter = query.pop(GET_PAR_KEY_FILTER, False)
+        self.set_description_and_caption(query)
         if self.show_filter and not(set(query) & set(ANIMAL_QUERY_KEYS)):
             res = Animal.objects.none()
         else:
@@ -63,9 +73,9 @@ class AnimalListView(ListView, FormMixin):
     def get_context_data(self, **kwargs):
         show_permission = self.request.user.is_authenticated()
         context = ListView.get_context_data(self, **kwargs)
-        context.update(get_base_context(show_permission=show_permission, active_menu=ANIMALS))
         context['filter_string'] = self.get_filter_string()
         context['caption'] = self.caption
+        context['description'] = self.description
         if self.show_filter:
             u = FormMixin.get_context_data(self, **kwargs)
             context.update(u)
@@ -73,6 +83,8 @@ class AnimalListView(ListView, FormMixin):
         else:
             context['description'] = self.description
             del context['form']
+        extra_title = context['caption'] + ' ' + context['description']
+        context.update(get_base_context(show_permission=show_permission, active_menu=ANIMALS, extra_title=extra_title))
         return context
 
     def get_filter_string(self, update_dict=None):
@@ -114,7 +126,7 @@ class AnimalDetailView(DetailView):
     def get_context_data(self, **kwargs):
         show_permission = self.request.user.is_authenticated()
         context = DetailView.get_context_data(self, **kwargs)
-        context.update(get_base_context(show_permission=show_permission, active_menu=ANIMALS))
+        context.update(get_base_context(show_permission=show_permission, active_menu=ANIMALS, extra_title=self.object.__str__()))
         animal = kwargs[DJ_OBJECT]
         if show_permission is False and animal.show is False:
             raise Http404("Нет прав для просмотра этой страницы")
@@ -155,7 +167,7 @@ class GroupListView(ListView):
     def get_context_data(self, **kwargs):
         show_permission = self.request.user.is_authenticated()
         context = ListView.get_context_data(self, **kwargs)
-        context.update(get_base_context(show_permission=show_permission, active_menu=ANIMALS))
+        context.update(get_base_context(show_permission=show_permission, active_menu=ANIMALS, extra_title=URL_NAME_GROUPS_TITLE))
 
         context['shelter_caption'] = GROUP_INSTANCE_SHELTER_NAME
         context['shelter_url'] = reverse(URL_NAME_GROUP, kwargs={DJ_PK: GROUP_INSTANCE_SHELTER_ID})
@@ -185,6 +197,11 @@ class GroupListView(ListView):
 
 class GroupDetailView(AnimalListView):
 
+    def set_description_and_caption(self, query):
+        group = get_group(group_id=self.kwargs[DJ_PK], show_permission=self.request.user.is_authenticated())
+        self.description = group.description
+        self.caption = group.name
+
     def get_queryset(self):
         res = super(GroupDetailView, self).get_queryset(group_id=self.kwargs[DJ_PK])
         return res
@@ -205,7 +222,7 @@ class GroupDetailView(AnimalListView):
 
 def index_view(request):
     show_permission = request.user.is_authenticated()
-    context = get_base_context(show_permission=show_permission, active_menu=INDEX)
+    context = get_base_context(show_permission=show_permission, active_menu=INDEX, extra_title=URL_NAME_INDEX_TITLE)
     query = {ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_SHELTER}
     shelter_animals = get_animals_from_query(
         query=query, show_permission=show_permission
