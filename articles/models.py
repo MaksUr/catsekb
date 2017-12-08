@@ -3,7 +3,8 @@ from django.urls import reverse
 
 from articles.article_constants import ARTICLE_KEY_TITLE, ARTICLE_KEY_TEXT, ARTICLE_KEY_CREATED, ARTICLE_KEY_UPDATED, \
     ARTICLE_KEY_SHOW, AUTHOR_KEY_NAME, ARTICLE_VERBOSE_NAME, ARTICLE_VERBOSE_NAME_PLURAL, AUTHOR_VERBOSE_NAME, \
-    AUTHOR_VERBOSE_NAME_PLURAL, SUBJECT_KEY_NAME, SUBJECT_VERBOSE_NAME, SUBJECT_VERBOSE_NAME_PLURAL, ARTICLES_DEFAULT_MAPPING, CAPTION, URL
+    AUTHOR_VERBOSE_NAME_PLURAL, SUBJECT_KEY_NAME, SUBJECT_VERBOSE_NAME, SUBJECT_VERBOSE_NAME_PLURAL, \
+    ARTICLES_DEFAULT_MAPPING, URL, SUBJECT_KEY_SHOW
 from articles.validators import article_name_validator
 from catsekb.constants import DJ_PK, URL_NAME_SUBJECT, URL_NAME_ARTICLE
 
@@ -21,6 +22,7 @@ class Author(Model):
 
 class Subject(Model):
     name = CharField(SUBJECT_KEY_NAME, max_length=120, unique=True)
+    show = BooleanField(SUBJECT_KEY_SHOW, default=True)
 
     class Meta:
         verbose_name = SUBJECT_VERBOSE_NAME

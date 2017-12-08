@@ -60,14 +60,13 @@ class Animal(Model):
     # fields
     name = CharField(ANIMAL_KEY_NAME, max_length=32, blank=True, default='')
     description = TextField(ANIMAL_KEY_DESCRIPTION, blank=True, default='')
-    sex = CharField(ANIMAL_KEY_SEX, max_length=1, choices=ANIMAL_SEX_CHOICES, blank=True, default='')
+    sex = CharField(ANIMAL_KEY_SEX, max_length=1, choices=ANIMAL_SEX_CHOICES[1:], blank=True, default='')
     birthday_precision = CharField(
         max_length=1, choices=ANIMAL_BIRTHDAY_PRECISION_CHOICES, null=True, default=''
     )
     tag = CharField(ANIMAL_KEY_TAG, max_length=32, blank=True, default='')
     vk_album_id = IntegerField(ANIMAL_KEY_VK_ALBUM_ID, blank=True, default=None, null=True)
     date_of_birth = DateField(null=True, default=None, blank=True)
-    # TODO: Применить данное поле, добавить метод отображение возроста по годам, месяцам и дням
     shelter_date = DateField(ANIMAL_KEY_SHELTER_DATE, null=True, default=None, blank=True)
     group = ForeignKey(Group, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)
     show = BooleanField(ANIMAL_KEY_SHOW, default=True)
@@ -75,7 +74,7 @@ class Animal(Model):
     location_status = CharField(
         ANIMAL_KEY_LOCATION_STATUS,
         max_length=1,
-        choices=ANIMAL_LOCATION_STATUS_CHOICES,
+        choices=ANIMAL_LOCATION_STATUS_CHOICES[1:],
         default='',
         blank=True
     )
