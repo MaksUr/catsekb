@@ -7,7 +7,7 @@ from articles.article_constants import ARTICLES_DEFAULT_MAPPING, ARTICLE_FIND_CA
 from articles.models import Subject
 
 from cats.cats_constants import GROUP_INSTANCE_ALL_ID, GROUP_INSTANCE_SHELTER_ID, \
-    GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, GROUP_MAPPING, PRIVATE_GROUP
+    GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, GROUP_MAPPING, PRIVATE_GROUP, ANIMAL_LOCATION_STATUS
 from catsekb.constants import SHOW, GET_PAR_KEY_FILTER, URL_NAME_ANIMALS, URL_NAME_FIND_CAT
 from cats.models import Group
 
@@ -64,7 +64,12 @@ def get_base_context(active_menu, show_permission=False):
 
     animal_filter_url = dict()
     animal_filter_url['caption'] = 'Поиск'
-    animal_filter_url['url'] = "{url}?{key}=1".format(url=reverse(URL_NAME_ANIMALS), key=GET_PAR_KEY_FILTER)
+    animal_filter_url['url'] = "{url}?{key}=1&{shelter_key}={shelter_value}".format(
+        url=reverse(URL_NAME_ANIMALS),
+        key=GET_PAR_KEY_FILTER,
+        shelter_key=ANIMAL_LOCATION_STATUS,
+        shelter_value=GROUP_INSTANCE_SHELTER_ID
+    )
 
     find_cat_url = dict()
     find_cat_url['caption'] = ARTICLES_DEFAULT_MAPPING[ARTICLE_FIND_CAT_ID][CAPTION]
