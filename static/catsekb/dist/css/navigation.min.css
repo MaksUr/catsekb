@@ -33,7 +33,7 @@
   transition: all .55s 0s ease-out; }
 
 .menu_opening > li {
-  margin: 10px 15px 0 0; }
+  margin: 10px 10px 0 0; }
 
 .menu_opening li:first-child {
   margin-top: 0; }
@@ -49,11 +49,12 @@
 /* <---------- .top_nav BEGIN ----------> */
 .top_nav {
   width: 100%;
-  height: 0px;
+  height: 60px;
   background-color: rgba(255, 255, 255, 0.8);
   -webkit-transition: height 1s, opacity 1s;
   -o-transition: height 1s, opacity 1s;
-  transition: height 1s, opacity 1s;
+  transition: opacity 1s, transform .7s;
+  transform: translateY(-120%);
   opacity: 0;
   position: fixed;
   top: 0;
@@ -61,33 +62,18 @@
   z-index: 112; }
 
 .top_nav_opened {
-  height: 60px;
   -webkit-transition: height 0.55s cubic-bezier(0.1, 0.68, 0.58, 1), -webkit-transform 0.55s cubic-bezier(0.1, 0.68, 0.58, 1);
   transition: height 0.55s cubic-bezier(0.1, 0.68, 0.58, 1), -webkit-transform 0.55s cubic-bezier(0.1, 0.68, 0.58, 1);
   -o-transition: height 0.55s cubic-bezier(0.1, 0.68, 0.58, 1), transform 0.55s cubic-bezier(0.1, 0.68, 0.58, 1);
   transition: height 0.55s cubic-bezier(0.1, 0.68, 0.58, 1), transform 0.55s cubic-bezier(0.1, 0.68, 0.58, 1);
   transition: height 0.55s cubic-bezier(0.1, 0.68, 0.58, 1), transform 0.55s cubic-bezier(0.1, 0.68, 0.58, 1), -webkit-transform 0.55s cubic-bezier(0.1, 0.68, 0.58, 1);
-  opacity: 1; }
-
-.nav_bar {
-  -webkit-transition: -webkit-transform .57s;
-  transition: -webkit-transform .57s;
-  -o-transition: transform .57s;
-  transition: transform .57s;
-  transition: transform .57s, -webkit-transform .57s;
-  -webkit-transform: translateY(-120%);
-      -ms-transform: translateY(-120%);
-          transform: translateY(-120%); }
-
-.nav_bar_opened {
-  -webkit-transform: translate(0%);
-      -ms-transform: translate(0%);
-          transform: translate(0%); }
+  opacity: 1;
+  transform: translateY(0%);}
 
 .top_nav.top_nav_increase_photo, .mobile_list.top_nav_increase_photo {
   -webkit-transform: translateY(-100%);
       -ms-transform: translateY(-100%);
-          transform: translateY(-100%); }
+          transform: translateY(-120%); }
 
 .top_logo {
   height: 50px;
@@ -101,7 +87,7 @@
   padding: 0;
   background-color: rgba(255, 255, 255, 0.8);
   top: 40px;
-  left: 15px;
+  left: -10px;
   -webkit-border-bottom-left-radius: 3px;
           border-bottom-left-radius: 3px;
   -webkit-border-bottom-right-radius: 3px;
@@ -109,7 +95,7 @@
 
 .menu_opening.top_menu > li {
   padding-top: 0;
-  margin: 15px 10px 0 10px; }
+  margin: 10px 10px 0 10px; }
 
 .menu_opening.top_menu li:first-child {
   margin-top: 0; }

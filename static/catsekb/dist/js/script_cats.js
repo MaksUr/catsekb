@@ -1,15 +1,12 @@
-var preview_photo = document.querySelector('.preview_photo');
-var increase_photo = document.querySelector('.increase_photo');
-var close_increase_photo = document.querySelector('.close_increase');
-var btn_prev = document.querySelector('.prev_photo');
-var btn_next = document.querySelector('.next_photo');
-var images = document.querySelectorAll('.item_photo');
-var body = document.getElementsByTagName('body');
-var mobile_list =  document.querySelector('.mobile_list');
-var burger = document.querySelector('.burger');
-var message = document.querySelector('.message');
-var scrolled =  window.pageYOffset || document.documentElement.scrollTop;
-var n = 0;
+var preview_photo = document.querySelector('.preview_photo'),
+    increase_photo = document.querySelector('.increase_photo'),
+    close_increase_photo = document.querySelector('.close_increase'),
+    btn_prev = document.querySelector('.prev_photo'),
+    btn_next = document.querySelector('.next_photo'),
+    images = document.querySelectorAll('.item_photo'),
+    body = document.getElementsByTagName('body'),
+    burger = document.querySelector('.burger'),
+    n = 0;
 
 close_increase_photo.addEventListener('click', exit);
 

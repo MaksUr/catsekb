@@ -14,24 +14,21 @@
     </ul>
 </nav>  
 <div class="top_nav">
-    <div class="nav_bar">
-        <div class="container">
-            <div class="row">
-                <div class="hidden-xs col-sm-2 col-md-2 col-lg-2">
-                    <div class="logo_top_nav">
-                        <a href="{% url 'index' %}">
-                            <img src="{% static 'catsekb/dist/img/logo.png' %}" class="top_logo">
-                        </a>
-
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="hidden-xs col-sm-2 col-md-2 col-lg-2">
+                <div class="logo_top_nav">
+                    <a href="{% url 'index' %}">
+                        <img src="{% static 'catsekb/dist/img/logo.png' %}" class="top_logo">
+                    </a>
                 </div>
-                <div class="hidden-xs col-sm-10 col-sm-offset-0 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-4">
-                    <nav class="font">
-                        <ul class="menu top_menu">
-                            {% include "cats/menu_tabs.html" with menu_class='menu_opening top_menu' active_menu=active_menu groups=groups helps=helps %}
-                        </ul>
-                    </nav>
-                </div>
+            </div>
+            <div class="hidden-xs col-sm-10 col-sm-offset-0 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-4">
+                <nav class="font">
+                    <ul class="menu top_menu">
+                        {% include "cats/menu_tabs.html" with menu_class='menu_opening top_menu' active_menu=active_menu groups=groups helps=helps %}
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
