@@ -3,7 +3,7 @@ from django.db.models import QuerySet
 from cats.cats_constants import GROUP_INSTANCE_ALL_NAME, ANIMAL_GROUP, ANIMAL_NAME, GROUP_INSTANCE_ALL_ID, AGE_DISTANCE, \
     ANIMAL_DATE_OF_BIRTH, GROUP_NAME, ANIMAL_LOCATION_STATUS_DEAD, ANIMAL_LOCATION_STATUS_SHELTER, \
     ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS, GROUP_ID, ANIMAL_SEX, SHELTER_DISTANCE, ANIMAL_SHELTER_DATE
-from catsekb.constants import DJ_PK
+from catsekb.constants import DJ_PK, NO_CHOICE_VALUE
 from cats.time import get_age_from_string, get_date_from_age
 
 TEMPLATE = '{arg1}__{arg2}'
@@ -52,7 +52,8 @@ def update_distance_kwargs(kwargs, kwargs_key, field_name):
 
 class AnimalQuerySet(QuerySet):
     def filter(self, *args, **kwargs):
-        if kwargs.get(GROUP_ID) is not None:
+        kwargs = {key: kwargs[key] for key in kwargs if kwargs[key] != NO_CHOICE_VALUE}
+        if kwargs.get(GROUP_ID) is not None and (kwargs[GROUP_ID] != NO_CHOICE_VALUE):
             if kwargs[GROUP_ID] in LOCATION_GROUP_MAPPING:
                 kwargs[ANIMAL_LOCATION_STATUS] = kwargs[GROUP_ID]
             elif kwargs[GROUP_ID] != GROUP_INSTANCE_ALL_ID:
