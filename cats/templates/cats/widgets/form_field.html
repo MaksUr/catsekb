@@ -1,0 +1,9 @@
+{# field #}
+
+{% for choice in field.field.choices %}
+    <p>id_for_label: {{ form.sex.id_for_label }}
+    <p>{{ choice }}</p>
+    {% if forloop.first %}
+        : checked
+    {% endif %}
+{% endfor %}

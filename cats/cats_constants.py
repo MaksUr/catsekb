@@ -10,7 +10,7 @@
 # foreign_key служит для связи текущей модели с другой моделью. Например модель - AnimalImage,
 # foreign_key: animal ссылается на модель Animal.
 # Это значит поле animal в AnimalImage относится к определенному Animal
-from catsekb.constants import SHOW, NAME, DESCRIPTION, VK_GROUP_ID
+from catsekb.constants import SHOW, NAME, DESCRIPTION, VK_GROUP_ID, NO_CHOICE
 
 APPLICATION_VERBOSE_NAME = 'Котики'  # Название приложения
 
@@ -146,6 +146,7 @@ ANIMAL_SEX_MALE = "M"  # для хранения в БД
 ANIMAL_SEX_CHOICE_FEMALE = "Женский"
 ANIMAL_SEX_CHOICE_MALE = "Мужской"
 ANIMAL_SEX_CHOICES = (
+    NO_CHOICE,
     (ANIMAL_SEX_MALE, ANIMAL_SEX_CHOICE_MALE),
     (ANIMAL_SEX_FEMALE, ANIMAL_SEX_CHOICE_FEMALE)
 )
@@ -168,6 +169,7 @@ ANIMAL_LOCATION_STATUS_CHOICE_SHELTER = 'В поиске дома'
 ANIMAL_LOCATION_STATUS_CHOICE_DEAD = 'На радуге'
 
 ANIMAL_LOCATION_STATUS_CHOICES = (
+    NO_CHOICE,
     (ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_CHOICE_HOME),
     (ANIMAL_LOCATION_STATUS_SHELTER, ANIMAL_LOCATION_STATUS_CHOICE_SHELTER),
     (ANIMAL_LOCATION_STATUS_DEAD, ANIMAL_LOCATION_STATUS_CHOICE_DEAD),
@@ -320,6 +322,7 @@ GROUP_ANIMALS_PREVIEW_COUNT = 3
 AGE_DISTANCE = 'age_distance'
 AGE_DISTANCE_KEY = 'Возраст'
 AGE_DISTANCE_CHOICES = (
+    NO_CHOICE,
     ('_m1', 'до месяца'),
     ('m1_m6', 'от месяца до полугода'),
     ('m6_y1', 'от полугода до года'),

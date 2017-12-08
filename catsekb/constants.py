@@ -3,6 +3,10 @@ VK_GROUP_ID = 73666865
 # Captions
 CAPTION_ANIMAL_LIST_DEFAULT = 'Наши коты'
 
+NO_CHOICE_LABEL = 'Любой'
+NO_CHOICE_VALUE = 'unspecified'
+NO_CHOICE = (NO_CHOICE_VALUE, NO_CHOICE_LABEL)
+
 # Menu
 INDEX = 'index'
 ANIMALS = 'animals'
@@ -14,6 +18,7 @@ NAME = 'name'
 DESCRIPTION = 'description'
 CAPTION = 'caption'
 URL = 'url'
+CLASS = 'class'
 
 
 GET_PAR_KEY_PER_PAGE = 'per_page'
