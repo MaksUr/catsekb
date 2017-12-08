@@ -23,7 +23,7 @@
     {% endif %}
 
     {% for group in groups %}
-            {% include 'cats/widgets/gallery.html' with object_list=group.get_preview_animals_by_group  filter_parameters='?group_id='|add:group.id caption=group.name caption_url=group.get_absolute_url %}
+            {% include 'cats/widgets/gallery.html' with object_list=group.get_preview_animals_by_group  filter_parameters='?group_id='|add:group.id_str caption=group.name caption_url=group.get_absolute_url %}
     {% empty %}
         <p>Групп еще нет</p>
     {% endfor %}
