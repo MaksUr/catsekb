@@ -2,16 +2,23 @@
 .about {
   position: relative; }
 
+.cat_section {
+  position: relative;
+  height: 450px;
+}
 .full {
   background-image: url(../img/cat.jpg);
   -webkit-background-size: cover;
-          background-size: cover;
+  background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: fixed;
   width: 100%;
   background-position: 22%;
-  position: relative;
-  height: 450px; }
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: -1; 
+}
 
 .line_container {
   position: absolute;
@@ -25,18 +32,18 @@
   text-align: right; }
 
 .cat_container {
-  width: 80px;
-  height: 150px;
-  position: absolute;
-  top: -30px;
-  left: 0;
-  z-index: 10; }
+      width: 80px;
+    height: 150px;
+    position: absolute;
+    top: 45px;
+    left: 0;
+    z-index: 10;}
 
 .cat_a_mouse {
   height: 90px;
   position: absolute;
   visibility: visible;
-  top: -20px;
+  top: 60px;
   left: -45px;
   z-index: 9;
   -webkit-transform: rotate(59deg);
