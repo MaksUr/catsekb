@@ -3,29 +3,30 @@
 	position: relative;
 }
 
-.full {
+.cat_section {
+    position: relative;
     height: 450px;
-    filter: brightness(90%);
-    position: relative;
 }
-.full, .line_container {
-    position: relative;
+.full {
     background-image: url(../img/cat.jpg);
-    background-size: 100%;
+    -webkit-background-size: cover;
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: 23%;
     width: 100%;
+    background-position: 22%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: -1;
 }
 
 .line_container {
     position: absolute;
     z-index: 10;
     width: 100%;
-    filter: brightness(100%);
     height: 80px;
-    top: 40%;
+    top: 40%; 
 }
 
 .line_container h2 {
@@ -37,7 +38,7 @@
     width: 80px;
     height: 150px;
     position: absolute;
-    top: -30px;
+    top: 45px;
     left: 0;
     z-index: 10;
 }
@@ -45,7 +46,7 @@
     height: 90px;
     position: absolute;
     visibility: visible;
-    top: -20px;
+    top: 60px;
     left: -45px;
     z-index: 9;
     transform: rotate(59deg);

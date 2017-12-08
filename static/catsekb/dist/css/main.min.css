@@ -14,38 +14,18 @@
   zoom: 1; }
 
 body {
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  z-index: 1 }
 
 .overY {
   overflow-y: hidden; }
 
 /* Отступы между секциями */
 section {
-  margin: 80px 0; }
+  padding: 50px 0; 
+  background-color: #fff;}
 
-header {
-  margin-bottom: 50px; }
-
-footer {
-  margin-top: 50px; }
-
-.message {
-  position: fixed;
-  bottom: 4%;
-  left: 15%;
-  margin: 0;
-  padding: 10px;
-  z-index: 111;
-  width: 70%;
-  background-color: rgba(255, 255, 255, 0.75);
-  -webkit-border-radius: 3px;
-          border-radius: 3px;
-  color: #004040;
-  display: none;
-  visibility: hidden;
-  opacity: 0; }
-
-.vis, .message.vis {
+.vis {
   visibility: visible;
   opacity: 1;
   -webkit-transition: opacity .4s ease, visibility .4s ease;
