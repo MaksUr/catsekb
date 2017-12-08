@@ -1,4 +1,4 @@
-from catsekb.constants import URL_NAME_CONTACTS, URL_NAME_FIND_CAT, CAPTION, URL
+from catsekb.constants import URL_NAME_CONTACTS, URL_NAME_FIND_CAT, CAPTION, URL, SHOW
 
 APPLICATION_VERBOSE_NAME = 'Статьи'
 
@@ -20,6 +20,12 @@ SUBJECT_VERBOSE_NAME_PLURAL = 'Темы'
 SUBJECT_NAME = 'name'
 SUBJECT_KEY_NAME = SUBJECT_VERBOSE_NAME
 SUBJECT_KEY_NAME_HELP_TEXT = 'Укажи тематику статьи'
+
+# show
+SUBJECT_SHOW = SHOW
+SUBJECT_KEY_SHOW = 'Показывать тему статей'
+SUBJECT_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удаления или чтобы скрыть. ' \
+                           'Скрытые темы статей доступны для персонала на сайте.'
 
 
 # class Article

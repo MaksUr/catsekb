@@ -6,7 +6,8 @@ from django.forms import ValidationError
 from cats.cats_constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_PRECISION, ANIMAL_KEY_UPDATED_HELP_TEXT, \
     ANIMAL_KEY_CREATED_HELP_TEXT, ANIMAL_KEY_SHOW_HELP_TEXT, \
     ANIMAL_KEY_SEX_HELP_TEXT, ANIMAL_KEY_NAME_HELP_TEXT, \
-    ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST, ANIMAL_DAYS, ANIMAL_FORM_KEY_DAYS, ANIMAL_KEY_DAYS_HELP_TEXT, ANIMAL_MONTHS, ANIMAL_FORM_KEY_MONTHS, \
+    ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST, ANIMAL_DAYS, ANIMAL_FORM_KEY_DAYS, ANIMAL_KEY_DAYS_HELP_TEXT, \
+    ANIMAL_MONTHS, ANIMAL_FORM_KEY_MONTHS, \
     ANIMAL_KEY_MONTHS_HELP_TEXT, ANIMAL_YEARS, ANIMAL_FORM_KEY_YEARS, ANIMAL_KEY_YEARS_HELP_TEXT, ANIMAL_SEX, \
     ANIMAL_SHOW, ANIMAL_GROUP, ANIMAL_KEY_GROUP_HELP_TEXT, ANIMAL_NAME, ANIMAL_DATE_OF_BIRTH, \
     ANIMAL_KEY_NAME, ANIMAL_KEY_SEX, AGE_DISTANCE_CHOICES, \
@@ -20,8 +21,8 @@ from cats.cats_constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_
     ANIMAL_VK_ALBUM_URL, ANIMAL_VK_ALBUM_URL_WRONG_FORMAT, \
     ANIMAL_IMAGE_CREATED, ANIMAL_IMAGE_KEY_CREATED_HELP_TEXT, \
     ANIMAL_KEY_SHELTER_DATE_HELP_TEXT, ANIMAL_SHELTER_DATE, ANIMAL_VALID_INFO, ANIMAL_KEY_VALID_INFO_HELP_TEXT, \
-    ANIMAL_FORM_VK_UPDATE_INFO, SHELTER_DISTANCE_KEY, SHELTER_DISTANCE_CHOICES
-from catsekb.constants import DJ_INSTANCE, DJ_INITIAL, VK_GROUP_ID
+    ANIMAL_FORM_VK_UPDATE_INFO, SHELTER_DISTANCE_KEY, SHELTER_DISTANCE_CHOICES, SHELTER_DISTANCE, AGE_DISTANCE
+from catsekb.constants import DJ_INSTANCE, DJ_INITIAL, VK_GROUP_ID, NO_CHOICE_VALUE, CLASS
 from cats.models import Animal, AnimalImage
 from cats.time import get_date_from_age, calc_age_uptoday
 
@@ -207,32 +208,32 @@ class FilterForm(forms.Form):
         label=ANIMAL_KEY_NAME,
     )
 
-    sex = forms.ChoiceField(widget=forms.RadioSelect, required=False, choices=ANIMAL_SEX_CHOICES, label=ANIMAL_KEY_SEX)
+    sex = forms.ChoiceField(
+        widget=forms.RadioSelect(attrs={CLASS: ANIMAL_SEX}),
+        required=False, choices=ANIMAL_SEX_CHOICES,
+        label=ANIMAL_KEY_SEX
+    )
 
     age_distance = forms.ChoiceField(
         label=AGE_DISTANCE_KEY,
-        widget=forms.RadioSelect(attrs={'class': 'age_distance'}),
+        widget=forms.RadioSelect(attrs={CLASS: AGE_DISTANCE}),
         required=False,
         choices=AGE_DISTANCE_CHOICES
     )
 
     shelter_distance = forms.ChoiceField(
         label=SHELTER_DISTANCE_KEY,
-        widget=forms.RadioSelect(attrs={'class': 'shelter_distance'}),
+        widget=forms.RadioSelect(attrs={CLASS: SHELTER_DISTANCE}),
         required=False,
         choices=SHELTER_DISTANCE_CHOICES
     )
 
     location_status = forms.ChoiceField(
-        widget=forms.RadioSelect(attrs={'class': 'location_status'}),
+        widget=forms.RadioSelect(attrs={CLASS: ANIMAL_LOCATION_STATUS}),
         required=False,
         choices=ANIMAL_LOCATION_STATUS_CHOICES,
         label=ANIMAL_KEY_LOCATION_STATUS
     )
-
-    def __init__(self, *args, **kwargs):
-        # kwargs['auto_id'] = False
-        forms.Form.__init__(self, *args, **kwargs)
 
 
 class AnimalImageForm(forms.ModelForm):
