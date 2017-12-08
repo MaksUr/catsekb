@@ -15,6 +15,8 @@
         {% include 'cats/widgets/form.html' with form=form caption="Поиск" caption_url="" %}
         {% if object_list %}
             {% include 'cats/widgets/gallery.html' with object_list=object_list filter_parameters=filter_string caption="Результат поиска" capt_descr=description page_obj=page_obj %}
+        {% else %}
+            {% include 'cats/widgets/gallery.html' with object_list=object_list filter_parameters=filter_string caption="Результат поиска" capt_descr='Питомцев не найдено' page_obj=page_obj %}
         {% endif %}
     {% else %}
         {% include 'cats/widgets/gallery.html' with object_list=object_list filter_parameters=filter_string caption=caption capt_descr=description page_obj=page_obj %}
