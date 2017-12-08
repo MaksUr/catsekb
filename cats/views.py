@@ -83,7 +83,7 @@ class AnimalListView(ListView, FormMixin):
         else:
             context['description'] = self.description
             del context['form']
-        extra_title = context['caption'] + ' ' + context['description']
+        extra_title = context['caption']
         context.update(get_base_context(show_permission=show_permission, active_menu=ANIMALS, extra_title=extra_title))
         return context
 
