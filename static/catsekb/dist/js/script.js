@@ -7,7 +7,7 @@ var top_nav = document.querySelector('.top_nav'),
  	widthScreen = document.documentElement.clientWidth;
 
 document.addEventListener("DOMContentLoaded", ready);
-
+document.addEventListener("DOMContentLoaded", shelDisDisable);
 var canHover = !(matchMedia('(hover: none)').matches);
 
 function ready() {
@@ -81,13 +81,13 @@ function view_menu_opening(i) {
 })();
 
 
+
 var formShel = document.documentElement.querySelectorAll('.shelter_distance'),
     formLoc = document.documentElement.querySelectorAll('.location_status');
 
 for (i = 0; i <= formLoc.length - 1; i++) {
-		formLoc[i].addEventListener('click', shelDisDisable.bind(this, i));
-	}
-
+	formLoc[i].addEventListener('click', shelDisDisable.bind(this, i));
+}
 
 function shelDisDisable(i) {
 	if (formLoc[2].checked == true || formLoc[0].checked == true) {
