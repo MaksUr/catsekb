@@ -5,12 +5,19 @@ from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_TITLE, ARTIC
     CAPTION
 from articles.models import Subject, Article
 from catsekb.constants import ARTICLES, CONTACTS, DJ_ID, URL_NAME_SUBJECTS_TITLE, URL_NAME_SUBJECT_TITLE, \
-    URL_NAME_ARTICLE_TITLE
-from catsekb.view_functions import get_base_context
+    URL_NAME_ARTICLE_TITLE, SHOW
+from catsekb.view_functions import get_base_context, get_objects_from_query
 
 
 class SubjectListView(ListView):
     model = Subject
+
+    def get_queryset(self):
+        return get_objects_from_query(
+            model_cls=Subject,
+            query=dict(),
+            show_permission=self.request.user.is_authenticated()
+        )
 
     def get_context_data(self, **kwargs):
         show_permission = self.request.user.is_authenticated()
@@ -29,6 +36,12 @@ class SubjectListView(ListView):
 class SubjectDetailView(DetailView):
     model = Subject
 
+    def get_object(self, queryset=None):
+        if self.request.user.is_authenticated() is not True:
+            queryset = Subject.objects.filter(**{SHOW: True})
+        obj = super(SubjectDetailView, self).get_object(queryset=queryset)
+        return obj
+
     def get_context_data(self, **kwargs):
         show_permission = self.request.user.is_authenticated()
         context = DetailView.get_context_data(self, **kwargs)
@@ -43,6 +56,12 @@ class SubjectDetailView(DetailView):
 class ArticleDetailView(DetailView):
     model = Article
     active_menu = ARTICLES
+
+    def get_object(self, queryset=None):
+        if self.request.user.is_authenticated() is not True:
+            queryset = Subject.objects.filter(**{SHOW: True})
+        obj = super(ArticleDetailView, self).get_object(queryset=queryset)
+        return obj
 
     def get_context_data(self, **kwargs):
         show_permission = self.request.user.is_authenticated()
