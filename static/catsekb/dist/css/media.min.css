@@ -60,6 +60,9 @@
     height: 100%; }
   .prev_photo, .next_photo {
     display: none; }
+  .count_image {
+    display: none;
+  }
   .burger {
     cursor: pointer;
     z-index: 113;

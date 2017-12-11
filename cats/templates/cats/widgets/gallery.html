@@ -25,7 +25,11 @@
                 <div class="col-md-12 slim">
                      {% for animal in object_list %}
                         <div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0">
-                            <div class="cat_find_block" style="background-image: url({% if animal.get_image.image_url %} {{ animal.get_image.image_small_url }} {% else %} {% static "catsekb/dist/img/sad_cat.png" %} {% endif %});">
+                            {% if animal.get_image.image_url %}
+                                <div class="cat_find_block" style="background-image: url({{ animal.get_image.image_small_url }});">
+                            {% else %}
+                                <div class="cat_find_block" style="background-image: url({% static "catsekb/dist/img/sad_cat.png" %}); background-size: 125px;">
+                            {% endif %}
                                 <a href="{% url 'animal_detail' pk=animal.id %}{{ filter_parameters }}#anchor_cat" class="hashtag">
                                     <div class="cat_find_name mid">                                   
                                             {% include 'cats/widgets/gallery_item_description.html' with animal=animal %} 

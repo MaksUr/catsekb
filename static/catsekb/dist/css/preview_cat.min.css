@@ -64,12 +64,28 @@
   max-height: 100%;
   max-width: 100%; }
 
-.close_increase {
+
+
+
+/* !!! */
+.close_increase, .count_image {
   position: fixed;
+  z-index: 111; }
+
+.close_increase {
   top: 4%;
   right: 3%;
-  z-index: 111;
-  cursor: pointer; }
+  cursor: pointer;
+}
+
+.count_image {
+  bottom: 4%;
+  left: 0;
+  width: 100%;
+}
+
+
+
 
 .prev_photo {
   background-image: url(../img/prev_photo.png); }
