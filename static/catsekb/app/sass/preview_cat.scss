@@ -59,13 +59,23 @@
     max-width: 100%;
 }
 
+/* добавлено 11.12.2017 */
+.close_increase, .count_image {
+  position: fixed;
+  z-index: 111; }
+
 .close_increase {
-    position: fixed;
-    top: 4%;
-    right: 3%;
-    z-index: 111;
-    cursor: pointer;
+  top: 4%;
+  right: 3%;
+  cursor: pointer;
 }
+
+.count_image {
+  bottom: 4%;
+  left: 0;
+  width: 100%;
+}
+
 
 .prev_photo {
 	background-image: url(../img/prev_photo.png);
