@@ -26,9 +26,9 @@
                         <div class="form_elem">
                             {% include 'cats/widgets/form_field.html' with field=form.shelter_distance %}
                         </div>                            
-                    <p class="font mid">
+                    <div class="find_container font mid">
                         <input type="submit" value="Найти любимца" class="but">
-                    </p>
+                    </div>
                 </form>
                  <p class="font mid">
                     <a href="{% url 'animal_list' %}?filter=1#anchor_search" class="ghost_but">Сброс фильтров</a>

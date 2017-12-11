@@ -136,29 +136,3 @@
 
 .character {
   margin-top: 5px; }
-
-/*.characteristics {
-    list-style-type: initial;
-    margin: 5px 0 0 20px;
-}
-.characteristics li {
-    margin-bottom: 5px;
-}*/
-/*.request_container {
-	overflow-y: hidden;
-}*/
-/*.cat_a_letter {
-	position: absolute;
-    top: 0;
-    left: 50%;
-    margin-left: -45px;
-    height: 90px;
-    z-index: -1;
-    transition: transform .7s ease;
-}*/
-/*.request a:hover + .cat_a_letter {
-	transform: translateY(-64%);
-    position: absolute; 
-    transition: transform .7s ease;  
-}
-*/
