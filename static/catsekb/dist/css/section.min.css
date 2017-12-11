@@ -65,12 +65,6 @@
           transform: translateX(-70%) rotate(45deg); }
 
 /* <---------- .about END ----------> */
-.article img {
-  display: block;
-  max-width: 100%;
-  height: auto; }
-
-
 
 .find_container {
   overflow-y: hidden;

@@ -199,7 +199,8 @@ input.but:hover {
 }
 
 .article img {
-	max-width: 100%;
-	display: block;
-	height: auto;
-}
+    max-height: 600px;
+    margin: 0 auto;
+    padding: 13px 0;
+    display: block;
+    max-width: 100%;}
