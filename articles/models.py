@@ -1,3 +1,4 @@
+import re
 from django.db.models import Model, CharField, TextField, DateTimeField, BooleanField, ForeignKey
 from django.urls import reverse
 
@@ -7,6 +8,9 @@ from articles.article_constants import ARTICLE_KEY_TITLE, ARTICLE_KEY_TEXT, ARTI
     ARTICLES_DEFAULT_MAPPING, URL, SUBJECT_KEY_SHOW
 from articles.validators import article_name_validator
 from catsekb.constants import DJ_PK, URL_NAME_SUBJECT, URL_NAME_ARTICLE
+
+
+SEARCH_TAG_PATTERN = re.compile(r'<.+?>', re.S)
 
 
 class Author(Model):
@@ -56,3 +60,9 @@ class Article(Model):
             return reverse(ARTICLES_DEFAULT_MAPPING[self.id][URL])
         else:
             return reverse(URL_NAME_ARTICLE, kwargs={DJ_PK: self.id})
+
+    def get_preview_text(self):
+        res = self.text[:270]
+        res = SEARCH_TAG_PATTERN.sub('', res) + '...'
+        return res
+

@@ -10,7 +10,7 @@
         {% if object.show %}
             <div class="row">
                 <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-                    <p>{{ object.text|truncatechars:270 }}</p>
+                    <p>{{ object.get_preview_text }}</p>
                 </div>
             </div>
             <div class="row">
