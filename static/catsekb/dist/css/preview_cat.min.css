@@ -5,14 +5,16 @@
 .pagination_cats {
   margin-top: 30px; }
 
+.preview_photo {
+  cursor: pointer;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
+}
 .preview_photo a {
   border: none;
   padding: 0; }
 
 .preview_photo img {
-  cursor: pointer;
-  cursor: -webkit-zoom-in;
-  cursor: zoom-in;
   width: 100%;
   /* Для IE */ }
 

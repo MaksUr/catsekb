@@ -152,12 +152,9 @@ ul {
 
 /* <---------- form BEGIN ----------> */
 
-.form_elem:first-child {
-	margin-top: 0;
-}
 .form_elem {
 	display: block;
-	margin: 0 15px 20px 0;
+	margin: 0 15px 15px 0;
 	text-align: left;
 }
 
@@ -175,9 +172,6 @@ ul {
 .form_elem li {
 	margin: 1px 0;
 }
-input[type="submit"] {
-	margin: 15px 0 0 0;
-}
 
 input[type="text"]:active {
 	border-color: #846aa5;
@@ -187,6 +181,10 @@ input.but {
 }
 input.but:hover {     
     background-color: #f93c3c;
+}
+
+input.but:focus {
+  outline-color: #00BCD4;
 }
 
 /* <---------- form END ----------> */
@@ -200,7 +198,7 @@ input.but:hover {
 
 .article img {
     max-height: 600px;
-    margin: 0 auto;
-    padding: 13px 0;
+    margin: 10px auto;
     display: block;
-    max-width: 100%;}
+    max-width: 100%;
+}

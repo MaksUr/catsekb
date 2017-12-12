@@ -64,21 +64,27 @@
 }
 
 /* <---------- .about END ----------> */
-
 .find_container {
   overflow-y: hidden;
+  position: relative;
 }
-.cat_a_letter {
+
+.find_container input {
+    margin-top: 75px;
+    position: relative;
+    z-index: 1;
+}
+.cat_find {
     position: absolute;
-    top: 0;
+    top: 80px;
     left: 50%;
-    margin-left: -45px;
+    margin-left: -50px;
     height: 90px;
-    z-index: -1;
-    transition: transform .7s ease;
+    z-index: 0;
+    transition: transform .65s ease;
 }
-.can-hover .find a:hover + .cat_a_letter {
-    transform: translateY(-64%);
+.can-hover .find input:hover + .cat_find {
+    transform: translateY(-89%);
     position: absolute; 
-    transition: transform .7s ease;  
+    transition: transform .65s ease;  
 }
