@@ -1,7 +1,7 @@
 {# form #}
 {# caption #}
 {# caption_url #}
-
+{% load static %}
 <section class="search" id="anchor_search">
     <div class="container">
         {% include 'cats/widgets/caption.html' with caption=caption caption_url=caption_url %}
@@ -27,7 +27,10 @@
                             {% include 'cats/widgets/form_field.html' with field=form.shelter_distance %}
                         </div>                            
                     <div class="find_container font mid">
-                        <input type="submit" value="Найти любимца" class="but">
+                        <div class="find mid font">
+                            <input type="submit" value="Найти любимца" class="but">
+                            <img src="{% static 'catsekb/dist/img/cat_find.png' %}" class="cat_find">
+                        </div>
                     </div>
                 </form>
                  <p class="font mid">
@@ -37,3 +40,4 @@
         </div>
     </div>
 </section>
+

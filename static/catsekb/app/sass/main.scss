@@ -43,7 +43,7 @@ section {
 }
 
 .right {
-  text-align: right;
+    text-align: right;
 }
 
 
@@ -65,17 +65,10 @@ a {
 a, a:link, a:visited, a:hover, a:active  {
 	text-decoration: none;
 }
-a:hover, a:active {
-  color: #526aa5;
-}
 
-.mobile_list a:active, .open_next_menu:active {
-  color: #526aa5;
+a:hover, a:active, .top_nav a:hover, .menu a:hover, .mobile_list a:hover, .open_next_menu:hover, .mobile_list a:active, .open_next_menu:active { 
+	color: #526aa5;
 }
-.mobile_list a:hover, .open_next_menu:hover {
-  color: #526aa5;
-}
-
 .but {
     background-color: #526aa5;
     color: white !important;
@@ -130,10 +123,6 @@ a:hover, a:active {
 	color: #5858ff;
 }
 
-.top_nav a:hover, .menu a:hover { 
-	color: #526aa5;
-}
-
 ul {
     list-style-type: none;
 }
@@ -152,12 +141,9 @@ ul {
 
 /* <---------- form BEGIN ----------> */
 
-.form_elem:first-child {
-	margin-top: 0;
-}
 .form_elem {
 	display: block;
-	margin: 0 15px 20px 0;
+	margin: 0 15px 15px 0;
 	text-align: left;
 }
 
@@ -175,9 +161,6 @@ ul {
 .form_elem li {
 	margin: 1px 0;
 }
-input[type="submit"] {
-	margin: 15px 0 0 0;
-}
 
 input[type="text"]:active {
 	border-color: #846aa5;
@@ -187,6 +170,10 @@ input.but {
 }
 input.but:hover {     
     background-color: #f93c3c;
+}
+
+input.but:focus {
+  outline-color: #00BCD4;
 }
 
 /* <---------- form END ----------> */
@@ -200,7 +187,7 @@ input.but:hover {
 
 .article img {
     max-height: 600px;
-    margin: 0 auto;
-    padding: 13px 0;
+    margin: 10px auto;
     display: block;
-    max-width: 100%;}
+    max-width: 100%;
+}
