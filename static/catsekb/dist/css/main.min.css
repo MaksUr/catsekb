@@ -61,14 +61,9 @@ a {
 a, a:link, a:visited, a:hover, a:active {
   text-decoration: none; }
 
-a:hover, a:active {
-  color: #526aa5; }
-
-.mobile_list a:active, .open_next_menu:active {
-  color: #526aa5; }
-
-.mobile_list a:hover, .open_next_menu:hover {
-  color: #526aa5; }
+a:hover, a:active, .top_nav a:hover, .menu a:hover, .mobile_list a:hover, .open_next_menu:hover, .mobile_list a:active, .open_next_menu:active { 
+  color: #526aa5;
+}
 
 .but {
   background-color: #526aa5;
@@ -124,9 +119,6 @@ a:hover, a:active {
 
 .hashtag:hover, .tag:hover {
   color: #5858ff; }
-
-.top_nav a:hover, .menu a:hover {
-  color: #526aa5; }
 
 ul {
   list-style-type: none; }
