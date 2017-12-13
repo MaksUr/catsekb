@@ -190,3 +190,8 @@ input.but:focus {
 .open_art {
   height: 100%;
 }
+
+.hide_anchor {
+    position: relative;
+    top: -60px;
+}

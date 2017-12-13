@@ -1,6 +1,8 @@
 {# object #}
 
-<div class="article font line_height"  id="p{{ object.id }}">
+<div class="hide_anchor" id="anchor_{{ object.id }}">
+</div>
+<div class="article font line_height">
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
@@ -20,7 +22,7 @@
                     <p class="date_article">{{ object.created.date }}</p>
                 </div>
                 <div class="col-xs-6 col-xs-offset-0 col-sm-4 col-sm-offset-2 col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-0">
-                    <a href="#p{{ object.id }}"><span class="art_vis tag right">Читать далее</span></a>
+                    <a href="#anchor_{{ object.id }}"><span class="art_vis tag right">Показать полностью</span></a>
                 </div>
 		    </div>
         {% else %}
