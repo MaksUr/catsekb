@@ -178,16 +178,27 @@ input.but:focus {
 
 /* <---------- form END ----------> */
 .date_article {
-  color: #9E9E9E;
+  color: #9E9E9E; 
 }
 
 .article {
-  margin-bottom: 30px;
-}
+  margin-bottom: 30px; }
 
 .article img {
     max-height: 600px;
     margin: 10px auto;
     display: block;
     max-width: 100%;
+}
+
+.article a {
+  display: inline;
+}
+.art {
+  height: 120px;
+  overflow: hidden;
+}
+
+.open_art {
+  height: 100%;
 }

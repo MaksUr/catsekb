@@ -8,7 +8,6 @@ var top_nav = document.querySelector('.top_nav'),
 
 document.addEventListener("DOMContentLoaded", ready);
 document.addEventListener("DOMContentLoaded", shelDisDisable);
-
 var canHover = !(matchMedia('(hover: none)').matches);
 
 function ready() {
@@ -102,3 +101,13 @@ function shelDisDisable(i) {
 	}
 }
 
+var artVisBut = document.documentElement.querySelectorAll('.art_vis'),
+    art =  document.documentElement.querySelectorAll('.art');
+
+for (i = 0; i <= artVisBut.length - 1; i++) {
+    artVisBut[i].addEventListener('click', openArt.bind(this, i));
+}
+
+function openArt(i) {
+    art[i].classList.toggle('open_art');
+}

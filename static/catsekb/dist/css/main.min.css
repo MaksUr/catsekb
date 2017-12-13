@@ -98,6 +98,7 @@ a:hover, a:active, .top_nav a:hover, .menu a:hover, .mobile_list a:hover, .open_
   color: #fff; }
 
 .tag {
+  cursor: pointer;
   padding: 10px;
   -webkit-border-radius: 3px;
           border-radius: 3px; }
@@ -176,3 +177,16 @@ input.but:focus {
     margin: 10px auto;
     display: block;
     max-width: 100%;}
+
+.article a {
+  display: inline;
+}
+.art {
+  height: 120px;
+  overflow: hidden;
+
+}
+
+.open_art {
+  height: 100%;
+}
