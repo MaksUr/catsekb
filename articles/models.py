@@ -5,7 +5,9 @@ from django.urls import reverse
 from articles.article_constants import ARTICLE_KEY_TITLE, ARTICLE_KEY_TEXT, ARTICLE_KEY_CREATED, ARTICLE_KEY_UPDATED, \
     ARTICLE_KEY_SHOW, AUTHOR_KEY_NAME, ARTICLE_VERBOSE_NAME, ARTICLE_VERBOSE_NAME_PLURAL, AUTHOR_VERBOSE_NAME, \
     AUTHOR_VERBOSE_NAME_PLURAL, SUBJECT_KEY_NAME, SUBJECT_VERBOSE_NAME, SUBJECT_VERBOSE_NAME_PLURAL, \
-    ARTICLES_DEFAULT_MAPPING, URL, SUBJECT_KEY_SHOW
+    ARTICLES_DEFAULT_MAPPING, URL, SUBJECT_KEY_SHOW, NEWS_VERBOSE_NAME, NEWS_VERBOSE_NAME_PLURAL, NEWS_KEY_TITLE, \
+    NEWS_KEY_TEXT, NEWS_KEY_CREATED, NEWS_KEY_UPDATED, NEWS_KEY_SHOW, NEWS_SUBJECT_VERBOSE_NAME, \
+    NEWS_SUBJECT_VERBOSE_NAME_PLURAL
 from articles.validators import article_name_validator
 from catsekb.constants import DJ_PK, URL_NAME_SUBJECT, URL_NAME_ARTICLE
 
@@ -39,6 +41,12 @@ class Subject(Model):
         return reverse(URL_NAME_SUBJECT, kwargs={DJ_PK: self.id})
 
 
+class NewsSubject(Subject):
+    class Meta:
+        verbose_name = NEWS_SUBJECT_VERBOSE_NAME
+        verbose_name_plural = NEWS_SUBJECT_VERBOSE_NAME_PLURAL
+
+
 class Article(Model):
     title = CharField(ARTICLE_KEY_TITLE, max_length=70, unique=True, validators=[article_name_validator])
     text = TextField(ARTICLE_KEY_TEXT, default='')
@@ -66,3 +74,16 @@ class Article(Model):
         res = SEARCH_TAG_PATTERN.sub('', res) + '...'
         return res
 
+
+class News(Model):
+    title = CharField(NEWS_KEY_TITLE, max_length=70, null=True, blank=True, default='')
+    text = TextField(NEWS_KEY_TEXT, default='')
+    created = DateTimeField(NEWS_KEY_CREATED, auto_now_add=True)
+    updated = DateTimeField(NEWS_KEY_UPDATED, auto_now=True)
+    show = BooleanField(NEWS_KEY_SHOW, default=True)
+    author = ForeignKey(Author, verbose_name=Author._meta.verbose_name, null=True, blank=True)
+    subject = ForeignKey(NewsSubject, verbose_name=NewsSubject._meta.verbose_name, null=True, blank=True)
+
+    class Meta:
+        verbose_name = NEWS_VERBOSE_NAME
+        verbose_name_plural = NEWS_VERBOSE_NAME_PLURAL

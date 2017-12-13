@@ -19,7 +19,17 @@ DESCRIPTION = 'description'
 CAPTION = 'caption'
 URL = 'url'
 CLASS = 'class'
+SUBJECT = 'subject'
+AUTHOR = 'author'
+TITLE = 'title'
+TEXT = 'text'
 
+
+CREATED = 'created'
+CREATED_KEY = 'создано'
+
+UPDATED = 'updated'
+UPDATED_KEY = 'обновлено'
 
 GET_PAR_KEY_PER_PAGE = 'per_page'
 GET_PAR_KEY_PAGE = 'page'

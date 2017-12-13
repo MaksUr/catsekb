@@ -10,7 +10,8 @@
 # foreign_key служит для связи текущей модели с другой моделью. Например модель - AnimalImage,
 # foreign_key: animal ссылается на модель Animal.
 # Это значит поле animal в AnimalImage относится к определенному Animal
-from catsekb.constants import SHOW, NAME, DESCRIPTION, VK_GROUP_ID, NO_CHOICE
+from catsekb.constants import SHOW, NAME, DESCRIPTION, VK_GROUP_ID, NO_CHOICE, CREATED_KEY, CREATED, UPDATED, \
+    UPDATED_KEY
 
 APPLICATION_VERBOSE_NAME = 'Котики'  # Название приложения
 
@@ -57,8 +58,8 @@ ANIMAL_IMAGE_KEY_BACKGROUND = 'Использовать для фона стра
 ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT = 'Фоновое изображение страницы с котом. Рекомендуется использовать предпросмотр.'
 
 # created
-ANIMAL_IMAGE_CREATED = 'created'
-ANIMAL_IMAGE_KEY_CREATED = 'Дата создания'
+ANIMAL_IMAGE_CREATED = CREATED
+ANIMAL_IMAGE_KEY_CREATED = CREATED_KEY
 ANIMAL_IMAGE_KEY_CREATED_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_CREATED'
 
 # background_y_position
@@ -221,13 +222,13 @@ ANIMAL_KEY_VALID_INFO_HELP_TEXT = 'Информация проверена вр�
 
 
 # created
-ANIMAL_CREATED = 'created'
-ANIMAL_KEY_CREATED = 'Создано'
+ANIMAL_CREATED = CREATED
+ANIMAL_KEY_CREATED = CREATED_KEY
 ANIMAL_KEY_CREATED_HELP_TEXT = ''
 
 # updated
-ANIMAL_UPDATED = 'updated'
-ANIMAL_KEY_UPDATED = 'Обновлено'
+ANIMAL_UPDATED = UPDATED
+ANIMAL_KEY_UPDATED = UPDATED_KEY
 ANIMAL_KEY_UPDATED_HELP_TEXT = ''
 
 # Возраст. Определяет date_of_birth в том случае, если date_of_birth не редактировался пользователем.

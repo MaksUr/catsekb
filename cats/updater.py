@@ -6,19 +6,15 @@ except ImportError:
 
 from cats.cats_constants import ANIMAL_IMAGE_PHOTO_ID, ANIMAL_IMAGE_ANIMAL, ANIMAL_IMAGE_IMAGE_URL, \
     ANIMAL_IMAGE_IMAGE_SMALL_URL, ANIMAL_IMAGE_CREATED, ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND
-from catsekb.constants import VK_GROUP_ID
+from catsekb.constants import VK_GROUP_ID, CREATED
 from cats.models import AnimalImage
 
 RESPONSE = "response"
-TITLE = "title"
-TEXT = "text"
 ITEMS = "items"
 PID = "pid"
-CREATED = "created"
 SIZES = "sizes"
 TYPE = "type"
 SRC = "src"
-DESCRIPTION = "description"
 AID = "aid"
 
 SIZE_TYPES = ("w", "z", "y", "r", "x", "q", "p", "o", "m", "s",)

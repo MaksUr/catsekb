@@ -1,7 +1,9 @@
 from django.contrib import admin
 
-from articles.article_constants import ARTICLE_TITLE, ARTICLE_SHOW, SUBJECT_SHOW, SUBJECT_NAME
-from articles.models import Article, Author, Subject
+from articles.article_constants import ARTICLE_TITLE, ARTICLE_SHOW, SUBJECT_SHOW, SUBJECT_NAME, NEWS_TITLE, NEWS_SHOW
+from articles.models import Article, Author, Subject, News, NewsSubject
+
+admin.site.register(Author)
 
 
 class ArticleAdmin(admin.ModelAdmin):
@@ -13,6 +15,14 @@ class SubjectAdmin(admin.ModelAdmin):
     list_display = (SUBJECT_NAME, SUBJECT_SHOW)
 admin.site.register(Subject, SubjectAdmin)
 
-admin.site.register(Author)
+
+class NewsSubjectAdmin(SubjectAdmin):
+    pass
+admin.site.register(NewsSubject, NewsSubjectAdmin)
+
+
+class NewsAdmin(admin.ModelAdmin):
+    list_display = (NEWS_TITLE, NEWS_SHOW)
+admin.site.register(News, NewsAdmin)
 
 
