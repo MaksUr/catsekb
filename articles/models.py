@@ -77,11 +77,6 @@ class Article(Model):
         else:
             return reverse(URL_NAME_ARTICLE, kwargs={DJ_PK: self.id})
 
-    def get_preview_text(self):
-        res = self.text[:270]
-        res = SEARCH_TAG_PATTERN.sub('', res) + '...'
-        return res
-
 
 class News(Model):
     title = CharField(NEWS_KEY_TITLE, max_length=70, null=True, blank=True, default='')
@@ -95,3 +90,9 @@ class News(Model):
     class Meta:
         verbose_name = NEWS_VERBOSE_NAME
         verbose_name_plural = NEWS_VERBOSE_NAME_PLURAL
+
+    def __str__(self):
+        return '{title}: {text}...'.format(title=self.title, text=self.text[:15])
+
+    def get_absolute_url(self):
+        return reverse(URL_NAME_ARTICLE, kwargs={DJ_PK: self.id})
