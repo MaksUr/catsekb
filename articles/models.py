@@ -1,5 +1,5 @@
 import re
-from django.db.models import Model, CharField, TextField, DateTimeField, BooleanField, ForeignKey
+from django.db.models import Model, CharField, TextField, DateTimeField, BooleanField, ForeignKey, QuerySet
 from django.urls import reverse
 
 from articles.article_constants import ARTICLE_KEY_TITLE, ARTICLE_KEY_TEXT, ARTICLE_KEY_CREATED, ARTICLE_KEY_UPDATED, \
@@ -7,10 +7,9 @@ from articles.article_constants import ARTICLE_KEY_TITLE, ARTICLE_KEY_TEXT, ARTI
     AUTHOR_VERBOSE_NAME_PLURAL, SUBJECT_KEY_NAME, SUBJECT_VERBOSE_NAME, SUBJECT_VERBOSE_NAME_PLURAL, \
     ARTICLES_DEFAULT_MAPPING, URL, SUBJECT_KEY_SHOW, NEWS_VERBOSE_NAME, NEWS_VERBOSE_NAME_PLURAL, NEWS_KEY_TITLE, \
     NEWS_KEY_TEXT, NEWS_KEY_CREATED, NEWS_KEY_UPDATED, NEWS_KEY_SHOW, NEWS_SUBJECT_VERBOSE_NAME, \
-    NEWS_SUBJECT_VERBOSE_NAME_PLURAL
+    NEWS_SUBJECT_VERBOSE_NAME_PLURAL, NEWS_SUBJECT_KEY_NAME, NEWS_SUBJECT_KEY_SHOW
 from articles.validators import article_name_validator
-from catsekb.constants import DJ_PK, URL_NAME_SUBJECT, URL_NAME_ARTICLE
-
+from catsekb.constants import DJ_PK, URL_NAME_SUBJECT, URL_NAME_ARTICLE, URL_NAME_NEWS_SUBJECT
 
 SEARCH_TAG_PATTERN = re.compile(r'<.+?>', re.S)
 
@@ -41,10 +40,19 @@ class Subject(Model):
         return reverse(URL_NAME_SUBJECT, kwargs={DJ_PK: self.id})
 
 
-class NewsSubject(Subject):
+class NewsSubject(Model):
+    name = CharField(NEWS_SUBJECT_KEY_NAME, max_length=120, unique=True)
+    show = BooleanField(NEWS_SUBJECT_KEY_SHOW, default=True)
+
     class Meta:
         verbose_name = NEWS_SUBJECT_VERBOSE_NAME
         verbose_name_plural = NEWS_SUBJECT_VERBOSE_NAME_PLURAL
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse(URL_NAME_NEWS_SUBJECT, kwargs={DJ_PK: self.id})
 
 
 class Article(Model):
