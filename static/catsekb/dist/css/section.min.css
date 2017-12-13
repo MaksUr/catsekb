@@ -43,16 +43,16 @@
   position: absolute;
   visibility: visible;
   top: 35px;
-  left: -45px;
+  left: 0;
   z-index: 9;
   -webkit-transform: rotate(59deg);
       -ms-transform: rotate(59deg);
-          transform: rotate(59deg);
+          transform: translateX(-40%) rotate(59deg);
   -webkit-transition: -webkit-transform .5s ease;
   transition: -webkit-transform .5s ease;
   -o-transition: transform .5s ease;
   transition: transform .5s ease;
-  transition: transform .5s ease, -webkit-transform .5s ease; }
+  transition: transform .55s ease, -webkit-transform .5s ease; }
 
 .about .tag {
   padding: 0;
@@ -62,7 +62,7 @@
 .can-hover .cat_container:hover + .cat_a_mouse {
   -webkit-transform: translateX(-70%) rotate(45deg);
       -ms-transform: translateX(-70%) rotate(45deg);
-          transform: translateX(-70%) rotate(45deg); }
+          transform: translateX(-115%) rotate(45deg); }
 
 /* <---------- .about END ----------> */
 
