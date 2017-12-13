@@ -3,13 +3,13 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 
-from articles.article_constants import ARTICLES_DEFAULT_MAPPING, ARTICLE_FIND_CAT_ID, CAPTION
-from articles.models import Subject
-
+from articles.article_constants import ARTICLES_DEFAULT_MAPPING, ARTICLE_FIND_CAT_ID, CAPTION, NEWS_VERBOSE_NAME_PLURAL, \
+    ARTICLE_VERBOSE_NAME_PLURAL
 from cats.cats_constants import GROUP_INSTANCE_ALL_ID, GROUP_INSTANCE_SHELTER_ID, \
     GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, GROUP_MAPPING, PRIVATE_GROUP, ANIMAL_LOCATION_STATUS
-from catsekb.constants import SHOW, GET_PAR_KEY_FILTER, URL_NAME_ANIMALS, URL_NAME_FIND_CAT
 from cats.models import Group
+from catsekb.constants import SHOW, GET_PAR_KEY_FILTER, URL_NAME_ANIMALS, URL_NAME_FIND_CAT, URL_NAME_NEWS_FEED, \
+    URL_NAME_SUBJECTS_FEED
 
 
 def get_objects_from_query(model_cls, query, show_permission=False, order_by=None):
@@ -71,15 +71,23 @@ def get_base_context(active_menu, extra_title, show_permission=False):
         shelter_value=GROUP_INSTANCE_SHELTER_ID
     )
 
+    helpful_info_list = list()
     find_cat_url = dict()
     find_cat_url['caption'] = ARTICLES_DEFAULT_MAPPING[ARTICLE_FIND_CAT_ID][CAPTION]
     find_cat_url['url'] = reverse(URL_NAME_FIND_CAT)
-
-    user_articles = get_objects_from_query(model_cls=Subject, query=dict(), show_permission=show_permission)
+    news = dict()
+    news['caption'] = NEWS_VERBOSE_NAME_PLURAL
+    news['url'] = reverse(URL_NAME_NEWS_FEED)
+    articles = dict()
+    articles['caption'] = ARTICLE_VERBOSE_NAME_PLURAL
+    articles['url'] = reverse(URL_NAME_SUBJECTS_FEED)
+    helpful_info_list.append(find_cat_url)
+    helpful_info_list.append(news)
+    helpful_info_list.append(articles)
 
     context = {
         'group_list': [animal_filter_url] + default_group_list + list(user_group_list),
-        'helpful_info_list': [find_cat_url] + list(user_articles),
+        'helpful_info_list': helpful_info_list,
         'active_menu': active_menu,
         'extra_title': extra_title,
     }

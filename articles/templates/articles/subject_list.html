@@ -14,7 +14,7 @@
     
         {% for object in object_list %}
         	<section class="font mid">    
-            {% include 'cats/widgets/caption.html' with caption=object.name %}
+            {% include 'cats/widgets/caption.html' with caption=object.name caption_url=object.get_absolute_url %}
             {% for article in object.article_set.all|slice:":3" %}
                 {% if forloop.counter < 3 %}
                     {% include 'articles/widgets/article_preview.html' with object=article %}
