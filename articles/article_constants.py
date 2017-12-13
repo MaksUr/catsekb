@@ -1,5 +1,7 @@
+from os.path import join
+
 from catsekb.constants import URL_NAME_CONTACTS, URL_NAME_FIND_CAT, CAPTION, URL, SHOW, CREATED, CREATED_KEY, UPDATED, \
-    UPDATED_KEY, SUBJECT, AUTHOR, NAME, TEXT, TITLE
+    UPDATED_KEY, SUBJECT, AUTHOR, NAME, TEXT, TITLE, FOLDER
 
 APPLICATION_VERBOSE_NAME = 'Статьи'
 
@@ -89,10 +91,12 @@ ARTICLES_DEFAULT_MAPPING = {
     ARTICLE_CONTACTS_ID: {
         CAPTION: 'Контакты',
         URL: URL_NAME_CONTACTS,
+        FOLDER: join('articles', 'articles_list', 'contacts.txt'),
     },
     ARTICLE_FIND_CAT_ID: {
         CAPTION: 'Что делать я нашел кота',
         URL: URL_NAME_FIND_CAT,
+        FOLDER: join('articles', 'articles_list', 'find_cat.txt'),
     }
 }
 

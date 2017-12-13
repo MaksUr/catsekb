@@ -8,6 +8,7 @@ from articles.article_constants import ARTICLE_TITLE, ARTICLE_TEXT, ARTICLE_SUBJ
 from articles.models import Subject, Article
 from catsekb.constants import NAME
 from catsekb.settings import BASE_DIR
+from catsekb.view_functions import create_or_update_default_articles
 
 ARTICLES_DIR = join(BASE_DIR, 'articles', 'articles_list')
 
@@ -84,6 +85,7 @@ def create_articles_by_subj(subject, subj_dir, cls):
 
 
 def update_articles(cls=Article, cls_subj=Subject):
+    create_or_update_default_articles()
     subjects = listdir(ARTICLES_DIR)
     for subj in subjects:
         curr_dir = join(ARTICLES_DIR, subj)

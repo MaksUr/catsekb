@@ -23,6 +23,7 @@ SUBJECT = 'subject'
 AUTHOR = 'author'
 TITLE = 'title'
 TEXT = 'text'
+FOLDER = 'folder'
 
 
 CREATED = 'created'

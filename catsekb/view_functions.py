@@ -2,14 +2,36 @@ from django.core.exceptions import FieldError
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
+from os.path import join
 
 from articles.article_constants import ARTICLES_DEFAULT_MAPPING, ARTICLE_FIND_CAT_ID, CAPTION, NEWS_VERBOSE_NAME_PLURAL, \
-    ARTICLE_VERBOSE_NAME_PLURAL
+    ARTICLE_VERBOSE_NAME_PLURAL, ARTICLE_TITLE, ARTICLE_TEXT
+from articles.models import Article
 from cats.cats_constants import GROUP_INSTANCE_ALL_ID, GROUP_INSTANCE_SHELTER_ID, \
     GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, GROUP_MAPPING, PRIVATE_GROUP, ANIMAL_LOCATION_STATUS
 from cats.models import Group
 from catsekb.constants import SHOW, GET_PAR_KEY_FILTER, URL_NAME_ANIMALS, URL_NAME_FIND_CAT, URL_NAME_NEWS_FEED, \
-    URL_NAME_SUBJECTS_FEED
+    URL_NAME_SUBJECTS_FEED, DJ_ID, FOLDER
+from catsekb.settings import BASE_DIR
+
+
+def create_or_update_default_articles():
+
+    for art_id in ARTICLES_DEFAULT_MAPPING:
+        fp = join(BASE_DIR, ARTICLES_DEFAULT_MAPPING[art_id][FOLDER])
+        try:
+            f = open(fp, 'r')
+            t = f.read()
+        except (OSError, IOError):
+            f = open(fp, 'w')
+            t = ''
+        Article.objects.get_or_create(
+            id=art_id, defaults={
+                DJ_ID: art_id,
+                ARTICLE_TITLE: ARTICLES_DEFAULT_MAPPING[art_id][CAPTION],
+                ARTICLE_TEXT: t
+            }
+        )
 
 
 def get_objects_from_query(model_cls, query, show_permission=False, order_by=None):
