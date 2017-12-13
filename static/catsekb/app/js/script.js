@@ -4,11 +4,11 @@ var top_nav = document.querySelector('.top_nav'),
  	body = document.getElementsByTagName('body'), 
  	cat_find_block = document.querySelectorAll('.cat_find_block'), 
  	open_next_menu = document.querySelectorAll('.open_next_menu'), 
- 	widthScreen = document.documentElement.clientWidth;
+ 	widthScreen = document.documentElement.clientWidth,
+ 	canHover = !(matchMedia('(hover: none)').matches);
 
 document.addEventListener("DOMContentLoaded", ready);
 document.addEventListener("DOMContentLoaded", shelDisDisable);
-var canHover = !(matchMedia('(hover: none)').matches);
 
 function ready() {
 	if(canHover) {
@@ -36,15 +36,15 @@ function ready() {
 }
 
 function go(val) {		
-		var scrolled =  window.pageYOffset || document.documentElement.scrollTop;
-		
-		if (scrolled >= val) {
-			top_nav.classList.add('top_nav_opened'); 
-		}
-		else {
-			top_nav.classList.remove('top_nav_opened'); 
-		}		
+	var scrolled =  window.pageYOffset || document.documentElement.scrollTop;
+	
+	if (scrolled >= val) {
+		top_nav.classList.add('top_nav_opened'); 
 	}
+	else {
+		top_nav.classList.remove('top_nav_opened'); 
+	}		
+}
 
 function mobileNav() {
 	mobile_list.classList.toggle('open'); 

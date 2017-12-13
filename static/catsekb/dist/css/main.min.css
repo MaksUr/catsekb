@@ -193,7 +193,7 @@ input.but:focus {
 
 .hide_anchor {
     position: relative;
-    top: -70px;
+    top: -65px;
 }
 
 .art_vis::after {
