@@ -2,10 +2,10 @@ import json
 from os.path import join, abspath
 
 from cats.cats_constants import ANIMAL_VK_ALBUM_ID, ANIMAL_VALID_INFO
-from catsekb.constants import VK_GROUP_ID
+from catsekb.constants import VK_GROUP_ID, TITLE
 from cats.models import Animal
 from cats.update_scripts.vk_response_parser import get_animal_kwargs_from_vk_response
-from cats.updater import get_albums_info, RESPONSE, AID, TITLE, update_images_for_animal
+from cats.updater import get_albums_info, RESPONSE, AID, update_images_for_animal
 
 KEY_IGNORE_TITLES = 'ignore_albums_titles'
 
