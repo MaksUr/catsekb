@@ -1,4 +1,5 @@
 {# object #}
+{# subject_key #}
 
 <div class="hide_anchor" id="anchor_{{ object.id }}">
 </div>
@@ -25,6 +26,14 @@
                     <a href="#anchor_{{ object.id }}"><span class="art_vis tag right">Показать полностью</span></a>
                 </div>
 		    </div>
+            {% if subject_key %}
+                <div class="row">
+                    <div class="col-xs-6 col-xs-offset-0 col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-1 col-lg-4 col-lg-offset-2">
+                        <p class="date_article">{{ subject_key }}: <a href="#">{{ object.subject }}</a></p>
+                    </div>
+		        </div>
+
+            {% endif %}
         {% else %}
             <div class="row">
                 <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">

@@ -1,11 +1,12 @@
 # Create your views here.
 from django.views.generic import DetailView, ListView
 
-from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_TITLE, ARTICLES_DEFAULT_MAPPING, ARTICLE_FIND_CAT_ID, \
-    CAPTION
-from articles.models import Subject, Article
+from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_TITLE, ARTICLES_DEFAULT_MAPPING, \
+    ARTICLE_FIND_CAT_ID, \
+    CAPTION, NEWS_CREATED
+from articles.models import Subject, Article, News
 from catsekb.constants import ARTICLES, CONTACTS, DJ_ID, URL_NAME_SUBJECTS_TITLE, URL_NAME_SUBJECT_TITLE, \
-    URL_NAME_ARTICLE_TITLE, SHOW
+    URL_NAME_ARTICLE_TITLE, SHOW, URL_NAME_NEWS_TITLE
 from catsekb.view_functions import get_base_context, get_objects_from_query
 
 
@@ -30,6 +31,24 @@ class SubjectListView(ListView):
             }
         )
         context['find_cat'] = article
+        return context
+
+
+class NewsListView(ListView):
+    model = News
+
+    def get_queryset(self):
+        return get_objects_from_query(
+            model_cls=News,
+            query=dict(),
+            show_permission=self.request.user.is_authenticated(),
+            order_by=NEWS_CREATED
+        )
+
+    def get_context_data(self, **kwargs):
+        show_permission = self.request.user.is_authenticated()
+        context = ListView.get_context_data(self, **kwargs)
+        context.update(get_base_context(show_permission=show_permission, active_menu=ARTICLES, extra_title=URL_NAME_NEWS_TITLE))
         return context
 
 

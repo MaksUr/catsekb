@@ -1,0 +1,21 @@
+{# for base #}
+    {# group_list #}
+    {# helpful_info_list #}
+
+{# objects #}
+{% extends "cats/base.html" %}
+
+{% block base_body %}
+<section>
+    {% for object in object_list %}
+        {% include 'articles/widgets/article_preview.html' with object=object %}
+        {% if object.subject %}
+            {% include 'articles/widgets/article_preview.html' with object=object subject_key='Раздел новостей' %}
+        {% else %}
+            {% include 'articles/widgets/article_preview.html' with object=object %}
+        {% endif %}
+    {% empty %}
+        <p>Новостей еще нет.</p>
+    {% endfor %}
+</section>
+{% endblock base_body %}
