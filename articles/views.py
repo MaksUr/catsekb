@@ -3,7 +3,7 @@ from django.views.generic import DetailView, ListView
 
 from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_TITLE, ARTICLES_DEFAULT_MAPPING, \
     ARTICLE_FIND_CAT_ID, \
-    CAPTION, NEWS_CREATED
+    CAPTION
 from articles.models import Subject, Article, News, NewsSubject
 from catsekb.constants import ARTICLES, CONTACTS, DJ_ID, URL_NAME_SUBJECTS_TITLE, URL_NAME_SUBJECT_TITLE, \
     URL_NAME_ARTICLE_TITLE, SHOW, URL_NAME_NEWS_TITLE, CREATED, URL_NAME_NEWS_FEED_TITLE, URL_NAME_ARTICLES_FEED_TITLE
@@ -92,7 +92,7 @@ class ArticleDetailView(DetailView):
 
     def get_object(self, queryset=None):
         if self.request.user.is_authenticated() is not True:
-            queryset = Subject.objects.filter(**{SHOW: True})
+            queryset = Article.objects.filter(**{SHOW: True})
         obj = super(ArticleDetailView, self).get_object(queryset=queryset)
         return obj
 
