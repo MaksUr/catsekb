@@ -8,7 +8,6 @@
 {% block base_body %}
 <section>
     {% for object in object_list %}
-        {% include 'articles/widgets/article_preview.html' with object=object %}
         {% if object.subject %}
             {% include 'articles/widgets/article_preview.html' with object=object subject_key='Раздел новостей' %}
         {% else %}
