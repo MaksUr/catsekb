@@ -195,3 +195,11 @@ input.but:focus {
     position: relative;
     top: -70px;
 }
+
+.art_vis::after {
+  content: 'Показать полностью';
+}
+
+.art_hide::after {
+  content: 'Скрыть';
+}

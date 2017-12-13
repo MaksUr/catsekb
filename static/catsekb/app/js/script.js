@@ -110,4 +110,6 @@ for (i = 0; i <= artVisBut.length - 1; i++) {
 
 function openArt(i) {
     art[i].classList.toggle('open_art');
+    artVisBut[i].classList.toggle('art_vis');
+    artVisBut[i].classList.toggle('art_hide');
 }
