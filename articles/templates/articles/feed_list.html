@@ -8,7 +8,7 @@
 {% extends "cats/base.html" %}
 
 {% block base_body %}
-<section>
+<section class="font">
     {% include 'cats/widgets/caption.html' with caption=caption %}
     {% for object in object_list %}
         {% if object.subject %}
@@ -20,18 +20,32 @@
         <p>Новостей еще нет.</p>
     {% endfor %}
     {% if page_obj %}
-            {% if page_obj.has_previous %}
-                    <a href="?page={{ page_obj.previous_page_number }}" class="tag">Предыдущий</a>
-            {% else %}
-                    <span class="tag no_active">Предыдущий</span>
-            {% endif %}
+        <div class="row">
+            <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1">
+                <div class="mid font">
+                {% if page_obj.paginator.num_pages > 1 %}
+                    {% if page_obj.has_previous %}
+                            <a href="?page={{ page_obj.previous_page_number }}" class="tag">Предыдущий</a>
+                    {% else %}
+                            <span class="tag no_active">Предыдущий</span>
+                    {% endif %}
 
+                    <a href="?per_page=all" class="tag">Показать всё</a>
 
-            {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number}}" class="tag">Следующий</a>
-            {% else %}
-                    <span class="tag no_active">Следующий</span>
-            {% endif %}
+                    {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number}}" class="tag">Следующий</a>
+                    {% else %}
+                            <span class="tag no_active">Следующий</span>
+                    {% endif %}
+                {% else %}
+                    <!-- Кнопка показать всех - неактивна! -->
+                    <a class="tag pag_gallery no_active">Назад</a>
+                    <a class="tag pag_gallery no_active">Показать всё</a>
+                    <a class="tag pag_gallery no_active">Далее</a>
+                {% endif %}
+                </div>
+            </div>
+        </div>
     {% endif %}
 </section>
 {% endblock base_body %}

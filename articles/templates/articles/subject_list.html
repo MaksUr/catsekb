@@ -11,7 +11,7 @@
     {% include 'cats/widgets/caption.html' with caption="Важно!" %}
     <ul>
         <li>
-            <a href="{{ find_cat.get_absolute_url }}">{{ find_cat.title }}</a>
+            <a href="{{ find_cat.get_absolute_url }}" class="hashtag">{{ find_cat.title }}</a>
         </li>
     </ul>
     </section>
@@ -22,11 +22,11 @@
                 {% if forloop.counter < 6 %}
                     <ul>
                         <li>
-                            <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                            <a href="{{ article.get_absolute_url }}" class="hashtag">{{ article.title }}</a>
                         </li>
                     </ul>
                 {% else %}
-                    <a href="{{ object.get_absolute_url }}#anchor_cat" class="tag">Смотреть еще</a>
+                    <a href="{{ object.get_absolute_url }}#anchor_cat" class="tag">Смотреть ещё</a>
                 {% endif %}
             {% endfor %}
         	</section>
