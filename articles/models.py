@@ -54,7 +54,7 @@ class Article(Model):
         verbose_name_plural = ARTICLE_VERBOSE_NAME_PLURAL
 
     def __str__(self):
-        return '{title}: {text}...'.format(title=self.title, text=self.text[:15])
+        return '{title}: {text}...'.format(title=self.title or 'Статья', text=self.text[:15])
 
     def get_absolute_url(self):
         if ARTICLES_DEFAULT_MAPPING.get(self.id) is not None:
@@ -77,7 +77,7 @@ class News(Model):
         verbose_name_plural = NEWS_VERBOSE_NAME_PLURAL
 
     def __str__(self):
-        return '{title}: {text}...'.format(title=self.title, text=self.text[:15])
+        return '{title}: {text}...'.format(title=self.title or 'Новость', text=self.text[:15])
 
-    def get_absolute_url(self):
-        return reverse(URL_NAME_ARTICLE, kwargs={DJ_PK: self.id})
+    # def get_absolute_url(self):
+    #     return reverse(URL_NAME_ARTICLE, kwargs={DJ_PK: self.id})

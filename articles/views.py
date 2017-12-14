@@ -12,7 +12,7 @@ from catsekb.view_functions import get_base_context, get_objects_from_query
 
 class AbstractFeedListView(ListView):
     title = ''
-    order_by = None
+    order_by = '-' + CREATED
 
     def get_queryset(self):
         return get_objects_from_query(
@@ -48,14 +48,12 @@ class SubjectListView(AbstractFeedListView):
 class NewsFeedListView(AbstractFeedListView):
     model = News
     title = URL_NAME_NEWS_FEED_TITLE
-    order_by = CREATED
     template_name = 'articles/feed_list.html'
 
 
 class ArticlesFeedListView(AbstractFeedListView):
     model = Article
     title = URL_NAME_ARTICLES_FEED_TITLE
-    order_by = CREATED
     template_name = 'articles/feed_list.html'
 
 

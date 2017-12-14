@@ -55,7 +55,6 @@ class ArticleText:
         img_urls = self.get_urls_from_text()
         res_list = self.combine_url_with_text(img_urls, text_without_urls)
         res_text = ''.join(res_list)
-        res_text = res_text.replace('\n', '<br>\n')
         return res_text
 
 
