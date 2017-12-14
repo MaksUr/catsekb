@@ -6,11 +6,13 @@ from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_TITLE, ARTIC
     CAPTION
 from articles.models import Subject, Article, News
 from catsekb.constants import ARTICLES, CONTACTS, DJ_ID, URL_NAME_SUBJECTS_TITLE, URL_NAME_SUBJECT_TITLE, \
-    URL_NAME_ARTICLE_TITLE, SHOW, CREATED, URL_NAME_NEWS_FEED_TITLE, URL_NAME_ARTICLES_FEED_TITLE
+    URL_NAME_ARTICLE_TITLE, SHOW, CREATED, URL_NAME_NEWS_FEED_TITLE, URL_NAME_ARTICLES_FEED_TITLE, GET_PAR_KEY_PER_PAGE, \
+    GET_PAR_VAL_PAGE, GET_PAR_KEY_PAGE
 from catsekb.view_functions import get_base_context, get_objects_from_query
 
 
 class AbstractFeedListView(ListView):
+    paginate_by = 30
     title = ''
     order_by = '-' + CREATED
 
@@ -27,6 +29,20 @@ class AbstractFeedListView(ListView):
         context = super(AbstractFeedListView, self).get_context_data(**kwargs)
         context.update(get_base_context(show_permission=show_permission, active_menu=ARTICLES, extra_title=self.title))
         return context
+
+    def get_paginate_by(self, queryset):
+        per_page = self.request.GET.get(GET_PAR_KEY_PER_PAGE)
+        if per_page is not None:
+            if per_page == GET_PAR_VAL_PAGE:
+                self.kwargs[GET_PAR_KEY_PAGE] = 1
+                return len(queryset)
+            else:
+                try:
+                    return int(per_page)
+                except ValueError:
+                    return self.paginate_by
+        else:
+            return self.paginate_by
 
 
 class SubjectListView(AbstractFeedListView):

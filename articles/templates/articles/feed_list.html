@@ -3,6 +3,7 @@
     {# helpful_info_list #}
 
 {# objects #}
+{# page_obj #}
 {% extends "cats/base.html" %}
 
 {% block base_body %}
@@ -16,5 +17,19 @@
     {% empty %}
         <p>Новостей еще нет.</p>
     {% endfor %}
+    {% if page_obj %}
+            {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}" class="tag">Предыдущий</a>
+            {% else %}
+                    <span class="tag no_active">Предыдущий</span>
+            {% endif %}
+
+
+            {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number}}" class="tag">Следующий</a>
+            {% else %}
+                    <span class="tag no_active">Следующий</span>
+            {% endif %}
+    {% endif %}
 </section>
 {% endblock base_body %}
