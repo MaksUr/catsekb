@@ -63,7 +63,6 @@ URL_NAME_FIND_CAT = 'find_cat'
 URL_NAME_NEWS_FEED = 'news_feed'                    # новостная лента
 URL_NAME_SUBJECTS_FEED = 'subjects_feed'            # Лента статей
 URL_NAME_SUBJECTS = 'subjects'                      # Список тем статей
-URL_NAME_NEWS = 'news'                              # Список тем новостей
 
 URL_NAME_INDEX_TITLE = 'Главная страница'
 URL_NAME_GROUPS_TITLE = 'Наши питомцы'
@@ -71,7 +70,6 @@ URL_NAME_GROUPS_TITLE = 'Наши питомцы'
 # URL_NAME_ANIMALS_TITLE = '{caption}'
 # URL_NAME_ANIMAL_TITLE = '{name}'
 URL_NAME_SUBJECTS_TITLE = 'Полезные статьи'
-URL_NAME_NEWS_TITLE = 'Новости'
 URL_NAME_NEWS_FEED_TITLE = 'Новостная лента'
 URL_NAME_ARTICLES_FEED_TITLE = 'Новостная лента'
 URL_NAME_SUBJECT_TITLE = '{subj}'

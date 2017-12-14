@@ -31,22 +31,6 @@ SUBJECT_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удал�
                            'Скрытые темы статей доступны для персонала на сайте.'
 
 
-# class NewsSubject
-NEWS_SUBJECT_VERBOSE_NAME = 'Тема новости'
-NEWS_SUBJECT_VERBOSE_NAME_PLURAL = 'Темы новостей'
-
-# name
-NEWS_SUBJECT_NAME = NAME
-NEWS_SUBJECT_KEY_NAME = NEWS_SUBJECT_VERBOSE_NAME
-NEWS_SUBJECT_KEY_NAME_HELP_TEXT = 'Укажи тематику новости'
-
-# show
-NEWS_SUBJECT_SHOW = SHOW
-NEWS_SUBJECT_KEY_SHOW = 'Показывать тему новостей'
-NEWS_SUBJECT_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удаления или чтобы скрыть. ' \
-                           'Скрытые темы новостей доступны для персонала на сайте.'
-
-
 # class Article
 ARTICLE_VERBOSE_NAME = 'Статья'
 ARTICLE_VERBOSE_NAME_PLURAL = APPLICATION_VERBOSE_NAME

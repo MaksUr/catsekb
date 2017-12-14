@@ -4,9 +4,9 @@ from django.views.generic import DetailView, ListView
 from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_TITLE, ARTICLES_DEFAULT_MAPPING, \
     ARTICLE_FIND_CAT_ID, \
     CAPTION
-from articles.models import Subject, Article, News, NewsSubject
+from articles.models import Subject, Article, News
 from catsekb.constants import ARTICLES, CONTACTS, DJ_ID, URL_NAME_SUBJECTS_TITLE, URL_NAME_SUBJECT_TITLE, \
-    URL_NAME_ARTICLE_TITLE, SHOW, URL_NAME_NEWS_TITLE, CREATED, URL_NAME_NEWS_FEED_TITLE, URL_NAME_ARTICLES_FEED_TITLE
+    URL_NAME_ARTICLE_TITLE, SHOW, CREATED, URL_NAME_NEWS_FEED_TITLE, URL_NAME_ARTICLES_FEED_TITLE
 from catsekb.view_functions import get_base_context, get_objects_from_query
 
 
@@ -44,12 +44,6 @@ class SubjectListView(AbstractFeedListView):
         )
         context['find_cat'] = article
         return context
-
-
-class NewsSubjectListView(AbstractFeedListView):
-    model = NewsSubject
-    title = URL_NAME_NEWS_TITLE
-    template_name = 'articles/subject_list.html'
 
 
 class NewsFeedListView(AbstractFeedListView):

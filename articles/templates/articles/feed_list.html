@@ -3,13 +3,14 @@
     {# helpful_info_list #}
 
 {# objects #}
+{# subject_key #}
 {% extends "cats/base.html" %}
 
 {% block base_body %}
 <section>
     {% for object in object_list %}
         {% if object.subject %}
-            {% include 'articles/widgets/article_preview.html' with object=object subject_key='Раздел новостей' %}
+            {% include 'articles/widgets/article_preview.html' with object=object subject_key=subject_key %}
         {% else %}
             {% include 'articles/widgets/article_preview.html' with object=object %}
         {% endif %}
