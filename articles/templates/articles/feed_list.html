@@ -18,17 +18,25 @@
         <p>Новостей еще нет.</p>
     {% endfor %}
     {% if page_obj %}
-            {% if page_obj.has_previous %}
-                    <a href="?page={{ page_obj.previous_page_number }}" class="tag">Предыдущий</a>
-            {% else %}
-                    <span class="tag no_active">Предыдущий</span>
-            {% endif %}
+            {% if page_obj.paginator.num_pages > 1 %}
+                {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}" class="tag">Предыдущий</a>
+                {% else %}
+                        <span class="tag no_active">Предыдущий</span>
+                {% endif %}
 
+                <a href="?per_page=all" class="tag">Показать все</a>
 
-            {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number}}" class="tag">Следующий</a>
+                {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number}}" class="tag">Следующий</a>
+                {% else %}
+                        <span class="tag no_active">Следующий</span>
+                {% endif %}
             {% else %}
-                    <span class="tag no_active">Следующий</span>
+                <!-- Кнопка показать всех - неактивна! -->
+                <a class="tag no_active pag_gallery">Назад</a>
+                <a class="tag no_active pag_gallery">Показать всех</a>
+                <a class="tag no_active pag_gallery">Далее</a>
             {% endif %}
     {% endif %}
 </section>
