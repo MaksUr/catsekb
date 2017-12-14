@@ -79,7 +79,10 @@
     font-size: 0;
     -webkit-transition: opacity .4s ease, visibility .4s ease;
     -o-transition: opacity .4s ease, visibility .4s ease;
-    transition: opacity .4s ease, visibility .4s ease; } }
+    transition: opacity .4s ease, visibility .4s ease; } 
+  .hide_anchor {
+    top: -15px; }
+}
 
 @media (min-width: 768px) and (max-width: 992px) {
   .description_cat {
