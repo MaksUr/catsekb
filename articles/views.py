@@ -116,6 +116,30 @@ class ArticleDetailView(DetailView):
         return context
 
 
+class NewsDetailView(DetailView):
+    template_name = 'articles/article_detail.html'
+    model = News
+    active_menu = ARTICLES
+
+    def get_object(self, queryset=None):
+        if self.request.user.is_authenticated() is not True:
+            queryset = Article.objects.filter(**{SHOW: True})
+        obj = super(NewsDetailView, self).get_object(queryset=queryset)
+        return obj
+
+    def get_context_data(self, **kwargs):
+        show_permission = self.request.user.is_authenticated()
+        context = DetailView.get_context_data(self, **kwargs)
+        context.update(
+            get_base_context(
+                show_permission=show_permission,
+                active_menu=self.active_menu,
+                extra_title=URL_NAME_ARTICLE_TITLE.format(title=self.object.title)
+            )
+        )
+        return context
+
+
 class DefaultArticleDetailView(ArticleDetailView):
     article_id = None  # abstract
 

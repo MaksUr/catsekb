@@ -9,7 +9,7 @@ from articles.article_constants import ARTICLE_KEY_TITLE, ARTICLE_KEY_TEXT, ARTI
     ARTICLES_DEFAULT_MAPPING, URL, SUBJECT_KEY_SHOW, NEWS_VERBOSE_NAME, NEWS_VERBOSE_NAME_PLURAL, NEWS_KEY_TITLE, \
     NEWS_KEY_TEXT, NEWS_KEY_CREATED, NEWS_KEY_UPDATED, NEWS_KEY_SHOW
 from articles.validators import article_name_validator
-from catsekb.constants import DJ_PK, URL_NAME_SUBJECT, URL_NAME_ARTICLE, URL_NAME_NEWS_SUBJECT
+from catsekb.constants import DJ_PK, URL_NAME_SUBJECT, URL_NAME_ARTICLE, URL_NAME_POST
 
 SEARCH_TAG_PATTERN = re.compile(r'<.+?>', re.S)
 
@@ -79,5 +79,5 @@ class News(Model):
     def __str__(self):
         return '{title}: {text}...'.format(title=self.title or 'Новость', text=self.text[:15])
 
-    # def get_absolute_url(self):
-    #     return reverse(URL_NAME_ARTICLE, kwargs={DJ_PK: self.id})
+    def get_absolute_url(self):
+        return reverse(URL_NAME_POST, kwargs={DJ_PK: self.id})

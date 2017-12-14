@@ -20,7 +20,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-6 col-xs-offset-0 col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-1 col-lg-4 col-lg-offset-2">
-                    <p class="date_article">{{ object.created.date }}</p>
+                    <a href="{{ object.get_absolute_url }}"><p class="date_article">{{ object.created.date }}</p></a>
                 </div>
                 <div class="col-xs-6 col-xs-offset-0 col-sm-4 col-sm-offset-2 col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-0">
                     <a href="#anchor_{{ object.id }}"><span class="art_vis tag right"></span></a>
