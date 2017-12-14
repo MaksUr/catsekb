@@ -4,8 +4,16 @@
 
 {# object #}
 {# shelter_caption #}
+{# next #}
+{# previous #}
 {% extends "cats/base.html" %}
 
 {% block base_body %}
     {% include 'articles/widgets/article.html' with object=object %}
+    {% if next %}
+        <p><a href="{{ next.get_absolute_url }}">Следующий</a></p>
+    {% endif %}
+    {% if previous %}
+        <p><a href="{{ previous.get_absolute_url }}">Предыдущий</a></p>
+    {% endif %}
 {% endblock base_body %}

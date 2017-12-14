@@ -8,7 +8,6 @@ var top_nav = document.querySelector('.top_nav'),
  	canHover = !(matchMedia('(hover: none)').matches);
 
 document.addEventListener("DOMContentLoaded", ready);
-document.addEventListener("DOMContentLoaded", shelDisDisable);
 
 function ready() {
 	if(canHover) {
@@ -27,15 +26,15 @@ function ready() {
 	
 	if (widthScreen < 751) {
 		console.log(widthScreen);
-		burger.addEventListener('click', mobileNav);
+		burger.addEventListener('click', openedMobileMenu);
 
 	} else {
-		window.addEventListener('scroll', go.bind(this, 325));
+		window.addEventListener('scroll', openedTopMenu.bind(this, 325));
 	}
 	
 }
 
-function go(val) {		
+function openedTopMenu(val) {		
 	var scrolled =  window.pageYOffset || document.documentElement.scrollTop;
 	
 	if (scrolled >= val) {
@@ -46,7 +45,7 @@ function go(val) {
 	}		
 }
 
-function mobileNav() {
+function openedMobileMenu() {
 	mobile_list.classList.toggle('open'); 
 	body[0].classList.toggle('overY');
 }
@@ -79,37 +78,3 @@ function view_menu_opening(i) {
   }
  
 })();
-
-
-
-var formShel = document.documentElement.querySelectorAll('.shelter_distance'),
-    formLoc = document.documentElement.querySelectorAll('.location_status');
-
-for (i = 0; i <= formLoc.length - 1; i++) {
-	formLoc[i].addEventListener('click', shelDisDisable.bind(this, i));
-}
-
-function shelDisDisable(i) {
-	if (formLoc[2].checked == true || formLoc[0].checked == true) {
-		for(i = 0; i <= formShel.length - 1; i++) {
-			formShel[i].disabled = '';
-		} 
-	} else {
-		for(i = 0; i <= formShel.length - 1; i++) {
-			formShel[i].disabled = 'disable';
-		} 
-	}
-}
-
-var artVisBut = document.documentElement.querySelectorAll('.art_vis'),
-    art =  document.documentElement.querySelectorAll('.art');
-
-for (i = 0; i <= artVisBut.length - 1; i++) {
-    artVisBut[i].addEventListener('click', openArt.bind(this, i));
-}
-
-function openArt(i) {
-    art[i].classList.toggle('open_art');
-    artVisBut[i].classList.toggle('art_vis');
-    artVisBut[i].classList.toggle('art_hide');
-}

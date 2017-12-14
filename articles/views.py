@@ -4,15 +4,17 @@ from django.views.generic import DetailView, ListView
 from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_TITLE, ARTICLES_DEFAULT_MAPPING, \
     ARTICLE_FIND_CAT_ID, \
     CAPTION
-from articles.models import Subject, Article, News, NewsSubject
+from articles.models import Subject, Article, News
 from catsekb.constants import ARTICLES, CONTACTS, DJ_ID, URL_NAME_SUBJECTS_TITLE, URL_NAME_SUBJECT_TITLE, \
-    URL_NAME_ARTICLE_TITLE, SHOW, URL_NAME_NEWS_TITLE, CREATED, URL_NAME_NEWS_FEED_TITLE, URL_NAME_ARTICLES_FEED_TITLE
+    URL_NAME_ARTICLE_TITLE, SHOW, CREATED, URL_NAME_NEWS_FEED_TITLE, URL_NAME_ARTICLES_FEED_TITLE, GET_PAR_KEY_PER_PAGE, \
+    GET_PAR_VAL_PAGE, GET_PAR_KEY_PAGE
 from catsekb.view_functions import get_base_context, get_objects_from_query
 
 
 class AbstractFeedListView(ListView):
+    paginate_by = 30
     title = ''
-    order_by = None
+    order_by = '-' + CREATED
 
     def get_queryset(self):
         return get_objects_from_query(
@@ -26,13 +28,28 @@ class AbstractFeedListView(ListView):
         show_permission = self.request.user.is_authenticated()
         context = super(AbstractFeedListView, self).get_context_data(**kwargs)
         context.update(get_base_context(show_permission=show_permission, active_menu=ARTICLES, extra_title=self.title))
+        context['caption'] = self.title
         return context
+
+    def get_paginate_by(self, queryset):
+        per_page = self.request.GET.get(GET_PAR_KEY_PER_PAGE)
+        if per_page is not None:
+            if per_page == GET_PAR_VAL_PAGE:
+                self.kwargs[GET_PAR_KEY_PAGE] = 1
+                return len(queryset)
+            else:
+                try:
+                    return int(per_page)
+                except ValueError:
+                    return self.paginate_by
+        else:
+            return self.paginate_by
 
 
 class SubjectListView(AbstractFeedListView):
     model = Subject
     title = URL_NAME_SUBJECTS_TITLE
-    template_name = 'articles/subject_list.html'
+    order_by = None
 
     def get_context_data(self, **kwargs):
         context = super(SubjectListView, self).get_context_data(**kwargs)
@@ -46,23 +63,15 @@ class SubjectListView(AbstractFeedListView):
         return context
 
 
-class NewsSubjectListView(AbstractFeedListView):
-    model = NewsSubject
-    title = URL_NAME_NEWS_TITLE
-    template_name = 'articles/subject_list.html'
-
-
 class NewsFeedListView(AbstractFeedListView):
     model = News
     title = URL_NAME_NEWS_FEED_TITLE
-    order_by = CREATED
     template_name = 'articles/feed_list.html'
 
 
 class ArticlesFeedListView(AbstractFeedListView):
     model = Article
-    title = URL_NAME_ARTICLES_FEED_TITLE
-    order_by = CREATED
+    title = URL_NAME_SUBJECTS_TITLE
     template_name = 'articles/feed_list.html'
 
 
@@ -86,14 +95,14 @@ class SubjectDetailView(DetailView):
         return context
 
 
-class ArticleDetailView(DetailView):
-    model = Article
+class AbstractArticleDetailView(DetailView):
     active_menu = ARTICLES
+    template_name = 'articles/article_detail.html'
 
     def get_object(self, queryset=None):
         if self.request.user.is_authenticated() is not True:
-            queryset = Article.objects.filter(**{SHOW: True})
-        obj = super(ArticleDetailView, self).get_object(queryset=queryset)
+            queryset = self.model.objects.filter(**{SHOW: True})
+        obj = super(AbstractArticleDetailView, self).get_object(queryset=queryset)
         return obj
 
     def get_context_data(self, **kwargs):
@@ -103,10 +112,24 @@ class ArticleDetailView(DetailView):
             get_base_context(
                 show_permission=show_permission,
                 active_menu=self.active_menu,
-                extra_title=URL_NAME_ARTICLE_TITLE.format(title=self.object.title)
+                extra_title=self.object.title
             )
         )
+        q = dict()
+        if show_permission is not True:
+            q[SHOW] = True
+        context['next'] = self.model.objects.filter(id__gt=self.object.id).order_by('id').first()
+        context['previous'] = self.model.objects.filter(id__lt=self.object.id).order_by('-id').first()
+        # TODO: проверить первые и последние
         return context
+
+
+class ArticleDetailView(AbstractArticleDetailView):
+    model = Article
+
+
+class NewsDetailView(AbstractArticleDetailView):
+    model = News
 
 
 class DefaultArticleDetailView(ArticleDetailView):

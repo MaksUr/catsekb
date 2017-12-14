@@ -6,7 +6,7 @@ import re
 
 from articles.article_constants import ARTICLE_TITLE, ARTICLE_TEXT, ARTICLE_SUBJECT
 from articles.models import Subject, Article
-from catsekb.constants import NAME
+from catsekb.constants import NAME, IMAGE
 from catsekb.settings import BASE_DIR
 from catsekb.view_functions import create_or_update_default_articles
 
@@ -25,6 +25,11 @@ TEMPLATE_TAG_IMG = '\n<img src="{src}">'
 class ArticleText:
     def __init__(self, text):
         self.text = text
+        url = PATTERN_URL.search(self.text)
+        if url:
+            self.url = url.group()
+        else:
+            self.url = "http://127.0.0.1:8000/media/sad_cat.png"
 
     @staticmethod
     def combine_url_with_text(urls, lines):
@@ -55,21 +60,22 @@ class ArticleText:
         img_urls = self.get_urls_from_text()
         res_list = self.combine_url_with_text(img_urls, text_without_urls)
         res_text = ''.join(res_list)
-        res_text = res_text.replace('\n', '<br>\n')
         return res_text
 
 
-def create_article(art_fn, subject, cls):
+def create_article(art_fn, subject):
     if isfile(art_fn) and art_fn.endswith('.txt'):
         title = basename(art_fn).replace('.txt', '')
         t = open(art_fn, 'r', encoding='UTF-8').read()
-        text = ArticleText(t).get_text()
-        article, created = cls.objects.get_or_create(
+        at = ArticleText(t)
+        text = at.get_text()
+        article, created = Article.objects.get_or_create(
             title=title,
             defaults={
                 ARTICLE_TITLE: title,
                 ARTICLE_TEXT: text,
-                ARTICLE_SUBJECT: subject
+                ARTICLE_SUBJECT: subject,
+                IMAGE: at.url,
             }
         )
         if created is False:
@@ -79,17 +85,17 @@ def create_article(art_fn, subject, cls):
             article.save()
 
 
-def create_articles_by_subj(subject, subj_dir, cls):
+def create_articles_by_subj(subject, subj_dir):
     for a in listdir(subj_dir):
-        create_article(join(subj_dir, a), subject, cls)
+        create_article(join(subj_dir, a), subject)
 
 
-def update_articles(cls=Article, cls_subj=Subject):
+def update_articles():
     create_or_update_default_articles()
     subjects = listdir(ARTICLES_DIR)
     for subj in subjects:
         curr_dir = join(ARTICLES_DIR, subj)
         if isdir(curr_dir):
-            subject, updated = cls_subj.objects.get_or_create(name=subj, defaults={NAME: subj})
-            create_articles_by_subj(subject, curr_dir, cls=cls)
+            subject, updated = Subject.objects.get_or_create(name=subj, defaults={NAME: subj})
+            create_articles_by_subj(subject, curr_dir)
 

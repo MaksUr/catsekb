@@ -7,22 +7,28 @@
 {% extends "cats/base.html" %}
 
 {% block base_body %}
-	<section class="font mid">   
+	<section class="font mid">
     {% include 'cats/widgets/caption.html' with caption="Важно!" %}
-    {% include 'articles/widgets/article_preview.html' with object=find_cat %}
-    </section>   
-    
+    <ul>
+        <li>
+            <a href="{{ find_cat.get_absolute_url }}" class="hashtag">{{ find_cat.title }}</a>
+        </li>
+    </ul>
+    </section>
         {% for object in object_list %}
-        	<section class="font mid">    
+        	<section class="font mid">
             {% include 'cats/widgets/caption.html' with caption=object.name caption_url=object.get_absolute_url %}
-            {% for article in object.article_set.all|slice:":3" %}
-                {% if forloop.counter < 3 %}
-                    {% include 'articles/widgets/article_preview.html' with object=article %}
+            {% for article in object.article_set.all|slice:":6" %}
+                {% if forloop.counter < 6 %}
+                    <ul>
+                        <li>
+                            <a href="{{ article.get_absolute_url }}" class="hashtag">{{ article.title }}</a>
+                        </li>
+                    </ul>
                 {% else %}
-                    <a href="{{ object.get_absolute_url }}#anchor_cat" class="tag">Смотреть еще</a>
+                    <a href="{{ object.get_absolute_url }}#anchor_cat" class="tag">Смотреть ещё</a>
                 {% endif %}
             {% endfor %}
         	</section>
         {% endfor %}
-    
 {% endblock base_body %}

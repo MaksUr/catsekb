@@ -37,7 +37,7 @@ def create_or_update_default_articles():
 def get_objects_from_query(model_cls, query, show_permission=False, order_by=None):
     """
 
-    :type order_by: tuple | list
+    :type order_by: str
     :type model_cls: django.db.models.Model | articles.models.Article | articles.models.Animal| articles.models.Group 
     :type show_permission: bool
     :type query: dict

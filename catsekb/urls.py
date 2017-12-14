@@ -17,13 +17,12 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 
-from articles.views import NewsFeedListView, NewsSubjectListView
+from articles.views import NewsFeedListView
 from catsekb import settings
 
 urlpatterns = [
     url(r'^', include('cats.urls')),
-    url(r'^feed/', NewsFeedListView.as_view(), name='news_feed'),
-    url(r'^news/', NewsSubjectListView.as_view(), name='news'),
+    url(r'^news/', NewsFeedListView.as_view(), name='news_feed'),
     url(r'^articles/', include('articles.urls')),
     url(r'^admin/', admin.site.urls),
 ] + \

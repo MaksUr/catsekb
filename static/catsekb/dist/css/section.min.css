@@ -72,6 +72,9 @@
 }
 
 .find_container input {
+    margin-top: 15px;
+}
+.can-hover .find_container input {
     margin-top: 75px;
     position: relative;
     z-index: 1;
