@@ -4,10 +4,12 @@
 
 {# objects #}
 {# page_obj #}
+{# caption #}
 {% extends "cats/base.html" %}
 
 {% block base_body %}
 <section>
+    {% include 'cats/widgets/caption.html' with caption=caption %}
     {% for object in object_list %}
         {% if object.subject %}
             {% include 'articles/widgets/article_preview.html' with object=object subject_key="Тема" %}

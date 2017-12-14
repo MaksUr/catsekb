@@ -16,7 +16,7 @@
     </ul>
     </section>
         {% for object in object_list %}
-        	<section class="font mid">    
+        	<section class="font mid">
             {% include 'cats/widgets/caption.html' with caption=object.name caption_url=object.get_absolute_url %}
             {% for article in object.article_set.all|slice:":6" %}
                 {% if forloop.counter < 6 %}
