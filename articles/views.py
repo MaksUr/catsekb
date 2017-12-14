@@ -14,7 +14,7 @@ from catsekb.view_functions import get_base_context, get_objects_from_query
 class AbstractFeedListView(ListView):
     paginate_by = 30
     title = ''
-    order_by = '-' + CREATED
+    order_by = 'id'
 
     def get_queryset(self):
         return get_objects_from_query(

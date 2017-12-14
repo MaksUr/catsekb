@@ -65,7 +65,8 @@ class ArticleText:
 
 def create_article(art_fn, subject):
     if isfile(art_fn) and art_fn.endswith('.txt'):
-        title = basename(art_fn).replace('.txt', '')
+        fn = basename(art_fn)
+        title = fn[fn.index('-')+1:].replace('.txt', '')
         t = open(art_fn, 'r', encoding='UTF-8').read()
         at = ArticleText(t)
         text = at.get_text()
@@ -86,16 +87,21 @@ def create_article(art_fn, subject):
 
 
 def create_articles_by_subj(subject, subj_dir):
-    for a in listdir(subj_dir):
+    l = listdir(subj_dir)
+    l.sort()
+    for a in l:
         create_article(join(subj_dir, a), subject)
 
 
 def update_articles():
     create_or_update_default_articles()
     subjects = listdir(ARTICLES_DIR)
+    subjects.sort()
     for subj in subjects:
         curr_dir = join(ARTICLES_DIR, subj)
         if isdir(curr_dir):
-            subject, updated = Subject.objects.get_or_create(name=subj, defaults={NAME: subj})
+            subject, updated = Subject.objects.get_or_create(
+                name=subj[subj.index('-')+1:], defaults={NAME: subj[subj.index('-')+1:]}
+            )
             create_articles_by_subj(subject, curr_dir)
 
