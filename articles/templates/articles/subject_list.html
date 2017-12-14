@@ -10,8 +10,7 @@
 	<section class="font mid">   
     {% include 'cats/widgets/caption.html' with caption="Важно!" %}
     {% include 'articles/widgets/article_preview.html' with object=find_cat %}
-    </section>   
-    
+    </section>
         {% for object in object_list %}
         	<section class="font mid">    
             {% include 'cats/widgets/caption.html' with caption=object.name caption_url=object.get_absolute_url %}
@@ -24,5 +23,4 @@
             {% endfor %}
         	</section>
         {% endfor %}
-    
 {% endblock base_body %}
