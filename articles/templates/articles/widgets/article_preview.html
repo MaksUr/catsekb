@@ -3,7 +3,7 @@
 
 <div class="hide_anchor" id="anchor_{{ object.id }}">
 </div>
-<div class="article line_height">
+<div class="article font line_height">
 	<div class="container">
         {% if object.show %}
             <div class="row">
@@ -19,11 +19,10 @@
             </div>
             {% if subject_key %}
                 <div class="row">
-                    <div class="col-xs-6 col-xs-offset-0 col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-1 col-lg-4 col-lg-offset-2">
-                        <p class="date_article">{{ subject_key }}: <a href="{{ object.subject.get_absolute_url }}">{{ object.subject.name }}</a></p>
+                    <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+                        <p class="date_article">{{ subject_key }}: <a href="{{ object.subject.get_absolute_url }}#anchor_cat" class="hashtag">{{ object.subject.name }}</a></p>
                     </div>
 		        </div>
-
             {% endif %}
         {% else %}
             <div class="row">
