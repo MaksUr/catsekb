@@ -1,5 +1,6 @@
 import re
-from django.db.models import Model, CharField, TextField, DateTimeField, BooleanField, ForeignKey, QuerySet
+from django.db.models import Model, CharField, TextField, DateTimeField, BooleanField, ForeignKey, QuerySet, \
+    IntegerField
 from django.urls import reverse
 
 from articles.article_constants import ARTICLE_KEY_TITLE, ARTICLE_KEY_TEXT, ARTICLE_KEY_CREATED, ARTICLE_KEY_UPDATED, \
@@ -69,6 +70,7 @@ class News(Model):
     updated = DateTimeField(NEWS_KEY_UPDATED, auto_now=True)
     show = BooleanField(NEWS_KEY_SHOW, default=True)
     author = ForeignKey(Author, verbose_name=Author._meta.verbose_name, null=True, blank=True)
+    vk_album_id = IntegerField('ID новости в VK', blank=True, default=None, null=True)
 
     class Meta:
         verbose_name = NEWS_VERBOSE_NAME

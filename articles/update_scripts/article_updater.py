@@ -59,12 +59,12 @@ class ArticleText:
         return res_text
 
 
-def create_article(art_fn, subject, cls):
+def create_article(art_fn, subject):
     if isfile(art_fn) and art_fn.endswith('.txt'):
         title = basename(art_fn).replace('.txt', '')
         t = open(art_fn, 'r', encoding='UTF-8').read()
         text = ArticleText(t).get_text()
-        article, created = cls.objects.get_or_create(
+        article, created = Article.objects.get_or_create(
             title=title,
             defaults={
                 ARTICLE_TITLE: title,
@@ -79,17 +79,17 @@ def create_article(art_fn, subject, cls):
             article.save()
 
 
-def create_articles_by_subj(subject, subj_dir, cls):
+def create_articles_by_subj(subject, subj_dir):
     for a in listdir(subj_dir):
-        create_article(join(subj_dir, a), subject, cls)
+        create_article(join(subj_dir, a), subject)
 
 
-def update_articles(cls=Article, cls_subj=Subject):
+def update_articles():
     create_or_update_default_articles()
     subjects = listdir(ARTICLES_DIR)
     for subj in subjects:
         curr_dir = join(ARTICLES_DIR, subj)
         if isdir(curr_dir):
-            subject, updated = cls_subj.objects.get_or_create(name=subj, defaults={NAME: subj})
-            create_articles_by_subj(subject, curr_dir, cls=cls)
+            subject, updated = Subject.objects.get_or_create(name=subj, defaults={NAME: subj})
+            create_articles_by_subj(subject, curr_dir)
 
