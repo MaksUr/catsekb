@@ -28,6 +28,7 @@ class AbstractFeedListView(ListView):
         show_permission = self.request.user.is_authenticated()
         context = super(AbstractFeedListView, self).get_context_data(**kwargs)
         context.update(get_base_context(show_permission=show_permission, active_menu=ARTICLES, extra_title=self.title))
+        context['caption'] = self.title
         return context
 
     def get_paginate_by(self, queryset):
@@ -48,6 +49,7 @@ class AbstractFeedListView(ListView):
 class SubjectListView(AbstractFeedListView):
     model = Subject
     title = URL_NAME_SUBJECTS_TITLE
+    order_by = None
 
     def get_context_data(self, **kwargs):
         context = super(SubjectListView, self).get_context_data(**kwargs)
@@ -69,7 +71,7 @@ class NewsFeedListView(AbstractFeedListView):
 
 class ArticlesFeedListView(AbstractFeedListView):
     model = Article
-    title = URL_NAME_ARTICLES_FEED_TITLE
+    title = URL_NAME_SUBJECTS_TITLE
     template_name = 'articles/feed_list.html'
 
 
