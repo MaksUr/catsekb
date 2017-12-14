@@ -6,7 +6,7 @@ import re
 
 from articles.article_constants import ARTICLE_TITLE, ARTICLE_TEXT, ARTICLE_SUBJECT
 from articles.models import Subject, Article
-from catsekb.constants import NAME
+from catsekb.constants import NAME, IMAGE
 from catsekb.settings import BASE_DIR
 from catsekb.view_functions import create_or_update_default_articles
 
@@ -25,6 +25,11 @@ TEMPLATE_TAG_IMG = '\n<img src="{src}">'
 class ArticleText:
     def __init__(self, text):
         self.text = text
+        url = PATTERN_URL.search(self.text)
+        if url:
+            self.url = url.group()
+        else:
+            self.url = "http://127.0.0.1:8000/media/sad_cat.png"
 
     @staticmethod
     def combine_url_with_text(urls, lines):
@@ -62,13 +67,15 @@ def create_article(art_fn, subject):
     if isfile(art_fn) and art_fn.endswith('.txt'):
         title = basename(art_fn).replace('.txt', '')
         t = open(art_fn, 'r', encoding='UTF-8').read()
-        text = ArticleText(t).get_text()
+        at = ArticleText(t)
+        text = at.get_text()
         article, created = Article.objects.get_or_create(
             title=title,
             defaults={
                 ARTICLE_TITLE: title,
                 ARTICLE_TEXT: text,
-                ARTICLE_SUBJECT: subject
+                ARTICLE_SUBJECT: subject,
+                IMAGE: at.url,
             }
         )
         if created is False:

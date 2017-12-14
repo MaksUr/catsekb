@@ -24,6 +24,8 @@ AUTHOR = 'author'
 TITLE = 'title'
 TEXT = 'text'
 FOLDER = 'folder'
+IMAGE = 'image'
+IMAGE_KEY = 'Изображение для превью'
 
 
 CREATED = 'created'
