@@ -191,3 +191,7 @@ input.but:focus {
 .link_art a {
   padding-bottom: 0;
 }
+
+.news_container {
+  padding-bottom: 25px;
+}
