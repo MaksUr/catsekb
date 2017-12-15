@@ -25,7 +25,7 @@ TEMPLATE_TAG_IMG = '\n<img src="{src}">'
 class ArticleText:
     def __init__(self, text):
         self.text = text
-        url = PATTERN_URL.search(self.text)
+        url = PATTERN_IMG_URL.search(self.text)
         if url:
             self.url = url.group()
         else:
@@ -83,25 +83,27 @@ def create_article(art_fn, subject):
             article.__setattr__(ARTICLE_TITLE, title)
             article.__setattr__(ARTICLE_TEXT, text)
             article.__setattr__(ARTICLE_SUBJECT, subject)
+            article.__setattr__(IMAGE, at.url)
             article.save()
 
 
 def create_articles_by_subj(subject, subj_dir):
     l = listdir(subj_dir)
-    l.sort()
+    l.sort(key=lambda s: int(s.split('-')[0]))
     for a in l:
         create_article(join(subj_dir, a), subject)
 
 
 def update_articles():
+    print('update articles')
     create_or_update_default_articles()
-    subjects = listdir(ARTICLES_DIR)
-    subjects.sort()
+    subjects = [i for i in listdir(ARTICLES_DIR) if isdir(join(ARTICLES_DIR, i))]
+    subjects.sort(key=lambda s: int(s.split('-')[0]))
     for subj in subjects:
         curr_dir = join(ARTICLES_DIR, subj)
-        if isdir(curr_dir):
-            subject, updated = Subject.objects.get_or_create(
-                name=subj[subj.index('-')+1:], defaults={NAME: subj[subj.index('-')+1:]}
-            )
-            create_articles_by_subj(subject, curr_dir)
+        subject, updated = Subject.objects.get_or_create(
+            name=subj[subj.index('-')+1:], defaults={NAME: subj[subj.index('-')+1:]}
+        )
+        create_articles_by_subj(subject, curr_dir)
+    print('update articles is finished')
 

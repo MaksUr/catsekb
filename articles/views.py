@@ -14,7 +14,7 @@ from catsekb.view_functions import get_base_context, get_objects_from_query
 class AbstractFeedListView(ListView):
     paginate_by = 30
     title = ''
-    order_by = 'id'
+    order_by = None
 
     def get_queryset(self):
         return get_objects_from_query(
@@ -49,7 +49,7 @@ class AbstractFeedListView(ListView):
 class SubjectListView(AbstractFeedListView):
     model = Subject
     title = URL_NAME_SUBJECTS_TITLE
-    order_by = None
+    order_by = 'id'
 
     def get_context_data(self, **kwargs):
         context = super(SubjectListView, self).get_context_data(**kwargs)
@@ -67,12 +67,14 @@ class NewsFeedListView(AbstractFeedListView):
     model = News
     title = URL_NAME_NEWS_FEED_TITLE
     template_name = 'articles/feed_list.html'
+    order_by = '-created'
 
 
 class ArticlesFeedListView(AbstractFeedListView):
     model = Article
     title = URL_NAME_SUBJECTS_TITLE
     template_name = 'articles/feed_list.html'
+    order_by = '-created'
 
 
 class SubjectDetailView(DetailView):
