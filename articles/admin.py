@@ -1,6 +1,8 @@
 from django.contrib import admin
 
-from articles.article_constants import ARTICLE_TITLE, ARTICLE_SHOW, SUBJECT_SHOW, SUBJECT_NAME, NEWS_TITLE, NEWS_SHOW
+from articles.article_constants import ARTICLE_TITLE, ARTICLE_SHOW, SUBJECT_SHOW, SUBJECT_NAME, NEWS_TITLE, NEWS_SHOW, \
+    NEWS_IMPORTANT
+from articles.forms import NewsForm
 from articles.models import Article, Author, Subject, News
 
 admin.site.register(Author)
@@ -18,7 +20,8 @@ admin.site.register(Subject, SubjectAdmin)
 
 
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ('__str__', NEWS_SHOW)
+    form = NewsForm
+    list_display = ('__str__', NEWS_SHOW, NEWS_IMPORTANT)
     search_fields = ('__str__',)
 admin.site.register(News, NewsAdmin)
 
