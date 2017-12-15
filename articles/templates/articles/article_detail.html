@@ -4,16 +4,27 @@
 
 {# object #}
 {# shelter_caption #}
-{# next #}
-{# previous #}
+{# page #}
 {% extends "cats/base.html" %}
 
 {% block base_body %}
     {% include 'articles/widgets/article.html' with object=object %}
-    {% if next %}
-        <p><a href="{{ next.get_absolute_url }}">Следующий</a></p>
-    {% endif %}
-    {% if previous %}
-        <p><a href="{{ previous.get_absolute_url }}">Предыдущий</a></p>
+    {% if page %}
+        {% load app_filters %}
+
+         {% if page.has_previous %}
+            {% with previous_object=page.paginator.object_list|return_item_by_index:page.previous_page_number%}
+                <p><a href="{{ previous_object.get_absolute_url }}">Предыдущая статья "{{ previous_object.title }}"</a></p>
+            {% endwith %}
+        {% endif %}
+
+        {% if page.has_next %}
+            {% with next_object=page.paginator.object_list|return_item_by_index:page.next_page_number %}
+                <p><a href="{{ next_object.get_absolute_url }}">Следующая статья "{{ next_object.title }}"</a></p>
+            {% endwith %}
+        {% endif %}
+
+
+
     {% endif %}
 {% endblock base_body %}

@@ -1,12 +1,14 @@
 # Create your views here.
+from django.core.paginator import Paginator
+from django.http import Http404
 from django.views.generic import DetailView, ListView
 
 from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_TITLE, ARTICLES_DEFAULT_MAPPING, \
     ARTICLE_FIND_CAT_ID, \
-    CAPTION
+    CAPTION, ARTICLE_TEXT
 from articles.models import Subject, Article, News
 from catsekb.constants import ARTICLES, CONTACTS, DJ_ID, URL_NAME_SUBJECTS_TITLE, URL_NAME_SUBJECT_TITLE, \
-    URL_NAME_ARTICLE_TITLE, SHOW, CREATED, URL_NAME_NEWS_FEED_TITLE, URL_NAME_ARTICLES_FEED_TITLE, GET_PAR_KEY_PER_PAGE, \
+    SHOW, URL_NAME_NEWS_FEED_TITLE, GET_PAR_KEY_PER_PAGE, \
     GET_PAR_VAL_PAGE, GET_PAR_KEY_PAGE
 from catsekb.view_functions import get_base_context, get_objects_from_query
 
@@ -76,6 +78,10 @@ class ArticlesFeedListView(AbstractFeedListView):
     template_name = 'articles/feed_list.html'
     order_by = '-created'
 
+    def get_queryset(self):
+        queryset = super(ArticlesFeedListView, self).get_queryset()
+        return queryset.exclude(**{'id__in': list(ARTICLES_DEFAULT_MAPPING)})
+
 
 class SubjectDetailView(DetailView):
     model = Subject
@@ -100,12 +106,19 @@ class SubjectDetailView(DetailView):
 class AbstractArticleDetailView(DetailView):
     active_menu = ARTICLES
     template_name = 'articles/article_detail.html'
+    pagination_order = 'created'
 
     def get_object(self, queryset=None):
-        if self.request.user.is_authenticated() is not True:
-            queryset = self.model.objects.filter(**{SHOW: True})
+        queryset = self.queryset or self.get_queryset() or queryset
         obj = super(AbstractArticleDetailView, self).get_object(queryset=queryset)
         return obj
+
+    def get_queryset(self):
+        query_d = {}
+        if self.request.user.is_authenticated() is not True:
+            query_d[SHOW] = True
+        self.queryset = self.model.objects.filter(**query_d)
+        return self.queryset
 
     def get_context_data(self, **kwargs):
         show_permission = self.request.user.is_authenticated()
@@ -117,34 +130,71 @@ class AbstractArticleDetailView(DetailView):
                 extra_title=self.object.title
             )
         )
-        q = dict()
-        if show_permission is not True:
-            q[SHOW] = True
-        context['next'] = self.model.objects.filter(id__gt=self.object.id).order_by('id').first()
-        context['previous'] = self.model.objects.filter(id__lt=self.object.id).order_by('-id').first()
-        # TODO: проверить первые и последние
+        if self.pagination_order:
+            context['page'] = self.get_page()
         return context
+
+    def get_page(self):
+        if self.pagination_order:
+            articles = self.get_queryset().order_by(self.pagination_order)
+        else:
+            articles = self.get_queryset()
+        for index, art in enumerate(articles):
+            page_numb = index + 1
+            if art.id == int(self.kwargs['pk']):
+                current_page = page_numb
+                break
+        else:
+            return None
+        paginator = Paginator(articles, 1)
+        page = paginator.page(current_page)
+        return page
 
 
 class ArticleDetailView(AbstractArticleDetailView):
     model = Article
+
+    def get_queryset(self):
+        queryset = super(ArticleDetailView, self).get_queryset()
+        self.queryset = queryset.exclude(**{'id__in': list(ARTICLES_DEFAULT_MAPPING)})
+        return self.queryset
 
 
 class NewsDetailView(AbstractArticleDetailView):
     model = News
 
 
-class DefaultArticleDetailView(ArticleDetailView):
+class DefaultArticleDetailView(AbstractArticleDetailView):
     article_id = None  # abstract
+    pagination_order = None
+    model = Article
 
-    def get_object(self, queryset=None):
-        title = ARTICLES_DEFAULT_MAPPING.get(self.article_id)
-        if title is not None:
-            article, updated = Article.objects.get_or_create(
-                id=self.article_id, defaults={ARTICLE_TITLE: title[CAPTION], DJ_ID: self.article_id})
+    def get_queryset(self):
+        queryset = super(DefaultArticleDetailView, self).get_queryset()
+        self.queryset = queryset.filter(**{'id__in': list(ARTICLES_DEFAULT_MAPPING)})
+        return self.queryset
+
+    def save_default_article(self):
+        # TODO: check
+        default_art = ARTICLES_DEFAULT_MAPPING.get(self.article_id)
+        if default_art is not None:
+            created, article = Article.objects.get_or_create(
+                id=self.article_id, defaults={
+                    ARTICLE_TITLE: default_art[CAPTION],
+                    DJ_ID: self.article_id,
+                    ARTICLE_TEXT: '<p>Страница в разработке<p>'
+                }
+            )
             return article
         else:
-            return None
+            raise Http404('Внутреняя ошибка.')
+
+    def get_object(self, queryset=None):
+        self.kwargs['pk'] = self.article_id
+        obj = super(DefaultArticleDetailView, self).get_object(queryset=self.queryset)
+        if not obj:
+            obj = self.save_default_article()
+        return obj
 
 
 class ContactsView(DefaultArticleDetailView):
