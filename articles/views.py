@@ -1,4 +1,5 @@
 # Create your views here.
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.views.generic import DetailView, ListView
@@ -178,7 +179,7 @@ class DefaultArticleDetailView(AbstractArticleDetailView):
         # TODO: check
         default_art = ARTICLES_DEFAULT_MAPPING.get(self.article_id)
         if default_art is not None:
-            created, article = Article.objects.get_or_create(
+            article, created = Article.objects.get_or_create(
                 id=self.article_id, defaults={
                     ARTICLE_TITLE: default_art[CAPTION],
                     DJ_ID: self.article_id,
@@ -191,8 +192,9 @@ class DefaultArticleDetailView(AbstractArticleDetailView):
 
     def get_object(self, queryset=None):
         self.kwargs['pk'] = self.article_id
-        obj = super(DefaultArticleDetailView, self).get_object(queryset=self.queryset)
-        if not obj:
+        try:
+            obj = self.get_queryset().get(id=self.article_id)
+        except ObjectDoesNotExist:
             obj = self.save_default_article()
         return obj
 
