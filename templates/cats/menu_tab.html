@@ -16,9 +16,9 @@
             {% for item in menu_items %}
                 <li>
                     {% if item.get_absolute_url %}
-                        <a href="{{ item.get_absolute_url }}#anchor_cat">{{ item }}</a>
+                        <a href="{{ item.get_absolute_url }}#anchor_caption">{{ item }}</a>
                     {% else %}
-                        <a href="{{ item.url }}#anchor_cat">{{ item.caption }}</a>
+                        <a href="{{ item.url }}#anchor_caption">{{ item.caption }}</a>
                     {% endif %}
                 </li>
             {% endfor %}

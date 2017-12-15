@@ -5,26 +5,26 @@
     {% if object.important %}   
         <div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0 col-md-12 col-md-offset-0 col-lg-12 col-lg-offset-0">
             <div class="news_container">
-                <a href="{{ object.get_absolute_url }}#anchor_cat" style="background-image: url({{ object.image }}); background-position-y: {{ object.y_pos }}%;" class="art_img"></a>
+                <a href="{{ object.get_absolute_url }}#anchor_caption" style="background-image: url({{ object.image }}); background-position-y: {{ object.y_pos }}%;" class="art_img"></a>
                 <div class="link_art">
-                    <a href="{{ object.get_absolute_url }}#anchor_cat"><h3>{{ object.title }}</h3></a>
+                    <a href="{{ object.get_absolute_url }}#anchor_caption"><h3>{{ object.title }}</h3></a>
                     <p class="date_article">{{ object.created.date }}</p>
                 </div>
                 {% if subject_key %}
-                    <p class="date_article">{{ subject_key }}: <a href="{{ object.subject.get_absolute_url }}#anchor_cat" class="hashtag">{{ object.subject.name }}</a></p>
+                    <p class="date_article">{{ subject_key }}: <a href="{{ object.subject.get_absolute_url }}#anchor_caption" class="hashtag">{{ object.subject.name }}</a></p>
                 {% endif %}
             </div>
         </div>
     {% else %}
        <div class="col-xs-12 col-xs-offset-0 col-sm-6 col-sm-offset-0 col-md-6 col-md-offset-0 col-lg-6 col-lg-offset-0">
             <div class="news_container">
-                <a href="{{ object.get_absolute_url }}#anchor_cat" style="background-image: url({{ object.image }}); background-position-y: {{ object.y_pos }}%;" class="art_img"></a>
+                <a href="{{ object.get_absolute_url }}#anchor_caption" style="background-image: url({{ object.image }}); background-position-y: {{ object.y_pos }}%;" class="art_img"></a>
                 <div class="link_art">
-                    <a href="{{ object.get_absolute_url }}#anchor_cat"><h3>{{ object.title }}</h3></a>
+                    <a href="{{ object.get_absolute_url }}#anchor_caption"><h3>{{ object.title }}</h3></a>
                     <p class="date_article">{{ object.created.date }}</p>
                 </div>
                 {% if subject_key %}
-                    <p class="date_article">{{ subject_key }}: <a href="{{ object.subject.get_absolute_url }}#anchor_cat" class="hashtag">{{ object.subject.name }}</a></p>
+                    <p class="date_article">{{ subject_key }}: <a href="{{ object.subject.get_absolute_url }}#anchor_caption" class="hashtag">{{ object.subject.name }}</a></p>
                 {% endif %}
             </div>
         </div>
