@@ -10,15 +10,25 @@
 {% block base_body %}
 <section class="font">
     {% include 'cats/widgets/caption.html' with caption=caption %}
-    {% for object in object_list %}
-        {% if object.subject %}
-            {% include 'articles/widgets/article_preview.html' with object=object subject_key="Тема" %}
-        {% else %}
-            {% include 'articles/widgets/article_preview.html' with object=object %}
-        {% endif %}
-    {% empty %}
-        <p>Новостей еще нет.</p>
-    {% endfor %}
+    <div class="hide_anchor" id="anchor_{{ object.id }}">
+    </div>
+    <div class="article font line_height">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                {% for object in object_list %}
+                    {% if object.subject %}
+                        {% include 'articles/widgets/article_preview.html' with object=object subject_key="Тема" %}
+                    {% else %}
+                        {% include 'articles/widgets/article_preview.html' with object=object %}
+                    {% endif %}
+                {% empty %}
+                    <p>Новостей еще нет.</p>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
     {% if page_obj %}
         <div class="row">
             <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1">

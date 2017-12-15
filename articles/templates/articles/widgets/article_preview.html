@@ -1,36 +1,42 @@
 {# object #}
 {# subject_key #}
 
-<div class="hide_anchor" id="anchor_{{ object.id }}">
-</div>
-<div class="article font line_height">
-	<div class="container">
-        {% if object.show %}
-            <div class="row">
-                <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-                    <a href="{{ object.get_absolute_url }}#anchor_cat" style="background-image: url({{ object.image }});" class="art_img"></a>
+{% if object.show %}
+    {% if object.important %}   
+        <div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0 col-md-12 col-md-offset-0 col-lg-12 col-lg-offset-0">
+            <div class="news_container">
+                <a href="{{ object.get_absolute_url }}#anchor_cat" style="background-image: url({{ object.image }}); background-position-y: {{ object.y_pos }}%;" class="art_img"></a>
+                <div class="link_art">
+                    <a href="{{ object.get_absolute_url }}#anchor_cat"><h3>{{ object.title }}</h3></a>
+                    <p class="date_article">{{ object.created.date }}</p>
                 </div>
-                <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-                    <div class="link_art">
-                        <a href="{{ object.get_absolute_url }}#anchor_cat"><h3>{{ object.title }}</h3></a>
-                        <p class="date_article">{{ object.created.date }}</p>
-                    </div>
-                </div>
+                {% if subject_key %}
+                    <p class="date_article">{{ subject_key }}: <a href="{{ object.subject.get_absolute_url }}#anchor_cat" class="hashtag">{{ object.subject.name }}</a></p>
+                {% endif %}
             </div>
-            {% if subject_key %}
-                <div class="row">
-                    <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-                        <p class="date_article">{{ subject_key }}: <a href="{{ object.subject.get_absolute_url }}#anchor_cat" class="hashtag">{{ object.subject.name }}</a></p>
-                    </div>
-		        </div>
-            {% endif %}
-        {% else %}
+        </div>
+    {% else %}
+       <div class="col-xs-12 col-xs-offset-0 col-sm-6 col-sm-offset-0 col-md-6 col-md-offset-0 col-lg-6 col-lg-offset-0">
+            <div class="news_container">
+                <a href="{{ object.get_absolute_url }}#anchor_cat" style="background-image: url({{ object.image }}); background-position-y: {{ object.y_pos }}%;" class="art_img"></a>
+                <div class="link_art">
+                    <a href="{{ object.get_absolute_url }}#anchor_cat"><h3>{{ object.title }}</h3></a>
+                    <p class="date_article">{{ object.created.date }}</p>
+                </div>
+                {% if subject_key %}
+                    <p class="date_article">{{ subject_key }}: <a href="{{ object.subject.get_absolute_url }}#anchor_cat" class="hashtag">{{ object.subject.name }}</a></p>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+{% else %}
+    <div class="article font line_height">
+        <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
                     <p>Статья в разработке...</p>
                 </div>
             </div>
-        {% endif %}
-	</div>
-</div>
-
+        </div>
+    </div>
+{% endif %}
