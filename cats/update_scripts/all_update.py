@@ -68,13 +68,8 @@ def update_all_animals_from_vk(conf_pth=None):
             continue
 
         animal, created = Animal.objects.get_or_create(**{ANIMAL_VK_ALBUM_ID: aid})
-        if animal.__getattribute__(ANIMAL_VALID_INFO) is True:
+        if animal.__getattribute__(ANIMAL_VALID_INFO) is True or created is not True:
             continue
-        if created:
-            c = 'Создан'
-        else:
-            c = 'Обновлен'
-        print('{c} "{a}"'.format(c=c, a=animal))
         kwargs = get_animal_kwargs_from_vk_response({RESPONSE: (item,)})
         for k in kwargs:
             animal.__setattr__(k, kwargs[k])
@@ -83,4 +78,4 @@ def update_all_animals_from_vk(conf_pth=None):
         except (KeyError, ValueError, TypeError):
             pass
         update_images_for_animal(animal, aid)
-        print('finish')
+    print('finish')

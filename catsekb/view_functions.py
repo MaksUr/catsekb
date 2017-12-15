@@ -20,11 +20,12 @@ def create_or_update_default_articles():
     for art_id in ARTICLES_DEFAULT_MAPPING:
         fp = join(BASE_DIR, ARTICLES_DEFAULT_MAPPING[art_id][FOLDER])
         try:
-            f = open(fp, 'r')
+            f = open(fp, 'r', encoding='UTF-8')
             t = f.read()
         except (OSError, IOError):
-            f = open(fp, 'w')
+            f = open(fp, 'w', encoding='UTF-8')
             t = ''
+        f.close()
         Article.objects.get_or_create(
             id=art_id, defaults={
                 DJ_ID: art_id,

@@ -19,7 +19,7 @@ def group_name_validator(name):
 
 
 def background_y_position_validator(value):
-    if 0 > value > 100:
+    if value > 10 or value < 0:
         message = ANIMAL_IMAGE_VALIDATION_WRONG_Y_POS.format(val=value)
         raise ValidationError(message)
 
