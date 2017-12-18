@@ -4,7 +4,7 @@
   display: inline; }
 
 .gallery_description {
-  margin-bottom: 10px; }
+  margin-bottom: 15px; }
 
 .cat_find_name, .cat_find_layer {
   opacity: 0;
@@ -39,7 +39,7 @@
   min-height: 300px; }
 
 .nav_gallery {
-  margin-top: 10px; }
+  margin-top: 15px; }
 
 .description_link {
   position: absolute;

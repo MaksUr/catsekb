@@ -170,9 +170,9 @@ input.but:focus {
 .date_article {
   color: #9E9E9E; }
 
-/*.article {
+.article {
   margin-bottom: 25px; }
-*/
+
 .hide_anchor {
     position: relative;
     top: -65px;

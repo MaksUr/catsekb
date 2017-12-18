@@ -1,5 +1,5 @@
 /* <---------- .about BEGIN ----------> */
-.about, .gallery_cats, .feed {
+.about, .gallery_cats, .feed, .cat_detail {
   position: relative; 
   background-color: #fff;
   padding: 70px 0;}

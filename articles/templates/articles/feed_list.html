@@ -12,7 +12,7 @@
     {% include 'cats/widgets/caption.html' with caption=caption %}
     <div class="hide_anchor" id="anchor_{{ object.id }}">
     </div>
-    <div class="article line_height">
+    <div class="line_height">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
@@ -30,9 +30,10 @@
         </div>
     </div>
     {% if page_obj %}
+    <div class="container">
         <div class="row">
             <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1">
-                <div class="nav_gallery mid">
+                <div class="mid">
                 {% if page_obj.paginator.num_pages > 1 %}
                     <span>Страница: {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
 
@@ -61,6 +62,7 @@
                 </div>
             </div>
         </div>
+    </div>
     {% endif %}
 </section>
 {% endblock base_body %}
