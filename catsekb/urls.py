@@ -19,9 +19,11 @@ from django.contrib import admin
 
 from articles.views import NewsFeedListView
 from catsekb import settings
+from catsekb.views import index_view
 
 urlpatterns = [
-    url(r'^', include('cats.urls')),
+    url(r'^$', index_view, name='index'),
+    url(r'^cats/', include('cats.urls')),
     url(r'^news/', NewsFeedListView.as_view(), name='news_feed'),
     url(r'^articles/', include('articles.urls')),
     url(r'^admin/', admin.site.urls),

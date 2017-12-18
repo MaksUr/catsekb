@@ -8,6 +8,7 @@
 {# home_animals_count #}
 {# animals_count #}
 {# dying_animals_count #}
+{# important_news #}
 
 {% extends "cats/base.html" %}
 {% load static %}
@@ -27,27 +28,33 @@
 			</div>
 		</div>
 	</section>
-		<div class="cat_section">
-			<div class="line_container">
-				<div class="container">
-					<div class="row">
-						<div class="col-xs-10 col-xs-offset-1 col-lg-10">
-							<h2>
-								{% if shelter_animals_count %}
-							        <span>Ищут дом: {{ shelter_animals_count }} /</span>
-							    {% endif %}
 
-							    {% if home_animals_count %}
-							        <span>Пристроено: {{ home_animals_count }}</span>
-							    {% endif %}
-							</h2>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="full">
-			</div>
-		</div>       
+    <div class="cat_section">
+        <div class="line_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-10 col-xs-offset-1 col-lg-10">
+                        <h2>
+                            {% if shelter_animals_count %}
+                                <span>Ищут дом: {{ shelter_animals_count }} /</span>
+                            {% endif %}
+
+                            {% if home_animals_count %}
+                                <span>Пристроено: {{ home_animals_count }}</span>
+                            {% endif %}
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="full">
+        </div>
+    </div>
 	{% url 'group_detail' pk='S' as group_url %}
     {% include 'cats/widgets/gallery.html' with object_list=shelter_animals filter_parameters='?group_id=S' caption=shelter_caption caption_url=group_url %}
+    <section>
+        <div class="cat_container">
+		</div>
+        {% include 'articles/widgets/article_preview.html' with col=12 object=important_news %}
+    </section>
 {% endblock base_body %}

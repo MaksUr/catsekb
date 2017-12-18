@@ -5,8 +5,8 @@ from django.urls import reverse
 from os.path import join
 
 from articles.article_constants import ARTICLES_DEFAULT_MAPPING, ARTICLE_FIND_CAT_ID, CAPTION, NEWS_VERBOSE_NAME_PLURAL, \
-    ARTICLE_VERBOSE_NAME_PLURAL, ARTICLE_TITLE, ARTICLE_TEXT
-from articles.models import Article
+    ARTICLE_VERBOSE_NAME_PLURAL, ARTICLE_TITLE, ARTICLE_TEXT, NEWS_IMPORTANT
+from articles.models import Article, News
 from cats.cats_constants import GROUP_INSTANCE_ALL_ID, GROUP_INSTANCE_SHELTER_ID, \
     GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, GROUP_MAPPING, PRIVATE_GROUP, ANIMAL_LOCATION_STATUS
 from cats.models import Group
@@ -79,6 +79,16 @@ def get_default_group_list(show_permission=False):
     if show_permission:
         default_group_list.append(get_group(group_id=GROUP_INSTANCE_DEAD_ID, show_permission=show_permission))
     return default_group_list
+
+
+def get_important_news():
+    kwargs = {
+        SHOW: True,
+        NEWS_IMPORTANT: True,
+    }
+    # TODO: check if not found
+    res = News.objects.filter(**kwargs).order_by('-created').first()
+    return res
 
 
 def get_base_context(active_menu, extra_title, show_permission=False):

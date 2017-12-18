@@ -1,6 +1,5 @@
 from django.core.paginator import Paginator
 from django.http import Http404
-from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormMixin
@@ -9,14 +8,13 @@ from cats.cats_constants import ANIMAL_CREATED, ANIMAL_LOCATION_STATUS_HOME, ANI
     ANIMAL_LOCATION_STATUS, \
     GROUP_ID, ANIMAL_LOCATION_STATUS_DEAD, GROUP_INSTANCE_SHELTER_NAME, GROUP_INSTANCE_HOME_NAME, \
     GROUP_INSTANCE_DEAD_NAME, GROUP_INSTANCE_SHELTER_ID, GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, \
-    GROUP_ANIMALS_PREVIEW_COUNT, ANIMAL_LOCATION_STATUS_CHOICES_D, GROUP_MAPPING
-from catsekb.constants import CAPTION_ANIMAL_LIST_DEFAULT, INDEX, ANIMALS, GET_PAR_KEY_PAGE, GET_PAR_KEY_PER_PAGE, \
-    GET_PAR_VAL_PAGE, \
-    GET_PAR_KEY_FILTER, DJ_PK, DJ_PAGE, DJ_OBJECT, URL_NAME_GROUP, NAME, DESCRIPTION, URL_NAME_GROUPS_TITLE, \
-    URL_NAME_INDEX_TITLE
+    GROUP_ANIMALS_PREVIEW_COUNT, GROUP_MAPPING
 from cats.forms import FilterForm
 from cats.models import Animal, Group
 from cats.query import ANIMAL_QUERY_KEYS
+from catsekb.constants import CAPTION_ANIMAL_LIST_DEFAULT, ANIMALS, GET_PAR_KEY_PAGE, GET_PAR_KEY_PER_PAGE, \
+    GET_PAR_VAL_PAGE, \
+    GET_PAR_KEY_FILTER, DJ_PK, DJ_PAGE, DJ_OBJECT, URL_NAME_GROUP, NAME, DESCRIPTION, URL_NAME_GROUPS_TITLE
 from catsekb.view_functions import get_objects_from_query, get_base_context, get_group
 
 GALLERY_DEFAULT_ITEMS_COUNT = 9
@@ -220,22 +218,4 @@ class GroupDetailView(AnimalListView):
         return res
 
 
-def index_view(request):
-    show_permission = request.user.is_authenticated()
-    context = get_base_context(show_permission=show_permission, active_menu=INDEX, extra_title=URL_NAME_INDEX_TITLE)
-    query = {ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_SHELTER}
-    shelter_animals = get_animals_from_query(
-        query=query, show_permission=show_permission
-    ).order_by('?')
-    context['shelter_animals'] = shelter_animals[:GALLERY_DEFAULT_ITEMS_COUNT]
-    context['shelter_caption'] = GROUP_INSTANCE_SHELTER_NAME
-    context['shelter_animals_count'] = shelter_animals.count()
-    context['home_animals_count'] = get_animals_from_query(
-        query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_HOME}, show_permission=True
-    ).count()  # TODO: need correct number
-    context['animals_count'] = get_animals_from_query(query=dict(), show_permission=True).count()
-    if show_permission is True:
-        context['dying_animals_count'] = get_animals_from_query(
-            query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_DEAD}, show_permission=True
-        ).count()
-    return render(request, 'cats/index.html', context)
+
