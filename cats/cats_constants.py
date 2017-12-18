@@ -13,6 +13,8 @@
 from catsekb.constants import SHOW, NAME, DESCRIPTION, VK_GROUP_ID, NO_CHOICE, CREATED_KEY, CREATED, UPDATED, \
     UPDATED_KEY
 
+GALLERY_DEFAULT_ITEMS_COUNT = 9
+
 APPLICATION_VERBOSE_NAME = 'Котики'  # Название приложения
 
 # class AnimalImage

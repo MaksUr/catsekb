@@ -1,10 +1,9 @@
 from django.shortcuts import render
 
 from cats.cats_constants import ANIMAL_LOCATION_STATUS_SHELTER, ANIMAL_LOCATION_STATUS, GROUP_INSTANCE_SHELTER_NAME, \
-    ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_DEAD
-from cats.views import get_animals_from_query, GALLERY_DEFAULT_ITEMS_COUNT
+    ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_DEAD, GALLERY_DEFAULT_ITEMS_COUNT
 from catsekb.constants import URL_NAME_INDEX_TITLE, INDEX
-from catsekb.view_functions import get_base_context, get_important_news
+from catsekb.view_functions import get_base_context, get_important_news, get_animals_from_query
 
 HOME_ANIMALS_COUNT = 0
 
