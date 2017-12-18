@@ -3,6 +3,9 @@ from os.path import join
 from catsekb.constants import URL_NAME_CONTACTS, URL_NAME_FIND_CAT, CAPTION, URL, SHOW, CREATED, CREATED_KEY, UPDATED, \
     UPDATED_KEY, SUBJECT, AUTHOR, NAME, TEXT, TITLE, FOLDER
 
+FEED_PAGINATE_BY = 10
+
+
 APPLICATION_VERBOSE_NAME = 'Статьи'
 
 # class Author

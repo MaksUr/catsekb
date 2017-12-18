@@ -5,6 +5,8 @@
 {# object #}
 {# shelter_caption #}
 {# page #}
+{# feed_per_page #}
+{# feed_url #}
 {% extends "cats/base.html" %}
 
 {% block base_body %}
@@ -12,6 +14,7 @@
     {% include 'articles/widgets/article.html' with object=object %}
     {% if page %}
         {% load app_filters %}
+        {% load verbose_names %}
 
          {% if page.has_previous %}
             {% with previous_object=page.paginator.object_list|return_item_by_index:page.previous_page_number%}
@@ -20,9 +23,11 @@
                 </div>
             {% endwith %}
         {% endif %}
-        <div class="mid font">
-            <a href="{% url 'news_feed' %}#anchor_caption" class="tag">Вернуться к списку</a>
-        </div>
+        {% if feed_per_page and feed_url %}
+            <div class="mid font">
+                <a href="{{ feed_url }}?page={% return_page_by_object page.paginator.object_list object feed_per_page %}#anchor_caption" class="tag">Вернуться к списку</a>
+            </div>
+        {% endif %}
         {% if page.has_next %}
             {% with next_object=page.paginator.object_list|return_item_by_index:page.next_page_number %}
                 <div class="mid font">

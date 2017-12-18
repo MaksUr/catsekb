@@ -23,3 +23,16 @@ def get_default_value_for_form(field_name, counter, query_dict, choice):
         return " checked='checked'"
     else:
         return ''
+
+
+@register.simple_tag
+def return_page_by_object(objects, obj, per_page):
+    if per_page:
+        index = ((list(objects).index(obj)) / per_page) + 1
+        return int(index)
+    else:
+        return 100
+
+
+
+

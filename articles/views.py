@@ -2,20 +2,21 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
 from django.http import Http404
+from django.urls import reverse
 from django.views.generic import DetailView, ListView
 
 from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_TITLE, ARTICLES_DEFAULT_MAPPING, \
     ARTICLE_FIND_CAT_ID, \
-    CAPTION, ARTICLE_TEXT
+    CAPTION, ARTICLE_TEXT, FEED_PAGINATE_BY
 from articles.models import Subject, Article, News
 from catsekb.constants import ARTICLES, CONTACTS, DJ_ID, URL_NAME_SUBJECTS_TITLE, URL_NAME_SUBJECT_TITLE, \
     SHOW, URL_NAME_NEWS_FEED_TITLE, GET_PAR_KEY_PER_PAGE, \
-    GET_PAR_VAL_PAGE, GET_PAR_KEY_PAGE
+    GET_PAR_VAL_PAGE, GET_PAR_KEY_PAGE, URL_NAME_SUBJECTS_FEED, URL_NAME_NEWS_FEED
 from catsekb.view_functions import get_base_context, get_objects_from_query
 
 
 class AbstractFeedListView(ListView):
-    paginate_by = 10
+    paginate_by = FEED_PAGINATE_BY
     title = ''
     order_by = None
 
@@ -107,7 +108,8 @@ class SubjectDetailView(DetailView):
 class AbstractArticleDetailView(DetailView):
     active_menu = ARTICLES
     template_name = 'articles/article_detail.html'
-    pagination_order = 'created'
+    pagination_order = '-created'
+    feed_url = None
 
     def get_object(self, queryset=None):
         queryset = self.queryset or self.get_queryset() or queryset
@@ -131,8 +133,10 @@ class AbstractArticleDetailView(DetailView):
                 extra_title=self.object.title
             )
         )
-        if self.pagination_order:
+        if self.pagination_order and self.feed_url:
             context['page'] = self.get_page()
+            context['feed_per_page'] = FEED_PAGINATE_BY
+            context['feed_url'] = reverse(self.feed_url)
         return context
 
     def get_page(self):
@@ -154,6 +158,7 @@ class AbstractArticleDetailView(DetailView):
 
 class ArticleDetailView(AbstractArticleDetailView):
     model = Article
+    feed_url = URL_NAME_SUBJECTS_FEED
 
     def get_queryset(self):
         queryset = super(ArticleDetailView, self).get_queryset()
@@ -163,6 +168,7 @@ class ArticleDetailView(AbstractArticleDetailView):
 
 class NewsDetailView(AbstractArticleDetailView):
     model = News
+    feed_url = URL_NAME_NEWS_FEED
 
 
 class DefaultArticleDetailView(AbstractArticleDetailView):
