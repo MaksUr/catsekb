@@ -107,6 +107,7 @@ a:hover, a:active, .top_nav a:hover, .menu a:hover, .mobile_list a:hover, .open_
 	display: inline-block;
 	color: #c5c5c5;
 	padding: 10px;
+	cursor: default;
 }
 
 .tag.no_active:hover {
@@ -205,4 +206,8 @@ input.but:focus {
 
 .news_container {
   padding-bottom: 25px;
+}
+
+.subject_list li {
+  padding-bottom: 6px;
 }

@@ -35,17 +35,17 @@
                 <div class="mid font">
                 {% if page_obj.paginator.num_pages > 1 %}
                     {% if page_obj.has_previous %}
-                            <a href="?page={{ page_obj.previous_page_number }}" class="tag">Предыдущий</a>
+                            <a href="?page={{ page_obj.previous_page_number }}#anchor_caption" class="tag">Назад</a>
                     {% else %}
-                            <span class="tag no_active">Предыдущий</span>
+                            <span class="tag no_active">Назад</span>
                     {% endif %}
 
-                    <a href="?per_page=all" class="tag">Показать всё</a>
+                    <a href="?per_page=all#anchor_caption" class="tag">Показать всё</a>
 
                     {% if page_obj.has_next %}
-                            <a href="?page={{ page_obj.next_page_number}}" class="tag">Следующий</a>
+                            <a href="?page={{ page_obj.next_page_number}}#anchor_caption" class="tag">Далее</a>
                     {% else %}
-                            <span class="tag no_active">Следующий</span>
+                            <span class="tag no_active">Далее</span>
                     {% endif %}
                 {% else %}
                     <!-- Кнопка показать всех - неактивна! -->
