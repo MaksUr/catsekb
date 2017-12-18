@@ -4,39 +4,19 @@ from django.urls import reverse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormMixin
 
-from cats.cats_constants import ANIMAL_CREATED, ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_SHELTER, \
+from cats.cats_constants import ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_SHELTER, \
     ANIMAL_LOCATION_STATUS, \
     GROUP_ID, ANIMAL_LOCATION_STATUS_DEAD, GROUP_INSTANCE_SHELTER_NAME, GROUP_INSTANCE_HOME_NAME, \
     GROUP_INSTANCE_DEAD_NAME, GROUP_INSTANCE_SHELTER_ID, GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, \
-    GROUP_ANIMALS_PREVIEW_COUNT, GROUP_MAPPING
+    GROUP_ANIMALS_PREVIEW_COUNT, GROUP_MAPPING, GALLERY_DEFAULT_ITEMS_COUNT
 from cats.forms import FilterForm
 from cats.models import Animal, Group
 from cats.query import ANIMAL_QUERY_KEYS
 from catsekb.constants import CAPTION_ANIMAL_LIST_DEFAULT, ANIMALS, GET_PAR_KEY_PAGE, GET_PAR_KEY_PER_PAGE, \
     GET_PAR_VAL_PAGE, \
     GET_PAR_KEY_FILTER, DJ_PK, DJ_PAGE, DJ_OBJECT, URL_NAME_GROUP, NAME, DESCRIPTION, URL_NAME_GROUPS_TITLE
-from catsekb.view_functions import get_objects_from_query, get_base_context, get_group
-
-GALLERY_DEFAULT_ITEMS_COUNT = 9
-
-
-def filter_animals_query(query):
-    res = {key: query[key] for key in query if key in ANIMAL_QUERY_KEYS}
-    return res
-
-
-def get_animals_from_query(query, show_permission=False):
-    """
-
-    :rtype: QueryDict
-    :type show_permission: bool
-    :type query: dict
-    """
-    query = filter_animals_query(query)
-    res = get_objects_from_query(
-        model_cls=Animal, query=query, show_permission=show_permission, order_by=ANIMAL_CREATED
-    )
-    return res
+from catsekb.view_functions import get_objects_from_query, get_base_context, get_group, get_animals_from_query
+from catsekb.views import get_shelter_animals
 
 
 class AnimalListView(ListView, FormMixin):
@@ -132,6 +112,9 @@ class AnimalDetailView(DetailView):
         if animals_query:
             animals = get_animals_from_query(animals_query, show_permission=show_permission)
             context[DJ_PAGE] = self.get_animal_page(animals, animal)
+        shelter_animals, shelter_animals_count = get_shelter_animals(show_permission=show_permission, count=3)
+        context['shelter_animals'] = shelter_animals
+        context['shelter_caption'] = GROUP_INSTANCE_SHELTER_NAME
         return context
 
     def get_animals_query(self):

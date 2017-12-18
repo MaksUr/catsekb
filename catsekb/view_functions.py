@@ -8,8 +8,9 @@ from articles.article_constants import ARTICLES_DEFAULT_MAPPING, ARTICLE_FIND_CA
     ARTICLE_VERBOSE_NAME_PLURAL, ARTICLE_TITLE, ARTICLE_TEXT, NEWS_IMPORTANT
 from articles.models import Article, News
 from cats.cats_constants import GROUP_INSTANCE_ALL_ID, GROUP_INSTANCE_SHELTER_ID, \
-    GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, GROUP_MAPPING, PRIVATE_GROUP, ANIMAL_LOCATION_STATUS
-from cats.models import Group
+    GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, GROUP_MAPPING, PRIVATE_GROUP, ANIMAL_LOCATION_STATUS, ANIMAL_CREATED
+from cats.models import Group, Animal
+from cats.query import ANIMAL_QUERY_KEYS
 from catsekb.constants import SHOW, GET_PAR_KEY_FILTER, URL_NAME_ANIMALS, URL_NAME_FIND_CAT, URL_NAME_NEWS_FEED, \
     URL_NAME_SUBJECTS_FEED, DJ_ID, FOLDER
 from catsekb.settings import BASE_DIR
@@ -127,3 +128,20 @@ def get_base_context(active_menu, extra_title, show_permission=False):
     return context
 
 
+def filter_animals_query(query):
+    res = {key: query[key] for key in query if key in ANIMAL_QUERY_KEYS}
+    return res
+
+
+def get_animals_from_query(query, show_permission=False):
+    """
+
+    :rtype: QueryDict
+    :type show_permission: bool
+    :type query: dict
+    """
+    query = filter_animals_query(query)
+    res = get_objects_from_query(
+        model_cls=Animal, query=query, show_permission=show_permission, order_by=ANIMAL_CREATED
+    )
+    return res
