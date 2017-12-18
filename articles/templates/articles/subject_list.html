@@ -25,7 +25,9 @@
                         <a href="{{ article.get_absolute_url }}" class="hashtag">{{ article.title }}</a>
                     </li>
                 {% else %}
-                    <a href="{{ object.get_absolute_url }}#anchor_caption" class="tag">Смотреть ещё</a>
+                    <li>
+                        <a href="{{ object.get_absolute_url }}#anchor_caption" class="tag">Смотреть ещё</a>
+                    </li>
                 {% endif %}
             {% endfor %}
             </ul>

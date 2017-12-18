@@ -15,7 +15,7 @@ from catsekb.view_functions import get_base_context, get_objects_from_query
 
 
 class AbstractFeedListView(ListView):
-    paginate_by = 30
+    paginate_by = 3
     title = ''
     order_by = None
 
