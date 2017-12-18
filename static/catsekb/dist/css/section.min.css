@@ -1,9 +1,13 @@
 /* <---------- .about BEGIN ----------> */
-.about, .gallery_cats, .feed, .cat_detail {
+.about, .cat_detail, .index .gallery_cats {
   position: relative; 
   background-color: #fff;
-  padding: 70px 0;}
+  padding: 70px 0; }
 
+.index .feed, .gallery_cats {
+  padding: 0 0 70px 0;
+  background-color: #fff;
+}
 .cat_section {
   height: 450px; }
 
