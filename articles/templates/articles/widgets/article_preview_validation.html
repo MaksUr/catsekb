@@ -5,7 +5,13 @@
     {% if object.important %}
         {% include 'articles/widgets/article_preview.html' with col=12 object=object subject_key=subject_key %}
     {% else %}
-       {% include 'articles/widgets/article_preview.html' with col=6 object=object subject_key=subject_key %}
+        {% include 'articles/widgets/article_preview.html' with col=6 object=object subject_key=subject_key %}
+    {% endif %}
+{% elif request.user.is_authenticated %}
+    {% if object.important %}
+        {% include 'articles/widgets/article_preview.html' with col=12 object=object subject_key=subject_key %}
+    {% else %}
+        {% include 'articles/widgets/article_preview.html' with col=6 object=object subject_key=subject_key %}
     {% endif %}
 {% else %}
 
