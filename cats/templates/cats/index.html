@@ -28,7 +28,6 @@
 			</div>
 		</div>
 	</section>
-
     <div class="cat_section">
         <div class="line_container">
             <div class="container">
@@ -52,9 +51,17 @@
     </div>
 	{% url 'group_detail' pk='S' as group_url %}
     {% include 'cats/widgets/gallery.html' with object_list=shelter_animals filter_parameters='?group_id=S' caption=shelter_caption caption_url=group_url %}
-    <section>
-        <div class="cat_container">
-		</div>
-        {% include 'articles/widgets/article_preview.html' with col=12 object=important_news %}
+    <section class="line_height font">
+        {% include 'cats/widgets/caption.html' with caption='Новости приюта' %}
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                    {% include 'articles/widgets/article_preview.html' with col=12 object=important_news %}
+                    <div class="mid">
+                        <a href="{% url 'news_feed' %}#anchor_caption" class="tag">Другие новости</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 {% endblock base_body %}

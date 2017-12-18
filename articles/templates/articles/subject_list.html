@@ -18,14 +18,16 @@
         {% for object in object_list %}
         	<section class="font mid">
             {% include 'cats/widgets/caption.html' with caption=object.name caption_url=object.get_absolute_url %}
-            <ul>
+            <ul class="subject_list">
             {% for article in object.article_set.all|slice:":6" %}
                 {% if forloop.counter < 6 %}
                     <li>
                         <a href="{{ article.get_absolute_url }}" class="hashtag">{{ article.title }}</a>
                     </li>
                 {% else %}
-                    <a href="{{ object.get_absolute_url }}#anchor_caption" class="tag">Смотреть ещё</a>
+                    <li>
+                        <a href="{{ object.get_absolute_url }}#anchor_caption" class="tag">Смотреть ещё</a>
+                    </li>
                 {% endif %}
             {% endfor %}
             </ul>
