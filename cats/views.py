@@ -16,6 +16,7 @@ from catsekb.constants import CAPTION_ANIMAL_LIST_DEFAULT, ANIMALS, GET_PAR_KEY_
     GET_PAR_VAL_PAGE, \
     GET_PAR_KEY_FILTER, DJ_PK, DJ_PAGE, DJ_OBJECT, URL_NAME_GROUP, NAME, DESCRIPTION, URL_NAME_GROUPS_TITLE
 from catsekb.view_functions import get_objects_from_query, get_base_context, get_group, get_animals_from_query
+from catsekb.views import get_shelter_animals
 
 
 class AnimalListView(ListView, FormMixin):
@@ -111,6 +112,9 @@ class AnimalDetailView(DetailView):
         if animals_query:
             animals = get_animals_from_query(animals_query, show_permission=show_permission)
             context[DJ_PAGE] = self.get_animal_page(animals, animal)
+        shelter_animals, shelter_animals_count = get_shelter_animals(show_permission=show_permission, count=3)
+        context['shelter_animals'] = shelter_animals
+        context['shelter_caption'] = GROUP_INSTANCE_SHELTER_NAME
         return context
 
     def get_animals_query(self):
