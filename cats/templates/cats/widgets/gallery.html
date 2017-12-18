@@ -8,7 +8,7 @@
 
 {% load verbose_names %}
 {% load static %}
-<section id="gallery_cat">
+<div id="gallery_cat" class="gallery_cats">
     <!-- # T0D0: #Зефир,_Крем,_Сливка,_Трюфелька_catsekb..... - обрезать строку если больше 25 символов # -->
     {% include 'cats/widgets/caption.html' with caption=caption caption_url=caption_url %}
     <div class="container">
@@ -85,6 +85,6 @@
             {% endif %}
         </div>
     </div>
-</section>
+</div>
 
  

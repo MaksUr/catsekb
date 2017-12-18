@@ -12,7 +12,7 @@
     {% include 'cats/widgets/caption.html' with caption=caption %}
     <div class="hide_anchor" id="anchor_{{ object.id }}">
     </div>
-    <div class="article font line_height">
+    <div class="article line_height">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
@@ -36,7 +36,7 @@
                 {% if page_obj.paginator.num_pages > 1 %}
                     <span>Страница: {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
 
-                    <p class="pagination_cats mid font">
+                    <p class="pagination_cats mid">
                     {% if page_obj.has_previous %}
                             <a href="?page={{ page_obj.previous_page_number }}#anchor_caption" class="tag">Назад</a>
                     {% else %}

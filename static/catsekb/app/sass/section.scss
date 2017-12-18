@@ -1,7 +1,10 @@
 /* <---------- .about BEGIN ----------> */
-.about {
-	position: relative;
+.about, .gallery_cats, .feed {
+    position: relative; 
+    background-color: #fff;
+    padding: 70px 0;
 }
+
 
 .cat_section {
     height: 450px;

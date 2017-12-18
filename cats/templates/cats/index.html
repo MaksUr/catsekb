@@ -13,7 +13,7 @@
 {% extends "cats/base.html" %}
 {% load static %}
 {% block base_body %}
-    <section class="about">
+    <div class="about">
 		<div class="cat_container">
 		</div>
 		<img class="cat_a_mouse" src="{% static "catsekb/dist/img/cat_and_mouse.png" %}">
@@ -27,7 +27,7 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
     <div class="cat_section">
         <div class="line_container">
             <div class="container">
@@ -51,7 +51,7 @@
     </div>
 	{% url 'group_detail' pk='S' as group_url %}
     {% include 'cats/widgets/gallery.html' with object_list=shelter_animals filter_parameters='?group_id=S' caption=shelter_caption caption_url=group_url %}
-    <section class="line_height font">
+    <div class="feed line_height font">
         {% include 'cats/widgets/caption.html' with caption='Новости приюта' %}
         <div class="container">
             <div class="row">
@@ -63,5 +63,5 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 {% endblock base_body %}

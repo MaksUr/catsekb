@@ -112,7 +112,7 @@ class AnimalDetailView(DetailView):
         if animals_query:
             animals = get_animals_from_query(animals_query, show_permission=show_permission)
             context[DJ_PAGE] = self.get_animal_page(animals, animal)
-        shelter_animals, shelter_animals_count = get_shelter_animals(show_permission=show_permission, count=3)
+        shelter_animals, shelter_animals_count = get_shelter_animals(show_permission=show_permission, count=9)
         context['shelter_animals'] = shelter_animals
         context['shelter_caption'] = GROUP_INSTANCE_SHELTER_NAME
         return context
