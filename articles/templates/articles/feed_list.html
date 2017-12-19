@@ -66,3 +66,9 @@
     {% endif %}
 </section>
 {% endblock base_body %}
+
+{% block header %}
+     {% with "catsekb/dist/img/header_news.jpg" as background_image_file %}
+            {{ block.super }}
+    {% endwith %}
+{% endblock header %}
