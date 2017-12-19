@@ -44,6 +44,8 @@
 
 {% block header %}
      {% with "catsekb/dist/img/header_articles.jpg" as background_image_file %}
+        {% with object as background_image %}
             {{ block.super }}
-    {% endwith %}
+        {% endwith %}
+     {% endwith %}
 {% endblock header %}

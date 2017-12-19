@@ -78,3 +78,21 @@ URL_NAME_SUBJECT_TITLE = '{subj}'
 URL_NAME_ARTICLE_TITLE = '{title}'
 # URL_NAME_CONTACTS_TITLE = '{title}'
 # URL_NAME_FIND_CAT_TITLE = '{title}'
+
+# background
+IMAGE_BACKGROUND = 'background'
+IMAGE_KEY_BACKGROUND = 'Использовать для фона страницы.'
+IMAGE_KEY_BACKGROUND_HELP_TEXT = 'Фоновое изображение страницы. Рекомендуется использовать предпросмотр.'
+
+# y_pos
+Y_POS = 'y_pos'
+KEY_Y_POS = 'Позиция по вертикали'
+KEY_Y_POS_HELP_TEXT = 'Некоторые изображения могут смещаться, из-за горизонтального отображения. ' \
+                           'Установите значение от 0 до 100 чтобы отрегулировать вертикальный центр.'
+
+
+# use_background
+USE_BACKGROUND = 'use_background'
+KEY_USE_BACKGROUND = 'Использовать изображение для фона страницы'
+KEY_USE_BACKGROUND_HELP_TEXT = 'Есть изображения, которые будут плохо смотреться на фоне.' \
+                               'Используйте эту настройку, чтобы отключить изображение на фоне.'

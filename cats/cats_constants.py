@@ -11,7 +11,7 @@
 # foreign_key: animal ссылается на модель Animal.
 # Это значит поле animal в AnimalImage относится к определенному Animal
 from catsekb.constants import SHOW, NAME, DESCRIPTION, VK_GROUP_ID, NO_CHOICE, CREATED_KEY, CREATED, UPDATED, \
-    UPDATED_KEY
+    UPDATED_KEY, IMAGE_BACKGROUND, IMAGE_KEY_BACKGROUND, IMAGE_KEY_BACKGROUND_HELP_TEXT, KEY_Y_POS, KEY_Y_POS_HELP_TEXT
 
 GALLERY_DEFAULT_ITEMS_COUNT = 9
 
@@ -55,9 +55,9 @@ ANIMAL_IMAGE_KEY_FAVOURITE = 'Избранное'
 ANIMAL_IMAGE_KEY_FAVOURITE_HELP_TEXT = 'Основное изображение страницы с котом.'
 
 # background
-ANIMAL_IMAGE_BACKGROUND = 'background'
-ANIMAL_IMAGE_KEY_BACKGROUND = 'Использовать для фона страницы с котом.'
-ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT = 'Фоновое изображение страницы с котом. Рекомендуется использовать предпросмотр.'
+ANIMAL_IMAGE_BACKGROUND = IMAGE_BACKGROUND
+ANIMAL_IMAGE_KEY_BACKGROUND = IMAGE_KEY_BACKGROUND
+ANIMAL_IMAGE_KEY_BACKGROUND_HELP_TEXT = IMAGE_KEY_BACKGROUND_HELP_TEXT
 
 # created
 ANIMAL_IMAGE_CREATED = CREATED
@@ -66,9 +66,9 @@ ANIMAL_IMAGE_KEY_CREATED_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_CREATED'
 
 # background_y_position
 ANIMAL_IMAGE_BACKGROUND_Y_POSITION = 'background_y_position'
-ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION = 'Настройка позиции фонового изображения по вертикали.'
-ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT = 'Значение от 0 до 100. Используется для корректного отображения ' \
-                                                   'вертикальных изображений'
+ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION = KEY_Y_POS
+ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT = KEY_Y_POS_HELP_TEXT
+
 ANIMAL_IMAGE_VALIDATION_WRONG_Y_POS = '{val} имеет недопустимое значение. Значение должно быть от 0 до 100.'
 
 # image_thumb

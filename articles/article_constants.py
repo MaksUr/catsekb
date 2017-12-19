@@ -1,7 +1,8 @@
 from os.path import join
 
 from catsekb.constants import URL_NAME_CONTACTS, URL_NAME_FIND_CAT, CAPTION, URL, SHOW, CREATED, CREATED_KEY, UPDATED, \
-    UPDATED_KEY, SUBJECT, AUTHOR, NAME, TEXT, TITLE, FOLDER
+    UPDATED_KEY, SUBJECT, AUTHOR, NAME, TEXT, TITLE, FOLDER, Y_POS, KEY_Y_POS, KEY_Y_POS_HELP_TEXT, USE_BACKGROUND, \
+    KEY_USE_BACKGROUND, KEY_USE_BACKGROUND_HELP_TEXT
 
 FEED_PAGINATE_BY = 10
 
@@ -64,6 +65,17 @@ ARTICLE_SHOW = SHOW
 ARTICLE_KEY_SHOW = 'Показывать статью'
 ARTICLE_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удаления или чтобы скрыть. ' \
                            'Скрытые статьи доступны для персонала на сайте.'
+
+# y_pos
+ARTICLE_Y_POS = Y_POS
+ARTICLE_KEY_Y_POS = KEY_Y_POS
+ARTICLE_KEY_Y_POS_HELP_TEXT = KEY_Y_POS_HELP_TEXT
+
+# use_background
+ARTICLE_USE_BACKGROUND = USE_BACKGROUND
+ARTICLE_KEY_USE_BACKGROUND = KEY_USE_BACKGROUND
+ARTICLE_KEY_USE_BACKGROUND_HELP_TEXT = KEY_USE_BACKGROUND_HELP_TEXT
+
 # author
 ARTICLE_AUTHOR = AUTHOR
 
@@ -128,11 +140,15 @@ NEWS_KEY_IMPORTANT_HELP_TEXT = 'Последняя новость закрепл
                                'В ленте новостей новость занимает все ширину. ' \
                                'Внимательно проследите и настройте позицию по вертикали ' \
                                'для корректного отображения новости.'
+# y_pos
+NEWS_Y_POS = Y_POS
+NEWS_KEY_Y_POS = KEY_Y_POS
+NEWS_KEY_Y_POS_HELP_TEXT = KEY_Y_POS_HELP_TEXT
 
-NEWS_Y_POS = 'y_pos'
-NEWS_KEY_Y_POS = 'Позиция по вертикали'
-NEWS_KEY_Y_POS_HELP_TEXT = 'Некоторые изображения могут смещаться, из-за горизонтального отображения. ' \
-                           'Установите значение от 0 до 100 чтобы отрегулировать вертикальный центр.'
+# use_background
+NEWS_USE_BACKGROUND = USE_BACKGROUND
+NEWS_KEY_USE_BACKGROUND = KEY_USE_BACKGROUND
+NEWS_KEY_USE_BACKGROUND_HELP_TEXT = KEY_USE_BACKGROUND_HELP_TEXT
 
 # author
 NEWS_AUTHOR = AUTHOR
