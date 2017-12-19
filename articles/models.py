@@ -8,7 +8,7 @@ from articles.article_constants import ARTICLE_KEY_TITLE, ARTICLE_KEY_TEXT, ARTI
     AUTHOR_VERBOSE_NAME_PLURAL, SUBJECT_KEY_NAME, SUBJECT_VERBOSE_NAME, SUBJECT_VERBOSE_NAME_PLURAL, \
     ARTICLES_DEFAULT_MAPPING, URL, SUBJECT_KEY_SHOW, NEWS_VERBOSE_NAME, NEWS_VERBOSE_NAME_PLURAL, NEWS_KEY_TITLE, \
     NEWS_KEY_TEXT, NEWS_KEY_CREATED, NEWS_KEY_UPDATED, NEWS_KEY_SHOW, NEWS_KEY_Y_POS, NEWS_KEY_IMPORTANT, \
-    NEWS_USE_BACKGROUND, ARTICLE_KEY_Y_POS, ARTICLE_USE_BACKGROUND
+    NEWS_USE_BACKGROUND, ARTICLE_KEY_Y_POS, ARTICLE_USE_BACKGROUND, NEWS_KEY_USE_BACKGROUND, ARTICLE_KEY_USE_BACKGROUND
 from articles.validators import article_name_validator
 from cats.validators import background_y_position_validator
 from catsekb.constants import DJ_PK, URL_NAME_SUBJECT, URL_NAME_ARTICLE, URL_NAME_POST, IMAGE_KEY
@@ -52,7 +52,7 @@ class Article(Model):
     subject = ForeignKey(Subject, verbose_name=Subject._meta.verbose_name, null=True, blank=True)
     image = URLField(IMAGE_KEY)
     y_pos = IntegerField(ARTICLE_KEY_Y_POS, blank=True, default=50, validators=[background_y_position_validator])
-    use_background = BooleanField(ARTICLE_USE_BACKGROUND, default=True)
+    use_background = BooleanField(ARTICLE_KEY_USE_BACKGROUND, default=True)
 
     class Meta:
         verbose_name = ARTICLE_VERBOSE_NAME
@@ -87,7 +87,7 @@ class News(Model):
     image = URLField(IMAGE_KEY)
     important = BooleanField(NEWS_KEY_IMPORTANT, default=False)
     y_pos = IntegerField(NEWS_KEY_Y_POS, blank=True, default=50, validators=[background_y_position_validator])
-    use_background = BooleanField(NEWS_USE_BACKGROUND, default=True)
+    use_background = BooleanField(NEWS_KEY_USE_BACKGROUND, default=True)
 
     class Meta:
         verbose_name = NEWS_VERBOSE_NAME
