@@ -184,6 +184,10 @@ input.but:focus {
 .article {
   margin-bottom: 25px; }
 
+.article img {
+   max-height: 350px;
+   width: 100%;	
+}
 .hide_anchor {
     position: relative;
     top: -55px;
