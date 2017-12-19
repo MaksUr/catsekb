@@ -192,6 +192,10 @@ input.but:focus {
     max-width: 100%;
 }
 
+.article p {
+    margin: 10px 0;
+}
+
 .link_art a {
   padding-bottom: 0;
 }

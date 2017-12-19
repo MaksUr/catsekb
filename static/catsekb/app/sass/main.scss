@@ -184,10 +184,6 @@ input.but:focus {
 .article {
   margin-bottom: 25px; }
 
-.article img {
-   max-height: 350px;
-   width: 100%;	
-}
 .hide_anchor {
     position: relative;
     top: -55px;
@@ -198,6 +194,17 @@ input.but:focus {
     width: 100%;
     background-size: cover;
     background-position: center;
+}
+
+.article img {
+    max-height: 600px;
+    margin: 10px auto;
+    display: block;
+    max-width: 100%;
+}
+
+.article p {
+    margin: 10px 0;
 }
 
 .link_art a {
