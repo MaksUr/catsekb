@@ -1,10 +1,16 @@
-/* <---------- .about BEGIN ----------> */
-.about, .gallery_cats, .feed, .cat_detail {
-  position: relative; 
-  background-color: #fff;
-  padding: 70px 0;}
+.about, .index .gallery_cats {
+    position: relative; 
+    background-color: #fff;
+    padding: 70px 0; } 
 
+.cat_detail {
+    padding: 0 0 70px 0;
+}
 
+.index .feed, .gallery_cats {
+    padding: 0 0 70px 0;
+    background-color: #fff;
+}
 .cat_section {
     height: 450px;
 }
@@ -65,7 +71,6 @@
     transform: translateX(-115%) rotate(45deg);
 }
 
-/* <---------- .about END ----------> */
 .find_container {
   overflow-y: hidden;
   position: relative;

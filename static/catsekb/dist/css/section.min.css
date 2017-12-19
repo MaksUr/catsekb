@@ -1,8 +1,10 @@
-/* <---------- .about BEGIN ----------> */
-.about, .cat_detail, .index .gallery_cats {
+.about, .index .gallery_cats {
   position: relative; 
   background-color: #fff;
-  padding: 70px 0; }
+  padding: 70px 0; } 
+.cat_detail {
+    padding: 0 0 70px 0;
+  }
 
 .index .feed, .gallery_cats {
   padding: 0 0 70px 0;

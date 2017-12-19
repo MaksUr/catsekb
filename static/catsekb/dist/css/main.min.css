@@ -185,16 +185,12 @@ input.but:focus {
     background-position: center;
 }
 
-.link_art {
-  margin-top: 5px;
-}
-
 .link_art a {
   padding-bottom: 0;
 }
 
 .news_container {
-  padding-bottom: 25px;
+  padding-bottom: 20px;
 }
 
 .subject_list li {
