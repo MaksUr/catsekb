@@ -7,10 +7,10 @@
         <a href="{{ object.get_absolute_url }}#anchor_caption" style="background-image: url({{ object.image }}); background-position-y: {{ object.y_pos }}%;" class="art_img"></a>
         <div class="link_art">
             <a href="{{ object.get_absolute_url }}#anchor_caption"><h3>{{ object.title }}</h3></a>
-            <p class="date_article">{{ object.created.date }}</p>
+            <div class="date_article">{{ object.created.date }}</div>
         </div>
         {% if subject_key %}
-            <p class="date_article">{{ subject_key }}: <a href="{{ object.subject.get_absolute_url }}#anchor_caption" class="hashtag">{{ object.subject.name }}</a></p>
+            <div class="date_article">{{ subject_key }}: <a href="{{ object.subject.get_absolute_url }}#anchor_caption" class="hashtag">{{ object.subject.name }}</a></div>
         {% endif %}
     </div>
 </div>
