@@ -11,4 +11,4 @@
 {% include "cats/menu_tab.html" with name='articles' active=active_menu url_caption='Полезная информация' menu_items=helps menu_class=menu_class %}
 
 {% url 'contacts' as cont_url %}
-{% include "cats/menu_tab.html" with name='contacts' active=active_menu abs_url=cont_url url_caption='Контакты' %}
+{% include "cats/menu_tab.html" with name='contacts' active=active_menu abs_url=cont_url|add:'#anchor_caption'  url_caption='Контакты' %}
