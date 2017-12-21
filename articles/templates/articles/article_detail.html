@@ -38,10 +38,20 @@
         {% endif %}
     {% endif %}
     </section>
+    
     {% if recommendations %}
-        {% for article in recommendations %}
-            {% include 'articles/widgets/article_preview.html' with col=6 object=article %}
-        {% endfor %}
+    <section class="font line_height">
+        {% include 'cats/widgets/caption.html' with caption='Другие статьи' %}
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                    {% for article in recommendations %}
+                        {% include 'articles/widgets/article_preview.html' with col=6 object=article %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
     {% endif %}
 
 
