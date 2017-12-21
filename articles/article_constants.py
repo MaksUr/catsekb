@@ -2,7 +2,7 @@ from os.path import join
 
 from catsekb.constants import URL_NAME_CONTACTS, URL_NAME_FIND_CAT, CAPTION, URL, SHOW, CREATED, CREATED_KEY, UPDATED, \
     UPDATED_KEY, SUBJECT, AUTHOR, NAME, TEXT, TITLE, FOLDER, Y_POS, KEY_Y_POS, KEY_Y_POS_HELP_TEXT, USE_BACKGROUND, \
-    KEY_USE_BACKGROUND, KEY_USE_BACKGROUND_HELP_TEXT
+    KEY_USE_BACKGROUND, KEY_USE_BACKGROUND_HELP_TEXT, URL_NAME_ABOUT
 
 FEED_PAGINATE_BY = 10
 
@@ -85,6 +85,7 @@ ARTICLE_SUBJECT = SUBJECT
 # Article instances
 ARTICLE_CONTACTS_ID = 1
 ARTICLE_FIND_CAT_ID = 2
+ARTICLE_ABOUT_ID = 3
 
 ARTICLES_DEFAULT_MAPPING = {
     ARTICLE_CONTACTS_ID: {
@@ -96,7 +97,12 @@ ARTICLES_DEFAULT_MAPPING = {
         CAPTION: 'Что делать я нашел кота',
         URL: URL_NAME_FIND_CAT,
         FOLDER: join('articles', 'articles_list', 'find_cat.txt'),
-    }
+    },
+    ARTICLE_ABOUT_ID: {
+        CAPTION: 'О проекте',
+        URL: URL_NAME_ABOUT,
+        FOLDER: join('articles', 'articles_list', 'about.txt'),
+    },
 }
 
 
