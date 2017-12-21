@@ -19,7 +19,6 @@ class AbstractFeedListView(ListView):
     paginate_by = FEED_PAGINATE_BY
     title = ''
     order_by = None
-    subject_key = None
 
     def get_queryset(self):
         return get_objects_from_query(
@@ -34,8 +33,6 @@ class AbstractFeedListView(ListView):
         context = super(AbstractFeedListView, self).get_context_data(**kwargs)
         context.update(get_base_context(show_permission=show_permission, active_menu=ARTICLES, extra_title=self.title))
         context['caption'] = self.title
-        if self.subject_key:
-            context['subject_key'] = self.subject_key
         return context
 
     def get_paginate_by(self, queryset):
@@ -82,7 +79,6 @@ class ArticlesFeedListView(AbstractFeedListView):
     title = URL_NAME_SUBJECTS_TITLE
     template_name = 'articles/feed_list.html'
     order_by = '-created'
-    subject_key = SUBJECT_VERBOSE_NAME
 
     def get_queryset(self):
         queryset = super(ArticlesFeedListView, self).get_queryset()
