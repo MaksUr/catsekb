@@ -7,7 +7,7 @@ from django.views.generic import DetailView, ListView
 
 from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_TITLE, ARTICLES_DEFAULT_MAPPING, \
     ARTICLE_FIND_CAT_ID, \
-    CAPTION, ARTICLE_TEXT, FEED_PAGINATE_BY
+    CAPTION, ARTICLE_TEXT, FEED_PAGINATE_BY, SUBJECT_VERBOSE_NAME
 from articles.models import Subject, Article, News
 from catsekb.constants import ARTICLES, CONTACTS, DJ_ID, URL_NAME_SUBJECTS_TITLE, URL_NAME_SUBJECT_TITLE, \
     SHOW, URL_NAME_NEWS_FEED_TITLE, GET_PAR_KEY_PER_PAGE, \
@@ -19,6 +19,7 @@ class AbstractFeedListView(ListView):
     paginate_by = FEED_PAGINATE_BY
     title = ''
     order_by = None
+    subject_key = None
 
     def get_queryset(self):
         return get_objects_from_query(
@@ -33,6 +34,8 @@ class AbstractFeedListView(ListView):
         context = super(AbstractFeedListView, self).get_context_data(**kwargs)
         context.update(get_base_context(show_permission=show_permission, active_menu=ARTICLES, extra_title=self.title))
         context['caption'] = self.title
+        if self.subject_key:
+            context['subject_key'] = self.subject_key
         return context
 
     def get_paginate_by(self, queryset):
@@ -79,6 +82,7 @@ class ArticlesFeedListView(AbstractFeedListView):
     title = URL_NAME_SUBJECTS_TITLE
     template_name = 'articles/feed_list.html'
     order_by = '-created'
+    subject_key = SUBJECT_VERBOSE_NAME
 
     def get_queryset(self):
         queryset = super(ArticlesFeedListView, self).get_queryset()

@@ -9,7 +9,7 @@
             <a href="{{ object.get_absolute_url }}#anchor_caption"><h3>{{ object.title }}</h3></a>
             <div class="date_article">{{ object.created.date }}</div>
         </div>
-        {% if subject_key %}
+        {% if subject_key and object.subject %}
             <div class="date_article">{{ subject_key }}: <a href="{{ object.subject.get_absolute_url }}#anchor_caption" class="hashtag">{{ object.subject.name }}</a></div>
         {% endif %}
     </div>

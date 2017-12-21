@@ -5,6 +5,7 @@
 {# objects #}
 {# page_obj #}
 {# caption #}
+{# subject_key #}
 {% extends "cats/base.html" %}
 
 {% block base_body %}
@@ -17,11 +18,7 @@
             <div class="row">
                 <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
                 {% for object in object_list %}
-                    {% if object.subject %}
-                        {% include 'articles/widgets/article_preview_validation.html' with object=object subject_key="Тема" %}
-                    {% else %}
-                        {% include 'articles/widgets/article_preview_validation.html' with object=object %}
-                    {% endif %}
+                        {% include 'articles/widgets/article_preview_validation.html' with object=object subject_key=subject_key %}
                 {% empty %}
                     <p>Новостей еще нет.</p>
                 {% endfor %}
