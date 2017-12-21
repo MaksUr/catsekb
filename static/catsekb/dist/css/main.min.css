@@ -116,10 +116,10 @@ a:hover, a:active, .top_nav a:hover, .menu a:hover, .mobile_list a:hover, .open_
   padding: 0;
   display: block; }
 
-.hashtag, .tag {
+.hashtag, .tag, .article a {
   color: #8585ff; }
 
-.hashtag:hover, .tag:hover {
+.hashtag:hover, .tag:hover, .article a:hover {
   color: #5858ff; }
 
 ul {
