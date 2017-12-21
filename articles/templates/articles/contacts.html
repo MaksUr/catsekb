@@ -6,47 +6,57 @@
 {% extends "cats/base.html" %}
 
 {% block base_body %}
-    <!-- {% include 'articles/widgets/article.html' with object=object %} -->
-    <div class="contacts font line_height">
+    <section class="font line_height">
 		<div class="container">
-			{% include 'cats/widgets/caption.html' with caption="Активисты приюта" %}
+			{% include 'cats/widgets/caption.html' with caption="Контакты" %}
 			<div class="row">
 				<div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-					<p>
-						тел: 8-912-60-25-666 Татьяна
-						Instagram: https://www.instagram.com/catsekb/ 
-						VK: https://vk.com/catsekb_vk
-						FB: https://www.facebook.com/cats.ekb 
-						ok: https://ok.ru/catsekb
-						Email: сatsekb@gmail.com  
-						        сatsekb@e1.ru
-
-						Сделай добро! Подари коту семью!
-					</p>
+					
+					<ul class="contacts">
+						<li>
+							<h3>Приют</h3>
+						</li>
+						<li>
+							Татьяна - тел: 8-912-60-25-666
+						</li>
+						<li>
+							Instagram: <a href="https://www.instagram.com/catsekb/ ">https://www.instagram.com/catsekb/ </a>
+						</li>
+						<li>
+							ВКонтакте: <a href="https://vk.com/catsekb_vk">https://vk.com/catsekb_vk</a>
+						</li>
+						<li>
+							Facebook: <a href="https://www.facebook.com/cats.ekb">https://www.facebook.com/cats.ekb</a>
+						</li>
+						<li>
+							Одноклассники: <a href="https://ok.ru/catsekb">https://ok.ru/catsekb</a>
+						</li>
+						<li>
+						 	<b>Email:</b> сatsekb@gmail.com
+						</li>
+					</ul>
+					<ul class="contacts">
+						<li>
+							<h3>Разработчики сайта</h3>
+						</li>
+						<li>
+							<b>Front-end, дизайн:</b> Киселев М.В.
+						</li>
+						<li>
+							<b>Email:</b> maxoonix@gmail.com
+						</li>
+						<li>
+							<b>Back-end:</b> Ураков М.А.
+						</li>
+						<li>
+							<b>Email:</b> maksim.urakv@gmail.com
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="contacts font line_height">
-		<div class="container">
-			{% include 'cats/widgets/caption.html' with caption="Разработчики сайта" %}
-			<div class="row">
-				<div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-					<p>
-						тел: 8-912-60-25-666 Татьяна
-						Instagram: https://www.instagram.com/catsekb/ 
-						VK: https://vk.com/catsekb_vk
-						FB: https://www.facebook.com/cats.ekb 
-						ok: https://ok.ru/catsekb
-						Email: сatsekb@gmail.com  
-						        сatsekb@e1.ru
+	</section>
 
-						Сделай добро! Подари коту семью!
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
 
 
 

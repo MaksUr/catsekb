@@ -117,10 +117,10 @@ a:hover, a:active, .top_nav a:hover, .menu a:hover, .mobile_list a:hover, .open_
   padding: 0;
   display: block;
 }
-.hashtag, .tag {
+.hashtag, .tag, .article a, .contacts a {
 	color: #8585ff;
 }
-.hashtag:hover, .tag:hover {
+.hashtag:hover, .tag:hover, .article a:hover, .contacts a:hover {
 	color: #5858ff;
 }
 
@@ -217,4 +217,15 @@ input.but:focus {
 
 .subject_list li {
   padding-bottom: 6px;
+}
+
+.contacts {
+  margin-top: 20px;
+}
+.contacts li {
+  margin-bottom: 5px;
+}
+
+.contacts a {
+  padding: 0;
 }
