@@ -7,6 +7,7 @@
 {# page #}
 {# feed_per_page #}
 {# feed_url #}
+{# recommendations #}
 {% extends "cats/base.html" %}
 
 {% block base_body %}
@@ -35,11 +36,14 @@
                 </div>
             {% endwith %}
         {% endif %}
-
-
-
     {% endif %}
-    </section> 
+    </section>
+    {% for article in recommendations %}
+        {% include 'articles/widgets/article_preview.html' with col=6 object=article %}
+    {% empty %}
+
+    {% endfor %}
+
 {% endblock base_body %}
 
 {% block header %}
