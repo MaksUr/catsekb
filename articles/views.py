@@ -7,7 +7,7 @@ from django.views.generic import DetailView, ListView
 
 from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_TITLE, ARTICLES_DEFAULT_MAPPING, \
     ARTICLE_FIND_CAT_ID, \
-    CAPTION, ARTICLE_TEXT, FEED_PAGINATE_BY, SUBJECT_VERBOSE_NAME
+    CAPTION, ARTICLE_TEXT, FEED_PAGINATE_BY, SUBJECT_VERBOSE_NAME, ARTICLE_ABOUT_ID
 from articles.models import Subject, Article, News
 from catsekb.constants import ARTICLES, CONTACTS, DJ_ID, URL_NAME_SUBJECTS_TITLE, URL_NAME_SUBJECT_TITLE, \
     SHOW, URL_NAME_NEWS_FEED_TITLE, GET_PAR_KEY_PER_PAGE, \
@@ -218,3 +218,9 @@ class ContactsView(DefaultArticleDetailView):
 
 class FindCatView(DefaultArticleDetailView):
     article_id = ARTICLE_FIND_CAT_ID
+
+
+class AboutView(DefaultArticleDetailView):
+    template_name = 'articles/about.html'
+    active_menu = CONTACTS
+    article_id = ARTICLE_ABOUT_ID

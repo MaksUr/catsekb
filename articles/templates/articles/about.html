@@ -1,0 +1,16 @@
+{# for base #}
+    {# group_list #}
+    {# helpful_info_list #}
+
+{# object #}
+{% extends "cats/base.html" %}
+
+{% block base_body %}
+    {% include 'articles/widgets/article.html' with object=object %}
+{% endblock base_body %}
+
+{% block header %}
+     {% with "catsekb/dist/img/header_contacts.jpg" as background_image_file %}
+            {{ block.super }}
+    {% endwith %}
+{% endblock header %}
