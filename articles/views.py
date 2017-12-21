@@ -7,7 +7,7 @@ from django.views.generic import DetailView, ListView
 
 from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_TITLE, ARTICLES_DEFAULT_MAPPING, \
     ARTICLE_FIND_CAT_ID, \
-    CAPTION, ARTICLE_TEXT, FEED_PAGINATE_BY
+    CAPTION, ARTICLE_TEXT, FEED_PAGINATE_BY, SUBJECT_VERBOSE_NAME
 from articles.models import Subject, Article, News
 from catsekb.constants import ARTICLES, CONTACTS, DJ_ID, URL_NAME_SUBJECTS_TITLE, URL_NAME_SUBJECT_TITLE, \
     SHOW, URL_NAME_NEWS_FEED_TITLE, GET_PAR_KEY_PER_PAGE, \
@@ -110,6 +110,7 @@ class AbstractArticleDetailView(DetailView):
     template_name = 'articles/article_detail.html'
     pagination_order = '-created'
     feed_url = None
+    recommendations = None
 
     def get_object(self, queryset=None):
         queryset = self.queryset or self.get_queryset() or queryset
@@ -137,6 +138,8 @@ class AbstractArticleDetailView(DetailView):
             context['page'] = self.get_page()
             context['feed_per_page'] = FEED_PAGINATE_BY
             context['feed_url'] = reverse(self.feed_url)
+        if self.recommendations:
+            context['recommendations'] = self.queryset.order_by('?')[:self.recommendations]
         return context
 
     def get_page(self):
@@ -159,6 +162,7 @@ class AbstractArticleDetailView(DetailView):
 class ArticleDetailView(AbstractArticleDetailView):
     model = Article
     feed_url = URL_NAME_SUBJECTS_FEED
+    recommendations = 2
 
     def get_queryset(self):
         queryset = super(ArticleDetailView, self).get_queryset()
@@ -169,6 +173,7 @@ class ArticleDetailView(AbstractArticleDetailView):
 class NewsDetailView(AbstractArticleDetailView):
     model = News
     feed_url = URL_NAME_NEWS_FEED
+    recommendations = 2
 
 
 class DefaultArticleDetailView(AbstractArticleDetailView):

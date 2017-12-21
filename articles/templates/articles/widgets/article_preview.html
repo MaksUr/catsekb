@@ -1,5 +1,4 @@
 {# object #}
-{# subject_key #}
 {# col #}
 
 <div class="col-xs-12 col-xs-offset-0 col-sm-{{ col }} col-sm-offset-0 col-md-{{ col }} col-md-offset-0 col-lg-{{ col }} col-lg-offset-0">
@@ -9,8 +8,8 @@
             <a href="{{ object.get_absolute_url }}#anchor_caption"><h3>{{ object.title }}</h3></a>
             <div class="date_article">{{ object.created.date }}</div>
         </div>
-        {% if subject_key %}
-            <div class="date_article">{{ subject_key }}: <a href="{{ object.subject.get_absolute_url }}#anchor_caption" class="hashtag">{{ object.subject.name }}</a></div>
+        {% if object.subject %}
+            <div class="date_article">Тема: <a href="{{ object.subject.get_absolute_url }}#anchor_caption" class="hashtag">{{ object.subject.name }}</a></div>
         {% endif %}
     </div>
 </div>

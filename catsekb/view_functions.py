@@ -92,6 +92,14 @@ def get_important_news():
     return res
 
 
+def get_last_articles(count):
+    kwargs = {
+        SHOW: True,
+    }
+    res = Article.objects.filter(**kwargs).exclude(**{'id__in': list(ARTICLES_DEFAULT_MAPPING)}).order_by('?')[:count]
+    return res
+
+
 def get_base_context(active_menu, extra_title, show_permission=False):
     default_group_list = get_default_group_list(show_permission=show_permission)
     user_group_list = get_objects_from_query(model_cls=Group, query=dict(), show_permission=show_permission)

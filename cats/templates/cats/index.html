@@ -9,10 +9,12 @@
 {# animals_count #}
 {# dying_animals_count #}
 {# important_news #}
+{# articles #}
 
 {% extends "cats/base.html" %}
 {% load static %}
 {% block base_body %}
+
     <div class="about">
 		<div class="cat_container">
 		</div>
@@ -28,41 +30,73 @@
 			</div>
 		</div>
 	</div>
-    <div class="cat_section">
-        <div class="line_container">
+
+    {% if shelter_animals_count or home_animals_count %}
+        <div class="cat_section">
+            <div class="line_container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-10 col-xs-offset-1 col-lg-10">
+                            <h2>
+                                {% if shelter_animals_count %}
+                                    <span>Ищут дом: {{ shelter_animals_count }} /</span>
+                                {% endif %}
+
+                                {% if home_animals_count %}
+                                    <span>Пристроено: {{ home_animals_count }}</span>
+                                {% endif %}
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="full">
+            </div>
+        </div>
+    {% endif %}
+
+    {% if shelter_animals %}
+        {% url 'group_detail' pk='S' as group_url %}
+        {% include 'cats/widgets/gallery.html' with object_list=shelter_animals filter_parameters='?group_id=S' caption=shelter_caption caption_url=group_url %}
+    {% endif %}
+
+    {% if important_news %}
+        <div class="feed line_height font">
+            {% include 'cats/widgets/caption.html' with caption='Новости приюта' %}
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-10 col-xs-offset-1 col-lg-10">
-                        <h2>
-                            {% if shelter_animals_count %}
-                                <span>Ищут дом: {{ shelter_animals_count }} /</span>
-                            {% endif %}
+                    <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                        {% include 'articles/widgets/article_preview.html' with col=12 object=important_news %}
+                        <div class="mid">
+                            <a href="{% url 'news_feed' %}#anchor_caption" class="tag">Другие новости</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 
-                            {% if home_animals_count %}
-                                <span>Пристроено: {{ home_animals_count }}</span>
-                            {% endif %}
-                        </h2>
+    {% if articles %}
+        <div class="feed line_height font">
+            {% include 'cats/widgets/caption.html' with caption='Наши статьи' %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                        {% for article in articles %}
+                            {% include 'articles/widgets/article_preview.html' with col=6 object=article %}
+                        {% endfor %}
+                        <div class="mid">
+                            <a href="{% url 'subjects_feed' %}#anchor_caption" class="tag">Другие статьи</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="full">
-        </div>
-    </div>
-	{% url 'group_detail' pk='S' as group_url %}
-    {% include 'cats/widgets/gallery.html' with object_list=shelter_animals filter_parameters='?group_id=S' caption=shelter_caption caption_url=group_url %}
-    <div class="feed line_height font">
-        {% include 'cats/widgets/caption.html' with caption='Новости приюта' %}
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-                    {% include 'articles/widgets/article_preview.html' with col=12 object=important_news %}
-                    <div class="mid">
-                        <a href="{% url 'news_feed' %}#anchor_caption" class="tag">Другие новости</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% endif %}
+
+
+
+
+
 {% endblock base_body %}
 {% block body_attr %}class='index'{% endblock body_attr %}
