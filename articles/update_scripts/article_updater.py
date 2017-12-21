@@ -101,7 +101,7 @@ def update_articles():
     subjects.sort(key=lambda s: int(s.split('-')[0]))
     for subj in subjects:
         curr_dir = join(ARTICLES_DIR, subj)
-        subject, updated = Subject.objects.get_or_create(
+        subject, created = Subject.objects.get_or_create(
             name=subj[subj.index('-')+1:], defaults={NAME: subj[subj.index('-')+1:]}
         )
         create_articles_by_subj(subject, curr_dir)

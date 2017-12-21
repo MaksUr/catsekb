@@ -27,13 +27,17 @@ def create_or_update_default_articles():
             f = open(fp, 'w', encoding='UTF-8')
             t = ''
         f.close()
-        Article.objects.get_or_create(
+        article, created = Article.objects.get_or_create(
             id=art_id, defaults={
                 DJ_ID: art_id,
                 ARTICLE_TITLE: ARTICLES_DEFAULT_MAPPING[art_id][CAPTION],
                 ARTICLE_TEXT: t
             }
         )
+        if created is False:
+            article.__setattr__(ARTICLE_TITLE, ARTICLES_DEFAULT_MAPPING[art_id][CAPTION])
+            article.__setattr__(ARTICLE_TEXT, t)
+            article.save()
 
 
 def get_objects_from_query(model_cls, query, show_permission=False, order_by=None):
