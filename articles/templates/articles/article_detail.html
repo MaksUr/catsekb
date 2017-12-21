@@ -38,11 +38,12 @@
         {% endif %}
     {% endif %}
     </section>
-    {% for article in recommendations %}
-        {% include 'articles/widgets/article_preview.html' with col=6 object=article %}
-    {% empty %}
+    {% if recommendations %}
+        {% for article in recommendations %}
+            {% include 'articles/widgets/article_preview.html' with col=6 object=article %}
+        {% endfor %}
+    {% endif %}
 
-    {% endfor %}
 
 {% endblock base_body %}
 
