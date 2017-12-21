@@ -67,8 +67,10 @@
                 <div class="row">
                     <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
                         {% include 'articles/widgets/article_preview.html' with col=12 object=important_news %}
-                        <div class="mid">
-                            <a href="{% url 'news_feed' %}#anchor_caption" class="tag">Другие новости</a>
+                        <div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0">
+                            <div class="mid">
+                                <a href="{% url 'news_feed' %}#anchor_caption" class="tag">Другие новости</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -78,15 +80,17 @@
 
     {% if articles %}
         <div class="feed line_height font">
-            {% include 'cats/widgets/caption.html' with caption='Наши статьи' %}
+            {% include 'cats/widgets/caption.html' with caption='Полезные статьи' %}
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
                         {% for article in articles %}
                             {% include 'articles/widgets/article_preview.html' with col=6 object=article %}
                         {% endfor %}
-                        <div class="mid">
-                            <a href="{% url 'subjects_feed' %}#anchor_caption" class="tag">Другие статьи</a>
+                        <div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0">
+                            <div class="mid">
+                                <a href="{% url 'subjects_feed' %}#anchor_caption" class="tag">Другие статьи</a>
+                            </div>
                         </div>
                     </div>
                 </div>
