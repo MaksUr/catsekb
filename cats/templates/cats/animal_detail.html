@@ -27,9 +27,13 @@
                             {% else %}
                                 <img src="{% static 'catsekb/dist/img/sad_cat.png' %}" class="img-responsive">
                             {% endif %}
+                            {% if images.count >= 1 %}
                             <div class="count_photo_layer">
                                 <span class="count_photo">{{ images.count }} фото</span>
                             </div>
+                            <div class="photo_increase_icon">
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
 
