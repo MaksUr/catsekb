@@ -229,3 +229,25 @@ input.but:focus {
 .contacts a {
   padding: 0;
 }
+
+.cat_basket {
+    position: absolute;
+    left: 0;
+    top: 75%;
+    width: 90px;
+    height: 90px;
+    background-image: url(../img/cat_in_basket.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: transform .7s;
+    transform: translateX(-77%) rotate(94deg);
+}
+
+.can-hover .request:hover + .cat_basket {
+  transform: translateX(-17%) rotate(85deg);
+  transition: transform .76s;
+}
+
+.cat_basket.not {
+  transform: translateX(-120%) rotate(80deg);
+}
