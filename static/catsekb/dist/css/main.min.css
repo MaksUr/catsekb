@@ -61,9 +61,8 @@ a {
 a, a:link, a:visited, a:hover, a:active {
   text-decoration: none; }
 
-a:hover, a:active, .top_nav a:hover, .menu a:hover, .mobile_list a:hover, .open_next_menu:hover, .mobile_list a:active, .open_next_menu:active { 
-  color: #526aa5;
-}
+a:hover, a:active, .top_nav a:hover, .menu a:hover, .mobile_list a:hover, .open_next_menu:hover, .mobile_list a:active, .open_next_menu:active {
+  color: #526aa5; }
 
 .but {
   background-color: #526aa5;
@@ -98,7 +97,6 @@ a:hover, a:active, .top_nav a:hover, .menu a:hover, .mobile_list a:hover, .open_
   color: #fff; }
 
 .tag {
-  cursor: pointer;
   padding: 10px;
   -webkit-border-radius: 3px;
           border-radius: 3px; }
@@ -106,8 +104,8 @@ a:hover, a:active, .top_nav a:hover, .menu a:hover, .mobile_list a:hover, .open_
 .tag.no_active {
   display: inline-block;
   color: #c5c5c5;
-  padding: 10px; 
-  cursor: default;}
+  padding: 10px;
+  cursor: default; }
 
 .tag.no_active:hover {
   color: #c5c5c5; }
@@ -163,8 +161,7 @@ input.but:hover {
   background-color: #f93c3c; }
 
 input.but:focus {
-  outline-color: #00BCD4;
-}
+  outline-color: #00BCD4; }
 
 /* <---------- form END ----------> */
 .date_article {
@@ -174,69 +171,39 @@ input.but:focus {
   margin-bottom: 25px; }
 
 .hide_anchor {
-    position: relative;
-    top: -55px;
-}
+  position: relative;
+  top: -55px; }
 
 .art_img {
-    height: 350px;
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-}
+  height: 350px;
+  width: 100%;
+  -webkit-background-size: cover;
+          background-size: cover;
+  background-position: center; }
 
 .article img {
-    max-height: 600px;
-    margin: 10px auto;
-    display: block;
-    max-width: 100%;
-}
+  max-height: 600px;
+  margin: 10px auto;
+  display: block;
+  max-width: 100%; }
 
 .article p {
-    margin: 10px 0;
-}
+  margin: 10px 0; }
 
 .link_art a {
-  padding-bottom: 0;
-}
+  padding-bottom: 0; }
 
 .news_container {
-  padding-bottom: 20px;
-}
+  padding-bottom: 20px; }
 
 .subject_list li {
-  padding-bottom: 5px;
-}
+  padding-bottom: 5px; }
 
 .contacts {
-  margin-bottom: 20px;
-}
+  margin-bottom: 20px; }
+
 .contacts li {
-  margin-bottom: 5px;
-}
+  margin-bottom: 5px; }
 
 .contacts a {
-  padding: 0;
-}
-
-.cat_basket {
-    position: absolute;
-    left: 0;
-    top: 75%;
-    width: 90px;
-    height: 90px;
-    background-image: url(../img/cat_in_basket.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    transition: transform .7s;
-    transform: translateX(-77%) rotate(94deg);
-}
-
-.can-hover .request:hover + .cat_basket {
-  transform: translateX(-17%) rotate(85deg);
-  transition: transform .76s;
-}
-
-.cat_basket.not {
-  transform: translateX(-120%) rotate(80deg);
-}
+  padding: 0; }

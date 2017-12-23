@@ -116,15 +116,16 @@
 }
 
 .photo_increase_icon {
-  position: absolute;
-  bottom: 3px;
-  left: 30px;
-  z-index: 9;
-  background-image: url(../img/photo_increase_icon.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  height: 35px;
-  width: 35px;
+    position: absolute;
+    bottom: 10px;
+    left: 30px;
+    z-index: 9;
+    background-image: url(../img/photo_increase_icon.png);
+    -webkit-background-size: contain;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 30px;
+    width: 30px;
 }
 
 .description_cat > li {
@@ -145,4 +146,26 @@
 
 .character {
     margin-top: 5px;
+}
+
+.cat_basket {
+    position: absolute;
+    left: 0;
+    top: 70%;
+    width: 90px;
+    height: 90px;
+    background-image: url(../img/cat_in_basket.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: transform .7s;
+    transform: translateX(-77%) rotate(94deg);
+}
+
+.can-hover .request:hover + .cat_basket {
+  transform: translateX(-17%) rotate(85deg);
+  transition: transform .76s;
+}
+
+.cat_basket.not {
+  transform: translateX(-120%) rotate(80deg);
 }

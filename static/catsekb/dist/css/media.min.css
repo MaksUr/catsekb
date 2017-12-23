@@ -61,8 +61,7 @@
   .prev_photo, .next_photo {
     display: none; }
   .count_image {
-    display: none;
-  }
+    display: none; }
   .burger {
     cursor: pointer;
     z-index: 113;
@@ -79,15 +78,13 @@
     font-size: 0;
     -webkit-transition: opacity .4s ease, visibility .4s ease;
     -o-transition: opacity .4s ease, visibility .4s ease;
-    transition: opacity .4s ease, visibility .4s ease; } 
+    transition: opacity .4s ease, visibility .4s ease; }
   .hide_anchor {
     top: -15px; }
   .art_img {
-    height: 300px;
-  }
+    height: 300px; }
   .cat_basket {
-    display: none; } 
-}
+    display: none; } }
 
 @media (min-width: 768px) and (max-width: 992px) {
   .description_cat {

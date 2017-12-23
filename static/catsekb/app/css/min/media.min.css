@@ -9,7 +9,7 @@
 
 /* Устройства с шириной экрана до 767px */
 @media (max-width: 767px) {
-  a.tag, .tag.pag_gallery, .form_elem, .message {
+  a.tag, .tag.pag_gallery {
     display: block; }
   .tag {
     background-color: rgba(255, 255, 255, 0.75); }
@@ -60,6 +60,8 @@
     height: 100%; }
   .prev_photo, .next_photo {
     display: none; }
+  .count_image {
+    display: none; }
   .burger {
     cursor: pointer;
     z-index: 113;
@@ -76,7 +78,13 @@
     font-size: 0;
     -webkit-transition: opacity .4s ease, visibility .4s ease;
     -o-transition: opacity .4s ease, visibility .4s ease;
-    transition: opacity .4s ease, visibility .4s ease; } }
+    transition: opacity .4s ease, visibility .4s ease; }
+  .hide_anchor {
+    top: -15px; }
+  .art_img {
+    height: 300px; }
+  .cat_basket {
+    display: none; } }
 
 @media (min-width: 768px) and (max-width: 992px) {
   .description_cat {

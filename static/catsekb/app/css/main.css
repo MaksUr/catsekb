@@ -22,7 +22,7 @@ body {
 
 /* Отступы между секциями */
 section {
-  padding: 50px 0;
+  margin: 70px 0;
   background-color: #fff; }
 
 .vis {
@@ -61,13 +61,7 @@ a {
 a, a:link, a:visited, a:hover, a:active {
   text-decoration: none; }
 
-a:hover, a:active {
-  color: #526aa5; }
-
-.mobile_list a:active, .open_next_menu:active {
-  color: #526aa5; }
-
-.mobile_list a:hover, .open_next_menu:hover {
+a:hover, a:active, .top_nav a:hover, .menu a:hover, .mobile_list a:hover, .open_next_menu:hover, .mobile_list a:active, .open_next_menu:active {
   color: #526aa5; }
 
 .but {
@@ -110,7 +104,8 @@ a:hover, a:active {
 .tag.no_active {
   display: inline-block;
   color: #c5c5c5;
-  padding: 10px; }
+  padding: 10px;
+  cursor: default; }
 
 .tag.no_active:hover {
   color: #c5c5c5; }
@@ -119,14 +114,11 @@ a:hover, a:active {
   padding: 0;
   display: block; }
 
-.hashtag, .tag, .article a {
+.hashtag, .tag, .article a, .contacts a {
   color: #8585ff; }
 
-.hashtag:hover, .tag:hover, .article a:hover {
+.hashtag:hover, .tag:hover, .article a:hover, .contacts a:hover {
   color: #5858ff; }
-
-.top_nav a:hover, .menu a:hover {
-  color: #526aa5; }
 
 ul {
   list-style-type: none; }
@@ -141,12 +133,9 @@ ul {
   margin: 0 auto; }
 
 /* <---------- form BEGIN ----------> */
-.form_elem:first-child {
-  margin-top: 0; }
-
 .form_elem {
   display: block;
-  margin: 0 15px 20px 0;
+  margin: 0 15px 15px 0;
   text-align: left; }
 
 #id_name {
@@ -162,9 +151,6 @@ ul {
 .form_elem li {
   margin: 1px 0; }
 
-input[type="submit"] {
-  margin: 15px 0 0 0; }
-
 input[type="text"]:active {
   border-color: #846aa5; }
 
@@ -174,14 +160,50 @@ input.but {
 input.but:hover {
   background-color: #f93c3c; }
 
+input.but:focus {
+  outline-color: #00BCD4; }
+
 /* <---------- form END ----------> */
 .date_article {
   color: #9E9E9E; }
 
 .article {
-  margin-bottom: 30px; }
+  margin-bottom: 25px; }
+
+.hide_anchor {
+  position: relative;
+  top: -55px; }
+
+.art_img {
+  height: 350px;
+  width: 100%;
+  -webkit-background-size: cover;
+          background-size: cover;
+  background-position: center; }
 
 .article img {
-  max-width: 100%;
+  max-height: 600px;
+  margin: 10px auto;
   display: block;
-  height: auto; }
+  max-width: 100%; }
+
+.article p {
+  margin: 10px 0; }
+
+.link_art a {
+  padding-bottom: 0; }
+
+.news_container {
+  padding-bottom: 20px; }
+
+.subject_list li {
+  padding-bottom: 5px; }
+
+.contacts {
+  margin-bottom: 20px; }
+
+.contacts li {
+  margin-bottom: 5px; }
+
+.contacts a {
+  padding: 0; }

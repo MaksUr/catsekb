@@ -1,16 +1,16 @@
 .about, .index .gallery_cats {
-  position: relative; 
+  position: relative;
   background-color: #fff;
-  padding: 70px 0; } 
+  padding: 70px 0; }
+
 .cat_detail {
-    padding: 0 0 70px 0;
-    position: relative;
-}
+  padding: 0 0 70px 0;
+  position: relative; }
 
 .index .feed, .gallery_cats {
   padding: 0 0 70px 0;
-  background-color: #fff;
-}
+  background-color: #fff; }
+
 .cat_section {
   height: 450px; }
 
@@ -54,14 +54,14 @@
   top: 35px;
   left: 0;
   z-index: 9;
-  -webkit-transform: rotate(59deg);
-      -ms-transform: rotate(59deg);
+  -webkit-transform: translateX(-40%) rotate(59deg);
+      -ms-transform: translateX(-40%) rotate(59deg);
           transform: translateX(-40%) rotate(59deg);
-  -webkit-transition: -webkit-transform .5s ease;
-  transition: -webkit-transform .5s ease;
-  -o-transition: transform .5s ease;
-  transition: transform .5s ease;
-  transition: transform .55s ease, -webkit-transform .5s ease; }
+  -webkit-transition: -webkit-transform .55s ease;
+  transition: -webkit-transform .55s ease;
+  -o-transition: transform .55s ease;
+  transition: transform .55s ease;
+  transition: transform .55s ease, -webkit-transform .55s ease; }
 
 .about .tag {
   padding: 0;
@@ -69,36 +69,42 @@
   background-color: #fdf9f9; }
 
 .can-hover .cat_container:hover + .cat_a_mouse {
-  -webkit-transform: translateX(-70%) rotate(45deg);
-      -ms-transform: translateX(-70%) rotate(45deg);
+  -webkit-transform: translateX(-115%) rotate(45deg);
+      -ms-transform: translateX(-115%) rotate(45deg);
           transform: translateX(-115%) rotate(45deg); }
-
-/* <---------- .about END ----------> */
 
 .find_container {
   overflow-y: hidden;
-  position: relative;
-}
+  position: relative; }
 
 .find_container input {
-    margin-top: 15px;
-}
+  margin-top: 15px; }
+
 .can-hover .find_container input {
-    margin-top: 75px;
-    position: relative;
-    z-index: 1;
-}
+  margin-top: 75px;
+  position: relative;
+  z-index: 1; }
+
 .cat_find {
-    position: absolute;
-    top: 80px;
-    left: 50%;
-    margin-left: -50px;
-    height: 90px;
-    z-index: 0;
-    transition: transform .65s ease;
-}
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  margin-left: -50px;
+  height: 90px;
+  z-index: 0;
+  -webkit-transition: -webkit-transform .65s ease;
+  transition: -webkit-transform .65s ease;
+  -o-transition: transform .65s ease;
+  transition: transform .65s ease;
+  transition: transform .65s ease, -webkit-transform .65s ease; }
+
 .can-hover .find input:hover + .cat_find {
-    transform: translateY(-89%);
-    position: absolute; 
-    transition: transform .65s ease;  
-}
+  -webkit-transform: translateY(-89%);
+      -ms-transform: translateY(-89%);
+          transform: translateY(-89%);
+  position: absolute;
+  -webkit-transition: -webkit-transform .65s ease;
+  transition: -webkit-transform .65s ease;
+  -o-transition: transform .65s ease;
+  transition: transform .65s ease;
+  transition: transform .65s ease, -webkit-transform .65s ease; }

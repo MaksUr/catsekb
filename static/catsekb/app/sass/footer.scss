@@ -33,16 +33,21 @@ footer {
 	color: #f0cdb7;
 
 }
-.social a {
+/*.social a {
 	padding-left: 10px;
-}
+}*/
 
 .social img {
-	height: 30px;
+	height: 40px;
 	opacity: .6;
 }
 .social a:first-child {
 	padding-left: 0;
+}
+
+.social li:nth-child(2) {
+	margin-left: -5px;
+	padding-top: 15px;
 }
 
 .social a:hover img {
