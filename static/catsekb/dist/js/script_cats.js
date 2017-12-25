@@ -6,8 +6,10 @@ var preview_photo = document.querySelector('.preview_photo'),
     images = document.querySelectorAll('.item_photo'),
     body = document.getElementsByTagName('body'),
     burger = document.querySelector('.burger'),
-    count_image = document.querySelector('.count_image');
+    count_image = document.querySelector('.count_image'),
+    cat_basket = document.querySelector('.cat_basket'),
     n = 0;
+
 
 close_increase_photo.addEventListener('click', exit);
 
@@ -47,6 +49,7 @@ function exit() {
 	close_increase_photo.classList.remove('vis');
 	count_image.classList.add('no-vis');
 	count_image.classList.remove('vis');
+	cat_basket.classList.remove('not');
 	body[0].classList.toggle('overY');
 }
 
@@ -60,5 +63,6 @@ function increase() {
 	count_image.classList.remove('no-vis');
 	count_image.classList.add('vis');
 	count_image.innerText = (n + 1) + ' / ' + images.length;
+	cat_basket.classList.add('not');
 	body[0].classList.toggle('overY');
 }

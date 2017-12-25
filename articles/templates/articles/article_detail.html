@@ -11,7 +11,7 @@
 {% extends "cats/base.html" %}
 
 {% block base_body %}
-    <section class="line_height font">
+    <section class="font line_height">
     {% include 'articles/widgets/article.html' with object=object %}
     {% if page %}
         {% load app_filters %}
