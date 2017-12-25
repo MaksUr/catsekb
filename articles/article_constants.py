@@ -94,7 +94,7 @@ ARTICLES_DEFAULT_MAPPING = {
         FOLDER: join('articles', 'articles_list', 'contacts.txt'),
     },
     ARTICLE_FIND_CAT_ID: {
-        CAPTION: 'Что делать я нашел кота',
+        CAPTION: 'Я нашел кота, что делать?',
         URL: URL_NAME_FIND_CAT,
         FOLDER: join('articles', 'articles_list', 'find_cat.txt'),
     },
