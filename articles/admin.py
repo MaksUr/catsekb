@@ -1,14 +1,15 @@
 from django.contrib import admin
 
-from articles.article_constants import ARTICLE_TITLE, ARTICLE_SHOW, SUBJECT_SHOW, SUBJECT_NAME, NEWS_TITLE, NEWS_SHOW, \
+from articles.article_constants import ARTICLE_SHOW, SUBJECT_SHOW, SUBJECT_NAME, NEWS_SHOW, \
     NEWS_IMPORTANT
-from articles.forms import NewsForm
+from articles.forms import NewsForm, ArticleForm
 from articles.models import Article, Author, Subject, News
 
 admin.site.register(Author)
 
 
 class ArticleAdmin(admin.ModelAdmin):
+    form = ArticleForm
     list_display = ('__str__', ARTICLE_SHOW)
     search_fields = ('__str__',)
 admin.site.register(Article, ArticleAdmin)

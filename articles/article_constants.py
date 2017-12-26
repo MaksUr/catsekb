@@ -41,7 +41,7 @@ ARTICLE_VERBOSE_NAME_PLURAL = APPLICATION_VERBOSE_NAME
 
 # title
 ARTICLE_TITLE = TITLE
-ARTICLE_TITLE_VALIDATION_HAS_DEFAULT_VALUE = '"{title}" имеет недопустимое значение.'
+ARTICLE_TITLE_VALIDATION_HAS_DEFAULT_VALUE = '"{title}" стандартная статья, название изменять нельзя. '
 ARTICLE_KEY_TITLE = 'Название статьи'
 ARTICLE_KEY_TITLE_HELP_TEXT = ''
 

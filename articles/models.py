@@ -43,14 +43,14 @@ class Subject(Model):
 
 
 class Article(Model):
-    title = CharField(ARTICLE_KEY_TITLE, max_length=70, unique=True, validators=[article_name_validator])
+    title = CharField(ARTICLE_KEY_TITLE, max_length=70, unique=True)
     text = TextField(ARTICLE_KEY_TEXT)
     created = DateTimeField(ARTICLE_KEY_CREATED, auto_now_add=True)
     updated = DateTimeField(ARTICLE_KEY_UPDATED, auto_now=True)
     show = BooleanField(ARTICLE_KEY_SHOW, default=True)
     author = ForeignKey(Author, verbose_name=Author._meta.verbose_name, null=True, blank=True)
     subject = ForeignKey(Subject, verbose_name=Subject._meta.verbose_name, null=True, blank=True)
-    image = URLField(IMAGE_KEY)
+    image = URLField(IMAGE_KEY, null=True, blank=True, default=None)
     y_pos = IntegerField(ARTICLE_KEY_Y_POS, blank=True, default=50, validators=[background_y_position_validator])
     use_background = BooleanField(ARTICLE_KEY_USE_BACKGROUND, default=True)
 
@@ -84,7 +84,7 @@ class News(Model):
     updated = DateTimeField(NEWS_KEY_UPDATED, auto_now=True)
     show = BooleanField(NEWS_KEY_SHOW, default=True)
     author = ForeignKey(Author, verbose_name=Author._meta.verbose_name, null=True, blank=True)
-    image = URLField(IMAGE_KEY)
+    image = URLField(IMAGE_KEY, null=True, blank=True, default=None)
     important = BooleanField(NEWS_KEY_IMPORTANT, default=False)
     y_pos = IntegerField(NEWS_KEY_Y_POS, blank=True, default=50, validators=[background_y_position_validator])
     use_background = BooleanField(NEWS_KEY_USE_BACKGROUND, default=True)
