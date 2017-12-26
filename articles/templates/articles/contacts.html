@@ -11,30 +11,7 @@
 			{% include 'cats/widgets/caption.html' with caption="Контакты" %}
 			<div class="row">
 				<div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-					
-					<ul class="contacts">
-						<li>
-							<h3>Приют</h3>
-						</li>
-						<li>
-							Татьяна - тел: 8-912-60-25-666
-						</li>
-						<li>
-							Instagram: <a href="https://www.instagram.com/catsekb/ ">https://www.instagram.com/catsekb/ </a>
-						</li>
-						<li>
-							ВКонтакте: <a href="https://vk.com/catsekb_vk">https://vk.com/catsekb_vk</a>
-						</li>
-						<li>
-							Facebook: <a href="https://www.facebook.com/cats.ekb">https://www.facebook.com/cats.ekb</a>
-						</li>
-						<li>
-							Одноклассники: <a href="https://ok.ru/catsekb">https://ok.ru/catsekb</a>
-						</li>
-						<li>
-						 	Email: сatsekb@gmail.com
-						</li>
-					</ul>
+					{{ object.text|safe }}
 					<ul class="contacts">
 						<li>
 							<h3>Разработчики сайта</h3>
