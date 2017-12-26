@@ -26,6 +26,9 @@ TEXT = 'text'
 FOLDER = 'folder'
 IMAGE = 'image'
 IMAGE_KEY = 'Изображение для превью'
+IMAGE_KEY_HELP_TEXT = 'ссылка на изображение.'
+AUTHOR_KEY_HELP_TEXT = 'Выберите автора'
+SUBJECT_KEY_HELP_TEXT = 'Выберите раздел'
 
 
 CREATED = 'created'
