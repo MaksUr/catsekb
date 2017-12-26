@@ -326,15 +326,20 @@ AGE_DISTANCE = 'age_distance'
 AGE_DISTANCE_KEY = 'Возраст'
 AGE_DISTANCE_CHOICES = (
     NO_CHOICE,
+    ('_y1', 'до года'),
+    ('y1_y3', 'от года до трех'),
+    ('y3_', 'более трех лет'),
+)
+
+# shelter_distance
+SHELTER_DISTANCE = 'shelter_distance'
+SHELTER_DISTANCE_KEY = 'Время в приюте'
+SHELTER_DISTANCE_CHOICES = (
+    NO_CHOICE,
     ('_m1', 'до месяца'),
     ('m1_m6', 'от месяца до полугода'),
     ('m6_y1', 'от полугода до года'),
     ('y1_y2', 'от года до двух'),
     ('y2_', 'более двух лет'),
 )
-
-# shelter_distance
-SHELTER_DISTANCE = 'shelter_distance'
-SHELTER_DISTANCE_KEY = 'Время в приюте'
-SHELTER_DISTANCE_CHOICES = AGE_DISTANCE_CHOICES
 
