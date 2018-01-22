@@ -76,17 +76,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'catsekb.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
-
 with open(join(BASE_DIR, 'db_key.txt')) as f:
     db_key = f.read().strip()
 
@@ -94,8 +83,8 @@ with open(join(BASE_DIR, 'db_key.txt')) as f:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'db1',
-        'USER': 'django_catsekb',
+        'NAME': 'catsekb',
+        'USER': 'catsekb',
         'PASSWORD': db_key,
         'HOST': 'localhost',
         'PORT': '',                      # Set to empty string for default.
@@ -145,8 +134,3 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static_production")
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
-
-try:
-    from .settings_production import *
-except:
-    pass
