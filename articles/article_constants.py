@@ -48,7 +48,7 @@ ARTICLE_KEY_TITLE_HELP_TEXT = ''
 # text
 ARTICLE_TEXT = 'text'
 ARTICLE_KEY_TEXT = 'Текст статьи'
-ARTICLE_KEY_TEXT_HELP_TEXT = 'Используйте html теги: <p> <a> <img> для форматирования текста.'
+ARTICLE_KEY_TEXT_HELP_TEXT = 'Используйте html теги для форматирования текста.'
 
 # created
 ARTICLE_CREATED = CREATED

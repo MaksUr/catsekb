@@ -33,7 +33,7 @@
                         <a href="{% url 'contacts' %}#anchor_caption">Контакты</a>
                     </li>                    
                     <li>
-                        <a href="{% url 'about' %}">Помощь приюту</a>
+                        <a href="{% url 'about' %}#help_anchor">Помощь приюту</a>
                     </li>
                 </ul>
             </div>
@@ -71,7 +71,7 @@
             <div class="col-xs-10 col-xs-offset-1">
                 <div class="copyright">
                     <span>
-                         © 2017. Все права защищены
+                         © {% now "Y" %}. Все права защищены
                     </span>
                 </div>
             </div>
