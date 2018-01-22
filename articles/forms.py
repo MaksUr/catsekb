@@ -22,6 +22,7 @@ class NewsForm(forms.ModelForm):
             NEWS_TEXT,
             NEWS_SHOW,
             NEWS_IMPORTANT,
+            IMAGE,
             NEWS_Y_POS,
             NEWS_AUTHOR,
         )
