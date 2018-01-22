@@ -78,8 +78,8 @@ def get_group(group_id, show_permission=False):
 
 def get_default_group_list(show_permission=False):
     default_group_list = list()
-    default_group_list.append(get_group(group_id=GROUP_INSTANCE_ALL_ID, show_permission=show_permission))
     default_group_list.append(get_group(group_id=GROUP_INSTANCE_SHELTER_ID, show_permission=show_permission))
+    default_group_list.append(get_group(group_id=GROUP_INSTANCE_ALL_ID, show_permission=show_permission))
     default_group_list.append(get_group(group_id=GROUP_INSTANCE_HOME_ID, show_permission=show_permission))
     if show_permission:
         default_group_list.append(get_group(group_id=GROUP_INSTANCE_DEAD_ID, show_permission=show_permission))
@@ -132,7 +132,7 @@ def get_base_context(active_menu, extra_title, show_permission=False):
     helpful_info_list.append(articles)
 
     context = {
-        'group_list': [animal_filter_url] + default_group_list + list(user_group_list),
+        'group_list': default_group_list + [animal_filter_url] + list(user_group_list),
         'helpful_info_list': helpful_info_list,
         'active_menu': active_menu,
         'extra_title': extra_title,
