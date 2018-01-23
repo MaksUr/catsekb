@@ -11,7 +11,7 @@
         background-image: url({% static background_image_file|default:"catsekb/dist/img/header_small.jpg" %});
     {% endif %}
 ">
-    <div class="header_layer">
+    <div class="header_layer font">
         <div class="container-fluid">
             <div class="row">
                     <div class="main_menu mid">
@@ -23,7 +23,7 @@
                         </h1>
                     </div>
                 <div class="hidden-xs col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-8">
-                    <nav class="font">
+                    <nav>
                         <ul class="menu mid">
                             {% include "cats/menu_tabs.html" with menu_class='menu_opening' active_menu=active_menu groups=groups helps=helps %}
                         </ul>
