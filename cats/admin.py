@@ -154,9 +154,3 @@ class GroupAdmin(admin.ModelAdmin):
     # inlines = [AnimalsInline]
 admin.site.register(Group, GroupAdmin)
 
-
-class AnimalImageAdmin(admin.ModelAdmin):
-    form = AnimalImageForm
-    fields = ANIMAL_IMAGE_FIELDS
-    readonly_fields = ANIMAL_IMAGE_READONLY_FIELDS
-admin.site.register(AnimalImage, AnimalImageAdmin)
