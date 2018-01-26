@@ -15,7 +15,7 @@
 {% load static %}
 {% block base_body %}
 
-    <div class="about">
+    <div class="about font line_height">
 		<div class="cat_container">
 		</div>
 		<img class="cat_a_mouse" src="{% static "catsekb/dist/img/cat_and_mouse.png" %}">
@@ -23,9 +23,14 @@
 			{% include 'cats/widgets/caption.html' with caption="О нас" %}
 			<div class="row">
 				<div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-					<p class="font line_height">
-						<strong>CatsEkb</strong> - это благотворительный проект по пристрою кошек; частный приют для травмированных кошек. Мы спасаем котиков, лечим их и ищем новый уютный дом. Если вы вдруг нашли котика и хотите помочь, внимательно прочитайте статью - <a href="{% url 'find_cat' %}#anchor_caption" class="tag">"Я НАШЕЛ КОТА, ЧТО ДЕЛАТЬ?"</a>.
-					</p>
+                    <div class="article">
+    					<p>
+    						<strong>CatsEkb - это благотворительный проект по пристрою кошек; частный приют для травмированных кошек.</strong> Мы спасаем котиков, лечим их и ищем новый уютный дом. Если вы вдруг нашли котика и хотите помочь, внимательно прочитайте статью - <a href="{% url 'find_cat' %}#anchor_caption" class="tag">"Я НАШЕЛ КОТА, ЧТО ДЕЛАТЬ?"</a>.
+                        </p>
+                        <p>
+                            Подробнее о нашем проекте вы можете прочитать <a href="{% url 'about' %}" class="tag">здесь</a>.
+                        </p>
+                    </div>
 				</div>
 			</div>
 		</div>
@@ -59,6 +64,7 @@
         {% url 'group_detail' pk='S' as group_url %}
         {% include 'cats/widgets/gallery.html' with object_list=shelter_animals filter_parameters='?group_id=S' caption=shelter_caption caption_url=group_url %}
     {% endif %}
+
 
     {% if important_news %}
         <div class="feed line_height font">
