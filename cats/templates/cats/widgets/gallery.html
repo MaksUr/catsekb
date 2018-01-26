@@ -9,7 +9,7 @@
 
 {% load verbose_names %}
 {% load static %}
-<div id="gallery_cat" class="gallery_cats">
+<div id="gallery_cat" class="gallery_cats font">
     <!-- # T0D0: #Зефир,_Крем,_Сливка,_Трюфелька_catsekb..... - обрезать строку если больше 25 символов # -->
     {% include 'cats/widgets/caption.html' with caption=caption caption_url=caption_url %}
     <div class="container">
@@ -17,11 +17,11 @@
             <div class="col-xs-10 col-xs-offset-1">
                 {% include 'cats/widgets/group_description.html' with description=capt_descr %}
                 {% if show_count and page_obj %}
-                    <p class="gallery_description mid font">Найдено {{ page_obj.paginator.count }} котиков</p>
+                    <p class="gallery_description mid">Найдено {{ page_obj.paginator.count }} котиков</p>
                 {% endif %}
             </div>
         </div>
-        <div class="gallery font">
+        <div class="gallery">
             <div class="row">
                 <div class="col-md-12 slim">
                      {% for animal in object_list %}
@@ -50,7 +50,7 @@
                             {% if page_obj.paginator.num_pages > 1 %}
                                 {% load app_filters %}
                                 <span>Страница: {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
-                                <p class="pagination_cats mid font">
+                                <p class="pagination_cats mid">
 
                                     {# previous #}
                                     {% if page_obj.has_previous %}
@@ -74,7 +74,7 @@
                                     
                                 </p>
                             {% else %}
-                                <p class="pagination_cats mid font">
+                                <p class="pagination_cats mid">
                                     <a class="tag no_active pag_gallery">Назад</a>
                                     <a class="tag no_active pag_gallery">Показать всех</a>
                                     <a class="tag no_active pag_gallery">Далее</a>
@@ -87,7 +87,13 @@
             </div>
         </div>
     {% if bottom_text and caption_url %}
-        <a href="{{ caption_url  }}">{{ bottom_text }}</a>
+        <div class="row">
+            <div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0">
+                <p class="pagination_cats mid">
+                    <a href="{{ caption_url  }}#anchor_caption" class="tag">{{ bottom_text }}</a>
+                </p>
+            </div>
+        </div>
     {% endif %}
     </div>
 </div>
