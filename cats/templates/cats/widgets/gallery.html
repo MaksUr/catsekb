@@ -5,6 +5,7 @@
 {# capt_descr #}
 {# page_obj #}
 {# show_count #}
+{# bottom_text #}
 
 {% load verbose_names %}
 {% load static %}
@@ -83,8 +84,10 @@
                     </div>
                 </div>                
             {% endif %}
+            </div>
         </div>
+    {% if bottom_text and caption_url %}
+        <a href="{{ caption_url  }}">{{ bottom_text }}</a>
+    {% endif %}
     </div>
 </div>
-
- 
