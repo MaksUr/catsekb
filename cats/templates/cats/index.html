@@ -57,7 +57,7 @@
 
     {% if shelter_animals %}
         {% url 'group_detail' pk='S' as group_url %}
-        {% include 'cats/widgets/gallery.html' with object_list=shelter_animals filter_parameters='?group_id=S' caption=shelter_caption caption_url=group_url %}
+            {% include 'cats/widgets/gallery.html' with object_list=shelter_animals filter_parameters='?group_id=S' caption=shelter_caption caption_url=group_url bottom_text='Подробнее' %}
     {% endif %}
 
     {% if important_news %}
