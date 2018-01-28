@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from os.path import join
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -20,12 +22,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '1j(lfw54!y!f3u%&8%e*(m)@k=p&@2iphm53p$$li&8hy#@gwl'
+with open(join(BASE_DIR, 'secret_key.txt')) as f:
+    SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'maksur.pythonanywhere.com']
+ALLOWED_HOSTS = ['catsekb.ru']
 
 
 # Application definition
@@ -73,16 +76,20 @@ TEMPLATES = [
 WSGI_APPLICATION = 'catsekb.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.10/ref/settings/#databases
+with open(join(BASE_DIR, 'db_key.txt')) as f:
+    db_key = f.read().strip()
 
+#settings for db on server
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'catsekb',
+        'USER': 'catsekb',
+        'PASSWORD': db_key,
+        'HOST': 'localhost',
+        'PORT': '',                      # Set to empty string for default.
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -127,8 +134,3 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static_production")
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
-
-try:
-    from .settings_production import *
-except:
-    pass
