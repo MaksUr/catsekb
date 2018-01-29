@@ -90,7 +90,7 @@ class SubjectDetailView(DetailView):
 
     def get_object(self, queryset=None):
         if self.request.user.is_authenticated() is not True:
-            queryset = Subject.objects.filter(**{SHOW: True})
+            queryset = Subject.objects.filter(**{SHOW: True}).order_by('created')
         obj = super(SubjectDetailView, self).get_object(queryset=queryset)
         return obj
 
@@ -163,6 +163,7 @@ class ArticleDetailView(AbstractArticleDetailView):
     model = Article
     feed_url = URL_NAME_SUBJECTS_FEED
     recommendations = 2
+    pagination_order = 'created'
 
     def get_queryset(self):
         queryset = super(ArticleDetailView, self).get_queryset()
