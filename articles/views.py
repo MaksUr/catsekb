@@ -53,7 +53,7 @@ class AbstractFeedListView(ListView):
 class SubjectListView(AbstractFeedListView):
     model = Subject
     title = URL_NAME_SUBJECTS_TITLE
-    order_by = 'id'
+    order_by = 'created'
 
     def get_context_data(self, **kwargs):
         context = super(SubjectListView, self).get_context_data(**kwargs)
