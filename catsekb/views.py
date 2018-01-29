@@ -35,7 +35,7 @@ def index_view(request):
     context['shelter_animals_count'] = shelter_animals_count
     context['important_news'] = get_important_news()
     context['articles'] = get_last_articles(2)
-    context['home_animals_count'] = get_home_animals_count() + 78
+    context['home_animals_count'] = get_home_animals_count() + 77
     context['animals_count'] = get_animals_from_query(query=dict(), show_permission=True).count()
     if show_permission is True:
         context['dying_animals_count'] = get_animals_from_query(

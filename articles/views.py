@@ -78,7 +78,7 @@ class ArticlesFeedListView(AbstractFeedListView):
     model = Article
     title = URL_NAME_SUBJECTS_TITLE
     template_name = 'articles/feed_list.html'
-    order_by = '-created'
+    order_by = 'created'
 
     def get_queryset(self):
         queryset = super(ArticlesFeedListView, self).get_queryset()
