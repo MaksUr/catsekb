@@ -1,3 +1,4 @@
+from datetime import timedelta
 from os.path import join, isdir, isfile, basename
 
 from os import listdir
@@ -106,4 +107,17 @@ def update_articles():
         )
         create_articles_by_subj(subject, curr_dir)
     print('update articles is finished')
+
+
+def change_article_order():
+    from django.utils import timezone
+
+    start_time = timezone.datetime(year=2018, month=1, day=15, hour=14, minute=58, tzinfo=timezone.get_current_timezone())
+    ids = [29, 33, 34, 35, 36, 37, 38, 39, 40, 30, 31, 32]
+    delta = timedelta(minutes=1)
+    for i in ids:
+        a = Article.objects.get(id=i)
+        start_time += delta
+        a.created = start_time
+        a.save()
 
