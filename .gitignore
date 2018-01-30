@@ -14,3 +14,5 @@ other/
 
 # gulp
 node_modules/
+
+catsekb/settings.py
