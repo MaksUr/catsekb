@@ -10,7 +10,7 @@ admin.site.register(Author)
 
 class ArticleAdmin(admin.ModelAdmin):
     form = ArticleForm
-    list_display = ('__str__', ARTICLE_SHOW)
+    list_display = ('__str__', ARTICLE_SHOW, 'created', 'updated')
     search_fields = ('__str__',)
 admin.site.register(Article, ArticleAdmin)
 
@@ -22,7 +22,7 @@ admin.site.register(Subject, SubjectAdmin)
 
 class NewsAdmin(admin.ModelAdmin):
     form = NewsForm
-    list_display = ('__str__', NEWS_SHOW, NEWS_IMPORTANT)
+    list_display = ('__str__', NEWS_SHOW, NEWS_IMPORTANT, 'created', 'updated')
     search_fields = ('__str__',)
 admin.site.register(News, NewsAdmin)
 
