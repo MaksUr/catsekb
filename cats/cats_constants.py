@@ -82,6 +82,7 @@ ANIMAL_VERBOSE_NAME_PLURAL = 'Питомцы'
 ANIMAL_VERBOSE_NAME = 'Питомец'
 ANIMAL_MAIN_FIELD_SET = 'Общая информация'
 ANIMAL_VK_IMPORT_SET = 'Импорт данных из группы в VK'
+ANIMAL_VIDEO_FIELD_SET = 'Видео'
 
 # tag
 ANIMAL_TAG_FIELD_SET = 'Настройка тега'
@@ -212,6 +213,10 @@ ANIMAL_KEY_SHELTER_DATE_HELP_TEXT = 'Примерная дата попадан�
 ANIMAL_GROUP = 'group'
 ANIMAL_KEY_GROUP_HELP_TEXT = 'Назначить группу для питомца.'
 
+# video
+ANIMAL_VIDEO = 'video'
+ANIMAL_KEY_VIDEO_HELP_TEXT = 'Видео на котором есть питомец'
+
 # show
 ANIMAL_SHOW = SHOW
 ANIMAL_KEY_SHOW = 'Показывать котика'
@@ -249,6 +254,21 @@ ANIMAL_KEY_MONTHS_HELP_TEXT = 'Указывается точность до ме
 ANIMAL_YEARS = 'years'
 ANIMAL_FORM_KEY_YEARS = 'Лет'
 ANIMAL_KEY_YEARS_HELP_TEXT = 'Указывается точность до года'
+
+
+# class AnimalVideo
+ANIMAL_VIDEO_VERBOSE_NAME = 'Видео'
+ANIMAL_VIDEO_VERBOSE_NAME_PLURAL = ANIMAL_VIDEO_VERBOSE_NAME
+
+# video_url
+ANIMAL_VIDEO_VIDEO_URL = 'video_url'
+ANIMAL_VIDEO_KEY_VIDEO_URL = 'Ссылка на видео Youtube'
+ANIMAL_VIDEO_KEY_VIDEO_URL_HELP_TEXT = 'Для копирования ссылки воспользуйтесь кнопкой "Поделиться".'
+
+ANIMAL_VIDEO_DESCRIPTION = 'video_description'
+ANIMAL_VIDEO_KEY_DESCRIPTION = 'Описание видео'
+ANIMAL_VIDEO_KEY_DESCRIPTION_HELP_TEXT = 'Кратко опишите содержание видео. ' \
+                                         'Описание будет использовано в качестве заголовка.'
 
 
 # class Group

@@ -14,10 +14,10 @@ from cats.cats_constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMA
     ANIMAL_IMAGE_PHOTO_ID, ANIMAL_IMAGE_IMAGE_URL_TAG, \
     ANIMAL_IMAGE_IMAGE_SMALL_URL_TAG, ANIMAL_IMAGE_CREATED, ANIMAL_SHELTER_DATE, ANIMAL_VALID_INFO, \
     ANIMAL_KEY_FORM_VK_UPDATE_PHOTO_HELP_TEXT, ANIMAL_KEY_FORM_VK_UPDATE_INFO_HELP_TEXT, ANIMAL_FORM_VK_UPDATE_INFO, \
-    ANIMAL_KEY_FORM_VK_UPDATE_INFO, ANIMAL_KEY_TAG_DISPLAY_HELP_TEXT
+    ANIMAL_KEY_FORM_VK_UPDATE_INFO, ANIMAL_KEY_TAG_DISPLAY_HELP_TEXT, ANIMAL_VIDEO_FIELD_SET, ANIMAL_VIDEO
 from catsekb.constants import DJ_CLASSES_COLLAPSE, DJ_CLASSES, DJ_FIELDS, DJ_ID
 from cats.forms import AnimalForm, AnimalImageForm
-from cats.models import Animal, AnimalImage, Group
+from cats.models import Animal, AnimalImage, Group, AnimalVideo
 from cats.updater import update_images_for_animal
 
 UPDATE_BUTTON = '<a class="button" href="{link}?upd={upd}">Обновить</a><p class="help">{help}</p>'
@@ -120,6 +120,14 @@ class AnimalAdmin(admin.ModelAdmin):
                 DJ_CLASSES: (DJ_CLASSES_COLLAPSE,)
             },
         ),
+        (
+            ANIMAL_VIDEO_FIELD_SET, {
+                DJ_FIELDS: (
+                    (ANIMAL_VIDEO,),
+                ),
+                DJ_CLASSES: (DJ_CLASSES_COLLAPSE,)
+            },
+        ),
     )
 
     readonly_fields = (ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPDATED,
@@ -151,6 +159,10 @@ class AnimalsInline(admin.StackedInline):
 class GroupAdmin(admin.ModelAdmin):
     list_display = (GROUP_NAME, GROUP_SHOW)
     # TODO: Сделать поддержку просмотра котов группы и добавлять
-    # inlines = [AnimalsInline]
 admin.site.register(Group, GroupAdmin)
+
+
+class AnimalVideoAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(AnimalVideo, AnimalVideoAdmin)
 

@@ -18,7 +18,8 @@ from cats.cats_constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_V
     ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION, ANIMAL_LOCATION_STATUS_CHOICES_D, ANIMAL_SEX_CHOICES_D, \
     ANIMAL_KEY_VK_ALBUM_ID, ANIMAL_IMAGE_KEY_PHOTO_ID, ANIMAL_IMAGE_KEY_IMAGE_SMALL_URL, ANIMAL_IMAGE_KEY_IMAGE_THUMB, \
     ANIMAL_IMAGE_KEY_CREATED, ANIMAL_KEY_SHELTER_DATE, ANIMAL_KEY_VALID_INFO, ANIMAL_DAYS, ANIMAL_MONTHS, \
-    ANIMAL_YEARS, GROUP_ANIMALS_PREVIEW_COUNT
+    ANIMAL_YEARS, GROUP_ANIMALS_PREVIEW_COUNT, ANIMAL_VIDEO_VERBOSE_NAME, ANIMAL_VIDEO_VERBOSE_NAME_PLURAL, \
+    ANIMAL_VIDEO_KEY_VIDEO_URL, ANIMAL_VIDEO_KEY_DESCRIPTION
 from catsekb.constants import DJ_PK, URL_NAME_GROUP, URL_NAME_ANIMAL, VK_GROUP_ID
 from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
@@ -52,6 +53,19 @@ class Group(Model):
         return Animal.objects.filter(group=self, show=True).order_by('?')[:GROUP_ANIMALS_PREVIEW_COUNT]
 
 
+class AnimalVideo(Model):
+
+    class Meta:
+        verbose_name = ANIMAL_VIDEO_VERBOSE_NAME
+        verbose_name_plural = ANIMAL_VIDEO_VERBOSE_NAME_PLURAL
+
+    video_url = URLField(ANIMAL_VIDEO_KEY_VIDEO_URL)
+    description = TextField(ANIMAL_VIDEO_KEY_DESCRIPTION)
+
+    def __str__(self):
+        return self.description
+
+
 class Animal(Model):
     BIRTHDAY_PRECISION_Y = ANIMAL_BIRTHDAY_PRECISION_YEAR
     BIRTHDAY_PRECISION_M = ANIMAL_BIRTHDAY_PRECISION_MONTH
@@ -69,6 +83,7 @@ class Animal(Model):
     date_of_birth = DateField(null=True, default=None, blank=True)
     shelter_date = DateField(ANIMAL_KEY_SHELTER_DATE, null=True, default=None, blank=True)
     group = ForeignKey(Group, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)
+    video = ForeignKey(AnimalVideo, verbose_name=AnimalVideo._meta.verbose_name, blank=True, null=True, default=None)
     show = BooleanField(ANIMAL_KEY_SHOW, default=True)
     valid_info = BooleanField(ANIMAL_KEY_VALID_INFO, default=False)
     location_status = CharField(
