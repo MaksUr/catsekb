@@ -7,6 +7,18 @@
                 {# video #}
                 {{ object.get_frame|safe }}
                 <h3>{{ object.description|truncatechars:50 }}</h3>
+                {% if object.created %}
+                    <div class="date_article">{{ object.created.date }}</div>
+                {% endif %}
+                {# TODO: Доступ только к открытым животным #}
+                {% if object.animal_set.all %}
+                    <div class="date_article">В ролях:
+                        {% for a in object.animal_set.all %}
+                            <a href="{{ a.get_absolute_url }}" class="hashtag">{{ a }}</a>
+                            {% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
             {% elif object.title %}
                 {# article #}
                 <a href="{{ object.get_absolute_url }}#anchor_caption" style="background-image: url({{ object.image }}); background-position-y: {{ object.y_pos }}%;" class="art_img"></a>

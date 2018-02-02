@@ -15,7 +15,7 @@ from cats.cats_constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMA
     ANIMAL_IMAGE_IMAGE_SMALL_URL_TAG, ANIMAL_IMAGE_CREATED, ANIMAL_SHELTER_DATE, ANIMAL_VALID_INFO, \
     ANIMAL_KEY_FORM_VK_UPDATE_PHOTO_HELP_TEXT, ANIMAL_KEY_FORM_VK_UPDATE_INFO_HELP_TEXT, ANIMAL_FORM_VK_UPDATE_INFO, \
     ANIMAL_KEY_FORM_VK_UPDATE_INFO, ANIMAL_KEY_TAG_DISPLAY_HELP_TEXT, ANIMAL_VIDEO_FIELD_SET, ANIMAL_VIDEO
-from catsekb.constants import DJ_CLASSES_COLLAPSE, DJ_CLASSES, DJ_FIELDS, DJ_ID
+from catsekb.constants import DJ_CLASSES_COLLAPSE, DJ_CLASSES, DJ_FIELDS, DJ_ID, CREATED
 from cats.forms import AnimalForm, AnimalImageForm, AnimalVideoForm
 from cats.models import Animal, AnimalImage, Group, AnimalVideo
 from cats.updater import update_images_for_animal
@@ -164,4 +164,5 @@ admin.site.register(Group, GroupAdmin)
 
 class AnimalVideoAdmin(admin.ModelAdmin):
     form = AnimalVideoForm
+    readonly_fields = (CREATED,)
 admin.site.register(AnimalVideo, AnimalVideoAdmin)

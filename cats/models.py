@@ -22,7 +22,7 @@ from cats.cats_constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_V
     ANIMAL_YEARS, GROUP_ANIMALS_PREVIEW_COUNT, ANIMAL_VIDEO_VERBOSE_NAME, ANIMAL_VIDEO_VERBOSE_NAME_PLURAL, \
     ANIMAL_VIDEO_KEY_VIDEO_URL, ANIMAL_VIDEO_KEY_DESCRIPTION, ANIMAL_VIDEO_YOUTUBE_FRAME_TEMPLATE, \
     ANIMAL_VIDEO_YOUTUBE_EMBED_URL, ANIMAL_VIDEO_KEY_SHOW
-from catsekb.constants import DJ_PK, URL_NAME_GROUP, URL_NAME_ANIMAL, VK_GROUP_ID
+from catsekb.constants import DJ_PK, URL_NAME_GROUP, URL_NAME_ANIMAL, VK_GROUP_ID, CREATED, CREATED_KEY
 from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
 from cats.validators import group_name_validator, background_y_position_validator
@@ -64,6 +64,7 @@ class AnimalVideo(Model):
     video_url = URLField(ANIMAL_VIDEO_KEY_VIDEO_URL)
     description = CharField(ANIMAL_VIDEO_KEY_DESCRIPTION, max_length=50)
     show = BooleanField(ANIMAL_VIDEO_KEY_SHOW, default=True)
+    created = DateTimeField(CREATED_KEY, auto_now_add=True)
     important = True
 
     def __str__(self):
