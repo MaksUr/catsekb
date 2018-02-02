@@ -12,10 +12,10 @@
                 {% endif %}
                 {# TODO: Доступ только к открытым животным #}
                 {% if object.animal_set.all %}
-                    <div class="date_article">В ролях:
+                    <div class="date_article"><span>В ролях:</span>
                         {% for a in object.animal_set.all %}
                             <a href="{{ a.get_absolute_url }}#anchor_caption" class="hashtag">{{ a }}</a>
-                            {% if not forloop.last %},{% endif %}
+                            {% if not forloop.last %}<span>,</span>{% endif %}
                         {% endfor %}
                     </div>
                 {% endif %}
