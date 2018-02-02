@@ -64,6 +64,7 @@ class AnimalVideo(Model):
     video_url = URLField(ANIMAL_VIDEO_KEY_VIDEO_URL)
     description = TextField(ANIMAL_VIDEO_KEY_DESCRIPTION)
     show = BooleanField(ANIMAL_VIDEO_KEY_SHOW, default=True)
+    important = True
 
     def __str__(self):
         return self.description
