@@ -19,6 +19,7 @@ class AbstractFeedListView(ListView):
     paginate_by = FEED_PAGINATE_BY
     title = ''
     order_by = None
+    active_menu = ARTICLES
 
     def get_queryset(self):
         return get_objects_from_query(
@@ -31,7 +32,7 @@ class AbstractFeedListView(ListView):
     def get_context_data(self, **kwargs):
         show_permission = self.request.user.is_authenticated()
         context = super(AbstractFeedListView, self).get_context_data(**kwargs)
-        context.update(get_base_context(show_permission=show_permission, active_menu=ARTICLES, extra_title=self.title))
+        context.update(get_base_context(show_permission=show_permission, active_menu=self.active_menu, extra_title=self.title))
         context['caption'] = self.title
         return context
 
@@ -87,6 +88,7 @@ class ArticlesFeedListView(AbstractFeedListView):
 
 class SubjectDetailView(DetailView):
     model = Subject
+    active_menu = ARTICLES
 
     def get_object(self, queryset=None):
         if self.request.user.is_authenticated() is not True:
@@ -100,7 +102,7 @@ class SubjectDetailView(DetailView):
         context.update(
             get_base_context(
                 show_permission=show_permission,
-                active_menu=ARTICLES,
+                active_menu=self.active_menu,
                 extra_title=URL_NAME_SUBJECT_TITLE.format(subj=self.object.name)))
         return context
 
