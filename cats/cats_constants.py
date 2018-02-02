@@ -266,10 +266,16 @@ ANIMAL_VIDEO_KEY_VIDEO_URL = 'Ссылка на видео Youtube'
 ANIMAL_VIDEO_KEY_VIDEO_URL_HELP_TEXT = 'Для копирования ссылки воспользуйтесь кнопкой "Поделиться".'
 ANIMAL_VIDEO_VIDEO_URL_VALIDATION_MESSAGE = 'Ссылка должна быть на видео.'
 
+# description
 ANIMAL_VIDEO_DESCRIPTION = 'description'
 ANIMAL_VIDEO_KEY_DESCRIPTION = 'Описание видео'
 ANIMAL_VIDEO_KEY_DESCRIPTION_HELP_TEXT = 'Кратко опишите содержание видео. ' \
                                          'Описание будет использовано в качестве заголовка.'
+
+# show
+ANIMAL_VIDEO_SHOW = SHOW
+ANIMAL_VIDEO_KEY_SHOW = 'Показывать видео'
+ANIMAL_VIDEO_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удаления или чтобы скрыть.'
 
 ANIMAL_VIDEO_YOUTUBE_EMBED_URL = "http://www.youtube.com/embed/{video_id}"
 ANIMAL_VIDEO_YOUTUBE_FRAME_TEMPLATE = '<iframe title="{dscr}" width="480" height="390" ' \

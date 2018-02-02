@@ -9,9 +9,10 @@ from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_TITLE, ARTIC
     ARTICLE_FIND_CAT_ID, \
     CAPTION, ARTICLE_TEXT, FEED_PAGINATE_BY, SUBJECT_VERBOSE_NAME, ARTICLE_ABOUT_ID
 from articles.models import Subject, Article, News
+from cats.models import AnimalVideo
 from catsekb.constants import ARTICLES, CONTACTS, DJ_ID, URL_NAME_SUBJECTS_TITLE, URL_NAME_SUBJECT_TITLE, \
     SHOW, URL_NAME_NEWS_FEED_TITLE, GET_PAR_KEY_PER_PAGE, \
-    GET_PAR_VAL_PAGE, GET_PAR_KEY_PAGE, URL_NAME_SUBJECTS_FEED, URL_NAME_NEWS_FEED
+    GET_PAR_VAL_PAGE, GET_PAR_KEY_PAGE, URL_NAME_SUBJECTS_FEED, URL_NAME_NEWS_FEED, URL_NAME_VIDEO_TITLE, ANIMALS
 from catsekb.view_functions import get_base_context, get_objects_from_query
 
 
@@ -66,6 +67,15 @@ class SubjectListView(AbstractFeedListView):
         )
         context['find_cat'] = article
         return context
+
+
+class AnimalVideoListView(AbstractFeedListView):
+    paginate_by = 20
+    model = AnimalVideo
+    title = URL_NAME_VIDEO_TITLE
+    template_name = 'articles/feed_list.html'
+    order_by = 'id'
+    active_menu = ANIMALS
 
 
 class NewsFeedListView(AbstractFeedListView):
