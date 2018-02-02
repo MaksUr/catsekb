@@ -54,6 +54,17 @@
             </div>
         </div>
     {% endwith %}
+    {% if object.video %}
+        <div class="font">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+                        {% include 'articles/widgets/article_preview_validation.html' with object=object.video %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
     {% url 'group_detail' pk='S' as group_url %}
     {% include 'cats/widgets/gallery.html' with object_list=shelter_animals filter_parameters='?group_id=S' caption=shelter_caption caption_url=group_url %}
 {% endblock base_body %}
