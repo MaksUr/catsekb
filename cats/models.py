@@ -62,7 +62,7 @@ class AnimalVideo(Model):
         verbose_name_plural = ANIMAL_VIDEO_VERBOSE_NAME_PLURAL
 
     video_url = URLField(ANIMAL_VIDEO_KEY_VIDEO_URL)
-    description = TextField(ANIMAL_VIDEO_KEY_DESCRIPTION)
+    description = CharField(ANIMAL_VIDEO_KEY_DESCRIPTION, max_length=50)
     show = BooleanField(ANIMAL_VIDEO_KEY_SHOW, default=True)
     important = True
 

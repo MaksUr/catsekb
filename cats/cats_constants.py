@@ -268,7 +268,7 @@ ANIMAL_VIDEO_VIDEO_URL_VALIDATION_MESSAGE = 'Ссылка должна быть 
 
 # description
 ANIMAL_VIDEO_DESCRIPTION = 'description'
-ANIMAL_VIDEO_KEY_DESCRIPTION = 'Описание видео'
+ANIMAL_VIDEO_KEY_DESCRIPTION = 'Название видео'
 ANIMAL_VIDEO_KEY_DESCRIPTION_HELP_TEXT = 'Кратко опишите содержание видео. ' \
                                          'Описание будет использовано в качестве заголовка.'
 
