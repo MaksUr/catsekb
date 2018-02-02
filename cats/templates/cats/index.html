@@ -10,6 +10,7 @@
 {# dying_animals_count #}
 {# important_news #}
 {# articles #}
+{# main_video #}
 
 {% extends "cats/base.html" %}
 {% load static %}
@@ -75,7 +76,7 @@
                         {% include 'articles/widgets/article_preview.html' with col=12 object=important_news %}
                         <div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0">
                             <div class="mid">
-                                <a href="{% url 'news_feed' %}#anchor_caption" class="tag">Другие новости</a>
+                                <a href="{% url 'news_feed' %}#anchor_caption" class="tag">Посмотреть другие новости</a>
                             </div>
                         </div>
                     </div>
@@ -95,7 +96,25 @@
                         {% endfor %}
                         <div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0">
                             <div class="mid">
-                                <a href="{% url 'subjects_feed' %}#anchor_caption" class="tag">Другие статьи</a>
+                                <a href="{% url 'subjects_feed' %}#anchor_caption" class="tag">Посмотреть другие статьи</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if main_video.first %}
+        <div class="feed line_height font">
+            {% include 'cats/widgets/caption.html' with caption='Наши видео' %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+                            {% include 'articles/widgets/article_preview_validation.html' with object=main_video.first %}
+                        <div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0">
+                            <div class="mid">
+                                <a href="{% url 'video' %}#anchor_caption" class="tag">Посмотреть другие видео</a>
                             </div>
                         </div>
                     </div>
