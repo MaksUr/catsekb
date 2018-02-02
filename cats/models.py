@@ -74,10 +74,13 @@ class AnimalVideo(Model):
     def get_video_url_and_template(video_url):
         m = re.search(AnimalVideo.PATTERN_YOUTUBE_ID, video_url)
         if m:
-            return ANIMAL_VIDEO_YOUTUBE_EMBED_URL.format(video_id=m.group(1)), ANIMAL_VIDEO_YOUTUBE_FRAME_TEMPLATE
+            return ANIMAL_VIDEO_YOUTUBE_EMBED_URL.format(video_id=m.group(2)), ANIMAL_VIDEO_YOUTUBE_FRAME_TEMPLATE
 
     def get_frame(self):
-        video_url, frame_template = self.get_video_url_and_template(self.video_url)
+        res = self.get_video_url_and_template(self.video_url)
+        if not res:
+            return
+        video_url, frame_template = res
         if video_url:
             return frame_template.format(dscr=self.description, url=video_url)
 

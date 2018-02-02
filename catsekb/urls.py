@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 
-from articles.views import NewsFeedListView
+from articles.views import NewsFeedListView, AnimalVideoListView
 from catsekb import settings
 from catsekb.views import index_view
 
@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^$', index_view, name='index'),
     url(r'^cats/', include('cats.urls')),
     url(r'^news/', NewsFeedListView.as_view(), name='news_feed'),
+    url(r'^video/', AnimalVideoListView.as_view(), name='video'),
     url(r'^articles/', include('articles.urls')),
     url(r'^admin/', admin.site.urls),
 ] + \

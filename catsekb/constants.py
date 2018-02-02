@@ -69,6 +69,7 @@ URL_NAME_POST = 'post'                         # новостной пост
 URL_NAME_SUBJECTS_FEED = 'subjects_feed'            # Лента статей
 URL_NAME_SUBJECTS = 'subjects'                      # Список тем статей
 URL_NAME_ABOUT = 'about'
+URL_NAME_VIDEO = 'video'
 
 URL_NAME_INDEX_TITLE = 'Главная страница'
 URL_NAME_GROUPS_TITLE = 'Наши питомцы'
