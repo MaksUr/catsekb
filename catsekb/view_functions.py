@@ -12,7 +12,7 @@ from cats.cats_constants import GROUP_INSTANCE_ALL_ID, GROUP_INSTANCE_SHELTER_ID
 from cats.models import Group, Animal
 from cats.query import ANIMAL_QUERY_KEYS
 from catsekb.constants import SHOW, GET_PAR_KEY_FILTER, URL_NAME_ANIMALS, URL_NAME_FIND_CAT, URL_NAME_NEWS_FEED, \
-    URL_NAME_SUBJECTS_FEED, DJ_ID, FOLDER
+    URL_NAME_SUBJECTS_FEED, DJ_ID, FOLDER, URL_NAME_VIDEO
 from catsekb.settings import BASE_DIR
 
 
@@ -117,6 +117,10 @@ def get_base_context(active_menu, extra_title, show_permission=False):
         shelter_value=GROUP_INSTANCE_SHELTER_ID
     )
 
+    video_url = dict()
+    video_url['caption'] = 'Видео'
+    video_url['url'] = reverse(URL_NAME_VIDEO)
+
     helpful_info_list = list()
     find_cat_url = dict()
     find_cat_url['caption'] = ARTICLES_DEFAULT_MAPPING[ARTICLE_FIND_CAT_ID][CAPTION]
@@ -132,7 +136,7 @@ def get_base_context(active_menu, extra_title, show_permission=False):
     helpful_info_list.append(articles)
 
     context = {
-        'group_list': default_group_list + [animal_filter_url] + list(user_group_list),
+        'group_list': default_group_list + [animal_filter_url] + list(user_group_list) + [video_url],
         'helpful_info_list': helpful_info_list,
         'active_menu': active_menu,
         'extra_title': extra_title,

@@ -9,9 +9,10 @@ from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_TITLE, ARTIC
     ARTICLE_FIND_CAT_ID, \
     CAPTION, ARTICLE_TEXT, FEED_PAGINATE_BY, SUBJECT_VERBOSE_NAME, ARTICLE_ABOUT_ID
 from articles.models import Subject, Article, News
+from cats.models import AnimalVideo
 from catsekb.constants import ARTICLES, CONTACTS, DJ_ID, URL_NAME_SUBJECTS_TITLE, URL_NAME_SUBJECT_TITLE, \
     SHOW, URL_NAME_NEWS_FEED_TITLE, GET_PAR_KEY_PER_PAGE, \
-    GET_PAR_VAL_PAGE, GET_PAR_KEY_PAGE, URL_NAME_SUBJECTS_FEED, URL_NAME_NEWS_FEED
+    GET_PAR_VAL_PAGE, GET_PAR_KEY_PAGE, URL_NAME_SUBJECTS_FEED, URL_NAME_NEWS_FEED, URL_NAME_VIDEO_TITLE, ANIMALS
 from catsekb.view_functions import get_base_context, get_objects_from_query
 
 
@@ -19,6 +20,7 @@ class AbstractFeedListView(ListView):
     paginate_by = FEED_PAGINATE_BY
     title = ''
     order_by = None
+    active_menu = ARTICLES
 
     def get_queryset(self):
         return get_objects_from_query(
@@ -31,7 +33,7 @@ class AbstractFeedListView(ListView):
     def get_context_data(self, **kwargs):
         show_permission = self.request.user.is_authenticated()
         context = super(AbstractFeedListView, self).get_context_data(**kwargs)
-        context.update(get_base_context(show_permission=show_permission, active_menu=ARTICLES, extra_title=self.title))
+        context.update(get_base_context(show_permission=show_permission, active_menu=self.active_menu, extra_title=self.title))
         context['caption'] = self.title
         return context
 
@@ -67,6 +69,15 @@ class SubjectListView(AbstractFeedListView):
         return context
 
 
+class AnimalVideoListView(AbstractFeedListView):
+    paginate_by = 20
+    model = AnimalVideo
+    title = URL_NAME_VIDEO_TITLE
+    template_name = 'articles/feed_list.html'
+    order_by = 'id'
+    active_menu = ANIMALS
+
+
 class NewsFeedListView(AbstractFeedListView):
     model = News
     title = URL_NAME_NEWS_FEED_TITLE
@@ -87,6 +98,7 @@ class ArticlesFeedListView(AbstractFeedListView):
 
 class SubjectDetailView(DetailView):
     model = Subject
+    active_menu = ARTICLES
 
     def get_object(self, queryset=None):
         if self.request.user.is_authenticated() is not True:
@@ -100,7 +112,7 @@ class SubjectDetailView(DetailView):
         context.update(
             get_base_context(
                 show_permission=show_permission,
-                active_menu=ARTICLES,
+                active_menu=self.active_menu,
                 extra_title=URL_NAME_SUBJECT_TITLE.format(subj=self.object.name)))
         return context
 

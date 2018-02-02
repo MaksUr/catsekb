@@ -22,9 +22,11 @@ from cats.cats_constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_
     ANIMAL_IMAGE_CREATED, ANIMAL_IMAGE_KEY_CREATED_HELP_TEXT, \
     ANIMAL_KEY_SHELTER_DATE_HELP_TEXT, ANIMAL_SHELTER_DATE, ANIMAL_VALID_INFO, ANIMAL_KEY_VALID_INFO_HELP_TEXT, \
     ANIMAL_FORM_VK_UPDATE_INFO, SHELTER_DISTANCE_KEY, SHELTER_DISTANCE_CHOICES, SHELTER_DISTANCE, AGE_DISTANCE, \
-    ANIMAL_VIDEO, ANIMAL_KEY_VIDEO_HELP_TEXT
+    ANIMAL_VIDEO, ANIMAL_KEY_VIDEO_HELP_TEXT, ANIMAL_VIDEO_VIDEO_URL, ANIMAL_VIDEO_DESCRIPTION, \
+    ANIMAL_VIDEO_KEY_DESCRIPTION_HELP_TEXT, ANIMAL_VIDEO_KEY_VIDEO_URL_HELP_TEXT, \
+    ANIMAL_VIDEO_VIDEO_URL_VALIDATION_MESSAGE, ANIMAL_VIDEO_SHOW, ANIMAL_VIDEO_KEY_SHOW_HELP_TEXT
 from catsekb.constants import DJ_INSTANCE, DJ_INITIAL, VK_GROUP_ID, NO_CHOICE_VALUE, CLASS
-from cats.models import Animal, AnimalImage
+from cats.models import Animal, AnimalImage, AnimalVideo
 from cats.time import get_date_from_age, calc_age_uptoday
 
 from cats.update_scripts.vk_response_parser import get_animal_kwargs_from_vk_response
@@ -261,3 +263,27 @@ class AnimalImageForm(forms.ModelForm):
     def clean(self):
         cleaned_data = forms.ModelForm.clean(self)
         return cleaned_data
+
+
+class AnimalVideoForm(forms.ModelForm):
+
+    class Meta:
+        model = AnimalVideo
+        fields = [
+            ANIMAL_VIDEO_VIDEO_URL,
+            ANIMAL_VIDEO_DESCRIPTION,
+            ANIMAL_VIDEO_SHOW,
+        ]
+
+        help_texts = {
+            ANIMAL_VIDEO_VIDEO_URL: ANIMAL_VIDEO_KEY_VIDEO_URL_HELP_TEXT,
+            ANIMAL_VIDEO_DESCRIPTION: ANIMAL_VIDEO_KEY_DESCRIPTION_HELP_TEXT,
+            ANIMAL_VIDEO_SHOW: ANIMAL_VIDEO_KEY_SHOW_HELP_TEXT,
+        }
+
+    def clean_video_url(self):
+        if AnimalVideo.get_video_url_and_template(self.cleaned_data.get(ANIMAL_VIDEO_VIDEO_URL)):
+            return self.cleaned_data.get(ANIMAL_VIDEO_VIDEO_URL)
+        else:
+            message = ANIMAL_VIDEO_VIDEO_URL_VALIDATION_MESSAGE
+            raise ValidationError(message)
