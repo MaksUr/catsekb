@@ -264,11 +264,17 @@ ANIMAL_VIDEO_VERBOSE_NAME_PLURAL = ANIMAL_VIDEO_VERBOSE_NAME
 ANIMAL_VIDEO_VIDEO_URL = 'video_url'
 ANIMAL_VIDEO_KEY_VIDEO_URL = 'Ссылка на видео Youtube'
 ANIMAL_VIDEO_KEY_VIDEO_URL_HELP_TEXT = 'Для копирования ссылки воспользуйтесь кнопкой "Поделиться".'
+ANIMAL_VIDEO_VIDEO_URL_VALIDATION_MESSAGE = 'Ссылка должна быть на видео.'
 
 ANIMAL_VIDEO_DESCRIPTION = 'description'
 ANIMAL_VIDEO_KEY_DESCRIPTION = 'Описание видео'
 ANIMAL_VIDEO_KEY_DESCRIPTION_HELP_TEXT = 'Кратко опишите содержание видео. ' \
                                          'Описание будет использовано в качестве заголовка.'
+
+ANIMAL_VIDEO_YOUTUBE_EMBED_URL = "http://www.youtube.com/embed/{video_id}"
+ANIMAL_VIDEO_YOUTUBE_FRAME_TEMPLATE = '<iframe title="{dscr}" width="480" height="390" ' \
+                                      'src="{url}" ' \
+                                      'frameborder="0" allowfullscreen></iframe>'
 
 
 # class Group
