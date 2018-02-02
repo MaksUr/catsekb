@@ -265,7 +265,7 @@ ANIMAL_VIDEO_VIDEO_URL = 'video_url'
 ANIMAL_VIDEO_KEY_VIDEO_URL = 'Ссылка на видео Youtube'
 ANIMAL_VIDEO_KEY_VIDEO_URL_HELP_TEXT = 'Для копирования ссылки воспользуйтесь кнопкой "Поделиться".'
 
-ANIMAL_VIDEO_DESCRIPTION = 'video_description'
+ANIMAL_VIDEO_DESCRIPTION = 'description'
 ANIMAL_VIDEO_KEY_DESCRIPTION = 'Описание видео'
 ANIMAL_VIDEO_KEY_DESCRIPTION_HELP_TEXT = 'Кратко опишите содержание видео. ' \
                                          'Описание будет использовано в качестве заголовка.'
