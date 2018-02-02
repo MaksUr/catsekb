@@ -1,7 +1,8 @@
 from django.shortcuts import render
 
 from cats.cats_constants import ANIMAL_LOCATION_STATUS_SHELTER, ANIMAL_LOCATION_STATUS, GROUP_INSTANCE_SHELTER_NAME, \
-    ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_DEAD, GALLERY_DEFAULT_ITEMS_COUNT
+    ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_DEAD, GALLERY_DEFAULT_ITEMS_COUNT, \
+    ANIMAL_VIDEO_PUT_TO_INDEX_PAGE
 from cats.models import AnimalVideo
 from catsekb.constants import URL_NAME_INDEX_TITLE, INDEX, CREATED
 from catsekb.view_functions import get_base_context, get_important_news, get_animals_from_query, get_last_articles, \
@@ -45,6 +46,8 @@ def index_view(request):
         ).count()
     # TODO: add main parameter
     context['main_video'] = get_objects_from_query(
-        model_cls=AnimalVideo, query=dict(), show_permission=show_permission, order_by=CREATED
+        model_cls=AnimalVideo, query={ANIMAL_VIDEO_PUT_TO_INDEX_PAGE: True},
+        show_permission=show_permission,
+        order_by='-'+CREATED,
     )
     return render(request, 'cats/index.html', context)

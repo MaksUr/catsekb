@@ -21,7 +21,7 @@ from cats.cats_constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_V
     ANIMAL_IMAGE_KEY_CREATED, ANIMAL_KEY_SHELTER_DATE, ANIMAL_KEY_VALID_INFO, ANIMAL_DAYS, ANIMAL_MONTHS, \
     ANIMAL_YEARS, GROUP_ANIMALS_PREVIEW_COUNT, ANIMAL_VIDEO_VERBOSE_NAME, ANIMAL_VIDEO_VERBOSE_NAME_PLURAL, \
     ANIMAL_VIDEO_KEY_VIDEO_URL, ANIMAL_VIDEO_KEY_DESCRIPTION, ANIMAL_VIDEO_YOUTUBE_FRAME_TEMPLATE, \
-    ANIMAL_VIDEO_YOUTUBE_EMBED_URL, ANIMAL_VIDEO_KEY_SHOW
+    ANIMAL_VIDEO_YOUTUBE_EMBED_URL, ANIMAL_VIDEO_KEY_SHOW, ANIMAL_VIDEO_KEY_PUT_TO_INDEX_PAGE
 from catsekb.constants import DJ_PK, URL_NAME_GROUP, URL_NAME_ANIMAL, VK_GROUP_ID, CREATED, CREATED_KEY
 from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
@@ -65,18 +65,21 @@ class AnimalVideo(Model):
     description = CharField(ANIMAL_VIDEO_KEY_DESCRIPTION, max_length=50)
     show = BooleanField(ANIMAL_VIDEO_KEY_SHOW, default=True)
     created = DateTimeField(CREATED_KEY, auto_now_add=True)
+    put_to_index_page = BooleanField(ANIMAL_VIDEO_KEY_PUT_TO_INDEX_PAGE, default=False)
     important = True
 
     def __str__(self):
         return self.description
 
-    PATTERN_YOUTUBE_ID = re.compile(r'(youtu\.be/)([^"&?/ ]{11})')
+    PATTERN_YOUTUBE_ID = re.compile(
+        r'(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})'
+    )
 
     @staticmethod
     def get_video_url_and_template(video_url):
         m = re.search(AnimalVideo.PATTERN_YOUTUBE_ID, video_url)
         if m:
-            return ANIMAL_VIDEO_YOUTUBE_EMBED_URL.format(video_id=m.group(2)), ANIMAL_VIDEO_YOUTUBE_FRAME_TEMPLATE
+            return ANIMAL_VIDEO_YOUTUBE_EMBED_URL.format(video_id=m.group(1)), ANIMAL_VIDEO_YOUTUBE_FRAME_TEMPLATE
 
     def get_frame(self):
         res = self.get_video_url_and_template(self.video_url)

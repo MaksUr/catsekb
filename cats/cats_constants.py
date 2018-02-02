@@ -272,13 +272,18 @@ ANIMAL_VIDEO_KEY_DESCRIPTION = 'Название видео'
 ANIMAL_VIDEO_KEY_DESCRIPTION_HELP_TEXT = 'Кратко опишите содержание видео. ' \
                                          'Описание будет использовано в качестве заголовка.'
 
+# put_to_index_page
+ANIMAL_VIDEO_PUT_TO_INDEX_PAGE = 'put_to_index_page'
+ANIMAL_VIDEO_KEY_PUT_TO_INDEX_PAGE = 'Поместить на стартовую'
+ANIMAL_VIDEO_KEY_PUT_TO_INDEX_PAGE_HELP_TEXT = 'Используется самое позднее видео.'
+
 # show
 ANIMAL_VIDEO_SHOW = SHOW
 ANIMAL_VIDEO_KEY_SHOW = 'Показывать видео'
 ANIMAL_VIDEO_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удаления или чтобы скрыть.'
 
 ANIMAL_VIDEO_YOUTUBE_EMBED_URL = "http://www.youtube.com/embed/{video_id}"
-ANIMAL_VIDEO_YOUTUBE_FRAME_TEMPLATE = '<iframe title="{dscr}" width="480" height="390" ' \
+ANIMAL_VIDEO_YOUTUBE_FRAME_TEMPLATE = '<iframe title="{dscr}" width="900" height="390" ' \
                                       'src="{url}" ' \
                                       'frameborder="0" allowfullscreen></iframe>'
 
