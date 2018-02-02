@@ -9,6 +9,34 @@
 
 /* Устройства с шириной экрана до 767px */
 @media (max-width: 767px) {
+  .arrow_both  {
+    background-image: url(../img/next_photo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 30px;
+    position: absolute;
+    width: 40px;
+    z-index: 1;
+    top: 500px;
+    left: 50%;
+    margin-left: -20px;
+    transform: rotate(90deg);
+    animation-name: Arrow;
+    animation-duration: .9s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+
+
+  @keyframes Arrow {
+    from {
+      transform: translateY(-30%) rotate(90deg);
+    }
+    to {
+      transform: translateY(0%) rotate(90deg);
+    }
+  }
   a.tag, .tag.pag_gallery {
     display: block; }
   .tag {
