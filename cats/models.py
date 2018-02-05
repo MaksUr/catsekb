@@ -20,8 +20,10 @@ from cats.cats_constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_V
     ANIMAL_KEY_VK_ALBUM_ID, ANIMAL_IMAGE_KEY_PHOTO_ID, ANIMAL_IMAGE_KEY_IMAGE_SMALL_URL, ANIMAL_IMAGE_KEY_IMAGE_THUMB, \
     ANIMAL_IMAGE_KEY_CREATED, ANIMAL_KEY_SHELTER_DATE, ANIMAL_KEY_VALID_INFO, ANIMAL_DAYS, ANIMAL_MONTHS, \
     ANIMAL_YEARS, GROUP_ANIMALS_PREVIEW_COUNT, ANIMAL_VIDEO_VERBOSE_NAME, ANIMAL_VIDEO_VERBOSE_NAME_PLURAL, \
-    ANIMAL_VIDEO_KEY_VIDEO_URL, ANIMAL_VIDEO_KEY_DESCRIPTION, ANIMAL_VIDEO_YOUTUBE_FRAME_TEMPLATE, \
-    ANIMAL_VIDEO_YOUTUBE_EMBED_URL, ANIMAL_VIDEO_KEY_SHOW, ANIMAL_VIDEO_KEY_PUT_TO_INDEX_PAGE
+    ANIMAL_VIDEO_KEY_VIDEO_URL, ANIMAL_VIDEO_KEY_DESCRIPTION, ANIMAL_VIDEO_FRAME_TEMPLATE, \
+    ANIMAL_VIDEO_YOUTUBE_EMBED_URL, ANIMAL_VIDEO_KEY_SHOW, ANIMAL_VIDEO_KEY_PUT_TO_INDEX_PAGE, \
+    ANIMAL_VIDEO_FRAME_WIDTH, ANIMAL_VIDEO_FRAME_HEIGHT
+
 from catsekb.constants import DJ_PK, URL_NAME_GROUP, URL_NAME_ANIMAL, VK_GROUP_ID, CREATED, CREATED_KEY
 from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
@@ -74,20 +76,22 @@ class AnimalVideo(Model):
     PATTERN_YOUTUBE_ID = re.compile(
         r'(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})'
     )
+    PATTERN_VK_VIDEO_URL = re.compile(r'^(https?:)?//vk\.com/video_ext\.php\?oid=-?\d+&id=\d+&hash=[\d\w]+(&hd=\d+)?$')
 
     @staticmethod
-    def get_video_url_and_template(video_url):
+    def get_video_url(video_url):
         m = re.search(AnimalVideo.PATTERN_YOUTUBE_ID, video_url)
         if m:
-            return ANIMAL_VIDEO_YOUTUBE_EMBED_URL.format(video_id=m.group(1)), ANIMAL_VIDEO_YOUTUBE_FRAME_TEMPLATE
+            return ANIMAL_VIDEO_YOUTUBE_EMBED_URL.format(video_id=m.group(1))
+        m = re.search(AnimalVideo.PATTERN_VK_VIDEO_URL, video_url)
+        if m:
+            return m.group()
 
     def get_frame(self):
-        res = self.get_video_url_and_template(self.video_url)
-        if not res:
-            return
-        video_url, frame_template = res
+        video_url = self.get_video_url(self.video_url)
         if video_url:
-            return frame_template.format(dscr=self.description, url=video_url)
+            return ANIMAL_VIDEO_FRAME_TEMPLATE.format(dscr=self.description, url=video_url,
+                                                      width=ANIMAL_VIDEO_FRAME_WIDTH, height=ANIMAL_VIDEO_FRAME_HEIGHT)
 
 
 class Animal(Model):
