@@ -263,7 +263,13 @@ ANIMAL_VIDEO_VERBOSE_NAME_PLURAL = ANIMAL_VIDEO_VERBOSE_NAME
 # video_url
 ANIMAL_VIDEO_VIDEO_URL = 'video_url'
 ANIMAL_VIDEO_KEY_VIDEO_URL = 'Ссылка на видео Youtube'
-ANIMAL_VIDEO_KEY_VIDEO_URL_HELP_TEXT = 'Для копирования ссылки воспользуйтесь кнопкой "Поделиться".'
+ANIMAL_VIDEO_KEY_VIDEO_URL_HELP_TEXT = 'Для копирования ссылки воспользуйтесь кнопкой "Поделиться". '  \
+                                            'Для вставки видео из VK ' \
+                                            'необходимо получить текст с помощью кнопки "Еще=>Экспортировать" ' \
+                                            'или с помощью правой кнопки мыши выбрать "Копировать код для встраивания", ' \
+                                            'Ссылка для вставки включена в атрибуте src="ссылка_для_вставки".' \
+                                            'Пример: ' \
+                                            '"https://vk.com/video_ext.php?oid=-73666865&id=456239056&hash=cdc8d9d45257bb7d"'
 ANIMAL_VIDEO_VIDEO_URL_VALIDATION_MESSAGE = 'Ссылка должна быть на видео.'
 
 # description
