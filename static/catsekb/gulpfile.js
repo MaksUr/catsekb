@@ -1,6 +1,6 @@
 var gulp       = require('gulp'), // Подключаем Gulp
     sass         = require('gulp-sass'), //Подключаем Sass пакет,
-    concat       = require('gulp-concat'), // Подключаем gulp-concat (для конкатенации файлов)
+    concatCss = require('gulp-concat-css'), // Подключаем gulp-concat (для конкатенации файлов)
     cssnano      = require('gulp-cssnano'), // Подключаем пакет для минификации CSS
     rename       = require('gulp-rename'), // Подключаем библиотеку для переименования файлов
     del          = require('del'), // Подключаем библиотеку для удаления файлов и папок
@@ -20,6 +20,12 @@ gulp.task('css-libs', ['sass'], function() {
         .pipe(gulp.dest('app/css/min')); // Выгружаем в папку app/css
 });
 
+gulp.task('concat', function () {
+  return gulp.src('app/css/min/*.min')
+    .pipe(concatCss('concat.css'))
+    .pipe(gulp.dest('dist/css'));
+});
+
 gulp.task('watch', ['css-libs'], function() {
     gulp.watch('app/sass/**/*.scss', ['sass']); // Наблюдение за sass файлами в папке sass
 });
@@ -28,7 +34,7 @@ gulp.task('clean', function() {
     return del.sync('dist'); // Удаляем папку dist перед сборкой
 });
 
-gulp.task('build', ['clean', 'css-libs'], function() {
+gulp.task('build', ['clean', 'css-libs', 'concat'], function() {
 
     var buildCss = gulp.src([ // Переносим библиотеки в продакшен
         'app/css/bootstrap/*.min.css',

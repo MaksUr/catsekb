@@ -207,3 +207,6 @@ input.but:focus {
 
 .contacts a {
   padding: 0; }
+
+.news_container a {
+  padding-bottom: 0; }
