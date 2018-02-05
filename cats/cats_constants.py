@@ -262,9 +262,13 @@ ANIMAL_VIDEO_VERBOSE_NAME_PLURAL = ANIMAL_VIDEO_VERBOSE_NAME
 
 # video_url
 ANIMAL_VIDEO_VIDEO_URL = 'video_url'
-ANIMAL_VIDEO_KEY_VIDEO_URL = 'Ссылка на видео Youtube'
-ANIMAL_VIDEO_KEY_VIDEO_URL_HELP_TEXT = 'Для копирования ссылки воспользуйтесь кнопкой "Поделиться".'
-ANIMAL_VIDEO_VIDEO_URL_VALIDATION_MESSAGE = 'Ссылка должна быть на видео.'
+ANIMAL_VIDEO_KEY_VIDEO_URL = 'Ссылка на видео Youtube или VK'
+ANIMAL_VIDEO_KEY_VIDEO_URL_HELP_TEXT = 'Для копирования ссылки воспользуйтесь кнопкой "Поделиться".'  \
+                                            'Для вставки видео из VK ' \
+                                            'необходимо получить текст с помощью кнопки "поделиться" ' \
+                                            'или с помощью правой кнопки мыши и выделить из нее ссылку на видео, ' \
+                                            'которое заключено в атрибуте src="ссылка_для_вставки"'
+ANIMAL_VIDEO_VIDEO_URL_VALIDATION_MESSAGE = 'Ссылка должна быть на видео. '
 
 # description
 ANIMAL_VIDEO_DESCRIPTION = 'description'

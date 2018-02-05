@@ -71,30 +71,22 @@ class AnimalVideo(Model):
         return self.description
 
     PATTERN_YOUTUBE_ID = re.compile(r'(youtu\.be/)([^"&?/ ]{11})')
-    PATTERN_VK_VIDEO_URL = re.compile(r'^(https://)?vk\.com/video_ext\.php\?oid-?\d+&id=\d+&hash=[\d\w]+')
+    PATTERN_VK_VIDEO_URL = re.compile(r'^(https?:)?//vk\.com/video_ext\.php\?oid=-?\d+&id=\d+&hash=[\d\w]+(&hd=\d+)?$')
 
     @staticmethod
-    def get_vk_video_url_from_frame(frame):
-        m = re.search(AnimalVideo.PATTERN_VK_VIDEO_URL, frame)
+    def get_video_url(video_url):
+        m = re.search(AnimalVideo.PATTERN_YOUTUBE_ID, video_url)
+        if m:
+            return ANIMAL_VIDEO_YOUTUBE_EMBED_URL.format(video_id=m.group(2))
+        m = re.search(AnimalVideo.PATTERN_VK_VIDEO_URL, video_url)
         if m:
             return m.group()
 
-    @staticmethod
-    def get_video_url_and_template(video_url):
-        m = re.search(AnimalVideo.PATTERN_YOUTUBE_ID, video_url)
-        if m:
-            return ANIMAL_VIDEO_YOUTUBE_EMBED_URL.format(video_id=m.group(2)), ANIMAL_VIDEO_FRAME_TEMPLATE
-        vk_url = AnimalVideo.get_vk_video_url_from_frame(video_url)
-        if vk_url:
-            return vk_url, ANIMAL_VIDEO_FRAME_TEMPLATE
-
     def get_frame(self):
-        res = self.get_video_url_and_template(self.video_url)
-        if not res:
-            return
-        video_url, frame_template = res
+        video_url = self.get_video_url(self.video_url)
         if video_url:
-            return frame_template.format(dscr=self.description, url=video_url, width=ANIMAL_VIDEO_FRAME_WIDTH, height=ANIMAL_VIDEO_FRAME_HEIGHT)
+            return ANIMAL_VIDEO_FRAME_TEMPLATE.format(dscr=self.description, url=video_url,
+                                                      width=ANIMAL_VIDEO_FRAME_WIDTH, height=ANIMAL_VIDEO_FRAME_HEIGHT)
 
 
 class Animal(Model):

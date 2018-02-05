@@ -282,7 +282,7 @@ class AnimalVideoForm(forms.ModelForm):
         }
 
     def clean_video_url(self):
-        if AnimalVideo.get_video_url_and_template(self.cleaned_data.get(ANIMAL_VIDEO_VIDEO_URL)):
+        if AnimalVideo.get_video_url(self.cleaned_data.get(ANIMAL_VIDEO_VIDEO_URL)):
             return self.cleaned_data.get(ANIMAL_VIDEO_VIDEO_URL)
         else:
             message = ANIMAL_VIDEO_VIDEO_URL_VALIDATION_MESSAGE
