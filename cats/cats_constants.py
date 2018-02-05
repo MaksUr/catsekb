@@ -277,10 +277,16 @@ ANIMAL_VIDEO_SHOW = SHOW
 ANIMAL_VIDEO_KEY_SHOW = 'Показывать видео'
 ANIMAL_VIDEO_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удаления или чтобы скрыть.'
 
+ANIMAL_VIDEO_FRAME_WIDTH = 480
+ANIMAL_VIDEO_FRAME_HEIGHT = 390
+
 ANIMAL_VIDEO_YOUTUBE_EMBED_URL = "http://www.youtube.com/embed/{video_id}"
-ANIMAL_VIDEO_YOUTUBE_FRAME_TEMPLATE = '<iframe title="{dscr}" width="480" height="390" ' \
+
+
+ANIMAL_VIDEO_FRAME_TEMPLATE = '<iframe title="{dscr}" width="{width}" height="{height}" ' \
                                       'src="{url}" ' \
                                       'frameborder="0" allowfullscreen></iframe>'
+
 
 
 # class Group
