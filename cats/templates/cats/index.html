@@ -72,7 +72,7 @@
             {% include 'cats/widgets/caption.html' with caption='Новости приюта' %}
             <div class="container">
                 <div class="row">
-                    {% include 'articles/widgets/article_preview.html' with col=12 object=important_news %}
+                    {% include 'articles/widgets/article_preview.html' with object=important_news cs=12 cm=10 cmo=1 cl=8 clo=2 %}
                     <div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0">
                         <div class="mid">
                             <a href="{% url 'news_feed' %}#anchor_caption" class="tag">Посмотреть другие новости</a>
@@ -89,7 +89,7 @@
             <div class="container">
                 <div class="row">
                     {% for article in articles %}
-                        {% include 'articles/widgets/article_preview.html' with col=6 object=article %}
+                        {% include 'articles/widgets/article_preview.html' with object=article cs=12 cm=10 cmo=1 cl=8 clo=2 %}
                     {% endfor %}
                     <div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0">
                         <div class="mid">
@@ -106,7 +106,7 @@
             {% include 'cats/widgets/caption.html' with caption='Наши видео' %}
             <div class="container">
                 <div class="row">
-                    {% include 'articles/widgets/article_preview_validation.html' with object=main_video.first %}
+                    {% include 'articles/widgets/article_preview_validation.html' with object=main_video.first cs=12 cm=10 cmo=1 cl=8 clo=2 %}
                     <div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0">
                         <div class="mid">
                             <a href="{% url 'video' %}#anchor_caption" class="tag">Посмотреть другие видео</a>

@@ -1,16 +1,22 @@
 {# object #}
+{# cs #}
+{# cso #}
+{# cm #}
+{# cmo #}
+{# cl #}
+{# clo #}
 
 {% if object.show %}
     {% if object.important %}
-        {% include 'articles/widgets/article_preview.html' with col=12 object=object %}
+        {% include 'articles/widgets/article_preview.html' with cs=cs|default:6 cso=cso|default:0 cm=cm|default:5 cmo=cmo|default:0 cl=cl|default:4 clo=clo|default:0 object=object %}
     {% else %}
-        {% include 'articles/widgets/article_preview.html' with col=6 object=object %}
+        {% include 'articles/widgets/article_preview.html' with cs=cs|default:6 cso=cso|default:0 cm=cm|default:5 cmo=cmo|default:1 cl=cl|default:4 clo=clo|default:2 object=object %}
     {% endif %}
 {% elif request.user.is_authenticated %}
     {% if object.important %}
-        {% include 'articles/widgets/article_preview.html' with col=12 object=object %}
+        {% include 'articles/widgets/article_preview.html' with cs=cs|default:6 cso=cso|default:0 cm=cm|default:5 cmo=cmo|default:0 cl=cl|default:4 clo=clo|default:0 object=object %}
     {% else %}
-        {% include 'articles/widgets/article_preview.html' with col=6 object=object %}
+        {% include 'articles/widgets/article_preview.html' with cs=cs|default:6 cso=cso|default:0 cm=cm|default:5 cmo=cmo|default:1 cl=cl|default:4 clo=clo|default:2 object=object %}
     {% endif %}
 {% else %}
 
