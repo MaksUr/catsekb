@@ -15,11 +15,13 @@
     <div class="line_height">
         <div class="container">
             <div class="row">
-                {% for object in object_list %}
-                    {% include 'articles/widgets/article_preview_validation.html' with object=object %}
-                {% empty %}
-                    <p>Здесь пока пусто...</p>
-                {% endfor %}
+                <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                    {% for object in object_list %}
+                        {% include 'articles/widgets/article_preview_validation.html' with object=object %}
+                    {% empty %}
+                        <p>Здесь пока пусто...</p>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

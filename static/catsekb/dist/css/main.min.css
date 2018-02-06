@@ -210,3 +210,19 @@ input.but:focus {
 
 .news_container a {
   padding-bottom: 0; }
+
+.video {
+  overflow: hidden;
+  height: 0;
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 25px;
+  margin-bottom: 5px;
+}
+.video iframe {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
