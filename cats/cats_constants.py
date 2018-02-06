@@ -294,9 +294,9 @@ ANIMAL_VIDEO_FRAME_HEIGHT = 390
 ANIMAL_VIDEO_YOUTUBE_EMBED_URL = "http://www.youtube.com/embed/{video_id}"
 
 
-ANIMAL_VIDEO_FRAME_TEMPLATE = '<iframe title="{dscr}" width="{width}" height="{height}" ' \
+ANIMAL_VIDEO_FRAME_TEMPLATE = '<div class="video"><iframe title="{dscr}" width="{width}" height="{height}" ' \
                                       'src="{url}" ' \
-                                      'frameborder="0" allowfullscreen></iframe>'
+                                      'frameborder="0" allowfullscreen></iframe></div>'
 
 
 

@@ -1,6 +1,12 @@
 {# object #}
 {# col #}
 
+
+{# col-xs-12 col-xs-offset-0 col-sm-12      col-sm-offset-0     col-md-10   col-md-offset-1     col-lg-8    col-lg-offset-2 - Новость на главной (важная), Видео на главной #}
+{# col-xs-12 col-xs-offset-0 col-sm-6       col-sm-offset-0     col-md-5    col-md-offset-1     col-lg-4    col-lg-offset-2 - 1 блок для новостей и статей #}
+{# col-xs-12 col-xs-offset-0 col-sm-6       col-sm-offset-0     col-md-5    col-md-offset-0     col-lg-4    col-lg-offset-0 - Статья (2 блок) #}
+{# col-xs-12 col-xs-offset-0 col-sm-10      col-sm-offset-1     col-md-10   col-md-offset-1     col-lg-10   col-lg-offset-1 - Видео с котиком #}
+
 <div class="col-xs-12 col-xs-offset-0 col-sm-{{ col }} col-sm-offset-0 col-md-{{ col }} col-md-offset-0 col-lg-{{ col }} col-lg-offset-0">
     <div class="news_container">
             {% if object.video_url and object.get_frame %}
