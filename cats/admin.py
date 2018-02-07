@@ -134,6 +134,7 @@ class AnimalAdmin(admin.ModelAdmin):
     readonly_fields = (ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPDATED,
                        ANIMAL_TAG_DISPLAY, ANIMAL_VK_ALBUM_ID,
                        ANIMAL_FORM_VK_UPDATE_PHOTO, ANIMAL_FORM_VK_UPDATE_INFO,)
+    search_fields = (ANIMAL_NAME, ANIMAL_DESCRIPTION)
     form = AnimalForm
     inlines = [ImageInline]
 
