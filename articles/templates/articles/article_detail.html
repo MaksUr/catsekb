@@ -44,7 +44,7 @@
         {% include 'cats/widgets/caption.html' with caption='Другие посты' %}
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 slim">
+                <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
                     {% for article in recommendations %}
                         {% include 'articles/widgets/article_preview.html' with object=article cs=6 cm=6 cmo=0 cl=6 clo=0 %}
                     {% endfor %}
