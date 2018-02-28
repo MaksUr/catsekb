@@ -58,17 +58,6 @@
         {% include 'cats/footer.html' %}
     {% endblock footer %}
 
-
-    {# JQuery #}
-    {% block jquery_js %}
-        <script type="text/javascript" src="{% static "catsekb/dist/js/jquery-3.2.1.slim.js" %}"></script>
-    {% endblock jquery_js %}
-
-    {# Bootstrap #}
-    {% block bootstrap_js %}
-        <script type="text/javascript" src="{% static "catsekb/dist/js/bootstrap.min.js" %}"></script>
-    {% endblock %}
-
     {# Base JS #}
     {% block base_js %}
         <script type="text/javascript" src="{% static "catsekb/dist/js/script.js" %}"></script>

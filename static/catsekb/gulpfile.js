@@ -5,6 +5,7 @@ var gulp       = require('gulp'), // Подключаем Gulp
     rename       = require('gulp-rename'), // Подключаем библиотеку для переименования файлов
     del          = require('del'), // Подключаем библиотеку для удаления файлов и папок
     autoprefixer = require('gulp-autoprefixer');// Подключаем библиотеку для автоматического добавления префиксов
+    uglify      = require('gulp-uglifyjs'), // Подключаем gulp-uglifyjs (для сжатия JS)
 
 gulp.task('sass', function(){ // Создаем таск Sass
     return gulp.src('app/sass/**/*') // Берем источник
@@ -24,6 +25,16 @@ gulp.task('concat', function () {
   return gulp.src('app/css/min/*.min')
     .pipe(concatCss('concat.css'))
     .pipe(gulp.dest('dist/css'));
+});
+
+gulp.task('scripts', function() {
+    return gulp.src([ // Берем все необходимые библиотеки
+        'app/js/script.js',
+        'app/js/script_cats.js',
+        'app/js/script_form.js'
+        ])
+        .pipe(uglify()) // Сжимаем JS файл
+        .pipe(gulp.dest('app/js/min')); // Выгружаем в папку app/js
 });
 
 gulp.task('watch', ['css-libs'], function() {
