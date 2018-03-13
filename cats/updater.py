@@ -20,6 +20,7 @@ AID = "aid"
 SIZE_TYPES = ("w", "z", "y", "r", "x", "q", "p", "o", "m", "s",)
 SMALL_SIZE_TYPE = "r"
 BIG_SIZE_TYPE = "w"
+API_VERSION = "5.64"
 
 
 def get_vk_album_id_from_url(url):
@@ -68,6 +69,7 @@ def get_album_photos(group_id, album_id):
             'album_id': album_id,
             'owner_id': group_id,
             'photo_sizes': 1,
+            'v': API_VERSION,
         }).json()
     else:
         photos = get_album_photos_local(album_id)
@@ -93,6 +95,7 @@ def get_albums_info(group_id, album_ids):
             params['album_ids'] = ','.join(map(str, album_ids))
         r = requests.get(r'https://api.vk.com/method/photos.getAlbums', params={
             'owner_id': -1 * group_id,
+            'v': API_VERSION,
         }).json()
     else:
         r = get_albums_info_local(album_ids)
@@ -140,7 +143,7 @@ def save_image(animal, photo, favourite=False, background=False):
 
 def update_images_for_animal(animal, album_id):
     try:
-        images = get_album_photos(VK_GROUP_ID, album_id)[RESPONSE]
+        images = get_album_photos(VK_GROUP_ID, album_id)[RESPONSE]['items']
     except KeyError:
         return None
     try:
