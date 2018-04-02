@@ -21,7 +21,7 @@ function hoverSupport() {
 	}
 
 	if(body[0].classList.contains('can-hover') === false) {
-		for (i = 0; i <= openNextMenu.length - 1; i++) {
+		for (var i = 0; i <= openNextMenu.length - 1; i++) {
 			openNextMenu[i].addEventListener('click', showMenu.bind(this, i));
 		}
 
