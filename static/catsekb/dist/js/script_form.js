@@ -1,20 +1,22 @@
-document.addEventListener("DOMContentLoaded", shelDisDisable);
+"use strict";
 
-var formShel = document.documentElement.querySelectorAll('.shelter_distance'),
-    formLoc = document.documentElement.querySelectorAll('.location_status');
+document.addEventListener("DOMContentLoaded", disabledShelterDistance);
 
-for (i = 0; i <= formLoc.length - 1; i++) {
-	formLoc[i].addEventListener('click', shelDisDisable.bind(this, i));
+var formShelter = document.documentElement.querySelectorAll('.shelter_distance'),
+    formLocation = document.documentElement.querySelectorAll('.location_status');
+
+for (var i = 0; i <= formLocation.length - 1; i++) {
+	formLocation[i].addEventListener('click', disabledShelterDistance.bind(this, i));
 }
 
-function shelDisDisable(i) {
-	if (formLoc[2].checked == true || formLoc[0].checked == true) {
-		for(i = 0; i <= formShel.length - 1; i++) {
-			formShel[i].disabled = '';
+function disabledShelterDistance(i) {
+	if (formLocation[2].checked == true || formLocation[0].checked == true) {
+		for(var i = 0; i <= formShelter.length - 1; i++) {
+			formShelter[i].disabled = '';
 		} 
 	} else {
-		for(i = 0; i <= formShel.length - 1; i++) {
-			formShel[i].disabled = 'disable';
+		for(i = 0; i <= formShelter.length - 1; i++) {
+			formShelter[i].disabled = 'disable';
 		} 
 	}
 }
