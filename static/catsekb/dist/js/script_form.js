@@ -1,3 +1,5 @@
+"use strict";
+
 document.addEventListener("DOMContentLoaded", disabledShelterDistance);
 
 var formShelter = document.documentElement.querySelectorAll('.shelter_distance'),
