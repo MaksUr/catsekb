@@ -46,6 +46,24 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+@font-face {
+  font-family: Neucha;
+  src: url(../fonts/Neucha/Neucha.ttf);
+  font-style: normal;
+  font-weight: 400; }
+
+@font-face {
+  font-family: Open Sans;
+  src: url(../fonts/OpenSans/OpenSans-Regular.ttf);
+  font-style: normal;
+  font-weight: 400; }
+
+@font-face {
+  font-family: Open Sans;
+  src: url(../fonts/OpenSans/OpenSans-SemiBold.ttf);
+  font-style: normal;
+  font-weight: 600; }
+
 h1, h2 {
   color: #333;
   font-family: Neucha, Arial, cursive;
