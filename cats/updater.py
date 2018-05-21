@@ -7,6 +7,7 @@ except ImportError:
 from cats.cats_constants import ANIMAL_IMAGE_PHOTO_ID, ANIMAL_IMAGE_ANIMAL, ANIMAL_IMAGE_IMAGE_URL, \
     ANIMAL_IMAGE_IMAGE_SMALL_URL, ANIMAL_IMAGE_CREATED, ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND
 from catsekb.constants import VK_GROUP_ID, CREATED
+from catsekb.settings import VK_TOKEN
 from cats.models import AnimalImage
 
 RESPONSE = "response"
@@ -65,12 +66,14 @@ def get_album_photos_local(album_id):
 def get_album_photos(group_id, album_id):
     if requests is not None:
         group_id = -1 * group_id
-        photos = requests.get(r'https://api.vk.com/method/photos.get', params={
+        r = requests.get(r'https://api.vk.com/method/photos.get', params={
             'album_id': album_id,
             'owner_id': group_id,
             'photo_sizes': 1,
             'v': API_VERSION,
-        }).json()
+            'access_token': VK_TOKEN,
+        })
+        photos = r.json()        
     else:
         photos = get_album_photos_local(album_id)
     return photos
@@ -120,7 +123,7 @@ def save_image(animal, photo, favourite=False, background=False):
     photos = photo.get(SIZES, ())
     biggest_photo = get_photo_from_size(photos, biggest=True)
     small_photo = get_photo_from_size(photos, biggest=False)
-    pid = photo.get(PID)
+    pid = photo.get('id')
     created = photo.get(CREATED)
     if created is not None:
         created = datetime.datetime.fromtimestamp(created).date()

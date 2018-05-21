@@ -21,10 +21,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
+with open(join(BASE_DIR, 'vk_token.txt')) as f:
+        VK_TOKEN = f.read().strip()
 # SECURITY WARNING: keep the secret key used in production secret!
 try:
     with open(join(BASE_DIR, 'secret_key.txt')) as f:
-        SECRET_KEY = f.read().strip()
+        SECRET_KEY = f.read().strip()    
 except FileNotFoundError:
     SECRET_KEY = '1j(lfw54!y!f3u%&8%e*(m)@k=p&@2iphm53p$$li&8hy#@gwl'
     DEBUG = True
