@@ -1,27 +1,28 @@
 {
-  "name": "catsekb",
+  "name": "none",
   "version": "1.0.0",
-  "description": "catsekb project",
-  "main": "gulpfile.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "C:\\Users\\Maxim\\Documents\\Site\\rep\\catsekb"
-  },
-  "author": "MKV",
-  "license": "ISC",
-  "devDependencies": {
+  "main": "index.js",
+  "author": "MaximKisseloff",
+  "license": "MIT",
+  "dependencies": {
+    "browser-sync": "^2.23.6",
     "del": "^3.0.0",
+    "global": "^4.3.2",
     "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^4.0.0",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-cache": "^1.0.2",
     "gulp-concat": "^2.6.1",
-    "gulp-concat-css": "^3.0.0",
-    "gulp-cssnano": "^2.1.2",
+    "gulp-concat-css": "^3.1.0",
+    "gulp-cssnano": "^2.1.3",
+    "gulp-group-css-media-queries": "^1.2.2",
+    "gulp-imagemin": "^4.1.0",
     "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0",
+    "gulp-sass": "^4.0.1",
+    "gulp-sass-glob": "^1.0.9",
     "gulp-uglifyjs": "^0.6.2",
-    "sass": "^1.0.0-beta.3"
+    "gulp-wait": "^0.0.2",
+    "imagemin-pngquant": "^5.1.0",
+    "jquery": "^3.3.1",
+    "smart-grid": "^2.1.1"
   }
 }
