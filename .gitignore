@@ -15,3 +15,5 @@ other/
 # gulp
 node_modules/
 
+vk_token.txt
+

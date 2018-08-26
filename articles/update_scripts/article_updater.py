@@ -112,8 +112,8 @@ def update_articles():
 def change_article_order():
     from django.utils import timezone
 
-    start_time = timezone.datetime(year=2018, month=1, day=15, hour=14, minute=58, tzinfo=timezone.get_current_timezone())
-    ids = [29, 33, 34, 35, 36, 37, 38, 39, 40, 30, 31, 32]
+    start_time = timezone.datetime(year=2018, month=1, day=30, hour=19, minute=1, tzinfo=timezone.get_current_timezone())
+    ids = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
     delta = timedelta(minutes=1)
     for i in ids:
         a = Article.objects.get(id=i)

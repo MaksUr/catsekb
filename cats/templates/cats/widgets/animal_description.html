@@ -46,7 +46,7 @@
     {% if animal.shelter_date %}
         {% ifequal animal.location_status 'S' %}
         <li>
-            <span class="property_name">В приюте:</span>
+            <span class="property_name">На передержке:</span>
             {% include 'cats/widgets/age.html' with age=animal.get_shelter_time %}
         </li>
         {% endifequal %}

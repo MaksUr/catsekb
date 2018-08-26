@@ -26,7 +26,7 @@
 				<div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
                     <div class="article">
     					<p>
-    						<strong>CatsEkb - это благотворительный проект по пристрою кошек; частный приют для травмированных кошек.</strong> Мы спасаем котиков, лечим их и ищем новый уютный дом. Если вы вдруг нашли котика и хотите помочь, внимательно прочитайте статью - <a href="{% url 'find_cat' %}#anchor_caption" class="tag">"Я НАШЕЛ КОТА, ЧТО ДЕЛАТЬ?"</a>.
+    						<strong>CatsEkb - это благотворительный проект по пристрою кошек.</strong> Мы помогаем кураторам найти новый уютный дом для котов с передержек. Если вы вдруг нашли котика и хотите помочь, внимательно прочитайте статью - <a href="{% url 'find_cat' %}#anchor_caption" class="tag">"Я НАШЕЛ КОТА, ЧТО ДЕЛАТЬ?"</a>.
                         </p>
                         <p>
                             <a href="{% url 'about' %}#anchor_caption" class="tag">Подробнее о нашем проекте</a>
@@ -69,7 +69,7 @@
 
     {% if important_news %}
         <div class="feed line_height font">
-            {% include 'cats/widgets/caption.html' with caption='Новости приюта' %}
+            {% include 'cats/widgets/caption.html' with caption='Новости проекта' %}
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
