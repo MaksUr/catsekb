@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'catsekb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 try:
-    with open(join(BASE_DIR, 'db_key.txt')) as f:
+    with open(os.path.join(os.sep, 'srv', 'db_key.txt')) as f:
         db_key = f.read().strip()
 except FileNotFoundError:
     DATABASES = {
@@ -98,9 +98,9 @@ else:
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'catsekb',
             'USER': 'catsekb',
-            'PASSWORD': db_key,
-            'HOST': 'localhost',
-            'PORT': '',                      # Set to empty string for default.
+            'PASSWORD': '1234', # Решить вопрос
+            'HOST': 'catsekb.ru-postgres',
+            'PORT': '5432',
         }
     }
 
