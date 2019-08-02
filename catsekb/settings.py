@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
-with open(join(BASE_DIR, 'vk_token.txt')) as f:
+with open(os.path.join(os.sep, 'srv', 'vk_token.txt')) as f:
         VK_TOKEN = f.read().strip()
 # SECURITY WARNING: keep the secret key used in production secret!
 try:
@@ -143,7 +143,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static_production")
+STATIC_ROOT = os.path.join(os.sep, 'srv', 'static')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
