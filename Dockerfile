@@ -22,6 +22,7 @@ COPY catsekb ./catsekb
 COPY articles ./articles
 COPY cats ./cats
 COPY static ./static
+COPY templates ./templates
 COPY manage.py ./
 COPY gunicorn.conf.py ./
 
