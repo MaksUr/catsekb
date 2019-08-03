@@ -135,4 +135,8 @@
 
 - выключить nginx:
     - проверить занят ли 80 порт nginx-ом: `sudo lsof -i -P -n | grep LISTEN` 
-    - отключить nginx: `systemctl stop nginx.service`
+    - отключить nginx:
+        ```
+        systemctl stop nginx.service
+        systemctl disable nginx.service
+        ```
