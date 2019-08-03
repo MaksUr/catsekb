@@ -1,0 +1,27 @@
+[Unit]
+Description=catsekb.ru nginx container
+Requires=docker-catsekb.ru-project.service
+After=docker-catsekb.ru-project.service
+
+[Service]
+Type=simple
+ExecStartPre=-/usr/bin/docker kill catsekb.ru-nginx
+ExecStartPre=-/usr/bin/docker rm catsekb.ru-nginx
+ExecStart=/usr/bin/docker run \
+        --rm \
+        --network=mw \
+        -p 80:80 \
+        -p 443:443 \
+        --name catsekb.ru-nginx \
+        -v /srv/catsekb.ru/nginx/catsekb.ru.conf:/etc/nginx/conf.d/catsekb.ru.conf:ro \
+        -v /srv/catsekb.ru/static:/srv/static \
+        -v /srv/catsekb.ru/nginx/share/:/usr/share/nginx/catsekb.ru/ \
+        -v /etc/letsencrypt/live/catsekb.ru/fullchain.pem:/etc/ssl/catsekb.ru.crt \
+        -v /etc/letsencrypt/live/catsekb.ru/privkey.pem:/etc/ssl/catsekb.ru.key \
+        -v  /var/www/catsekb.ru/:/var/www/catsekb.ru/ \
+        nginx:1.15.12
+ExecStop=/usr/bin/docker stop catsekb.ru-nginx
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
