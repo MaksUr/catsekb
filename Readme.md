@@ -25,9 +25,17 @@
         -v ~/rep/sites/catsekb/vk_token.txt:/srv/vk_token.txt \
         -v ~/rep/sites/catsekb/db_key.txt:/srv/db_key.txt catsekb.ru:latest
     ```
+- Создание бекапа
+    ```
+    docker exec \
+        -i \
+        catsekb.ru-postgres \
+        pg_dump -c -h localhost -U catsekb catsekb | gzip > catsekb_04_03_2019.backup.gz
+    ```
+
 - Восстановление данных из бекапа: 
     ```
-    sudo docker exec \
+    docker exec \
         -i \
         catsekb.ru-postgres \
         psql -U catsekb -d catsekb < dump_name.sql
