@@ -1,3 +1,32 @@
+{% extends "catsekb/base.html" %}
+{% load static %}
+{% block base_body %}
+
+    <div class="about font line_height">
+		<div class="cat_container">
+		</div>
+		<img class="cat_a_mouse" src="{% static "catsekb/dist/img/cat_and_mouse.png" %}">
+		<div class="container">
+			{% include 'cats/widgets/caption.html' with caption="О нас" %}
+			<div class="row">
+				<div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                    <div class="article">
+    					<p>
+    						<strong>Счастье в дом это наш приют и мы его любим!</strong> Мы всем помогаем!!
+                        </p>
+                        <p>
+                            <a href="{% url 'about' %}#anchor_caption" class="tag">Подробнее о нашем приюте</a>
+                        </p>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock base_body %}
+{% block body_attr %}class='index'{% endblock body_attr %}
+
+
 <a href="{% url 'catsekb_page' %}">
     catsekb
 </a>

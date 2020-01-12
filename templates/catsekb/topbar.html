@@ -1,0 +1,36 @@
+{# groups #}
+{# helps #}
+{# active_menu #}
+
+{% load static %}
+
+<div class="burger vis">
+    <span>toggle menu</span>
+</div>   
+
+<nav class="mid font">
+    <ul class="mobile_list">
+        {% include "catsekb/menu_tabs.html" with menu_class='mobile_list_opening' active_menu=active_menu groups=groups helps=helps %}
+    </ul>
+</nav>  
+<div class="top_nav">
+    <div class="container">
+        <div class="row">
+            <div class="hidden-xs col-sm-2 col-md-2 col-lg-2">
+                <div class="logo_top_nav">
+                    <a href="{% url 'index' %}">
+                        {# TODO: logo для catsekb #}
+                        <img src="{% static 'catsekb/dist/img/logo.png' %}" class="top_logo">
+                    </a>
+                </div>
+            </div>
+            <div class="hidden-xs col-sm-10 col-sm-offset-0 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-4">
+                <nav class="font">
+                    <ul class="menu top_menu">
+                        {% include "catsekb/menu_tabs.html" with menu_class='menu_opening top_menu' active_menu=active_menu groups=groups helps=helps %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
