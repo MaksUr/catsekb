@@ -1,32 +1,11 @@
 from django.shortcuts import render
 
-from cats.cats_constants import ANIMAL_LOCATION_STATUS_SHELTER, ANIMAL_LOCATION_STATUS, GROUP_INSTANCE_SHELTER_NAME, \
-    ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_DEAD, GALLERY_DEFAULT_ITEMS_COUNT, \
-    ANIMAL_VIDEO_PUT_TO_INDEX_PAGE
+from cats.cats_constants import ANIMAL_LOCATION_STATUS, GROUP_INSTANCE_SHELTER_NAME, \
+    ANIMAL_LOCATION_STATUS_DEAD, ANIMAL_VIDEO_PUT_TO_INDEX_PAGE
 from cats.models import AnimalVideo
 from catsekb.constants import URL_NAME_INDEX_TITLE, INDEX, CREATED
 from catsekb.view_functions import get_base_context, get_important_news, get_animals_from_query, get_last_articles, \
-    get_objects_from_query
-
-HOME_ANIMALS_COUNT = 0
-
-
-def get_shelter_animals(show_permission, count=GALLERY_DEFAULT_ITEMS_COUNT):
-    query = {ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_SHELTER}
-    shelter_animals = get_animals_from_query(
-        query=query, show_permission=show_permission
-    ).order_by('?')
-    return shelter_animals[:count], len(shelter_animals)
-
-
-def get_home_animals_count():
-    global HOME_ANIMALS_COUNT
-    get_animals_from_query(
-        query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_HOME}, show_permission=True
-    ).count()
-    return HOME_ANIMALS_COUNT or get_animals_from_query(
-        query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_HOME}, show_permission=True
-    ).count()
+    get_objects_from_query, get_shelter_animals, get_home_animals_count
 
 
 def index_view(request):

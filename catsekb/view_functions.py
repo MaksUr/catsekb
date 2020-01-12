@@ -8,7 +8,8 @@ from articles.article_constants import ARTICLES_DEFAULT_MAPPING, ARTICLE_FIND_CA
     ARTICLE_VERBOSE_NAME_PLURAL, ARTICLE_TITLE, ARTICLE_TEXT, NEWS_IMPORTANT
 from articles.models import Article, News
 from cats.cats_constants import GROUP_INSTANCE_ALL_ID, GROUP_INSTANCE_SHELTER_ID, \
-    GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, GROUP_MAPPING, PRIVATE_GROUP, ANIMAL_LOCATION_STATUS, ANIMAL_CREATED
+    GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, GROUP_MAPPING, PRIVATE_GROUP, ANIMAL_LOCATION_STATUS, \
+    ANIMAL_CREATED, GALLERY_DEFAULT_ITEMS_COUNT, ANIMAL_LOCATION_STATUS_SHELTER, ANIMAL_LOCATION_STATUS_HOME
 from cats.models import Group, Animal
 from cats.query import ANIMAL_QUERY_KEYS
 from catsekb.constants import SHOW, GET_PAR_KEY_FILTER, URL_NAME_ANIMALS, URL_NAME_FIND_CAT, URL_NAME_NEWS_FEED, \
@@ -161,3 +162,21 @@ def get_animals_from_query(query, show_permission=False):
         model_cls=Animal, query=query, show_permission=show_permission, order_by=ANIMAL_CREATED
     )
     return res
+
+
+def get_shelter_animals(show_permission, count=GALLERY_DEFAULT_ITEMS_COUNT):
+    query = {ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_SHELTER}
+    shelter_animals = get_animals_from_query(
+        query=query, show_permission=show_permission
+    ).order_by('?')
+    return shelter_animals[:count], len(shelter_animals)
+
+
+def get_home_animals_count():
+    HOME_ANIMALS_COUNT = 0  # TODO: Вынести в базу и выпилить
+    get_animals_from_query(
+        query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_HOME}, show_permission=True
+    ).count()
+    return HOME_ANIMALS_COUNT or get_animals_from_query(
+        query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_HOME}, show_permission=True
+    ).count()

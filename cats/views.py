@@ -15,8 +15,8 @@ from cats.query import ANIMAL_QUERY_KEYS
 from catsekb.constants import CAPTION_ANIMAL_LIST_DEFAULT, ANIMALS, GET_PAR_KEY_PAGE, GET_PAR_KEY_PER_PAGE, \
     GET_PAR_VAL_PAGE, \
     GET_PAR_KEY_FILTER, DJ_PK, DJ_PAGE, DJ_OBJECT, URL_NAME_GROUP, NAME, DESCRIPTION, URL_NAME_GROUPS_TITLE
-from catsekb.view_functions import get_objects_from_query, get_base_context, get_group, get_animals_from_query
-from catsekb.views import get_shelter_animals
+from catsekb.view_functions import get_objects_from_query, get_base_context, get_group, get_animals_from_query, \
+    get_shelter_animals
 
 
 class AnimalListView(ListView, FormMixin):
