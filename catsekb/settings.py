@@ -26,7 +26,7 @@ with open(os.path.join(os.sep, 'srv', 'vk_token.txt')) as f:
 # SECURITY WARNING: keep the secret key used in production secret!
 try:
     with open(os.path.join(os.sep, 'srv', 'secret_key.txt')) as f:
-        SECRET_KEY = f.read().strip()    
+        SECRET_KEY = f.read().strip()
 except FileNotFoundError:
     SECRET_KEY = '1j(lfw54!y!f3u%&8%e*(m)@k=p&@2iphm53p$$li&8hy#@gwl'
     DEBUG = True

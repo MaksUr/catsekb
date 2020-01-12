@@ -26,12 +26,12 @@ class AbstractFeedListView(ListView):
         return get_objects_from_query(
             model_cls=self.model,
             query=dict(),
-            show_permission=self.request.user.is_authenticated(),
+            show_permission=self.request.user.is_authenticated,
             order_by=self.order_by
         )
 
     def get_context_data(self, **kwargs):
-        show_permission = self.request.user.is_authenticated()
+        show_permission = self.request.user.is_authenticated
         context = super(AbstractFeedListView, self).get_context_data(**kwargs)
         context.update(get_base_context(show_permission=show_permission, active_menu=self.active_menu, extra_title=self.title))
         context['caption'] = self.title
@@ -101,13 +101,13 @@ class SubjectDetailView(DetailView):
     active_menu = ARTICLES
 
     def get_object(self, queryset=None):
-        if self.request.user.is_authenticated() is not True:
+        if self.request.user.is_authenticated is not True:
             queryset = Subject.objects.filter(**{SHOW: True}).order_by('created')
         obj = super(SubjectDetailView, self).get_object(queryset=queryset)
         return obj
 
     def get_context_data(self, **kwargs):
-        show_permission = self.request.user.is_authenticated()
+        show_permission = self.request.user.is_authenticated
         context = DetailView.get_context_data(self, **kwargs)
         context.update(
             get_base_context(
@@ -131,13 +131,13 @@ class AbstractArticleDetailView(DetailView):
 
     def get_queryset(self):
         query_d = {}
-        if self.request.user.is_authenticated() is not True:
+        if self.request.user.is_authenticated is not True:
             query_d[SHOW] = True
         self.queryset = self.model.objects.filter(**query_d)
         return self.queryset
 
     def get_context_data(self, **kwargs):
-        show_permission = self.request.user.is_authenticated()
+        show_permission = self.request.user.is_authenticated
         context = DetailView.get_context_data(self, **kwargs)
         context.update(
             get_base_context(

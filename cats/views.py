@@ -37,7 +37,7 @@ class AnimalListView(ListView, FormMixin):
                 pass
 
     def get_queryset(self, **kwargs):
-        show_permission = self.request.user.is_authenticated()
+        show_permission = self.request.user.is_authenticated
         query = self.request.GET.dict()
         query.update(kwargs)
         self.show_filter = query.pop(GET_PAR_KEY_FILTER, False)
@@ -49,7 +49,7 @@ class AnimalListView(ListView, FormMixin):
         return res
 
     def get_context_data(self, **kwargs):
-        show_permission = self.request.user.is_authenticated()
+        show_permission = self.request.user.is_authenticated
         context = ListView.get_context_data(self, **kwargs)
         context['filter_string'] = self.get_filter_string()
         context['caption'] = self.caption
@@ -102,7 +102,7 @@ class AnimalDetailView(DetailView):
     model = Animal
 
     def get_context_data(self, **kwargs):
-        show_permission = self.request.user.is_authenticated()
+        show_permission = self.request.user.is_authenticated
         context = DetailView.get_context_data(self, **kwargs)
         context.update(get_base_context(show_permission=show_permission, active_menu=ANIMALS, extra_title=self.object.__str__()))
         animal = kwargs[DJ_OBJECT]
@@ -141,12 +141,12 @@ class GroupListView(ListView):
     model = Group
 
     def get_queryset(self):
-        show_permission = self.request.user.is_authenticated()
+        show_permission = self.request.user.is_authenticated
         group_list = get_objects_from_query(model_cls=Group, query=dict(), show_permission=show_permission)
         return group_list
 
     def get_context_data(self, **kwargs):
-        show_permission = self.request.user.is_authenticated()
+        show_permission = self.request.user.is_authenticated
         context = ListView.get_context_data(self, **kwargs)
         context.update(get_base_context(show_permission=show_permission, active_menu=ANIMALS, extra_title=URL_NAME_GROUPS_TITLE))
 
@@ -179,7 +179,7 @@ class GroupListView(ListView):
 class GroupDetailView(AnimalListView):
 
     def set_description_and_caption(self, query):
-        group = get_group(group_id=self.kwargs[DJ_PK], show_permission=self.request.user.is_authenticated())
+        group = get_group(group_id=self.kwargs[DJ_PK], show_permission=self.request.user.is_authenticated)
         self.description = group.description
         self.caption = group.name
 
@@ -189,7 +189,7 @@ class GroupDetailView(AnimalListView):
 
     def get_context_data(self, **kwargs):
         group_id = self.kwargs[DJ_PK]
-        group = get_group(group_id=group_id, show_permission=self.request.user.is_authenticated())
+        group = get_group(group_id=group_id, show_permission=self.request.user.is_authenticated)
         self.caption = group.name
         self.description = group.description
         context = super(GroupDetailView, self).get_context_data(**kwargs)

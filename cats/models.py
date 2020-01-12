@@ -2,7 +2,7 @@ from datetime import date
 
 import re
 from django.db.models import Model, CharField, TextField, ForeignKey, DateTimeField, BooleanField, ManyToManyField, \
-    URLField, IntegerField, DateField
+    URLField, IntegerField, DateField, CASCADE
 # Create your models here.
 from django.urls import reverse
 
@@ -110,8 +110,8 @@ class Animal(Model):
     vk_album_id = IntegerField(ANIMAL_KEY_VK_ALBUM_ID, blank=True, default=None, null=True)
     date_of_birth = DateField(null=True, default=None, blank=True)
     shelter_date = DateField(ANIMAL_KEY_SHELTER_DATE, null=True, default=None, blank=True)
-    group = ForeignKey(Group, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)
-    video = ForeignKey(AnimalVideo, verbose_name=AnimalVideo._meta.verbose_name, blank=True, null=True, default=None)
+    group = ForeignKey(Group, on_delete=CASCADE, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)
+    video = ForeignKey(AnimalVideo, on_delete=CASCADE, verbose_name=AnimalVideo._meta.verbose_name, blank=True, null=True, default=None)
     show = BooleanField(ANIMAL_KEY_SHOW, default=True)
     valid_info = BooleanField(ANIMAL_KEY_VALID_INFO, default=False)
     location_status = CharField(
@@ -222,7 +222,7 @@ class Animal(Model):
 
 
 class AnimalImage(Model):
-    animal = ForeignKey(Animal)
+    animal = ForeignKey(Animal, on_delete=CASCADE)
     image_url = URLField(ANIMAL_IMAGE_KEY_IMAGE_URL)
     image_small_url = URLField(ANIMAL_IMAGE_KEY_IMAGE_SMALL_URL, blank=True, default=None, null=True)
     photo_id = IntegerField(ANIMAL_IMAGE_KEY_PHOTO_ID, blank=True, default=None, null=True)

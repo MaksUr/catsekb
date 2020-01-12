@@ -30,7 +30,7 @@ def get_home_animals_count():
 
 
 def index_view(request):
-    show_permission = request.user.is_authenticated()
+    show_permission = request.user.is_authenticated
     context = get_base_context(show_permission=show_permission, active_menu=INDEX, extra_title=URL_NAME_INDEX_TITLE)
     shelter_animals, shelter_animals_count = get_shelter_animals(show_permission=show_permission)
     context['shelter_animals'] = shelter_animals

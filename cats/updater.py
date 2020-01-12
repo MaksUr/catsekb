@@ -1,8 +1,5 @@
 import datetime
-try:
-    import requests
-except ImportError:
-    requests = None
+import requests
 
 from cats.cats_constants import ANIMAL_IMAGE_PHOTO_ID, ANIMAL_IMAGE_ANIMAL, ANIMAL_IMAGE_IMAGE_URL, \
     ANIMAL_IMAGE_IMAGE_SMALL_URL, ANIMAL_IMAGE_CREATED, ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND
@@ -64,22 +61,20 @@ def get_album_photos_local(album_id):
 
 
 def get_album_photos(group_id, album_id):
-    if requests is not None:
-        group_id = -1 * group_id
-        r = requests.get(r'https://api.vk.com/method/photos.get', params={
-            'album_id': album_id,
-            'owner_id': group_id,
-            'photo_sizes': 1,
-            'v': API_VERSION,
-            'access_token': VK_TOKEN,
-        })
-        photos = r.json()        
-    else:
-        photos = get_album_photos_local(album_id)
+    group_id = -1 * group_id
+    r = requests.get(r'https://api.vk.com/method/photos.get', params={
+        'album_id': album_id,
+        'owner_id': group_id,
+        'photo_sizes': 1,
+        'v': API_VERSION,
+        'access_token': VK_TOKEN,
+    })
+    photos = r.json()
     return photos
 
 
 def get_albums_info_local(album_ids):
+    # TODO: Удалить эту функцию
     from cats.update_scripts.all_update import open_json
     r = open_json(r'other\albums.json')
     if album_ids:
@@ -100,8 +95,7 @@ def get_albums_info(group_id, album_ids):
             'owner_id': -1 * group_id,
             'v': API_VERSION,
         }).json()
-    else:
-        r = get_albums_info_local(album_ids)
+
     return r
 
 
