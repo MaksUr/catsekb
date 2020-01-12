@@ -99,7 +99,7 @@ else:
             'NAME': 'catsekb',
             'USER': 'catsekb',
             'PASSWORD': db_key,
-            'HOST': 'catsekb.ru-postgres',
+            'HOST': 'postgres',
             'PORT': '5432',
         }
     }

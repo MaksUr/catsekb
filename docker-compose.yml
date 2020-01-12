@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+    postgres:
+        image: postgres:11.2
+        container_name: "catsekb.ru-postgres"
+        restart: always
+        volumes:
+            - /srv/catsekb.ru/postgres:/var/lib/postgresql/data
+        networks:
+            - internal
+        environment:
+            POSTGRES_NAME: catsekb
+            POSTGRES_USER: catsekb
+            POSTGRES_PASSWORD: PASSWD
+    django:
+        image: catsekb.ru:latest
+        container_name: catsekb.ru
+        restart: always
+        volumes:
+            - /srv/catsekb.ru/:/srv/
+        depends_on:
+            - postgres
+        networks:
+            - internal
+    nginx:
+        image: nginx:1.17
+        restart: always
+        volumes:
+            - /srv/catsekb.ru/nginx/catsekb.ru.conf:/etc/nginx/conf.d/catsekb.ru.conf:ro
+            - /srv/catsekb.ru/static:/srv/static
+            - /srv/catsekb.ru/nginx/share/:/usr/share/nginx/catsekb.ru/
+            - /etc/letsencrypt/live/catsekb.ru/fullchain.pem:/etc/ssl/catsekb.ru.crt
+            - /etc/letsencrypt/live/catsekb.ru/privkey.pem:/etc/ssl/catsekb.ru.key
+            - /var/www/catsekb.ru/:/var/www/catsekb.ru/
+        networks:
+            - internal
+            - default
+        ports:
+            - "80:80"
+            - "443:443"
+
+networks:
+    internal:
