@@ -38,6 +38,7 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
+    'catsekb_page.apps.CatsekbPageConfig',
     'cats.apps.CatsConfig',
     'articles.apps.ArticlesConfig',
 
