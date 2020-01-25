@@ -89,6 +89,7 @@ ARTICLE_CONTACTS_ID = 1
 ARTICLE_FIND_CAT_ID = 2
 ARTICLE_ABOUT_ID = 3
 
+# TODO: Выпилить из базы статичные страницы и выпилить этот трешак
 ARTICLES_DEFAULT_MAPPING = {
     ARTICLE_CONTACTS_ID: {
         CAPTION: 'Контакты',

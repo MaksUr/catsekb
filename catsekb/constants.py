@@ -11,7 +11,6 @@ NO_CHOICE = (NO_CHOICE_VALUE, NO_CHOICE_LABEL)
 INDEX = 'index'
 ANIMALS = 'animals'
 ARTICLES = 'articles'
-CONTACTS = 'contacts'
 
 SHOW = 'show'
 NAME = 'name'

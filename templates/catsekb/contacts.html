@@ -3,7 +3,7 @@
     {# helpful_info_list #}
 
 {# object #}
-{% extends "cats/base.html" %}
+{% extends "catsekb/base.html" %}
 
 {% block base_body %}
     <section class="font line_height">
@@ -11,7 +11,7 @@
 			{% include 'cats/widgets/caption.html' with caption="Контакты" %}
 			<div class="row">
 				<div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-					{{ object.text|safe }}
+					{{ object|safe }}
 					<ul class="contacts">
 						<li>
 							<h3>Разработчики сайта</h3>
@@ -21,14 +21,13 @@
 						</li>
 						<li>
 							<a title="WhatsApp" href="whatsapp://send?phone=+79506370164">WhatsApp</a>
-							<a title="Viber" href="viber://add?number=89221560114">Viber</a>
 							<a title="Telegram" href="tg://resolve?domain=MaximKisseloff">Telegram</a>
 						</li>
 						<li>
 							Back-end: <b>Ураков Максим</b>
 						</li>
 						<li>
-							Email: <b>maksim.urakv@gmail.com</b>
+							<a title="Telegram" href="tg://resolve?domain=Maks_Ur">Telegram</a>
 						</li>
 					</ul>
 				</div>
@@ -42,6 +41,7 @@
 {% endblock base_body %}
 
 {% block header %}
+	{# TODO: Подобрать изображение #}
      {% with "catsekb/dist/img/header_contacts.jpg" as background_image_file %}
             {{ block.super }}
     {% endwith %}

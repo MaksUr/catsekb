@@ -10,7 +10,7 @@ from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_TITLE, ARTIC
     CAPTION, ARTICLE_TEXT, FEED_PAGINATE_BY, SUBJECT_VERBOSE_NAME, ARTICLE_ABOUT_ID
 from articles.models import Subject, Article, News
 from cats.models import AnimalVideo
-from catsekb.constants import ARTICLES, CONTACTS, DJ_ID, URL_NAME_SUBJECTS_TITLE, URL_NAME_SUBJECT_TITLE, \
+from catsekb.constants import ARTICLES, DJ_ID, URL_NAME_SUBJECTS_TITLE, URL_NAME_SUBJECT_TITLE, \
     SHOW, URL_NAME_NEWS_FEED_TITLE, GET_PAR_KEY_PER_PAGE, \
     GET_PAR_VAL_PAGE, GET_PAR_KEY_PAGE, URL_NAME_SUBJECTS_FEED, URL_NAME_NEWS_FEED, URL_NAME_VIDEO_TITLE, ANIMALS
 from catsekb.view_functions import get_base_context, get_objects_from_query
@@ -222,18 +222,10 @@ class DefaultArticleDetailView(AbstractArticleDetailView):
             obj = self.save_default_article()
         return obj
 
-
-class ContactsView(DefaultArticleDetailView):
-    template_name = 'articles/contacts.html'
-    active_menu = CONTACTS
-    article_id = ARTICLE_CONTACTS_ID
-
-
 class FindCatView(DefaultArticleDetailView):
     article_id = ARTICLE_FIND_CAT_ID
 
 
 class AboutView(DefaultArticleDetailView):
     template_name = 'articles/about.html'
-    active_menu = CONTACTS
     article_id = ARTICLE_ABOUT_ID

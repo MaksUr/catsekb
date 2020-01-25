@@ -1,0 +1,22 @@
+{# object #}
+{% extends "catsekb/base.html" %}
+
+{% block base_body %}
+    <section class="font line_height">
+		<div class="container">
+			{% include 'cats/widgets/caption.html' with caption="Помощь приюту" %}
+			<div class="row">
+				<div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+					{{ object|safe }}					
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock base_body %}
+
+{% block header %}
+	{# TODO: Подобрать изображение #}
+     {% with "catsekb/dist/img/header_contacts.jpg" as background_image_file %}
+            {{ block.super }}
+    {% endwith %}
+{% endblock header %}

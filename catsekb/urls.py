@@ -19,10 +19,12 @@ from django.contrib import admin
 
 from articles.views import NewsFeedListView, AnimalVideoListView
 from catsekb import settings
-from catsekb.views import index_view
+from catsekb.views import index_view, contacts_view, help_us_view
 
 urlpatterns = [
     path('', index_view, name='index'),
+    path('contacts/', contacts_view, name='contacts'),
+    path('help_us/', help_us_view, name='help_us'),
     path('catsekb/', include('catsekb_page.urls')),
     path('admin/', admin.site.urls),
 ] + \

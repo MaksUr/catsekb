@@ -160,7 +160,7 @@ CONSTANCE_ADDITIONAL_FIELDS = {
 }
 
 CONSTANCE_CONFIG = {
-    'CONTACTS_PAGE': (
+    'CONTACTS_PAGE_CONTENT': (
         """<p>
             Instagram:&nbsp;<a href="https://www.instagram.com/catsekb/" target="_blank">https://www.instagram.com/catsekb/</a><br />
             ВКонтакте:&nbsp;<a href="https://vk.com/catsekb_vk" target="_blank">https://vk.com/catsekb_vk</a><br />
@@ -171,7 +171,7 @@ CONSTANCE_CONFIG = {
         'Тут необходимо указать текст, который будет отображаться на странице "Контакты"',
         'editable_content'
     ),
-    'HELP_PAGE': (
+    'HELP_US_PAGE_CONTENT': (
         "Эта страница еще в разработке",
         'Тут необходимо указать текст, который будет отображаться на странице "Помощь приюту"',
         'editable_content'
