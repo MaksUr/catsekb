@@ -48,7 +48,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #  WYSIWYG editor
     'ckeditor',
+    #  For store single objects in DB
+    'constance',
+    'constance.backends.database',
 ]
 
 MIDDLEWARE = [
@@ -149,3 +153,27 @@ STATIC_ROOT = os.path.join(os.sep, 'srv', 'static')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+CONSTANCE_ADDITIONAL_FIELDS = {
+    'editable_content': ['ckeditor.fields.RichTextFormField', {}],
+}
+
+CONSTANCE_CONFIG = {
+    'CONTACTS_PAGE': (
+        """<p>
+            Instagram:&nbsp;<a href="https://www.instagram.com/catsekb/" target="_blank">https://www.instagram.com/catsekb/</a><br />
+            ВКонтакте:&nbsp;<a href="https://vk.com/catsekb_vk" target="_blank">https://vk.com/catsekb_vk</a><br />
+            Facebook:&nbsp;<a href="https://www.facebook.com/cats.ekb" target="_blank">https://www.facebook.com/cats.ekb</a><br />
+            Одноклассники:&nbsp;<a href="https://ok.ru/catsekb" target="_blank">https://ok.ru/catsekb</a><br />
+            Email: сatsekb@gmail.com
+        </p>""",
+        'Тут необходимо указать текст, который будет отображаться на странице "Контакты"',
+        'editable_content'
+    ),
+    'HELP_PAGE': (
+        "Эта страница еще в разработке",
+        'Тут необходимо указать текст, который будет отображаться на странице "Помощь приюту"',
+        'editable_content'
+    )
+}
