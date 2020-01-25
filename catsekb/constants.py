@@ -12,7 +12,6 @@ INDEX = 'index'
 ANIMALS = 'animals'
 ARTICLES = 'articles'
 CONTACTS = 'contacts'
-CATSEKB_PAGE = 'catsekb_page'
 
 SHOW = 'show'
 NAME = 'name'

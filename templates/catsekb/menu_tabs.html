@@ -4,11 +4,12 @@
 {# menu_class #}
 
 {% url 'index' as index_url %}
+{% url 'catsekb_page' as catsekb_url %}
 {% include "catsekb/menu_tab.html" with name='index' active=active_menu abs_url=index_url url_caption='Главная' %}
 
-{% include "catsekb/menu_tab.html" with name='animals' active=active_menu url_caption='Наши коты' menu_items=groups menu_class=menu_class %}
+{% include "catsekb/menu_tab.html" with active=active_menu abs_url=catsekb_url url_caption='CatksEkb' %}
 
-{% include "catsekb/menu_tab.html" with name='articles' active=active_menu url_caption='Полезная информация' menu_items=helps menu_class=menu_class %}
-
-{% url 'contacts' as cont_url %}
-{% include "catsekb/menu_tab.html" with name='contacts' active=active_menu abs_url=cont_url|add:'#anchor_caption'  url_caption='Контакты' %}
+{# TODO: Лабрадоры #}
+{# TODO: Хаски #}
+{# TODO: Помощь приюту #}
+{# TODO: Контакты #}
