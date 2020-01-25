@@ -2,6 +2,7 @@ import re
 from django.db.models import Model, CharField, TextField, DateTimeField, BooleanField, ForeignKey, QuerySet, \
     IntegerField, URLField, CASCADE
 from django.urls import reverse
+from ckeditor.fields import RichTextField
 
 from articles.article_constants import ARTICLE_KEY_TITLE, ARTICLE_KEY_TEXT, ARTICLE_KEY_CREATED, ARTICLE_KEY_UPDATED, \
     ARTICLE_KEY_SHOW, AUTHOR_KEY_NAME, ARTICLE_VERBOSE_NAME, ARTICLE_VERBOSE_NAME_PLURAL, AUTHOR_VERBOSE_NAME, \
@@ -44,7 +45,7 @@ class Subject(Model):
 
 class Article(Model):
     title = CharField(ARTICLE_KEY_TITLE, max_length=70, unique=True)
-    text = TextField(ARTICLE_KEY_TEXT)
+    text = RichTextField(ARTICLE_KEY_TEXT)
     created = DateTimeField(ARTICLE_KEY_CREATED, auto_now_add=True)
     updated = DateTimeField(ARTICLE_KEY_UPDATED, auto_now=True)
     show = BooleanField(ARTICLE_KEY_SHOW, default=True)
@@ -79,7 +80,7 @@ class Article(Model):
 
 class News(Model):
     title = CharField(NEWS_KEY_TITLE, max_length=70)
-    text = TextField(NEWS_KEY_TEXT)
+    text = RichTextField(NEWS_KEY_TEXT)
     created = DateTimeField(NEWS_KEY_CREATED, auto_now_add=True)
     updated = DateTimeField(NEWS_KEY_UPDATED, auto_now=True)
     show = BooleanField(NEWS_KEY_SHOW, default=True)

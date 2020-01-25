@@ -1,5 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from ckeditor.widgets import CKEditorWidget
 
 from articles.article_constants import NEWS_TITLE, NEWS_TEXT, NEWS_SHOW, \
     NEWS_IMPORTANT, NEWS_Y_POS, NEWS_AUTHOR, NEWS_KEY_TITLE_HELP_TEXT, NEWS_KEY_TEXT_HELP_TEXT, \
@@ -14,7 +15,7 @@ from catsekb.constants import IMAGE, IMAGE_KEY_HELP_TEXT
 
 
 class NewsForm(forms.ModelForm):
-
+    text = forms.CharField(widget=CKEditorWidget())
     class Meta:
         model = News
         fields = (
@@ -39,7 +40,7 @@ class NewsForm(forms.ModelForm):
 
 
 class ArticleForm(forms.ModelForm):
-
+    text = forms.CharField(widget=CKEditorWidget())
     class Meta:
         model = Article
         fields = (
