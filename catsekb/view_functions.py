@@ -12,7 +12,7 @@ from cats.cats_constants import GROUP_INSTANCE_ALL_ID, GROUP_INSTANCE_SHELTER_ID
     ANIMAL_CREATED, GALLERY_DEFAULT_ITEMS_COUNT, ANIMAL_LOCATION_STATUS_SHELTER, ANIMAL_LOCATION_STATUS_HOME
 from cats.models import Group, Animal
 from cats.query import ANIMAL_QUERY_KEYS
-from catsekb.constants import SHOW, GET_PAR_KEY_FILTER, URL_NAME_ANIMALS, URL_NAME_FIND_CAT, URL_NAME_NEWS_FEED, \
+from catsekb.constants import SHOW, GET_PAR_KEY_FILTER, URL_NAME_ANIMALS, URL_NAME_FIND_CAT, \
     URL_NAME_SUBJECTS_FEED, DJ_ID, FOLDER, URL_NAME_VIDEO
 from catsekb.settings import BASE_DIR
 
@@ -126,14 +126,14 @@ def get_base_context(active_menu, extra_title, show_permission=False):
     find_cat_url = dict()
     find_cat_url['caption'] = ARTICLES_DEFAULT_MAPPING[ARTICLE_FIND_CAT_ID][CAPTION]
     find_cat_url['url'] = reverse(URL_NAME_FIND_CAT)
-    news = dict()
-    news['caption'] = NEWS_VERBOSE_NAME_PLURAL
-    news['url'] = reverse(URL_NAME_NEWS_FEED)
+    # news = dict()
+    # news['caption'] = NEWS_VERBOSE_NAME_PLURAL
+    # news['url'] = reverse(URL_NAME_NEWS_FEED)
     articles = dict()
     articles['caption'] = ARTICLE_VERBOSE_NAME_PLURAL
     articles['url'] = reverse(URL_NAME_SUBJECTS_FEED)
     helpful_info_list.append(find_cat_url)
-    helpful_info_list.append(news)
+    # helpful_info_list.append(news)
     helpful_info_list.append(articles)
 
     context = {

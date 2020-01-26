@@ -9,6 +9,9 @@
 {% url 'catsekb_page' as catsekb_url %}
 {% include "catsekb/menu_tab.html" with active=active_menu abs_url=catsekb_url url_caption='CatksEkb' %}
 
+{% url 'news' as news_url %}
+{% include "catsekb/menu_tab.html" with name='news' active=active_menu abs_url=news_url url_caption='Наши новости' %}
+
 {% url 'help_us' as help_us_url %}
 {% include "catsekb/menu_tab.html" with name='help_us' active=active_menu abs_url=help_us_url url_caption='Помощь приюту' %}
 

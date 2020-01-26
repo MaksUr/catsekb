@@ -12,7 +12,7 @@ from articles.models import Subject, Article, News
 from cats.models import AnimalVideo
 from catsekb.constants import ARTICLES, DJ_ID, URL_NAME_SUBJECTS_TITLE, URL_NAME_SUBJECT_TITLE, \
     SHOW, URL_NAME_NEWS_FEED_TITLE, GET_PAR_KEY_PER_PAGE, \
-    GET_PAR_VAL_PAGE, GET_PAR_KEY_PAGE, URL_NAME_SUBJECTS_FEED, URL_NAME_NEWS_FEED, URL_NAME_VIDEO_TITLE, ANIMALS
+    GET_PAR_VAL_PAGE, GET_PAR_KEY_PAGE, URL_NAME_SUBJECTS_FEED, URL_NAME_VIDEO_TITLE, ANIMALS
 from catsekb.view_functions import get_base_context, get_objects_from_query
 
 
@@ -83,6 +83,7 @@ class NewsFeedListView(AbstractFeedListView):
     title = URL_NAME_NEWS_FEED_TITLE
     template_name = 'articles/feed_list.html'
     order_by = '-created'
+    active_menu = 'news'
 
 
 class ArticlesFeedListView(AbstractFeedListView):
@@ -185,7 +186,7 @@ class ArticleDetailView(AbstractArticleDetailView):
 
 class NewsDetailView(AbstractArticleDetailView):
     model = News
-    feed_url = URL_NAME_NEWS_FEED
+    feed_url = 'news'
     recommendations = 2
 
 

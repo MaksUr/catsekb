@@ -22,6 +22,7 @@ from catsekb import settings
 from catsekb.views import index_view, contacts_view, help_us_view
 
 urlpatterns = [
+    path('', include('articles.urls')),
     path('', index_view, name='index'),
     path('contacts/', contacts_view, name='contacts'),
     path('help_us/', help_us_view, name='help_us'),

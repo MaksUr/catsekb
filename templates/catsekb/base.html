@@ -8,14 +8,11 @@
     {% block meta %}<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">{% endblock meta %}
     {% block base_title %}
     <title>
-        {# TODO: title #}
-        {% block title %}Счастье в дом (title){% if extra_title %} - {{ extra_title }}{% endif %}{% endblock title %}
+        {% block title %}Счастье в дом{% if extra_title %} - {{ extra_title }}{% endif %}{% endblock title %}
     </title>
     {% endblock base_title %}
 
-    {# TODO: favicon #}
     <link rel="shortcut icon" type="image/png" href="{% static 'catsekb/dist/img/favicon.png' %}">
-
 
     {# Base CSS #}
     {% block base_css %}

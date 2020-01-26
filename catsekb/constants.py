@@ -63,10 +63,9 @@ URL_NAME_SUBJECT = 'subject'
 URL_NAME_ARTICLE = 'article'
 URL_NAME_CONTACTS = 'contacts'
 URL_NAME_FIND_CAT = 'find_cat'
-URL_NAME_NEWS_FEED = 'news_feed'                    # новостная лента
+# URL_NAME_NEWS_FEED = 'news_feed'                    # новостная лента
 URL_NAME_POST = 'post'                         # новостной пост
 URL_NAME_SUBJECTS_FEED = 'subjects_feed'            # Лента статей
-URL_NAME_SUBJECTS = 'subjects'                      # Список тем статей
 URL_NAME_ABOUT = 'about'
 URL_NAME_VIDEO = 'video'
 
