@@ -7,6 +7,8 @@ from cats.models import Animal
 from cats.update_scripts.vk_response_parser import get_animal_kwargs_from_vk_response
 from cats.updater import get_albums_info, RESPONSE, AID, update_images_for_animal
 
+# TODO: Объявить VK_GROUP_ID
+
 KEY_IGNORE_TITLES = 'ignore_albums_titles'
 
 

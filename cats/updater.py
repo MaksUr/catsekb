@@ -3,7 +3,7 @@ import requests
 
 from cats.cats_constants import ANIMAL_IMAGE_PHOTO_ID, ANIMAL_IMAGE_ANIMAL, ANIMAL_IMAGE_IMAGE_URL, \
     ANIMAL_IMAGE_IMAGE_SMALL_URL, ANIMAL_IMAGE_CREATED, ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND
-from catsekb.constants import VK_GROUP_ID, CREATED
+from catsekb.constants import CREATED
 from catsekb.settings import VK_TOKEN
 from cats.models import AnimalImage
 
@@ -21,16 +21,17 @@ BIG_SIZE_TYPE = "w"
 API_VERSION = "5.64"
 
 
-def get_vk_album_id_from_url(url):
-    group = "album-" + str(VK_GROUP_ID) + "_"
-    if url and r'vk.com/' in url and url.find(group) >= 0:
-        album_id = url[url.find(group) + len(group):]
+def get_vk_group_and_album_id_from_url(url):
+    if url.find('vk.com/album-') >= 0:
+        album_and_group = url.split('-')[-1]
+        group_id, album_id = album_and_group.split('_')
         try:
+            group_id = int(group_id)
             album_id = int(album_id)
         except ValueError:
             return None
         else:
-            return album_id
+            return group_id, album_id
     else:
         return None
 
@@ -138,9 +139,9 @@ def save_image(animal, photo, favourite=False, background=False):
     image.save()
 
 
-def update_images_for_animal(animal, album_id):
+def update_images_for_animal(animal, group_id, album_id):
     try:
-        images = get_album_photos(VK_GROUP_ID, album_id)[RESPONSE]['items']
+        images = get_album_photos(group_id, album_id)[RESPONSE]['items']
     except KeyError:
         return None
     try:

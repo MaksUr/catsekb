@@ -26,12 +26,12 @@ from cats.cats_constants import ANIMAL_UPDATED, ANIMAL_CREATED, ANIMAL_BIRTHDAY_
     ANIMAL_VIDEO_KEY_DESCRIPTION_HELP_TEXT, ANIMAL_VIDEO_KEY_VIDEO_URL_HELP_TEXT, \
     ANIMAL_VIDEO_VIDEO_URL_VALIDATION_MESSAGE, ANIMAL_VIDEO_SHOW, ANIMAL_VIDEO_KEY_SHOW_HELP_TEXT, \
     ANIMAL_VIDEO_KEY_PUT_TO_INDEX_PAGE, ANIMAL_VIDEO_PUT_TO_INDEX_PAGE, ANIMAL_VIDEO_KEY_PUT_TO_INDEX_PAGE_HELP_TEXT
-from catsekb.constants import DJ_INSTANCE, DJ_INITIAL, VK_GROUP_ID, NO_CHOICE_VALUE, CLASS
+from catsekb.constants import DJ_INSTANCE, DJ_INITIAL, NO_CHOICE_VALUE, CLASS
 from cats.models import Animal, AnimalImage, AnimalVideo
 from cats.time import get_date_from_age, calc_age_uptoday
 
 from cats.update_scripts.vk_response_parser import get_animal_kwargs_from_vk_response
-from cats.updater import get_vk_album_id_from_url, get_albums_info
+from cats.updater import get_vk_group_and_album_id_from_url, get_albums_info
 
 
 def get_range(size):
@@ -99,7 +99,7 @@ class AnimalForm(forms.ModelForm):
     def get_initial_update(instance, upd_type):
         res = dict()
         if (instance.vk_album_id is not None) and (upd_type == ANIMAL_FORM_VK_UPDATE_INFO):
-            response = get_albums_info(album_ids=(instance.vk_album_id,), group_id=VK_GROUP_ID)
+            response = get_albums_info(album_ids=(instance.vk_album_id,), group_id=instance.vk_group_id)
             animal_update = get_animal_kwargs_from_vk_response(response)
             if animal_update.get(ANIMAL_DATE_OF_BIRTH):
                 d = calc_age_uptoday(before_date=animal_update[ANIMAL_DATE_OF_BIRTH], later_date=date.today())
@@ -193,6 +193,7 @@ class AnimalForm(forms.ModelForm):
         if name == "" or self.instance.name == name:
             pass
         elif Animal.objects.filter(name=name).exists():
+            # TODO: Сделать проверку на уникальность, включая project
             message = ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST.format(name=name)
             raise ValidationError(message)
         return name
@@ -200,10 +201,10 @@ class AnimalForm(forms.ModelForm):
     def clean_vk_album_url(self):
         vk_alb_url = self.cleaned_data.get(ANIMAL_VK_ALBUM_URL)
         if vk_alb_url:
-            vk_album_id = get_vk_album_id_from_url(vk_alb_url)
-            if vk_album_id is None:
+            vk_album_info = get_vk_group_and_album_id_from_url(vk_alb_url)
+            if vk_album_info is None:
                 raise ValidationError(ANIMAL_VK_ALBUM_URL_WRONG_FORMAT)
-            self.instance.vk_album_id = vk_album_id
+            self.instance.vk_group_id, self.instance.vk_album_id = vk_album_info
         return vk_alb_url
 
 

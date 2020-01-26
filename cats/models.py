@@ -24,7 +24,7 @@ from cats.cats_constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_V
     ANIMAL_VIDEO_YOUTUBE_EMBED_URL, ANIMAL_VIDEO_KEY_SHOW, ANIMAL_VIDEO_KEY_PUT_TO_INDEX_PAGE, \
     ANIMAL_VIDEO_FRAME_WIDTH, ANIMAL_VIDEO_FRAME_HEIGHT
 
-from catsekb.constants import DJ_PK, URL_NAME_GROUP, URL_NAME_ANIMAL, VK_GROUP_ID, CREATED, CREATED_KEY
+from catsekb.constants import DJ_PK, URL_NAME_GROUP, URL_NAME_ANIMAL, CREATED, CREATED_KEY
 from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
 from cats.validators import group_name_validator, background_y_position_validator
@@ -116,6 +116,7 @@ class Animal(Model):
     )
     tag = CharField(ANIMAL_KEY_TAG, max_length=32, blank=True, default='')
     vk_album_id = IntegerField(ANIMAL_KEY_VK_ALBUM_ID, blank=True, default=None, null=True)
+    vk_group_id = IntegerField('Id группы VK', blank=True, default=None, null=True)
     date_of_birth = DateField(null=True, default=None, blank=True)
     shelter_date = DateField(ANIMAL_KEY_SHELTER_DATE, null=True, default=None, blank=True)
     group = ForeignKey(Group, on_delete=CASCADE, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)
@@ -217,7 +218,7 @@ class Animal(Model):
 
     def get_vk_album_url(self):
         if self.vk_album_id:
-            return r"https://vk.com/album-{group_id}_{album_id}".format(group_id=VK_GROUP_ID, album_id=self.vk_album_id)
+            return r"https://vk.com/album-{group_id}_{album_id}".format(group_id=self.vk_group_id, album_id=self.vk_album_id)
         else:
             return None
 
@@ -235,7 +236,7 @@ class AnimalImage(Model):
     photo_id = IntegerField(ANIMAL_IMAGE_KEY_PHOTO_ID, blank=True, default=None, null=True)
     favourite = BooleanField(ANIMAL_IMAGE_KEY_FAVOURITE, default=False)
     background = BooleanField(ANIMAL_IMAGE_KEY_BACKGROUND, default=False)
-    created = DateField(ANIMAL_IMAGE_KEY_CREATED, null=True, default=None, blank=True)
+    created = DateField(ANIMAL_IMAGE_KEY_CREATED, null=True, default=None, blank=True)  # TODO: Выпилить
     background_y_position = IntegerField(
         ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION, blank=True, default=50, validators=[background_y_position_validator]
     )

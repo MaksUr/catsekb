@@ -2,7 +2,6 @@ from os.path import join
 
 from cats.update_scripts.all_update import open_json
 from cats.update_scripts.downloader.bd_to_json import save_json
-from catsekb.constants import VK_GROUP_ID
 
 try:
     import requests
@@ -13,7 +12,7 @@ except ImportError:
 JSON_NEWS = join('articles', 'articles_list', 'news.json')
 
 
-def get_wall_news(group_id=VK_GROUP_ID, access_token=None):
+def get_wall_news(group_id, access_token=None):
     if requests is None or access_token is None:
         return open_json(JSON_NEWS)
     group_id = -1 * group_id
@@ -29,7 +28,7 @@ def get_wall_news(group_id=VK_GROUP_ID, access_token=None):
     return news
 
 
-def get_post_by_id_list(posts_ids, token, group_id=VK_GROUP_ID):
+def get_post_by_id_list(posts_ids, token, group_id):
     if requests is None:
         return None
     group_id = -1 * group_id

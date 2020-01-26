@@ -1,5 +1,3 @@
-VK_GROUP_ID = 73666865
-
 # Captions
 CAPTION_ANIMAL_LIST_DEFAULT = 'Наши коты'
 

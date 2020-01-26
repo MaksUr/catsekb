@@ -10,7 +10,7 @@
 # foreign_key служит для связи текущей модели с другой моделью. Например модель - AnimalImage,
 # foreign_key: animal ссылается на модель Animal.
 # Это значит поле animal в AnimalImage относится к определенному Animal
-from catsekb.constants import SHOW, NAME, DESCRIPTION, VK_GROUP_ID, NO_CHOICE, CREATED_KEY, CREATED, UPDATED, \
+from catsekb.constants import SHOW, NAME, DESCRIPTION, NO_CHOICE, CREATED_KEY, CREATED, UPDATED, \
     UPDATED_KEY, IMAGE_BACKGROUND, IMAGE_KEY_BACKGROUND, IMAGE_KEY_BACKGROUND_HELP_TEXT, KEY_Y_POS, KEY_Y_POS_HELP_TEXT
 
 GALLERY_DEFAULT_ITEMS_COUNT = 9
@@ -120,7 +120,7 @@ ANIMAL_VK_ALBUM_URL = 'vk_album_url'
 ANIMAL_KEY_VK_ALBUM_URL = 'Ссылка на альбом в VK'
 ANIMAL_KEY_VK_ALBUM_URL_HELP_TEXT = 'Для изменения необходмо сохранить.'
 ANIMAL_VK_ALBUM_URL_WRONG_FORMAT = '''Ссылка имеет недопустимое значение. 
-Пример: https://vk.com/album-{group_id}_12345'''.format(group_id=VK_GROUP_ID)
+Пример: https://vk.com/album-54321_12345'''
 ANIMAL_VK_ALBUM_URL_IS_EMPTY = 'Необходимо заполнить поле "{VK_ALBUM_URL}"'.format(VK_ALBUM_URL=ANIMAL_KEY_VK_ALBUM_URL)
 
 

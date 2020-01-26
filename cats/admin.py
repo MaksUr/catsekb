@@ -139,10 +139,10 @@ class AnimalAdmin(admin.ModelAdmin):
     def get_form(self, request, obj=None, **kwargs):
         form = super(AnimalAdmin, self).get_form(request, obj=None, **kwargs)
         upd = request.GET.get('upd')
-        if upd and obj and obj.vk_album_id is not None:
+        if upd and obj and obj.vk_album_id is not None and obj.vk_group_id:
             form.update_form = upd
             if upd == ANIMAL_FORM_VK_UPDATE_PHOTO:
-                update_images_for_animal(obj, obj.vk_album_id)
+                update_images_for_animal(obj, obj.vk_group_id, obj.vk_album_id)
         return form
 
 admin.site.register(Animal, AnimalAdmin)
