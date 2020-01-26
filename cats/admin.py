@@ -7,7 +7,7 @@ from cats.cats_constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMA
     ANIMAL_SEX, ANIMAL_DAYS, ANIMAL_MONTHS, ANIMAL_YEARS, \
     ANIMAL_AGE_FIELD_SET, ANIMAL_SHOW, \
     ANIMAL_DESCRIPTION, GROUP_NAME, GROUP_SHOW, ANIMAL_LOCATION_STATUS, ANIMAL_TAG, ANIMAL_TAG_FIELD_SET, \
-    ANIMAL_TAG_DISPLAY, ANIMAL_KEY_TAG_DISPLAY, ANIMAL_IMAGE_IMAGE_THUMB, \
+    ANIMAL_TAG_DISPLAY, \
     ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND, \
     ANIMAL_IMAGE_BACKGROUND_Y_POSITION, ANIMAL_VK_IMPORT_SET, ANIMAL_VK_ALBUM_ID, \
     ANIMAL_VK_ALBUM_URL, \
@@ -15,7 +15,7 @@ from cats.cats_constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMA
     ANIMAL_IMAGE_PHOTO_ID, ANIMAL_IMAGE_IMAGE_URL_TAG, \
     ANIMAL_IMAGE_IMAGE_SMALL_URL_TAG, ANIMAL_IMAGE_CREATED, ANIMAL_SHELTER_DATE, \
     ANIMAL_KEY_FORM_VK_UPDATE_PHOTO_HELP_TEXT, ANIMAL_KEY_FORM_VK_UPDATE_INFO_HELP_TEXT, ANIMAL_FORM_VK_UPDATE_INFO, \
-    ANIMAL_KEY_FORM_VK_UPDATE_INFO, ANIMAL_KEY_TAG_DISPLAY_HELP_TEXT, ANIMAL_VIDEO_FIELD_SET, ANIMAL_VIDEO, \
+    ANIMAL_KEY_FORM_VK_UPDATE_INFO, ANIMAL_VIDEO_FIELD_SET, ANIMAL_VIDEO, \
     ANIMAL_VIDEO_DESCRIPTION, ANIMAL_VIDEO_SHOW, ANIMAL_VIDEO_PUT_TO_INDEX_PAGE
 from catsekb.constants import DJ_CLASSES_COLLAPSE, DJ_CLASSES, DJ_ID, CREATED
 from cats.forms import AnimalForm, AnimalImageForm, AnimalVideoForm
@@ -25,19 +25,19 @@ from cats.updater import update_images_for_animal
 UPDATE_BUTTON = '<a class="button" href="{link}?upd={upd}">Обновить</a><p class="help">{help}</p>'
 
 ANIMAL_IMAGE_FIELDS = (
-        ANIMAL_IMAGE_IMAGE_THUMB,
-        ANIMAL_IMAGE_IMAGE_URL_TAG,
-        ANIMAL_IMAGE_IMAGE_SMALL_URL_TAG,
-        ANIMAL_IMAGE_FAVOURITE,
-        ANIMAL_IMAGE_BACKGROUND,
-        ANIMAL_IMAGE_BACKGROUND_Y_POSITION,
-        ANIMAL_IMAGE_PHOTO_ID,
-        ANIMAL_IMAGE_CREATED,
+    'image_thumb',
+    ANIMAL_IMAGE_IMAGE_URL_TAG,
+    ANIMAL_IMAGE_IMAGE_SMALL_URL_TAG,
+    ANIMAL_IMAGE_FAVOURITE,
+    ANIMAL_IMAGE_BACKGROUND,
+    ANIMAL_IMAGE_BACKGROUND_Y_POSITION,
+    ANIMAL_IMAGE_PHOTO_ID,
+    ANIMAL_IMAGE_CREATED,
     )
 
 ANIMAL_IMAGE_READONLY_FIELDS = (ANIMAL_IMAGE_IMAGE_URL_TAG,
                                 ANIMAL_IMAGE_IMAGE_SMALL_URL_TAG,
-                                ANIMAL_IMAGE_IMAGE_THUMB,
+                                'image_thumb',
                                 ANIMAL_IMAGE_PHOTO_ID
                                 )
 
@@ -57,12 +57,12 @@ class ImageInline(admin.StackedInline):
 class AnimalAdmin(admin.ModelAdmin):
     def tag_display(self, obj):
         res = '<a href="{url}">{label}</a><p class="help">{help}</p>'.format(
-            url=obj.get_instagram_link(),
-            label=obj.get_hashtag_name(),
-            help=ANIMAL_KEY_TAG_DISPLAY_HELP_TEXT
+            url=obj.get_instagram_link() or '',
+            label=obj.get_hashtag_name() or '—',
+            help='Для обновления необходимо сохранить. Убедитесь в корректности ссылки.'
         )
         return mark_safe(res)
-    tag_display.short_description = ANIMAL_KEY_TAG_DISPLAY
+    tag_display.short_description = 'Текущий тег'
 
     def vk_update_photo(self, obj):
         return mark_safe(UPDATE_BUTTON.format(

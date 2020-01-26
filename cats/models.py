@@ -5,10 +5,10 @@ from django.db.models import Model, CharField, TextField, ForeignKey, DateTimeFi
     URLField, IntegerField, DateField, CASCADE
 # Create your models here.
 from django.urls import reverse
+from django.utils.safestring import mark_safe
 
 from cats.cats_constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_VERBOSE_NAME, \
-    ANIMAL_IMAGE_KEY_IMAGE_URL, HASHTAG_TEMPLATE_INSTAGRAM, \
-    HASHTAG_TEMPLATE, HASHTAG_SUFFIX, \
+    ANIMAL_IMAGE_KEY_IMAGE_URL, \
     ANIMAL_VERBOSE_NAME_PLURAL, ANIMAL_VERBOSE_NAME, ANIMAL_KEY_UPDATED, ANIMAL_KEY_CREATED, ANIMAL_KEY_SHOW, \
     ANIMAL_KEY_SEX, ANIMAL_KEY_NAME, \
     ANIMAL_BIRTHDAY_PRECISION_DAY, ANIMAL_BIRTHDAY_PRECISION_MONTH, ANIMAL_BIRTHDAY_PRECISION_YEAR, \
@@ -17,7 +17,7 @@ from cats.cats_constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_V
     ANIMAL_KEY_LOCATION_STATUS, ANIMAL_SEX_CHOICES, ANIMAL_BIRTHDAY_PRECISION_CHOICES, ANIMAL_LOCATION_STATUS_CHOICES, \
     ANIMAL_KEY_TAG, ANIMAL_IMAGE_KEY_BACKGROUND, ANIMAL_IMAGE_KEY_FAVOURITE, \
     ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION, ANIMAL_LOCATION_STATUS_CHOICES_D, ANIMAL_SEX_CHOICES_D, \
-    ANIMAL_KEY_VK_ALBUM_ID, ANIMAL_IMAGE_KEY_PHOTO_ID, ANIMAL_IMAGE_KEY_IMAGE_SMALL_URL, ANIMAL_IMAGE_KEY_IMAGE_THUMB, \
+    ANIMAL_KEY_VK_ALBUM_ID, ANIMAL_IMAGE_KEY_PHOTO_ID, ANIMAL_IMAGE_KEY_IMAGE_SMALL_URL, \
     ANIMAL_IMAGE_KEY_CREATED, ANIMAL_KEY_SHELTER_DATE, ANIMAL_DAYS, ANIMAL_MONTHS, \
     ANIMAL_YEARS, GROUP_ANIMALS_PREVIEW_COUNT, ANIMAL_VIDEO_VERBOSE_NAME, ANIMAL_VIDEO_VERBOSE_NAME_PLURAL, \
     ANIMAL_VIDEO_KEY_VIDEO_URL, ANIMAL_VIDEO_KEY_DESCRIPTION, ANIMAL_VIDEO_FRAME_TEMPLATE, \
@@ -144,21 +144,13 @@ class Animal(Model):
         else:
             return str(self.id)
 
-    def get_name_for_tag(self):
-        res = self.tag or self.__str__()
-        return res.replace(' ', '_')
-
     def get_hashtag_name(self):
-        name = self.get_name_for_tag()
-        if name:
-            template = HASHTAG_TEMPLATE
-            return template.format(name=name, suffix=HASHTAG_SUFFIX)
+        if self.tag:
+            return '#{name}'.format(name=self.tag)
 
     def get_instagram_link(self):
-        name = self.get_name_for_tag()
-        if name:
-            template = HASHTAG_TEMPLATE_INSTAGRAM
-            return template.format(name=name, suffix=HASHTAG_SUFFIX)
+        if self.tag:
+            return 'https://www.instagram.com/explore/tags/{name}/'.format(name=self.tag)
 
     def get_main_image(self):
         """
@@ -244,17 +236,15 @@ class AnimalImage(Model):
     def image_thumb(self):
         # TODO: edit view
         image_url = self.image_small_url or self.image_url
-        return '<img src="%s" style="height: 200px">' % image_url
-    image_thumb.allow_tags = True
-    image_thumb.short_description = ANIMAL_IMAGE_KEY_IMAGE_THUMB
+        return mark_safe('<img src="%s" style="height: 200px">' % image_url)
+    image_thumb.short_description = 'Фото'
 
     def image_url_tag(self):
         if self.image_url:
             res = '<a href="{url}">{label}</a>'.format(url=self.image_url, label=self.image_url)
         else:
             res = ''
-        return res
-    image_url_tag.allow_tags = True
+        return mark_safe(res)
     image_url_tag.short_description = ANIMAL_IMAGE_KEY_IMAGE_URL
 
     def image_small_url_tag(self):
@@ -262,8 +252,7 @@ class AnimalImage(Model):
             res = '<a href="{url}">{label}</a>'.format(url=self.image_small_url, label=self.image_small_url)
         else:
             res = ''
-        return res
-    image_small_url_tag.allow_tags = True
+        return mark_safe(res)
     image_small_url_tag.short_description = ANIMAL_IMAGE_KEY_IMAGE_SMALL_URL
 
     def get_background_style(self):

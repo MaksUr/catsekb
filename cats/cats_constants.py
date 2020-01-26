@@ -69,11 +69,6 @@ ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION_HELP_TEXT = KEY_Y_POS_HELP_TEXT
 
 ANIMAL_IMAGE_VALIDATION_WRONG_Y_POS = '{val} имеет недопустимое значение. Значение должно быть от 0 до 100.'
 
-# image_thumb
-ANIMAL_IMAGE_IMAGE_THUMB = 'image_thumb'
-ANIMAL_IMAGE_KEY_IMAGE_THUMB = 'Фото'
-ANIMAL_IMAGE_KEY_IMAGE_THUMB_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_IMAGE_THUMB'
-
 
 # class Animal
 ANIMAL_VERBOSE_NAME_PLURAL = 'Питомцы'
@@ -86,18 +81,10 @@ ANIMAL_TAG_FIELD_SET = 'Настройка тега'
 
 ANIMAL_TAG = 'tag'
 ANIMAL_KEY_TAG = 'Тэг животного'
-ANIMAL_KEY_TAG_HELP_TEXT = 'При заполнении этого поля, будет использоваться данный пользовательский тег. ' \
-                           'Символ "#" и окончание "_catsekb" подставляется автоматически. Пример заполнения: "Смурфик"'
 
 # tag display
 
 ANIMAL_TAG_DISPLAY = 'tag_display'
-ANIMAL_KEY_TAG_DISPLAY = 'Текущий тег'
-ANIMAL_KEY_TAG_DISPLAY_HELP_TEXT = 'Для обновления необходимо сохранить. Убедитесь в корректности ссылки.'
-
-HASHTAG_TEMPLATE_INSTAGRAM = 'https://www.instagram.com/explore/tags/{name}_{suffix}/'
-HASHTAG_TEMPLATE = '#{name}_{suffix}'
-HASHTAG_SUFFIX = 'catsekb'
 
 # name
 ANIMAL_NAME = 'name'
