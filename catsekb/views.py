@@ -6,7 +6,7 @@ from catsekb.view_functions import get_important_news
 PROJECT_MENU_ITEMS_CONTEXT = {
     'projects_menu_items': [
         {'caption': 'CatsEkb', 'url': reverse_lazy('catsekb_page')},
-        {'caption': 'HaskyEkb', 'url': '#'},
+        {'caption': 'HuskyEkb', 'url': '#'},
         {'caption': 'Rotvodom', 'url': '#'},
     ]
 }

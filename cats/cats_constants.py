@@ -78,7 +78,6 @@ ANIMAL_IMAGE_KEY_IMAGE_THUMB_HELP_TEXT = '_help_text ANIMAL_IMAGE_KEY_IMAGE_THUM
 # class Animal
 ANIMAL_VERBOSE_NAME_PLURAL = 'Питомцы'
 ANIMAL_VERBOSE_NAME = 'Питомец'
-ANIMAL_MAIN_FIELD_SET = 'Общая информация'
 ANIMAL_VK_IMPORT_SET = 'Импорт данных из группы в VK'
 ANIMAL_VIDEO_FIELD_SET = 'Видео'
 
@@ -219,12 +218,6 @@ ANIMAL_KEY_VIDEO_HELP_TEXT = 'Видео на котором есть питом
 ANIMAL_SHOW = SHOW
 ANIMAL_KEY_SHOW = 'Показывать котика'
 ANIMAL_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удаления или чтобы скрыть.'
-
-# valid_info
-ANIMAL_VALID_INFO = 'valid_info'
-ANIMAL_KEY_VALID_INFO = 'Проверено'
-ANIMAL_KEY_VALID_INFO_HELP_TEXT = 'Информация проверена вручную.'
-
 
 # created
 ANIMAL_CREATED = CREATED

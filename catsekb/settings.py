@@ -180,7 +180,7 @@ CONSTANCE_CONFIG = {
         0,
         'Коррекция числа пристроенных котов'
     ),
-    'HASKY_COUNT_CORRECTION': (
+    'HUSKY_COUNT_CORRECTION': (
         0,
         'Коррекция числа пристроенных хаски'
     ),

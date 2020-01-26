@@ -1,10 +1,11 @@
 from django.contrib import admin
 # Register your models here.
 from django.urls import reverse
+from django.utils.safestring import mark_safe
 
 from cats.cats_constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMAL_UPDATED, ANIMAL_NAME, ANIMAL_GROUP, \
     ANIMAL_SEX, ANIMAL_DAYS, ANIMAL_MONTHS, ANIMAL_YEARS, \
-    ANIMAL_AGE_FIELD_SET, ANIMAL_MAIN_FIELD_SET, ANIMAL_SHOW, \
+    ANIMAL_AGE_FIELD_SET, ANIMAL_SHOW, \
     ANIMAL_DESCRIPTION, GROUP_NAME, GROUP_SHOW, ANIMAL_LOCATION_STATUS, ANIMAL_TAG, ANIMAL_TAG_FIELD_SET, \
     ANIMAL_TAG_DISPLAY, ANIMAL_KEY_TAG_DISPLAY, ANIMAL_IMAGE_IMAGE_THUMB, \
     ANIMAL_IMAGE_FAVOURITE, ANIMAL_IMAGE_BACKGROUND, \
@@ -12,11 +13,11 @@ from cats.cats_constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMA
     ANIMAL_VK_ALBUM_URL, \
     ANIMAL_FORM_VK_UPDATE_PHOTO, ANIMAL_KEY_FORM_VK_UPDATE_PHOTO, \
     ANIMAL_IMAGE_PHOTO_ID, ANIMAL_IMAGE_IMAGE_URL_TAG, \
-    ANIMAL_IMAGE_IMAGE_SMALL_URL_TAG, ANIMAL_IMAGE_CREATED, ANIMAL_SHELTER_DATE, ANIMAL_VALID_INFO, \
+    ANIMAL_IMAGE_IMAGE_SMALL_URL_TAG, ANIMAL_IMAGE_CREATED, ANIMAL_SHELTER_DATE, \
     ANIMAL_KEY_FORM_VK_UPDATE_PHOTO_HELP_TEXT, ANIMAL_KEY_FORM_VK_UPDATE_INFO_HELP_TEXT, ANIMAL_FORM_VK_UPDATE_INFO, \
     ANIMAL_KEY_FORM_VK_UPDATE_INFO, ANIMAL_KEY_TAG_DISPLAY_HELP_TEXT, ANIMAL_VIDEO_FIELD_SET, ANIMAL_VIDEO, \
     ANIMAL_VIDEO_DESCRIPTION, ANIMAL_VIDEO_SHOW, ANIMAL_VIDEO_PUT_TO_INDEX_PAGE
-from catsekb.constants import DJ_CLASSES_COLLAPSE, DJ_CLASSES, DJ_FIELDS, DJ_ID, CREATED
+from catsekb.constants import DJ_CLASSES_COLLAPSE, DJ_CLASSES, DJ_ID, CREATED
 from cats.forms import AnimalForm, AnimalImageForm, AnimalVideoForm
 from cats.models import Animal, AnimalImage, Group, AnimalVideo
 from cats.updater import update_images_for_animal
@@ -60,34 +61,31 @@ class AnimalAdmin(admin.ModelAdmin):
             label=obj.get_hashtag_name(),
             help=ANIMAL_KEY_TAG_DISPLAY_HELP_TEXT
         )
-        return res
-    tag_display.allow_tags = True
+        return mark_safe(res)
     tag_display.short_description = ANIMAL_KEY_TAG_DISPLAY
 
     def vk_update_photo(self, obj):
-        return UPDATE_BUTTON.format(
+        return mark_safe(UPDATE_BUTTON.format(
             link=reverse('admin:cats_animal_change', args=(obj.pk,)),
             upd=ANIMAL_FORM_VK_UPDATE_PHOTO,
             help=ANIMAL_KEY_FORM_VK_UPDATE_PHOTO_HELP_TEXT
-        )
+        ))
     vk_update_photo.short_description = ANIMAL_KEY_FORM_VK_UPDATE_PHOTO
-    vk_update_photo.allow_tags = True
 
     def vk_update_info(self, obj):
-        return UPDATE_BUTTON.format(
+        return mark_safe(UPDATE_BUTTON.format(
             link=reverse('admin:cats_animal_change', args=(obj.pk,)),
             upd=ANIMAL_FORM_VK_UPDATE_INFO,
             help=ANIMAL_KEY_FORM_VK_UPDATE_INFO_HELP_TEXT
-        )
+        ))
     vk_update_info.short_description = ANIMAL_KEY_FORM_VK_UPDATE_INFO
-    vk_update_info.allow_tags = True
 
-    list_display = (DJ_ID, ANIMAL_NAME, ANIMAL_LOCATION_STATUS, ANIMAL_SEX, ANIMAL_SHOW, ANIMAL_VALID_INFO)
+    list_display = (DJ_ID, ANIMAL_NAME, 'project', ANIMAL_LOCATION_STATUS, ANIMAL_SEX, ANIMAL_SHOW)
     list_display_links = (ANIMAL_NAME, DJ_ID)
     fieldsets = (
         (
             ANIMAL_VK_IMPORT_SET, {
-                DJ_FIELDS: (
+                'fields': (
                     ANIMAL_FORM_VK_UPDATE_PHOTO,
                     ANIMAL_FORM_VK_UPDATE_INFO,
                     ANIMAL_VK_ALBUM_ID,
@@ -97,11 +95,11 @@ class AnimalAdmin(admin.ModelAdmin):
             },
         ),
         (
-            ANIMAL_MAIN_FIELD_SET, {
-                DJ_FIELDS: (
-                    ANIMAL_NAME, ANIMAL_LOCATION_STATUS,
+            'Общая инфомация', {
+                'fields': (
+                    ANIMAL_NAME, 'project', ANIMAL_LOCATION_STATUS,
                     ANIMAL_SHELTER_DATE,
-                    ANIMAL_SHOW, ANIMAL_DESCRIPTION, ANIMAL_VALID_INFO,
+                    ANIMAL_SHOW, ANIMAL_DESCRIPTION,
                     ANIMAL_GROUP, ANIMAL_SEX,
                     ANIMAL_CREATED, ANIMAL_UPDATED,
                 ),
@@ -109,13 +107,13 @@ class AnimalAdmin(admin.ModelAdmin):
         ),
         (
             ANIMAL_TAG_FIELD_SET, {
-                DJ_FIELDS: (ANIMAL_TAG, ANIMAL_TAG_DISPLAY),
+                'fields': (ANIMAL_TAG, ANIMAL_TAG_DISPLAY),
                 DJ_CLASSES: (DJ_CLASSES_COLLAPSE,),
             },
         ),
         (
             ANIMAL_AGE_FIELD_SET, {
-                DJ_FIELDS: (
+                'fields': (
                     (ANIMAL_YEARS, ANIMAL_MONTHS, ANIMAL_DAYS),
                 ),
                 DJ_CLASSES: (DJ_CLASSES_COLLAPSE,)
@@ -123,7 +121,7 @@ class AnimalAdmin(admin.ModelAdmin):
         ),
         (
             ANIMAL_VIDEO_FIELD_SET, {
-                DJ_FIELDS: (
+                'fields': (
                     (ANIMAL_VIDEO,),
                 ),
                 DJ_CLASSES: (DJ_CLASSES_COLLAPSE,)

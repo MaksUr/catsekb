@@ -1,7 +1,7 @@
 import json
 from os.path import join, abspath
 
-from cats.cats_constants import ANIMAL_VK_ALBUM_ID, ANIMAL_VALID_INFO
+from cats.cats_constants import ANIMAL_VK_ALBUM_ID
 from catsekb.constants import VK_GROUP_ID, TITLE
 from cats.models import Animal
 from cats.update_scripts.vk_response_parser import get_animal_kwargs_from_vk_response
@@ -67,9 +67,7 @@ def update_all_animals_from_vk(conf_pth=None):
         ):
             continue
 
-        animal, created = Animal.objects.get_or_create(**{ANIMAL_VK_ALBUM_ID: aid})
-        if animal.__getattribute__(ANIMAL_VALID_INFO) is True or created is not True:
-            continue
+        animal, created = Animal.objects.get_or_create(**{ANIMAL_VK_ALBUM_ID: aid})        
         kwargs = get_animal_kwargs_from_vk_response({RESPONSE: (item,)})
         for k in kwargs:
             animal.__setattr__(k, kwargs[k])

@@ -173,10 +173,9 @@ def get_shelter_animals(show_permission, count=GALLERY_DEFAULT_ITEMS_COUNT):
 
 
 def get_home_animals_count():
-    HOME_ANIMALS_COUNT = 0  # TODO: Вынести в базу и выпилить
     get_animals_from_query(
         query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_HOME}, show_permission=True
     ).count()
-    return HOME_ANIMALS_COUNT or get_animals_from_query(
+    return get_animals_from_query(
         query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_HOME}, show_permission=True
     ).count()

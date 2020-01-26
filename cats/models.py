@@ -18,7 +18,7 @@ from cats.cats_constants import ANIMAL_IMAGE_VERBOSE_NAME_PLURAL, ANIMAL_IMAGE_V
     ANIMAL_KEY_TAG, ANIMAL_IMAGE_KEY_BACKGROUND, ANIMAL_IMAGE_KEY_FAVOURITE, \
     ANIMAL_IMAGE_KEY_BACKGROUND_Y_POSITION, ANIMAL_LOCATION_STATUS_CHOICES_D, ANIMAL_SEX_CHOICES_D, \
     ANIMAL_KEY_VK_ALBUM_ID, ANIMAL_IMAGE_KEY_PHOTO_ID, ANIMAL_IMAGE_KEY_IMAGE_SMALL_URL, ANIMAL_IMAGE_KEY_IMAGE_THUMB, \
-    ANIMAL_IMAGE_KEY_CREATED, ANIMAL_KEY_SHELTER_DATE, ANIMAL_KEY_VALID_INFO, ANIMAL_DAYS, ANIMAL_MONTHS, \
+    ANIMAL_IMAGE_KEY_CREATED, ANIMAL_KEY_SHELTER_DATE, ANIMAL_DAYS, ANIMAL_MONTHS, \
     ANIMAL_YEARS, GROUP_ANIMALS_PREVIEW_COUNT, ANIMAL_VIDEO_VERBOSE_NAME, ANIMAL_VIDEO_VERBOSE_NAME_PLURAL, \
     ANIMAL_VIDEO_KEY_VIDEO_URL, ANIMAL_VIDEO_KEY_DESCRIPTION, ANIMAL_VIDEO_FRAME_TEMPLATE, \
     ANIMAL_VIDEO_YOUTUBE_EMBED_URL, ANIMAL_VIDEO_KEY_SHOW, ANIMAL_VIDEO_KEY_PUT_TO_INDEX_PAGE, \
@@ -29,8 +29,15 @@ from cats.query import AnimalQuerySet
 from cats.time import calc_age_uptoday
 from cats.validators import group_name_validator, background_y_position_validator
 
+PROJECT_CHOICES = (
+    ('catsekb', 'CatsEkb'),
+    ('huskyekb', 'HuskyEkb'),
+    ('rotvodom', 'Rotvodom'),
+)
+
 
 class Group(Model):
+    # TODO: Выпилить группу
     name = CharField(GROUP_KEY_NAME, max_length=32, unique=True, validators=[group_name_validator])
     description = TextField(GROUP_KEY_DESCRIPTION, blank=True, default=None, max_length=100)
     show = BooleanField(GROUP_KEY_SHOW, default=True)
@@ -101,8 +108,9 @@ class Animal(Model):
 
     # fields
     name = CharField(ANIMAL_KEY_NAME, max_length=32, blank=True, default='')
-    description = TextField(ANIMAL_KEY_DESCRIPTION, blank=True, default='')
+    description = TextField(ANIMAL_KEY_DESCRIPTION, blank=True, default='')  # TODO: ReachTextField
     sex = CharField(ANIMAL_KEY_SEX, max_length=1, choices=ANIMAL_SEX_CHOICES[1:], blank=True, default='')
+    project = CharField('Проект', max_length=10, choices=PROJECT_CHOICES)
     birthday_precision = CharField(
         max_length=1, choices=ANIMAL_BIRTHDAY_PRECISION_CHOICES, null=True, default=''
     )
@@ -113,7 +121,6 @@ class Animal(Model):
     group = ForeignKey(Group, on_delete=CASCADE, verbose_name=Group._meta.verbose_name, blank=True, null=True, default=None)
     video = ForeignKey(AnimalVideo, on_delete=CASCADE, verbose_name=AnimalVideo._meta.verbose_name, blank=True, null=True, default=None)
     show = BooleanField(ANIMAL_KEY_SHOW, default=True)
-    valid_info = BooleanField(ANIMAL_KEY_VALID_INFO, default=False)
     location_status = CharField(
         ANIMAL_KEY_LOCATION_STATUS,
         max_length=1,
