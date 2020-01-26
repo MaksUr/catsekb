@@ -1,11 +1,11 @@
-from django.shortcuts import render
 from constance import config
-from cats.cats_constants import ANIMAL_LOCATION_STATUS, GROUP_INSTANCE_SHELTER_NAME, \
-    ANIMAL_LOCATION_STATUS_DEAD, ANIMAL_VIDEO_PUT_TO_INDEX_PAGE
+from django.shortcuts import render
+
+from cats.cats_constants import ANIMAL_VIDEO_PUT_TO_INDEX_PAGE
 from cats.models import AnimalVideo
 from catsekb.constants import URL_NAME_INDEX_TITLE, INDEX, CREATED
-from catsekb.view_functions import get_base_catsekb_context, get_important_news, get_animals_from_query, get_last_articles, \
-    get_objects_from_query, get_shelter_animals, get_home_animals_count
+from catsekb.view_functions import get_base_catsekb_context, get_important_news, get_animals_from_query, \
+    get_last_articles, get_objects_from_query, get_shelter_animals, get_home_animals_count
 
 
 def catsekb_page_view(request):
@@ -18,10 +18,6 @@ def catsekb_page_view(request):
     context['articles'] = get_last_articles(2)
     context['home_animals_count'] = get_home_animals_count() + config.CATS_COUNT_CORRECTION
     context['animals_count'] = get_animals_from_query(query=dict(), show_permission=True).count()
-    if show_permission is True:
-        context['dying_animals_count'] = get_animals_from_query(
-            query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_DEAD}, show_permission=True
-        ).count()
     # TODO: add main parameter
     context['main_video'] = get_objects_from_query(
         model_cls=AnimalVideo, query={ANIMAL_VIDEO_PUT_TO_INDEX_PAGE: True},

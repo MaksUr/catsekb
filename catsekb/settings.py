@@ -39,6 +39,7 @@ else:
 
 INSTALLED_APPS = [
     'catsekb_page.apps.CatsekbPageConfig',
+    'huskyekb_page.apps.HuskyekbPageConfig',
     'cats.apps.CatsConfig',
     'articles.apps.ArticlesConfig',
 
