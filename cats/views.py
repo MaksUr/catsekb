@@ -15,7 +15,7 @@ from cats.query import ANIMAL_QUERY_KEYS
 from catsekb.constants import CAPTION_ANIMAL_LIST_DEFAULT, ANIMALS, GET_PAR_KEY_PAGE, GET_PAR_KEY_PER_PAGE, \
     GET_PAR_VAL_PAGE, \
     GET_PAR_KEY_FILTER, DJ_PK, DJ_PAGE, DJ_OBJECT, URL_NAME_GROUP, NAME, DESCRIPTION, URL_NAME_GROUPS_TITLE
-from catsekb.view_functions import get_objects_from_query, get_base_context, get_group, get_animals_from_query, \
+from catsekb.view_functions import get_objects_from_query, get_base_catsekb_context, get_group, get_animals_from_query, \
     get_shelter_animals
 
 
@@ -62,7 +62,7 @@ class AnimalListView(ListView, FormMixin):
             context['description'] = self.description
             del context['form']
         extra_title = context['caption']
-        context.update(get_base_context(show_permission=show_permission, active_menu=ANIMALS, extra_title=extra_title))
+        context.update(get_base_catsekb_context(show_permission=show_permission, active_menu=ANIMALS, extra_title=extra_title))
         return context
 
     def get_filter_string(self, update_dict=None):
@@ -104,7 +104,7 @@ class AnimalDetailView(DetailView):
     def get_context_data(self, **kwargs):
         show_permission = self.request.user.is_authenticated
         context = DetailView.get_context_data(self, **kwargs)
-        context.update(get_base_context(show_permission=show_permission, active_menu=ANIMALS, extra_title=self.object.__str__()))
+        context.update(get_base_catsekb_context(show_permission=show_permission, active_menu=ANIMALS, extra_title=self.object.__str__()))
         animal = kwargs[DJ_OBJECT]
         if show_permission is False and animal.show is False:
             raise Http404("Нет прав для просмотра этой страницы")
@@ -148,7 +148,7 @@ class GroupListView(ListView):
     def get_context_data(self, **kwargs):
         show_permission = self.request.user.is_authenticated
         context = ListView.get_context_data(self, **kwargs)
-        context.update(get_base_context(show_permission=show_permission, active_menu=ANIMALS, extra_title=URL_NAME_GROUPS_TITLE))
+        context.update(get_base_catsekb_context(show_permission=show_permission, active_menu=ANIMALS, extra_title=URL_NAME_GROUPS_TITLE))
 
         context['shelter_caption'] = GROUP_INSTANCE_SHELTER_NAME
         context['shelter_url'] = reverse(URL_NAME_GROUP, kwargs={DJ_PK: GROUP_INSTANCE_SHELTER_ID})

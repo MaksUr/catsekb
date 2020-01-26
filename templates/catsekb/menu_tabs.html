@@ -1,13 +1,7 @@
-{# active_menu [index, animal, helpful, contacts] #}
-{# groups #}
-{# helps #}
-{# menu_class #}
-
 {% url 'index' as index_url %}
 {% include "catsekb/menu_tab.html" with name='index' active=active_menu abs_url=index_url url_caption='Главная' %}
 
-{% url 'catsekb_page' as catsekb_url %}
-{% include "catsekb/menu_tab.html" with active=active_menu abs_url=catsekb_url url_caption='CatksEkb' %}
+{% include "catsekb/menu_tab.html" with name='projects' url_caption='Наши проекты' menu_items=projects_menu_items menu_class=menu_class %}
 
 {% url 'news' as news_url %}
 {% include "catsekb/menu_tab.html" with name='news' active=active_menu abs_url=news_url url_caption='Наши новости' %}

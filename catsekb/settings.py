@@ -166,7 +166,7 @@ CONSTANCE_CONFIG = {
             ВКонтакте:&nbsp;<a href="https://vk.com/catsekb_vk" target="_blank">https://vk.com/catsekb_vk</a><br />
             Facebook:&nbsp;<a href="https://www.facebook.com/cats.ekb" target="_blank">https://www.facebook.com/cats.ekb</a><br />
             Одноклассники:&nbsp;<a href="https://ok.ru/catsekb" target="_blank">https://ok.ru/catsekb</a><br />
-            Email: сatsekb@gmail.com
+            Email: сatsekb@gmail.com<br />
         </p>""",
         'Тут необходимо указать текст, который будет отображаться на странице "Контакты"',
         'editable_content'

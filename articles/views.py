@@ -13,7 +13,7 @@ from cats.models import AnimalVideo
 from catsekb.constants import ARTICLES, DJ_ID, URL_NAME_SUBJECTS_TITLE, URL_NAME_SUBJECT_TITLE, \
     SHOW, URL_NAME_NEWS_FEED_TITLE, GET_PAR_KEY_PER_PAGE, \
     GET_PAR_VAL_PAGE, GET_PAR_KEY_PAGE, URL_NAME_SUBJECTS_FEED, URL_NAME_VIDEO_TITLE, ANIMALS
-from catsekb.view_functions import get_base_context, get_objects_from_query
+from catsekb.view_functions import get_base_catsekb_context, get_objects_from_query
 
 
 class AbstractFeedListView(ListView):
@@ -33,7 +33,7 @@ class AbstractFeedListView(ListView):
     def get_context_data(self, **kwargs):
         show_permission = self.request.user.is_authenticated
         context = super(AbstractFeedListView, self).get_context_data(**kwargs)
-        context.update(get_base_context(show_permission=show_permission, active_menu=self.active_menu, extra_title=self.title))
+        context.update(get_base_catsekb_context(show_permission=show_permission, active_menu=self.active_menu, extra_title=self.title))
         context['caption'] = self.title
         return context
 
@@ -111,7 +111,7 @@ class SubjectDetailView(DetailView):
         show_permission = self.request.user.is_authenticated
         context = DetailView.get_context_data(self, **kwargs)
         context.update(
-            get_base_context(
+            get_base_catsekb_context(
                 show_permission=show_permission,
                 active_menu=self.active_menu,
                 extra_title=URL_NAME_SUBJECT_TITLE.format(subj=self.object.name)))
@@ -141,7 +141,7 @@ class AbstractArticleDetailView(DetailView):
         show_permission = self.request.user.is_authenticated
         context = DetailView.get_context_data(self, **kwargs)
         context.update(
-            get_base_context(
+            get_base_catsekb_context(
                 show_permission=show_permission,
                 active_menu=self.active_menu,
                 extra_title=self.object.title
