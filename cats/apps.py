@@ -1,8 +1,8 @@
 from django.apps import AppConfig
 
-from cats.cats_constants import APPLICATION_VERBOSE_NAME
-
 
 class CatsConfig(AppConfig):
+    # TODO: Переименовать cats в pets
+    # Содержит сущность "Питомец"
     name = 'cats'
-    verbose_name = APPLICATION_VERBOSE_NAME
+    verbose_name = 'Питомцы'
