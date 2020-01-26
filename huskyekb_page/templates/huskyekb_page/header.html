@@ -1,0 +1,37 @@
+{# groups #}
+{# helps #}
+{# active_menu #}
+{# background_style? #}
+{# background_image_file? #}
+{% load static %}
+<header style="
+    {% if background_style %}
+        {{ background_style }}
+    {% else %}
+        background-image: url({% static background_image_file|default:"catsekb/dist/img/husky_header_small.jpg" %});
+    {% endif %}
+">
+    <div class="header_layer font">
+        <div class="container-fluid">
+            <div class="row">
+                    <div class="main_menu mid">
+                        <a href="{% url 'catsekb_page' %}">
+                            <img src="{% static 'catsekb/dist/img/huskyekb_logo.svg' %}" class="logo">
+                        </a>
+                        <h1>
+                            Возьми хаски из приюта!
+                        </h1>
+                    </div>
+                <div class="hidden-xs col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-8">
+                    <nav>
+                        <ul class="menu mid">
+                            {% include "huskyekb_page/menu_tabs.html" with menu_class='menu_opening' active_menu=active_menu groups=groups helps=helps %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="arrow_both">
+    </div>
+</header>

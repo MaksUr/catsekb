@@ -1,0 +1,70 @@
+{# group_list #}
+{# helpful_info_list #}
+{# background_image #}
+{# background_image_file #}
+{# active_menu #}
+{# extra_title #}
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="yandex-verification" content="cffc23dc3ca5fc7e" />
+    {% block meta %}<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">{% endblock meta %}
+    {% block base_title %}
+    <title>
+        {% block title %}CatsEkb{% if extra_title %} - {{ extra_title }}{% endif %}{% endblock title %}
+    </title>
+    {% endblock base_title %}
+
+    <link rel="shortcut icon" type="image/png" href="{% static 'catsekb/dist/img/favicon.png' %}">
+
+    {# Base CSS #}
+    {% block base_css %}
+        <link rel="stylesheet" type="text/css" href="{% static "catsekb/dist/css/base.min.css" %}">
+        <link href="https://fonts.googleapis.com/css?family=Neucha|Open+Sans:400,600" rel="stylesheet">
+    {% endblock base_css %}   
+
+    {# Custom CSS #}
+    {% block css %}{% endblock css %}
+
+
+    {# Custom head JS #}
+    {% block head_js %}{% endblock head_js %}
+
+</head>
+<body {% block body_attr %}{% endblock body_attr %}>
+
+    {# Top navigation bar #}
+
+    {% block topbar %}
+        {% include 'catsekb_page/topbar.html' with groups=group_list helps=helpful_info_list active_menu=active_menu %}
+    {% endblock topbar %}
+
+    {# Header #}
+    {% block header %}
+        {% include 'catsekb_page/header.html' with groups=group_list helps=helpful_info_list background_style=background_image.get_background_style background_image_file=background_image_file active_menu=active_menu %}
+    {% endblock header %}
+
+    {# Main content goes here #}
+    {% block base_body %}{% endblock base_body %}
+
+    {# Footer #}
+    {% block footer %}
+        {% include 'catsekb_page/footer.html' %}
+    {% endblock footer %}
+
+    {# Base JS #}
+    {% block base_js %}
+        <script type="text/javascript" src="{% static "catsekb/dist/js/script.js" %}"></script>
+    {% endblock base_js %}
+
+    {# Custom JS #}
+    {% block custom_js %}{% endblock custom_js %}
+    <!--[if !IE]><!-->
+        <script>if(/*@cc_on!@*/false){document.body.classList.add('can-hover')}</script>
+    <!--<![endif]-->
+</body>
+</html>

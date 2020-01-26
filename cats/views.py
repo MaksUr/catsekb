@@ -23,7 +23,7 @@ class AnimalListView(ListView, FormMixin):
     paginate_by = GALLERY_DEFAULT_ITEMS_COUNT
     model = Animal
     form_class = FilterForm
-    template_name = 'cats/animal_list.html'
+    template_name = 'catsekb_page/animal_list.html'
     caption = CAPTION_ANIMAL_LIST_DEFAULT
     description = ''
     show_filter = False
