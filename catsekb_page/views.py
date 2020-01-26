@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from constance import config
 from cats.cats_constants import ANIMAL_LOCATION_STATUS, GROUP_INSTANCE_SHELTER_NAME, \
     ANIMAL_LOCATION_STATUS_DEAD, ANIMAL_VIDEO_PUT_TO_INDEX_PAGE
 from cats.models import AnimalVideo
@@ -13,11 +13,10 @@ def catsekb_page_view(request):
     context = get_base_catsekb_context(show_permission=show_permission, active_menu=INDEX, extra_title=URL_NAME_INDEX_TITLE)
     shelter_animals, shelter_animals_count = get_shelter_animals(show_permission=show_permission)
     context['shelter_animals'] = shelter_animals
-    context['shelter_caption'] = GROUP_INSTANCE_SHELTER_NAME
     context['shelter_animals_count'] = shelter_animals_count
     context['important_news'] = get_important_news()
     context['articles'] = get_last_articles(2)
-    context['home_animals_count'] = get_home_animals_count() + 77
+    context['home_animals_count'] = get_home_animals_count() + config.CATS_COUNT_CORRECTION
     context['animals_count'] = get_animals_from_query(query=dict(), show_permission=True).count()
     if show_permission is True:
         context['dying_animals_count'] = get_animals_from_query(
