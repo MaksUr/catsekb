@@ -190,10 +190,10 @@ class AnimalForm(forms.ModelForm):
 
     def clean_name(self):
         name = self.cleaned_data.get(ANIMAL_NAME, None)
+        project = self.cleaned_data.get('project', None)
         if name == "" or self.instance.name == name:
             pass
-        elif Animal.objects.filter(name=name).exists():
-            # TODO: Сделать проверку на уникальность, включая project
+        elif Animal.objects.filter(name=name, project=project).exists():
             message = ANIMAL_FORM_VALIDATION_ERROR_NAME_ALREADY_EXIST.format(name=name)
             raise ValidationError(message)
         return name

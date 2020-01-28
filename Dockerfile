@@ -21,6 +21,9 @@ WORKDIR /catsekb.ru
 COPY catsekb ./catsekb
 COPY articles ./articles
 COPY cats ./cats
+COPY catsekb_page ./catsekb_page
+COPY huskyekb_page ./huskyekb_page
+COPY rotvodom_page ./rotvodom_page
 COPY static ./static
 COPY templates ./templates
 COPY manage.py ./

@@ -100,7 +100,7 @@ class AnimalListView(ListView, FormMixin):
 
 
 class AnimalDetailView(DetailView):
-    # template animal_detail
+    template_name = 'catsekb_page/animal_detail.html'
     model = Animal
 
     def get_context_data(self, **kwargs):
@@ -114,7 +114,7 @@ class AnimalDetailView(DetailView):
         if animals_query:
             animals = get_animals_from_query(animals_query, show_permission=show_permission)
             context[DJ_PAGE] = self.get_animal_page(animals, animal)
-        shelter_animals, shelter_animals_count = get_shelter_animals(show_permission=show_permission, count=9)  # TODO: project
+        shelter_animals, shelter_animals_count = get_shelter_animals(show_permission=show_permission, count=9)
         context['shelter_animals'] = shelter_animals
         context['shelter_caption'] = GROUP_INSTANCE_SHELTER_NAME
         return context

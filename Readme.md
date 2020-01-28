@@ -11,8 +11,8 @@
             -e POSTGRES_USER=catsekb \
             -e POSTGRES_PASSWORD=PSWD \
             --network=mw \
-            -v ~/rep/sites/catsekb/postgres:/var/lib/postgresql/data \
-            postgres:11.6
+            -v /srv/catsekb.ru/postgres:/var/lib/postgresql/data \
+            postgres:11.2
     ```
 - запуск контейнера для локальной разработки c постгресс:
     ```
@@ -21,15 +21,15 @@
         --rm \
         -p 8000:80 \
         --network=mw \
-        -v ~/rep/sites/catsekb/secret_key.txt:/srv/secret_key.txt \
-        -v ~/rep/sites/catsekb/vk_token.txt:/srv/vk_token.txt \
-        -v ~/rep/sites/catsekb/db_key.txt:/srv/db_key.txt catsekb.ru:latest
+        -v /srv/catsekb.ru/secret_key.txt:/srv/secret_key.txt \
+        -v /srv/catsekb.ru/vk_token.txt:/srv/vk_token.txt \
+        -v /srv/catsekb.ru/db_key.txt:/srv/db_key.txt catsekb.ru:latest
     ```
 - Создание бекапа
     ```
     docker exec \
         -i \
-        catsekb.ru-postgres \
+        postgres \
         pg_dump -c -h localhost -U catsekb catsekb | gzip > catsekb_04_03_2019.backup.gz
     ```
 
@@ -37,7 +37,7 @@
     ```
     docker exec \
         -i \
-        catsekb.ru-postgres \
+        postgres \
         psql -U catsekb -d catsekb < dump_name.sql
     ```
 

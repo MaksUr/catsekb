@@ -203,7 +203,7 @@ ANIMAL_KEY_VIDEO_HELP_TEXT = 'Видео на котором есть питом
 
 # show
 ANIMAL_SHOW = SHOW
-ANIMAL_KEY_SHOW = 'Показывать котика'
+ANIMAL_KEY_SHOW = 'Показывать питомца'
 ANIMAL_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удаления или чтобы скрыть.'
 
 # created

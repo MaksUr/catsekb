@@ -164,8 +164,10 @@ def get_animals_from_query(query, show_permission=False):
     return res
 
 
-def get_shelter_animals(show_permission, project, count=GALLERY_DEFAULT_ITEMS_COUNT):
-    query = {ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_SHELTER, 'project': project}
+def get_shelter_animals(show_permission, project=None, count=GALLERY_DEFAULT_ITEMS_COUNT):
+    query = {ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_SHELTER}
+    if project is not None:
+        query['project'] = project
     shelter_animals = get_animals_from_query(
         query=query, show_permission=show_permission
     ).order_by('?')
