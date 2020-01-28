@@ -313,8 +313,6 @@ GROUP_INSTANCE_HOME_DESCR = 'Они обрели свой дом'
 
 GROUP_INSTANCE_SHELTER_ID = ANIMAL_LOCATION_STATUS_SHELTER
 GROUP_INSTANCE_SHELTER_NAME = 'Ищут дом'
-GROUP_INSTANCE_SHELTER_DESCR = 'Собаки привязываются к людям, кошки привязываются к дому. ' \
-                                       'Не дай этим котикам привязаться к клетке. Помоги им обрести свой дом.'
 GROUP_INSTANCE_DEAD_ID = ANIMAL_LOCATION_STATUS_DEAD
 GROUP_INSTANCE_DEAD_NAME = ANIMAL_LOCATION_STATUS_CHOICE_DEAD
 GROUP_INSTANCE_DEAD_DESCR = 'Пусть земля им будет пухом, они всегда останутся в наших сердцах.'
@@ -331,7 +329,7 @@ GROUP_MAPPING = {
     },
     GROUP_INSTANCE_SHELTER_ID: {
         NAME: GROUP_INSTANCE_SHELTER_NAME,
-        DESCRIPTION: GROUP_INSTANCE_SHELTER_DESCR,
+        DESCRIPTION: '__'
     },
     GROUP_INSTANCE_DEAD_ID: {
         NAME: GROUP_INSTANCE_DEAD_NAME,

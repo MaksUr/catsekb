@@ -1,0 +1,100 @@
+{# object_list #}
+{# filter_parameters #}
+{# caption #}
+{# caption_url #}
+{# capt_descr #}
+{# page_obj #}
+{# show_count #}
+{# bottom_text #}
+
+{% load verbose_names %}
+{% load static %}
+<div id="gallery_cat" class="gallery_cats font">
+    <!-- # T0D0: #Зефир,_Крем,_Сливка,_Трюфелька_catsekb..... - обрезать строку если больше 25 символов # -->
+    {% include 'cats/widgets/caption.html' with caption=caption caption_url=caption_url %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-10 col-xs-offset-1">
+                {% include 'cats/widgets/group_description.html' with description=capt_descr %}
+                {% if show_count and page_obj %}
+                    <p class="gallery_description mid">Найдено {{ page_obj.paginator.count }} хаски</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="gallery">
+            <div class="row">
+                <div class="col-md-12 slim">
+                     {% for animal in object_list %}
+                        <div class="col-xs-12 col-xs-offset-0 col-sm-4 col-sm-offset-0">
+                            {% if animal.get_image.image_url %}
+                                <div class="cat_find_block" style="background-image: url({{ animal.get_image.image_small_url }});">
+                            {% else %}
+                                <div class="cat_find_block" style="background-image: url({% static "catsekb/dist/img/sad_cat.png" %}); background-size: 120px;">  TODO: change image
+                            {% endif %}
+                                <a href="{% url 'animal_detail' pk=animal.id %}{{ filter_parameters }}#anchor_caption" class="hashtag">
+                                    <div class="cat_find_name mid">
+                                            {% include 'cats/widgets/gallery_item_description.html' with animal=animal %}
+                                    </div>
+                                    <p class="description_link">Перейти к просмотру</p>
+                                </a>
+                                <div class="cat_find_layer"></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% if page_obj %}
+                <div class="row">
+                    <div class="col-xs-12 col-xs-offset-0">
+                        <div class="nav_gallery mid">
+                            {% if page_obj.paginator.num_pages > 1 %}
+                                {% load app_filters %}
+                                <span>Страница: {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+                                <p class="pagination_cats mid">
+
+                                    {# previous #}
+                                    {% if page_obj.has_previous %}
+                                        {% with prev_id=page_obj.paginator.object_list|return_item_by_index:page_obj.previous_page_number %}
+                                            <a href="?{{ request.GET|change_page:page_obj.previous_page_number }}#gallery_cat" class="tag pag_gallery">Назад</a>
+                                        {% endwith %}
+                                    {% else %}
+                                        <a class="tag no_active pag_gallery">Назад</a>
+                                    {% endif %}
+
+                                    <a href="?per_page=all{% if request.GET.urlencode %}&{{ request.GET.urlencode }}{% endif %}#gallery_cat" class="tag pag_gallery">Показать всех</a>
+
+                                    {# next #}
+                                    {% if page_obj.has_next %}
+                                        {% with next_id=page_obj.paginator.object_list|return_item_by_index:page_obj.next_page_number %}
+                                            <a href="?{{ request.GET|change_page:page_obj.next_page_number }}#gallery_cat" class="tag pag_gallery">Далее</a>
+                                        {% endwith %}
+                                    {% else %}
+                                        <a class="tag no_active pag_gallery">Далее</a>
+                                    {% endif %}
+
+                                </p>
+                            {% else %}
+                                <p class="pagination_cats mid">
+                                    <a class="tag no_active pag_gallery">Назад</a>
+                                    <a class="tag no_active pag_gallery">Показать всех</a>
+                                    <a class="tag no_active pag_gallery">Далее</a>
+                                </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            </div>
+            {% if bottom_text and caption_url %}
+                <div class="row">
+                    <div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0">
+                        <p class="pagination_cats mid">
+                            <a href="{{ caption_url  }}#anchor_caption" class="tag">{{ bottom_text }}</a>
+                        </p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+    </div>
+</div>

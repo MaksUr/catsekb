@@ -26,6 +26,7 @@ ANIMAL_QUERY_KEYS = (
     SHELTER_DISTANCE,
     ANIMAL_LOCATION_STATUS,
     ANIMAL_SEX,
+    'project',
 )
 
 

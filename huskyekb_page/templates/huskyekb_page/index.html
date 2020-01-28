@@ -57,8 +57,8 @@
     {% endif %}
 
     {% if shelter_animals %}
-        {% url 'group_detail' pk='S' as group_url %}
-            {% include 'cats/widgets/gallery.html' with object_list=shelter_animals filter_parameters='?group_id=S' caption='Ищут дом' caption_url=group_url bottom_text='Посмотреть других котиков' %}
+        {% url 'husky_looking_for_home' as group_url %}
+            {% include 'huskyekb_page/widgets/gallery.html' with object_list=shelter_animals filter_parameters='?group_id=S&project=huskyekb' caption='Ищут дом' caption_url=group_url bottom_text='Посмотреть других хаски' %}
     {% endif %}
 
     {% if articles %}

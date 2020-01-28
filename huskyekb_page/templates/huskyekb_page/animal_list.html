@@ -1,0 +1,34 @@
+{# for base #}
+    {# group_list #}
+    {# helpful_info_list #}
+
+{# caption #}
+{# object_list #}
+{# filter_string #}
+{# page_obj #}
+{# form #}
+
+{% extends "huskyekb_page/base.html" %}
+{% block base_body %}
+
+
+  {% with description="Кошки привязываются к дому, собаки привязываются к людям. Не дай питомцам привязаться к нашим волонтерам. Помоги им обрести свой дом." %}
+    {% if form %}
+        {% include 'cats/widgets/form.html' with form=form caption="Поиск" caption_url="" %}
+        {% if object_list %}
+            {% include 'cats/widgets/gallery.html' with object_list=object_list filter_parameters=filter_string caption="Результат поиска" capt_descr=description page_obj=page_obj %}
+        {% else %}
+            {% include 'cats/widgets/gallery.html' with object_list=object_list filter_parameters=filter_string caption="Результат поиска" capt_descr='Питомцев не найдено' page_obj=page_obj %}
+        {% endif %}
+    {% else %}
+        {% include 'cats/widgets/gallery.html' with object_list=object_list filter_parameters=filter_string caption=caption capt_descr=description page_obj=page_obj %}
+    {% endif %}
+  {% endwith %}
+
+{% endblock base_body %}
+
+{#{% block header %}#}
+{#     {% with "catsekb/dist/img/header_cats.jpg" as background_image_file %}#}
+{#            {{ block.super }}#}
+{#    {% endwith %}#}
+{#{% endblock header %}#}
