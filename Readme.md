@@ -55,26 +55,17 @@
 
 ## Первоначальная настройка.
 
-- docker:
-    - установить докер по инструкции https://www.digitalocean.com/community/tutorials/docker-ubuntu-18-04-1-ru
-    - создать виртуальную сеть `docker network create --driver bridge mw`
+- установить `docker-compose`
 
 - для переноса образа на виртуалку я тупо использую архив с образом (TODO: разобраться как это можно сделать по-человески с docker-registry)
     ```
     docker build -t catsekb.ru:latest . && \
-    docker save catsekb.ru:latest > catsekb.tar && \
-    docker save postgres:11.2 > postgres.tar && \
-    docker save nginx:1.15.12 > nginx.tar
+    docker save catsekb.ru:latest > catsekb.tar
     ```
 
 - перенести файлы на виртуалку:
-     -  `configs/nginx/catsekb.ru.conf` в `/srv/catsekb.ru/nginx/catsekb.ru.conf`
-     -  `configs/systemd/*` в `/etc/systemd/system/`
-
+     -  `configs/nginx/nginx.conf` в `/srv/catsekb.ru/nginx/nginx.conf`
      - `catsekb.tar` в `~/catsekb.tar`
-     - `postgres.tar` в `~/postgres.tar`
-     - `nginx.tar` в `~/nginx.tar`
-
      - `secret_key.txt` в `/srv/catsekb.ru/secret_key.txt` - секретный ключ в Django
      - `vk_token.txt` в `/srv/catsekb.ru/vk_token.txt` - токен для доступа к Api
      - `db_key.txt` в `/srv/catsekb.ru/db_key.txt` - пароль к postgres
@@ -82,63 +73,11 @@
 - разорхивировать образы в докер:
     ```
     docker load < ~/catsekb.tar && \
-    docker load < ~/postgres.tar && \
-    docker load < ~/nginx.tar && \
     rm ~/*.tar
     ```
 
-- для автоматического перезапуска используется systemd (TODO: использовать docker-compose):
-    - чтобы применить изменения в systemd: `systemctl daemon-reload`
-    - включить systemd jobs:
-        ```
-        systemctl enable docker-catsekb.ru-postgres.service && \
-        systemctl enable docker-catsekb.ru-project.service && \
-        systemctl enable docker-catsekb.ru-nginx.service
-
-        ```
-    - перезапустить джобы:
-        ```
-        systemctl restart docker-catsekb.ru-postgres.service && \
-        systemctl restart docker-catsekb.ru-project.service && \
-        systemctl restart docker-catsekb.ru-nginx.service
-
-        ```
-
-- добавление сертификатов с помощью certbot:
-    - установка: https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx (п. 1, 2)
-    - в nginx нужно удалить блок ssl 443 порт:
-        ```
-        server {
-        listen 80;
-        server_tokens off;
-        server_name catsekb.ru;
-
-        # For letsencrypt
-        location /.well-known/acme-challenge/ {
-            root /usr/share/nginx/catsekb.ru;
-        }
-
-        location /static/ {
-            alias /srv/static/;
-        }
-
-        location / {
-
-            proxy_pass http://catsekb.ru:80;
-            proxy_redirect off;
-            proxy_set_header Host $http_host;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        }
-
-      }
-      ```
-    - `sudo letsencrypt certonly -a webroot --webroot-path=/srv/catsekb.ru/nginx/share/ -d catsekb.ru`
-    - вернуть обратно конфиг nginx и перезапустить джоб nginx
-    - возможные проблемы:
-        - https://github.com/certbot/certbot/issues/5868 Решение:
-            - удалил папку `/etc/letsencrypt/live/catsekb.ru`
-            запустил команду `certonly` снова.
-            Изменил путь systemd шном джобе на `/etc/letsencrypt/live/catsekb.ru-0001`
+- для автоматического перезапуска используется docker-compose:
+    - `docker-compose up`
 
 
 - выключить nginx:
@@ -148,3 +87,29 @@
         systemctl stop nginx.service
         systemctl disable nginx.service
         ```
+
+## Сертификаты
+
+[Инструкция](https://miki725.com/docker/crypto/2017/01/29/docker+nginx+letsencrypt.html)
+
+Первичная настройка:
+```
+docker run -it --rm \
+      -v /srv/catsekb.ru/certs:/etc/letsencrypt \
+      -v /srv/catsekb.ru/certs-data:/data/letsencrypt \
+      deliverous/certbot \
+      certonly \
+      --webroot --webroot-path=/data/letsencrypt \
+      -d xn--80aegc1blqbj1c4c.xn--p1ai -d www.xn--80aegc1blqbj1c4c.xn--p1ai
+```
+
+Обновление сертификата:
+```
+docker run -t --rm \
+      -v /srv/catsekb.ru/certs:/etc/letsencrypt \
+      -v /srv/catsekb.ru/certs-data:/data/letsencrypt \
+      deliverous/certbot \
+      renew \
+      --webroot --webroot-path=/data/letsencrypt
+$ docker-compose kill -s HUP nginx
+```

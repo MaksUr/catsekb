@@ -12,7 +12,7 @@ services:
         environment:
             POSTGRES_NAME: catsekb
             POSTGRES_USER: catsekb
-            POSTGRES_PASSWORD: PASSWD
+            POSTGRES_PASSWORD: db_key_txt
     django:
         image: catsekb.ru:latest
         container_name: catsekb.ru
@@ -27,12 +27,10 @@ services:
         image: nginx:1.17
         restart: always
         volumes:
-            - /srv/catsekb.ru/nginx/catsekb.ru.conf:/etc/nginx/conf.d/catsekb.ru.conf:ro
+            - /srv/catsekb.ru/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf:ro
             - /srv/catsekb.ru/static:/srv/static
-            - /srv/catsekb.ru/nginx/share/:/usr/share/nginx/catsekb.ru/
-            - /etc/letsencrypt/live/catsekb.ru/fullchain.pem:/etc/ssl/catsekb.ru.crt
-            - /etc/letsencrypt/live/catsekb.ru/privkey.pem:/etc/ssl/catsekb.ru.key
-            - /var/www/catsekb.ru/:/var/www/catsekb.ru/
+            - /srv/catsekb.ru/certs:/etc/letsencrypt
+            - /srv/catsekb.ru/certs-data:/data/letsencrypt
         networks:
             - internal
             - default

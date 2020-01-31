@@ -33,7 +33,7 @@ except FileNotFoundError:
     ALLOWED_HOSTS = ['127.0.0.1']
 else:
     DEBUG = False
-    ALLOWED_HOSTS = ['catsekb.ru']
+    ALLOWED_HOSTS = ['xn--80aegc1blqbj1c4c.xn--p1ai', 'www.xn--80aegc1blqbj1c4c.xn--p1ai']
 
 # Application definition
 
