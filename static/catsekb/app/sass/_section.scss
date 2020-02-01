@@ -15,8 +15,21 @@
 .cat_section {
     height: 450px;
 }
-.full {
+
+.full_cat_image {
     background-image: url(../img/cat.jpg);
+}
+
+.full_husky_image {
+    background-image: url(../img/husky_background.jpg);
+}
+
+.full_rottweiler_image {
+    background-image: url(../img/rottweiler_background.jpg);
+}
+
+.full {
+    //background-image: url(../img/cat.jpg);
     -webkit-background-size: cover;
     background-size: cover;
     background-repeat: no-repeat;
