@@ -127,8 +127,6 @@ class Animal(Model):
         ANIMAL_KEY_LOCATION_STATUS,
         max_length=1,
         choices=ANIMAL_LOCATION_STATUS_CHOICES[1:],
-        default='',
-        blank=True
     )
     created = DateTimeField(ANIMAL_KEY_CREATED, auto_now_add=True)
     updated = DateTimeField(ANIMAL_KEY_UPDATED, auto_now=True)
@@ -201,7 +199,7 @@ class Animal(Model):
         return d
 
     def get_absolute_url(self):
-        return reverse(URL_NAME_ANIMAL, kwargs={DJ_PK: self.id})
+        return reverse('animal_detail', kwargs={'pk': self.id, 'project': self.project})
 
     def get_location_status(self):
         return ANIMAL_LOCATION_STATUS_CHOICES_D.get(self.location_status)

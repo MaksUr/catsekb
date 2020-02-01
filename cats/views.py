@@ -6,15 +6,15 @@ from django.views.generic.edit import FormMixin
 
 from cats.cats_constants import ANIMAL_LOCATION_STATUS_HOME, ANIMAL_LOCATION_STATUS_SHELTER, \
     ANIMAL_LOCATION_STATUS, \
-    ANIMAL_LOCATION_STATUS_DEAD, GROUP_INSTANCE_SHELTER_NAME, GROUP_INSTANCE_HOME_NAME, \
-    GROUP_INSTANCE_DEAD_NAME, GROUP_INSTANCE_SHELTER_ID, GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, \
+    ANIMAL_LOCATION_STATUS_DEAD, \
+    GROUP_INSTANCE_SHELTER_ID, GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, \
     GROUP_ANIMALS_PREVIEW_COUNT, GROUP_MAPPING, GALLERY_DEFAULT_ITEMS_COUNT
 from cats.forms import FilterForm
 from cats.models import Animal, Group
 from cats.query import ANIMAL_QUERY_KEYS
-from catsekb.constants import CAPTION_ANIMAL_LIST_DEFAULT, ANIMALS, GET_PAR_KEY_PAGE, GET_PAR_KEY_PER_PAGE, \
+from catsekb.constants import ANIMALS, GET_PAR_KEY_PAGE, GET_PAR_KEY_PER_PAGE, \
     GET_PAR_VAL_PAGE, \
-    GET_PAR_KEY_FILTER, DJ_PAGE, DJ_OBJECT, URL_NAME_GROUP, NAME, DESCRIPTION, URL_NAME_GROUPS_TITLE
+    GET_PAR_KEY_FILTER, DJ_OBJECT, URL_NAME_GROUP, NAME, DESCRIPTION, URL_NAME_GROUPS_TITLE
 from catsekb.view_functions import get_objects_from_query, get_base_catsekb_context, get_group, get_animals_from_query, \
     get_shelter_animals
 
@@ -23,7 +23,7 @@ class AnimalListView(ListView, FormMixin):
     paginate_by = GALLERY_DEFAULT_ITEMS_COUNT
     model = Animal
     form_class = FilterForm
-    caption = CAPTION_ANIMAL_LIST_DEFAULT
+    caption = 'Наши коты'
     description = ''
     show_filter = False
     project = None
@@ -113,10 +113,10 @@ class AnimalDetailView(DetailView):
         animals_query = self.get_animals_query()
         if animals_query:
             animals = get_animals_from_query(animals_query, show_permission=show_permission)
-            context[DJ_PAGE] = self.get_animal_page(animals, animal)
+            context['page'] = self.get_animal_page(animals, animal)
         shelter_animals, shelter_animals_count = get_shelter_animals(show_permission=show_permission, count=9)
         context['shelter_animals'] = shelter_animals
-        context['shelter_caption'] = GROUP_INSTANCE_SHELTER_NAME
+        context['shelter_caption'] = 'Ищут дом'
         return context
 
     def get_animals_query(self):
@@ -128,12 +128,11 @@ class AnimalDetailView(DetailView):
         if animal not in animals:
             return None
         else:
-            animals_id_list = [i.id for i in animals]
             try:
-                page_number = animals_id_list.index(animal.id) + 1
+                page_number = list(animals).index(animal) + 1
             except ValueError:
                 return None
-            paginator = Paginator(animals_id_list, 1)
+            paginator = Paginator(animals, 1)
             page = paginator.page(page_number)
             return page
 
@@ -152,14 +151,14 @@ class GroupListView(ListView):
         context = ListView.get_context_data(self, **kwargs)
         context.update(get_base_catsekb_context(show_permission=show_permission, active_menu=ANIMALS, extra_title=URL_NAME_GROUPS_TITLE))
 
-        context['shelter_caption'] = GROUP_INSTANCE_SHELTER_NAME
+        context['shelter_caption'] = 'Ищут дом'
         context['shelter_url'] = reverse(URL_NAME_GROUP, kwargs={'pk': GROUP_INSTANCE_SHELTER_ID})
         context['shelter_animals'] = get_animals_from_query(
             query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_SHELTER},
             show_permission=show_permission
         ).order_by('?')[:GROUP_ANIMALS_PREVIEW_COUNT]
 
-        context['home_caption'] = GROUP_INSTANCE_HOME_NAME
+        context['home_caption'] = 'Пристроены'
         context['home_url'] = reverse(URL_NAME_GROUP, kwargs={'pk': GROUP_INSTANCE_HOME_ID})
         context['home_animals'] = get_animals_from_query(
             query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_HOME},
@@ -167,7 +166,7 @@ class GroupListView(ListView):
         ).order_by('?')[:GROUP_ANIMALS_PREVIEW_COUNT]
 
         if show_permission is True:
-            context['dying_caption'] = GROUP_INSTANCE_DEAD_NAME
+            context['dying_caption'] = 'На радуге'
             context['dying_url'] = reverse(URL_NAME_GROUP, kwargs={'pk': GROUP_INSTANCE_DEAD_ID})
             context['dying_animals'] = get_animals_from_query(
                 query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_DEAD},

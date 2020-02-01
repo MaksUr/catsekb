@@ -19,7 +19,7 @@ from cats.cats_constants import ANIMAL_BIRTHDAY_PRECISION, ANIMAL_CREATED, ANIMA
     ANIMAL_VIDEO_DESCRIPTION, ANIMAL_VIDEO_SHOW, ANIMAL_VIDEO_PUT_TO_INDEX_PAGE
 from catsekb.constants import DJ_CLASSES_COLLAPSE, DJ_CLASSES, DJ_ID, CREATED
 from cats.forms import AnimalForm, AnimalImageForm, AnimalVideoForm
-from cats.models import Animal, AnimalImage, Group, AnimalVideo
+from cats.models import Animal, AnimalImage, AnimalVideo
 from cats.updater import update_images_for_animal
 
 UPDATE_BUTTON = '<a class="button" href="{link}?upd={upd}">Обновить</a><p class="help">{help}</p>'
@@ -144,7 +144,6 @@ class AnimalAdmin(admin.ModelAdmin):
             if upd == ANIMAL_FORM_VK_UPDATE_PHOTO:
                 update_images_for_animal(obj, obj.vk_group_id, obj.vk_album_id)
         return form
-
 admin.site.register(Animal, AnimalAdmin)
 
 
@@ -154,12 +153,6 @@ class AnimalsInline(admin.StackedInline):
     form = AnimalForm
     fields = (ANIMAL_NAME, ANIMAL_SEX, ANIMAL_SHOW, ANIMAL_LOCATION_STATUS)
     show_change_link = True
-
-
-class GroupAdmin(admin.ModelAdmin):
-    list_display = (GROUP_NAME, GROUP_SHOW)
-    # TODO: Сделать поддержку просмотра котов группы и добавлять
-admin.site.register(Group, GroupAdmin)
 
 
 class AnimalVideoAdmin(admin.ModelAdmin):

@@ -118,17 +118,14 @@ def get_base_catsekb_context(active_menu, extra_title, show_permission=False):
         shelter_value=GROUP_INSTANCE_SHELTER_ID
     )
 
-    video_url = dict()
-    video_url['caption'] = 'Видео'
-    video_url['url'] = reverse(URL_NAME_VIDEO)
+    # video_url = dict()
+    # video_url['caption'] = 'Видео'
+    # video_url['url'] = reverse(URL_NAME_VIDEO)
 
     helpful_info_list = list()
     find_cat_url = dict()
     find_cat_url['caption'] = ARTICLES_DEFAULT_MAPPING[ARTICLE_FIND_CAT_ID][CAPTION]
     find_cat_url['url'] = reverse(URL_NAME_FIND_CAT)
-    # news = dict()
-    # news['caption'] = NEWS_VERBOSE_NAME_PLURAL
-    # news['url'] = reverse(URL_NAME_NEWS_FEED)
     articles = dict()
     articles['caption'] = ARTICLE_VERBOSE_NAME_PLURAL
     articles['url'] = reverse(URL_NAME_SUBJECTS_FEED)
@@ -137,7 +134,7 @@ def get_base_catsekb_context(active_menu, extra_title, show_permission=False):
     helpful_info_list.append(articles)
 
     context = {
-        'group_list': default_group_list + [animal_filter_url] + list(user_group_list) + [video_url],
+        'group_list': default_group_list + [animal_filter_url] + list(user_group_list),
         'helpful_info_list': helpful_info_list,
         'active_menu': active_menu,
         'extra_title': extra_title,
@@ -174,10 +171,10 @@ def get_shelter_animals(show_permission, project=None, count=GALLERY_DEFAULT_ITE
     return shelter_animals[:count], len(shelter_animals)
 
 
-def get_home_animals_count():
-    get_animals_from_query(
-        query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_HOME}, show_permission=True
-    ).count()
+def get_home_animals_count(project=None):
+    query = {ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_HOME}
+    if project is not None:
+        query['project'] = project
     return get_animals_from_query(
-        query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_HOME}, show_permission=True
+        query, show_permission=True
     ).count()

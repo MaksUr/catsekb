@@ -1,5 +1,4 @@
 # Captions
-CAPTION_ANIMAL_LIST_DEFAULT = 'Наши коты'
 
 NO_CHOICE_LABEL = 'Любой'
 NO_CHOICE_VALUE = ''
@@ -47,7 +46,6 @@ DJ_CLASSES_COLLAPSE = 'collapse'
 DJ_CLASSES = 'classes'
 DJ_PK = 'pk'
 DJ_ID = 'id'
-DJ_PAGE = 'page'
 DJ_OBJECT = 'object'
 
 # URLs
@@ -66,7 +64,6 @@ URL_NAME_SUBJECTS_FEED = 'subjects_feed'            # Лента статей
 URL_NAME_ABOUT = 'about'
 URL_NAME_VIDEO = 'video'
 
-URL_NAME_INDEX_TITLE = 'Главная страница'
 URL_NAME_GROUPS_TITLE = 'Наши питомцы'
 # URL_NAME_GROUP_TITLE = '{group}'
 # URL_NAME_ANIMALS_TITLE = '{caption}'

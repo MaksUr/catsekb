@@ -31,7 +31,7 @@
                             {% else %}
                                 <div class="cat_find_block" style="background-image: url({% static "catsekb/dist/img/sad_cat.png" %}); background-size: 120px;">
                             {% endif %}
-                                <a href="{% url 'animal_detail' pk=animal.id %}{{ filter_parameters }}#anchor_caption" class="hashtag">
+                                <a href="{% url 'animal_detail' pk=animal.id project=animal.project %}{{ filter_parameters }}#anchor_caption" class="hashtag">
                                     <div class="cat_find_name mid">                                   
                                             {% include 'cats/widgets/gallery_item_description.html' with animal=animal %} 
                                     </div> 

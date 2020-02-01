@@ -5,8 +5,8 @@
     <div class="pagination_cats mid font">
             {# previous #}
             {% if page.has_previous %}
-                {% with prev_id=page.paginator.object_list|return_item_by_index:page.previous_page_number %}
-                    <a href="{% url 'animal_detail' pk=prev_id %}?{{ request.GET.urlencode }}#anchor_caption" class="tag">Предыдущий</a>
+                {% with previous=page.paginator.object_list|return_item_by_index:page.previous_page_number %}
+                    <a href="{% url 'animal_detail' pk=previous.id project=previous.project %}?{{ request.GET.urlencode }}#anchor_caption" class="tag">Предыдущий</a>
                 {% endwith %}
             {% else %}
                     <span class="tag no_active">Предыдущий</span>
@@ -18,8 +18,8 @@
 
             {# next #}           
             {% if page.has_next %}
-                {% with next_id=page.paginator.object_list|return_item_by_index:page.next_page_number %}
-                    <a href="{% url 'animal_detail' pk=next_id %}?{{ request.GET.urlencode }}#anchor_caption" class="tag">Следующий</a>
+                {% with next=page.paginator.object_list|return_item_by_index:page.next_page_number %}
+                    <a href="{% url 'animal_detail' pk=next.id project=next.project %}?{{ request.GET.urlencode }}#anchor_caption" class="tag">Следующий</a>
                 {% endwith %}
             {% else %}
                     <span class="tag no_active">Следующий</span>
