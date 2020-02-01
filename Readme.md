@@ -113,3 +113,8 @@ docker run -t --rm \
       --webroot --webroot-path=/data/letsencrypt
 $ docker-compose kill -s HUP nginx
 ```
+
+# Frontend
+
+Установка зависимостей `yarn`
+Сборка `node node_modules/gulp/bin/gulp.js  build`  # TODO: Переписать gulp на webpack

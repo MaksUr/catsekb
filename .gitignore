@@ -17,6 +17,9 @@ postgres/
 # gulp
 node_modules/
 
+# frontend
+dist/
+
 vk_token.txt
 db_key.txt
 secret_key.txt

@@ -24,6 +24,7 @@ COPY cats ./cats
 COPY catsekb_page ./catsekb_page
 COPY huskyekb_page ./huskyekb_page
 COPY rotvodom_page ./rotvodom_page
+# Всю папку static копировать не нужно, нужно копировать только dist/
 COPY static ./static
 COPY templates ./templates
 COPY manage.py ./
