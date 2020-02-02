@@ -23,7 +23,7 @@ class AnimalListView(ListView, FormMixin):
     paginate_by = GALLERY_DEFAULT_ITEMS_COUNT
     model = Animal
     form_class = FilterForm
-    caption = 'Наши коты'
+    caption = 'Наши коты'  # TODO: Выпилить caption and desription
     description = ''
     show_filter = False
     project = None
@@ -165,13 +165,12 @@ class GroupListView(ListView):
             show_permission=show_permission
         ).order_by('?')[:GROUP_ANIMALS_PREVIEW_COUNT]
 
-        if show_permission is True:
-            context['dying_caption'] = 'На радуге'
-            context['dying_url'] = reverse(URL_NAME_GROUP, kwargs={'pk': GROUP_INSTANCE_DEAD_ID})
-            context['dying_animals'] = get_animals_from_query(
-                query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_DEAD},
-                show_permission=show_permission
-            ).order_by('?')[:GROUP_ANIMALS_PREVIEW_COUNT]
+        context['dying_caption'] = 'На радуге'
+        context['dying_url'] = reverse(URL_NAME_GROUP, kwargs={'pk': GROUP_INSTANCE_DEAD_ID})
+        context['dying_animals'] = get_animals_from_query(
+            query={ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_DEAD},
+            show_permission=show_permission
+        ).order_by('?')[:GROUP_ANIMALS_PREVIEW_COUNT]
 
         context['groups'] = get_objects_from_query(model_cls=Group, query=dict(), show_permission=show_permission)
         return context
