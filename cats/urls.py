@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.urls import path, register_converter
 
-from urls_converters import ProjectConverter
+from .urls_converters import ProjectConverter
 from . import views
 
 register_converter(ProjectConverter, 'project')

@@ -118,3 +118,9 @@ $ docker-compose kill -s HUP nginx
 
 Установка зависимостей `yarn`
 Сборка `node node_modules/gulp/bin/gulp.js  build`  # TODO: Переписать gulp на webpack
+
+## Docker
+`cd static/catsekb/`
+`docker build -t happy_house_front:latest . `
+`docker run --rm -v ~/rep/sites/catsekb/static/catsekb/:/share happy_house_front:latest cp -r /dist /share
+`
