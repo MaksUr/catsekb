@@ -10,7 +10,7 @@
 # foreign_key служит для связи текущей модели с другой моделью. Например модель - AnimalImage,
 # foreign_key: animal ссылается на модель Animal.
 # Это значит поле animal в AnimalImage относится к определенному Animal
-from catsekb.constants import SHOW, NAME, DESCRIPTION, NO_CHOICE, CREATED_KEY, CREATED, UPDATED, \
+from catsekb.constants import SHOW, NO_CHOICE, CREATED_KEY, CREATED, UPDATED, \
     UPDATED_KEY, IMAGE_BACKGROUND, IMAGE_KEY_BACKGROUND, IMAGE_KEY_BACKGROUND_HELP_TEXT, KEY_Y_POS, KEY_Y_POS_HELP_TEXT
 
 GALLERY_DEFAULT_ITEMS_COUNT = 9
@@ -155,14 +155,14 @@ ANIMAL_LOCATION_STATUS_DEAD = 'D'    # для хранения в БД
 
 ANIMAL_LOCATION_STATUS_CHOICES = (
     NO_CHOICE,
-    (ANIMAL_LOCATION_STATUS_HOME, 'Пристроен'),
-    (ANIMAL_LOCATION_STATUS_SHELTER, 'В поиске дома'),
-    (ANIMAL_LOCATION_STATUS_DEAD, 'На радуге'),
+    ('H', 'Пристроен'),
+    ('S', 'В поиске дома'),
+    ('D', 'На радуге'),
 )
 ANIMAL_LOCATION_STATUS_CHOICES_D = {
-    ANIMAL_LOCATION_STATUS_HOME: 'Пристроен',
-    ANIMAL_LOCATION_STATUS_SHELTER: 'В поиске дома',
-    ANIMAL_LOCATION_STATUS_DEAD: 'На радуге',
+    'H': 'Пристроен',
+    'S': 'В поиске дома',
+    'D': 'На радуге',
 }
 
 # birthday_precision.
@@ -300,39 +300,39 @@ GROUP_KEY_SHOW_HELP_TEXT = 'Убрать отметку вместо удале�
 
 # instances Group
 
-GROUP_INSTANCE_ALL_ID = 'all'
-GROUP_INSTANCE_ALL_NAME = 'Все котики'
-GROUP_INSTANCE_ALL_DESCR = 'Все животные которые попали к нам в приют.'
+# GROUP_INSTANCE_ALL_ID = 'all'
+# GROUP_INSTANCE_ALL_NAME = 'Все котики'
+# GROUP_INSTANCE_ALL_DESCR = 'Все животные которые попали к нам в приют.'
 
-GROUP_INSTANCE_HOME_ID = ANIMAL_LOCATION_STATUS_HOME
-GROUP_INSTANCE_HOME_DESCR = 'Они обрели свой дом'
+# GROUP_INSTANCE_HOME_ID = 'H'
+# GROUP_INSTANCE_HOME_DESCR = 'Они обрели свой дом'
 
-GROUP_INSTANCE_SHELTER_ID = ANIMAL_LOCATION_STATUS_SHELTER
-GROUP_INSTANCE_DEAD_ID = ANIMAL_LOCATION_STATUS_DEAD
-GROUP_INSTANCE_DEAD_DESCR = 'Пусть земля им будет пухом, они всегда останутся в наших сердцах.'
+# GROUP_INSTANCE_SHELTER_ID = 'S'
+# GROUP_INSTANCE_DEAD_ID = 'D'
+# GROUP_INSTANCE_DEAD_DESCR = 'Пусть земля им будет пухом, они всегда останутся в наших сердцах.'
 
 
-GROUP_MAPPING = {
-    GROUP_INSTANCE_ALL_ID: {
-        NAME: GROUP_INSTANCE_ALL_NAME,
-        DESCRIPTION: GROUP_INSTANCE_ALL_DESCR,
-    },
-    GROUP_INSTANCE_HOME_ID: {
-        NAME: 'Пристроены',
-        DESCRIPTION: GROUP_INSTANCE_HOME_DESCR,
-    },
-    GROUP_INSTANCE_SHELTER_ID: {
-        NAME: 'Ищут дом',
-        DESCRIPTION: '__'
-    },
-    GROUP_INSTANCE_DEAD_ID: {
-        NAME: 'На радуге',
-        DESCRIPTION: GROUP_INSTANCE_DEAD_DESCR,
-    },
-}
+# GROUP_MAPPING = {
+#     'all': {
+#         'name': 'Все котики',
+#         'description': 'Все животные которые попали к нам в приют.',
+#     },
+#     'H': {
+#         'name': 'Пристроены',
+#         'description': 'Они обрели свой дом',
+#     },
+#     'S': {
+#         'name': 'Ищут дом',
+#         'description': '_'
+#     },
+#     'D': {
+#         'name': 'На радуге',
+#         'description': 'Пусть земля им будет пухом, они всегда останутся в наших сердцах.',
+#     },
+# }
 
 PRIVATE_GROUP = (
-    GROUP_INSTANCE_DEAD_ID,
+    'D',
 )
 
 GROUP_ANIMALS_PREVIEW_COUNT = 3

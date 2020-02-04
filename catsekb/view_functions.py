@@ -1,19 +1,19 @@
+from os.path import join
+
 from django.core.exceptions import FieldError
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from django.urls import reverse
-from os.path import join
+from django.urls import reverse, reverse_lazy
 
-from articles.article_constants import ARTICLES_DEFAULT_MAPPING, ARTICLE_FIND_CAT_ID, CAPTION, NEWS_VERBOSE_NAME_PLURAL, \
+from articles.article_constants import ARTICLES_DEFAULT_MAPPING, ARTICLE_FIND_CAT_ID, CAPTION, \
     ARTICLE_VERBOSE_NAME_PLURAL, ARTICLE_TITLE, ARTICLE_TEXT, NEWS_IMPORTANT
 from articles.models import Article, News
-from cats.cats_constants import GROUP_INSTANCE_ALL_ID, GROUP_INSTANCE_SHELTER_ID, \
-    GROUP_INSTANCE_HOME_ID, GROUP_INSTANCE_DEAD_ID, GROUP_MAPPING, PRIVATE_GROUP, ANIMAL_LOCATION_STATUS, \
-    ANIMAL_CREATED, GALLERY_DEFAULT_ITEMS_COUNT, ANIMAL_LOCATION_STATUS_SHELTER, ANIMAL_LOCATION_STATUS_HOME
+from cats.cats_constants import PRIVATE_GROUP, ANIMAL_LOCATION_STATUS, \
+    ANIMAL_CREATED, GALLERY_DEFAULT_ITEMS_COUNT
 from cats.models import Group, Animal
 from cats.query import ANIMAL_QUERY_KEYS
 from catsekb.constants import SHOW, GET_PAR_KEY_FILTER, URL_NAME_ANIMALS, URL_NAME_FIND_CAT, \
-    URL_NAME_SUBJECTS_FEED, DJ_ID, FOLDER, URL_NAME_VIDEO
+    URL_NAME_SUBJECTS_FEED, DJ_ID, FOLDER
 from catsekb.settings import BASE_DIR
 
 
@@ -62,6 +62,24 @@ def get_objects_from_query(model_cls, query, show_permission=False, order_by=Non
 
 
 def get_group(group_id, show_permission=False):
+    GROUP_MAPPING = {
+        'all': {
+            'name': 'Все котики',
+            'description': 'Все животные которые попали к нам в приют.',
+        },
+        'H': {
+            'name': 'Пристроены',
+            'description': 'Они обрели свой дом',
+        },
+        'S': {
+            'name': 'Ищут дом',
+            'description': '_'
+        },
+        'D': {
+            'name': 'На радуге',
+            'description': 'Пусть земля им будет пухом, они всегда останутся в наших сердцах.',
+        },
+    }
     if group_id in GROUP_MAPPING:
         if show_permission is False and group_id in PRIVATE_GROUP:
             raise Http404('Нет прав для просмотра данной группы.')
@@ -75,16 +93,6 @@ def get_group(group_id, show_permission=False):
             query['show'] = True
         res = get_object_or_404(Group, **query)
         return res
-
-
-def get_default_group_list(show_permission=False):
-    default_group_list = list()
-    default_group_list.append(get_group(group_id=GROUP_INSTANCE_SHELTER_ID, show_permission=show_permission))
-    default_group_list.append(get_group(group_id=GROUP_INSTANCE_ALL_ID, show_permission=show_permission))
-    default_group_list.append(get_group(group_id=GROUP_INSTANCE_HOME_ID, show_permission=show_permission))
-    if show_permission:
-        default_group_list.append(get_group(group_id=GROUP_INSTANCE_DEAD_ID, show_permission=show_permission))
-    return default_group_list
 
 
 def get_important_news():
@@ -105,9 +113,13 @@ def get_last_articles(count):
     return res
 
 
-def get_base_catsekb_context(active_menu, extra_title, show_permission=False):
-    default_group_list = get_default_group_list(show_permission=show_permission)
-    user_group_list = get_objects_from_query(model_cls=Group, query=dict(), show_permission=show_permission)
+def get_base_catsekb_context(active_menu, extra_title):
+    default_group_list = [
+        {'url': reverse_lazy('pets_in_shelter'), 'caption': 'Ищут дом', 'description': '???'},
+        {'url': reverse_lazy('animal_list'), 'caption': 'Все котики', 'description': 'Все животные которые попали к нам в приют.'},
+        {'url': reverse_lazy('pets_in_home'), 'caption': 'Пристроены', 'description': 'Они обрели свой дом'},
+        {'url': reverse_lazy('pets_dead'), 'caption': 'На радуге', 'description': 'Пусть земля им будет пухом, они всегда останутся в наших сердцах.'},
+    ]
 
     animal_filter_url = dict()
     animal_filter_url['caption'] = 'Поиск'
@@ -115,12 +127,8 @@ def get_base_catsekb_context(active_menu, extra_title, show_permission=False):
         url=reverse(URL_NAME_ANIMALS),
         key=GET_PAR_KEY_FILTER,
         shelter_key=ANIMAL_LOCATION_STATUS,
-        shelter_value=GROUP_INSTANCE_SHELTER_ID
+        shelter_value='S'
     )
-
-    # video_url = dict()
-    # video_url['caption'] = 'Видео'
-    # video_url['url'] = reverse(URL_NAME_VIDEO)
 
     helpful_info_list = list()
     find_cat_url = dict()
@@ -134,7 +142,7 @@ def get_base_catsekb_context(active_menu, extra_title, show_permission=False):
     helpful_info_list.append(articles)
 
     context = {
-        'group_list': default_group_list + [animal_filter_url] + list(user_group_list),
+        'group_list': default_group_list + [animal_filter_url],
         'helpful_info_list': helpful_info_list,
         'active_menu': active_menu,
         'extra_title': extra_title,
@@ -162,7 +170,7 @@ def get_animals_from_query(query, show_permission=False):
 
 
 def get_shelter_animals(show_permission, project=None, count=GALLERY_DEFAULT_ITEMS_COUNT):
-    query = {ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_SHELTER}
+    query = {ANIMAL_LOCATION_STATUS: 'S'}
     if project is not None:
         query['project'] = project
     shelter_animals = get_animals_from_query(
@@ -172,7 +180,7 @@ def get_shelter_animals(show_permission, project=None, count=GALLERY_DEFAULT_ITE
 
 
 def get_home_animals_count(project=None):
-    query = {ANIMAL_LOCATION_STATUS: ANIMAL_LOCATION_STATUS_HOME}
+    query = {ANIMAL_LOCATION_STATUS: 'H'}
     if project is not None:
         query['project'] = project
     return get_animals_from_query(

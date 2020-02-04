@@ -29,7 +29,7 @@ urlpatterns = [
     path('catsekb/', include('catsekb_page.urls')),
     path('huskyekb/', include('huskyekb_page.urls')),
     path('rotvodom/', include('rotvodom_page.urls')),
-    path('pet/', include('cats.urls')),
+    path('pets/', include('cats.urls')),
     path('admin/', admin.site.urls),
 ] + \
               static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \

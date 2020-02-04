@@ -8,7 +8,7 @@ from catsekb.view_functions import get_base_catsekb_context, get_important_news,
 
 def catsekb_page_view(request):
     show_permission = request.user.is_authenticated
-    context = get_base_catsekb_context(show_permission=show_permission, active_menu=INDEX, extra_title='Главная страница')
+    context = get_base_catsekb_context(active_menu=INDEX, extra_title='Главная страница')
     shelter_animals, shelter_animals_count = get_shelter_animals(show_permission=show_permission, project='catsekb')
     context['shelter_animals'] = shelter_animals
     context['shelter_animals_count'] = shelter_animals_count

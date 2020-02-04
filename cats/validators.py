@@ -1,13 +1,13 @@
 from django.core.exceptions import ValidationError
 
-from cats.cats_constants import GROUP_INSTANCE_ALL_NAME, GROUP_FORM_VALIDATION_ERROR_NAME_IS_DEFAULT, \
+from cats.cats_constants import GROUP_FORM_VALIDATION_ERROR_NAME_IS_DEFAULT, \
     ANIMAL_IMAGE_VALIDATION_WRONG_Y_POS
 
 DEFAULT_GROUP_NAMES = (
     'Пристроены',
     'Ищут дом',
     'На радуге',
-    GROUP_INSTANCE_ALL_NAME,
+    'Все котики',
 )
 
 
