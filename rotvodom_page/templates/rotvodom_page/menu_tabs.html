@@ -1,0 +1,9 @@
+{# active_menu [index, animal, helpful] #}
+{# groups #}
+{# helps #}
+{# menu_class #}
+
+{% url 'index' as index_url %}
+{% include "catsekb_page/menu_tab.html" with name='index' active=active_menu abs_url=index_url url_caption='Главная' %}
+
+{% include "catsekb_page/menu_tab.html" with name='animals' active=active_menu url_caption='Наши питомцы' menu_items=groups menu_class=menu_class %}

@@ -1,0 +1,76 @@
+{# for base #}
+    {# group_list #}
+    {# helpful_info_list #}
+
+{# object #}
+{# page? #}
+{# shelter_animals #}
+{# shelter_caption #}
+
+{% extends "rotvodom_page/base.html" %}
+{% load static %}
+{% block base_body %}
+    {% with object.animalimage_set.all as images %}
+        {% if images.count > 0 %}
+            {% include 'cats/widgets/increase_photo.html' with items=images %}
+        {% endif %}
+        <div class="cat_detail">
+            <div class="container">
+                {% include 'cats/widgets/caption.html' with caption=object.name %}
+                <div class="row">
+                    <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1">
+                        <div class="preview_photo font">
+                            {% if object.get_main_image %}
+                                <img src="{{ object.get_main_image.image_url }}" class="img-responsive" alt="{{ object.get_main_image.get_alt }}">
+                            {% else %}
+                                <img src="{% static 'catsekb/dist/img/rottweiler-small.svg' %}" class="img-responsive">
+                            {% endif %}
+                            {% if images.count >= 1 %}
+                            <div class="count_photo_layer">
+                                <span class="count_photo">{{ images.count }} фото</span>
+                            </div>
+                            <div class="photo_increase_icon">
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-5 col-md-offset-0 col-lg-5 col-lg-offset-0">
+                        {% include 'cats/widgets/animal_description.html' with animal=object %}
+                    </div>
+                </div>
+                {% ifequal object.location_status 'S' %}
+                    <div class="row">
+                        {% include 'cats/widgets/questionnaire_form.html' %}
+                    </div>
+                {% endifequal %}
+                <div class="row">
+                    <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1">
+                        {% include 'cats/widgets/animal_pagination.html' with page=page request=request type='prev' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endwith %}
+    {% if object.video %}
+        <div class="font line_height">
+            <div class="container">
+                <div class="row">
+                    {% include 'articles/widgets/article_preview_validation.html' with object=object.video cs=10 cso=1 cm=10 cmo=1 cl=10 clo=1 %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% url 'group_detail' pk='S' as group_url %}
+    {% include 'cats/widgets/gallery.html' with object_list=shelter_animals filter_parameters='?group_id=S' caption=shelter_caption caption_url=group_url %}
+{% endblock base_body %}
+
+{% block header %}
+    {% with object.get_background_image as background_image %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock header %}
+
+{% block custom_js %}
+    <script type="text/javascript" src="{% static 'catsekb/dist/js/script_cats.js' %}"></script>
+{% endblock %}

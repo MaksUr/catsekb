@@ -34,5 +34,5 @@ urlpatterns = [
     ),
     path('groups/', views.GroupListView.as_view(template_name='cats/group_list.html'), name='group_list'),
     url(r'^group_(?P<pk>([0-9]+)|(all)|(S)|(H)|(D))/$', views.GroupDetailView.as_view(), name='group_detail'),
-    path('<project:project>/<int:pk>/', views.AnimalDetailView.as_view(), name='animal_detail'),  #  TODO: поменять project и pets местами
+    # path('<project:project>/<int:pk>/', views.AnimalDetailView.as_view(), name='animal_detail'),  #  TODO: поменять project и pets местами
 ]

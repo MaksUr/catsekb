@@ -19,7 +19,7 @@ from catsekb.settings import BASE_DIR
 PROJECT_MENU_ITEMS_CONTEXT = [
     {'caption': 'CatsEkb', 'url': reverse_lazy('catsekb_page')},
     {'caption': 'HuskyEkb', 'url': reverse_lazy('huskyekb_page')},
-    {'caption': 'Rotvodom', 'url': '#'},
+    {'caption': 'Rotvodom', 'url': reverse_lazy('rotvodom_page')},
 ]
 
 CATSEKB_MENU_ITEMS_CONTEXT = [
@@ -172,6 +172,7 @@ def get_base_catsekb_context(active_menu, extra_title, project=None):
 
     context = {
         'group_list': default_group_list + [animal_filter_url],
+        'projects_menu_items': default_group_list,  # TODO: убрать костыль
         'helpful_info_list': helpful_info_list,
         'active_menu': active_menu,
         'extra_title': extra_title,

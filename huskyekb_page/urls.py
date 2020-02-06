@@ -9,14 +9,14 @@ urlpatterns = [
     path('pets/', AnimalListView.as_view(
         template_name='huskyekb_page/animal_list.html',
         caption='Все хаски',
-        description='Все хаски, которые попали к нам в приют.',
+        description='Все питомцы, которые попали к нам в приют.',
         location_status=None,
         project='huskyekb',
     ), name='husky_all'),
     path('pets/shelter/', AnimalListView.as_view(
         template_name='huskyekb_page/animal_list.html',
         caption='Ищут дом',
-        description='',
+        description='Помоги им обрести свой дом.',
         location_status='S',
         project='huskyekb',
     ), name='husky_in_shelter'),

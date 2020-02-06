@@ -19,6 +19,7 @@ from django.contrib import admin
 
 from catsekb import settings
 from catsekb.views import index_view, contacts_view, help_us_view, about_view
+from cats.views import AnimalDetailView
 
 urlpatterns = [
     path('', include('articles.urls')),
@@ -31,6 +32,7 @@ urlpatterns = [
     path('rotvodom/', include('rotvodom_page.urls')),
     path('pets/', include('cats.urls')),
     path('admin/', admin.site.urls),
+    path('<project:project>/pets/<int:pk>/', AnimalDetailView.as_view(), name='animal_detail'),  #  TODO: сделать нормально
 ] + \
               static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
               static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

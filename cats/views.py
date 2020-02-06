@@ -54,7 +54,7 @@ class AnimalListView(ListView, FormMixin):
             context['description'] = self.description
             del context['form']
         extra_title = context['caption']
-        context.update(get_base_catsekb_context(active_menu=ANIMALS, extra_title=extra_title))
+        context.update(get_base_catsekb_context(active_menu=ANIMALS, extra_title=extra_title, project=self.project))
         return context
 
     def get_filter_string(self):
@@ -90,10 +90,18 @@ class AnimalDetailView(DetailView):
     template_name = 'catsekb_page/animal_detail.html'
     model = Animal
 
+    def get_template_names(self):
+        if self.object.project == 'catsekb':
+            return 'catsekb_page/animal_detail.html'
+        if self.object.project == 'huskyekb':
+            return 'huskyekb_page/animal_detail.html'
+        if self.object.project == 'rotvodom':
+            return 'rotvodom_page/animal_detail.html'
+
     def get_context_data(self, **kwargs):
         show_permission = self.request.user.is_authenticated
         context = DetailView.get_context_data(self, **kwargs)
-        context.update(get_base_catsekb_context(active_menu=ANIMALS, extra_title=self.object.__str__()))
+        context.update(get_base_catsekb_context(active_menu=ANIMALS, extra_title=self.object.__str__()), project='catsekb')
         animal = kwargs[DJ_OBJECT]
         if show_permission is False and animal.show is False:
             raise Http404("Нет прав для просмотра этой страницы")

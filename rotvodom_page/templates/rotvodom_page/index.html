@@ -10,21 +10,27 @@
 {# articles #}
 {# main_video #}
 
-{% extends "huskyekb_page/base.html" %}
+{% extends "rotvodom_page/base.html" %}
 {% load static %}
 {% block base_body %}
 
     <div class="about font line_height">
 		<div class="cat_container">
 		</div>
-		<img class="cat_a_mouse" src="{% static "catsekb/dist/img/husky_small.svg" %}">
+		<img class="cat_a_mouse" src="{% static "catsekb/dist/img/rottweiler-small.svg" %}">
 		<div class="container">
 			{% include 'cats/widgets/caption.html' with caption="О нас" %}
 			<div class="row">
 				<div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
           <div class="article">
             <p>
-              Сообщество команды помощи собакам северных ездовых пород и их метисам, попавшим в трудную ситуацию, города Екатеринбурга и области. Создано для распространения информации о собаках, находящихся на курации группы.
+              Наша группа создана для помощи ротвейлерам и их метисам,попавшим в беду-выброшенным, оставшимся на улице без хозяев.
+            </p>
+            <p>
+              Каждая собака на нашем попечении - это собака, которую предали, выбросили, не справились.
+            </p>
+            <p>
+              Мы помогаем ротвейлерам адаптироваться и подбираем им новых хозяев, которые смогут и не предадут.
             </p>
           </div>
 				</div>
@@ -51,14 +57,14 @@
                     </div>
                 </div>
             </div>
-            <div class="full full_husky_image">
+            <div class="full full_rottweiler_image">
             </div>
         </div>
     {% endif %}
 
     {% if shelter_animals %}
-        {% url 'husky_in_shelter' as group_url %}
-            {% include 'huskyekb_page/widgets/gallery.html' with object_list=shelter_animals filter_parameters='?group_id=S&project=huskyekb' caption='Ищут дом' caption_url=group_url bottom_text='Посмотреть других хаски' %}
+        {% url 'rotv_in_shelter' as group_url %}
+            {% include 'rotvodom_page/widgets/gallery.html' with object_list=shelter_animals filter_parameters='?group_id=S&project=rotvodom' caption='Ищут дом' caption_url=group_url bottom_text='Посмотреть других хаски' %}
     {% endif %}
 
     {% if articles %}
