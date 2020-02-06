@@ -60,7 +60,7 @@
     {% endif %}
 
     {% if shelter_animals %}
-        {% url 'cats_looking_for_home' as group_url %}
+        {% url 'cats_in_shelter' as group_url %}
             {% include 'cats/widgets/gallery.html' with object_list=shelter_animals filter_parameters='?group_id=S' caption='Ищут дом' caption_url=group_url bottom_text='Посмотреть других котиков' %}
     {% endif %}
 

@@ -31,9 +31,8 @@ class AbstractFeedListView(ListView):
         )
 
     def get_context_data(self, **kwargs):
-        show_permission = self.request.user.is_authenticated
         context = super(AbstractFeedListView, self).get_context_data(**kwargs)
-        context.update(get_base_catsekb_context(show_permission=show_permission, active_menu=self.active_menu, extra_title=self.title))
+        context.update(get_base_catsekb_context(active_menu=self.active_menu, extra_title=self.title))
         context['caption'] = self.title
         return context
 
@@ -108,11 +107,9 @@ class SubjectDetailView(DetailView):
         return obj
 
     def get_context_data(self, **kwargs):
-        show_permission = self.request.user.is_authenticated
         context = DetailView.get_context_data(self, **kwargs)
         context.update(
             get_base_catsekb_context(
-                show_permission=show_permission,
                 active_menu=self.active_menu,
                 extra_title=URL_NAME_SUBJECT_TITLE.format(subj=self.object.name)))
         return context
@@ -138,11 +135,9 @@ class AbstractArticleDetailView(DetailView):
         return self.queryset
 
     def get_context_data(self, **kwargs):
-        show_permission = self.request.user.is_authenticated
         context = DetailView.get_context_data(self, **kwargs)
         context.update(
             get_base_catsekb_context(
-                show_permission=show_permission,
                 active_menu=self.active_menu,
                 extra_title=self.object.title
             )
@@ -225,8 +220,3 @@ class DefaultArticleDetailView(AbstractArticleDetailView):
 
 class FindCatView(DefaultArticleDetailView):
     article_id = ARTICLE_FIND_CAT_ID
-
-
-class AboutView(DefaultArticleDetailView):
-    template_name = 'articles/about.html'
-    article_id = ARTICLE_ABOUT_ID

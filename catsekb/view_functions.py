@@ -12,7 +12,7 @@ from cats.cats_constants import PRIVATE_GROUP, ANIMAL_LOCATION_STATUS, \
     ANIMAL_CREATED, GALLERY_DEFAULT_ITEMS_COUNT
 from cats.models import Group, Animal
 from cats.query import ANIMAL_QUERY_KEYS
-from catsekb.constants import SHOW, GET_PAR_KEY_FILTER, URL_NAME_ANIMALS, URL_NAME_FIND_CAT, \
+from catsekb.constants import SHOW, GET_PAR_KEY_FILTER, URL_NAME_FIND_CAT, \
     URL_NAME_SUBJECTS_FEED, DJ_ID, FOLDER
 from catsekb.settings import BASE_DIR
 
@@ -115,19 +115,18 @@ def get_last_articles(count):
 
 def get_base_catsekb_context(active_menu, extra_title):
     default_group_list = [
-        {'url': reverse_lazy('pets_in_shelter'), 'caption': 'Ищут дом', 'description': '???'},
-        {'url': reverse_lazy('animal_list'), 'caption': 'Все котики', 'description': 'Все животные которые попали к нам в приют.'},
-        {'url': reverse_lazy('pets_in_home'), 'caption': 'Пристроены', 'description': 'Они обрели свой дом'},
-        {'url': reverse_lazy('pets_dead'), 'caption': 'На радуге', 'description': 'Пусть земля им будет пухом, они всегда останутся в наших сердцах.'},
+        {'url': reverse_lazy('cats_in_shelter'), 'caption': 'Ищут дом'},
+        {'url': reverse_lazy('cats_all'), 'caption': 'Все котики'},
+        {'url': reverse_lazy('cats_in_home'), 'caption': 'Пристроены'},
+        {'url': reverse_lazy('cats_dead'), 'caption': 'На радуге'},
     ]
 
     animal_filter_url = dict()
     animal_filter_url['caption'] = 'Поиск'
-    animal_filter_url['url'] = "{url}?{key}=1&{shelter_key}={shelter_value}".format(
-        url=reverse(URL_NAME_ANIMALS),
+    animal_filter_url['url'] = "{url}?{key}=1".format(
+        url=reverse('animal_list'),
         key=GET_PAR_KEY_FILTER,
         shelter_key=ANIMAL_LOCATION_STATUS,
-        shelter_value='S'
     )
 
     helpful_info_list = list()

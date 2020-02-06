@@ -217,8 +217,9 @@ class FilterForm(forms.Form):
 
     sex = forms.ChoiceField(
         widget=forms.RadioSelect(attrs={CLASS: ANIMAL_SEX}),
-        required=False, choices=ANIMAL_SEX_CHOICES,
-        label=ANIMAL_KEY_SEX
+        required=False,
+        label=ANIMAL_KEY_SEX,
+        choices=ANIMAL_SEX_CHOICES,
     )
 
     age_distance = forms.ChoiceField(
@@ -240,6 +241,18 @@ class FilterForm(forms.Form):
         required=False,
         choices=ANIMAL_LOCATION_STATUS_CHOICES,
         label=ANIMAL_KEY_LOCATION_STATUS
+    )
+
+    project = forms.ChoiceField(
+        widget=forms.RadioSelect(attrs={CLASS: 'project'}),
+        required=False,
+        choices=(
+            ('', 'Любой'),
+            ('catsekb', 'CatsEKb'),
+            ('huskyekb', 'HuskyEkb'),
+            ('rotvodom', 'Rotvodom'),
+        ),
+        label='Проект'
     )
 
 

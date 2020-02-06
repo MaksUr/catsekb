@@ -13,6 +13,5 @@ urlpatterns = [
     url(r'^article_(?P<pk>[0-9]+)$', views.ArticleDetailView.as_view(), name='article'),
     url(r'^post_(?P<pk>[0-9]+)$', views.NewsDetailView.as_view(), name='post'),
     url(r'^find_cat/$', views.FindCatView.as_view(), name='find_cat'),
-    url(r'^about/$', views.AboutView.as_view(), name='about'),
     path('video/', views.AnimalVideoListView.as_view(), name='video'),
 ]

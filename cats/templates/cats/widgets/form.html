@@ -15,6 +15,9 @@
                             {{ form.name.as_widget }}
                         </div>
                         <div class="form_elem">
+                            {% include 'cats/widgets/form_field.html' with field=form.project %}
+                        </div>
+                        <div class="form_elem">
                             {% include 'cats/widgets/form_field.html' with field=form.sex %}
                         </div>
                         <div class="form_elem">

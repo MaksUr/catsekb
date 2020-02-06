@@ -7,10 +7,11 @@
 {# filter_string #}
 {# page_obj #}
 {# form #}
+{# description #}
 
 {% extends "catsekb_page/base.html" %}
 {% block base_body %}
-    {% with description="Собаки привязываются к людям, кошки привязываются к дому. Не дай этим котикам привязаться к клетке. Помоги им обрести свой дом." %}
+    {% with description=description %}
       {% if form %}
           {% include 'cats/widgets/form.html' with form=form caption="Поиск" caption_url="" %}
           {% if object_list %}

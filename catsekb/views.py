@@ -43,10 +43,25 @@ def help_us_view(request):
     context = {
         'active_menu': 'help_us',
         'extra_title': 'Помощь приюту',
+        'caption': 'Помощь приюту',
         'object': config.HELP_US_PAGE_CONTENT,
         'projects_menu_items': PROJECT_MENU_ITEMS_CONTEXT,
     }
     return render(
         request, 'catsekb/help_us.html',
+        context=context
+    )
+
+
+def about_view(request):
+    context = {
+        # 'active_menu': 'help_us',
+        'extra_title': 'О проекте',
+        'caption': 'О проекте',
+        'object': config.ABOUT_PAGE_CONTENT,
+        'projects_menu_items': PROJECT_MENU_ITEMS_CONTEXT,
+    }
+    return render(
+        request, 'catsekb/about.html',
         context=context
     )

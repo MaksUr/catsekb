@@ -18,47 +18,23 @@ from catsekb.view_functions import get_objects_from_query, get_base_catsekb_cont
 
 
 class AnimalListView(ListView, FormMixin):
-    paginate_by = GALLERY_DEFAULT_ITEMS_COUNT
+    paginate_by = 9
     model = Animal
     form_class = FilterForm
-    caption = 'Наши коты'  # TODO: Выпилить caption and desription
-    description = ''
+    caption = 'Наши питомцы'
+    description = None
     show_filter = False
     project = None
-
-    def set_description_and_caption(self, query):
-        GROUP_MAPPING = {
-            'all': {
-                'name': 'Все котики',
-                'description': 'Все животные которые попали к нам в приют.',
-            },
-            'H': {
-                'name': 'Пристроены',
-                'description': 'Они обрели свой дом',
-            },
-            'S': {
-                'name': 'Ищут дом',
-                'description': '_'
-            },
-            'D': {
-                'name': 'На радуге',
-                'description': 'Пусть земля им будет пухом, они всегда останутся в наших сердцах.',
-            },
-        }
-        if len(query) == 1 and 'location_status' in query:
-            try:
-                self.caption = GROUP_MAPPING[query['location_status']]['name']
-                self.description = GROUP_MAPPING[query['location_status']]['description']
-            except KeyError:
-                pass
+    location_status = None
 
     def get_queryset(self, **kwargs):
         query = self.request.GET.dict()
         query.update(kwargs)
-        if self.project is not None and self.project in ['catsekb', 'huskyekb', 'rotvodom']:
+        if self.project is not None:
             query.update({'project': self.project})
+        if self.location_status is not None and self.location_status in ['S', 'H', 'D']:
+            query.update({'location_status': self.location_status})
         self.show_filter = query.pop(GET_PAR_KEY_FILTER, False)
-        self.set_description_and_caption(query)
         if self.show_filter and not(set(query) & set(ANIMAL_QUERY_KEYS)):
             res = Animal.objects.none()
         else:
@@ -81,17 +57,14 @@ class AnimalListView(ListView, FormMixin):
         context.update(get_base_catsekb_context(active_menu=ANIMALS, extra_title=extra_title))
         return context
 
-    def get_filter_string(self, update_dict=None):
+    def get_filter_string(self):
         query = self.request.GET.copy()
         query._mutable = True
-        if update_dict:
-            query.update(update_dict)
         if self.show_filter:
-            query[GET_PAR_KEY_FILTER] = 1
-        if query:
-            return '?' + query.urlencode()
-        else:
+            query['filter'] = 1  # Ключ в GET параметра, включающий поиск по галереи.
+        if not query:
             return ''
+        return '?' + query.urlencode()
 
     def get_paginate_by(self, queryset):
         per_page = self.request.GET.get(GET_PAR_KEY_PER_PAGE)
@@ -207,11 +180,3 @@ class GroupDetailView(AnimalListView):
         self.description = group.description
         context = super(GroupDetailView, self).get_context_data(**kwargs)
         return context
-
-    def get_filter_string(self, update_dict=None):
-        upd = {'group_id': self.kwargs['pk']}
-        res = super(GroupDetailView, self).get_filter_string(update_dict=upd)
-        return res
-
-
-
