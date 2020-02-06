@@ -16,6 +16,40 @@ from catsekb.constants import SHOW, GET_PAR_KEY_FILTER, URL_NAME_FIND_CAT, \
     URL_NAME_SUBJECTS_FEED, DJ_ID, FOLDER
 from catsekb.settings import BASE_DIR
 
+PROJECT_MENU_ITEMS_CONTEXT = [
+    {'caption': 'CatsEkb', 'url': reverse_lazy('catsekb_page')},
+    {'caption': 'HuskyEkb', 'url': reverse_lazy('huskyekb_page')},
+    {'caption': 'Rotvodom', 'url': '#'},
+]
+
+CATSEKB_MENU_ITEMS_CONTEXT = [
+    {'url': reverse_lazy('cats_in_shelter'), 'caption': 'Ищут дом'},
+    {'url': reverse_lazy('cats_all'), 'caption': 'Все котики'},
+    {'url': reverse_lazy('cats_in_home'), 'caption': 'Пристроены'},
+    {'url': reverse_lazy('cats_dead'), 'caption': 'На радуге'},
+]
+
+HUSKYEKB_MENU_ITEMS_CONTEXT = [
+    {'url': reverse_lazy('husky_in_shelter'), 'caption': 'Ищут дом'},
+    {'url': reverse_lazy('husky_all'), 'caption': 'Все хаски'},
+    {'url': reverse_lazy('husky_in_home'), 'caption': 'Пристроены'},
+    {'url': reverse_lazy('husky_dead'), 'caption': 'На радуге'},
+]
+
+ROTVODOM_MENU_ITEMS_CONTEXT = [
+    {'url': reverse_lazy('rotv_in_shelter'), 'caption': 'Ищут дом'},
+    {'url': reverse_lazy('rotv_all'), 'caption': 'Все ротвейлеры'},
+    {'url': reverse_lazy('rotv_in_home'), 'caption': 'Пристроены'},
+    {'url': reverse_lazy('rotv_dead'), 'caption': 'На радуге'},
+]
+
+PROJECT_GROUPS_MAPPING = {
+    'catsekb': CATSEKB_MENU_ITEMS_CONTEXT,
+    'huskyekb': HUSKYEKB_MENU_ITEMS_CONTEXT,
+    'rotvodom': ROTVODOM_MENU_ITEMS_CONTEXT,
+    'main': PROJECT_MENU_ITEMS_CONTEXT,
+}
+
 
 def create_or_update_default_articles():
 
@@ -113,13 +147,9 @@ def get_last_articles(count):
     return res
 
 
-def get_base_catsekb_context(active_menu, extra_title):
-    default_group_list = [
-        {'url': reverse_lazy('cats_in_shelter'), 'caption': 'Ищут дом'},
-        {'url': reverse_lazy('cats_all'), 'caption': 'Все котики'},
-        {'url': reverse_lazy('cats_in_home'), 'caption': 'Пристроены'},
-        {'url': reverse_lazy('cats_dead'), 'caption': 'На радуге'},
-    ]
+def get_base_catsekb_context(active_menu, extra_title, project=None):
+    project = project or 'main'
+    default_group_list = PROJECT_GROUPS_MAPPING[project]
 
     animal_filter_url = dict()
     animal_filter_url['caption'] = 'Поиск'

@@ -21,6 +21,7 @@ class AbstractFeedListView(ListView):
     title = ''
     order_by = None
     active_menu = ARTICLES
+    project = None
 
     def get_queryset(self):
         return get_objects_from_query(
@@ -32,7 +33,7 @@ class AbstractFeedListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(AbstractFeedListView, self).get_context_data(**kwargs)
-        context.update(get_base_catsekb_context(active_menu=self.active_menu, extra_title=self.title))
+        context.update(get_base_catsekb_context(active_menu=self.active_menu, extra_title=self.title, project=self.project))
         context['caption'] = self.title
         return context
 
@@ -121,6 +122,7 @@ class AbstractArticleDetailView(DetailView):
     pagination_order = '-created'
     feed_url = None
     recommendations = None
+    project = None
 
     def get_object(self, queryset=None):
         queryset = self.queryset or self.get_queryset() or queryset
@@ -139,7 +141,8 @@ class AbstractArticleDetailView(DetailView):
         context.update(
             get_base_catsekb_context(
                 active_menu=self.active_menu,
-                extra_title=self.object.title
+                extra_title=self.object.title,
+                project=self.project
             )
         )
         if self.pagination_order and self.feed_url:
@@ -217,6 +220,7 @@ class DefaultArticleDetailView(AbstractArticleDetailView):
         except ObjectDoesNotExist:
             obj = self.save_default_article()
         return obj
+
 
 class FindCatView(DefaultArticleDetailView):
     article_id = ARTICLE_FIND_CAT_ID

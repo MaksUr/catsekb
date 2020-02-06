@@ -1,14 +1,8 @@
-from django.shortcuts import render
-from django.urls import reverse_lazy
 from constance import config
-from catsekb.view_functions import get_important_news
-from cats.models import AnimalVideo
+from django.shortcuts import render
 
-PROJECT_MENU_ITEMS_CONTEXT = [
-    {'caption': 'CatsEkb', 'url': reverse_lazy('catsekb_page')},
-    {'caption': 'HuskyEkb', 'url': reverse_lazy('huskyekb_page')},
-    {'caption': 'Rotvodom', 'url': '#'},
-]
+from cats.models import AnimalVideo
+from catsekb.view_functions import get_important_news, PROJECT_MENU_ITEMS_CONTEXT
 
 
 def index_view(request):
