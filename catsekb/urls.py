@@ -18,19 +18,25 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 from catsekb import settings
-from catsekb.views import index_view, contacts_view, help_us_view, about_view, partners_view, partner_detail_view, \
-    partner_event_detail_view
+from catsekb import views
 from cats.views import AnimalDetailView
+from articles.views import NewsFeedListView
 
 urlpatterns = [
     path('', include('articles.urls')),
-    path('', index_view, name='index'),
-    path('contacts/', contacts_view, name='contacts'),
-    path('help/', help_us_view, name='help_us'),
-    path('about/', about_view, name='about'),
-    path('partners/', partners_view, name='partners'),
-    path('partners/<int:pk>', partner_detail_view, name='partner_detail'),
-    path('event/<int:pk>', partner_event_detail_view, name='partner_event_detail'),
+    path('', views.index_view, name='index'),
+    path('contacts/', views.contacts_view, name='contacts'),
+    path('help/', views.help_view, name='help'),
+    path('about/', views.about_view, name='about'),
+    path('documents/', views.documents_view, name='documents'),
+    path('reports/', views.reports_view, name='reports'),
+    path('media/', views.media_view, name='media'),
+    path('partners/', views.partners_view, name='partners'),
+    path('news/', NewsFeedListView.as_view(), name='news'),
+    path('partners/<int:pk>', views.partner_detail_view, name='partner_detail'),
+    path('event/<int:pk>', views.partner_event_detail_view, name='partner_event_detail'),
+    path('get-animal-guide/', views.get_animal_guide_view, name='get_animal_guide'),
+    path('new-animals/', views.new_animals_view, name='new_animals'),
     path('catsekb/', include('catsekb_page.urls')),
     path('huskyekb/', include('huskyekb_page.urls')),
     path('rotvodom/', include('rotvodom_page.urls')),

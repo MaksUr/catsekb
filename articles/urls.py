@@ -5,9 +5,6 @@ from . import views
 
 urlpatterns = [
     path('articles/list/', views.SubjectListView.as_view(), name='article_list'),
-
-    path('news/', views.NewsFeedListView.as_view(), name='news'),    
-
     url(r'^feed/$', views.ArticlesFeedListView.as_view(project='catsekb'), name='subjects_feed'),
     url(r'^subject_(?P<pk>[0-9]+)$', views.SubjectDetailView.as_view(), name='subject'),
     url(r'^article_(?P<pk>[0-9]+)$', views.ArticleDetailView.as_view(), name='article'),

@@ -1,18 +1,25 @@
-{% url 'index' as index_url %}
-{% include "catsekb/menu_tab.html" with name='index' active=active_menu abs_url=index_url url_caption='Главная' %}
+{% include "catsekb/menu_tab.html" with name='about' url_caption='О фонде' active=active_menu menu_items=about_menu_items menu_class=menu_class %}
 
-{% include "catsekb/menu_tab.html" with name='projects' url_caption='Наши проекты' menu_items=projects_menu_items menu_class=menu_class %}
+{% include "catsekb/menu_tab.html" with name='our_animals' url_caption='Наши животные' active=active_menu menu_items=our_animals_menu_items menu_class=menu_class %}
+
+{% url 'help' as help_url %}
+{% include "catsekb/menu_tab.html" with name='help' url_caption='Помощь приюту' active=active_menu abs_url=help_url %}
+
+{% url 'partners' as partners_url %}
+{% include "catsekb/menu_tab.html" with name='partners' url_caption='Наши партнеры' active=active_menu abs_url=partners_url %}
 
 {% url 'news' as news_url %}
-{% include "catsekb/menu_tab.html" with name='news' active=active_menu abs_url=news_url url_caption='Наши новости' %}
-
-{% url 'help_us' as help_us_url %}
-{% include "catsekb/menu_tab.html" with name='help_us' active=active_menu abs_url=help_us_url url_caption='Помощь приюту' %}
+{% include "catsekb/menu_tab.html" with name='news' url_caption='Новости' active=active_menu abs_url=news_url %}
 
 {% url 'contacts' as contacts_url %}
-{% include "catsekb/menu_tab.html" with name='contacts' active=active_menu abs_url=contacts_url|add:'#anchor_caption' url_caption='Контакты' %}
+{% include "catsekb/menu_tab.html" with name='contacts' url_caption='Контакты' active=active_menu abs_url=contacts_url|add:'#anchor_caption' %}
 
-{# TODO: Лабрадоры #}
-{# TODO: Хаски #}
-{# TODO: Помощь приюту #}
-{# TODO: Контакты #}
+
+{#{% url 'index' as index_url %}#}
+{#{% include "catsekb/menu_tab.html" with name='index' active=active_menu abs_url=index_url url_caption='Главная' %}#}
+{##}
+
+{##}
+{#{% url 'news' as news_url %}#}
+{#{% include "catsekb/menu_tab.html" with name='news' active=active_menu abs_url=news_url url_caption='Наши новости' %}#}
+{##}

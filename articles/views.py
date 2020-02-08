@@ -5,15 +5,16 @@ from django.http import Http404
 from django.urls import reverse
 from django.views.generic import DetailView, ListView
 
-from articles.article_constants import ARTICLE_CONTACTS_ID, ARTICLE_TITLE, ARTICLES_DEFAULT_MAPPING, \
+from articles.article_constants import ARTICLE_TITLE, ARTICLES_DEFAULT_MAPPING, \
     ARTICLE_FIND_CAT_ID, \
-    CAPTION, ARTICLE_TEXT, FEED_PAGINATE_BY, SUBJECT_VERBOSE_NAME, ARTICLE_ABOUT_ID
+    CAPTION, ARTICLE_TEXT, FEED_PAGINATE_BY
 from articles.models import Subject, Article, News
 from cats.models import AnimalVideo
 from catsekb.constants import ARTICLES, DJ_ID, URL_NAME_SUBJECTS_TITLE, URL_NAME_SUBJECT_TITLE, \
-    SHOW, URL_NAME_NEWS_FEED_TITLE, GET_PAR_KEY_PER_PAGE, \
-    GET_PAR_VAL_PAGE, GET_PAR_KEY_PAGE, URL_NAME_SUBJECTS_FEED, URL_NAME_VIDEO_TITLE, ANIMALS
-from catsekb.view_functions import get_base_catsekb_context, get_objects_from_query
+    SHOW, GET_PAR_KEY_PER_PAGE, GET_PAR_VAL_PAGE, GET_PAR_KEY_PAGE, URL_NAME_SUBJECTS_FEED, URL_NAME_VIDEO_TITLE, \
+    ANIMALS
+from catsekb.view_functions import get_base_catsekb_context, get_objects_from_query, ABOUT_MENU_ITEMS_BASE_CONTEXT, \
+    OUR_ANIMALS_MENU_ITEMS_BASE_CONTEXT
 
 
 class AbstractFeedListView(ListView):
@@ -80,10 +81,16 @@ class AnimalVideoListView(AbstractFeedListView):
 
 class NewsFeedListView(AbstractFeedListView):
     model = News
-    title = URL_NAME_NEWS_FEED_TITLE
-    template_name = 'articles/feed_list.html'
+    title = 'Новости'
+    template_name = 'catsekb/news.html'
     order_by = '-created'
     active_menu = 'news'
+
+    def get_context_data(self, **kwargs):
+        context = super(NewsFeedListView, self).get_context_data(**kwargs)
+        context['about_menu_items'] = ABOUT_MENU_ITEMS_BASE_CONTEXT
+        context['our_animals_menu_items'] = OUR_ANIMALS_MENU_ITEMS_BASE_CONTEXT
+        return context
 
 
 class ArticlesFeedListView(AbstractFeedListView):

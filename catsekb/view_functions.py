@@ -16,10 +16,19 @@ from catsekb.constants import SHOW, GET_PAR_KEY_FILTER, URL_NAME_FIND_CAT, \
     URL_NAME_SUBJECTS_FEED, DJ_ID, FOLDER
 from catsekb.settings import BASE_DIR
 
-PROJECT_MENU_ITEMS_CONTEXT = [
+ABOUT_MENU_ITEMS_BASE_CONTEXT = [
+    {'caption': 'О фонде', 'url': reverse_lazy('about')},
+    {'caption': 'Документы', 'url': reverse_lazy('documents')},
+    {'caption': 'Отчеты', 'url': reverse_lazy('reports')},
+    {'caption': 'Сми о нас', 'url': reverse_lazy('media')},
+]
+
+OUR_ANIMALS_MENU_ITEMS_BASE_CONTEXT = [
+    {'caption': 'Взять животное из приюта', 'url': reverse_lazy('get_animal_guide')},
     {'caption': 'CatsEkb', 'url': reverse_lazy('catsekb_page')},
     {'caption': 'HuskyEkb', 'url': reverse_lazy('huskyekb_page')},
     {'caption': 'Rotvodom', 'url': reverse_lazy('rotvodom_page')},
+    {'caption': 'Новенькие', 'url': reverse_lazy('new_animals')}
 ]
 
 CATSEKB_MENU_ITEMS_CONTEXT = [
@@ -47,7 +56,7 @@ PROJECT_GROUPS_MAPPING = {
     'catsekb': CATSEKB_MENU_ITEMS_CONTEXT,
     'huskyekb': HUSKYEKB_MENU_ITEMS_CONTEXT,
     'rotvodom': ROTVODOM_MENU_ITEMS_CONTEXT,
-    'main': PROJECT_MENU_ITEMS_CONTEXT,
+    'main': OUR_ANIMALS_MENU_ITEMS_BASE_CONTEXT,
 }
 
 
