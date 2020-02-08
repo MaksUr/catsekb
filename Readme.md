@@ -121,6 +121,5 @@ $ docker-compose kill -s HUP nginx
 
 ## Docker
 `cd static/catsekb/`
-`docker build -t happy_house_front:latest . `
-`docker run --rm -v ~/rep/sites/catsekb/static/catsekb/:/share happy_house_front:latest cp -r /dist /share
-`
+`docker build -t happy_house_front:latest .`
+`docker run --rm -v ~/rep/sites/catsekb/static/catsekb/:/share happy_house_front:latest cp -r /dist /share`

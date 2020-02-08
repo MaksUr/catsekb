@@ -11,7 +11,6 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglifyjs'),
     imagemin = require('gulp-imagemin'),
     pngquant = require('imagemin-pngquant'),
-    cache = require('gulp-cache'),
     gcmq = require('gulp-group-css-media-queries');
 
 gulp.task('copy-bootstrap', function () {
@@ -48,12 +47,13 @@ gulp.task('scripts', function () {
 
 gulp.task('img', function () {
     return gulp.src('app/img/**/*')
-        .pipe(cache(imagemin({
-            interlaced: true,
-            progressive: true,
-            svgoPlugins: [{ removeViewBox: false }],
-            use: [pngquant()]
-        })))
+        // TODO: Сделать нормальное сжатие изображений, и не через Gulp
+        // .pipe(cache(imagemin({
+        //     interlaced: true,
+        //     progressive: true,
+        //     svgoPlugins: [{ removeViewBox: false }],
+        //     use: [pngquant()]
+        // })))
         .pipe(gulp.dest('dist/img'));
 });
 
