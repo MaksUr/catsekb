@@ -1,0 +1,36 @@
+{% extends "catsekb/base.html" %}
+
+{% block base_body %}
+    <section class="font line_height">
+    {% include 'cats/widgets/caption.html' with caption=object.name %}
+        <div class="article font line_height">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                        {{ object.description }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="font">
+    {% with object.partnerevent_set.all as events %}
+        <div class="line_height">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                        {% for event in events %}
+                            {% if event.show or request.user.is_authenticated %}
+                                {% include 'catsekb/event_preview.html' with cs=cs|default:12 cso=cso|default:0 cm=cm|default:12 cmo=cmo|default:0 cl=cl|default:12 clo=clo|default:0 object=event %}
+                            {% endif %}
+                        {% empty %}
+                            <p>Здесь пока пусто...</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endwith %}
+    </section>
+{% endblock base_body %}

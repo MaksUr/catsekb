@@ -18,7 +18,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 from catsekb import settings
-from catsekb.views import index_view, contacts_view, help_us_view, about_view
+from catsekb.views import index_view, contacts_view, help_us_view, about_view, partners_view, partner_detail_view, \
+    partner_event_detail_view
 from cats.views import AnimalDetailView
 
 urlpatterns = [
@@ -27,6 +28,9 @@ urlpatterns = [
     path('contacts/', contacts_view, name='contacts'),
     path('help/', help_us_view, name='help_us'),
     path('about/', about_view, name='about'),
+    path('partners/', partners_view, name='partners'),
+    path('partners/<int:pk>', partner_detail_view, name='partner_detail'),
+    path('event/<int:pk>', partner_event_detail_view, name='partner_event_detail'),
     path('catsekb/', include('catsekb_page.urls')),
     path('huskyekb/', include('huskyekb_page.urls')),
     path('rotvodom/', include('rotvodom_page.urls')),

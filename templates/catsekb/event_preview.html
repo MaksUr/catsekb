@@ -1,0 +1,25 @@
+{# object #}
+{# cs #}
+{# cso #}
+{# cm #}
+{# cmo #}
+{# cl #}
+{# clo #}
+
+
+<div class="col-xs-12 col-xs-offset-0 col-sm-{{ cs }} col-sm-offset-{{ cso }} col-md-{{ cm }} col-md-offset-{{ cmo }} col-lg-{{ cl }} col-lg-offset-{{ clo }}">
+    <div class="news_container">
+        <a href="{{ object.get_absolute_url }}#anchor_caption" style="background-image: url({{ object.image }}); background-position-y: {{ object.y_pos }}%;" class="art_img"></a>
+        <a href="{{ object.get_absolute_url }}#anchor_caption"><h3>{{ object.title|truncatechars:50 }}</h3></a>
+        {% if object.date %}
+            <div class="date_article">{{ object.date.date }}</div>
+        {% endif %}
+    </div>
+</div>
+
+
+
+
+
+
+

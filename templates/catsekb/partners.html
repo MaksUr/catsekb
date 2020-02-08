@@ -1,0 +1,21 @@
+{# object_list #}
+{% extends "catsekb/base.html" %}
+
+{% block base_body %}
+    <section>
+        {% include 'cats/widgets/caption.html' with caption=caption %}
+        <div class="font line_height">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                        {% for object in object_list %}
+                            {% if object.show or request.user.is_authenticated %}
+                                {% include 'articles/widgets/partner_preview.html' with object=object %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock base_body %}

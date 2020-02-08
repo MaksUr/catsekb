@@ -1,0 +1,19 @@
+{# object #}
+{# cs #}
+{# cso #}
+{# cm #}
+{# cmo #}
+{# cl #}
+{# clo #}
+
+<div class="col-xs-12 col-xs-offset-0 col-sm-{{ cs }} col-sm-offset-{{ cso }} col-md-{{ cm }} col-md-offset-{{ cmo }} col-lg-{{ cl }} col-lg-offset-{{ clo }}">
+    <div class="news_container">
+        {% if object.name %}
+            {# partner #}
+            <div>
+                <img src="{{ object.image }}" alt="{{ object.name }}-logo">
+            </div>
+            <a href="{{ object.get_absolute_url }}#anchor_caption"><h3>{{ object.name|truncatechars:50 }}</h3></a>
+        {% endif %}
+    </div>
+</div>

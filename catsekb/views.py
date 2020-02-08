@@ -1,6 +1,7 @@
 from constance import config
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
+from articles.models import Partner, PartnerEvent
 from cats.models import AnimalVideo
 from catsekb.view_functions import get_important_news, PROJECT_MENU_ITEMS_CONTEXT
 
@@ -49,7 +50,7 @@ def help_us_view(request):
 
 def about_view(request):
     context = {
-        # 'active_menu': 'help_us',
+        'active_menu': 'about',
         'extra_title': 'О проекте',
         'caption': 'О проекте',
         'object': config.ABOUT_PAGE_CONTENT,
@@ -57,5 +58,49 @@ def about_view(request):
     }
     return render(
         request, 'catsekb/about.html',
+        context=context
+    )
+
+
+def partners_view(request):
+    context = {
+        'active_menu': 'partners',
+        'extra_title': 'Наши партнеры',
+        'caption': 'Наши партнеры',
+        'object_list': Partner.objects.all().order_by('name'),
+        'projects_menu_items': PROJECT_MENU_ITEMS_CONTEXT,
+    }
+    return render(
+        request, 'catsekb/partners.html',
+        context=context
+    )
+
+
+def partner_detail_view(request, pk):
+    partner = get_object_or_404(Partner, pk=pk)
+    context = {
+        'active_menu': 'partners',
+        'extra_title': partner.name,
+        'caption': 'Наши партнеры',
+        'object': partner,
+        'projects_menu_items': PROJECT_MENU_ITEMS_CONTEXT,
+    }
+    return render(
+        request, 'catsekb/partner_detail_view.html',
+        context=context
+    )
+
+
+def partner_event_detail_view(request, pk):
+    partner_event = get_object_or_404(PartnerEvent, pk=pk)
+    context = {
+        'active_menu': 'partners',
+        'extra_title': partner_event.title,
+        'caption': 'Наши партнеры',
+        'object': partner_event,
+        'projects_menu_items': PROJECT_MENU_ITEMS_CONTEXT,
+    }
+    return render(
+        request, 'catsekb/partner_event_detail_view.html',
         context=context
     )

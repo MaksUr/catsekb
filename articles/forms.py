@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.admin.widgets import AdminDateWidget
 from django.core.exceptions import ValidationError
 from ckeditor.widgets import CKEditorWidget
 
@@ -10,12 +11,13 @@ from articles.article_constants import NEWS_TITLE, NEWS_TEXT, NEWS_SHOW, \
     ARTICLE_KEY_SHOW_HELP_TEXT, ARTICLE_KEY_AUTHOR_HELP_TEXT, \
     ARTICLE_KEY_SUBJECT_HELP_TEXT, ARTICLE_KEY_Y_POS_HELP_TEXT, ARTICLE_TITLE_VALIDATION_HAS_DEFAULT_VALUE, \
     ARTICLES_DEFAULT_MAPPING, ARTICLE_KEY_USE_BACKGROUND_HELP_TEXT
-from articles.models import News, Article
+from articles.models import News, Article, PartnerEvent
 from catsekb.constants import IMAGE, IMAGE_KEY_HELP_TEXT
 
 
 class NewsForm(forms.ModelForm):
     text = forms.CharField(widget=CKEditorWidget())
+
     class Meta:
         model = News
         fields = (
@@ -71,3 +73,46 @@ class ArticleForm(forms.ModelForm):
             raise ValidationError(message)
         return self.cleaned_data[ARTICLE_TITLE]
 
+
+class PartnerEventAdminForm(forms.ModelForm):
+    text = forms.CharField(
+        widget=CKEditorWidget(),
+        label=PartnerEvent._meta.get_field('text').verbose_name,
+    )
+    date = forms.DateTimeField(
+        widget=AdminDateWidget(),
+        label=PartnerEvent._meta.get_field('date').verbose_name,
+    )
+
+    class Meta:
+        model = PartnerEvent
+
+        fields = (
+            'title',
+            'text',
+            'date',
+            'image',
+            'show',
+            'partner',
+            'y_pos',
+            'use_background',
+        )
+
+        # TODO: разобраться как добавить
+        readonly_fields = (
+            'created',
+            'updated',
+        )
+
+        help_texts = {
+            'title': 'Название партерского события',
+            'created': 'Дата создания записи',
+            'updated': 'Дата обновления записи',
+            'image': 'Ссылка на главное изображения события (для фона и превью)',
+            'show': 'Показывать на сайте или нет (используйте вместо удаления)',
+            'partner': 'К какому партнеру относится событие',
+            'y_pos': 'Если изображение съехало вверх или вниз, установите значение "Позиция по вертикали"',
+            'use_background': 'Помещает фото в шапку страницы. Если фон съехал, установите "Позиция по вертикали".',
+        }
+
+        # TODO: добавить валидацию, что y_pos, use_background могут использоваться если есть image

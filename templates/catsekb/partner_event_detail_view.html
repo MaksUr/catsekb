@@ -1,0 +1,23 @@
+{# for base #}
+    {# group_list #}
+    {# helpful_info_list #}
+
+{# object #}
+{# shelter_caption #}
+{# page #}
+{# feed_per_page #}
+{# feed_url #}
+{# recommendations #}
+{% extends "catsekb/base.html" %}
+
+{% block base_body %}
+    <section class="font line_height">
+    {% include 'articles/widgets/article.html' with object=object %}
+    </section>
+{% endblock base_body %}
+
+{% block header %}
+    {% with object as background_image %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock header %}
