@@ -1,0 +1,11 @@
+{# button_url #}
+{# button_label #}
+{% load static %}
+<div class="request mid font">
+    <a href="{{ button_url }}" class="but" target="_blank">
+        {{ button_label }}
+    </a>
+</div>
+{% if animation %}
+  <div class="cat_basket"></div>
+{% endif %}
