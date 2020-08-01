@@ -1,0 +1,10 @@
+# Frontend
+FROM node:11
+
+WORKDIR /front
+COPY static/catsekb/package.json .
+COPY static/catsekb/yarn.lock .
+RUN yarn
+COPY static/catsekb/gulpfile.js ./gulpfile.js
+COPY static/catsekb/app ./app
+RUN node node_modules/gulp/bin/gulp.js build

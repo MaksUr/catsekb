@@ -1,3 +1,18 @@
+# Запуск локально
+
+1. `python3 -m venv venv`
+1. `source venv/bin/activate`
+1. `pip install pip --upgrade`
+1. `pip install -r requirements.txt`
+1. `python manage.py check` (если не проходит добавить vk rest api key)
+1. `python manage.py migrate`
+1. `python manage.py runserver`: запустится без стилей
+1. `docker build -t catsekb_front:latest -f Dockerfile_front .`
+1. `docker run --rm -v ~/rep/personal/catsekb/static/catsekb/:/share catsekb_front:latest cp -r /front/dist/ /share` (указать абсолютный путь до репозитория)
+1. `python manage.py runserver`
+
+
+
 # Запуск проекта локально с помощью с докера
 - build образа с помощью докера: `docker build -t catsekb.ru:latest .`
 - запуск контейнера для локальной разработки: `docker run -ti --rm -p 8000:80 -v ~/rep/sites/catsekb/vk_token.txt:/srv/vk_token.txt -v ~/rep/sites/catsekb/db.sqlite3:/catsekb.ru/db.sqlite3 catsekb.ru:latest`

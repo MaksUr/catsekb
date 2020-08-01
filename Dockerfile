@@ -1,4 +1,6 @@
 # Frontend
+# Копипаста из Dockerfile_front
+# TODO: убрать копипасту, сделать чтобы этот файл запускал команды из файла Dockerfile_front
 FROM node:11
 
 WORKDIR /front
