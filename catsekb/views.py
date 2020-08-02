@@ -67,6 +67,21 @@ def about_view(request):
         context=context
     )
 
+def needs_view(request):
+    name = 'Нужды приюта'
+    context = {
+        'active_menu': 'needs',
+        'extra_title': name,
+        'caption': name,
+        'object': config.NEEDS_PAGE_CONTENT,
+        'about_menu_items': ABOUT_MENU_ITEMS_BASE_CONTEXT,
+        'our_animals_menu_items': OUR_ANIMALS_MENU_ITEMS_BASE_CONTEXT,
+    }
+    return render(
+        request, 'catsekb/needs.html',
+        context=context
+    )
+
 
 def documents_view(request):
     name = 'Документы'
