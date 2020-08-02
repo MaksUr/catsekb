@@ -23,9 +23,7 @@
                         {% for event in events %}
                             {% if event.show or request.user.is_authenticated %}
                                 {% include 'catsekb/event_preview.html' with cs=cs|default:12 cso=cso|default:0 cm=cm|default:12 cmo=cmo|default:0 cl=cl|default:12 clo=clo|default:0 object=event %}
-                            {% endif %}
-                        {% empty %}
-                            <p>Здесь пока пусто...</p>
+                            {% endif %}                        
                         {% endfor %}
                     </div>
                 </div>

@@ -190,6 +190,7 @@ class ArticleDetailView(AbstractArticleDetailView):
 
 
 class NewsDetailView(AbstractArticleDetailView):
+    template_name = 'articles/news_detail.html'
     model = News
     feed_url = 'news'
     recommendations = 2
