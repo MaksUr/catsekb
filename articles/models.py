@@ -80,26 +80,26 @@ class Article(Model):
 
 
 class News(Model):
-    title = CharField(NEWS_KEY_TITLE, max_length=70)
-    text = RichTextField(NEWS_KEY_TEXT)
-    created = DateTimeField(NEWS_KEY_CREATED, auto_now_add=True)
-    updated = DateTimeField(NEWS_KEY_UPDATED, auto_now=True)
-    show = BooleanField(NEWS_KEY_SHOW, default=True)
+    title = CharField('Заголовок новости', max_length=70)
+    text = RichTextField('Текст новости')
+    created = DateTimeField('создано', auto_now_add=True)
+    updated = DateTimeField('обновлено', auto_now=True)
+    show = BooleanField('Показывать новость', default=True)
     author = ForeignKey(Author, on_delete=CASCADE, verbose_name=Author._meta.verbose_name, null=True, blank=True)
-    image = URLField(IMAGE_KEY, null=True, blank=True, default=None)
-    important = BooleanField(NEWS_KEY_IMPORTANT, default=False)
-    y_pos = IntegerField(NEWS_KEY_Y_POS, blank=True, default=50, validators=[background_y_position_validator])
-    use_background = BooleanField(NEWS_KEY_USE_BACKGROUND, default=True)
+    image = URLField('Изображение для превью', null=True, blank=True, default=None)
+    important = BooleanField('Важная новость', default=False)
+    y_pos = IntegerField('Позиция по вертикали', blank=True, default=50, validators=[background_y_position_validator])
+    use_background = BooleanField('Использовать изображение для фона страницы', default=True)
 
     class Meta:
-        verbose_name = NEWS_VERBOSE_NAME
-        verbose_name_plural = NEWS_VERBOSE_NAME_PLURAL
+        verbose_name = 'Новость'
+        verbose_name_plural = 'Новости'
 
     def __str__(self):
         return '{title}: {text}...'.format(title=self.title or 'Новость', text=self.text[:15])
 
     def get_absolute_url(self):
-        return reverse(URL_NAME_POST, kwargs={DJ_PK: self.id})
+        return reverse('post', kwargs={DJ_PK: self.id})
 
     def get_background_style(self):
         if self.image and self.use_background:
