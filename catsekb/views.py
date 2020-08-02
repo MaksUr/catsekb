@@ -2,7 +2,7 @@ from constance import config
 from django.shortcuts import render, get_object_or_404
 
 from articles.models import Partner, PartnerEvent
-from cats.models import AnimalVideo
+from cats.models import AnimalVideo, Animal
 from catsekb.view_functions import get_important_news, OUR_ANIMALS_MENU_ITEMS_BASE_CONTEXT, \
     ABOUT_MENU_ITEMS_BASE_CONTEXT
 
@@ -188,6 +188,7 @@ def new_animals_view(request):
         'caption': name,
         'about_menu_items': ABOUT_MENU_ITEMS_BASE_CONTEXT,
         'our_animals_menu_items': OUR_ANIMALS_MENU_ITEMS_BASE_CONTEXT,
+        'new_animals': Animal.objects.filter(location_status='S', vk_album_id__isnull=False).order_by('-created')
     }
     return render(
         request, 'catsekb/new_animals.html',

@@ -4,12 +4,7 @@
 {% block base_body %}
     <section class="font line_height">
 		<div class="container">
-			{% include 'cats/widgets/caption.html' with caption=caption %}
-			<div class="row">
-				<div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-					Эта страница еще в разработке
-				</div>
-			</div>
+			{% include 'cats/widgets/gallery.html' with object_list=new_animals filter_parameters='?group_id=S' caption=caption caption_url=group_url bottom_text='Посмотреть других котиков' %}
 		</div>
 	</section>
 {% endblock base_body %}
