@@ -41,23 +41,23 @@
         </div>
     {% endif %}
 
-    {% if main_video.first %}
-        <div class="feed line_height font">
-            {% include 'cats/widgets/caption.html' with caption='Наши видео' %}
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-                    {% include 'articles/widgets/article_preview_validation.html' with object=main_video.first cs=12 cm=12 cmo=0 cl=12 clo=0 %}
-                        <div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0">
-                            <div class="mid">
-                                <a href="{% url 'video' %}#anchor_caption" class="tag">Посмотреть другие видео</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endif %}
+{#    {% if main_video.first %} #}
+{#        <div class="feed line_height font"> #}
+{#            {% include 'cats/widgets/caption.html' with caption='Наши видео' %} #}
+{#            <div class="container"> #}
+{#                <div class="row"> #}
+{#                    <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2"> #}
+{#                    {% include 'articles/widgets/article_preview_validation.html' with object=main_video.first cs=12 cm=12 cmo=0 cl=12 clo=0 %} #}
+{#                        <div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0"> #}
+{#                            <div class="mid"> #}
+{#                                <a href="{% url 'video' %}#anchor_caption" class="tag">Посмотреть другие видео</a> #}
+{#                            </div> #}
+{#                        </div> #}
+{#                    </div> #}
+{#                </div> #}
+{#            </div> #}
+{#        </div> #}
+{#    {% endif %} #}
 
 {% endblock base_body %}
 {% block body_attr %}class='index'{% endblock body_attr %}
