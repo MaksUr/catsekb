@@ -20,7 +20,7 @@ from django.contrib import admin
 from catsekb import settings
 from catsekb import views
 from cats.views import AnimalDetailView
-from articles.views import NewsFeedListView
+from articles.views import NewsFeedListView, ResultsFeedListView
 
 urlpatterns = [
     path('', include('articles.urls')),
@@ -31,6 +31,8 @@ urlpatterns = [
     path('documents/', views.documents_view, name='documents'),
     path('reports/', views.reports_view, name='reports'),
     path('media/', views.media_view, name='media'),
+    path('results/', ResultsFeedListView.as_view(), name='results'),
+    path('needs/', views.about_view, name='needs'),
     path('partners/', views.partners_view, name='partners'),
     path('news/', NewsFeedListView.as_view(), name='news'),
     path('partners/<int:pk>', views.partner_detail_view, name='partner_detail'),

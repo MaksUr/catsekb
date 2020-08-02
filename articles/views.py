@@ -8,7 +8,7 @@ from django.views.generic import DetailView, ListView
 from articles.article_constants import ARTICLE_TITLE, ARTICLES_DEFAULT_MAPPING, \
     ARTICLE_FIND_CAT_ID, \
     CAPTION, ARTICLE_TEXT, FEED_PAGINATE_BY
-from articles.models import Subject, Article, News
+from articles.models import Subject, Article, News, Results
 from cats.models import AnimalVideo
 from catsekb.constants import ARTICLES, DJ_ID, URL_NAME_SUBJECTS_TITLE, URL_NAME_SUBJECT_TITLE, \
     SHOW, GET_PAR_KEY_PER_PAGE, GET_PAR_VAL_PAGE, GET_PAR_KEY_PAGE, URL_NAME_SUBJECTS_FEED, URL_NAME_VIDEO_TITLE, \
@@ -88,6 +88,19 @@ class NewsFeedListView(AbstractFeedListView):
 
     def get_context_data(self, **kwargs):
         context = super(NewsFeedListView, self).get_context_data(**kwargs)
+        context['about_menu_items'] = ABOUT_MENU_ITEMS_BASE_CONTEXT
+        context['our_animals_menu_items'] = OUR_ANIMALS_MENU_ITEMS_BASE_CONTEXT
+        return context
+
+class ResultsFeedListView(AbstractFeedListView):
+    model = Results
+    title = 'Наши результаты'
+    template_name = 'catsekb/results.html'
+    order_by = '-created'
+    active_menu = 'results'
+
+    def get_context_data(self, **kwargs):
+        context = super(ResultsFeedListView, self).get_context_data(**kwargs)
         context['about_menu_items'] = ABOUT_MENU_ITEMS_BASE_CONTEXT
         context['our_animals_menu_items'] = OUR_ANIMALS_MENU_ITEMS_BASE_CONTEXT
         return context

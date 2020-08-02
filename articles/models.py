@@ -85,8 +85,10 @@ class News(Model):
     created = DateTimeField('создано', auto_now_add=True)
     updated = DateTimeField('обновлено', auto_now=True)
     show = BooleanField('Показывать новость', default=True)
+    # TODO: выпилить автора
     author = ForeignKey(Author, on_delete=CASCADE, verbose_name=Author._meta.verbose_name, null=True, blank=True)
     image = URLField('Изображение для превью', null=True, blank=True, default=None)
+    # TODO: пересмотреть необходимость этого поля
     important = BooleanField('Важная новость', default=False)
     y_pos = IntegerField('Позиция по вертикали', blank=True, default=50, validators=[background_y_position_validator])
     use_background = BooleanField('Использовать изображение для фона страницы', default=True)
@@ -99,7 +101,41 @@ class News(Model):
         return '{title}: {text}...'.format(title=self.title or 'Новость', text=self.text[:15])
 
     def get_absolute_url(self):
-        return reverse('post', kwargs={DJ_PK: self.id})
+        return reverse('post', kwargs={'pk': self.id})
+
+    def get_background_style(self):
+        if self.image and self.use_background:
+            res = 'background-image: url({url}); background-size: cover; background-position-y: {ypos}%;'.format(
+                url=self.image, ypos=self.y_pos
+            )
+        else:
+            res = None
+        return res
+
+class Results(Model):
+    # Копипаста из News
+    title = CharField('Заголовок результата', max_length=70)
+    text = RichTextField('Текст результата')
+    created = DateTimeField('создано', auto_now_add=True)
+    updated = DateTimeField('обновлено', auto_now=True)
+    show = BooleanField('Показывать результат', default=True)
+    # TODO: выпилить автора
+    author = ForeignKey(Author, on_delete=CASCADE, verbose_name=Author._meta.verbose_name, null=True, blank=True)
+    image = URLField('Изображение для превью', null=True, blank=True, default=None)
+    # TODO: пересмотреть необходимость этого поля
+    important = BooleanField('Важный результат', default=False)
+    y_pos = IntegerField('Позиция по вертикали', blank=True, default=50, validators=[background_y_position_validator])
+    use_background = BooleanField('Использовать изображение для фона страницы', default=True)
+
+    class Meta:
+        verbose_name = 'Результат'
+        verbose_name_plural = 'Результаты'
+
+    def __str__(self):
+        return '{title}: {text}...'.format(title=self.title or 'Результат', text=self.text[:15])
+
+    def get_absolute_url(self):
+        return reverse('result', kwargs={'pk': self.id})
 
     def get_background_style(self):
         if self.image and self.use_background:
