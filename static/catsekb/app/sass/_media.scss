@@ -25,9 +25,21 @@
 	.main_menu {
 		margin-top: 20px;
 	}
-	
+
+	.full_cat_image {
+		background-image: url(../img/cat_mobile.jpg);
+	}
+
+	.full_husky_image {
+		background-image: url(../img/husky_mobile.jpg);
+	}
+
+	.full_rottweiler_image {
+		background-image: url(../img/rottweiler_mobile.jpg);
+	}
+
 	.full {
-    	background-image: url(../img/cat_mobile.jpg);
+    	// background-image: url(../img/cat_mobile.jpg);
     	background-position: 48%;
 		padding: 20px 0;
 	}
