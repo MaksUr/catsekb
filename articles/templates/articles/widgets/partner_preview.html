@@ -11,9 +11,25 @@
         {% if object.name %}
             {# partner #}
             <div>
+                {% if object.company_url %}
+                    <a href="{{ object.company_url }}" target="_blank" rel="noopener noreferrer">
+                        <img src="{{ object.image }}" alt="{{ object.name }}-logo">
+                    </a>
+                {% else %}
                 <img src="{{ object.image }}" alt="{{ object.name }}-logo">
+                {% endif %}
             </div>
-            <a href="{{ object.get_absolute_url }}#anchor_caption"><h3>{{ object.name|truncatechars:50 }}</h3></a>
+            {% if object.description %}
+                <a href="{{ object.get_absolute_url }}#anchor_caption">
+                    <h3>
+                        {{ object.name|truncatechars:50 }}
+                    </h3>
+                </a>
+            {% else %}
+                <h3>
+                    {{ object.name|truncatechars:50 }}
+                </h3>
+            {% endif %}
         {% endif %}
     </div>
 </div>

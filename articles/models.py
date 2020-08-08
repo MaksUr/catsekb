@@ -149,9 +149,10 @@ class Results(Model):
 
 class Partner(Model):
     name = CharField("Партнер", max_length=70)
-    description = TextField("Краткое описание партнера", max_length=500)
+    description = TextField("Краткое описание партнера", max_length=500, null=True, blank=True, default=None)
     image = URLField("Лого партнера")
     show = BooleanField("Показывать на сайте", default=True)
+    company_url = URLField("Ссылка на партнера", null=True, blank=True, default=None)
 
     def __str__(self):
         return self.name
