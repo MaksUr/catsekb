@@ -208,6 +208,13 @@ class NewsDetailView(AbstractArticleDetailView):
     feed_url = 'news'
     recommendations = 2
 
+class ResultDetailView(AbstractArticleDetailView):
+    # Копипаста из NewsDetailView
+    template_name = 'articles/news_detail.html'
+    model = Results
+    feed_url = 'results'
+    recommendations = 2
+
 
 class DefaultArticleDetailView(AbstractArticleDetailView):
     article_id = None  # abstract
