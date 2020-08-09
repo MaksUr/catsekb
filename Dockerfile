@@ -38,6 +38,7 @@ COPY cats ./cats
 COPY catsekb_page ./catsekb_page
 COPY huskyekb_page ./huskyekb_page
 COPY rotvodom_page ./rotvodom_page
+COPY payments ./payments
 # Всю папку static копировать не нужно, нужно копировать только dist/
 COPY static/admin ./static/admin
 COPY --from=0 /front/dist ./static/catsekb/dist

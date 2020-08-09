@@ -56,6 +56,14 @@
         psql -U catsekb -d catsekb < dump_name.sql
     ```
 
+# Обновление production
+
+1. Забилдить или скачать докер образ: `docker build -t catsekb.ru:latest .`
+1. Перейти в директорию где лежит файл: `docker-compose.yml`: `cd /root`
+1. В соответствии с [инструкцией](https://docs.docker.com/compose/production/) выполнить команды: `docker-compose build django`
+1. `docker-compose up --no-deps -d django`
+
+
 # Запуск проекта на виртуальной машине.
 
 ## Настройка виртуалки
@@ -84,6 +92,8 @@
      - `secret_key.txt` в `/srv/catsekb.ru/secret_key.txt` - секретный ключ в Django
      - `vk_token.txt` в `/srv/catsekb.ru/vk_token.txt` - токен для доступа к Api
      - `db_key.txt` в `/srv/catsekb.ru/db_key.txt` - пароль к postgres
+     - `yandex_account_id.txt` в `/srv/catsekb.ru/yandex_account_id.txt` - shopId в яндекс касса
+     - `yandex_secret_key.txt` в `/srv/catsekb.ru/yandex_secret_key.txt` - Секретный ключ в яндекс касса
 
 - разорхивировать образы в докер:
     ```

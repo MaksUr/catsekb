@@ -23,6 +23,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 with open(os.path.join(os.sep, 'srv', 'vk_token.txt')) as f:
         VK_TOKEN = f.read().strip()
+
+with open(os.path.join(os.sep, 'srv', 'yandex_account_id.txt')) as f:
+        YANDEX_MONEY_ACCOUNT_ID = f.read().strip()
+
+with open(os.path.join(os.sep, 'srv', 'yandex_secret_key.txt')) as f:
+        YANDEX_MONEY_SECRET_KEY = f.read().strip()
+
 # SECURITY WARNING: keep the secret key used in production secret!
 try:
     with open(os.path.join(os.sep, 'srv', 'secret_key.txt')) as f:
@@ -43,6 +50,7 @@ INSTALLED_APPS = [
     'rotvodom_page.apps.RotvodomPageConfig',
     'cats.apps.CatsConfig',
     'articles.apps.ArticlesConfig',
+    'payments.apps.PaymentsConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',

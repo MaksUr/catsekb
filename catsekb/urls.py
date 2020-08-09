@@ -42,6 +42,7 @@ urlpatterns = [
     path('catsekb/', include('catsekb_page.urls')),
     path('huskyekb/', include('huskyekb_page.urls')),
     path('rotvodom/', include('rotvodom_page.urls')),
+    path('payments/', include('payments.urls')),
     path('pets/', include('cats.urls')),
     path('admin/', admin.site.urls),
     path('<project:project>/pets/<int:pk>/', AnimalDetailView.as_view(), name='animal_detail'),  #  TODO: сделать нормально
