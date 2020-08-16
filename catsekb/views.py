@@ -5,6 +5,7 @@ from articles.models import Partner, PartnerEvent
 from cats.models import AnimalVideo, Animal
 from catsekb.view_functions import get_important_news, OUR_ANIMALS_MENU_ITEMS_BASE_CONTEXT, \
     ABOUT_MENU_ITEMS_BASE_CONTEXT
+from payments.forms import PaymentForm
 
 
 def index_view(request):
@@ -42,6 +43,7 @@ def help_view(request):
         'active_menu': 'help',
         'extra_title': 'Помощь приюту',
         'caption': 'Помощь приюту',
+        'pay_form': PaymentForm(),
         'object': config.HELP_PAGE_CONTENT,
         'about_menu_items': ABOUT_MENU_ITEMS_BASE_CONTEXT,
         'our_animals_menu_items': OUR_ANIMALS_MENU_ITEMS_BASE_CONTEXT,

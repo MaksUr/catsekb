@@ -2,33 +2,7 @@
 {% load static %}
 
 {% block base_body %}
-    <section class="search" id="anchor_search">
-        <div class="container">
-            {% include 'cats/widgets/caption.html' with caption='Помощь приюту' %}
-            <div class="row">
-                <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4">
-                    <form action={% url 'pay' %} method="post" class="search_form font mid" name='hi'>
-                        {% csrf_token %}
-                        <div class="form_elem">
-                            {{ form.amount.label_tag }}
-                            {{ form.amount.as_widget }}
-                        </div>
-                        <div>
-                            <p class="font mid">
-                                Перевод осуществляется через яндекс кассу.
-                            </p>
-                        </div>
-                        <div class="find_container font mid">
-                            <div class="find mid font">
-                                <input type="submit" value="Помочь приюту" class="but">
-                                <img src="{% static 'catsekb/dist/img/cat_find.png' %}" class="cat_find">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+    {% include 'payments/widgets/pay_form.html' with form=form %}
 {% endblock base_body %}
 
 {% block header %}
