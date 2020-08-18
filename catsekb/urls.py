@@ -33,6 +33,7 @@ urlpatterns = [
     path('media/', views.media_view, name='media'),
     path('results/', ResultsFeedListView.as_view(), name='results'),
     path('needs/', views.needs_view, name='needs'),
+    path('plans/', views.plans_view, name='plans'),
     path('partners/', views.partners_view, name='partners'),
     path('news/', NewsFeedListView.as_view(), name='news'),
     path('partners/<int:pk>', views.partner_detail_view, name='partner_detail'),

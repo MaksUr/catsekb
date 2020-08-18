@@ -84,6 +84,20 @@ def needs_view(request):
         context=context
     )
 
+def plans_view(request):
+    name = 'Наши планы'
+    context = {
+        'active_menu': 'plans',
+        'extra_title': name,
+        'caption': name,
+        'object': config.PLANS_PAGE_CONTENT,
+        'about_menu_items': ABOUT_MENU_ITEMS_BASE_CONTEXT,
+        'our_animals_menu_items': OUR_ANIMALS_MENU_ITEMS_BASE_CONTEXT,
+    }
+    return render(
+        request, 'catsekb/plans.html',
+        context=context
+    )
 
 def documents_view(request):
     name = 'Документы'

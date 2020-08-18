@@ -23,6 +23,7 @@ ABOUT_MENU_ITEMS_BASE_CONTEXT = [
     {'caption': 'Сми о нас', 'url': reverse_lazy('media')},
     {'caption': 'Наши результаты', 'url': reverse_lazy('results')},
     {'caption': 'Нужды приюта', 'url': reverse_lazy('needs')},
+    {'caption': 'Наши планы', 'url': reverse_lazy('plans')},
 ]
 
 OUR_ANIMALS_MENU_ITEMS_BASE_CONTEXT = [
