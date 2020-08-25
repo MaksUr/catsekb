@@ -30,6 +30,7 @@ urlpatterns = [
     path('about/', views.about_view, name='about'),
     path('documents/', views.documents_view, name='documents'),
     path('reports/', views.reports_view, name='reports'),
+    path('help/sms/', views.sms_help_view, name='sms_help'),
     path('media/', views.media_view, name='media'),
     path('results/', ResultsFeedListView.as_view(), name='results'),
     path('needs/', views.needs_view, name='needs'),

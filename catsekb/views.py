@@ -116,19 +116,34 @@ def documents_view(request):
 
 
 def reports_view(request):
-        name = 'Отчетность'
-        context = {
-            'active_menu': 'about',
-            'extra_title': name,
-            'caption': name,
-            'object': config.REPORTS_PAGE_CONTENT,
-            'about_menu_items': ABOUT_MENU_ITEMS_BASE_CONTEXT,
-            'our_animals_menu_items': OUR_ANIMALS_MENU_ITEMS_BASE_CONTEXT,
-        }
-        return render(
-            request, 'catsekb/reports.html',
-            context=context
-        )
+    name = 'Отчетность'
+    context = {
+        'active_menu': 'about',
+        'extra_title': name,
+        'caption': name,
+        'object': config.REPORTS_PAGE_CONTENT,
+        'about_menu_items': ABOUT_MENU_ITEMS_BASE_CONTEXT,
+        'our_animals_menu_items': OUR_ANIMALS_MENU_ITEMS_BASE_CONTEXT,
+    }
+    return render(
+        request, 'catsekb/reports.html',
+        context=context
+    )
+
+def sms_help_view(request):
+    name = 'Помощь приюту с помощью sms'
+    context = {
+        'active_menu': 'sms_help',
+        'extra_title': name,
+        'caption': name,
+        'object': config.SMS_HELP_PAGE_CONTENT,
+        'about_menu_items': ABOUT_MENU_ITEMS_BASE_CONTEXT,
+        'our_animals_menu_items': OUR_ANIMALS_MENU_ITEMS_BASE_CONTEXT,
+    }
+    return render(
+        request, 'catsekb/sms_help.html',
+        context=context
+    )
 
 
 def media_view(request):

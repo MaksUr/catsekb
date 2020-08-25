@@ -4,6 +4,15 @@
 
 {% block base_body %}
 	{% include 'payments/widgets/pay_form.html' with form=pay_form %}
+	<section class="font line_height">
+		<div class="container">
+			{% url 'sms_help' as sms_help_url %}
+			{% include 'cats/widgets/caption.html' with caption='Помощь приюту с помощью sms на короткий номер' caption_url=sms_help_url %}
+			<div class="article">
+				<p class="font mid">Вы можете ознакомиться с короткими номерами и условиями мобильных операторов на <a href="{% url 'sms_help' %}">этой странице</a>.</p>
+			</div>
+		</div>
+	</section>
     <section class="font line_height">
 		<div class="container">
 			{% include 'cats/widgets/caption.html' with caption=caption %}
